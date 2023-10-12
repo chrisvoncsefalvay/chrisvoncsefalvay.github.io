@@ -1,0 +1,27 @@
+[
+  {
+    "listing": "/posts/index.html",
+    "items": [
+      "/posts/knowledge-dividend-of-llms/index.html",
+      "/posts/asemantic-induction-of-hallucinations/index.html",
+      "/posts/data-for-the-next-pandemic/index.html",
+      "/posts/dwarf-fortress/index.html",
+      "/posts/five-non-data-science-books-for-data-scientists/index.html",
+      "/posts/quora-answers/index.html",
+      "/posts/a-different-shade-of-grey/index.html",
+      "/posts/as-we-may-see/index.html",
+      "/posts/paxlovid/index.html",
+      "/posts/mrna-gene-therapy/index.html",
+      "/posts/ransomware-prisoners-dilemma/index.html",
+      "/posts/julia-a-post-mortem/index.html"
+    ]
+  },
+  {
+    "listing": "/media/index.html",
+    "items": [
+      "/media/tech-for-good/index.html",
+      "/media/fr-disinfectants/index.html",
+      "/media/euronews-covid/index.html"
+    ]
+  }
+]

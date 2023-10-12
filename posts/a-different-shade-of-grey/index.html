@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2022-04-13">
+<meta name="description" content="A response to Urbina et al. (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them).">
+
+<title>Chris von Csefalvay - A different shade of grey</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Chris von Csefalvay - A different shade of grey">
+<meta property="og:description" content="A response to Urbina et al. (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them).">
+<meta property="og:image" content="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg">
+<meta property="og:site-name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="Chris von Csefalvay - A different shade of grey">
+<meta name="twitter:description" content="A response to Urbina et al. (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them).">
+<meta name="twitter:image" content="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="A different shade of grey">
+<meta name="citation_author" content="Chris von Csefalvay">
+<meta name="citation_publication_date" content="2022-04-13">
+<meta name="citation_cover_date" content="2022-04-13">
+<meta name="citation_year" content="2022">
+<meta name="citation_online_date" content="2022-04-13">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Dual use of artificial-intelligence-powered drug discovery;,citation_author=Fabio Urbina;,citation_author=Filippa Lentzos;,citation_author=Cédric Invernizzi;,citation_author=Sean Ekins;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_issue=3;,citation_volume=4;,citation_journal_title=Nature Machine Intelligence;,citation_publisher=Nature Publishing Group UK London;">
+<meta name="citation_reference" content="citation_title=Improving the human hazard characterization of chemicals: A Tox21 update;,citation_author=Raymond R Tice;,citation_author=Christopher P Austin;,citation_author=Robert J Kavlock;,citation_author=John R Bucher;,citation_publication_date=2013;,citation_cover_date=2013;,citation_year=2013;,citation_issue=7;,citation_volume=121;,citation_journal_title=Environmental health perspectives;,citation_publisher=National Institute of Environmental Health Sciences;">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers" rel="" target="">
+ <span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching" rel="" target="">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media" rel="" target="">
+ <span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts" rel="" target="">
+ <span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
+ <span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#the-reverse-of-the-medal" id="toc-the-reverse-of-the-medal" class="nav-link" data-scroll-target="#the-reverse-of-the-medal">The reverse of the medal</a></li>
+  <li><a href="#a-lighter-shade-of-grey" id="toc-a-lighter-shade-of-grey" class="nav-link" data-scroll-target="#a-lighter-shade-of-grey">A lighter shade of grey</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A different shade of grey</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">computational chemistry</div>
+    <div class="quarto-category">ethics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <p>A response to Urbina <em>et al.</em> (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them).</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 13, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In a recent paper that has attracted the interest of popular media as well, Fabio Urbina and colleagues examined the use (or rather, the abuse) of computational chemistry models of toxicity for generating toxic compounds and potential chemical agent candidates.<span class="citation" data-cites="urbina2022dual">(<a href="#ref-urbina2022dual" role="doc-biblioref">Urbina et al. 2022</a>)</span> Urbina and colleagues conclude that</p>
+<blockquote class="blockquote">
+<p>By going as close as we dared, we have still crossed a grey moral boundary, demonstrating that it is possible to design virtual potential toxic molecules without much in the way of effort, time or computational resources.</p>
+</blockquote>
+<p>I agree with the conclusion, but for rather different reasons.</p>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Computational chemistry is the branch of computational science that focuses on applications in the chemical field. This includes pharmacology and rational drug design (RDD) in particular. The purpose of RDD is to generate drug candidates that show favourable indicators of effectiveness (such as high binding affinity to a target protein) along with indicators of biological suitability (such as no or low interference with other proteins, low toxicity and no inhibition of metabolic ‘bottlenecks’ like CYP3A4). The latter part is typically handled by a toxicity model.</p>
+<p>Rather simply put, a toxicity model infers the structural associations (the chemical structures associated with undesirable effects) from a library of known compounds with known effects. For instance, the Toxicology in the 21st Century (Tox21) programme of the US federal government has performed over sixty different assays (typically, enzyme inhibition assays) for over 13,000 different compounds. <span class="citation" data-cites="tice2013improving">(<a href="#ref-tice2013improving" role="doc-biblioref">Tice et al. 2013</a>)</span> Using molecular fingerprinting, which we have discussed in a previous post on this blog in this very same context, it is possible to build relatively easy models for toxicity. Where a particular desired toxicity is known, say mitochondrial toxicity, it’s not difficult to build a pipeline that generates candidate compounds, derives the molecular fingerprint and evaluates the likelihood that the molecule that is obtained will be an effective agent. In this sense, I wholeheartedly agree with Urbina: the cat is very much out of the bag. Even if Tox21’s public data does not include the classical target of modern chemical weapons (acetylcholinesterase), such data is not exactly hard to come by or, for a nation-state actor, to generate. A near-peer adversary could create such assays for cents on the compound.</p>
+<p>Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g.&nbsp;for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.</p>
+</section>
+<section id="the-reverse-of-the-medal" class="level1">
+<h1>The reverse of the medal</h1>
+<p>On the other hand, the likelihood of an AI-generated chemical agent ever posing a threat beyond the theoretical is very, very low. There are a few reasons for that, and they’re inherent partly in computational chemistry, partly in weapons design.</p>
+<p>The computational chemistry part pertains to the fact that molecular fingerprinting and similar models only give us a narrow view of the outcomes we may expect. For starters, no model is able to reliably assess the feasibility and cost-effectiveness of synthesis. There are plenty of drug candidates that have performed admirably in vitro and sometimes even in clinical trials, but for which no feasible way of cost-efficient, large-scale synthesis could be found. Then, there are the drugs that ought to work, and might even work in vitro, but end up failing in clinical trials with no effect or an unexpected toxicity. Effect inference from chemical structure looks only at one side of the medal, and not even all of that.</p>
+<p>The bigger problem is the weapons design part. To avoid a late-night visit from some mild-mannered federal employees in a dark SUV, I’d like to point out that anything I discuss here is well in the public domain. With that said: just as pharmaceutical chemists want some things from their target compounds (such as relatively little inference, predictable metabolism, a wide therapeutic margin and few adverse effects), designers of chemical weapons have their own considerations for which to optimise. VX, for instance, is immensely popular because its oily consistency gives it beneficial physical properties. Similarly, a potential chemical weapon candidate must be stable vis-a-vis e.g.&nbsp;UV exposure, but not too stable. An example of the latter is the Red Zone in France, the World War I battlefields that have been bombarded with so many chemical weapons that to this day, they are heavily contaminated by arsenic, among others. The preference for binary agents (which contain two relatively stable and relatively non-toxic chemicals that are mixed, typically during the flight time of a shell, to form the active agent) means that a less toxic agent that can be reliably produced from the simple admixture of two relatively stable agents may be preferred to a more lethal unary agent. And this, of course, all assumes a state actor willing and able to violate international law on chemical weapons.</p>
+<p>Finally, there is no real need for novel chemical agents, at least not in the nerve agent category. Not only does using a known agent provide plausible deniability, there is also no real need to create anything more lethal than VX. Even relatively old chemical agents, such as mustard agents, are effective enough. A novel chemical structure may not guarantee that the agent escapes chemical detection, and functional antidotes are going to be just as effective against novel agents. To an atropine/pralidoxime NAAK autoinjector’s efficacy, it makes no difference whether the acetylcholinesterase inhibition comes from sarin, VX, Tetram or inadvertent exposure to organophosphate pesticides. Arguably, this becomes somewhat more complex with other agents, where the biological targets — and hence the antidotes — are more specific. Nevertheless, it is hard to conceive of anyone possessed of a burning rationale to start creating novel chemical agents.</p>
+</section>
+<section id="a-lighter-shade-of-grey" class="level1">
+<h1>A lighter shade of grey</h1>
+<p>I commend the authors for discussing the moral aspects of this exercise. It is rather uncomfortable to write about the use of artificial intelligence to create tools whose predominant use would be to extinguish human lives (although, as noted, many of these compounds can, and often do, have a medicinal use).</p>
+<p>Where I cannot agree with the authors is the conclusion that this situation calls for regulation (be it self-regulation or imposed from above).</p>
+<blockquote class="blockquote">
+<p>Although MegaSyn is a commercial product and thus we have control over who has access to it, going forward, we will implement restrictions or an API for any forward-facing models. A reporting structure or hotline to authorities, for use if there is a lapse or if we become aware of anyone working on developing toxic molecules for non-therapeutic uses, may also be valuable. Finally, universities should redouble their efforts toward the ethical training of science students and broaden the scope to other disciplines, and particularly to computing students, so that they are aware of the potential for misuse of AI from an early stage of their career, as well as understanding the potential for broader impact.</p>
+</blockquote>
+<p>This is all well and good, but — assuming that there were a realistic danger of people coming to grief from AI-generated chemical weapons — it solves a problem that the authors have failed to substantiate exists. The tools to do this have been around for a long time. For the reasons laid out in the previous section, there is no burning desire anywhere in the world right now, as far as I can see, to develop a successor to VX purely on a structural basis. Of course, a chemical agent that can be synthesised without relying on any OPCW listed substances, or which can have novel effects, or which can escape traditional methods of detection (GC/MS, typically), would be of interest to potential bad actors, but current models of computational chemistry do not help with that. Creating permutational or functional analogues of VX does not, realistically, put anyone a single step closer to the ability to carry out an atrocity using such reprehensible weapons.</p>
+<p>On the other hand, I am concerned about the moral aspects that derive from the consequences of Urbina et al.’s paper. Given that the overwhelming majority of users of computational chemistry and RDD do so for benign purposes, the public attention garnered by such articles may create a regulatory push that is not going to make anyone safer, but will impede scientific inquiry. Urbina et al.&nbsp;point out the reputational risk, and the risk of a single bad apple spoiling the lot — I am rather uncertain whether an attention-grabbing headline in The Verge, raising the spectre of the scary AI that generates tens of thousands of killer compounds in hours (virtually all of which are very likely to be practically useless), is doing our discipline any favours.</p>
+<p>The Scythian prince Anacharsis likened laws to cobwebs: strong enough to catch the weak, but too weak to impede the powerful. In that sense, a sufficiently determined adversary with the right tools — scientists, labs, an AWS account with a few hundred bucks of credit — will be able to subvert the art of creating chemistry to save lives and turn it into a way to destroy them. No amount of regulation, controlled APIs and lectures on the Hague Ethical Guidelines are going to be any impediment. To a near-peer adversary or even a well-funded non-state actor, the door has been open for rational chemical agent discovery (RCAD) for a very long time. If the past is anything to go by, it has not really yielded rich fruit. Pretty much the only new thing under the sun for chemical agents in recent decades was the (possible, theorised) use of binary agents on Kim Jong-nam — not exactly a result of assiduous, AI-driven research into novel agents, but rather the every-day fare of a paranoid, despotic regime driven by cruelty and ignorance.</p>
+<p>The only thing to fear, then, is fear itself. There is a justified concern in the AI community that while we do indeed need to discuss ethical use of artificial intelligence in the RDD domain, there is a time and a place for that. Sensationalism and alarmist headlines of poison-spewing machine learning models are great clickbait, but they do not benefit the discipline. Realism, not alarmism, is needed to tackle these issues.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-tice2013improving" class="csl-entry" role="listitem">
+Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013. <span>“Improving the Human Hazard Characterization of Chemicals: A Tox21 Update.”</span> <em>Environmental Health Perspectives</em> 121 (7): 756–65.
+</div>
+<div id="ref-urbina2022dual" class="csl-entry" role="listitem">
+Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>“Dual Use of Artificial-Intelligence-Powered Drug Discovery.”</span> <em>Nature Machine Intelligence</em> 4 (3): 189–91.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2022,
+  author = {von Csefalvay, Chris},
+  title = {A Different Shade of Grey},
+  date = {2022-04-13},
+  url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+Csefalvay, Chris von. 2022. <span>“A Different Shade of Grey.”</span>
+April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

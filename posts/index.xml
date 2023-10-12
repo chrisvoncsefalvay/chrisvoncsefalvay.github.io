@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Chris von Csefalvay</title>
+<link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/index.html</link>
+<atom:link href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/index.xml" rel="self" type="application/rss+xml"/>
+<description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Mon, 02 Oct 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The knowledge dividend of large language models</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Over at the <a href="https://medium.com/starschema-blog">work blog</a>, I’m discussing what knowledge means for large language models (LLMs), and the ways in which we can leverage this knowledge dividend for better inference.</p>
+<blockquote class="blockquote">
+<p>As I’m writing this, the sun hasn’t risen over the Denver skyline in earnest. There’s still pink in the sky over the Front Range, and most of the world is still blissfully asleep. And so far, a small, moderately fine-tuned Large Language Model (LLM) trained on $500 worth of free credits has explained to me just how bad the Broncos’ recent 20–70 embarrassment against the Miami Dolphins is (very), made some useful suggestions for a Caddoan language to learn if I wanted to help with language preservation (Pawnee) and created a fairly acceptable recipe to salvage whatever is left in my fridge (spicy tomato and cheese omelet with a chia side salad). Not too shabby for something that has absolutely no understanding of language preservation, omelets or American football (then again, neither do I, as far as the last one is concerned).</p>
+<p>And therein lies one of the pervasive paradoxes of LLMs: they generate very confident, very credible and very often correct answers to questions on subjects they really don’t know all that much about.</p>
+</blockquote>
+<p><a href="https://medium.com/starschema-blog/the-knowledge-dividend-of-llms-a-pragmatic-perspective-79e8f8fb0686">Read the full post here.</a></p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
+  author = {von Csefalvay, Chris},
+  title = {The Knowledge Dividend of Large Language Models},
+  date = {2023-10-02},
+  url = {https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2023. <span>“The Knowledge Dividend of Large
+Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms">https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>LLMs</category>
+  <category>Cross-post: Starschema</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/index.html</guid>
+  <pubDate>Mon, 02 Oct 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/header.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Asemantic Induction of Hallucinations in LLMs</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Over at the <a href="https://medium.com/starschema-blog">work blog</a>, I’m discussing what knowledge means for large language models (LLMs), and the ways in which we can leverage this knowledge dividend for better inference.</p>
+<blockquote class="blockquote">
+<p>Language is highly semantic, but because of that, it is also highly flexible. By semantic, I mean that every lexeme has a distinct and coherent meaning. A lexeme is the “root form” that is conjugated to various forms, e.g.&nbsp;“see”, “saw” or “seeing” are all forms of the same lexeme, “SEE” (by convention, in linguistics, we set lexemes in capitals to distinguish them of their homomorphic conjugated forms). By flexibility, I mean that you can actually manipulate lexical order and retain meaning. Consider the sentence “Joe walked his dog in the park”. “In the park, Joe walked his dog” and “His dog, Joe walked in the park” all have slightly different nuances due to inflection and emphasis of order, but overall, they all get the same larger message across. Some languages permit even more flexibility with word order, but even in English, the worst case scenario is that it’ll sound a little odd. The content remains intelligible, which is why poets get to move words around to make things rhyme. In short, producing something that looks “like” natural language is going to be natural language. It’s likely not going to be a Booker Prize-winning product of staggering genius, but it will be good enough.</p>
+<p>This is not the case for asemantic structures. By asemantic structures, I mean any system in which a sequence of tokens has a meaning, but in which there’s no semantic meaning to any token. In other words, every token has a meaning, but that meaning is not inherent in their character. It probably serves to belabour this point a little. All words are, to an extent, made up, but more similar words are closer to each other in meaning. By similar, I do not mean simple formal similarity, such as Hamming or Levenshtein distances, but rather logical similarity, e.g.&nbsp;conjugation of the same root. This is more evident in some languages than others. In Semitic languages, for instance, you have clusters of meaning that are connected by consonantal roots. By way of an example: the triconsonantal root k-b-d connects a cloud of meanings that all have to do with the middle or centre of something, and by extension the centre of gravity or honour. This gives us e.g., the Hebrew words for ‘heavy’ (כָּבֵד), mass in the physical sense (כֹּבֶד), and the word for ‘liver’ (כָּבֵד), which was considered to be roughly in the middle of the body. In any language, however, there is a degree of meaningful semantic similarity between connected concepts. There has more been written on this than I have the space to mention here.</p>
+<p>An asemantic structure is where there are formally similar things that are unrelated. You have probably experienced this when you dialled the wrong number by a slip of the finger. The fact is, if you live in the United States, my phone number looks a lot like yours, and by extension, anyone else’s. There’s no semantically meaningful reason why your phone number shouldn’t be mine or vice versa: it’s not more ‘you’ as mine is not more ‘me’ in any underlying sense.</p>
+<p>Which is why GPT-4 struggles with asemantic content, and we’ll use this to break it a little.</p>
+</blockquote>
+<p><a href="https://medium.com/starschema-blog/asemantic-induction-of-hallucinations-in-large-language-models-c92ef5030714">Read the full post here.</a></p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
+  author = {von Csefalvay, Chris},
+  title = {Asemantic {Induction} of {Hallucinations} in {LLMs}},
+  date = {2023-03-23},
+  url = {https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2023. <span>“Asemantic Induction of Hallucinations
+in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>LLMs</category>
+  <category>Cross-post: Starschema</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/index.html</guid>
+  <pubDate>Thu, 23 Mar 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/header.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Data for the next pandemic</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>My recent post on the <a href="https://medium.com/starschema-blog">Starschema blog</a> discusses the need for better data products to tackle future pandemic challenges:</p>
+<blockquote class="blockquote">
+<p>Three years into the COVID-19 pandemic, the medical, public health and disaster preparedness communities are trying to isolate lessons learned from the harrowing experience of a global outbreak that resulted in little shy of seven million deaths. There remains considerable disagreement as to what ought or ought not have been done, what worked and what did not and how to best approach a coming pandemic.</p>
+<p>One of the only points on which there is widespread agreement regarding the global response to the pandemic is that data played a crucial role in tackling the crisis. Where data drove decision-making, outcomes were almost universally better in terms of morbidity and mortality.</p>
+</blockquote>
+<p>Read the full post <a href="https://medium.com/starschema-blog/data-for-the-next-pandemic-f340cac8558c">here</a>.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
+  author = {von Csefalvay, Chris},
+  title = {Data for the Next Pandemic},
+  date = {2023-03-07},
+  url = {https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2023. <span>“Data for the Next Pandemic.”</span>
+March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic">https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic</a>.
+</div></div></section></div> ]]></description>
+  <category>computational epidemiology</category>
+  <category>epidemics</category>
+  <category>Cross-post: Starschema</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/index.html</guid>
+  <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/header.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>The hardest AI problem you’ve never heard of.</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>There’s a notion in artificial intelligence known as Moravec’s paradox: it’s relatively easy to teach a computer to play chess or checkers at a pretty decent level, but near impossible to teach it something as trivial as bipedal motion. <span class="citation" data-cites="hassabis2017artificial">(Hassabis 2017)</span> The sensorimotor tasks that our truly wonderful brains have mastered by our second birthday are much harder to teach a computer than something arguably as ‘complex’ as <a href="https://www.chessgames.com/perl/chessgame?gid=1070917">beating a chess grandmaster</a>. In that sense, what Garry Kasparov learned in the first months of his life were much more ‘difficult’, from the perspective of AI, than his mastery of chess. So is, for that matter, learning to play Super Mario. What’s hard for us is simple for computers, and vice versa. <span class="citation" data-cites="pinker2003language">(Pinker 2003)</span></p>
+<section id="tiny-problems-big-world" class="level1">
+<h1>Tiny problems, big world</h1>
+<p>Chess, for all its complexity, has a relatively small problem space. It is a spatially confined game of a limited number of pieces – which, by the way, is monotonically decreasing over time. Pieces have limited moves, so that a piece of type p being at position (<img src="https://latex.codecogs.com/png.latex?x,%20y">) at time t has a finite number of places it can be at <img src="https://latex.codecogs.com/png.latex?t+1"> (valid moves). Consequently, for any state of the chessboard, we can describe a finite set of possible states one step later. Recursively, for any state of the chessboard, we can enumerate any future state. That this enumeration involves a rapidly growing and rather massive problem space is not, inherently, a huge problem. There are discrete steps in time, and each of those steps moves us along the tree. In short: however big the problem space, it can be enumerated.</p>
+<p>This is important because processes like this (known as Markov decision processes) are kind of problem machine learning excels at. We can enumerate a bunch of these trees from start to finish (that is, individual chess games), and eventually the computer builds a representation of whether a particular move given particular preceding moves is or is not a good idea. Or, more formally, we can define a number of actions called policies in this context, so that given a system in state s and the action a, <img src="https://latex.codecogs.com/png.latex?%5Cpi_%7Ba,%20s%7D%20=%20p(a_t%20=%20a%20%7C%20s_t%20=%20s)">. We can then define a reward function for any policy <img src="https://latex.codecogs.com/png.latex?%5Cpi">, so that <img src="https://latex.codecogs.com/png.latex?R(%5Cpi)%20%5Csim%20%5Csum_%7Bt%20=%200%7D%5E%7B%5Cinfty%7D%20r(%5Cpi,%20t)"> for all <img src="https://latex.codecogs.com/png.latex?r(%5Cpi,%20t)"> being the reward gained by taking the action corresponding to the policy <img src="https://latex.codecogs.com/png.latex?%5Cpi"> at time step <img src="https://latex.codecogs.com/png.latex?t">.<sup>1</sup> Then, given a state <img src="https://latex.codecogs.com/png.latex?s"> and a policy <img src="https://latex.codecogs.com/png.latex?%5Cpi">, we can calculate the expectation value of <img src="https://latex.codecogs.com/png.latex?R_%7B%5Cpi%7D%20%7C%20t">. And if we can calculate it, we can sic one of the many optimisation algorithms on it to maximise it. There, chess played, game won, end of.</p>
+</section>
+<section id="lets-get-more-problematic" class="level1">
+<h1>Let’s get more problematic</h1>
+<p>Except, as I said, chess is, well, relatively simple to enumerate. What about non-enumerable systems? For starters, we can dispense with discrete time and start operating in continuous time. Things get a whole lot more complicated when you start to move from discrete maths to continuous values (and that’s why I largely stay on the discrete side, in the comfort of number theory and integer indices). What if a game of chess didn’t have turns, but rather played at whatever speed the players can simultaneously manage? And had a large problem space, a ton of different actors, oh, and let’s sprinkle some degree of randomness into it, so as to make the whole thing impossible to understand and computationally insane to model?</p>
+<p>It turns out that we already have games like that. And one of them might just be the ultimate test for AI. Enter Dwarf Fortress.</p>
+<p>Well, then you’d have Dwarf Fortress.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">This is Dwarf Fortress, in all its beauty (comma lack thereof). Screenshot taken from the legendary Boatmurdered saga, the most hilariously weird tale of just how incredible this game can be.</figcaption>
+</figure>
+</div>
+<p>Now, in case you haven’t heard of Dwarf Fortress: it’s not much to look at, to put it mildly. It’s got none of the smooth, flashy graphics of AAA gaming titles, the deep story of a game like Destiny or the humour of, say, Borderlands.[2]. What it does have is a level of intricacy that makes it a game on the literal edge between insanity and genius (and typically, when it comes to Dwarf Fortress, the two are present in a <a href="https://en.wikipedia.org/wiki/Racemic_mixture">racemic mixture</a>). You’re in charge of building, unsurprisingly, a fortress, full of dwarves. You explore, mine, craft and inevitably get killed, more than likely by a) elephants, b) lava. In the meantime, random things happen, in a procedurally generated world. From time to time, dwarves become possessed, elephants assault your fortress and things are set on fire. Behind all this is a staggering volume of intricate game mechanics for just about everything.</p>
+</section>
+<section id="agent-based-insanity" class="level1">
+<h1>Agent based insanity</h1>
+<p>Let me illustrate this with <a href="https://www.bay12games.com/dwarves/mantisbt/view.php?id=9195">an actual example</a>. In December 2015, a player has complained that the cats are dying in his fortress. It has emerged that they were dying of ethanol poisoning. It turns out that Dwarf Fortress models (individually, for each animal in the game!) the ingestion of substances from body coverings for animals. Cats lick their paws, and ingest a part of whatever is on their paws. In that case, it was spilled beer (which obviously dwarves drink in non-trivial quantities). A large number of dwarves stopping their inebriation in progress to do something else would result in large spills of alcoholic beverage, which the cats would get on their paws, which they would eventually lick, which would eventually get them drunk and, until a bug fix, dead.</p>
+<p>Now, this isn’t something special. Pretty much everything in Dwarf Fortress is like this. Oh, and almost all of it is procedurally generated. This makes Dwarf Fortress an extreme case: it is arguably the most difficult game that can be ‘learned’ that we know of.</p>
+<p>By ‘can be learned’, I mean that it is a game that can still have a distinct ordered set of policies <img src="https://latex.codecogs.com/png.latex?%5Cpi_%7B1%20...%20n%7D"> sorted by <img src="https://latex.codecogs.com/png.latex?E%5BR(%5Cpi)%5D">, i.e.&nbsp;the expectation value of the reward function of the policy over time <img src="https://latex.codecogs.com/png.latex?t_0%20%5Cto%20t_%7B%5Cinfty%7D">. We don’t see tossing a (fair) coin and guessing heads or tails as a winnable or ‘learnable’ game because there is no policy that is better than any of the others, and no amount of gathering information after a handful of coin tosses will make our predictive accuracy any better. Dwarf Fortress can’t exactly be won, but it can be not lost for a considerable time, which one can regard as a result (the sum reward is the time of survival, something I call the Kaplan-Meier definition of winning).</p>
+<p>Thus, it’s not all up to randomness, but rather up to being able to operate in a non-Markovian problem space – a very non-Markovian one, given the sheer variety of crazy things that can happen. Games like go or chess teach computers how to adapt to an opponent (who, incidentally, pursues the same objective). Learning Super Mario using deep Q learning is somewhat more about winning against an environment (in the sense that there is no competing player whose requirements for success mirror one’s own). Learning Dwarf Fortress, however, teaches computers how to operate in a space of uncertainty.</p>
+<p>If Dwarf Fortress sounds familiar to you, it’s because it is. It’s effectively a gamified version of agent-based modelling (ABMs), a technique we use to model populations by modelling individuals in a space of uncertainty governed by certain probability distributions. Take the classic SIR model of disease population dynamics. You can use a system of differential equations – or you can create a random population of a few hundred dwarves and simulate what would happen if you let some infection loose among them. Indeed, I reflect on this in my recent book:</p>
+<blockquote class="blockquote">
+<p>One of the most complex computer games ever devised is called Dwarf Fortress. It is not much to look at: its graphics are the terminal-based structures that were in vogue in the 1980s. What makes Dwarf Fortress an extraordinary game is the depth of agent-based logic: every character, every enemy unit, even pets are endowed with a hugely complex agent-based behavioral model. As an example, cats in Dwarf Fortress can stray into puddles of spilled beer, lick their paws later, and succumb to alcohol poisoning.</p>
+<p>Yet agent-based modeling is about much more than belligerent dwarves and drunk cats. Agent-based models are powerful computational tools to simulate large populations of boundedly rational actors who act according to preset preferences, although often enough in a stochastic manner. They can simulate the complex human behaviors of quasi-rational decision-making, represent large populations and, through iterative simulation, highlight likely behavioral outcomes of crowds.</p>
+<p>Most of the foregoing chapters described a kind of statistical mean-field dynamics of epidemiology – we might have known what a population does, but not much about any one individual in a population. At best, we could deduce the state or behavior of an individual in terms of likelihoods, e.g.&nbsp;if 30% of a population is infectious, there is approximately a 30% chance a randomly selected individual from the population will be infectious. Like statistical mechanics, it offers us the ability to reason about dynamics at the population scale without having to model each individual.</p>
+<p>This chapter explores an alternative approach. Agent-based models are primarily inductive—we obtain information about the population by large-scale, repeated simulation of individual agents. Such models allow a different glimpse into the operation of an epidemic process. Many phenomena that would be challenging to model on their own, such as heterogeneous populations with multiple heterogeneities, some continuous and others categorical, become almost trivially easy to analyze using agent-based models. On the other hand, agents can adopt complicated behaviors and very complex behavioral profiles are relatively easy to describe in the agent-paradigm, because we only need to describe an individual rather than an entire tion. This chapter discusses how we can leverage agent-based models for understanding infectious disease dynamics.</p>
+<p>– <span class="citation" data-cites="von2023computational">(Von Csefalvay 2023)</span></p>
+</blockquote>
+<p>Agent-based models help us understand issues that are, or might be, too complex to be analytically solved. It is, in a way, brute-forcing reality by creating a simulation and running it enough times to give a numerical solution. Where human issues are involved, agent-based models are the way to go to understand the complexity of human behaviour and choices. This is so even if most agent-based models have nowhere near the sophistication of Dwarf Fortress.</p>
+</section>
+<section id="if-you-want-me-worried-call-me-when-an-ai-has-mastered-dwarf-fortress" class="level1">
+<h1>If you want me worried, call me when an AI has mastered Dwarf Fortress</h1>
+<p>Algorithms that can infer a person’s emotional state from the position vector of facial landmarks or detect signs of stress in someone’s voice do not give a system any wider understanding of humans. Nor does beating them at playing go, chess, checkers or Starcraft. None of these abilities would be sufficient for an intelligence, artificial or not, to navigate the real world. Understanding a detailed, thorough agent-based model of a human (or dwarven!) society, however, comes much closer to it. A machine that can play chess is cool. A machine that can play Dwarf Fortress with good results is much more than that – it is a competitor, a social reasoner who can make assumptions about actions that hold true at least stochastically.</p>
+<p>One of the side effects of working in research in the AI field is that people will inevitably ask when our new robot overlords will show up. I have never been too concerned by that. With all due respect to Hawking, Musk, Norvig and other purveyors of AI fears, I am unconcerned by the ‘state of the art’. When it comes to complexity that involves cats licking beer off their paws and getting drunk, AI is still a good way away from showing a decent understanding of continuous stochastic systems.</p>
+<p>If you want me worried, call me when an AI has mastered Dwarf Fortress.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hassabis2017artificial" class="csl-entry">
+Hassabis, Demis. 2017. <span>“Artificial Intelligence: Chess Match of the Century.”</span> Nature Publishing Group UK London.
+</div>
+<div id="ref-pinker2003language" class="csl-entry">
+Pinker, Steven. 2003. <em>The Language Instinct: How the Mind Creates Language</em>. Penguin.
+</div>
+<div id="ref-von2023computational" class="csl-entry">
+Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: With Applications in Python</em>. Elsevier.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Specifically, by the factor <img src="https://latex.codecogs.com/png.latex?%5Cgamma%5Et">, where <img src="https://latex.codecogs.com/png.latex?%5Cgamma"> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
+  author = {von Csefalvay, Chris},
+  title = {The Hardest {AI} Problem You’ve Never Heard Of.},
+  date = {2023-03-07},
+  url = {https://chrisvoncsefalvay.com/posts/dwarf-fortress},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2023. <span>“The Hardest AI Problem You’ve Never
+Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/dwarf-fortress">https://chrisvoncsefalvay.com/posts/dwarf-fortress</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>games</category>
+  <category>ABMs</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/index.html</guid>
+  <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Five non-data-science books for data scientists</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Every year, the Commandant of the Marine Corps publishes a reading list of books that often only bear on warfighting tangentially at best. The idea behind this is that those entrusted with the lives of servicemembers should have an understanding of the world that goes beyond the profession of arms.</p>
+<p>In much the same way, I have been advising data scientists to go beyond professional literature. Below are the five books every data scientist should have read. As a profession, we are increasingly tackling morally complex issues. In the context of nuclear weapons, General Omar Bradley referred to nuclear giants but ethical infants. In a world that is shaped by data, and those who work with it, more than it has ever been in the history of humankind, may we take this chance to grow not only in skill but also in ethics, professionalism and humanity.</p>
+<section id="alexander-solzhenitsyn-in-the-first-circle" class="level1">
+<h1>Alexander Solzhenitsyn: <em>In the First Circle</em></h1>
+<p>Solzhenitsyn’s most famous books, such as <em>A Day in the Life of Ivan Denisovich</em> and <em>The Gulag Archipelago</em>, deal with the every-day privations of Soviet prison camps. <em>In the First Circle</em> is different: its characters exist literally in a limbo (the ‘First Circle’ of Dante’s <em>Inferno</em> of the righteous but unbaptised souls), subject to repression by the regime on one hand but due to their scientific knowledge, valued as workers in a sharashka, a ‘special engineering bureau’ staffed by prisoner scientists. In his Gulag books, Solzhenitsyn asks what it means to be human in a system of calculated inhuman repression. In the First Circle, his question is more specific: what does it mean to be a scientist in an unjust regime, and what compromises a scientist should not make, even if the cost is their freedom or their very survival. As AI and ML is increasingly used by tyrannical regimes as a tool of political repression, Solzhenitsyn’s In the First Circle speaks as loudly to today’s data scientists as it did to the Soviet and Western scientists who first read it in samizdat copies in the late 1960.</p>
+</section>
+<section id="thornton-wilder-the-bridge-of-san-luis-rey" class="level1">
+<h1>Thornton Wilder: <em>The Bridge of San Luis Rey</em></h1>
+<p>Wilder’s <em>The Bridge of San Luis Rey</em> might well be the first novel to feature a data scientist (of sorts) as a protagonist – the best part of a century before data science as such existed. Brother Juniper, an Italian monk in Peru, witnesses the collapse of an Inca rope bridge, leading to the death of five people. He devotes his following years to unraveling the mystery behind what seems random and senseless at first – why did these five people die, and why didn’t others? What made them special? He goes about this in much the same way as we would in any current problem: by gathering information on the decedents, and try to find what common factors set them apart. Wilder’s book is about a lot of things – not the least fate, randomness and our innate expectation of an ordered universe.</p>
+</section>
+<section id="david-halberstam-the-best-and-the-brightest" class="level1">
+<h1>David Halberstam: <em>The Best and the Brightest</em></h1>
+<p>Robert S. McNamara was nicknamed the Electric Brain for his almost preternatural grasp of quantitation. McGeorge Bundy was a foreign policy prodigy. JFK inspired Americans in a way few other Presidents have, before or after. The list goes on and on – JFK’s and later Lyndon B. Johnson’s cabinet was full of men of exceptional intelligence, knowledge, education and sophistication. And yet, in the face of a mounting crisis in Vietnam, they were worse than powerless: they contributed the worst shortcomings of their thinking to the problem that eventually embroiled America in a hopeless conflict. Halberstam’s <em>The Best and the Brightest</em> is a story of good people making bad decisions, the psychological pitfalls of interpreting the world not as it is but as we wished it to be to conform to our innermost prejudices. In the end, the ‘best and the brightest’ of America, together with prodigious amounts of information and data, missed the opportunity to prevent the fall of South Viet Nam to the Communists. The drama of Vietnam played out on the world stage, but the same cognitive biases Halberstam describes are at work in boardrooms, data science teams and decision-makers’ offices every single day.</p>
+</section>
+<section id="frank-herbert-the-dosadi-experiment" class="level1">
+<h1>Frank Herbert: <em>The Dosadi Experiment</em></h1>
+<p>Herbert’s <em>The Dosadi Experiment</em> should be required reading in Responsible Conduct of Research courses. The book deals with a perennial question: is it ethical to allow an injustice to a small number of individuals to continue if it protects an entire populated universe from potentially disastrous upheaval? Because this is Frank Herbert, there’s a decent amount of trippy 1970s sci-fi stuff, including ego sharing, tree bark like creatures that create FTL information transmission and dogs bred to be semi-sentient items of furniture. Taking those curves as they come, however, <em>The Dosadi Experiment</em> is a masterpiece, a weird-but-wonderful meditation on the rights of the many and the rights of the few, in a research ethics context.</p>
+</section>
+<section id="eric-schlosser-command-and-control" class="level1">
+<h1>Eric Schlosser: <em>Command and Control</em></h1>
+<p>In 1980, a Titan II inter-continental ballistic missile of the US Air Force suffered a liquid fuel explosion inside its silo near Damascus, Arkansas – with a nuclear warhead on top. Schlosser’s book reveals that this kind of incident was, unsettlingly, much less infrequent than one might be comfortable with. What happens when the literal survival of the planet depends on technology, and how comfortable are we in replacing the human decision-maker – often enough, a twenty-something 1st Lieutenant in a missile silo’s command centre – with technology that may run away from us? Schlosser’s book is an impassioned plea for better design of critical systems, presenting the near-disasters of nuclear weapons – which ought to be the epitome of safety engineering! – as an indication of all that can, and does, go wrong.</p>
+<hr>
+<p>What are your favourite non-data science books for data scientists? Let me know in the comments.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2022,
+  author = {von Csefalvay, Chris},
+  title = {Five Non-Data-Science Books for Data Scientists},
+  date = {2022-04-13},
+  url = {https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2022. <span>“Five Non-Data-Science Books for Data
+Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists">https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists</a>.
+</div></div></section></div> ]]></description>
+  <category>literature</category>
+  <category>data science</category>
+  <category>ethics</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</guid>
+  <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/book.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>My favourite Quora answers</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>I used to be on Quora. I’m not anymore. But I used to be. And I wrote some answers. Here are some of my favourites, categorised by field… sort of.</p>
+<section id="ai" class="level1">
+<h1>AI</h1>
+<section id="if-i-wrote-an-ai-and-trained-it-to-score-200-on-a-standardized-iq-test-what-could-a-human-of-100-iq-still-do-better" class="level2">
+<h2 class="anchored" data-anchor-id="if-i-wrote-an-ai-and-trained-it-to-score-200-on-a-standardized-iq-test-what-could-a-human-of-100-iq-still-do-better">If I wrote an AI and trained it to score 200 on a standardized IQ test, what could a human of 100 IQ still do better?</h2>
+<blockquote class="blockquote">
+<p>There’s something called Moravec’s paradox, which I’d sum up as follows: stuff that’s difficult for humans is not the same as what’s difficult for a computer. It is relatively trivial to teach a computer to be relatively good at chess or checkers or even go. On the other hand, getting a computer to master, say, bipedal motion is actually very, very tricky. There are multiple reasons behind this, including that the human brain is the pinnacle of an evolutionary pathway that spans the course of millions of years of optimisation for certain kinds of tasks, such as bipedal motion. We are an ‘opinionated’ system: we evolved with the idea that we’ll be solving certain kinds of problems, and not others. The evolutionary incentive for chess has been relatively modest compared to the evolutionary incentive to be able to run away from a sabre tooth cat or some prehistoric predator. Our brains have evolved through millions of years of exposure to certain senses: vision, balance, proprioception, pressure/pain, and so on. Without so much as wasting a single thought, our brain performs the process of sensor fusion and generating an operating model of where we are in space with accuracy that is really not trivial for computers even today. And we’re really good at this before we’re old enough to know just what an amazing nervous system we have. You really do not realise what a fantastic thing the human central nervous system is until it starts malfunctioning.</p>
+</blockquote>
+<p><a href="https://www.quora.com/If-I-wrote-an-AI-and-trained-it-to-score-200-on-a-standardized-IQ-test-what-could-a-human-of-100-IQ-still-do-better/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="will-true-ai-come-before-the-ability-to-completely-simulate-a-human-brain-is-there-a-difference" class="level2">
+<h2 class="anchored" data-anchor-id="will-true-ai-come-before-the-ability-to-completely-simulate-a-human-brain-is-there-a-difference">Will true AI come before the ability to completely simulate a human brain? Is there a difference?</h2>
+<blockquote class="blockquote">
+<p>Simulating the human brain is a fairly pointless exercise. You see, the human brain is a functionally extremely diverse thing. You see this best when you consider what damage to it can cause: some brain injuries cause mood disorders, some cause memory disorders, some cause aphasia (speech disorders), some cause issues with mobility and motor control, some cause severe disorders of consciousness like persistent vegetative states and minimally conscious states. The brain is basically a bunch of histologically largely similar tissue that does a lot of different things. There’s not a lot of point in simulating these functions.</p>
+<p>A bigger problem, though, is that some things are a lot harder to ‘simulate’ than others. This is something widely known as Moravec’s paradox: it’s a lot easier to teach a computer to play chess at a pretty high level than to teach it simple bipedal human motion. For this reason, simulating the human brain has generally been seen as not all that much of a priority. Connectionism is great, but it’s largely an inspiration, not a one-to-one reality. Many get this wrong because of concepts like neural networks and artificial neurons. In reality, a neural network is an abstraction to help humans. On the code level, there aren’t individual neurons or layers, there is just a bunch of relatively trivial linear algebra going on. I know I’m oversimplifying a little, but that’s the general idea.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Will-true-AI-come-before-the-ability-to-completely-simulate-a-human-brain-Is-there-a-difference/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="epidemiology" class="level1">
+<h1>Epidemiology</h1>
+<section id="why-is-it-important-to-be-concerned-with-the-health-of-other-nations-when-it-comes-to-global-health-issues" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-it-important-to-be-concerned-with-the-health-of-other-nations-when-it-comes-to-global-health-issues">Why is it important to be concerned with the health of other nations when it comes to global health issues?</h2>
+<blockquote class="blockquote">
+<p>Here’s an illustration. I live in Denver, a city with a major but not first-in-line international airport (e.g.&nbsp;not like Heathrow or LAX, but a pretty nice airport no less, despite the creepy murals). Just as a thought experiment, I sometimes pick random places on the planet and look at how long it would take me to get there. It’s virtually never more than 48 hours.</p>
+<p>To prove this point: it’s a little before 8am on a Sunday here. I can be:</p>
+<p>…in Ürümqi, China, in about 35 hours, …in Makassar City, Sulawesi, Indonesia, in about 33 to 42 hours, …in Maputo, Mozambique, in about 29 to 35 hours, depending on airline, …in Itahanga, Mato Grosso, Brazil, in about 44 hours, if I drove straight from Manaus, or 34 hours if I flew into Brasilia.</p>
+<p>I do these thought experiments all the time when I wonder about the thing you’re asking yourself. Because if I can get there in 48 hours, a pathogen from thereabouts can get here in the same time.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Why-is-it-important-to-be-concerned-with-the-health-of-other-nations-when-it-comes-to-global-health-issues/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="do-you-believe-that-there-could-be-more-cases-like-the-one-found-in-ohio-where-someone-has-been-infected-with-covid-for-an-extended-period-of-time" class="level2">
+<h2 class="anchored" data-anchor-id="do-you-believe-that-there-could-be-more-cases-like-the-one-found-in-ohio-where-someone-has-been-infected-with-covid-for-an-extended-period-of-time">Do you believe that there could be more cases like the one found in Ohio, where someone has been infected with COVID for an extended period of time?</h2>
+<blockquote class="blockquote">
+<p>Absolutely. In fact, I’d be extremely surprised if that weren’t the case.</p>
+<p>Let me take a slight detour here to a concept that might be more familiar. You’ve heard of supershedding and superspreading, right? We’re instinctively geared to consider things like that to be extraordinary phenomena, the same way some people who could hold an HIV infection without developing AIDS were known as “elite controllers” for a long time (today, the term is “long-term non-progressor”, which is much less cool, sadly). But the reality is, they’re not. They’re the (often quite fat) tails of a distribution. Here’s something that doesn’t come to you naturally, something you need to force your brain to wrap itself around as you start doing epidemiology: all the numbers you encounter talk about the central tendency, but say relatively little about the distribution.</p>
+<p>Let me expand on that a little. What’s the mean infectious period of COVID-19? If you ask someone who has a relatively good grasp of the subject, they’ll say it’s around 9–10 days, with an interquartile range of around 4–12 days, give or take one day each way. That term – “interquartile range” – means that given a sample, half of the values will be in that range. Or, more importantly, half of the values will be outside that range.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Do-you-believe-that-there-could-be-more-cases-like-the-one-found-in-Ohio-where-someone-has-been-infected-with-COVID-for-an-extended-period-of-time/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="native-americans-were-devastated-by-european-diseases-brought-by-colonizers-but-were-the-colonialists-impacted-by-new-diseases-not-found-in-europe" class="level2">
+<h2 class="anchored" data-anchor-id="native-americans-were-devastated-by-european-diseases-brought-by-colonizers-but-were-the-colonialists-impacted-by-new-diseases-not-found-in-europe">Native Americans were devastated by European diseases brought by colonizers, but were the colonialists impacted by new diseases not found in Europe?</h2>
+<blockquote class="blockquote">
+<p>Yes, with a significant difference: the Americas had a population density nowhere near that of urban Europe, where many of the colonists came from. Europe is tiny, and very interconnected. The result of that is that pathogenic diversity is going to be off the charts. It’s not even that Europeans brought various epidemics into the Americas, whose populations were largely naive to those pathogens (a phenomenon widely known as a ‘virgin soil epidemic’, much as I loathe the term) – it’s that they bought hundreds of different versions of it. They brought that into societies that, at least where North America was concerned, lived in a way that is very significantly more resilient to pathogens: in small(ish) groups, often as part of extended families (i.e.&nbsp;often similar profiles of immunity), spread out. In a profound sense, Old World epidemics are the result of a peculiarly (but not exclusively) Old World phenomenon: the Big City (“big”, here, being generally relative to total populations). When colonists moved to the Americas, they bought a piece of that Big City’s pathogenic diversity with them, to populations that have neither been exposed to that particular microbiome, nor have generally been under the evolutionary pressure to select for better genetic predispositions to develop immunity to a wide range of pathogens, since that just wasn’t much of a thing in the New World.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Native-Americans-were-devastated-by-European-diseases-brought-by-colonizers-but-were-the-colonialists-impacted-by-new-diseases-not-found-in-Europe/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="the-flu-has-been-around-since-1918.-why-are-the-vaccines-against-covid-which-is-much-newer-and-more-harmful-so-much-more-effective-than-the-flu-vaccines-is-there-any-hope-for-a-universal-flu-vaccine-as-there-is-for-a-universal-covid-vaccine" class="level2">
+<h2 class="anchored" data-anchor-id="the-flu-has-been-around-since-1918.-why-are-the-vaccines-against-covid-which-is-much-newer-and-more-harmful-so-much-more-effective-than-the-flu-vaccines-is-there-any-hope-for-a-universal-flu-vaccine-as-there-is-for-a-universal-covid-vaccine">The flu has been around since 1918. Why are the vaccines against Covid, which is much newer and more harmful, so much more effective than the flu vaccines? Is there any hope for a ‘universal flu vaccine’ (as there is for a ‘universal Covid vaccine’)?</h2>
+<blockquote class="blockquote">
+<p>Influenzaviruses have been around for much longer than since 1918. Greek physicians from the 5th century BC have documented what is almost definitely influenza. Influenza A and B viruses have differentiated around 2,000 years ago, but both trace their origins to a common ancestor around 8,000 years or so ago, give or take a few thousand years (molecular clocking gets tricky after some time). More importantly, however, influenza has a level of diversity that far exceeds SARS-CoV-2.</p>
+<p>Influenzaviruses are actually not a single pathogen, but four genera of the family orthomyxoviridae, each of which comprises a single species: we refer to these as influenzaviruses A, B, C and D. These are viral species in their own right. A, B and C are human pathogenic, and A is responsible for pandemic influenza. Influenzaviruses then break down into serotypes. When you see something like H1N1, that’s a subtype – it denotes the type of two major surface proteins, haemagglutinin (the number after H) and neuraminidase (the number after N) expressed by the virion. Influenza A virus is incredibly genetically diverse, and mutates rapidly. This creates a kind of diversity and versatility that makes it hard to vaccinate against.</p>
+</blockquote>
+<p><a href="https://www.quora.com/The-flu-has-been-around-since-1918-Why-are-the-vaccines-against-Covid-which-is-much-newer-and-more-harmful-so-much-more-effective-than-the-flu-vaccines-Is-there-any-hope-for-a-universal-flu-vaccine-as-there-is-for-a/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="why-is-patient-zero-called-patient-zero-and-not-patient-one-to-denote-the-first-person-with-a-disease" class="level2">
+<h2 class="anchored" data-anchor-id="why-is-patient-zero-called-patient-zero-and-not-patient-one-to-denote-the-first-person-with-a-disease">Why is “patient zero” called “patient zero” and not “patient one” to denote the first person with a disease?</h2>
+<blockquote class="blockquote">
+<p>Actually, it’s not. It’s a popular science term, nobody in epidemiology uses it. The correct term is ‘index case’ or ‘index patient’.</p>
+<p>“Patient zero” comes from a contact network study by Auerbach et al.&nbsp;(1984) on HIV:</p>
+<img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/auerbach.jpeg" class="img-fluid" alt="Auerbach’s contact network">
+</blockquote>
+<p>I have a fervent dislike for the ‘patient zero’ term, both in colloquial usage and in epidemiology (where it’s thankfully quite rare these days), so make sure you <a href="https://www.quora.com/Why-is-patient-zero-called-patient-zero-and-not-patient-one-to-denote-the-first-person-with-a-disease/answer/Chris-von-Csefalvay-3">read this answer in full</a>. Incidentally, we’re looking at this contact network in Computational Note 2.10 (page 75) of <a href="https://computationalinfectiousdisease.com">my book</a>.</p>
+</section>
+<section id="why-are-infectious-diseases-with-high-mortality-rates-not-as-infectious-as-those-with-lower-mortality-rates" class="level2">
+<h2 class="anchored" data-anchor-id="why-are-infectious-diseases-with-high-mortality-rates-not-as-infectious-as-those-with-lower-mortality-rates">Why are infectious diseases with high mortality rates not as infectious as those with lower mortality rates?</h2>
+<blockquote class="blockquote">
+<p>There’s a theory that underlies this observation, widely known as the ‘avirulence hypothesis’ aka ‘trade-off theory’ (which I discuss in my book on p.164). The idea is that from the perspective of the pathogen, virulence (the detrimental effect of the pathogen on the human) is quite epiphenomenal. The pathogen does not get an evolutionary advantage out of harming the host. Some of the most widely spread viruses, for instance, cause no symptoms at all in the overwhelming majority of people. My favourite, JC virus, is present in about 50–70% of all people worldwide, and generally does not cause symptoms unless the person in question is immunosuppressed (at which point, sadly, it can cause some dreadful consequences – progressive multifocal leukoencephalopathy, which occurs in HIV/AIDS and with the use of certain medications for neuroautoimmune disorders that reduce immune system activity in the brain, is caused by JC virus reactivation, and is pretty unpleasant). Ubiquitous viruses like EBV and some herpesviruses are generally very indolent, to the point of being asymptomatic in many cases. In some instances, they might even be beneficial – gammaherpesviruses are associated, at least in animal models, with an increased resistance to <em>Y. pestis</em> and <em>Listeria monocytogenes</em>.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Why-are-infectious-diseases-with-high-mortality-rates-not-as-infectious-as-those-with-lower-mortality-rates/answer/Chris-von-Csefalvay-3">Read the full answer here.</a> The <a href="https://www.nature.com/articles/nature05762">paper by Barton et al.&nbsp;(2007)</a>, which I cite, is an absolute gem too.</p>
+</section>
+<section id="has-smallpox-been-wiped-out-or-is-it-still-around" class="level2">
+<h2 class="anchored" data-anchor-id="has-smallpox-been-wiped-out-or-is-it-still-around">Has smallpox been wiped out, or is it still around?</h2>
+<blockquote class="blockquote">
+<p>Yes. As in, it’s been wiped out, and it’s still around. And this is one of the bigger travesties of the world.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Unfortunately, humans are what they are, and the two superpowers, the US and the USSR at the time, decided that each would be allowed to keep actual smallpox samples. The last outbreak of smallpox was not ‘natural’ but a laboratory escape, killing a medical photographer, Janet Parker, in 1978. In 1984, the WHO authorised two labs – VECTOR in Koltsovo, USSR, and the CDC in Atlanta – to store samples of it. And this has ignited a debate that keeps coming up all the time.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Has-smallpox-been-wiped-out-or-is-it-still-around/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="is-the-t-virus-in-resident-evil-a-fictional-virus-or-is-there-an-actual-disease-that-resembles-it" class="level2">
+<h2 class="anchored" data-anchor-id="is-the-t-virus-in-resident-evil-a-fictional-virus-or-is-there-an-actual-disease-that-resembles-it">Is the T-virus in Resident Evil a fictional virus or is there an actual disease that resembles it?</h2>
+<blockquote class="blockquote">
+<p>I like discussing fictional viruses. Heck, I’ve discussed one in my book – MEV-1, from Contagion –, which is supposed to be Serious Academic Literature. Fiction sometimes allows us to explore what could be, which is just as important as what is when it comes to preparing for bad things to happen.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Is-the-T-virus-in-Resident-Evil-a-fictional-virus-or-is-there-an-actual-disease-that-resembles-it/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="languages" class="level1">
+<h1>Languages</h1>
+<section id="if-a-person-is-fluent-in-multiple-languages-what-is-the-language-of-their-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="if-a-person-is-fluent-in-multiple-languages-what-is-the-language-of-their-thoughts">If a person is fluent in multiple languages, what is the language of their thoughts?</h2>
+<blockquote class="blockquote">
+<p>When you speak multiple languages, you come to think of languages as tools. I like German, for instance, which I consider a great tool for expressing logic, and I find German absolutely wonderful for discussing mathematics. I love the conciseness of modern Hebrew, and it’s my go-to for putting something down quickly. I think Russian gets certain emotions across in ways I have a hard time doing in other languages. And so on.</p>
+<p>You rarely use a single language for thoughts, although you do tend to default to whatever your dominant language is, which may or may not be your native language (my dominant language for thinking is English, but it was only the third or fourth language I’ve learned). Equally, I used to think primarily in Hungarian as a child (the language we spoke at home most of the time), but increasingly found I had a hard time expressing certain ideas. I learned both my first and second profession in English, and I have no idea what an outer automorphism group is in Hungarian, never mind the more specialised language I learned in law.</p>
+</blockquote>
+<p><a href="https://www.quora.com/If-a-person-is-fluent-in-multiple-languages-what-is-the-language-of-their-thoughts/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="is-it-possible-for-someone-who-speaks-more-than-one-language-to-identify-what-language-someone-is-speaking-just-by-hearing-them-speak-for-a-few-seconds-no-context-if-so-how-many-languages-can-this-be-done-with" class="level2">
+<h2 class="anchored" data-anchor-id="is-it-possible-for-someone-who-speaks-more-than-one-language-to-identify-what-language-someone-is-speaking-just-by-hearing-them-speak-for-a-few-seconds-no-context-if-so-how-many-languages-can-this-be-done-with">Is it possible for someone who speaks more than one language to identify what language someone is speaking just by hearing them speak for a few seconds (no context)? If so, how many languages can this be done with?</h2>
+<blockquote class="blockquote">
+<p>Yes. You can even pick this up with languages you don’t speak. For instance, I speak about a hundred words of Amharic (and about a quarter or so of those would fall into the ‘colourful language’ category), but can recognise it anytime.</p>
+<p>One of my native languages (Hungarian) is quite peculiar to me in that way. I can recognise it even if you speak it very faintly. I may not even be able to understand individual words, but there’s a ‘rhythm’ and ‘tonality’ to it that you can understand. The best analogy is this: say you’ve listened to your fair share of modern minimalist composers. If I gave you a new Philip Glass soundtrack, you’d immediately recognise it. There are some motifs that are just ‘so Glass’. This actually goes beyond identifying the language and starts to involve the semantic layer. My wife does not speak particularly good Hungarian, but can understand quite a bit of what’s going on from tone and affect.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Is-it-possible-for-someone-who-speaks-more-than-one-language-to-identify-what-language-someone-is-speaking-just-by-hearing-them-speak-for-a-few-seconds-no-context-If-so-how-many-languages-can-this-be-done-with/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="can-a-language-be-replaced-by-another-one-if-so-how-would-this-happen-in-an-example-of-a-real-world-scenario" class="level2">
+<h2 class="anchored" data-anchor-id="can-a-language-be-replaced-by-another-one-if-so-how-would-this-happen-in-an-example-of-a-real-world-scenario">Can a language be replaced by another one? If so, how would this happen in an example of a real world scenario?</h2>
+<blockquote class="blockquote">
+<p>Yes. This happens all the time, and unfortunately it’s one of the major causes of languages becoming extinct.</p>
+<p>By way of example, let’s consider one of my favourite languages, Yahgan, spoken by the Yaghan people in Tierra del Fuego. As languages go, it’s had pretty bad cards to begin with: it’s a language isolate, meaning it’s not related to any major language or linguistic group. In February of last year (2022), Cristina Calderon, the last native speaker of Yahgan, succumbed to complications of COVID-19 (at the ripe, old age of 93), and with her, Yahgan became effectively extinct. Which is a pity, because as languages go, it’s got some spectacularly fun features. But I’ll leave the language nerding for later.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Can-a-language-be-replaced-by-another-one-If-so-how-would-this-happen-in-an-example-of-a-real-world-scenario/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="if-you-had-the-ability-to-speak-any-language-fluently-which-one-would-you-choose-and-why" class="level2">
+<h2 class="anchored" data-anchor-id="if-you-had-the-ability-to-speak-any-language-fluently-which-one-would-you-choose-and-why">If you had the ability to speak any language fluently, which one would you choose, and why?</h2>
+<blockquote class="blockquote">
+<p>My shortlist:</p>
+<ul>
+<li>Arikara, a critically endangered Caddoan language. It’s spoken by fewer than a dozen people on the Fort Berthold reservation. Critically endangered, it is not mutually intelligible with any of its close Pawnee relatives.</li>
+<li>Lower Arrernte is not actually one of the Arrernte languages, although it is an Aranda language, i.e.&nbsp;related to it. Brownie Doolan perrurle was the last native speaker of Lower Arrernte, and he passed away in 2011.</li>
+<li>The Maidu languages, which are either extinct or almost so. Maidu is a language subfamily, although where it fits into the wider scheme of things isn’t all that clear. It used to be spoken in California by the Maidu peoples.</li>
+<li>Osage, another critically endangered language – was spoken mainly in Oklahoma, and has been considered extinct since 2005, when the last native speaker, Lucille Robedeaux, passed away.</li>
+<li>Sireniksky is a Yupik language that’s also extinct. There’s actually disagreement as to where it comes from, or whether it’s actually a Yupik language – there’s actually a theory that it’s the only known example of a third separate branch of the Eskimoan languages, along with Yupik and Inuit languages. It was displaced by Siberian Yupik, and of course Russian.</li>
+</ul>
+</blockquote>
+<p><a href="https://www.quora.com/If-you-had-the-ability-to-speak-any-language-fluently-which-one-would-you-choose-and-why/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="law" class="level1">
+<h1>Law</h1>
+<section id="are-law-firms-allowed-to-charge-as-if-they-were-doctors-despite-the-fact-that-it-requires-far-less-training-and-skill-set-than-medicine-does-what-can-be-done-about-this-issue" class="level2">
+<h2 class="anchored" data-anchor-id="are-law-firms-allowed-to-charge-as-if-they-were-doctors-despite-the-fact-that-it-requires-far-less-training-and-skill-set-than-medicine-does-what-can-be-done-about-this-issue">Are law firms allowed to charge as if they were doctors, despite the fact that it requires far less training and skill set than medicine does? What can be done about this issue?</h2>
+<blockquote class="blockquote">
+<p>I worked for a Big Law firm. To say we charged like doctors is a gross insult. Very few doctors charge remotely what we did.</p>
+<p>There’s a quite simple reason for why that’s the case: spending seven figures (or more) with us could save a company from being sunk by a lawsuit. Think about that for a moment. We routinely acted in matters where tens or hundreds of millions were at stake, and often enough, much more. The amount of money at play in such high stakes matters is orders of magnitude beyond whatever impact an individual physician may generate. You don’t have to like this fact of life, but that doesn’t make it any less a fact of life.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Are-law-firms-allowed-to-charge-as-if-they-were-doctors-despite-the-fact-that-it-requires-far-less-training-and-skill-set-than-medicine-does-What-can-be-done-about-this-issue/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="if-the-uk-were-invaded-would-it-be-legal-in-uk-law-for-a-civilian-to-murder-an-enemy-combatant-if-the-opportunity-presented-itself" class="level2">
+<h2 class="anchored" data-anchor-id="if-the-uk-were-invaded-would-it-be-legal-in-uk-law-for-a-civilian-to-murder-an-enemy-combatant-if-the-opportunity-presented-itself">If the UK were invaded, would it be legal in UK law for a civilian to murder an enemy combatant if the opportunity presented itself?</h2>
+<blockquote class="blockquote">
+<p>The laws of war basically separate people in two classes – combatants and non-combatants. A combatant cannot be prosecuted for the lawful conduct of hostilities which, yes, involves killing the other side’s combatants (they can, however, be prosecuted for war crimes). They are entitled to the panoply of rights that combatants have upon becoming non-combatants by way of surrender or becoming hors de combat, such as being wounded. On the other hand, a combatant can generally be killed with pretty little justification – if the kill is legal (the person is a combatant at the time, and the kill did not involve perfidy or some other form of illegality), it is what it is.</p>
+<p>Non-combatants enjoy extensive privileges in contrast. Not only are they entitled to protection, even if they are living in occupied areas, they are also categorically not permissible targets for military action. They and their property enjoy extensive protections. They cannot generally be interned against their will unless they are prisoners of war, they cannot generally be forced to work and there are various other protections they enjoy. Most of all, they cannot be killed for no reason other than not liking the occupying power.</p>
+<p>This gets complex where someone decides they’re going to blur the lines.</p>
+</blockquote>
+<p><a href="https://www.quora.com/If-the-UK-were-invaded-would-it-be-legal-in-UK-law-for-a-civilian-to-murder-an-enemy-combatant-if-the-opportunity-presented-itself/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="why-doesnt-the-uk-have-a-written-constitution" class="level2">
+<h2 class="anchored" data-anchor-id="why-doesnt-the-uk-have-a-written-constitution">Why doesn’t the UK have a written constitution?</h2>
+<blockquote class="blockquote">
+<p>I passionately hate the meme that the UK does not have a written constitution, because, for one, it’s not true, more importantly however, it distracts from the bigger question, namely what a constitution is.</p>
+<p>Now, a lot of how we perceive constitutions comes from the US idea that a constitution is a ‘supreme law of the land’, a superordinate legal norm against which all legislative and administrative action comes to be tested. This is not, actually, a necessary implication. Constitutions can be superordinate norms and it makes sense for them to be so. On the other hand, they don’t have to, nor is it a necessary implication of a constitution that it should be a superordinate norm. Nor do written and codified constitutions exclude reliance on other norms that happen not to be written and codified. An example would be constitutional conventions, which are basically political customs – plenty of countries with proper, codified constitutions have them. For instance, Germany has a codified constitution (even if it is not called a constitution but a Basic Law, for historical reasons), but that doesn’t provide for who gets to nominate the President of the Bundestag in the circumstances where a party has a plurality but is in opposition. It turns out that in this case, it would still be the largest party that would get to provide the President of the Bundestag, i.e.&nbsp;there’s no horse-trading between coalition parties to have a joint candidate for President of the Bundestag. This isn’t written down anywhere, incidentally.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Why-doesnt-the-UK-have-a-written-constitution/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="dont-american-law-students-study-the-famously-unwritten-british-constitution-are-the-details-superfluous" class="level2">
+<h2 class="anchored" data-anchor-id="dont-american-law-students-study-the-famously-unwritten-british-constitution-are-the-details-superfluous">Don’t American law students study the famously unwritten British Constitution? Are the details superfluous?</h2>
+<blockquote class="blockquote">
+<p>The British constitution is very much written.* It’s not codified. There’s a difference. For instance, nobody would argue that the Human Rights Act 1998 isn’t part of the British constitutional order, and last I checked, it’s pretty darn written. What it isn’t is codified, meaning there isn’t a single constitutional document.</p>
+<p>Part of the reason for this is that we do not have coequal branches of government. The UK has legislative supremacy, i.e.&nbsp;Parliament is not fettered by the judiciary. There’s no such thing as judicial review of primary legislation (as opposed to secondary legislation aka statutory instruments, and administrative action) the way there is in the US post-<em>Marbury v Madison</em>. Therefore, there’s no real need — or use — for a superordinate norm against which legislation may be tested. John Griffith said “the constitution is what happens … if it works, it’s constitutional”. The lecture (and later article) in which he made this poignant remark was titled <em>The Political Constitution</em>, which I think is a great way of describing the UK’s constitutional order.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Dont-American-law-students-study-the-famously-unwritten-British-Constitution-Are-the-details-superfluous/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="is-law-school-intrinsically-worth-it-even-if-you-dont-become-a-lawyer-is-it-worth-it-to-go-through-the-process-of-law-school" class="level2">
+<h2 class="anchored" data-anchor-id="is-law-school-intrinsically-worth-it-even-if-you-dont-become-a-lawyer-is-it-worth-it-to-go-through-the-process-of-law-school">Is law school intrinsically worth it? Even if you don’t become a lawyer, is it worth it to go through the process of law school?</h2>
+<blockquote class="blockquote">
+<p>The common perception is that law school is spent studying the law. This is maybe true in the vaguest outlines. Let me give you an example: like everyone pursuing a qualifying law degree in England and Wales, I had to take criminal law. Part of that was learning the elements of certain offences. I know to this date that theft is the (1) dishonest (2) appropriation of (3) property (4) belonging to another (5) with intent to permanently deprive. Would I actually know how to defend a theft charge? Probably not. How each of these parameters are applied in practice is not a lot like what you learn in law school.</p>
+<p>You do, however, learn a lot about reasoning. For instance, ‘dishonesty’ is an element of the offence. In England and Wales, a finding of dishonesty requires both a subjective and objective element (<em>R v Ghosh</em>), i.e.&nbsp;not only does your action have to be something others would consider dishonest, but it must also be something you yourself would consider dishonest. How would one arrive at that finding? How would one make the pleading for that? Would, say, someone believing that they are enriching themselves unjustly qualify?</p>
+</blockquote>
+<p><a href="https://www.quora.com/Is-law-school-intrinsically-worth-it-Even-if-you-dont-become-a-lawyer-is-it-worth-it-to-go-through-the-process-of-law-school/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="can-a-country-turn-vampires-illegal" class="level2">
+<h2 class="anchored" data-anchor-id="can-a-country-turn-vampires-illegal">Can a country turn vampires illegal?</h2>
+<p>If the vampire and zombie apocalypse is coming: Whitehall, call me.</p>
+<blockquote class="blockquote">
+<p>So, going after all the vampires would clearly be a violation of the Equality Act, and essentially a disability-based extermination. That’s a big no-no. Assuming we consider vampires still somewhat human, it would be a human rights violation. Since death in England and Wales is generally brainstem death, it would be very difficult to conclude that a vampire, once turned, is “dead” and hence no longer deserving of human rights.</p>
+<p>Vampires would thus be entitled to “reasonable accommodations” (such as working from home/castle/coffin or jobs that involve only night-time work), along with non-discrimination provisions. You would not, for instance, be allowed to refuse renting to the Karnstein family just because they have a predilection for blood.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Can-a-country-turn-vampires-illegal/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="having-diplomatic-status-is-sovereignty-but-its-nearly-impossible-to-obtain-so-being-a-sovereign-citizen-does-exist-if-you-can-obtain-diplomatic-immunity" class="level2">
+<h2 class="anchored" data-anchor-id="having-diplomatic-status-is-sovereignty-but-its-nearly-impossible-to-obtain-so-being-a-sovereign-citizen-does-exist-if-you-can-obtain-diplomatic-immunity">Having diplomatic status is sovereignty but it’s nearly impossible to obtain so, being a sovereign citizen does exist if you can obtain diplomatic immunity?</h2>
+<p>I do love me some sovcits.</p>
+<blockquote class="blockquote">
+<p>Not only is diplomatic status not sovereignty, it is the very opposite of sovereignty.</p>
+<p>You are granted diplomatic status by presenting your letter of credence aka diplomatic credentials (this does not mean an ID but a letter from your sending country’s or institution’s authorities to your receiving country) to the receiving country’s authorities. This is a pretty big show, incidentally – typically, they are presented to the receiving country’s head of state in person.</p>
+<p>It’s at the receiving country’s leisure to accept or reject this. A person isn’t a diplomat in a foreign country by their sending country’s fiat but by the receiving country’s consent (called agrément), which incidentally can be pretty much withdrawn at will – every country has the sovereign right to kick out any diplomat for any reason they want (Art. 9 Vienna Convention), and ban them from the country, a process generally known as PNGing (for persona non grata, and typically pronounced as ‘pinging’).</p>
+</blockquote>
+<p><a href="https://www.quora.com/Having-diplomatic-status-is-sovereignty-but-it%E2%80%99s-nearly-impossible-to-obtain-so-being-a-sovereign-citizen-does-exist-if-you-can-obtain-diplomatic-immunity/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="mathematics" class="level1">
+<h1>Mathematics</h1>
+<section id="as-a-math-major-or-mathematician-what-makes-you-roll-your-eyes-every-time-you-hear-it" class="level2">
+<h2 class="anchored" data-anchor-id="as-a-math-major-or-mathematician-what-makes-you-roll-your-eyes-every-time-you-hear-it">As a math major or mathematician, what makes you roll your eyes every time you hear it?</h2>
+<blockquote class="blockquote">
+<p>The assumption that we all do the same stuff.</p>
+<p>I’m doing a very specific kind of applied mathematics, day in, day out. What I do for a living has very little to do with what Alon Amit, one of my favourite Quorans, or, say, Edward Frenkel does. I could, technically, go about my work without having the slightest idea of Galois theory. Of course, that would be a sad and diminished existence, but hey. On the other hand, I need to know how to use a continuous wavelet transform with a Morlet wavelet to discern the way periodicities in the incidence of infectious diseases have changed (and if you are interested in that sort of stuff, you can go buy my book). I need to be able to construct Lyapunov functions and use them to reason about the stability of equilibrium states. And I have to be able to tell whether a certain control parameter, such as vaccination rate, is going to result in complex non-linear behaviour.</p>
+</blockquote>
+<p><a href="https://www.quora.com/As-a-math-major-or-mathematician-what-makes-you-roll-your-eyes-every-time-you-hear-it/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="do-mathematicians-use-advanced-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="do-mathematicians-use-advanced-terminology">Do mathematicians use advanced terminology?</h2>
+<blockquote class="blockquote">
+<p>As you move towards more advanced maths, it becomes less about dealing with numbers and stuff, and more about logical manipulations of various concepts. We want a convenient way to refer to certain things for which certain statements are true. To give you an example you are likely familiar with: we could say “x is a member of the set of integers greater than one that is not the product of two natural numbers”. Or, we could just say “x is [a] prime”. This is useful when you have to describe more complex things. A group, for instance, is a construct that consists of a set and an operation. A set and an operation are a group if they exhibit the group axioms — properties that are the “requirements” for a group. What these are are not so relevant here as the fact that life is a whole lot easier for us if we can simply say “group” and know that everyone else will know what we’re talking about, including, importantly, what specific features this thing we allege is a group would exhibit, from which we can then derive various other properties. For instance, one property of a group is that the operation is “closed”, meaning that performing the operation on any elements of the set will give you another element of the set. We know that addition of integers is a group (the set is the set of integers, the operation is addition). Consequently, we have proved that if x and y are integers, so will x + y be an integer. Trivial, yes, but it gets much more complicated quite quickly.</p>
+<p>Many of these concepts are, essentially, sets of rules and conditions. Often, they’re subspecies: an Abelian group is a group that satisfies some specific criteria. A ring is a kind of Abelian group that meets some additional criteria. And so on. Mathematical terminology is intended to capture these logical distinctions in a sort of shorthand.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Do-mathematicians-use-advanced-terminology/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="medicine-and-physiology" class="level1">
+<h1>Medicine and physiology</h1>
+<section id="what-is-the-scariest-disease-in-the-world-other-than-rabies" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-scariest-disease-in-the-world-other-than-rabies">What is the scariest disease in the world (other than rabies)?</h2>
+<blockquote class="blockquote">
+<p>Primary Amoebic Meningoencephalitis, aka Naegleriasis.</p>
+<p>Now, there’s no good meningoencephalitis. They’re all bad, even the relatively treatable forms. The problem is that the brain does not have a lot of tolerance for swelling, and therefore pretty much any inflammation in the brain is going to be a massive problem.</p>
+<p>The reason why PAM is the worst kind of meningoencephalitis is because the pathogen involved, <em>N. fowlerii</em>, is extremely difficult to kill. Naegleriasis is an amoebiasis rather than a bacterial infection, meaning that the usual method of solving problems – throw antibiotics at it – doesn’t really work. The most effective drug until recently used to be amphotericin B, which is notorious enough for its side effect profile to be nicknamed ‘amphoterrible’. From what I gather from an acquaintance who has had the pleasure of a personal acquaintance with the darn thing, it does its nickname justice. It’s not the most unpleasant drug in the infectious disease arsenal, because our friends in Infectious Diseases have things like literal arsenic in antifreeze (melarsoprol), but it’s pretty bad. And that’s before dealing with the problem of actually getting it to the site of the action, which often requires intrathecal administration (into the spinal canal), which has an entire set of issues on its own. Oh, and this treatment is effective in around 1.5% of cases. That’s right: case-fatality ratio for PAM is around 98.5%. Survivors are often left with permanent neurological sequelae.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-is-the-scariest-disease-in-the-world-other-than-rabies/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-diseases-are-close-to-being-cured-by-medical-research-and-why-are-they-progressing-faster-than-others-like-diabetes" class="level2">
+<h2 class="anchored" data-anchor-id="what-diseases-are-close-to-being-cured-by-medical-research-and-why-are-they-progressing-faster-than-others-like-diabetes">What diseases are close to being cured by medical research, and why are they progressing faster than others (like diabetes)?</h2>
+<blockquote class="blockquote">
+<p>Probably the biggest success story is cystic fibrosis (CF). It’s gone from essentially lethal in childhood in the 1980s, to survivable into adulthood with serious interventions (such as a double lung transplant) in the 1990s to now having the “geriatric shift”: patients are getting old enough to need care for long term effects as they are now living into, if not a ripe old age, at least past previous life expectancies. In the West, with good care and management, especially in patients who have a druggable CFTR mutation that can be treated with the CFTR modulators (the ‘caftors’: lumacaftor, ivacaftor &amp;c.), hitting 30 is considered to be more or less normal, and a child born with CF today has a better chance of seeing their children and perhaps even grandchildren than anyone with CF has ever had. And all this played out over the span of about 30–40 years.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-diseases-are-close-to-being-cured-by-medical-research-and-why-are-they-progressing-faster-than-others-like-diabetes/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-exactly-happens-during-a-clinical-trial-how-do-you-become-a-participant-in-a-clinical-trial" class="level2">
+<h2 class="anchored" data-anchor-id="what-exactly-happens-during-a-clinical-trial-how-do-you-become-a-participant-in-a-clinical-trial">What exactly happens during a clinical trial? How do you become a participant in a clinical trial?</h2>
+<blockquote class="blockquote">
+<p>See a clinical trial, and you’ve seen exactly one clinical trial. There are many different clinical trials at many different stages, for many different conditions, for many different interventions. No two clinical trials are the same – this is not an exaggeration, this is a rule: you cannot ethically do the exact same clinical trial again (the key ethical consideration for a clinical trial is therapeutic equipoise – that is, there must be a genuine question, you cannot do a trial if you’re sure that a treatment will definitely work or definitely not work)</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-exactly-happens-during-a-clinical-trial-How-do-you-become-a-participant-in-a-clinical-trial/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="why-do-pet-scan-images-appear-in-black-and-white" class="level2">
+<h2 class="anchored" data-anchor-id="why-do-pet-scan-images-appear-in-black-and-white">Why do PET scan images appear in black and white?</h2>
+<blockquote class="blockquote">
+<p>I mean, do they?</p>
+<p>A PET scan is basically a form of scintigraphy. The idea of a PET scan is something along these lines: a radiotracer that undergoes ß+ decay is injected, and accumulates where the tracer is taken up (this depends on the tracer and the physiology being imaged). As the tracer undergoes ß+ decay, it emits positrons (thence the PE – ‘positron emission’ – part of the name). When positrons hit electrons, they annihilate and emit a gamma photon. This is then imaged using a gamma camera, which basically measures the intensity of light,* in this case, gamma light. The result is a picture of how much gamma light is emitted from any point in space, thanks to a nifty little thing called an inverse Radon transform (that’s ruh-DOWN as opposed to ray-DOWN, which is how you are supposed to pronounce the element, to which it’s entirely unrelated).</p>
+<p>Now, I’ve gone through this length to explain how the image is acquired because it helps us understand what the image is (which is always something you should have at the forefront in medical imaging). It’s an image of signal intensity attributable to a point in three-dimensional space (although we obviously look at 2-dimensional projections of it), where that signal intensity is the measure of the amount of ß+ decay originating from that point, which in turn is a measure of how much of the tracer is taken up by tissue at that point, which in turn is biologically meaningful (e.g.&nbsp;if the tracer is 18fluoro-deoxyglucose, which is a radiotagged sugar, it will show areas of higher glucose metabolism). In other words, for any point in space (and therefore, for any projection thereof), we have one value for any point in space.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Why-do-PET-scan-images-appear-in-black-and-white/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-are-the-challenges-faced-by-the-government-in-financing-treatment-for-rare-diseases" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-the-challenges-faced-by-the-government-in-financing-treatment-for-rare-diseases">What are the challenges faced by the government in financing treatment for rare diseases?</h2>
+<blockquote class="blockquote">
+<p>Pretty much the same as the private sector’s: they’re rare.</p>
+<p>Drug development hinges on economies of scale. The cost of bringing a drug to market is the same, whether it treats a million people, ten or, as is the case for some drugs, a single individual (Milasen, for instance, is an oligonucleotide antisense drug developed for one individual patient with one particular mutation causing Batten’s Disease). If a finite amount of money could be used to bring a drug to market that will give 5–10 quality-adjusted years of life to hundreds of thousands, or save the lives of maybe a hundred, the calculus is quite clear.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-are-the-challenges-faced-by-the-government-in-financing-treatment-for-rare-diseases/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="are-there-any-historical-examples-of-self-treatment-or-self-diagnosis-that-led-to-significant-advancements-in-medicine-or-public-health" class="level2">
+<h2 class="anchored" data-anchor-id="are-there-any-historical-examples-of-self-treatment-or-self-diagnosis-that-led-to-significant-advancements-in-medicine-or-public-health">Are there any historical examples of self-treatment or self-diagnosis that led to significant advancements in medicine or public health?</h2>
+<blockquote class="blockquote">
+<p>There are cells in your body called mast cells that are basically big containers of histamine. When these cells degranulate, they spew this histamine all over the place, and you experience what is known as an allergic reaction. So, it would probably be cool if we could keep these cells from blowing up, right?</p>
+<p>It turns out that this is a relatively workable idea. A young man by the name of Roger Altounyan, who came from an Aleppo Armenian family, knew of a folk remedy widely used around the Mediterranean – khella, a weed that is boiled down to a tea and used for asthma, colic and just about anything else. The problem is, khella is tremendously unpleasant in terms of side effects. It does, however, stabilise mast cells quite well. Altounyan figured out how to create an analogue, cromoglycate, that does the same but minus the horrid side effects.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Are-there-any-historical-examples-of-self-treatment-or-self-diagnosis-that-led-to-significant-advancements-in-medicine-or-public-health/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-would-happen-to-your-body-if-youre-exposed-to-10-times-the-magnetic-power-30t-of-an-mri-scanner" class="level2">
+<h2 class="anchored" data-anchor-id="what-would-happen-to-your-body-if-youre-exposed-to-10-times-the-magnetic-power-30t-of-an-mri-scanner">What would happen to your body if you’re exposed to 10 times the magnetic power (30T) of an MRI scanner?</h2>
+<blockquote class="blockquote">
+<p>Most of the weird and/or unpleasant things that tend to happen in a properly operated MRI (by which I mean nobody is letting the guy with all the spinal hardware into the scanner room) don’t actually happen due to the static magnetic field. In MRIspeak, that’s normally denoted <img src="https://latex.codecogs.com/png.latex?B_0">. If you read MRI safety literature, you’ll see another symbol a whole lot more: <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdB%7D%7Bdt%7D">, known to its friends and relatives as “flux change”. In this case, <img src="https://latex.codecogs.com/png.latex?dB"> stands not for decibels but is rather the change in the total field strength. It turns out that if you have a high frequency of change (and as we know, frequency is the inverse of the period), then even relatively small fields can build up quite a bit of flux change. The MRI has a part called the RF transmit coil (or sometimes just “coil”) that transmits a much, much smaller magnetic field that, however, varies rapidly. It’s called an RF coil because the transmitted signal is in the radiofrequency range, so in the high hundreds to low thousands of MHz (megahertz). If you get a tiny field that flips a hundred million times a second, you’re going to get an awful lot of flux change. By far the biggest problem is that this field coexists, regrettably, with an electric field <img src="https://latex.codecogs.com/png.latex?E"> (we’ve got Maxwell to thank for that). The Maxwell equation, of course, tells us that <img src="https://latex.codecogs.com/png.latex?%5Cdel%20%5Ctimes%20E%20=%20%5Cfrac%7BdB%7D%7Bdt%7D">, which in short means that if you oscillate the magnetic field, you’re going to get an electric field perpendicular to the magnetic field lines that is going to oscillate at the same frequency. This electric field dumps energy into whatever is at hand, and if you’re in the Magic Donut, that energy will end up in you. There are largely two things that happen. One is the result of the fact that you’re only seventy-odd percent water. A good part of the rest are charged particles, which are accelerated by this field and slammed into the nearest water molecule. This creates vibrational energy, which is also known as heat. This is called Ohmic heating, and if you’ve ever had one of those old space heaters that were ridiculously unsafe but incredibly cosy after being drenched by the rain, that’s how they worked. The bigger issue is dielectric heating. If you vary the electric field fast enough, all sorts of polar molecules are going to try to align themselves with that field. Unfortunately, that seventy-odd percent of yours that is water? That’s a polar molecule. If you flip water molecules around their axis a couple of hundred million tiems a second, you get what everyone else knows and loves as a “microwave oven”. Higher field strengths involve higher RF frequencies (for reasons you might find out by googling Larmor frequencies), so the RF coils in a higher field will have a higher <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdB%7D%7Bdt%7D"> and hence a higher <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BdE%7D%7Bdt%7D">. That in turns means more energy dumped as heat. It’s worth noting that this energy dumping as heat is pretty minimal. What happens a lot more often is if there’s something to be heated. There are two flavours of this. One is what we call inductive heating. This happens when the body, which is an okayish conductor, comes in touch with something that isn’t, such as the bore. That generates a resistance, and we know what happens to resistances. The other alternative is anything that creates a loop. By far the most frequent loops that generate RF burns are humans. If you are raising your arms up, don’t touch them. If you’re holding your arms down, don’t touch your hip. Don’t let cables touch your abdomen. More importantly, don’t let coils of cables be anywhere near you.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-would-happen-to-your-body-if-you-re-exposed-to-10-times-the-magnetic-power-30T-of-an-MRI-scanner/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="nuclear-weapons" class="level1">
+<h1>Nuclear weapons</h1>
+<section id="how-did-the-scientists-of-the-manhattan-project-know-it-would-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-did-the-scientists-of-the-manhattan-project-know-it-would-work">How did the scientists of the Manhattan project know it would work?</h2>
+<blockquote class="blockquote">
+<p>This is science. You never know if something will work. You do, however, have a degree of belief – in the statistical, not the religious sense –, and that belief tends to be the result of evidence (ideally). By the time dawn broke over Alamogordo on 16 July 1945, there was a pretty impressive amount of evidence that it would work just fine.</p>
+</blockquote>
+<p><a href="https://nuclearweaponsandspace.quora.com/How-did-the-scientists-of-the-Manhattan-project-know-it-would-work-What-gave-them-the-idea-that-they-could-make-a-bomb-2">Read the full answer here.</a></p>
+</section>
+<section id="would-the-a-bomb-be-created-without-oppenheimer" class="level2">
+<h2 class="anchored" data-anchor-id="would-the-a-bomb-be-created-without-oppenheimer">Would the A-bomb be created without Oppenheimer?</h2>
+<blockquote class="blockquote">
+<p>Much is made of Oppenheimer as an ‘administrator’, but I think that misses the point. There was a logistical-administrative genius at work at the Manhattan Project, but that was Leslie Groves, not Oppenheimer. Rather, Oppenheimer’s principal role was as a buffer.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Would-the-A-bomb-be-created-without-Oppenheimer/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="why-would-britain-have-had-to-ask-for-australian-permission-to-test-nuclear-weapons-in-the-1950s-in-australia-britain-owned-australia-in-the-past-so-surely-britain-can-do-whatever-it-wants-in-australia" class="level2">
+<h2 class="anchored" data-anchor-id="why-would-britain-have-had-to-ask-for-australian-permission-to-test-nuclear-weapons-in-the-1950s-in-australia-britain-owned-australia-in-the-past-so-surely-britain-can-do-whatever-it-wants-in-australia">Why would Britain have had to ask for Australian permission to test nuclear weapons in the 1950s in Australia? Britain owned Australia in the past so surely Britain can do whatever it wants in Australia?</h2>
+<blockquote class="blockquote">
+<p>In 1907, at the Imperial Conference, a number of self-governing British territories, such as Australia and Canada, became dominions. This made them subjects capable of independent standing under international law – Australia, for example, was one of the founding nations of the League of Nations. In 1931, the Statute of Westminster further increased the sovereignty of dominions. This basically put into effect the Balfour Declaration of 1926, which declared that the dominions were co-equal with each other and the United Kingdom. It also, implicitly, repealed the Colonial Laws Validity Act 1865 and essentially terminated the ability of Westminster to legislate for the Dominions. By the time you’re referring to, Australia has very much been an independent sovereign that in no conceivable way was “owned” by Britain. This includes participation in collective security agreements the UK was not party to, such as Australia and New Zealand’s alliance with the US – and, of course, it participated in the UN as a fully-fledged sovereign.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Why-would-Britain-have-had-to-ask-for-Australian-permission-to-test-nuclear-weapons-in-the-1950s-in-Australia-Britain-owned-Australia-in-the-past-so-surely-Britain-can-do-whatever-it-wants-in-Australia/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-are-the-first-signs-of-a-nuclear-war" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-the-first-signs-of-a-nuclear-war">What are the first signs of a nuclear war?</h2>
+<blockquote class="blockquote">
+<p>There was a project in the early 1980s run by the KGB called RYaN – raketno-yadernoye napadenie, roughly translating to ‘nuclear missile attack’ and sometimes wrongly spelled RYAN. The purpose of that was to watch for indicators of what in British governmentese is called ‘transition to war’ (TTW). The later Soviet leader, Yuri Andropov, was then the head of the KGB. Even by the standards of KGB functionaries, Andropov was paranoid to a clinical degree, at least partly due to his brain swimming in an increasingly potent pickle of his body’s own waste products due to untreated renal failure. More so, though, he witnessed a bunch of Soviet-trained servants of the Communist repression in Hungary get hung from lampposts during the 1956 Revolution, which left him with a life-long ‘Hungarian Complex’. Andropov genuinely believed that the West, with Reagan’s encouragement, was going to get the drop on the Soviet Union.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-are-the-first-signs-of-a-nuclear-war/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="theres-a-fear-of-dirty-bomb-used-by-some-malicious-non-governmental-actor-terrorist-organization.-but-is-that-fear-even-grounded-is-it-that-simple-to-construct-a-dirty-bomb-if-compared-to-the-standard-nukes-used-by-countries" class="level2">
+<h2 class="anchored" data-anchor-id="theres-a-fear-of-dirty-bomb-used-by-some-malicious-non-governmental-actor-terrorist-organization.-but-is-that-fear-even-grounded-is-it-that-simple-to-construct-a-dirty-bomb-if-compared-to-the-standard-nukes-used-by-countries">There’s a fear of dirty bomb used by some malicious non-governmental actor (terrorist organization). But is that fear even grounded? Is it that simple to construct a dirty bomb if compared to the “standard” nukes used by countries?</h2>
+<blockquote class="blockquote">
+<p>The entire edifice of control over the nuclear means of our fellow man’s destruction rests on a very simple principle: nuclear weapons need fissile material. It’s impossible to get fissile material easily (you can technically go and buy small amounts, but even that’s tricky). It’s impossible to make fissile material easily – you’ll have to master an entire industry called uranium enrichment or a different one called plutonium breeding. And there’s a minimum of how much fissile material you need to realise a yield. The ‘critical’ in ‘critical mass’ reflects this: critical mass plus one gram equals nuclear boom, critical mass minus one gram equals no nuclear boom. The effect of this scheme is that as long as nobody sells fissile material, even relatively well-funded state actors – think Iran, North Korea – have an enormously difficult time getting enough fissile material to play the nuclear game. Non-state actors pretty much stand not a snowball’s chance in hell.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Theres-a-fear-of-dirty-bomb-used-by-some-malicious-non-governmental-actor-terrorist-organization-But-is-that-fear-even-grounded-Is-it-that-simple-to-construct-a-dirty-bomb-if-compared-to-the-standard-nukes-used-by/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="could-you-build-a-nuclear-weapon-off-from-an-information-online" class="level2">
+<h2 class="anchored" data-anchor-id="could-you-build-a-nuclear-weapon-off-from-an-information-online">Could you build a nuclear weapon off from an information online?</h2>
+<blockquote class="blockquote">
+<p>Assuming you have the fissile material, the answer is largely yes.</p>
+<p>The US has, on multiple occasions, ran “Nth Country” experiments, mostly in the pre-internet era (if they did any in recent years, it is classified and will remain so for a long, long time). These have proven out that a physics PhD who did his doctorate on an area other than nuclear physics could, with the help of a decent college library (and, I assume, a friendly college librarian who has few compunctions about the weird guy asking for strange publications involving things like explosive lensing, aerogels and the properties of tantalum-182), build themselves a nuclear bomb.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Could-you-build-a-nuclear-weapon-off-from-an-information-online/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="oxford" class="level1">
+<h1>Oxford</h1>
+<section id="how-clever-do-you-have-to-be-to-get-a-first-at-oxford" class="level2">
+<h2 class="anchored" data-anchor-id="how-clever-do-you-have-to-be-to-get-a-first-at-oxford">How clever do you have to be to get a first at Oxford?</h2>
+<blockquote class="blockquote">
+<p>I’m not, by any stretch of the word, clever. I am generally a hard worker and someone who has probably well above-average stamina. Finals is a marathon, and you need to be able to both have great mental control (not let how you feel you performed one day affect how you are going into next day’s paper) and an ability to work extremely hard during the revision period.</p>
+</blockquote>
+<p><a href="https://www.quora.com/How-clever-do-you-have-to-be-to-get-a-first-at-Oxford/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-are-your-favorite-places-to-study-at-oxford-university" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-your-favorite-places-to-study-at-oxford-university">What are your favorite places to study at Oxford University?</h2>
+<blockquote class="blockquote">
+<p>Hidden gem: the Codrington Library at All Souls, now known as the All Souls College Library to distance themselves from Christopher Codrington, who might have donated a lot of money to All Souls, but was also a slaveowner. The name is gone, the statue is kept.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-are-your-favorite-places-to-study-at-Oxford-University/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="how-good-is-food-at-oxford-university-is-it-varied-among-different-colleges" class="level2">
+<h2 class="anchored" data-anchor-id="how-good-is-food-at-oxford-university-is-it-varied-among-different-colleges">How good is food at Oxford University? Is it varied among different colleges?</h2>
+<blockquote class="blockquote">
+<p>It’s quite decent – and yes, it varies as food is made &amp; served by the colleges. It’s British(-made) food, so take that with a pinch of salt (literally – it will taste super salty, but actually be devoid of actual salt, because the government replaced all salt with potassium chloride). Food at Formal Hall is generally very nice, food at lunch and informal hall ranges from good-quality institutional food to quite nice, actually. The typical staples are the usual English breakfast (baked beans, sausages, bacon, you get where I’m headed), whatever can be made at institutional scale for lunch, and the same again for dinner. If you go to informal hall every day for three meals at the same college, you will very rapidly grow bored of it. It’s not necessarily unhealthy, and it’s quite affordable, but it ain’t Heston Blumenthal. The same bubble &amp; squeak will get a little dull after you’ve had it for the fifth time that term. This, incidentally, is a reason for Fifth Week Blues (incipient depression around middle of term): you realise that you have five more weeks of every bit of meat getting drenched in the same made-from-powder gravy.</p>
+</blockquote>
+<p><a href="https://www.quora.com/How-good-is-food-at-Oxford-University-Is-it-varied-among-different-colleges/answer/Chris-von-Csefalvay-3">Read the full answer here (including a list of yays or nays, based on the author’s experience!).</a></p>
+</section>
+<section id="how-do-undergraduate-law-students-get-grades-at-oxford-do-they-have-quizzes-do-they-write-essays-or-what-for-the-finals-are-there-any-finals-or-mid-term-exams-at-all" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-undergraduate-law-students-get-grades-at-oxford-do-they-have-quizzes-do-they-write-essays-or-what-for-the-finals-are-there-any-finals-or-mid-term-exams-at-all">How do undergraduate law students get grades at Oxford? Do they have quizzes? Do they write essays or what for the finals? Are there any finals or mid-term exams at all?</h2>
+<blockquote class="blockquote">
+<p>Law at Oxford is a pretty… interesting subject when it comes to grading. There you are, after three or four years of suff… I mean, education, and all of it will boil down to a set of papers in one week. That’s it, that’s the whole thing. Nine three-hour papers. Nothing else matters.</p>
+<p>Over the past years, you’ve sat collections (like term exams) at the start of every term. You also sat Moderations (Mods) in your first year, which comprised three papers, in subjects you won’t be tested on in finals. But none of this matters, because it’s a brand new day, and everything starts anew. It’s hard to overstate the psychological pressure inherent in this. We all have good days and bad days, but you absolutely cannot have a bad finals week. This is an absolutely gruelling system that rewards not just knowledge and excellence but also the mental stability to perform no matter what. Training is what you default to when all else fails, and this is training at its harshest.</p>
+</blockquote>
+<p><a href="https://www.quora.com/How-do-undergraduate-law-students-get-grades-at-Oxford-Do-they-have-quizzes-Do-they-write-essays-or-what-for-the-finals-Are-there-any-finals-or-mid-term-exams-at-all/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="does-an-oxford-degree-provide-conclusive-evidence-that-one-person-is-more-intelligent-than-another" class="level2">
+<h2 class="anchored" data-anchor-id="does-an-oxford-degree-provide-conclusive-evidence-that-one-person-is-more-intelligent-than-another">Does an Oxford degree provide conclusive evidence that one person is more intelligent than another?</h2>
+<blockquote class="blockquote">
+<p>There are relatively few people around who have done as well on their undergraduate degree at Oxford as I did. The number would probably be, if I counted everyone alive and assumed that there are the same number of equivalents from the Other Place, in the three digits, and that’s assuming every year’s top 1st in every subject did at least as well as I did or better. Off a sample of eight billion, that’s a pretty low number. There are more billionaires alive than people with a top 1st from Oxford.</p>
+<p>There are probably tens of millions, if not more, people who are vastly more intelligent than I am. Some have top degrees from other universities. Some don’t have any degrees at all, or yet. Some could never get into Oxford and many, if they did, might not do well. There are many things involved in getting in, and doing well at, Oxford. Intelligence is at best part of the story. If I had a limited number of skill points to put into various skills to ensure success at Oxford, intelligence wouldn’t be my first or even second choice. More has been determined by industry, hard work and sheer bloody-minded determination than intelligence. Evolutionary biology calls this the Anna Karenina effect: no one factor ensures success, but rather the presence of all of them is necessary (which is why e.g.&nbsp;zebras were never domesticated like horses - they lack one crucial factor, namely the right temperament).</p>
+</blockquote>
+<p><a href="https://www.quora.com/Does-an-Oxford-degree-provide-conclusive-evidence-that-one-person-is-more-intelligent-than-another/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="do-students-at-oxford-and-cambridge-universities-have-fun-if-so-what-kind-of-things-do-they-do-to-entertain-themselves-on-campus" class="level2">
+<h2 class="anchored" data-anchor-id="do-students-at-oxford-and-cambridge-universities-have-fun-if-so-what-kind-of-things-do-they-do-to-entertain-themselves-on-campus">Do students at Oxford and Cambridge universities have fun? If so, what kind of things do they do to entertain themselves on campus?</h2>
+<blockquote class="blockquote">
+<p>No, fun has been outlawed in Oxford in 1537, having been found to be detrimental to good discipline.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Do-students-at-Oxford-and-Cambridge-universities-have-fun-If-so-what-kind-of-things-do-they-do-to-entertain-themselves-on-campus/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+</section>
+<section id="personal-life-and-experiences" class="level1">
+<h1>Personal life and experiences</h1>
+<section id="people-with-iqs-below-83-are-unemployable-in-western-society-according-to-jordan-peterson.-even-people-with-iqs-between-85-100-are-mostly-confined-to-low-paying-jobs-less-than-2x-the-minimum-wage.-why-is-this-issue-ignored-by-society" class="level2">
+<h2 class="anchored" data-anchor-id="people-with-iqs-below-83-are-unemployable-in-western-society-according-to-jordan-peterson.-even-people-with-iqs-between-85-100-are-mostly-confined-to-low-paying-jobs-less-than-2x-the-minimum-wage.-why-is-this-issue-ignored-by-society">People with IQs below 83 are unemployable in western society, according to Jordan Peterson. Even people with IQs between 85-100 are mostly confined to low paying jobs (less than 2x the minimum wage). Why is this issue ignored by society?</h2>
+<blockquote class="blockquote">
+<p>Unlike Dr Peterson, I graduated with a top 1st from the University of Oxford, and got my graduate education there, too. Without being so crass as to discuss what I make, it’s… well, it’s rather more than twice the minimum wage. I managed to do so with an IQ of 83–87, depending on test (all proper testing, administered by actual people, not some online stuff). So I suppose I might have an opinion on the matter.</p>
+<p>The idea that people with an IQ of 83 are ‘unemployable’ is ridiculous. There probably is some cut-off at which point it becomes difficult to employ someone without constant supervision, but people in the low 80s and even in the 70s can work just fine.</p>
+</blockquote>
+<p><a href="https://www.quora.com/People-with-IQs-below-83-are-unemployable-in-western-society-according-to-Jordan-Peterson-Even-people-with-IQs-between-85-100-are-mostly-confined-to-low-paying-jobs-less-than-2x-the-minimum-wage-Why-is-this-issue/answer/Chris-von-Csefalvay-3">Read the full answer here.</a>)</p>
+</section>
+<section id="can-money-really-buy-happiness-if-yes-then-how-and-if-not-then-what-can-bring-happiness" class="level2">
+<h2 class="anchored" data-anchor-id="can-money-really-buy-happiness-if-yes-then-how-and-if-not-then-what-can-bring-happiness">Can money really buy happiness? If yes, then how and if not, then what can bring happiness?</h2>
+<blockquote class="blockquote">
+<p>Money can’t buy happiness, but it can definitely buy the things you need to do what makes you happy, including – to some extent – time. It’s a common misunderstanding that money can’t buy time. That’s only the case if you manage it badly. If you can accrue money faster than what it costs you to buy an hour of your time, then this is absolutely no issue. 90% of what you do in your waking hours are things you can make someone else do, and usually for pretty nominal cash. I think there’s something good about doing many of these activities yourself – for instance, I’d never hire a personal chef, as making food relaxes me and it’s a good way to keep whatever motor function I’ve got left in my hands mostly in practice. On the other hand, I hate doing the dishes, and if I had to fly to Sotheby’s in London to bid on the last dishwasher in existence, I’d raid my savings to make sure to get it. There are very few things money cannot buy (love, loyalty, friendship are some examples). For all else, you just need to know how to spend your money to buy what it is you really want. If there’s one thing I’ve seen affluent people spend differently on, it’s that vastly more of their spend goes towards things that either buy them time, or buy them experiences to fill that time with.</p>
+<p>And that’s pretty close to happiness.</p>
+</blockquote>
+<p><a href="https://www.quora.com/Can-money-really-buy-happiness-If-yes-then-how-and-if-not-then-what-can-bring-happiness/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-is-it-like-living-with-diplomatic-immunity" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-it-like-living-with-diplomatic-immunity">What is it like living with diplomatic immunity?</h2>
+<blockquote class="blockquote">
+<p>Not as fun as you’d like to think.</p>
+<p>For starters: invoking diplomatic immunity is not really optional. The immunity does not belong to you as a person, it belongs to the state that sent you or your family member. As such, many interactions that you might be able to iron out pretty easily as a normal person will become pretty… complicated.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-is-it-like-living-with-diplomatic-immunity/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+</section>
+<section id="what-do-drunk-scientists-discuss-more-at-cocktail-parties-the-multiverse-wormholes-alien-sightings-or-time-travel" class="level2">
+<h2 class="anchored" data-anchor-id="what-do-drunk-scientists-discuss-more-at-cocktail-parties-the-multiverse-wormholes-alien-sightings-or-time-travel">What do drunk scientists discuss more at cocktail parties: The multiverse, wormholes, alien sightings or time travel?</h2>
+<p>We are, in fact, boring.</p>
+<blockquote class="blockquote">
+<p>Neither.</p>
+<p>You’d be surprised by what passes for normal conversation among scientists at cocktail parties. A cocktail party is where you don’t talk shop. If you do, you are marking yourself as a terrible bore, and you won’t be invited ever again. There’s nothing more boring than someone holding forth about abstract nonsense at a cocktail party.</p>
+</blockquote>
+<p><a href="https://www.quora.com/What-do-drunk-scientists-discuss-more-at-cocktail-parties-The-multiverse-wormholes-alien-sightings-or-time-travel/answer/Chris-von-Csefalvay-3">Read the full answer here.</a></p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2022,
+  author = {von Csefalvay, Chris},
+  title = {My Favourite {Quora} Answers},
+  date = {2022-04-13},
+  url = {https://chrisvoncsefalvay.com/posts/quora-answers},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2022. <span>“My Favourite Quora Answers.”</span>
+April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/quora-answers">https://chrisvoncsefalvay.com/posts/quora-answers</a>.
+</div></div></section></div> ]]></description>
+  <category>Quora</category>
+  <category>history</category>
+  <category>technology</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/index.html</guid>
+  <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/quora.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>A different shade of grey</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>In a recent paper that has attracted the interest of popular media as well, Fabio Urbina and colleagues examined the use (or rather, the abuse) of computational chemistry models of toxicity for generating toxic compounds and potential chemical agent candidates.<span class="citation" data-cites="urbina2022dual">(Urbina et al. 2022)</span> Urbina and colleagues conclude that</p>
+<blockquote class="blockquote">
+<p>By going as close as we dared, we have still crossed a grey moral boundary, demonstrating that it is possible to design virtual potential toxic molecules without much in the way of effort, time or computational resources.</p>
+</blockquote>
+<p>I agree with the conclusion, but for rather different reasons.</p>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Computational chemistry is the branch of computational science that focuses on applications in the chemical field. This includes pharmacology and rational drug design (RDD) in particular. The purpose of RDD is to generate drug candidates that show favourable indicators of effectiveness (such as high binding affinity to a target protein) along with indicators of biological suitability (such as no or low interference with other proteins, low toxicity and no inhibition of metabolic ‘bottlenecks’ like CYP3A4). The latter part is typically handled by a toxicity model.</p>
+<p>Rather simply put, a toxicity model infers the structural associations (the chemical structures associated with undesirable effects) from a library of known compounds with known effects. For instance, the Toxicology in the 21st Century (Tox21) programme of the US federal government has performed over sixty different assays (typically, enzyme inhibition assays) for over 13,000 different compounds. <span class="citation" data-cites="tice2013improving">(Tice et al. 2013)</span> Using molecular fingerprinting, which we have discussed in a previous post on this blog in this very same context, it is possible to build relatively easy models for toxicity. Where a particular desired toxicity is known, say mitochondrial toxicity, it’s not difficult to build a pipeline that generates candidate compounds, derives the molecular fingerprint and evaluates the likelihood that the molecule that is obtained will be an effective agent. In this sense, I wholeheartedly agree with Urbina: the cat is very much out of the bag. Even if Tox21’s public data does not include the classical target of modern chemical weapons (acetylcholinesterase), such data is not exactly hard to come by or, for a nation-state actor, to generate. A near-peer adversary could create such assays for cents on the compound.</p>
+<p>Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g.&nbsp;for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.</p>
+</section>
+<section id="the-reverse-of-the-medal" class="level1">
+<h1>The reverse of the medal</h1>
+<p>On the other hand, the likelihood of an AI-generated chemical agent ever posing a threat beyond the theoretical is very, very low. There are a few reasons for that, and they’re inherent partly in computational chemistry, partly in weapons design.</p>
+<p>The computational chemistry part pertains to the fact that molecular fingerprinting and similar models only give us a narrow view of the outcomes we may expect. For starters, no model is able to reliably assess the feasibility and cost-effectiveness of synthesis. There are plenty of drug candidates that have performed admirably in vitro and sometimes even in clinical trials, but for which no feasible way of cost-efficient, large-scale synthesis could be found. Then, there are the drugs that ought to work, and might even work in vitro, but end up failing in clinical trials with no effect or an unexpected toxicity. Effect inference from chemical structure looks only at one side of the medal, and not even all of that.</p>
+<p>The bigger problem is the weapons design part. To avoid a late-night visit from some mild-mannered federal employees in a dark SUV, I’d like to point out that anything I discuss here is well in the public domain. With that said: just as pharmaceutical chemists want some things from their target compounds (such as relatively little inference, predictable metabolism, a wide therapeutic margin and few adverse effects), designers of chemical weapons have their own considerations for which to optimise. VX, for instance, is immensely popular because its oily consistency gives it beneficial physical properties. Similarly, a potential chemical weapon candidate must be stable vis-a-vis e.g.&nbsp;UV exposure, but not too stable. An example of the latter is the Red Zone in France, the World War I battlefields that have been bombarded with so many chemical weapons that to this day, they are heavily contaminated by arsenic, among others. The preference for binary agents (which contain two relatively stable and relatively non-toxic chemicals that are mixed, typically during the flight time of a shell, to form the active agent) means that a less toxic agent that can be reliably produced from the simple admixture of two relatively stable agents may be preferred to a more lethal unary agent. And this, of course, all assumes a state actor willing and able to violate international law on chemical weapons.</p>
+<p>Finally, there is no real need for novel chemical agents, at least not in the nerve agent category. Not only does using a known agent provide plausible deniability, there is also no real need to create anything more lethal than VX. Even relatively old chemical agents, such as mustard agents, are effective enough. A novel chemical structure may not guarantee that the agent escapes chemical detection, and functional antidotes are going to be just as effective against novel agents. To an atropine/pralidoxime NAAK autoinjector’s efficacy, it makes no difference whether the acetylcholinesterase inhibition comes from sarin, VX, Tetram or inadvertent exposure to organophosphate pesticides. Arguably, this becomes somewhat more complex with other agents, where the biological targets — and hence the antidotes — are more specific. Nevertheless, it is hard to conceive of anyone possessed of a burning rationale to start creating novel chemical agents.</p>
+</section>
+<section id="a-lighter-shade-of-grey" class="level1">
+<h1>A lighter shade of grey</h1>
+<p>I commend the authors for discussing the moral aspects of this exercise. It is rather uncomfortable to write about the use of artificial intelligence to create tools whose predominant use would be to extinguish human lives (although, as noted, many of these compounds can, and often do, have a medicinal use).</p>
+<p>Where I cannot agree with the authors is the conclusion that this situation calls for regulation (be it self-regulation or imposed from above).</p>
+<blockquote class="blockquote">
+<p>Although MegaSyn is a commercial product and thus we have control over who has access to it, going forward, we will implement restrictions or an API for any forward-facing models. A reporting structure or hotline to authorities, for use if there is a lapse or if we become aware of anyone working on developing toxic molecules for non-therapeutic uses, may also be valuable. Finally, universities should redouble their efforts toward the ethical training of science students and broaden the scope to other disciplines, and particularly to computing students, so that they are aware of the potential for misuse of AI from an early stage of their career, as well as understanding the potential for broader impact.</p>
+</blockquote>
+<p>This is all well and good, but — assuming that there were a realistic danger of people coming to grief from AI-generated chemical weapons — it solves a problem that the authors have failed to substantiate exists. The tools to do this have been around for a long time. For the reasons laid out in the previous section, there is no burning desire anywhere in the world right now, as far as I can see, to develop a successor to VX purely on a structural basis. Of course, a chemical agent that can be synthesised without relying on any OPCW listed substances, or which can have novel effects, or which can escape traditional methods of detection (GC/MS, typically), would be of interest to potential bad actors, but current models of computational chemistry do not help with that. Creating permutational or functional analogues of VX does not, realistically, put anyone a single step closer to the ability to carry out an atrocity using such reprehensible weapons.</p>
+<p>On the other hand, I am concerned about the moral aspects that derive from the consequences of Urbina et al.’s paper. Given that the overwhelming majority of users of computational chemistry and RDD do so for benign purposes, the public attention garnered by such articles may create a regulatory push that is not going to make anyone safer, but will impede scientific inquiry. Urbina et al.&nbsp;point out the reputational risk, and the risk of a single bad apple spoiling the lot — I am rather uncertain whether an attention-grabbing headline in The Verge, raising the spectre of the scary AI that generates tens of thousands of killer compounds in hours (virtually all of which are very likely to be practically useless), is doing our discipline any favours.</p>
+<p>The Scythian prince Anacharsis likened laws to cobwebs: strong enough to catch the weak, but too weak to impede the powerful. In that sense, a sufficiently determined adversary with the right tools — scientists, labs, an AWS account with a few hundred bucks of credit — will be able to subvert the art of creating chemistry to save lives and turn it into a way to destroy them. No amount of regulation, controlled APIs and lectures on the Hague Ethical Guidelines are going to be any impediment. To a near-peer adversary or even a well-funded non-state actor, the door has been open for rational chemical agent discovery (RCAD) for a very long time. If the past is anything to go by, it has not really yielded rich fruit. Pretty much the only new thing under the sun for chemical agents in recent decades was the (possible, theorised) use of binary agents on Kim Jong-nam — not exactly a result of assiduous, AI-driven research into novel agents, but rather the every-day fare of a paranoid, despotic regime driven by cruelty and ignorance.</p>
+<p>The only thing to fear, then, is fear itself. There is a justified concern in the AI community that while we do indeed need to discuss ethical use of artificial intelligence in the RDD domain, there is a time and a place for that. Sensationalism and alarmist headlines of poison-spewing machine learning models are great clickbait, but they do not benefit the discipline. Realism, not alarmism, is needed to tackle these issues.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-tice2013improving" class="csl-entry">
+Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013. <span>“Improving the Human Hazard Characterization of Chemicals: A Tox21 Update.”</span> <em>Environmental Health Perspectives</em> 121 (7): 756–65.
+</div>
+<div id="ref-urbina2022dual" class="csl-entry">
+Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>“Dual Use of Artificial-Intelligence-Powered Drug Discovery.”</span> <em>Nature Machine Intelligence</em> 4 (3): 189–91.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2022,
+  author = {von Csefalvay, Chris},
+  title = {A Different Shade of Grey},
+  date = {2022-04-13},
+  url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2022. <span>“A Different Shade of Grey.”</span>
+April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>computational chemistry</category>
+  <category>ethics</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/index.html</guid>
+  <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>As we may see: the world after dashboards</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>In my latest post for the <a href="https://medium.com/starschema-blog">Starschema blog</a>, I discuss the end of dashboards, and what comes next:</p>
+<blockquote class="blockquote">
+<p>Enterprises have spent the last two decades meticulously curating dashboards. Tools have improved and what once was the preserve of trained professionals has largely been democratized across the enterprise. However, dashboards are quintessentially static. A dashboard shows what its developer has directed it to show. That ignores the vast realm of the ‘unknown unknown’ that is, what we don’t know that we don’t know.</p>
+<p>Dashboards, in that sense, answer narrow questions while giving the illusion of comprehensiveness and a 30,000ft perspective. In reality, dashboards are limited tools to convey limited information, while providing a psychologically fulfilling yet false illusion of comprehensiveness.</p>
+<p>This may be true, but until now, there have been rather few alternatives. In the modern enterprise, a dashboard is created to provide a consumer with information on a particular subject. This involves certain judgments about what is, and what is not, included. This, in turn, biases the observer to what they are presented: they are, in a sense, trapped in an involuntary version of McNamara’s fallacy. What is not quantified and dashboarded does not exist. Few modern executives have the capability to reach beyond these summaries of data (if they did, they wouldn’t need dashboards in the first place).</p>
+<p>However, machine learning may spell a fundamental change in this. We now have the tools and techniques to sift through vast volumes of data and evaluate the relative saliency of each data item.</p>
+</blockquote>
+<p>Read the full post <a href="https://medium.com/starschema-blog/as-we-may-see-the-world-after-dashboards-81dda9a0a7e7">here</a>.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2022,
+  author = {von Csefalvay, Chris},
+  title = {As We May See: The World After Dashboards},
+  date = {2022-04-01},
+  url = {https://chrisvoncsefalvay.com/posts/as-we-may-see},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2022. <span>“As We May See: The World After
+Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/posts/as-we-may-see">https://chrisvoncsefalvay.com/posts/as-we-may-see</a>.
+</div></div></section></div> ]]></description>
+  <category>dashboards</category>
+  <category>data visualization</category>
+  <category>data science</category>
+  <category>Cross-post: Starschema</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/index.html</guid>
+  <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/header.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Peace, love, Paxlovid and ‘Pfizermectin’</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>As the new Omicron variant of concern of COVID-19 emerged over Thanksgiving week (of all times!), attention has been turning to Paxlovid (PF-07321332). If, like me, you torment yourself by perusing conspiracy theories, you might have heard it referred to as Pfizermectin. Behind that is the idea that the “COVID pill” Paxlovid is, basically, a re-packaging of ivermectin, a disproven treatment for COVID-19. <span class="citation" data-cites="popp2021ivermectin">(Popp et al. 2021)</span></p>
+<section id="the-pfizermectin-gambit" class="level1">
+<h1>The Pfizermectin Gambit</h1>
+<p>The Pfizermectin argument rests on the fact that Paxlovid, an oral treatment for COVID-19 (colloquially known as a “Covid pill”) is a protease inhibitor, and so is ivermectin. Consequently, so the reasoning goes, ivermectin is just as good — except it is no longer an economically viable drug, vis-a-vis Paxlovid. So, it is claimed, ivermectin was repackaged, and now sold at a premium.</p>
+<p>So suggests, for instance, paleo-libertarian Lew Rockwell:</p>
+<blockquote class="twitter-tweet blockquote">
+<p lang="en" dir="ltr">
+Biden Admin Plans ‘Imminent’ Booster Expansion; Orders 10M Courses of ‘Pfizermectin’<br>By Tyler Durden<a href="https://t.co/IMckQeK541">https://t.co/IMckQeK541</a>
+</p>
+— Lew Rockwell (<span class="citation" data-cites="lewrockwell">(<strong>lewrockwell?</strong>)</span>) <a href="https://twitter.com/lewrockwell/status/1461791639224164354?ref_src=twsrc%5Etfw">November 19, 2021</a>
+</blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>The problem is… Paxlovid is not ivermectin. It is not even similar, and the difference is crucially important to why Paxlovid is likely to be an effective medication, and ivermectin won’t.</p>
+</section>
+<section id="whats-different-about-paxlovid" class="level1">
+<h1>What’s different about Paxlovid</h1>
+<p>As always, there’s a kernel of truth in the overall lie. It is true that both Paxlovid and ivermectin are inhibitors of the 3-chymotrypsin like protease (3CLPro). 3CLPro is the principal protease of coronaviruses. It belongs to a wider class called mixed-nucleophile proteases superfamily A. Their main function is to find peptide bonds in proteins between glutamine on one hand and serine, glycine or alanine on the other.</p>
+<p>To understand what’s going on here, we need to look at protein synthesis by viruses. A lot of the time, viral proteins are produced as one big, long protein called a polyprotein. Then, viral proteases break these at pre-determined cleavage sites into the constituent parts of what eventually becomes a viral particle. As far as the virus is concerned, interference with that cleavage is bad, bad news, essentially inhibiting the ability of the virus to create copies of itself that are effective infectious agents.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/paxlovid.png.webp" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Paxlovid (PF-07321332, in blue) bound to 3CLPro (volume model). Author’s own work, based on PDB:7SI9.</figcaption>
+</figure>
+</div>
+<p>This ‘molecular scissor’ in coronaviruses is 3CLPro, and as such, it’s clearly a target of interest. Mody et al., in a paper that has earned its spot on my list of top 10 papers of 2021, looked at 3CLPro inhibitors, and found that around 50 µM (micromoles) of ivermectin were sufficient to achieve a 75% or so reduction in the activity of 3CLPro. <span class="citation" data-cites="mody2021identification">(Mody et al. 2021)</span></p>
+<p>However, that’s actually bad news — because 50 µM is, actually, a lot. And therein lies the problem.</p>
+</section>
+<section id="the-pharmacokinetic-difference" class="level1">
+<h1>The (pharmaco)kinetic difference</h1>
+<p>The problem with ivermectin is very simple. In order for an enzyme inhibitor to be effective, it needs to reach a concentration where it inhibits the target enzyme enough to make a dent in the underlying process. The standard metric for this is known as <img src="https://latex.codecogs.com/png.latex?IC_%7B50%7D"> — the concentration of the inhibitor required to inhibit enzyme activity by 50%. This value for ivermectin is somewhere in the realm of tens of µM for 3CLPro.</p>
+<p>One µM of ivermectin weighs around 0.0875mg, so a 1 µM solution of ivermectin would have a concentration of around 87.5 nanograms per millilitre (ng/mL). To reach even a very conservative 5µM, you would need blood levels of 437.5ng/mL.</p>
+<p>And that’s a problem, because above 80 or so ng/mL, ivermectin is pretty toxic. <span class="citation" data-cites="gonzalez2008pharmacokinetics">(González Canga et al. 2008)</span> To reach the lowest conceivable limit of inhibitory action on 3CLPro would require doses that are incompatible with… well, life.</p>
+<p>The alleged ‘Pfizermectin’ achieves this efficacy at a nanomolar level – at a concentration roughly ten thousand times lower. <span class="citation" data-cites="owen2021oral">(Owen et al. 2021)</span> At that concentration, Paxlovid is still well within its margin of safety.</p>
+<p>This is not by accident, by the way. Paxlovid is the product of rational drug design, using computer models to identify a small molecule drug that is not only effective against an enzyme target but also has favourable pharmacokinetics. Far from merely ‘repackaging’ ivermectin, as the Pfizermectin theory alleges, this is an entirely new drug. It is structurally novel, and bears little resemblance, if any, to ivermectin. It was designed from the ground up to be orally effective, and be so at doses that are safe.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In the end, action happens in vivo — in real, living beings. Ivermectin might be a workable drug in vitro, where the model does not have to account for the inconvenience of actually keeping the host organism alive and breathing. To many of us who have looked at the maths of it, it has been clear that with the inhibitory concentrations required by ivermectin, it is never going to transition from the bench to bedside. Ivermectin does have a mechanism that counteracts SARS-CoV-2, the virus responsible for COVID-19. It’s just that it is way too weak to be of any practical use.</p>
+<p>Pfizer’s drug developers have solved this through molecular dynamics simulations and rational drug design (and, in fact, have released a paper on just how they did it, which is very, very cool).<span class="citation" data-cites="zhang2021structure">(Zhang et al. 2021)</span>. Paxlovid is the result of this development — and it is far from being ‘Pfizermectin’ or repackaged ivermectin.</p>
+<p>Until now, much of the activity has been focusing on debunking misconceptions about the COVID-19 vaccine and sensationalistic tripe about the pandemic. As curative non-vaccine treatments are entering the market, it will be important to provide the public with the proof they need to dispel dishonest notions about the “Covid pill”. First and foremost among these is that the “Covid pill”, whether molnipiravir or Pfizer’s Paxlovid, is not a repackaging of ivermectin in any conceivable sense.</p>
+<p>And the strongest proof of that is the simplest, too: it works, in ways ivermectin is mathematically incapable of working.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-gonzalez2008pharmacokinetics" class="csl-entry">
+González Canga, Aránzazu, Ana M Sahagún Prieto, M José Diez Liébana, Nélida Fernández Martı́nez, Matilde Sierra Vega, and Juan J Garcı́a Vieitez. 2008. <span>“The Pharmacokinetics and Interactions of Ivermectin in Humans—a Mini-Review.”</span> <em>The AAPS Journal</em> 10: 42–46.
+</div>
+<div id="ref-mody2021identification" class="csl-entry">
+Mody, Vicky, Joanna Ho, Savannah Wills, Ahmed Mawri, Latasha Lawson, Maximilian CCJC Ebert, Guillaume M Fortin, Srujana Rayalam, and Shashidharamurthy Taval. 2021. <span>“Identification of 3-Chymotrypsin Like Protease (3CLPro) Inhibitors as Potential Anti-SARS-CoV-2 Agents.”</span> <em>Communications Biology</em> 4 (1): 93.
+</div>
+<div id="ref-owen2021oral" class="csl-entry">
+Owen, Dafydd R, Charlotte MN Allerton, Annaliesa S Anderson, Lisa Aschenbrenner, Melissa Avery, Simon Berritt, Britton Boras, et al. 2021. <span>“An Oral SARS-CoV-2 Mpro Inhibitor Clinical Candidate for the Treatment of COVID-19.”</span> <em>Science</em> 374 (6575): 1586–93.
+</div>
+<div id="ref-popp2021ivermectin" class="csl-entry">
+Popp, Maria, Miriam Stegemann, Maria-Inti Metzendorf, Susan Gould, Peter Kranke, Patrick Meybohm, Nicole Skoetz, and Stephanie Weibel. 2021. <span>“Ivermectin for Preventing and Treating COVID-19.”</span> <em>Cochrane Database of Systematic Reviews</em>, no. 7.
+</div>
+<div id="ref-zhang2021structure" class="csl-entry">
+Zhang, Sheng, Maj Krumberger, Michael A Morris, Chelsea Marie T Parrocha, Adam G Kreutzer, and James S Nowick. 2021. <span>“Structure-Based Drug Design of an Inhibitor of the SARS-CoV-2 (COVID-19) Main Protease Using Free Software: A Tutorial for Students and Scientists.”</span> <em>European Journal of Medicinal Chemistry</em> 218: 113390.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2021,
+  author = {von Csefalvay, Chris},
+  title = {Peace, Love, {Paxlovid} and “{Pfizermectin}”},
+  date = {2021-11-27},
+  url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2021. <span>“Peace, Love, Paxlovid and
+<span>‘Pfizermectin’</span>.”</span> November 27, 2021. <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
+</div></div></section></div> ]]></description>
+  <category>COVID-19</category>
+  <category>pharmacology</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/index.html</guid>
+  <pubDate>Sat, 27 Nov 2021 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/paxlovid.png.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Why the COVID-19 vaccines are not gene therapy</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>There might be valid concerns about the mRNA vaccines. Then there are the clearly insane ones, such as the claims that it involves the injection of a microchip. The argument that mRNA vaccines are a form of ‘gene therapy’ are somewhere in the middle, and that makes responding to it somewhat difficult.</p>
+<p>The origin of this claim is pretty self-evident: since the ‘payload’ of the mRNA vaccine is, well, as the name suggests, mRNA,<sup>1</sup> it involves pushing genetic material into the recipient. That sounds rather gene therapy-y, does it not?</p>
+<p>These folks certainly think so:</p>
+<p>Except the devil’s in the details. And the details are pretty unambiguous: mRNA vaccines are nowhere near a ‘gene therapy’.</p>
+<section id="how-gene-therapies-work" class="level1">
+<h1>How gene therapies work</h1>
+<p>Let’s start by looking at a typical gene therapy: Zolgensma aka onasemnogene abeparvovec (say that three times quickly). This is an in vivo gene therapy, meaning that all the action takes place in the patient. It is given to very young children (under the age of 24 months) who have a certain mutation in the SMN1 gene, which leads to Type I spinal muscular atrophy. Onasemnogene abeparvovec is a modified adeno-associated virus 9 (AAV-9) that infects cells and gets them to produce ‘correct’ SMN1. This, then, alleviates their symptoms.</p>
+<p>The key part to note is that a viral platform is used for a reason: viruses know how to enter nuclei and get them to produce to their instructions. They do so by providing what is called a nuclear localisation signal (NLS), a sequence that allows proteins to be shuttled inside the nucleus, across the nuclear membrane, typically by way of a protein called importin, one of the karyopherins. The vast majority of gene therapies leverage viral NLSs, because they’re pretty much free gifts from viral evolution. They work, and they’re widely used.</p>
+<p>Gene therapy admittedly has some kinks that still need to be ironed out. Some things only seem to work well when using an ex vivo approach. An example for the latter are the CAR-T treatments, where the patient’s blood is drawn, T cells are isolated and then transfected with a viral vector. Currently, this approach works much better outside the patient (hence ex vivo) than inside them, largely because T cells make up such a small part of all cells in the body.</p>
+</section>
+<section id="how-mrna-vaccines-work" class="level1">
+<h1>How mRNA vaccines work</h1>
+<p>mRNA vaccines work in a much simpler way. It is, in many ways, a shortcut to the entire nuclear entry problem. If all you want is to make some proteins, you can skip the part about entering the nucleus and just, well, pretend to be the nucleus. Here’s how that roughly works.</p>
+<p>DNA is the stable, long-term ‘hard’ storage of cells. It’s slow and unwieldy, but relatively resilient. RNA is the volatile storage medium: small, quick and of a limited lifespan. During a process called translation, DNA is translated, eventually, into mRNA.<sup>2</sup> mRNA then heads for the ribosomes like a sort of work order, which the ribosomes fulfil by making the protein it describes. This is a quick and dirty description of the central dogma of molecular biology, of course.</p>
+<p>Because mRNA vaccines only need to make relatively simple proteins (compared to having to make a whole virus), they can simply go directly to the ribosomes: no need to get involved in that whole mess about nuclear entry. The tradeoff, of course, is that mRNA is quite rapidly degraded. For applications like Zolgensma, where we want cells to keep producing SMN1 for a prolonged period, the extra effort to effect nuclear entry makes sense. For mRNA vaccines, on the other hand, all we really need is a ‘spill’ of proteins that approximate some of the shapes of the Spike protein from SARS-CoV-2. That’s enough to elicit an immune reaction, create antibodies and memory lymphocytes and with that, the whole infrastructure of humoral and cellular immunity.</p>
+<p>Or, by way of analogy: you receive other vaccines as a one-time shot, rather than as a lifelong intravenous infusion, right? Immunity doesn’t need sustained exposure — the immune system is pretty quick at catching on. For the very same reason, there’s no need to permanently express the Spike-like protein the way there is a need to keep expressing SMN1 in the Zolgensma example.</p>
+</section>
+<section id="why-mrna-vaccines-are-not-gene-therapy" class="level1">
+<h1>Why mRNA vaccines are not gene therapy</h1>
+<p>This is hardly a differentiation without distinction. Gene therapy is, well, serious business. Almost 22 years ago, a young man named Jesse Gelsinger died from what we would today call a Multisystem Inflammatory Syndrome (MIS) following an adenovirus-vectored treatment for X-linked ornithine transcarbamylase deficiency, an inborn defect of metabolism. Modern gene therapies are still in many ways in their infancy, requiring close supervision and, often, extensive pre-treatment. They might be ready for prime time, but they certainly aren’t at the ‘all audiences’ stage just yet. And that’s ok — the first antibiotics were equally quite iffy from today’s perspective, and I am absolutely sure that within 25 years, the most frequent genetic disorders that gene therapy can fix — such as certain muscular dystrophies, cystic fibrosis or sickle cell anaemia — will be considered treatable with gene therapies. For now, however, gene therapies are complex treatments that demand experienced medical teams.</p>
+<p>Fortunately, that is not the case for the COVID-19 mRNA vaccines. These vaccines are not only remarkably safe (I have written about their neurological safety, safety vs autoimmune disorders, overall safety and safety vs anaphylactic events, and there’s a summary of these findings here) but also operate in a way entirely distinct from gene therapies. They do not enter the nucleus, they do not effect lasting changes (in fact, that’s one of the reasons why mRNA approaches for the gene therapy of chronic diseases have so far been less than successful) and they do just what it says on the tin: produce Spike-like proteins to elicit an immune response.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Sort of. Strictly speaking, this is not entirely true: mRNA vaccines actually have three mRNA bases — C, G and A — and a fourth base, m1Ψ. This is a molecule called N1-methylpseudouridine, and it replaces U in the mRNA. It is ‘read’ and interpreted as U, but is vastly less immunogenic.↩︎</p></li>
+<li id="fn2"><p>More specifically: it is translated into pre-mRNA, which is then spliced to get mRNA.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2021,
+  author = {von Csefalvay, Chris},
+  title = {Why the {COVID-19} Vaccines Are Not Gene Therapy},
+  date = {2021-11-09},
+  url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2021. <span>“Why the COVID-19 Vaccines Are Not
+Gene Therapy.”</span> November 9, 2021. <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
+</div></div></section></div> ]]></description>
+  <category>public health</category>
+  <category>vaccines</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/index.html</guid>
+  <pubDate>Tue, 09 Nov 2021 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Ransomware attacks as n-person prisoner’s dilemmas</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>In the middle of the green and pleasant countryside of England lies a small piece of commons –– land, that is, over which a number of people share certain rights. In this hypothetical scenario, it’s six farmers, <img src="https://latex.codecogs.com/png.latex?F_1"> to <img src="https://latex.codecogs.com/png.latex?F_6">. Each of them has a hypothetical cow, which differs from ordinary cows in that it grazes a fixed unit, and produces a fixed amount of milk (unlike real cows, which vary wildly in their input and output parameters, or so I’m told). It is important to note that the land is a form of common property, meaning it is held by all of them jointly––or as ye olde Law Latin would put it, totum tenet et nihil tenet: they all hold the whole together, but no-one holds any specific part of it.<sup>1</sup></p>
+<p>If you are one of the farmers, you have a very clear dominant strategy: get another cow! Even better, get a handful. More cows equal more milk, and the land can sustain at least six cows.</p>
+<p>The problem is, if all participants <img src="https://latex.codecogs.com/png.latex?F_%7B1...6%7D"> pursue this individually dominant strategy, the sum of their outcomes will be inferior. Every player choosing the dominant strategy results in a worse outcome than it would if they had not chosen the dominant strategy. This phenomenon is sometimes referred to as the ‘tragedy of the commons’, but is in fact a simple result of an n-player prisoner’s dilemma.</p>
+<section id="raising-the-stakes" class="level1">
+<h1>Raising the stakes</h1>
+<p>Let’s raise the stakes a little. Kidnappings happen because a significant fraction of people pay ransoms. The law on this is a little weird, and this reflects the general unease with which we regard the issue.<sup>2</sup> We might agree that paying ransoms is a bad idea as a matter of principle, while also feeling rather disinclined to sacrifice a loved one on the altar of that principle. Personally, I know very few people who genuinely would not pay a ransom they had the means to pay for the release of a loved one – even if as an abstract principle, they agree that paying ransoms is a bad idea. A lifetime ago, when I studied (and later taught) moral and political philosophy at Oxford, these questions were popular dilemmas to make students think about consequentialism. Now, they are questions that affect every-day lives. Just earlier this week, much of the Eastern seaboard experienced gas shortages due to a ransomware attack on the Colonial Pipeline – over here in Northern Virginia, most gas stations were out of supply yesterday and expect to have fuel no sooner than early next week.</p>
+<p>And that leads us to the ethical problem of ransomware, in particular paying the ransom (as the maintainers of the Colonial Pipeline did). If the common response to ransomware would be ‘go f––– yourself’, making ransomware would not be worth it. This scenario slightly differs from kidnapping in that the investment in each ransomware operation is very significantly smaller than it is for a kidnapping.<sup>3</sup> Consequently, adopting the collectively dominant strategy of telling kidnappers what to stick where on which family member of theirs would only work if virtually all potential victims would do so (i.e.&nbsp;cooperate). This makes ransomware a trickier problem than plain, old kidnapping: if only a few ransom demands are not met, kidnappers are faced not only with the issue of cleaning up the bodies but also a significant financing shortfall. Ransomware cybercriminals, on the other hand, can afford a significant proportion of their victims to ‘cooperate’ (i.e.&nbsp;not pay), as long as a small number ‘defect’. Thence comes our first important point to consider: the cost of extortion governs where the deficient equilibrium point is located.</p>
+</section>
+<section id="possible-solutions" class="level1">
+<h1>Possible solutions</h1>
+<p>The consequence of low-cost extortion (express kidnapping, ransomware &amp;c.) is to move the deficient equilibrium point to the far right, meaning that an unrealistically large percentage of the population must commit to cooperate before kidnappers start to see their business model break down. This is, ultimately, the problem known to economists as free-riding. There are, overall, two major solutions to it, none of them good.</p>
+<p>Forced cooperation. In forced cooperation, a third party (typically, the state) intervenes and shifts the payoff matrix so as to make cooperation relatively more profitable. This happens typically by making defection less profitable, such as would happen if paying ransoms were to be criminalised. Voluntary cooperation. In voluntary cooperation, the payoff matrix is unaffected, but players set aside their individually dominant strategy voluntarily. It’s important to note at this stage that it is perfectly consistent to argue against forced cooperation and in favour of voluntary cooperation––that is, holding the opinion that nobody should pay ransoms but the government should not criminalise paying ransoms is not an inconsistent public policy position.</p>
+</section>
+<section id="the-problem-with-forced-cooperation" class="level1">
+<h1>The problem with forced cooperation</h1>
+<p>Let’s face it – I’m an optimist, but even I’m not optimistic enough to think people will voluntarily cooperate to the extent required by the extremely low cost of ransomware attacks. The example of kidnappings, where ransoms are almost always paid (even where this is strictly speaking illegal), shows that such cooperation is unlikely to arise voluntarily.</p>
+<p>The answer to that, many would argue, lies in enforcing cooperation by altering the payoff matrix. <a href="https://www.cfr.org/blog/paying-ransom-ransomware-should-be-illegal">Robert Knake makes this point in an article from 2016</a>:</p>
+<blockquote class="blockquote">
+<p>What I will argue is that when looking at a public policy problem, the best place to create liability is where it will have the desired impact. If the goal is to stop ransomware attacks, raising the costs of paying ransoms beyond what the criminals are demanding is the best way to do that. Those costs could come in the form of civil fines or misdemeanor charges. For most American companies and most individuals, simply knowing that paying a ransom would violate the law might be enough to dissuade them. If enough victims are persuaded to forgo payment and accept the consequences, there will be fewer future victims.</p>
+</blockquote>
+<p>Regrettably, this argument is several kinds of wrong and at least two kinds of immoral. It is wrong because the sad ubiquity of ransomware attacks and their relatively private-synallagmatic nature (unlike kidnappings, which are widely publicised) means that enforcing such legislation would be quite difficult in practice. It is also wrong because the impact of “civil fines or misdemeanor charges” is far from clear. Short of exorbitant fines (which would face legal challenges for a range of reasons), these costs would just be factored into the ‘cost of doing business’ the way many companies already accept various unsavoury practices that are part and parcel of economic activity in some parts of the world. And it is fundamentally wrong in failing to understand the logic behind ransomware. The reason why ransomware makes sense is because data may be unique and irreplaceable (it shouldn’t be, and having well-designed IT policies with TTPs that encourage data replication and encryption are the most effective tools against ransomware attacks, but that’s a different story). Compared to the consequences of losing years of research, experiencing months of service interruption or leaking the medical records of thousands of patients, any fine the government can levy pales in comparison. You cannot fine a complex problem out of existence – and fines are in any case economically flawed deterrents, reducing the available funds for compliance. Fines work to reduce the economic profitability or viability of a course of action – they do not work in preventing the circumstances from arising that open up the choices including that course of action.</p>
+</section>
+<section id="a-better-model-of-state-action" class="level1">
+<h1>A better model of state action</h1>
+<p>If, thus, the coercive model of state action in response to ransomware is a ubiquitous failure, the question is what role the state can play in this matter. The alternative model that I support is one of cooperation rather than coercion. In the cooperative model, state actors assist enterprises within their territory in changing the payoff matrix by increasing the costs of successful ransomware attacks. Ransomware works because it’s so cost-efficient: even if only one in a thousand victims pay up, the monies paid out are sufficient for a generous profit. Up until here, I’m in agreement with the coercive model––the only way to eliminate ransomware is to make it economically less viable. The difference is how that is accomplished.</p>
+<p>In the cooperative model, the state invests in hardening IT systems against ransomware attacks. It stands to reason that if a large number of such attacks do not succeed, the entire enterprise becomes unprofitable. From the blackmailer’s perspective, the results are pretty much the same, i.e.&nbsp;vastly reduced income. However, from what H.L.A. Hart would have called the ‘internal point of view’, i.e.&nbsp;the perspective of the community and the individual, there is a crucial difference: cooperation forgoes the moral horror of punishing the victim in favour of preventing individuals from becoming victims. In the end, the “best place to create liability” is not where it will have some fictitious “impact”, but where it is most appropriate. Re-victimization is not only morally abhorrent, it is also ineffective: a company that sustained a loss from a massive ransomware attack may be less capable of upgrading security to withstand such attacks in the future, whereas a company that received support to shore up their defences will have a strong (indeed, contractual) incentive to do so.</p>
+<p>In the end, how we allocate losses says a lot about what we as a society are like. The choice, then, as far as ransomware is concerned, must lie in collaboration over coercion. Government has an opportunity to be a force for good in this field, if only it can forego the empty moralisms that focus on the victim’s blameworthiness. Certainly ill-prepared companies are more likely to be struck by ransomware. Blaming it all on the victim, however, and treating ransoms as illegal payments merely allows governments that have for too long dropped the ball on cybersecurity preparedness to further postpone their duties and deflect blame.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>As opposed to forms of co-ownership where each person owns a defined fraction of the co-owned property.↩︎</p></li>
+<li id="fn2"><p>The law is outright weird, in that in most countries, paying ransoms is not illegal per se, but giving money to certain entities is illegal regardless of the purpose of the money. In that sense the law does not distinguish between paying a ransom to, say, Boko Haram, who happen to be on the Treasury’s shitlist, or giving them the same amount of money due to an overwhelming conviction that boko is very haram indeed – it’s illegal either way. This makes paying a ransom needlessly complicated, especially as in my modest experience with kidnappers, they rarely discuss their organisational affiliations at length. With international jihad in particular being run on the franchise model in this day and age, it may well turn out that Joe Kidnapper, who held himself out as a common criminal, was in fact a full franchisee of al-Qa’ida, and suddenly the FBI is going through your underwear drawer.↩︎</p></li>
+<li id="fn3"><p>Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2021,
+  author = {von Csefalvay, Chris},
+  title = {Ransomware Attacks as n-Person Prisoner’s Dilemmas},
+  date = {2021-05-14},
+  url = {https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2021. <span>“Ransomware Attacks as n-Person
+Prisoner’s Dilemmas.”</span> May 14, 2021. <a href="https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma">https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma</a>.
+</div></div></section></div> ]]></description>
+  <category>cybersecurity</category>
+  <category>econometrics</category>
+  <category>game theory</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/index.html</guid>
+  <pubDate>Fri, 14 May 2021 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Julia: A post-mortem</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>A little over half a decade ago, I came across a wonderful project: a programming language called Julia that was going to revolutionise data science and technical computing. It was going to run like C, seamlessly integrate with Fortran, do things R does without its clunkiness, look and read like Python and be homoiconic like Lisp. We were all going to heaven, and that right soon. The language wars would end, we would finally get a lingua franca for anywhere code performance mattered, Julia would take over the <a href="https://www.tiobe.com/tiobe-index/">TIOBE Index</a>, and we’d all be home for tea and medals.</p>
+<p>I was so enthusiastic, I learned all there was to learn about Julia, and even pitched a book to Manning, who graciously accepted Learn Julia into their Early Access programme. Interest was lukewarm at best, which should have been a warning sign. Eventually, Manning felt there would not be a sufficient market for the book – and I don’t blame them. <a href="https://github.com/chrisvoncsefalvay/learn-julia-the-hard-way">Much of the book’s contents are now available on Github, and are a pretty good introduction for getting into the language.</a></p>
+<p>Fast forward to 2020: Julia is currently on the 34th position (narrowly missing the first tercile) on the TIOBE ratings. More people use FoxPro, a database language that reached end-of-life almost fifteen years ago, than Julia. Vastly more people use Scratch, a language that for all intents and purposes is a ‘learning’ language. Almost twice as many developers use COBOL and Fortran as use Julia, and both of those languages are nearing the retirement age in most Western countries.</p>
+<p>Something has clearly gone wrong. While Julia is not dead, and there are some very committed developers who expand the ecosystem, it is clear that the initial promise of Julia is unlikely to be realised. Instead of becoming the language, it will become just another language. Here are my thoughts why that’s the case.</p>
+<section id="its-hard-to-dislodge-an-incumbent" class="level1">
+<h1>It’s hard to dislodge an incumbent</h1>
+<p>Programming languages compete not just for users but also for people who develop it, evangelise it, advocate for it. Almost all major modern programming languages are openly developed, if not for the core language, then definitely for the ecosystem surrounding it (about which more later). Languages depend on public engagement, and the public wants to back a winner – as much psychologically as they do not want to spend their weekends writing code for free for a language that will be forgotten before TikTok memes go the way of Vine.<sup>1</sup></p>
+<p>In the field for languages to work with data – from data science through machine learning to just munging tabular data –, the incumbent is Python. There isn’t really a close second, except perhaps for R.<sup>2</sup> The former has remarkably low barriers to entry. Before Scratch and other ‘entry’ languages came around, it used to be the ‘gentle introduction’ to programming for many, along with BASIC.<sup>3</sup> Python and R are some of the most widely taught languages to non-computer scientists. If you are in any science and they make you learn a programming language, chances are it is going to be Python or R, with a smaller chance of Matlab or SAS.<sup>4</sup></p>
+<p>All in all, this makes it shockingly difficult to dislodge an incumbent. It’s a self-reinforcing process: new developers, given a choice, will gravitate towards the language that comes with ‘batteries included’. Few languages have as strong an ecosystem as Python – anything that’s ever been calculated has probably been implemented somewhere in Python. Consequently, the contenders will have fewer people to catch up to the incumbent. And on and on it goes.</p>
+</section>
+<section id="ecosystems" class="level1">
+<h1>Ecosystems</h1>
+<p>In the heroic age of computing, when Fortran was still young enough to not have to worry about putting money into its Roth IRA, people expected to write most of their code, or at worst copy/paste it. In 2020, using packages is as ubiquitous as using functions. Nobody wants to reimplement the Laplace distribution for the n-th time. Consequently, a lot of what we do as programmers depends on the package ecosystem. Knowing Python is not enough to write good Python for a real-world application. In fact, it’s not necessary to know the internals of Python in any depth compared to how well one is expected to know the guts of Pandas or NumPy. As a data scientist, you can safely get by without understanding how Python does <code>async</code> – but you better know the difference between a <code>PyArrayIterObject</code> and a <code>PyArrayMultiIterObject</code>.<sup>5</sup></p>
+<p>Ecosystems are self-perpetuating (see previous section). Bigger ecosystems, subject to some boundary condition, tend to beget even bigger ecosystems. This stands to reason – it’s easier to build a house if you don’t have to make a stone chisel to make a tenon joint to make a brick mold, <a href="https://www.youtube.com/watch?v=D59v74k5flU">as this gentleman demonstrates</a>. Nobody (except the yak wool lobby and, potentially, some yaks) likes <a href="https://en.wiktionary.org/wiki/yak_shaving">yak shaving</a>, and an ecosystem is really just a fancy way of saying the yaks have largely been shorn and shaven, and you won’t have to bother with them. That’s the kind of stuff that makes people want to write increasingly intricate code.</p>
+<p>Python has one of the best data science ecosystems, if not the best. It has sufficient organisation (largely via NumFocus and to a lesser extent, Anaconda) to overcome mundane issues like, say, funding, but open enough to be still enjoyable for people who hate bureaucracy.<sup>6</sup> It’s a tall order for any language, no matter how good, to beat this advantage. Which leads us to my next point.</p>
+</section>
+<section id="cui-bono" class="level1">
+<h1>Cui bono?</h1>
+<p>Lucius Cassius, who was consul of Rome in the 2nd century B.C. and a notorious hard-ass as a judge, was known to ask who would benefit from a particular crime when looking for the culprit. Dollars to donuts, the people who benefit from a crime tend to be statistically the most likely to have had a hand in it. It’s an equally good principle, when considering the viability of a programming language, to ask whom it benefits.</p>
+<p>Take R, for instance. For all its G–dawful syntax<sup>7</sup> and wide range of horrific features, it is a great language for people who are looking for something that comes with all the statistical bells and whistles.<sup>8</sup> It has <code>ggplot2</code>, which is quite probably the best static data plotting library ever written, and some rightly argue that Python still hasn’t caught up completely (although seaborn goes a long way towards that point). It has the Tidyverse/Hadleyverse, which is overall a pretty neat bundle of packages. There’s a clear profile of a user there – someone who needs to do some statistics, stat (no pun intended).</p>
+<p>Julia’s target user is harder to define. I have struggled with this while writing Learn Julia. Is this a general purpose language, or a technical/statistical computing language? Is this a language that people can easily get started with, or one that places a lot of emphasis on powerful features (mostly deriving from homoiconicity) that require a good bit of understanding? What’s the unique selling point?</p>
+<p>Julia has a lot of great features – I love the homoiconicity related features, and I love built-in parallelism as a first-class citizen and I think C-like speed is really cool. The problem for Julia is that I can get all these features in Python (e.g.&nbsp;JIT compilation with Numba for speed), and get a library for every imaginable use case including antigravity, dynamic typing, a syntax pleasantly unconcerned with niceties and a range of tools from IDEs to logging platforms that’s exhausting to even think about.</p>
+<p>In the end, this is the key point for me. The problem with Julia wasn’t that it wasn’t good. The problem was that it wasn’t good enough to make itself worthwhile in the face of Python &amp;c.</p>
+</section>
+<section id="coda" class="level1">
+<h1>Coda</h1>
+<p>These days, most of my work is in Python, with a smattering of bash scripts. I continue to follow Julia, but my laptop is probably at least half a year (if not more) out of date. I have poured a lot of time and energy into learning, understanding and popularising Julia, but I don’t see it living up to its initial promise anymore. There are some important, groundbreaking things being done with Python, largely in the machine learning field, and Julia did not make it past the fringes of that field.</p>
+<p>Nevertheless, it is an important object lesson to anyone embarking on a new idea in software development. It’s hard to beat an incumbent, and even harder to do so without having a large target user community you can capture with a compelling use case. In the end, code doesn’t make software – people and communities do. And for Julia, that – or rather, the lack thereof – has made all the difference.</p>
+</section>
+<section id="edited-to-add" class="level1">
+<h1>Edited To Add…</h1>
+<p>A few hours after this went up, I got hackernews’d, and my poor one vCPU machine running this site died a sad death. On the upside, it’s back up again with some additional beef, and there are <a href="https://news.ycombinator.com/item?id=26384133">some great comments on the Hacker News article</a>. Let me respond to a few here.</p>
+<blockquote class="blockquote">
+<p>There’s Python the language and “Python the dsl for tensor frameworks”, the former has arguably lost some ground/mindshare to newer, less “hobbled” languages, and the latter exists not by virtue of its own strengths but as the convenient vehicle for frameworks written by 2 enormous corporations.</p>
+<p>– FridgeSeal</p>
+</blockquote>
+<p>The whole comment of FridgeSeal is worth reading, even if I disagree with its gist. They make a great point: a lot of Python’s popularity is due to it being used as ‘the DSL for tensor frameworks’. The issue is that the consequence of Python being used as this ‘DSL for tensor frameworks’ is a better ecosystem, more support, great packages and a pretty much 100% dominance at the cutting edge of ML research. Reading any new paper about ML on ArXiv, I can be about 90% sure that there is a Python implementation somewhere that I can test drive, and if not, one is bound to come along soon. Tools like Jupyter Notebooks have had a massive impact on this, but let’s not forget that the first two letters in Jupyter stand for Julia.</p>
+<blockquote class="blockquote">
+<p>Julia is a language that looks very simple, but the more you use it, the more you realize how complex and unpredictable it is. I think that Union types do more harm than good (why would you want a function to return Union of int and float instead of compile error? It totally slows down the program) Array{Number} is totally different from Array{:&lt;Number}, and shouldn’t be allowed, as it is inefficient. 1-based indexing was a mistake, and I have seen it emitting inefficient code in the PTX compiler. But the worst and hardest part is the rule/heuristic for multiple dispatch: it’s so complex, that it isn’t even documented. It should probably throw more errors and be predictable instead of trying to be so smart.</p>
+<p>– xiphias2</p>
+</blockquote>
+<p>I am not going to get into the 1-vs-0 based indexing problem, because I treasure my head staying attached to my neck. However, xiphias2’s comment on multiple dispatch is spot on. I maintain that the success or failure of a programming language in 2021 is no longer intrinsic to the language itself (my whole ecosystem point), but at least partially contingent on extrinsic factors and, perhaps, even pure dumb luck. But if we were to look at issues with the language itself – why Julia doesn’t deserve to be the leading language rather than why it did not end up becoming the leading language, the difficulties of multiple dispatch would be pretty close to the top of my list.</p>
+<p>There’s a very interesting article by DJ Passey that claims multiple dispatch is how Julia beats Python. I contend that if your Python code involves type contingent control flow, you’re writing bad Python, and you should feel bad. If your Python code is slow because of that, you should doubly feel that. The following is horrific Python I have seen a little too often for my own good:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> func(arg1: Any) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> Optional[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>]:</span>
+<span id="cb1-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">isinstance</span>(arg1, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>):</span>
+<span id="cb1-3">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> arg1<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb1-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>:</span>
+<span id="cb1-5">       <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span></code></pre></div>
+<p>And that’s not even the worst implementation of this error (I’ll let you guess). It’s better to ask forgiveness than permission is a core Pythonic principle. The kind of code that DJ Passey claims will be accelerated by Julia’s multiple dispatch vis-a-vis type contingent control flows in Python do not (or at least should not) exist in good code bases. On the other hand, multiple dispatch can get weird at best, terrifyingly unpredictable at worst. Any developer who can handle multiple dispatch without setting themselves on fire by accident should be able to write Python code that doesn’t suck.</p>
+<blockquote class="blockquote">
+<p>I actually have very similar experiences. I want to like Julia and I look at it from time to time. The hype is always that it allows one to write C-speed code with the simplicity of python, without the idiosyncrasies of numpy. But every time I look I find just as many little things to look out for if one cares about performance, don’t use abstract types is another one. I understand why this is the case and I don’t have an issue generally with it, but considering that I know Python well, and know how to speed up Python using numba, pythran or cython, I don’t see what I would gain by investing in Julia. – cycomanic</p>
+</blockquote>
+<p>Believe it or not, this is actually the most frequent complaint I hear from potential commercial users of Julia. Heck, I want to like Julia! I most definitely want something better than Python. The problem is, putting up with Cython and Numba and all their collective unpredictability is still preferable, in an operational context, to dealing with Julia. And that’s a problem. If you’re writing code for a living, you need to be able to justify any time you spend learning a new language – to yourself if it’s in your free time (you should be playing with your children/wife/dog), to your employer if it’s on the clock (most employers sadly expect developers to spend all their time producing new code and very little time learning new things – I’m lucky to work at a place you could consider an exception). It’s non-trivial to justify Julia in its current state.</p>
+<blockquote class="blockquote">
+<p>Is the post only based on TIOBE? The same index that currently ranks JavaScript below Visual Basic and SQL below Assembly? That ranking is off by so much that anyone who takes it seriously loses at lot of credibility from the start. – superbcarrot</p>
+</blockquote>
+<p>Nope, and I’m sorry if I’ve accidentally given that impression. TIOBE is a rough, inaccurate but quantitatively objective(ish) proxy for my own experiences (which are more accurate but definitely not quantitatively objective, nor do I know enough about every single language to be able to somehow rank or compare them). For much of the last five years or so, a key part of my day job was to make some very critical business processes run faster, from healthcare through financial services to fraud detection. To put it this way – my concerns with Julia are largely expressible through a proof by contradiction: were it possible to make Julia do what was initially claimed for it (replace Python with something faster and better), I would have seen many more success stories of it doing so in practice. I’m not arrogant enough to assume that if I can’t make it work, nobody can – I’ve met many people who have tried just that, many of whom are significantly smarter than I am, and none fared with much success. I admit to the potential existence of a sampling bias here, of course.</p>
+<blockquote class="blockquote">
+<p>By calling it post-mortem the author already showed his level of stupidity (or absence of morality). Julia is a new language that have to compete with languages that accumulated a huge ecosystem of developments and continue to grow. Of course Julia is losing in comparison right now. – dandanua</p>
+</blockquote>
+<p>There are quite a few comments that obsess – in my opinion, unduly – over the title. A post-mortem does not necessarily mean (outside the medical context, anyway) that something is finished (yes, it does mean that literally, but not semantically, i.e.&nbsp;how it is used in practice). A post-mortem is the examination of something at an endpoint (including, potentially, success – after-action reviews of projects are often termed post mortems even if the project was a resounding success). As far as I am concerned, I do not see myself spending a lot of time on Julia in the future (of course, I am happy to be proven wrong – I don’t think anyone would be happier if Julia defied my dim expectations and turned out to be the future indeed!). In that sense, it is more or less a bit of closure as far as my active engagement with Julia is concerned (though as said, I do not foreclose looking into it later in the future!).</p>
+<p>“Give it time” is not how programming languages or software projects grow. If anything, it’s closer to “build it, and they will come”, which of course highlights a fundamental difficulty in open source, viz.&nbsp;that ‘they’ and the people who ‘build it’ are the same bunch. That makes for an untidy circular process. If we stopped being open to predictions based on the fact that the future has not played out yet, we would overall forfeit the epistemic validity of any prognostication about anything. If you are at 5,000ft and descending rapidly with a failed parachute, you’re not exactly dead – but it is rather unreasonable to ferociously contest any assertion that you might not exactly be long for the world, because ‘give it time’ (hey, the ground may just end up being made of marshmallows). In the land of cold, hart realities, sadly that is not how it tends to turn out.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Do people still remember Vine? I remember Vine. Man, I feel so old.↩︎</p></li>
+<li id="fn2"><p>R is quite different from Python in that it makes a uniformly horrible ETL language. It was designed as a ‘batteries included’ statistical toolbox, and the further one strays outside that realm, the worse it gets.↩︎</p></li>
+<li id="fn3"><p>This will inevitably help you gauge my age.↩︎</p></li>
+<li id="fn4"><p>In the last case, please look for a better institution to transfer to.↩︎</p></li>
+<li id="fn5"><p>I’m sure we all know all there is to know about IterObjects, but here’s a link to the NumPy reference to help you, uh, explain it to your dog.↩︎</p></li>
+<li id="fn6"><p>The institution, not the season.↩︎</p></li>
+<li id="fn7"><p>Here are some tips to make it suck less.↩︎</p></li>
+<li id="fn8"><p>Many of whom have also previously experienced SAS or STATA and thus cling to R like a drowning man clenches a life raft.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2021,
+  author = {von Csefalvay, Chris},
+  title = {Julia: {A} Post-Mortem},
+  date = {2021-03-07},
+  url = {https://chrisvoncsefalvay.com/posts/julia-a-post-mortem},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-von csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Csefalvay, Chris von. 2021. <span>“Julia: A Post-Mortem.”</span> March
+7, 2021. <a href="https://chrisvoncsefalvay.com/posts/julia-a-post-mortem">https://chrisvoncsefalvay.com/posts/julia-a-post-mortem</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>julia</category>
+  <category>programming</category>
+  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/index.html</guid>
+  <pubDate>Sun, 07 Mar 2021 00:00:00 GMT</pubDate>
+  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/julia.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>
