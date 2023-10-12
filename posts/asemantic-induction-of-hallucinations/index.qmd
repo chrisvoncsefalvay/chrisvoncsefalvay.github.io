@@ -1,0 +1,31 @@
+---
+title: "Asemantic Induction of Hallucinations in LLMs"
+description: |
+    Large language models (LLMs) struggle with asemantic information: the more we stray outside the confines of language, the worse it gets. Here's how we'll use this for fun and profit.
+author:
+  - name: Chris von Csefalvay
+    orcid: 0000-0003-3131-0864
+    email: chris@chrisvoncsefalvay.com
+date: 2023-03-23
+categories: ["ai", "LLMs", "Cross-post: Starschema"]
+image: header.jpg
+format:
+  html:
+    df-print: paged
+    toc: true
+citation:
+    url: https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations
+google-scholar: false
+---
+
+Over at the [work blog](https://medium.com/starschema-blog), I'm discussing what knowledge means for large language models (LLMs), and the ways in which we can leverage this knowledge dividend for better inference.
+
+> Language is highly semantic, but because of that, it is also highly flexible. By semantic, I mean that every lexeme has a distinct and coherent meaning. A lexeme is the “root form” that is conjugated to various forms, e.g. “see”, “saw” or “seeing” are all forms of the same lexeme, “SEE” (by convention, in linguistics, we set lexemes in capitals to distinguish them of their homomorphic conjugated forms). By flexibility, I mean that you can actually manipulate lexical order and retain meaning. Consider the sentence “Joe walked his dog in the park”. “In the park, Joe walked his dog” and “His dog, Joe walked in the park” all have slightly different nuances due to inflection and emphasis of order, but overall, they all get the same larger message across. Some languages permit even more flexibility with word order, but even in English, the worst case scenario is that it’ll sound a little odd. The content remains intelligible, which is why poets get to move words around to make things rhyme. In short, producing something that looks “like” natural language is going to be natural language. It’s likely not going to be a Booker Prize-winning product of staggering genius, but it will be good enough.
+>
+> This is not the case for asemantic structures. By asemantic structures, I mean any system in which a sequence of tokens has a meaning, but in which there’s no semantic meaning to any token. In other words, every token has a meaning, but that meaning is not inherent in their character. It probably serves to belabour this point a little. All words are, to an extent, made up, but more similar words are closer to each other in meaning. By similar, I do not mean simple formal similarity, such as Hamming or Levenshtein distances, but rather logical similarity, e.g. conjugation of the same root. This is more evident in some languages than others. In Semitic languages, for instance, you have clusters of meaning that are connected by consonantal roots. By way of an example: the triconsonantal root k-b-d connects a cloud of meanings that all have to do with the middle or centre of something, and by extension the centre of gravity or honour. This gives us e.g., the Hebrew words for ‘heavy’ (כָּבֵד), mass in the physical sense (כֹּבֶד), and the word for ‘liver’ (כָּבֵד), which was considered to be roughly in the middle of the body. In any language, however, there is a degree of meaningful semantic similarity between connected concepts. There has more been written on this than I have the space to mention here.
+>
+> An asemantic structure is where there are formally similar things that are unrelated. You have probably experienced this when you dialled the wrong number by a slip of the finger. The fact is, if you live in the United States, my phone number looks a lot like yours, and by extension, anyone else’s. There’s no semantically meaningful reason why your phone number shouldn’t be mine or vice versa: it’s not more ‘you’ as mine is not more ‘me’ in any underlying sense.
+>
+> Which is why GPT-4 struggles with asemantic content, and we’ll use this to break it a little.
+
+[Read the full post here.](https://medium.com/starschema-blog/asemantic-induction-of-hallucinations-in-large-language-models-c92ef5030714)

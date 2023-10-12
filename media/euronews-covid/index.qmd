@@ -1,0 +1,29 @@
+---
+title: "Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja"
+description: |
+    Commenting on our work on the COVID-19 data set and the relevance of data in a pandemic.
+author:
+  - name: Chris von Csefalvay
+    orcid: 0000-0003-3131-0864
+    email: chris@chrisvoncsefalvay.com
+date: 2020-04-17
+categories: ["Euronews"]
+image: header.webp
+format:
+  html:
+    df-print: paged
+    toc: true
+google-scholar: false
+citation:
+    url: https://chrisvoncsefalvay.com/media/euronews-covid
+---
+
+Discussing risk and data in the context of the COVID-19 pandemic:
+
+> — Összegyűjtöttünk adatokat arról, hogy hol vannak kórházak, hol vannak egészségügyi intézmények, milyen ágykapacitásuk van, milyen szolgáltatásokat tudnak nyújtani, tehát mi az az ápolási szint, amit el tudnak látni. Nagyon sok olyan adatot összegyűjtöttünk, hogy milyen óvintézkedéseket tettek egyes országok és így össze tudjuk azt is hasonlítani, hogy melyik államokban történt a leghatékonyabb válasz erre a problémára - mondta Cséfalvay.
+>
+> Az adatokat valamint az infrastrukturális hátteret a legszűkebb földrajzi elhelyezkedésre, körzetre, járásra vagy városra lebontva teszik közzé.
+>
+> — Azt is meg tudjuk mutatni, hogy milyen kockázatok vannak bizonyos területeken, hol vannak azok a területek, ahol nincsen kellő mennyiségű egészségügyi kapacitás, hol vannak azok a területek, ahol ha valakinek intenzív osztályos ápolásra van szüksége, megyén kívül kell mennie, vagy akár több megyén kívül kell mennie - sorolta a rendelkezésre álló adatokat Cséfalvay.
+
+See the whole thing [here](https://hu.euronews.com/2020/04/17/koronavirus-komplex-adatokat-gyujt-egy-magyar-ceg-de-a-kormany-meg-nem-kerte-a-segitseguke).

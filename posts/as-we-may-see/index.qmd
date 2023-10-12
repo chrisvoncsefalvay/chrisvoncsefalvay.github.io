@@ -1,0 +1,31 @@
+---
+title: "As we may see: the world after dashboards"
+description: |
+    Dashboards are over -- if you want it.
+author:
+  - name: Chris von Csefalvay
+    orcid: 0000-0003-3131-0864
+    email: chris@chrisvoncsefalvay.com
+date: 2022-04-01
+categories: ["dashboards", "data visualization", "data science", "Cross-post: Starschema"]
+image: header.webp
+format:
+  html:
+    df-print: paged
+    toc: true
+citation:
+    url: https://chrisvoncsefalvay.com/posts/as-we-may-see
+google-scholar: false
+---
+
+In my latest post for the [Starschema blog](https://medium.com/starschema-blog), I discuss the end of dashboards, and what comes next:
+
+> Enterprises have spent the last two decades meticulously curating dashboards. Tools have improved and what once was the preserve of trained professionals has largely been democratized across the enterprise. However, dashboards are quintessentially static. A dashboard shows what its developer has directed it to show. That ignores the vast realm of the ‘unknown unknown’ that is, what we don’t know that we don’t know.
+>
+> Dashboards, in that sense, answer narrow questions while giving the illusion of comprehensiveness and a 30,000ft perspective. In reality, dashboards are limited tools to convey limited information, while providing a psychologically fulfilling yet false illusion of comprehensiveness.
+>
+> This may be true, but until now, there have been rather few alternatives. In the modern enterprise, a dashboard is created to provide a consumer with information on a particular subject. This involves certain judgments about what is, and what is not, included. This, in turn, biases the observer to what they are presented: they are, in a sense, trapped in an involuntary version of McNamara’s fallacy. What is not quantified and dashboarded does not exist. Few modern executives have the capability to reach beyond these summaries of data (if they did, they wouldn’t need dashboards in the first place).
+>
+> However, machine learning may spell a fundamental change in this. We now have the tools and techniques to sift through vast volumes of data and evaluate the relative saliency of each data item.
+
+Read the full post [here](https://medium.com/starschema-blog/as-we-may-see-the-world-after-dashboards-81dda9a0a7e7).

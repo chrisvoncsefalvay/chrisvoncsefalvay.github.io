@@ -1,0 +1,29 @@
+---
+title: "Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel"
+description: |
+    Injecting disinfectants continues to be a bad idea.
+author:
+  - name: Chris von Csefalvay
+    orcid: 0000-0003-3131-0864
+    email: chris@chrisvoncsefalvay.com
+date: 2020-05-11
+categories: ["Frankfurter Rundschau"]
+image: header.png
+format:
+  html:
+    df-print: paged
+    toc: true
+google-scholar: false
+citation:
+    url: https://chrisvoncsefalvay.com/media/fr-disinfectants
+---
+
+My comment on the use of disinfectants as a treatment for COVID-19 was published in the Frankfurter Rundschau -- along with some skepticism about sunlight as the best disinfectant:
+
+> Beim Sonnenlicht als Corona-Faktor beruft sich das Weiße Haus auf eine Studie, die im "National Biodefense Analysis and Countermeasures Center" im Bundesstaat Maryland gemacht worden sein soll. Demnach schrumpft das Virus auf einer Edelstahloberfläche im Sonnenlicht bei einer Temperatur von 21 bis 24 Grad Celsius und 80 Prozent Luftfeuchtigkeit innerhalb von nur zwei Minuten auf die Hälfte seiner Größe - verglichen mit sechs Stunden im Dunkeln.
+>
+>Die Tatsache, dass es jedoch keine weiteren Details darüber gibt, wie das Experiment ausgeführt wurde, sorgt für Kopfschütteln bei Wissenschaftlern. "Es sieht so aus, als hätte jemand irgendwo ein Experiment durchgeführt", sagte Benjamin Neuman, Vorsitzender der Biowissenschaften an der Texas A&M University-Texarkana, der Nachrichtenagentur AFP. "Als Wissenschaftler würde ich natürlich gerne eine aktuelle Studie und die tatsächlichen Zahlen sehen", sagte der Virusepidemiologe Chris von Csefalvay. Mediziner reagierten fassungslos auf die Äußerungen des Präsidenten und warnten eindringlich davor, sich Desinfektionsmittel zu spritzen oder zu schlucken. Dies könne tödliche Folgen haben.
+
+Read the whole thing [here](https://www.fr.de/politik/corona-krise-usa-donald-trump-china-schuld-virus-sanktionen-zr-13651059.html).
+
+And on that note, the [Manila Times](https://www.manilatimes.net/2020/04/26/news/world/sun-kills-virus-scientists-divided/718909/) also quoted me on the same topic.
