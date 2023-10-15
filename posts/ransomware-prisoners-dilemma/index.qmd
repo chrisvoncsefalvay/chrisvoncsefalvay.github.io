@@ -2,19 +2,10 @@
 title: "Ransomware attacks as n-person prisoner's dilemmas"
 description: |
   A game theoretical perspective on ransomware attacks as n-person prisoner's dilemmas, and why forced cooperation isn't the answer.
-author:
-  - name: Chris von Csefalvay
-    orcid: 0000-0003-3131-0864
-    email: chris@chrisvoncsefalvay.com
 date: 2021-05-14
 categories: ["cybersecurity", "econometrics", "game theory"]
 image: 106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg
-format:
-  html:
-    df-print: paged
-    toc: true
-citation:
-    url: https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma
+citation: true
 google-scholar: true
 ---
 
