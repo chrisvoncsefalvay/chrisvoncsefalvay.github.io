@@ -2,19 +2,10 @@
 title: "The hardest AI problem you've never heard of."
 description: |
   Dwarves. Elephants. AI. Let the games begin.
-author:
-  - name: Chris von Csefalvay
-    orcid: 0000-0003-3131-0864
-    email: chris@chrisvoncsefalvay.com
 date: 2023-03-07
 categories: ["ai", "games", "ABMs"]
 image: 7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp
-format:
-  html:
-    df-print: paged
-    toc: true
-citation:
-    url: https://chrisvoncsefalvay.com/posts/dwarf-fortress
+citation: true
 google-scholar: true
 bibliography: references.bib
 ---
