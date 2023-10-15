@@ -1,0 +1,69 @@
+---
+title: "Beyond Broca"
+description: |
+  What if we've got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?
+author:
+  - name: Chris von Csefalvay
+    orcid: 0000-0003-3131-0864
+    email: chris@chrisvoncsefalvay.com
+date: 2023-10-15
+categories: ["ai", "llms", "philosophy", "language"]
+format:
+  html:
+    df-print: paged
+    toc: true
+citation:
+    url: https://chrisvoncsefalvay.com/posts/llms-language
+google-scholar: true
+---
+
+There's something special about language. It is 'our own', it is 'us', in a profound way, and quite surprisingly, more so than art. I was deeply struck by this when I first saw reactions to large generative language models that created realistic, human-ish prose. Notably, those mature enough to reach a non-professional audience – ChatGPT based on GPT-3 and later GPT-4 – came quite some time after models that could create fairly acceptable visual 'art'.[^1]
+
+[^1]: I don't mean to insinuate that what Stable Diffusion and DALL·E produce are 'art' in the sense we understand that concept. However, neither is what GPT produces 'language'. They are both simulators of outcomes based on stochastic approximations over a sufficiently large training set to be able to approximate the outcome of human activities we know as 'art' and 'language', respectively. 
+
+This was quite striking, for three reasons. 
+
+* For one, computationally, the probability space that a model seeking to create a realistic image has to navigate is exponentially larger than what's required to produce human-like prose. 
+* Secondly, we consider making art to be a very deeply human endeavour. Animals may to some minimal extent be taught to create poor simulacra of human artistic endeavours like painting, but nobody would confuse a trained elephant's 'paintings' to art. Art is not just a product, it's also an activity, one that proceeds with a subjective element in the artist, and no machine can replicate the process, no matter how well it may approximate the outcome. 
+* Most importantly, however, despite the previous point, lay audiences saw a connection between a simulacrum of language and human-like intelligence that was absent from a simulacrum of art.
+
+Which, of course, leads us to the key question: what if we got one of the most deeply enshrined beliefs about language, intelligence and the relationship between the two *utterly, dreadfully wrong*?
+
+
+# Our precious words
+A large language model (LLM) is, essentially, a very simple machine that knows a large number of conditional probabilities. Given a sequence of tokens $k_0, k{1}, \cdots, k_{n}$, it associates every possible token $k\prime$ with a probability $p(k_{n + 1} = k\prime | k_0, k{1}, \cdots, \k_{n})$ -- or in other words, given a token sequence $k_0, k{1}, \cdots, k_{n}$, it assigns to every point in a probability space a conditional likelihood that that point's corresponding token will be the $k_{n+1}$-th token. Or, using my preferred formulation, which looks at the inverse probability: given the token sequence, it creates a probability distribution of the next token and draws stochastically, weighted by token likelihood, so that a draw from the region of highest probability is most likely.
+
+It turns out that if the model's understanding of these conditional probabilities is sufficiently good, it can simulate knowledge quite well, [a point I belaboured elsewhere](https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/). This is not overly surprising: if a model knew the conditional probability of rain on day $d$, $p_r(d)$, given the weather on days $d-1$, $d-2$ and so on -- i.e. if it could learn $f(r(d-1), r(d-2), ..., r(d-n))$ to minimise a loss function $J(r(d), f(r(d-1), r(d-2), ..., r(d-n)))$ -- well enough, we'd trust it to tell us whether we'd need our raincoat on that given day. The model would know no more about rain or shine than LLMs know about language or the subject matters of language, but simulating tokens gets you quite a long way towards being useful as a simulacrum of knowledge.
+
+To the point that what comes out of such a model might well appear human-like: modern GPT implementations can produce prose that is a little stilted at times, but certainly often only distinguishable from human prose by the conspicuous absence of grammatical and spelling errors. This is interesting because of how it was perceived: quite immediately, this was connected to a kind of intelligence that was almost human, or indeed at times better than human. People suddenly started to worry about a dumb token simulator taking over their jobs.
+
+Clearly, language hit a nerve.
+
+# The medium is the message
+JARVIS. Siri. Alexa. WOPR. The AIs of fiction and our every-days have one thing in common: they use language as the presentation layer. This is deceptive, because neither of these systems are, well, particularly smart. Compared to models that can, say, quantitatively infer the activity of a small molecule drug from its structure (QSAR models), Siri is pretty pathetic. However, it has something QSAR models and other very impressive applications of machine learning don't: the human presentation layer, i.e. language.
+
+How we treat a system seems to be conditional on how it talks to us. In that sense, the medium is profoundly how we treat the message. To use the terminology of J.W. Harris's writings on human rights, we associate the 'right' to be considered to be intrinsically connected to being capable of engaging in human 'discourse'. And that, of course, means language. 
+
+This is not overly surprising, either. Our understanding of language has been that of a watershed moment in evolution. Humans became what they are when they learned to use language. Tool use is great, but tool use only makes _a human_ at best. What makes _humans_, plural, is language. This is intrinsically connected, of course, to society. Language is not an arbitrarily selected activity, nor is it really necessarily the kind of evolutionary game changer that tool use is. Rather, it is the tool, the _sine qua non_, the cornerstone and the absolutely fundamental instrument of social interaction. Language creates society. Society recognises human individuals and gives that recognition a meaning. The fact that I am a human being, and recognised as such (I hope), has a meaning that is different from me recognising that my dog is an individual of the species *Canis lupus familiaris*, because it does not merely acknowledge me as being of a certain species, but also of being of a certain kind of agent capable not only of having rights but also of speaking for them. Language is how all that happens.
+
+
+# The language of intelligence (or vice versa)
+What, then, if we got one of the most important things about humanity, and human intelligence, dreadfully wrong altogether? What if language is not a _product_ of intelligence (as we understand it in the human context) but rather a necessary instrument thereof?
+
+The evolution of something as crucial as language remains shrouded in a perplexing mystery to this date. What we know is that at some point, about 50-100,000 years ago, _something_ happened that gave rise to language. We don't quite know what it was, or how it specifically transpired. Indeed, despite advances in our understanding of cognitive neuroscience, we haven't found evidence of the 'language faculty' proposed by Chomsky (not to be confused with the brain areas responsible for speech, which perplexingly are part, but not the whole, of the language faculty). The genetics of language production – which centres around FOXP2 these days – hasn't gotten us a lot further, and there are way too many edge cases (_dissociations_, as the term in evolutionary neuroscience goes), where either there is a significant intellectual deficit despite preserved language ability (Williams syndrome being the textbook example of this) or the inverse (e.g. Developmental Verbal Dyspraxia, where there is impairment to language production but not to overall intellect) to be able to confidently make this connection on an individual level.
+
+On the other hand, on a broader level, it is hard to discount the relationship. What is more complex is the direction of this relationship. There are, really, three possible scenarios:
+
+1. Language is a consequence of human intelligence. The kind of intelligence we associate with modern human cognitive capabilities necessarily presupposes, absent some marginal exceptions, language.
+2. Language is an epiphenomenon of human intelligence. It evolved in parallel, but neither requires human intelligence (see Williams syndrome) nor does human intelligence require it (see Developmental Verbal Dyspraxia).
+3. Human intelligence is largely a consequence of language, which is its necessary but not sufficient condition. It is the evolutionarily most stable representation layer for information, and allows reasoning through complexity. 
+
+While the second of these is a convenient way to hand-wave away the entire question and account for the edge cases I discussed above, I find the third of these much more compelling. It is not defeated by the argument from either of the edge cases: it is not defeated by arguments from intact language despite intellectual deficits, because it does not assume that language is sufficient, merely that it is necessary. It is not defeated by the inverse, either, because it permits a small number of deviations. Language is not the only possible representational layer that could underpin intelligence. It is, however, vastly more evolutionarily advantageous through its efficiency. It is so much stronger and so much more efficient that it can be considered almost absolutely dominant – which indeed accounts for the fact that disorders of language with preserved intellectual functioning are vanishingly rare. If the efficiency of language as the 'operating system' of intelligence weren't so strongly dominant, such disorders would not be disorders, indeed, but alternate ways of cognitive existence that are equally evolutionarily stable.
+
+
+# The golden link
+Which leads us to what I shall call the "golden link" of intelligence – and perhaps the most frightening finding that derives from LLMs. We intuit, correctly, that a realistic simulacrum of language is an indication of intelligence. We once more intuit, correctly, that even if we're aware of the limits of LLMs' 'language', it displays more than a scintilla of whatever makes up intelligence. Just as Stable Diffusion is not art but a simulacrum of the end result of the process we know as 'art', ChatGPT isn't really 'language' but a simulacrum, by way of extending token sequences, of the end result of the process we know as 'language' – but no matter how deeply we understand this, it is hard to deny that ChatGPT does speak to us, to quote Kipling, "as a man would talk to a man". 
+
+And so, our trepidation and the 'uncanny valley' sensation of LLMs' 'intelligence' is quite instructive. It shows, clear as day, the intrinsic link between language and intelligence, but more importantly, that language is not a consequence of intelligence but a fundamental pre-requisite and indeed the communication protocol on which efficient human intelligence rests. Language is neither sufficient nor necessary for human intelligence (and perhaps other forms of intelligence do exist that do not require language at all), but it is the evolutionarily dominant stable strategy for representing information in a manner that can support intelligence. 
+
+There lies the scariest revelation of LLMs. It's not that LLMs will supplant us (they won't), or that we'll be condemned to a lifetime of reading books written by LLMs (have you tried to get ChatGPT to write a story on a novel premise?), nor that LLMs will steal our jobs and take over the planet. Rather, the great revelation is that LLMs cast light on what might have been one of the longest standing fallacies of humans reasoning about reasoning – that language is the product of intelligence, and not its operating system.
