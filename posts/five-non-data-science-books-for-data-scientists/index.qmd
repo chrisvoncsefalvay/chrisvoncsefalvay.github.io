@@ -2,19 +2,10 @@
 title: "Five non-data-science books for data scientists"
 description: |
   Read stuff outside your field. It'll be good for you.
-author:
-  - name: Chris von Csefalvay
-    orcid: 0000-0003-3131-0864
-    email: chris@chrisvoncsefalvay.com
 date: 2022-04-13
 categories: ["literature", "data science", "ethics"]
 image: book.jpg
-format:
-  html:
-    df-print: paged
-    toc: true
-citation:
-    url: https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists
+citation: true
 google-scholar: true
 ---
 
