@@ -2,86 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/disclaimer/index.html</loc>
-    <lastmod>2023-10-12T15:21:42.438Z</lastmod>
+    <lastmod>2023-10-15T15:19:47.495Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/index.html</loc>
-    <lastmod>2023-10-12T15:21:41.690Z</lastmod>
+    <lastmod>2023-10-15T15:19:46.775Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/index.html</loc>
-    <lastmod>2023-10-12T15:21:39.606Z</lastmod>
+    <lastmod>2023-10-15T15:19:44.651Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/index.html</loc>
-    <lastmod>2023-10-12T15:21:38.150Z</lastmod>
+    <lastmod>2023-10-15T15:19:43.247Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/index.html</loc>
-    <lastmod>2023-10-12T15:21:36.890Z</lastmod>
+    <lastmod>2023-10-15T15:19:42.023Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/index.html</loc>
-    <lastmod>2023-10-12T15:21:35.542Z</lastmod>
+    <lastmod>2023-10-15T15:19:40.727Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
-    <lastmod>2023-10-12T15:21:32.174Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/index.html</loc>
-    <lastmod>2023-10-12T15:21:31.166Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/papers/index.html</loc>
-    <lastmod>2023-10-12T15:21:30.322Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/index.html</loc>
-    <lastmod>2023-10-12T15:21:29.522Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/euronews-covid/index.html</loc>
-    <lastmod>2023-10-12T15:21:28.114Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/fr-disinfectants/index.html</loc>
-    <lastmod>2023-10-12T15:21:28.938Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/tech-for-good/index.html</loc>
-    <lastmod>2023-10-12T15:21:29.930Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/teaching/index.html</loc>
-    <lastmod>2023-10-12T15:21:30.698Z</lastmod>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/llms-language/index.html</loc>
+    <lastmod>2023-10-15T15:19:37.455Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/index.html</loc>
-    <lastmod>2023-10-12T15:21:31.614Z</lastmod>
+    <lastmod>2023-10-15T15:19:36.187Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/teaching/index.html</loc>
+    <lastmod>2023-10-15T15:19:35.283Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/tech-for-good/index.html</loc>
+    <lastmod>2023-10-15T15:19:34.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/fr-disinfectants/index.html</loc>
+    <lastmod>2023-10-15T15:19:33.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/euronews-covid/index.html</loc>
+    <lastmod>2023-10-15T15:19:32.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/index.html</loc>
+    <lastmod>2023-10-15T15:19:34.119Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/papers/index.html</loc>
+    <lastmod>2023-10-15T15:19:34.907Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/index.html</loc>
+    <lastmod>2023-10-15T15:19:35.739Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
+    <lastmod>2023-10-15T15:19:36.739Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/index.html</loc>
-    <lastmod>2023-10-12T15:21:33.114Z</lastmod>
+    <lastmod>2023-10-15T15:19:38.375Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/index.html</loc>
-    <lastmod>2023-10-12T15:21:35.978Z</lastmod>
+    <lastmod>2023-10-15T15:19:41.151Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/index.html</loc>
-    <lastmod>2023-10-12T15:21:37.394Z</lastmod>
+    <lastmod>2023-10-15T15:19:42.515Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/index.html</loc>
-    <lastmod>2023-10-12T15:21:38.738Z</lastmod>
+    <lastmod>2023-10-15T15:19:43.827Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/index.html</loc>
-    <lastmod>2023-10-12T15:21:40.346Z</lastmod>
+    <lastmod>2023-10-15T15:19:45.379Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/index.html</loc>
-    <lastmod>2023-10-12T15:21:42.150Z</lastmod>
+    <lastmod>2023-10-15T15:19:47.227Z</lastmod>
   </url>
 </urlset>
