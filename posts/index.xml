@@ -126,7 +126,6 @@ Csefalvay, Chris, von. 2023. <span>“Beyond Broca.”</span> October 15,
 <item>
   <title>The knowledge dividend of large language models</title>
   <dc:creator>von Csefalvay, Chris</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</link>
   <description><![CDATA[ 
 
@@ -141,16 +140,16 @@ Csefalvay, Chris, von. 2023. <span>“Beyond Broca.”</span> October 15,
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
+  author = {Csefalvay, Chris, von},
   title = {The Knowledge Dividend of Large Language Models},
   date = {2023-10-02},
   url = {https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2023. <span>“The
-Knowledge Dividend of Large Language Models.”</span> <a href="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms">https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms</a>.
+Csefalvay, Chris, von. 2023. <span>“The Knowledge Dividend of Large
+Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms">https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>LLMs</category>
