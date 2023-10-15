@@ -2,19 +2,10 @@
 title: "As we may see: the world after dashboards"
 description: |
     Dashboards are over -- if you want it.
-author:
-  - name: Chris von Csefalvay
-    orcid: 0000-0003-3131-0864
-    email: chris@chrisvoncsefalvay.com
 date: 2022-04-01
 categories: ["dashboards", "data visualization", "data science", "Cross-post: Starschema"]
 image: header.webp
-format:
-  html:
-    df-print: paged
-    toc: true
-citation:
-    url: https://chrisvoncsefalvay.com/posts/as-we-may-see
+citation: true
 google-scholar: false
 ---
 

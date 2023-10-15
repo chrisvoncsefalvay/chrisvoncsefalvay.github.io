@@ -2,19 +2,10 @@
 title: "A different shade of grey"
 description: |
   A response to Urbina _et al._ (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn't already have enough of them).
-author:
-  - name: Chris von Csefalvay
-    orcid: 0000-0003-3131-0864
-    email: chris@chrisvoncsefalvay.com
 date: 2022-04-13
 categories: ["ai", "computational chemistry", "ethics"]
 image: 155mmMustardGasShells-1200x900.jpg
-format:
-  html:
-    df-print: paged
-    toc: true
-citation:
-    url: https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey
+citation: true
 google-scholar: true
 bibliography: references.bib
 ---
