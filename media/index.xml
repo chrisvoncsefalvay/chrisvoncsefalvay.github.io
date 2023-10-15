@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>Chris von Csefalvay</title>
-<link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/index.html</link>
-<atom:link href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://chrisvoncsefalvay.com/media/index.html</link>
+<atom:link href="https://chrisvoncsefalvay.com/media/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.3.450</generator>
 <lastBuildDate>Tue, 07 Mar 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Tech for Good podcast</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/tech-for-good/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</link>
   <description><![CDATA[ 
 
 
@@ -37,14 +37,14 @@ Csefalvay, Chris von. 2023. <span>“Tech for Good Podcast.”</span> March
 7, 2023. <a href="https://chrisvoncsefalvay.com/media/tech-for-good">https://chrisvoncsefalvay.com/media/tech-for-good</a>.
 </div></div></section></div> ]]></description>
   <category>Tech for Good</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/tech-for-good/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</guid>
   <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/tech-for-good/header.jpeg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/fr-disinfectants/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</link>
   <description><![CDATA[ 
 
 
@@ -72,14 +72,14 @@ Csefalvay, Chris von. 2020. <span>“Corona in Den USA: Mediziner Warnen
 Nun Vor Injektion von Desinfektionsmittel.”</span> May 11, 2020. <a href="https://chrisvoncsefalvay.com/media/fr-disinfectants">https://chrisvoncsefalvay.com/media/fr-disinfectants</a>.
 </div></div></section></div> ]]></description>
   <category>Frankfurter Rundschau</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/fr-disinfectants/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</guid>
   <pubDate>Mon, 11 May 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/fr-disinfectants/header.png" medium="image" type="image/png" height="80" width="144"/>
+  <media:content url="https://chrisvoncsefalvay.com/media/fr-disinfectants/header.png" medium="image" type="image/png" height="80" width="144"/>
 </item>
 <item>
   <title>Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/euronews-covid/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</link>
   <description><![CDATA[ 
 
 
@@ -108,9 +108,9 @@ Használják, Itthon Még Nem Kellett a Magyar Cég Adatelemző
 Programja.”</span> April 17, 2020. <a href="https://chrisvoncsefalvay.com/media/euronews-covid">https://chrisvoncsefalvay.com/media/euronews-covid</a>.
 </div></div></section></div> ]]></description>
   <category>Euronews</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/euronews-covid/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</guid>
   <pubDate>Fri, 17 Apr 2020 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/media/euronews-covid/header.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/media/euronews-covid/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>

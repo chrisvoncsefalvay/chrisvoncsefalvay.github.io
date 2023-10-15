@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>Chris von Csefalvay</title>
-<link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/index.html</link>
-<atom:link href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://chrisvoncsefalvay.com/posts/index.html</link>
+<atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.3.450</generator>
 <lastBuildDate>Sun, 15 Oct 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Beyond Broca</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/llms-language/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/llms-language/index.html</link>
   <description><![CDATA[ 
 
 
@@ -82,13 +82,13 @@ Csefalvay, Chris von. 2023. <span>“Beyond Broca.”</span> October 15,
   <category>llms</category>
   <category>philosophy</category>
   <category>language</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/llms-language/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/llms-language/index.html</guid>
   <pubDate>Sun, 15 Oct 2023 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The knowledge dividend of large language models</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</link>
   <description><![CDATA[ 
 
 
@@ -116,14 +116,14 @@ Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.c
   <category>ai</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</guid>
   <pubDate>Mon, 02 Oct 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/knowledge-dividend-of-llms/header.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/header.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Asemantic Induction of Hallucinations in LLMs</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</link>
   <description><![CDATA[ 
 
 
@@ -153,14 +153,14 @@ in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/
   <category>ai</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</guid>
   <pubDate>Thu, 23 Mar 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/asemantic-induction-of-hallucinations/header.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/header.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Data for the next pandemic</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</link>
   <description><![CDATA[ 
 
 
@@ -188,14 +188,14 @@ March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pa
   <category>computational epidemiology</category>
   <category>epidemics</category>
   <category>Cross-post: Starschema</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</guid>
   <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/data-for-the-next-pandemic/header.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/header.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>The hardest AI problem you’ve never heard of.</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</link>
   <description><![CDATA[ 
 
 
@@ -213,7 +213,7 @@ March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pa
 <p>Well, then you’d have Dwarf Fortress.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="img-fluid figure-img"></p>
+<p><img src="https://chrisvoncsefalvay.com/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">This is Dwarf Fortress, in all its beauty (comma lack thereof). Screenshot taken from the legendary Boatmurdered saga, the most hilariously weird tale of just how incredible this game can be.</figcaption>
 </figure>
 </div>
@@ -275,14 +275,14 @@ Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/
   <category>ai</category>
   <category>games</category>
   <category>ABMs</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</guid>
   <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Five non-data-science books for data scientists</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</link>
   <description><![CDATA[ 
 
 
@@ -328,14 +328,14 @@ Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/pos
   <category>literature</category>
   <category>data science</category>
   <category>ethics</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</guid>
   <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/five-non-data-science-books-for-data-scientists/book.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/book.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>My favourite Quora answers</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</link>
   <description><![CDATA[ 
 
 
@@ -400,7 +400,7 @@ Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/pos
 <blockquote class="blockquote">
 <p>Actually, it’s not. It’s a popular science term, nobody in epidemiology uses it. The correct term is ‘index case’ or ‘index patient’.</p>
 <p>“Patient zero” comes from a contact network study by Auerbach et al.&nbsp;(1984) on HIV:</p>
-<img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/auerbach.jpeg" class="img-fluid" alt="Auerbach’s contact network">
+<img src="https://chrisvoncsefalvay.com/posts/quora-answers/auerbach.jpeg" class="img-fluid" alt="Auerbach’s contact network">
 </blockquote>
 <p>I have a fervent dislike for the ‘patient zero’ term, both in colloquial usage and in epidemiology (where it’s thankfully quite rare these days), so make sure you <a href="https://www.quora.com/Why-is-patient-zero-called-patient-zero-and-not-patient-one-to-denote-the-first-person-with-a-disease/answer/Chris-von-Csefalvay-3">read this answer in full</a>. Incidentally, we’re looking at this contact network in Computational Note 2.10 (page 75) of <a href="https://computationalinfectiousdisease.com">my book</a>.</p>
 </section>
@@ -756,14 +756,14 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/quora-answers">http
   <category>Quora</category>
   <category>history</category>
   <category>technology</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</guid>
   <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/quora-answers/quora.png" medium="image" type="image/png" height="96" width="144"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/quora-answers/quora.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
   <title>A different shade of grey</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</link>
   <description><![CDATA[ 
 
 
@@ -823,14 +823,14 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-o
   <category>ai</category>
   <category>computational chemistry</category>
   <category>ethics</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</guid>
   <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>As we may see: the world after dashboards</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</link>
   <description><![CDATA[ 
 
 
@@ -861,14 +861,14 @@ Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/post
   <category>data visualization</category>
   <category>data science</category>
   <category>Cross-post: Starschema</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</guid>
   <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/as-we-may-see/header.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/as-we-may-see/header.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Peace, love, Paxlovid and ‘Pfizermectin’</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</link>
   <description><![CDATA[ 
 
 
@@ -893,7 +893,7 @@ Biden Admin Plans ‘Imminent’ Booster Expansion; Orders 10M Courses of ‘Pfi
 <p>To understand what’s going on here, we need to look at protein synthesis by viruses. A lot of the time, viral proteins are produced as one big, long protein called a polyprotein. Then, viral proteases break these at pre-determined cleavage sites into the constituent parts of what eventually becomes a viral particle. As far as the virus is concerned, interference with that cleavage is bad, bad news, essentially inhibiting the ability of the virus to create copies of itself that are effective infectious agents.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/paxlovid.png.webp" class="img-fluid figure-img"></p>
+<p><img src="https://chrisvoncsefalvay.com/posts/paxlovid/paxlovid.png.webp" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Paxlovid (PF-07321332, in blue) bound to 3CLPro (volume model). Author’s own work, based on PDB:7SI9.</figcaption>
 </figure>
 </div>
@@ -948,14 +948,14 @@ Csefalvay, Chris von. 2021. <span>“Peace, Love, Paxlovid and
 </div></div></section></div> ]]></description>
   <category>COVID-19</category>
   <category>pharmacology</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</guid>
   <pubDate>Sat, 27 Nov 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/paxlovid/paxlovid.png.webp" medium="image" type="image/webp"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/paxlovid/paxlovid.png.webp" medium="image" type="image/webp"/>
 </item>
 <item>
   <title>Why the COVID-19 vaccines are not gene therapy</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1005,14 +1005,14 @@ Gene Therapy.”</span> November 9, 2021. <a href="https://chrisvoncsefalvay.com
 </div></div></section></div> ]]></description>
   <category>public health</category>
   <category>vaccines</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</guid>
   <pubDate>Tue, 09 Nov 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Ransomware attacks as n-person prisoner’s dilemmas</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1070,14 +1070,14 @@ Prisoner’s Dilemmas.”</span> May 14, 2021. <a href="https://chrisvoncsefalva
   <category>cybersecurity</category>
   <category>econometrics</category>
   <category>game theory</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</guid>
   <pubDate>Fri, 14 May 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/ransomware-prisoners-dilemma/106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Julia: A post-mortem</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/index.html</link>
+  <link>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</link>
   <description><![CDATA[ 
 
 
@@ -1199,9 +1199,9 @@ Csefalvay, Chris von. 2021. <span>“Julia: A Post-Mortem.”</span> March
   <category>ai</category>
   <category>julia</category>
   <category>programming</category>
-  <guid>https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</guid>
   <pubDate>Sun, 07 Mar 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/posts/julia-a-post-mortem/julia.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/julia.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

@@ -1,1 +1,1 @@
-Sitemap: https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/sitemap.xml
+Sitemap: https://chrisvoncsefalvay.com/sitemap.xml
