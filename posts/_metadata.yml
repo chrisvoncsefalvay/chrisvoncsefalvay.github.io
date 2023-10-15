@@ -12,6 +12,7 @@ format:
   html:
     df-print: paged
     toc: true
+    lang: en-GB
 citation:
   type: article
   
