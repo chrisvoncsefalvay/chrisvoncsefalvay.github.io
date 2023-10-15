@@ -13,7 +13,7 @@
 <lastBuildDate>Sun, 15 Oct 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Beyond Broca</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/llms-language/index.html</link>
   <description><![CDATA[ 
 
@@ -105,15 +105,15 @@ Zhong, Shifa, and Xiaohong Guan. 2023. <span>“Developing Quantitative Structur
 <ol>
 <li id="fn1"><p>I don’t mean to insinuate that what Stable Diffusion and DALL·E produce are ‘art’ in the sense we understand that concept. However, neither is what GPT produces ‘language’. They are both simulators of outcomes based on stochastic approximations over a sufficiently large training set to be able to approximate the outcome of human activities we know as ‘art’ and ‘language’, respectively.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
   title = {Beyond {Broca}},
   date = {2023-10-15},
   url = {https://chrisvoncsefalvay.com/posts/llms-language},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2023. <span>“Beyond Broca.”</span> October 15,
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> October 15,
 2023. <a href="https://chrisvoncsefalvay.com/posts/llms-language">https://chrisvoncsefalvay.com/posts/llms-language</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
@@ -125,7 +125,7 @@ Csefalvay, Chris, von. 2023. <span>“Beyond Broca.”</span> October 15,
 </item>
 <item>
   <title>The knowledge dividend of large language models</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</link>
   <description><![CDATA[ 
 
@@ -140,15 +140,15 @@ Csefalvay, Chris, von. 2023. <span>“Beyond Broca.”</span> October 15,
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
   title = {The Knowledge Dividend of Large Language Models},
   date = {2023-10-02},
   url = {https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2023. <span>“The Knowledge Dividend of Large
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“The Knowledge Dividend of Large
 Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms">https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
@@ -160,7 +160,7 @@ Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.c
 </item>
 <item>
   <title>Asemantic Induction of Hallucinations in LLMs</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</link>
   <description><![CDATA[ 
 
@@ -177,16 +177,16 @@ Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.c
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
   title = {Asemantic {Induction} of {Hallucinations} in {LLMs}},
   date = {2023-03-23},
   url = {https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2023. <span>“Asemantic Induction of
-Hallucinations in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations</a>.
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“Asemantic Induction of Hallucinations
+in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>LLMs</category>
@@ -197,7 +197,7 @@ Hallucinations in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefa
 </item>
 <item>
   <title>Data for the next pandemic</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</link>
   <description><![CDATA[ 
 
@@ -212,15 +212,15 @@ Hallucinations in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefa
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
   title = {Data for the Next Pandemic},
   date = {2023-03-07},
   url = {https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2023. <span>“Data for the Next Pandemic.”</span>
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“Data for the Next Pandemic.”</span>
 March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic">https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic</a>.
 </div></div></section></div> ]]></description>
   <category>computational epidemiology</category>
@@ -232,7 +232,7 @@ March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pa
 </item>
 <item>
   <title>The hardest AI problem you’ve never heard of.</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</link>
   <description><![CDATA[ 
 
@@ -299,15 +299,15 @@ Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: Wi
 <ol>
 <li id="fn1"><p>Specifically, by the factor <img src="https://latex.codecogs.com/png.latex?%5Cgamma%5Et">, where <img src="https://latex.codecogs.com/png.latex?%5Cgamma"> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2023,
-  author = {Csefalvay, Chris, von},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
   title = {The Hardest {AI} Problem You’ve Never Heard Of.},
   date = {2023-03-07},
   url = {https://chrisvoncsefalvay.com/posts/dwarf-fortress},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2023. <span>“The Hardest AI Problem You’ve Never
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“The Hardest AI Problem You’ve Never
 Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/dwarf-fortress">https://chrisvoncsefalvay.com/posts/dwarf-fortress</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
@@ -319,7 +319,7 @@ Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/
 </item>
 <item>
   <title>Five non-data-science books for data scientists</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</link>
   <description><![CDATA[ 
 
@@ -352,15 +352,15 @@ Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2022,
-  author = {Csefalvay, Chris, von},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+  author = {Chris von Csefalvay},
   title = {Five Non-Data-Science Books for Data Scientists},
   date = {2022-04-13},
   url = {https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2022. <span>“Five Non-Data-Science Books for Data
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2022. <span>“Five Non-Data-Science Books for Data
 Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists">https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists</a>.
 </div></div></section></div> ]]></description>
   <category>literature</category>
@@ -372,7 +372,7 @@ Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/pos
 </item>
 <item>
   <title>My favourite Quora answers</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</link>
   <description><![CDATA[ 
@@ -781,16 +781,16 @@ Scientists.”</span> April 13, 2022. <a href="https://chrisvoncsefalvay.com/pos
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2022,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
+  author = {Chris von Csefalvay and von Csefalvay, Chris},
   title = {My Favourite {Quora} Answers},
   date = {2022-04-13},
   url = {https://chrisvoncsefalvay.com/posts/quora-answers},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2022. <span>“My
-Favourite Quora Answers.”</span> <a href="https://chrisvoncsefalvay.com/posts/quora-answers">https://chrisvoncsefalvay.com/posts/quora-answers</a>.
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay, and Chris von Csefalvay. 2022. <span>“My Favourite
+Quora Answers.”</span> <a href="https://chrisvoncsefalvay.com/posts/quora-answers">https://chrisvoncsefalvay.com/posts/quora-answers</a>.
 </div></div></section></div> ]]></description>
   <category>Quora</category>
   <category>history</category>
@@ -801,7 +801,7 @@ Favourite Quora Answers.”</span> <a href="https://chrisvoncsefalvay.com/posts/
 </item>
 <item>
   <title>A different shade of grey</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</link>
   <description><![CDATA[ 
 
@@ -848,15 +848,15 @@ Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013
 <div id="ref-urbina2022dual" class="csl-entry">
 Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>“Dual Use of Artificial-Intelligence-Powered Drug Discovery.”</span> <em>Nature Machine Intelligence</em> 4 (3): 189–91.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2022,
-  author = {Csefalvay, Chris, von},
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+  author = {Chris von Csefalvay},
   title = {A Different Shade of Grey},
   date = {2022-04-13},
   url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2022. <span>“A Different Shade of Grey.”</span>
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span>
 April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
@@ -868,7 +868,7 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-o
 </item>
 <item>
   <title>As we may see: the world after dashboards</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</link>
   <description><![CDATA[ 
 
@@ -885,15 +885,15 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-o
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay, chris2022,
-  author = {Csefalvay, Chris, von},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+  author = {Chris von Csefalvay},
   title = {As We May See: The World After Dashboards},
   date = {2022-04-01},
   url = {https://chrisvoncsefalvay.com/posts/as-we-may-see},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von. 2022. <span>“As We May See: The World After
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2022. <span>“As We May See: The World After
 Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/posts/as-we-may-see">https://chrisvoncsefalvay.com/posts/as-we-may-see</a>.
 </div></div></section></div> ]]></description>
   <category>dashboards</category>
@@ -906,7 +906,7 @@ Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/post
 </item>
 <item>
   <title>Peace, love, Paxlovid and ‘Pfizermectin’</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</link>
   <description><![CDATA[ 
@@ -975,16 +975,16 @@ Popp, Maria, Miriam Stegemann, Maria-Inti Metzendorf, Susan Gould, Peter Kranke,
 <div id="ref-zhang2021structure" class="csl-entry">
 Zhang, Sheng, Maj Krumberger, Michael A Morris, Chelsea Marie T Parrocha, Adam G Kreutzer, and James S Nowick. 2021. <span>“Structure-Based Drug Design of an Inhibitor of the SARS-CoV-2 (COVID-19) Main Protease Using Free Software: A Tutorial for Students and Scientists.”</span> <em>European Journal of Medicinal Chemistry</em> 218: 113390.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2021,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
+  author = {Chris von Csefalvay and von Csefalvay, Chris},
   title = {Peace, Love, {Paxlovid} and “{Pfizermectin}”},
   date = {2021-11-27},
   url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2021" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2021. <span>“Peace,
-Love, Paxlovid and <span>‘Pfizermectin’</span>.”</span> <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay, and Chris von Csefalvay. 2021. <span>“Peace, Love,
+Paxlovid and <span>‘Pfizermectin’</span>.”</span> <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
 </div></div></section></div> ]]></description>
   <category>COVID-19</category>
   <category>pharmacology</category>
@@ -994,7 +994,7 @@ Love, Paxlovid and <span>‘Pfizermectin’</span>.”</span> <a href="https://c
 </item>
 <item>
   <title>Why the COVID-19 vaccines are not gene therapy</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</link>
   <description><![CDATA[ 
@@ -1033,15 +1033,15 @@ Love, Paxlovid and <span>‘Pfizermectin’</span>.”</span> <a href="https://c
 <li id="fn1"><p>Sort of. Strictly speaking, this is not entirely true: mRNA vaccines actually have three mRNA bases — C, G and A — and a fourth base, m1Ψ. This is a molecule called N1-methylpseudouridine, and it replaces U in the mRNA. It is ‘read’ and interpreted as U, but is vastly less immunogenic.↩︎</p></li>
 <li id="fn2"><p>More specifically: it is translated into pre-mRNA, which is then spliced to get mRNA.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2021,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
+  author = {Chris von Csefalvay and von Csefalvay, Chris},
   title = {Why the {COVID-19} Vaccines Are Not Gene Therapy},
   date = {2021-11-09},
   url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2021" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2021. <span>“Why the
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay, and Chris von Csefalvay. 2021. <span>“Why the
 COVID-19 Vaccines Are Not Gene Therapy.”</span> <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
 </div></div></section></div> ]]></description>
   <category>public health</category>
@@ -1052,7 +1052,7 @@ COVID-19 Vaccines Are Not Gene Therapy.”</span> <a href="https://chrisvoncsefa
 </item>
 <item>
   <title>Ransomware attacks as n-person prisoner’s dilemmas</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</link>
   <description><![CDATA[ 
@@ -1098,15 +1098,15 @@ COVID-19 Vaccines Are Not Gene Therapy.”</span> <a href="https://chrisvoncsefa
 <li id="fn2"><p>The law is outright weird, in that in most countries, paying ransoms is not illegal per se, but giving money to certain entities is illegal regardless of the purpose of the money. In that sense the law does not distinguish between paying a ransom to, say, Boko Haram, who happen to be on the Treasury’s shitlist, or giving them the same amount of money due to an overwhelming conviction that boko is very haram indeed – it’s illegal either way. This makes paying a ransom needlessly complicated, especially as in my modest experience with kidnappers, they rarely discuss their organisational affiliations at length. With international jihad in particular being run on the franchise model in this day and age, it may well turn out that Joe Kidnapper, who held himself out as a common criminal, was in fact a full franchisee of al-Qa’ida, and suddenly the FBI is going through your underwear drawer.↩︎</p></li>
 <li id="fn3"><p>Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2021,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
+  author = {Chris von Csefalvay and von Csefalvay, Chris},
   title = {Ransomware Attacks as n-Person Prisoner’s Dilemmas},
   date = {2021-05-14},
   url = {https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2021" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2021. <span>“Ransomware
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay, and Chris von Csefalvay. 2021. <span>“Ransomware
 Attacks as n-Person Prisoner’s Dilemmas.”</span> <a href="https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma">https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma</a>.
 </div></div></section></div> ]]></description>
   <category>cybersecurity</category>
@@ -1118,7 +1118,7 @@ Attacks as n-Person Prisoner’s Dilemmas.”</span> <a href="https://chrisvoncs
 </item>
 <item>
   <title>Julia: A post-mortem</title>
-  <dc:creator>von Csefalvay, Chris</dc:creator>
+  <dc:creator>Chris von Csefalvay</dc:creator>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</link>
   <description><![CDATA[ 
@@ -1228,15 +1228,15 @@ font-style: inherit;">None</span></span></code></pre></div>
 <li id="fn7"><p>Here are some tips to make it suck less.↩︎</p></li>
 <li id="fn8"><p>Many of whom have also previously experienced SAS or STATA and thus cling to R like a drowning man clenches a life raft.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay, chris2021,
-  author = {Csefalvay, Chris, von and von Csefalvay, Chris},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
+  author = {Chris von Csefalvay and von Csefalvay, Chris},
   title = {Julia: {A} Post-Mortem},
   date = {2021-03-07},
   url = {https://chrisvoncsefalvay.com/posts/julia-a-post-mortem},
   langid = {en}
 }
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay, chris2021" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris, von, and Chris von Csefalvay. 2021. <span>“Julia: A
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay, and Chris von Csefalvay. 2021. <span>“Julia: A
 Post-Mortem.”</span> <a href="https://chrisvoncsefalvay.com/posts/julia-a-post-mortem">https://chrisvoncsefalvay.com/posts/julia-a-post-mortem</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
