@@ -163,7 +163,6 @@ Knowledge Dividend of Large Language Models.”</span> <a href="https://chrisvon
 <item>
   <title>Asemantic Induction of Hallucinations in LLMs</title>
   <dc:creator>Chris Csefalvay</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</link>
   <description><![CDATA[ 
 
@@ -180,16 +179,16 @@ Knowledge Dividend of Large Language Models.”</span> <a href="https://chrisvon
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {von Csefalvay, Chris and von Csefalvay, Chris},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {von Csefalvay, Chris},
   title = {Asemantic {Induction} of {Hallucinations} in {LLMs}},
   date = {2023-03-23},
-  url = {https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations},
+  url = {https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris von, and Chris von Csefalvay. 2023. <span>“Asemantic
-Induction of Hallucinations in LLMs.”</span> <a href="https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-indcution-of-hallucinations</a>.
+Csefalvay, Chris von. 2023. <span>“Asemantic Induction of Hallucinations
+in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>LLMs</category>
@@ -201,7 +200,6 @@ Induction of Hallucinations in LLMs.”</span> <a href="https://chrisvoncsefalva
 <item>
   <title>Data for the next pandemic</title>
   <dc:creator>Chris Csefalvay</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</link>
   <description><![CDATA[ 
 
@@ -216,16 +214,16 @@ Induction of Hallucinations in LLMs.”</span> <a href="https://chrisvoncsefalva
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {von Csefalvay, Chris and von Csefalvay, Chris},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {von Csefalvay, Chris},
   title = {Data for the Next Pandemic},
   date = {2023-03-07},
   url = {https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris von, and Chris von Csefalvay. 2023. <span>“Data for the
-Next Pandemic.”</span> <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic">https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic</a>.
+Csefalvay, Chris von. 2023. <span>“Data for the Next Pandemic.”</span>
+March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic">https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic</a>.
 </div></div></section></div> ]]></description>
   <category>computational epidemiology</category>
   <category>epidemics</category>
@@ -237,7 +235,6 @@ Next Pandemic.”</span> <a href="https://chrisvoncsefalvay.com/posts/data-for-t
 <item>
   <title>The hardest AI problem you’ve never heard of.</title>
   <dc:creator>Chris Csefalvay</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</link>
   <description><![CDATA[ 
 
@@ -304,16 +301,16 @@ Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: Wi
 <ol>
 <li id="fn1"><p>Specifically, by the factor <img src="https://latex.codecogs.com/png.latex?%5Cgamma%5Et">, where <img src="https://latex.codecogs.com/png.latex?%5Cgamma"> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {von Csefalvay, Chris and von Csefalvay, Chris},
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {von Csefalvay, Chris},
   title = {The Hardest {AI} Problem You’ve Never Heard Of.},
   date = {2023-03-07},
   url = {https://chrisvoncsefalvay.com/posts/dwarf-fortress},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris von, and Chris von Csefalvay. 2023. <span>“The Hardest
-AI Problem You’ve Never Heard Of.”</span> <a href="https://chrisvoncsefalvay.com/posts/dwarf-fortress">https://chrisvoncsefalvay.com/posts/dwarf-fortress</a>.
+Csefalvay, Chris von. 2023. <span>“The Hardest AI Problem You’ve Never
+Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/dwarf-fortress">https://chrisvoncsefalvay.com/posts/dwarf-fortress</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>games</category>
@@ -808,7 +805,6 @@ Quora Answers.”</span> <a href="https://chrisvoncsefalvay.com/posts/quora-answ
 <item>
   <title>A different shade of grey</title>
   <dc:creator>Chris Csefalvay</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</link>
   <description><![CDATA[ 
 
@@ -855,16 +851,16 @@ Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013
 <div id="ref-urbina2022dual" class="csl-entry">
 Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>“Dual Use of Artificial-Intelligence-Powered Drug Discovery.”</span> <em>Nature Machine Intelligence</em> 4 (3): 189–91.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
-  author = {von Csefalvay, Chris and von Csefalvay, Chris},
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+  author = {von Csefalvay, Chris},
   title = {A Different Shade of Grey},
   date = {2022-04-13},
   url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris von, and Chris von Csefalvay. 2022. <span>“A Different
-Shade of Grey.”</span> <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
+Csefalvay, Chris von. 2022. <span>“A Different Shade of Grey.”</span>
+April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>computational chemistry</category>
@@ -876,7 +872,6 @@ Shade of Grey.”</span> <a href="https://chrisvoncsefalvay.com/posts/a-differen
 <item>
   <title>As we may see: the world after dashboards</title>
   <dc:creator>Chris Csefalvay</dc:creator>
-  <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</link>
   <description><![CDATA[ 
 
@@ -893,16 +888,16 @@ Shade of Grey.”</span> <a href="https://chrisvoncsefalvay.com/posts/a-differen
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
-  author = {von Csefalvay, Chris and von Csefalvay, Chris},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+  author = {von Csefalvay, Chris},
   title = {As We May See: The World After Dashboards},
   date = {2022-04-01},
   url = {https://chrisvoncsefalvay.com/posts/as-we-may-see},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
-Csefalvay, Chris von, and Chris von Csefalvay. 2022. <span>“As We May
-See: The World After Dashboards.”</span> <a href="https://chrisvoncsefalvay.com/posts/as-we-may-see">https://chrisvoncsefalvay.com/posts/as-we-may-see</a>.
+Csefalvay, Chris von. 2022. <span>“As We May See: The World After
+Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/posts/as-we-may-see">https://chrisvoncsefalvay.com/posts/as-we-may-see</a>.
 </div></div></section></div> ]]></description>
   <category>dashboards</category>
   <category>data visualization</category>
