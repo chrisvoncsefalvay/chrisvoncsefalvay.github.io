@@ -24,6 +24,7 @@ It's probably important to be realistic ahead of all: I did go into this madness
 # How not to do a marathon
 
 There are generally three commonly accepted things to do for a good long distance piece:
+
 * get some rest,
 * carb load, and
 * if you're not doing an organised race, have someone check in on you and help with things like hydration.
