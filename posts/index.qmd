@@ -1,7 +1,8 @@
 ---
 title: "The Notebook"
 listing:
-    contents: .
+    contents:
+        - "*.qmd"
     sort: date desc
     type: default
     categories: true
