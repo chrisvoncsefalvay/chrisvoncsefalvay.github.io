@@ -2,90 +2,94 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://chrisvoncsefalvay.com/disclaimer/index.html</loc>
-    <lastmod>2023-10-16T01:19:34.485Z</lastmod>
+    <lastmod>2023-10-16T01:47:05.318Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/index.html</loc>
-    <lastmod>2023-10-16T01:19:33.665Z</lastmod>
+    <lastmod>2023-10-16T01:47:04.322Z</lastmod>
   </url>
   <url>
-    <loc>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</loc>
-    <lastmod>2023-10-16T01:19:31.209Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</loc>
-    <lastmod>2023-10-16T01:19:29.653Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</loc>
-    <lastmod>2023-10-16T01:19:28.273Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</loc>
-    <lastmod>2023-10-16T01:19:26.753Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/llms-language/index.html</loc>
-    <lastmod>2023-10-16T01:19:22.977Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</loc>
-    <lastmod>2023-10-16T01:19:21.289Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/teaching/index.html</loc>
-    <lastmod>2023-10-16T01:19:20.297Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</loc>
-    <lastmod>2023-10-16T01:19:19.461Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</loc>
-    <lastmod>2023-10-16T01:19:18.417Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</loc>
-    <lastmod>2023-10-16T01:19:17.529Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/index.html</loc>
-    <lastmod>2023-10-16T01:19:19.013Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/papers/index.html</loc>
-    <lastmod>2023-10-16T01:19:19.881Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/index.html</loc>
-    <lastmod>2023-10-16T01:19:20.793Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
-    <lastmod>2023-10-16T01:19:21.889Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</loc>
-    <lastmod>2023-10-16T01:19:23.993Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</loc>
-    <lastmod>2023-10-16T01:19:27.265Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</loc>
-    <lastmod>2023-10-16T01:19:28.825Z</lastmod>
+    <loc>https://chrisvoncsefalvay.com/posts/skierg-marathon/index.html</loc>
+    <lastmod>2023-10-16T01:47:00.882Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</loc>
-    <lastmod>2023-10-16T01:19:30.289Z</lastmod>
+    <lastmod>2023-10-16T01:46:58.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</loc>
+    <lastmod>2023-10-16T01:46:57.158Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</loc>
+    <lastmod>2023-10-16T01:46:55.194Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</loc>
+    <lastmod>2023-10-16T01:46:51.066Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
+    <lastmod>2023-10-16T01:46:48.430Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/index.html</loc>
+    <lastmod>2023-10-16T01:46:47.038Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/papers/index.html</loc>
+    <lastmod>2023-10-16T01:46:45.874Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/index.html</loc>
+    <lastmod>2023-10-16T01:46:44.790Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</loc>
+    <lastmod>2023-10-16T01:46:42.890Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</loc>
+    <lastmod>2023-10-16T01:46:43.998Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</loc>
+    <lastmod>2023-10-16T01:46:45.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/teaching/index.html</loc>
+    <lastmod>2023-10-16T01:46:46.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</loc>
+    <lastmod>2023-10-16T01:46:47.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/llms-language/index.html</loc>
+    <lastmod>2023-10-16T01:46:49.770Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</loc>
+    <lastmod>2023-10-16T01:46:54.598Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</loc>
+    <lastmod>2023-10-16T01:46:56.474Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</loc>
+    <lastmod>2023-10-16T01:46:58.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</loc>
+    <lastmod>2023-10-16T01:47:00.058Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</loc>
-    <lastmod>2023-10-16T01:19:32.033Z</lastmod>
+    <lastmod>2023-10-16T01:47:01.914Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</loc>
-    <lastmod>2023-10-16T01:19:34.165Z</lastmod>
+    <lastmod>2023-10-16T01:47:04.930Z</lastmod>
   </url>
 </urlset>
