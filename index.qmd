@@ -21,6 +21,14 @@ about:
           url: https://orcid.org/0000-0003-3131-0864
         - text: "{{< ai google-scholar >}} Google Scholar"
           url: https://scholar.google.com/citations?user=X_2G-VsAAAAJ
+        - text: "{{< ai viaf >}} VIAF 7190162669581955500004"
+          url: http://viaf.org/viaf/7190162669581955500004
+        - text: "{{< ai isni >}} ISNI 0000 0005 0265 5729"
+          url: https://isni.org/isni/0000000502655729
+        - text: "{{< ai researcherid >}} RID IZD-6900-2023"
+          url: https://www.webofscience.com/wos/author/record/IZD-6900-2023
+        - text: "{{< ai osf >}} OSF"
+          url: https://osf.io/awhgj
 comments: false
 ---
 
