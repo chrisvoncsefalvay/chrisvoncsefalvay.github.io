@@ -21,6 +21,8 @@ It's probably important to be realistic ahead of all: I did go into this madness
 * I have an incredible boredom tolerance. Marathons are primarily psychological: we're just not used to doing the same one thing, without interruption, for 3-5 hours anymore. 
 * I guess insofar as there's such a thing as a genetic predisposition to be good at long distance physical activity, I've got the right genes. My dad is a multi-marathon athlete, so I likely have the right physiology.
 
+{{< embed skierg-marathon.ipynb#fig-skierg-marathon >}}
+
 # How not to do a marathon
 
 There are generally three commonly accepted things to do for a good long distance piece:
