@@ -194,8 +194,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"concept2-result-79965221.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div id="fig-skierg-marathon" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">8</span>), dpi<span class="op">=</span><span class="dv">600</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> gridspec.GridSpec(<span class="dv">3</span>, <span class="dv">1</span>, height_ratios<span class="op">=</span>[<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">1</span>])</span>
@@ -231,24 +230,18 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>ax3.set_xticks(ax3.get_xticks())</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>ax3.set_xticklabels(ax3.get_xticklabels(), rotation<span class="op">=</span><span class="dv">90</span>)</span>
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>ax3.set_xlabel(<span class="st">"metres"</span>)</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>ax3.set_xlim(<span class="dv">0</span>, <span class="dv">42195</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="fig-skierg-marathon-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<pre><code>(0.0, 42195.0)</code></pre>
-<figcaption class="figure-caption">(a) Stroke level data for the SkiErg marathon.</figcaption>
-</figure>
-</div>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>ax3.set_xlim(<span class="dv">0</span>, <span class="dv">42195</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="fig-skierg-marathon-2" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-skierg-marathon" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="skierg-marathon_files/figure-html/fig-skierg-marathon-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-skierg-marathon"></p>
-<figcaption class="figure-caption">(b)</figcaption>
+<p><img src="skierg-marathon_files/figure-html/fig-skierg-marathon-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Stroke level data for the SkiErg marathon.</figcaption>
 </figure>
 </div>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption>
-</figure>
-</div>
+</div></div>
 
 
      <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay,
