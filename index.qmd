@@ -26,9 +26,7 @@ comments: false
 
 ## Bio
 
-I'm a computational epidemiologist and data scientist working at the
-intersection of AI/ML, computational dynamics and public health. I am
-the author of [Computational Modeling of Infectious Disease](https://computationalinfectiousdisease.com), a richly illustrated compendium on modern computational epidemiology, as well as [a growing body of research](papers).
+I'm a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. I am the author of [Computational Modeling of Infectious Disease](https://computationalinfectiousdisease.com), a richly illustrated compendium on modern computational epidemiology, as well as [a growing body of research](papers).
 
 I attended the University  of Oxford for my undergraduate studies, graduating with a distinction (1st class), and returned there for my graduate studies. I also hold degrees from Cardiff and Robert Gordon University Aberdeen, and have studied at the University of Leiden under an Erasmus programme. Today, I am [board certified in public health](https://cph.nbphe.org/employer_letter/19626), a Fellow of the [Royal Society for Public Health](https://www.rsph.org.uk/) and a member of several other learned societies.
 
@@ -39,7 +37,6 @@ Between 2022 and 2023, I served Virginia as a member of the Medical Reserve Corp
 You can find a [list of my publications here](papers). My work on COVID-19 has been [featured in the media](media). I also write on various topics as the fancy strikes -- you can peruse my [notebook](blog) here.
 
 ## Key research interests
-
 
 * **Computational epidemiology**: agent-based modelling, disease-avoidant behaviours, epidemics over dynamic networks, geospatial computational epidemiology -- all primarily in the context of infectious diseases
 * **Pharmacovigilance**: VAERS, passive reporting, text mining of large complex report sets using LLMs
@@ -79,18 +76,12 @@ See more [here](papers).
 
 I live in Denver, CO, with my Golden Retriever, Oliver. Born in Budapest, Hungary, I've spent my formative years in England, but have called the Netherlands, Germany, Belgium, Austria and the United States home at various points in my life. Since 2020, I've been living in the United States, where I am a permanent resident.
 
-In my free time, I enjoy reading (mostly Cold War history and classical Greek drama),
-cooking (with not a lot of success) and Renaissance polyphony (esp.
-Thomas Tallis and Orlando di Lasso). I'm credited for a somewhat pretty sequence of integers called Jellyfish Heart numbers ([OEIS A344856](https://oeis.org/A344856)), which I discovered in 2020 while doing something that has nothing at all to do with
-my day job.
+In my free time, I enjoy reading (mostly Cold War history and classical Greek drama), cooking (with not a lot of success) and Renaissance polyphony (esp. Thomas Tallis and Orlando di Lasso). I'm credited for a somewhat pretty sequence of integers called Jellyfish Heart numbers ([OEIS A344856](https://oeis.org/A344856)), which I discovered in 2020 while doing something that has nothing at all to do with my day job.
 
 I live with [neuromyelitis optica](https://en.wikipedia.org/wiki/Neuromyelitis_optica) since 2015, which has left me with a lifelong desire to understand complex, multicausal health conditions like NMOSD better.
 
-In what little is left of my free time, I'm an adaptive multisport athlete,
-competing in wheelchair rugby, adaptive rowing (category PR1) and the SkiErg
-(category SIT2). In the latter, I [currently hold the world
-records in 100m, 2000m, 500m and half-marathon (21097m) distances, as well as
-the 1:00:00 time](https://www.concept2.com/skierg/motivation/records/adaptive-world?event=&gender=M&age_category=30&adaptive=31&op=Search&form_id=concept2_record_search_form#results).
+In what little is left of my free time, I'm an adaptive multisport athlete, competing in wheelchair rugby, adaptive rowing (category PR1) and the SkiErg
+(category SIT2). In the latter, I [currently hold the world records in 100m, 2000m, 500m and half-marathon (21097m) distances, as well as the 1:00:00 time](https://www.concept2.com/skierg/motivation/records/adaptive-world?event=&gender=M&age_category=30&adaptive=31&op=Search&form_id=concept2_record_search_form#results). I [occasionally rant and whine about my forays in the world of adaptive exercise and my attempts at doing so in a mostly science-based manner](https://chrisvoncsefalvay.com/posts/index.html#category=fitness).
 
 ## Pronunciation guide
 
