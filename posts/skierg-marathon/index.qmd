@@ -2,7 +2,7 @@
 title: "How to do a SkiErg marathon entirely the wrong way (but still finish)"
 description: |
     How to eat the wrong way, rest the wrong way (i.e. not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.  
-date: 2023-10-24
+date: 2023-10-13
 categories: ["fitness", "SkiErg"]
 citation: true
 google-scholar: false
