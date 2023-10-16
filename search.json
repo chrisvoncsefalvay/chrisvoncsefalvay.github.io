@@ -382,14 +382,14 @@
     "href": "posts/llms-language/index.html",
     "title": "Beyond Broca",
     "section": "",
-    "text": "There’s something special about language. It is ‘our own’, it is ‘us’, in a profound way, and quite surprisingly, more so than art. I was deeply struck by this when I first saw reactions to large generative language models that created realistic, human-ish prose. Notably, those mature enough to reach a non-professional audience – ChatGPT based on GPT-3 and later GPT-4 – came quite some time after models that could create fairly acceptable visual ‘art’.1\nThis was quite striking, for three reasons.\nWhich, of course, leads us to the key question: what if we got one of the most deeply enshrined beliefs about language, intelligence and the relationship between the two utterly, dreadfully wrong?"
+    "text": "There’s something special about language. It is ‘our own’, it is ‘us’, in a profound way, and quite surprisingly, more so than art. I was deeply struck by this when I first saw reactions to large generative language models that created realistic, human-ish prose. Notably, those mature enough to reach a non-professional audience – ChatGPT based on GPT-3 and later GPT-4 – came quite some time after models that could create fairly acceptable visual ‘art’.1 The appearance of synthetic language-like products (SLLPs), as I like to call the output of such generative models, came well after the appearance of synthetic simulacra of visual art,2 yet elicited much less fervent responses.\nThis was quite striking, for three reasons.\nWhich, of course, leads us to the key question: what if we got one of the most deeply enshrined beliefs about language, intelligence and the relationship between the two utterly, dreadfully wrong?"
   },
   {
     "objectID": "posts/llms-language/index.html#footnotes",
     "href": "posts/llms-language/index.html#footnotes",
     "title": "Beyond Broca",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nI don’t mean to insinuate that what Stable Diffusion and DALL·E produce are ‘art’ in the sense we understand that concept. However, neither is what GPT produces ‘language’. They are both simulators of outcomes based on stochastic approximations over a sufficiently large training set to be able to approximate the outcome of human activities we know as ‘art’ and ‘language’, respectively.↩︎"
+    "text": "Footnotes\n\n\nI don’t mean to insinuate that what Stable Diffusion and DALL·E produce are ‘art’ in the sense we understand that concept. However, neither is what GPT produces ‘language’. They are both simulators of outcomes based on stochastic approximations over a sufficiently large training set to be able to approximate the outcome of human activities we know as ‘art’ and ‘language’, respectively.↩︎\nFor a given value of “well after”. Time, in this discipline, moves with an unsettling alacrity.↩︎\nnot to be confused with the brain areas responsible for speech, which perplexingly are part, but not the whole, of the language faculty↩︎"
   },
   {
     "objectID": "posts/knowledge-dividend-of-llms/index.html",
