@@ -2,8 +2,8 @@
   {
     "listing": "/posts/index.html",
     "items": [
-      "/posts/skierg-marathon/index.html",
       "/posts/llms-language/index.html",
+      "/posts/skierg-marathon/index.html",
       "/posts/knowledge-dividend-of-llms/index.html",
       "/posts/asemantic-induction-of-hallucinations/index.html",
       "/posts/data-for-the-next-pandemic/index.html",
