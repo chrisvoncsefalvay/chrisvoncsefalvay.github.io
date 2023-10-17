@@ -5,7 +5,8 @@ description: |
 date: 2021-11-09
 categories: ["public health", "vaccines"]
 image: gettyimages-1666317109-1.jpg
-citation: true
+citation:
+  doi: "10.59350/s2xc9-mwp25"
 google-scholar: true
 ---
 
