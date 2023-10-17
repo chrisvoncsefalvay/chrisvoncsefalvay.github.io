@@ -4,7 +4,8 @@ description: |
     How to eat the wrong way, rest the wrong way (i.e. not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.  
 date: 2023-10-13
 categories: ["fitness", "SkiErg"]
-citation: true
+citation:
+    doi: "10.59350/68s7b-8c778"
 google-scholar: false
 ---
 

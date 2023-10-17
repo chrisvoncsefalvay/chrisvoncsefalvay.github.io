@@ -5,7 +5,8 @@ description: |
 date: 2021-11-27
 categories: ["COVID-19", "pharmacology"]
 image: paxlovid.png.webp
-citation: true
+citation:
+  doi: "10.59350/576dr-vbd49"
 google-scholar: true
 bibliography: references.bib
 ---

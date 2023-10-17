@@ -5,7 +5,8 @@ description: |
 date: 2023-03-07
 categories: ["ai", "games", "ABMs"]
 image: 7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp
-citation: true
+citation:
+  doi: "10.59350/5dp4z-d5e22"
 google-scholar: true
 bibliography: references.bib
 ---
