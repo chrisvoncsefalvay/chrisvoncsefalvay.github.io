@@ -10,7 +10,99 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Sun, 15 Oct 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 16 Oct 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Lyre of Hephaestus</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>I have probably spent more time looking at Poussin’s <em>Dance to the Music of Time</em> than any other work of art. Sneaking off to <a href="https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?service=direct/1/ResultListView/result.t1.collection_list.$TspTitleImageLink.link&amp;sp=10&amp;sp=Scollection&amp;sp=SfieldValue&amp;sp=0&amp;sp=0&amp;sp=2&amp;sp=SdetailList&amp;sp=0&amp;sp=Sdetail&amp;sp=0&amp;sp=F&amp;sp=T&amp;sp=2">the Wallace Collection</a> in London and just looking at the <em>Dance</em> was my comfort activity while living in London – a time that was not exactly devoid of its trials. It’s not, by any measure, <em>great</em> art, insofar as such judgments can be made with any objectivity. Like most French Baroque allegorical paintings, it’s considered somewhat ‘boring’. It neither has, nor claims to arrogate to itself, the fiery passion of a Van Gogh, the compositional genius of a Vermeer or the turbulence of a Turner. It’s not particularly well known, and indeed more know it for having lent its name to Anthony Powell’s dodecalogy (quite incidentally, another of my favourite works of art). In as far as there can be a sensible debate as to what is, and isn’t, ‘good’ or ‘great’ art, few would consider <em>Dance</em> to fall into that category. What nobody would argue, however, is that it <em>is</em> a piece of art.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8537.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Nicolas Poussin, <em>Dance to the Music of Time</em>.</figcaption>
+</figure>
+</div>
+<p>What, then, if I gave a somewhat clumsy description of the scene to Stable Diffusion, the currently fashionable model of generating images? Let’s try this:</p>
+<blockquote class="blockquote">
+<p>A painting, in the French Baroque style, of four female figures, allegories of the four seasons. They hold each other by the hand, dancing in a circle. Time, represented by an old man, plays a lyre. The scene is set in the early morning.</p>
+</blockquote>
+<p>Here’s what I got:</p>
+<div id="fig-poussin-stablediffusion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8536.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Stable Diffusion’s attempt at my description of the <em>Dance</em>.</figcaption>
+</figure>
+</div>
+<p>It’s not great by any stretch of the word. The faces, like in most diffusion models, are a mess. None of the figures get the allegory of time and seasons (of the year, but also of life, and of stations of an individual’s life). Certainly some more/better prompting could have gotten a slightly better result, but that’s really not the point.</p>
+<p>The point is that it’s not <em>art</em> not because it’s not ‘good enough’ to be art, but because it is fundamentally, qualitatively different.</p>
+<section id="one-art-please" class="level1">
+<h1>One art, please</h1>
+<p>At this point, we need to introduce a key concept to the argument to follow, namely that of a simulacrum. For the purposes of this argument, I shall define a simulacrum as follows: something that resembles the product of an intrinsically human activity but which can be obtained without that activity, including by non-human actors, such as non-human animals or, as it may be, artificial intelligences.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8534.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">One art, please!</figcaption>
+</figure>
+</div>
+<p>At the heart of the notion of a simulacrum is that the product and the process are different things. Art is not a product, but a process. I am, as I will explain later, not singling out art in some romantic exaltation of the artistic as quintessentially human, nor am I limiting art to what one might find in a museum. When I discuss art, I fully intend to include a toddler’s finger painting and even some absent-minded doodles on the margins of a less-than-gripping journal article.<sup>1</sup> There are other activities that may become the subject matter of a simulacrum, language being perhaps of foremost interest (on which, once again, see <em>infra</em>). And just as Zoidberg can’t buy ‘art’, merely a ‘work of art’ (‘work’ here having the meaning of ‘product’ – an ‘artwork’ or ‘work of art’ being not something with ‘art characteristics’ but rather the result of the activity we know as ‘art’), an artificial intelligence or a non-human animal cannot create ‘art’, either.</p>
+<p>At the heart of this is the difference between, of course, the process and the product. Artificial intelligence generally works according to a very simple inductive principle: given a bunch of examples (such as pairs of images and descriptions of images), learn the parameters of a function <img src="https://latex.codecogs.com/png.latex?f(d)%20=%20I"> so that for any arbitrary description <img src="https://latex.codecogs.com/png.latex?d">, an image <img src="https://latex.codecogs.com/png.latex?I"> is generated so as to minimise a loss function <img src="https://latex.codecogs.com/png.latex?%5Csum_%7Bi=0%7D%5EN%20J(d_i,%20I_i)"> over the <img src="https://latex.codecogs.com/png.latex?N">-sized training set. <img src="https://latex.codecogs.com/png.latex?f(d)"> may be quite complex indeed, and <img src="https://latex.codecogs.com/png.latex?J(d,%20I)"> may comprise various steps up to and including human input (reinforcement learning with human feedback – RLFH for short –, which is how most of the LLMs currently in vogue were trained, include this step quite prominently), but in the end, it’s all about learning <img src="https://latex.codecogs.com/png.latex?f">. For a neural network, for instance, this ‘learning’ takes place by way of an algorithm called backpropagation, which changes the values of weights and bias matrices that form part of <img src="https://latex.codecogs.com/png.latex?f"> so as to minimise <img src="https://latex.codecogs.com/png.latex?J">. Regardless of how <img src="https://latex.codecogs.com/png.latex?f"> is learned, what is at the heart of the entire process is learning a function that simulates the outcome. Stable Diffusion, for instance, is not concerned with simulating the <em>process</em> of creating art, it is concerned with simulating the <em>outcome</em> of creating art.</p>
+</section>
+<section id="human-processes" class="level1">
+<h1>Human processes</h1>
+<p>That matters, because not everything is about outcomes. In fact, as humans, we recognise that some of the most important things <em>aren’t</em>. Consider moral judgment, the individual and societal assignment of a moral character to human actions. Yes, outcomes do matter, but they aren’t the be-all end-all of moral judgment. We differentiate between murder, manslaughter, reckless homicide, excusable homicide and justifiable homicide, even though the end result is the same (i.e.&nbsp;someone is dead), because we acknowledge that different levels of moral agency, and different forms of its exercise, are at play in each of these. We do so because we recognise humans are more than mere outcome generating machines: how (and why) something came to be is often just as important, if not more so, than what the end result is.</p>
+<p>This is a uniquely human differentiation. In the same vein, then, there are things that only humans are capable of. A machine can certainly <em>take a life</em>, but it cannot <em>commit murder</em>, because the latter is defined not just by an outcome but also the mental state (<em>mens rea</em>) that led up to it. We think of Xerxes flogging the sea as the act of a megalomaniacal despot who has taken leave of his senses precisely because we recognise that punishing the sea, incapable of moral responsibility for its stormy waves washing away Xerxes’s pontoon bridges, as preposterous. Punishment requires, if not guilt, at least a subject <em>capable</em> of being guilty. Punishing the innocent is unjust, but punishing something incapable of being guilty or innocent or otherwise morally responsible is worse – it is <em>insane</em>.<sup>2</sup></p>
+<p>And just as moral guilt is uniquely human, so is creativity. This is not to suggest an exalted role for creativity – much as we tend to think of that term to have a positive meaning, for the purposes of this argument, creativity is any act of the mind that brings forth something. This comprises not just things like creating art, but also using language. There are many functions of language, ranging from the informative through the performative (what Searle called ‘speech acts’) to the phatic. However, humans communicating always do so with <em>some</em> intent. That’s different from machines using words. A machine uses words, and maybe uses language, but it does not ‘speak’, for that requires an intent, something no machine, howsoever sophisticated, can create. Like art, speech is not just about <em>what</em>, but the <em>why</em>, of an action. There are many reasons my neighbour greets me with “hey, how’re you doing?” – maybe it’s genuine interest in how I am doing, maybe it is as a kind of social bond-strengthening (phatic communication), but it is backed by some sort of intent that goes beyond just wanting to produce words.</p>
+</section>
+<section id="the-tune-without-the-music" class="level1">
+<h1>The tune without the music</h1>
+<p>A simulacrum, then, is what’s left when the uniquely human <em>process</em> is removed, and only the outcome remains, obtained through a different process (e.g.&nbsp;inference from a model generated by way of minimising the loss function over a training set). It is the tune without the music. A simulacrum doesn’t necessarily have to be ‘worse’ than the real deal – quite likely, Stable Diffusion can produce a better drawing than I could, and GPT-4 might well write a better poem than my hamfisted attempts at poetry. However, neither of those <em>are</em> the real thing. Stable Diffusion will be able to do better drawings than I do, but it won’t ever be able to do better <em>art</em>, because it’ll never be able to do art.</p>
+<p>In that sense, it’s the opposite of ‘going through the motions’: a simulacrum is an often indistinguishable in its end product from the ‘real thing’, but arrives there by a different route. This is, indeed, why it is so deceptively similar to the ‘real thing’, and what gives rise to perhaps its darker side. In a recent interview on one of my favourite podcasts, <a href="https://www.youtube.com/c/MachineLearningStreetTalk">Machine Learning Street Talk</a>, Daniel Dennett referred to the simulacrum of human communicational interaction as “counterfeit people”. I disagree with some of Dennett’s position, but this is worth watching in its entirety:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/axJtywd9Tbo?start=725" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>I think Dennett is wrong on a few points,<sup>3</sup> but the language of ‘counterfeits’ gets some of this point across quite well. A counterfeit currency isn’t really all <em>that</em> different from an authentic bank note. What is different is the intent by which it is created. The counterfeit lacks the moral intent that it be honoured in return (that’s why people forge currency – there would be little point in counterfeiting bank notes if one actually intended to honour them!).<sup>4</sup></p>
+</section>
+<section id="the-heart-of-the-matter" class="level1">
+<h1>The heart of the matter</h1>
+<p>In the end, outcomes are <em>not</em> all that make us who we are. The poet, the artist, the murderer and the thief – they are who and what they are not solely because of outcomes, but because of what led up to those outcomes. And that’s ultimately the most human thing any of us will ever get to experience: to be someone not because of an outcome that a machine or an algorithm could feasibly mimic, but because of the quintessentially human process of decisions, good or bad, actions, passion, foibles. The things that make us who we are are in turn a <em>product</em> of who we are.</p>
+<p>And that’s what gives meaning to those outcomes, meaning that a machine-generated limerick could never aspire to – not because it is not ‘good enough’, but because it is just a qualitatively different thing. It is, to use Pauli’s turn of phrase, not that the Stable Diffusion-generated painting in Figure&nbsp;1 is ‘not right’ (or aesthetically pleasing, in this case) – it’s that it’s ‘not even wrong’. It lacks the aptitude of being good or bad art, no matter how good or bad (likely the latter) it would be if it didn’t. It could, in theory, be good enough to put Poussin to shame, and it would still be no closer to being art. It could be Turner Prize-winning work,<sup>5</sup> and yet be put to shame by a toddler’s finger-painting.</p>
+<p>A world in which the poet and the machine are on equal footing is a world that, for all intents and purposes, does not have poets anymore. It is a world in which outcomes determine everything, and that makes it a world that is not worth inhabiting: for a world of outcomes alone is a world in which our choices, our actions, our most irreplicably human strengths and weaknesses alike play no role.</p>
+<p>But that is not the world we inhabit – thankfully. We – still? – live in a world in which the way we arrive at something, be it a poem or a painting or a dead body, matters. And as long as that is so, the simulacra of human action will remain inhabiting a different world of their own. They may reach a kind of technical verisimilitude, but not a moral verisimilitude.</p>
+<p>And <em>that</em> is what makes all the difference.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Because who of us hasn’t been bored enough by a dull paper to start doodling?↩︎</p></li>
+<li id="fn2"><p>Not that otherwise quite rationalistic societies did not engage in trials of lifeless things. <a href="https://scholarship.law.upenn.edu/cgi/viewcontent.cgi?referer=&amp;httpsredir=1&amp;article=7589&amp;context=penn_law_review">Walter Woodburn Hyde wrote a wonderful paper on this</a>.↩︎</p></li>
+<li id="fn3"><p>Importantly, I think he’s falling victim to the trap he so clearly identifies. The lack of moral agency of AI, which would make these pretend-humans something other than ‘real’ is exactly why the semantics of ‘counterfeiting’, which involves deception, an act of quintessential moral agency, is altogether inappropriate. But that’s for another day.↩︎</p></li>
+<li id="fn4"><p>Arguably, all modern fiat currency is at least a little fake, but that is <em>also</em> another argument for another day.↩︎</p></li>
+<li id="fn5"><p>Let’s, for the time being, entertain the notion that that still means <em>something</em>.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
+  title = {The {Lyre} of {Hephaestus}},
+  date = {2023-10-16},
+  url = {https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“The Lyre of Hephaestus.”</span>
+October 16, 2023. <a href="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus">https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus</a>.
+</div></div></section></div> ]]></description>
+  <category>ai</category>
+  <category>art</category>
+  <category>philosophy</category>
+  <guid>https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/index.html</guid>
+  <pubDate>Mon, 16 Oct 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8534.jpeg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Beyond Broca</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
