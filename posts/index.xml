@@ -289,17 +289,18 @@ Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> <a href="https://doi
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {How to Do a {SkiErg} Marathon Entirely the Wrong Way (but
     Still Finish)},
   date = {2023-10-13},
   url = {https://chrisvoncsefalvay.com/posts/skierg-marathon},
+  doi = {10.59350/68s7b-8c778},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“How to Do a SkiErg Marathon Entirely
-the Wrong Way (but Still Finish).”</span> October 13, 2023. <a href="https://chrisvoncsefalvay.com/posts/skierg-marathon">https://chrisvoncsefalvay.com/posts/skierg-marathon</a>.
+the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68s7b-8c778">https://doi.org/10.59350/68s7b-8c778</a>.
 </div></div></section></div> ]]></description>
   <category>fitness</category>
   <category>SkiErg</category>
@@ -482,16 +483,17 @@ Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: Wi
 <ol>
 <li id="fn1"><p>Specifically, by the factor <img src="https://latex.codecogs.com/png.latex?%5Cgamma%5Et">, where <img src="https://latex.codecogs.com/png.latex?%5Cgamma"> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The Hardest {AI} Problem You’ve Never Heard Of.},
   date = {2023-03-07},
   url = {https://chrisvoncsefalvay.com/posts/dwarf-fortress},
+  doi = {10.59350/5dp4z-d5e22},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“The Hardest AI Problem You’ve Never
-Heard Of.”</span> March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/dwarf-fortress">https://chrisvoncsefalvay.com/posts/dwarf-fortress</a>.
+Heard Of.”</span> <a href="https://doi.org/10.59350/5dp4z-d5e22">https://doi.org/10.59350/5dp4z-d5e22</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>games</category>
@@ -549,16 +551,16 @@ Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013
 <div id="ref-urbina2022dual" class="csl-entry">
 Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>‘Dual Use of Artificial-Intelligence-Powered Drug Discovery’</span>. <em>Nature Machine Intelligence</em> 4 (3): 189–91.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
   author = {Chris von Csefalvay},
   title = {A Different Shade of Grey},
   date = {2022-04-13},
   url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey},
+  doi = {10.59350/bwee1-hee31},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span>
-April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey">https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey</a>.
+Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span> <a href="https://doi.org/10.59350/bwee1-hee31">https://doi.org/10.59350/bwee1-hee31</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>computational chemistry</category>
@@ -1156,16 +1158,17 @@ Popp, Maria, Miriam Stegemann, Maria-Inti Metzendorf, Susan Gould, Peter Kranke,
 <div id="ref-zhang2021structure" class="csl-entry">
 Zhang, Sheng, Maj Krumberger, Michael A Morris, Chelsea Marie T Parrocha, Adam G Kreutzer, and James S Nowick. 2021. <span>‘Structure-Based Drug Design of an Inhibitor of the SARS-CoV-2 (COVID-19) Main Protease Using Free Software: A Tutorial for Students and Scientists’</span>. <em>European Journal of Medicinal Chemistry</em> 218: 113390.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2021,
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
   author = {Chris von Csefalvay},
   title = {Peace, Love, {Paxlovid} and “{Pfizermectin}”},
   date = {2021-11-27},
   url = {https://chrisvoncsefalvay.com/posts/paxlovid},
+  doi = {10.59350/576dr-vbd49},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2021. <span>“Peace, Love, Paxlovid and
-<span>‘Pfizermectin’</span>.”</span> November 27, 2021. <a href="https://chrisvoncsefalvay.com/posts/paxlovid">https://chrisvoncsefalvay.com/posts/paxlovid</a>.
+<span>‘Pfizermectin’</span>.”</span> <a href="https://doi.org/10.59350/576dr-vbd49">https://doi.org/10.59350/576dr-vbd49</a>.
 </div></div></section></div> ]]></description>
   <category>COVID-19</category>
   <category>pharmacology</category>
@@ -1213,16 +1216,17 @@ Chris von Csefalvay. 2021. <span>“Peace, Love, Paxlovid and
 <li id="fn1"><p>Sort of. Strictly speaking, this is not entirely true: mRNA vaccines actually have three mRNA bases — C, G and A — and a fourth base, m1Ψ. This is a molecule called N1-methylpseudouridine, and it replaces U in the mRNA. It is ‘read’ and interpreted as U, but is vastly less immunogenic.↩︎</p></li>
 <li id="fn2"><p>More specifically: it is translated into pre-mRNA, which is then spliced to get mRNA.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2021,
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
   author = {Chris von Csefalvay},
   title = {Why the {COVID-19} Vaccines Are Not Gene Therapy},
   date = {2021-11-09},
   url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy},
+  doi = {10.59350/s2xc9-mwp25},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2021. <span>“Why the COVID-19 Vaccines Are Not Gene
-Therapy.”</span> November 9, 2021. <a href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy">https://chrisvoncsefalvay.com/posts/mrna-gene-therapy</a>.
+Therapy.”</span> <a href="https://doi.org/10.59350/s2xc9-mwp25">https://doi.org/10.59350/s2xc9-mwp25</a>.
 </div></div></section></div> ]]></description>
   <category>public health</category>
   <category>vaccines</category>
@@ -1277,16 +1281,17 @@ Therapy.”</span> November 9, 2021. <a href="https://chrisvoncsefalvay.com/post
 <li id="fn2"><p>The law is outright weird, in that in most countries, paying ransoms is not illegal per se, but giving money to certain entities is illegal regardless of the purpose of the money. In that sense the law does not distinguish between paying a ransom to, say, Boko Haram, who happen to be on the Treasury’s shitlist, or giving them the same amount of money due to an overwhelming conviction that boko is very haram indeed – it’s illegal either way. This makes paying a ransom needlessly complicated, especially as in my modest experience with kidnappers, they rarely discuss their organisational affiliations at length. With international jihad in particular being run on the franchise model in this day and age, it may well turn out that Joe Kidnapper, who held himself out as a common criminal, was in fact a full franchisee of al-Qa’ida, and suddenly the FBI is going through your underwear drawer.↩︎</p></li>
 <li id="fn3"><p>Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2021,
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
   author = {Chris von Csefalvay},
   title = {Ransomware Attacks as n-Person Prisoner’s Dilemmas},
   date = {2021-05-14},
   url = {https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma},
+  doi = {10.59350/r74zv-gsd67},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2021. <span>“Ransomware Attacks as n-Person
-Prisoner’s Dilemmas.”</span> May 14, 2021. <a href="https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma">https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma</a>.
+Prisoner’s Dilemmas.”</span> <a href="https://doi.org/10.59350/r74zv-gsd67">https://doi.org/10.59350/r74zv-gsd67</a>.
 </div></div></section></div> ]]></description>
   <category>cybersecurity</category>
   <category>econometrics</category>
