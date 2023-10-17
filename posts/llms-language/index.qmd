@@ -4,7 +4,8 @@ description: |
   What if we've got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?
 date: 2023-10-15
 categories: ["ai", "llms", "philosophy", "language"]
-citation: true
+citation:
+    doi: "10.59350/vynvf-0k137"
 bibliography: bibliography.bib
 google-scholar: true
 ---
