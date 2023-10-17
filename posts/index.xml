@@ -205,16 +205,16 @@ Zhong, Shifa, and Xiaohong Guan. 2023. <span>‘Developing Quantitative Structur
 <li id="fn2"><p>For a given value of “well after”. Time, in this discipline, moves with an unsettling alacrity.↩︎</p></li>
 <li id="fn3"><p>not to be confused with the brain areas responsible for speech, which perplexingly are part, but not the whole, of the language faculty↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Beyond {Broca}},
   date = {2023-10-15},
   url = {https://chrisvoncsefalvay.com/posts/llms-language},
+  doi = {10.59350/vynvf-0k137},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> October 15,
-2023. <a href="https://chrisvoncsefalvay.com/posts/llms-language">https://chrisvoncsefalvay.com/posts/llms-language</a>.
+Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> <a href="https://doi.org/10.59350/vynvf-0k137">https://doi.org/10.59350/vynvf-0k137</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>llms</category>
