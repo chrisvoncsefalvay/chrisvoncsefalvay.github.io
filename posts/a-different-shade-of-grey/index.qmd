@@ -5,7 +5,8 @@ description: |
 date: 2022-04-13
 categories: ["ai", "computational chemistry", "ethics"]
 image: 155mmMustardGasShells-1200x900.jpg
-citation: true
+citation:
+  doi: "10.59350/bwee1-hee31"
 google-scholar: true
 bibliography: references.bib
 ---
