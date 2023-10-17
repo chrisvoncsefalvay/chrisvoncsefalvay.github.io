@@ -5,7 +5,8 @@ description: |
 date: 2021-05-14
 categories: ["cybersecurity", "econometrics", "game theory"]
 image: 106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg
-citation: true
+citation:
+  doi: "10.59350/r74zv-gsd67"
 google-scholar: true
 ---
 
