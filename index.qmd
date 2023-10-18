@@ -29,6 +29,7 @@ about:
           url: https://www.webofscience.com/wos/author/record/IZD-6900-2023
         - text: "{{< ai osf >}} OSF"
           url: https://osf.io/awhgj
+image: img/IMG_5986.jpeg
 comments: false
 ---
 
