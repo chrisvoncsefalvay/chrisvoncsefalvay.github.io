@@ -99,5 +99,5 @@ def write_into_file(entries_by_year: dict, destination_path: str, destination_di
 
 
 if __name__ == "__main__":
-    entries = read_bibtex_file("../papers/bibliography.bib")
-    write_into_file(entries, "../papers/index.qmd", "references")
+    entries = read_bibtex_file("papers/bibliography.bib")
+    write_into_file(entries, "papers/index.qmd", "references")
