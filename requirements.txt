@@ -4,4 +4,4 @@ matplotlib
 seaborn
 pandas
 scikit-learn
-pybtex
+bibtexparser
