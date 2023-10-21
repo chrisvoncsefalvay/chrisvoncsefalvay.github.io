@@ -1,5 +1,7 @@
 project:
   type: website
+  pre-render:
+    - scripts/pre_create_papers_file.py
 resources:
   - CNAME
 
