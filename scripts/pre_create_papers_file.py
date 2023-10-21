@@ -78,6 +78,14 @@ def generate_list_by_year(entries_by_year: dict) -> str:
         md += f"# {year}\n\n"
         for entry in entries:
             md += f"- {render_as_nlm(entry)}\n\n"
+
+    # determine number of years and entries
+    years = len(entries_by_year)
+    total_entries = 0
+    for year, entries in entries_by_year.items():
+        total_entries += len(entries)
+
+    print("Processed " + str(total_entries) + " entries from " + str(years) + " years.")
     return md
 
 
@@ -99,5 +107,13 @@ def write_into_file(entries_by_year: dict, destination_path: str, destination_di
 
 
 if __name__ == "__main__":
-    entries = read_bibtex_file("papers/bibliography.bib")
-    write_into_file(entries, "papers/index.qmd", "references")
+    OUTPUT_FILENAME: str = "papers/index.qmd"
+    INPUT_FILENAME: str = "papers/bibliography.bib"
+
+    print(f"Rendering bibliography...")
+    print("Reading BibTeX file from " + INPUT_FILENAME)
+    entries = read_bibtex_file("../papers/bibliography.bib")
+
+    print("Writing bibliography to " + OUTPUT_FILENAME)
+    write_into_file(entries, "../papers/index.qmd", "references")
+    print("Done.")
