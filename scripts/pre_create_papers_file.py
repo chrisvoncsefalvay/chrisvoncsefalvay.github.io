@@ -17,13 +17,18 @@ def read_bibtex_file(filename) -> dict:
     return entries_by_year
 
 
-def render_article_as_nlm(entry: dict) -> str:
-    """Renders an article BibTeX entry dict in the NLM format."""
-    authors = entry["author"].split(" and ")
+def process_authors_to_string_with_highlighting(authors: str, highlight_name: str = "csefalvay") -> str:
+    authors = authors.split(" and ")
     authors = [author.split(", ") for author in authors]
     authors = [f"{author[0]} {author[1][0]}" for author in authors]
-    authors = [f"**{author}**" if "csefalvay" in author.lower() else author for author in authors]
+    authors = [f"**{author}**" if highlight_name.lower() in author.lower() else author for author in authors]
     authors = ", ".join(authors)
+    return authors
+
+
+def render_article_as_nlm(entry: dict) -> str:
+    """Renders an article BibTeX entry dict in the NLM format."""
+    authors = process_authors_to_string_with_highlighting(entry["author"])
 
     title = entry["title"]
     journal = entry["journal"]
@@ -55,12 +60,25 @@ def render_article_as_nlm(entry: dict) -> str:
 
 def render_book_as_nlm(entry: dict) -> str:
     """Renders a book BibTeX entry dict in the NLM format."""
-    authors = entry["author"].split(" and ")
+    authors = process_authors_to_string_with_highlighting(entry["author"])
+
     title = entry["title"]
     publisher = entry["publisher"]
+    location = entry.get("address")
     year = entry["year"]
+    url = entry.get("url")
 
-    return f"{str(', '.join(authors))}. {title}. {publisher}; {year}."
+    ayt = f"{authors} ({year}). {title}."
+
+    if location:
+        ayt += f" {location}: {publisher}."
+    else:
+        ayt += f" {publisher}."
+
+    if url:
+        ayt += f" [{url}]({url})."
+
+    return ayt
 
 def render_as_nlm(entry: dict) -> str:
     """Renders a BibTeX entry dict in the NLM format."""
@@ -112,8 +130,8 @@ if __name__ == "__main__":
 
     print(f"Rendering bibliography...")
     print("Reading BibTeX file from " + INPUT_FILENAME)
-    entries = read_bibtex_file("../papers/bibliography.bib")
+    entries = read_bibtex_file(INPUT_FILENAME)
 
     print("Writing bibliography to " + OUTPUT_FILENAME)
-    write_into_file(entries, "../papers/index.qmd", "references")
+    write_into_file(entries, OUTPUT_FILENAME, "references")
     print("Done.")
