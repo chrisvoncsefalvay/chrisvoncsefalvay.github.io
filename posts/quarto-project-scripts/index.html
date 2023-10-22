@@ -296,10 +296,10 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
-    A[actions/checkout@v4] --&gt; B[quarto-dev/quarto-actions/setup@v2]
-    B --&gt; C[actions/setup-python@v4]
+    A["actions/checkout@v4"] --&gt; B["quarto-dev/quarto-actions/setup@v2"]
+    B --&gt; C["actions/setup-python@v4"]
     C --&gt; D["`pip install -r requirements.txt`"]
-    D --&gt; E[quarto-dev/quarto-actions/publish@v2]
+    D --&gt; E["quarto-dev/quarto-actions/publish@v2"]
     style D stroke-width:8px;
     style C stroke-width:8px;
 </pre>
