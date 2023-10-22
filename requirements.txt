@@ -5,3 +5,5 @@ seaborn
 pandas
 scikit-learn
 bibtexparser
+beautifulsoup4
+requests
