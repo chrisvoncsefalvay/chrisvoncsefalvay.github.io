@@ -38,6 +38,7 @@ format:
     toc_float: true
     toc_smooth_scroll: true
     toc_highlight: true
+    fig-align: center
 
 
 
