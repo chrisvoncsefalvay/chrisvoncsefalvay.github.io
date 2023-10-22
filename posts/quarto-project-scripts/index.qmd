@@ -16,6 +16,8 @@ What Quarto also does, however, is something super awesome: project scripts!
 A project script in Quarto is, basically, [a piece of Python, Lua, R or Typescript code that is executed at some point during rendering](https://quarto.org/docs/projects/scripts.html). This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file -- which is among others what I'm using it for. Essentially any programmatic function can be implemented in a project script.
 
 ```{mermaid}
+%%| fig-cap: Rendering pipeline in Quarto with pre- and post-render scripts.
+%%| fig-align: center
 flowchart TD
     A[Rendering pipeline start] --> B(Pre-render scripts)
     B --> C(Page rendering)
@@ -44,6 +46,8 @@ On my website, I use Quarto project scripts to maintain a [list of my papers](pa
 You can see the full project script [here](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py), but here's the gist of it:
 
 ```{mermaid}
+%%| fig-cap: My super clumsy pre-render script to build my bibliography.
+%%| fig-align: center
 flowchart TD
     A[BibTeX file] -->|"`load_bibtex_file()`"| B[BibTeX database object]
     B --> |"`render_as_nlm()`"| C{book or article?}
@@ -68,6 +72,8 @@ The second half of what makes project scripts awesome is that they integrate wit
 There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:
 
 ```{mermaid}
+%%| fig-cap: Integrating the pre-render script into the Github Actions CI/CD framework. The parts that need to be integrated into the publishing workflow are highlighted with bold outlines.
+%%| fig-align: center
 flowchart TD
     A["actions/checkout@v4"] --> B["quarto-dev/quarto-actions/setup@v2"]
     B --> C["actions/setup-python@v4"]
