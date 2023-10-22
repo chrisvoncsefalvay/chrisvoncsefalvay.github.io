@@ -69,10 +69,10 @@ There are some tricks to keep in mind here. Most importantly, because this requi
 
 ```{mermaid}
 flowchart TD
-    A[actions/checkout@v4] --> B[quarto-dev/quarto-actions/setup@v2]
-    B --> C[actions/setup-python@v4]
+    A["actions/checkout@v4"] --> B["quarto-dev/quarto-actions/setup@v2"]
+    B --> C["actions/setup-python@v4"]
     C --> D["`pip install -r requirements.txt`"]
-    D --> E[quarto-dev/quarto-actions/publish@v2]
+    D --> E["quarto-dev/quarto-actions/publish@v2"]
     style D stroke-width:8px;
     style C stroke-width:8px;
 ```
