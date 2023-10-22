@@ -237,7 +237,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <section id="project-whats" class="level1">
 <h1>Project whats?</h1>
 <p>A project script in Quarto is, basically, <a href="https://quarto.org/docs/projects/scripts.html">a piece of Python, Lua, R or Typescript code that is executed at some point during rendering</a>. This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file – which is among others what I’m using it for. Essentially any programmatic function can be implemented in a project script.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <div>
@@ -248,6 +248,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     D --&gt; E[Rendering pipeline end]
 </pre>
 </div>
+<p>Rendering pipeline in Quarto with pre- and post-render scripts.</p>
 </div>
 </div>
 </div>
@@ -264,7 +265,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <h1>A (poorly) worked example: generating a publication list</h1>
 <p>On my website, I use Quarto project scripts to maintain a <a href="papers">list of my papers</a>. This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>You can see the full project script <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py">here</a>, but here’s the gist of it:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <div>
@@ -281,6 +282,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     J --&gt; |"`write_into_file()`"| K["`papers/index.qmd`"]
 </pre>
 </div>
+<p>My super clumsy pre-render script to build my bibliography.</p>
 </div>
 </div>
 </div>
@@ -291,7 +293,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <h1>Wait, automagically updated?</h1>
 <p>The second half of what makes project scripts awesome is that they integrate with the rendering process. If the rendering process in turn integrates with some CI that watches for changes, then you can have a website that is automatically updated whenever you push a change to the repository. This is what I do with my website: I have a GitHub action that watches for changes to the <code>main</code> branch, and if it detects a change, it runs the rendering process and pushes the result to the <code>gh-pages</code> branch. This means that if I were to change the BibTeX file, it would trigger a re-render, and the list of publications would be automatically updated.</p>
 <p>There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <div>
@@ -304,6 +306,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     style C stroke-width:8px;
 </pre>
 </div>
+<p>Integrating the pre-render script into the Github Actions CI/CD framework. The parts that need to be integrated into the publishing workflow are highlighted with bold outlines.</p>
 </div>
 </div>
 </div>
