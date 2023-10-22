@@ -2,6 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/quarto-project-scripts/index.html",
       "/posts/lyre-of-hephaestus/index.html",
       "/posts/llms-language/index.html",
       "/posts/skierg-marathon/index.html",
