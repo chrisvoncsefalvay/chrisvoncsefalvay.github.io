@@ -51,16 +51,22 @@ You can see the full project script [here](https://github.com/chrisvoncsefalvay/
 %%| fig-cap: My super clumsy pre-render script to build my bibliography.
 %%| fig-align: center
 flowchart TD
-    A[BibTeX file] -->|"`load_bibtex_file()`"| B[BibTeX database object]
-    B --> |"`render_as_nlm()`"| C{book or article?}
+    A[BibTeX file] --> a("load_bibtex_file()") 
+    a --> B[BibTeX database object]
+    B --> b("render_as_nlm()") 
+    b --> C{book or article?}
     C --> D[article]
     C --> E[book]
-    D --> |"`render_article_as_nlm()`"| F[article entry]
-    E --> |"`render_book_as_nlm()`"| G[book entry]
+    D --> d("render_article_as_nlm()") 
+    d --> F[article entry]
+    E --> e("render_book_as_nlm()") 
+    e --> G[book entry]
     F --> H[all entries]
     G --> H
-    H --> |"`generate_list_by_year()`"| J[final set of entries]
-    J --> |"`write_into_file()`"| K["`papers/index.qmd`"]
+    H --> h("generate_list_by_year()") 
+    h --> J[final set of entries]
+    J --> j("write_into_file()") 
+    j --> K["papers/index.qmd"]
 ```
 
 We load a BibTeX file (`load_bibtex_file()`), parse it, use a function to determine whether we're rendering a book or an article entry (I don' have any other types of publications, but if I did, I'd add them here), and dispatch rendering to the appropriate function (`render_article_as_nlm()` for articles, `render_book_as_nlm()` for books). We sort the entries into a Markdown format with years separated by level 1 headings (`generate_list_by_year()`) and finally write it into the `papers/index.qmd` file (`write_into_file()`). There's some minor magic going on behind the scenes, such as capturing my name and setting it in bold (which is a bit of a convention in academic lists of publications), but that's the gist of it.
@@ -80,7 +86,7 @@ There are some tricks to keep in mind here. Most importantly, because this requi
 flowchart TD
     A["actions/checkout@v4"] --> B["quarto-dev/quarto-actions/setup@v2"]
     B --> C["actions/setup-python@v4"]
-    C --> D["`pip install -r requirements.txt`"]
+    C --> D("pip install -r requirements.txt")
     D --> E["quarto-dev/quarto-actions/publish@v2"]
     style D stroke-width:8px;
     style C stroke-width:8px;
