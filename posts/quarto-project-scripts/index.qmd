@@ -87,6 +87,8 @@ In particular, I had to explicitly specify the Python version and install the re
 
 One thing to keep in mind when writing your script is the context from which it will be executed. In particular, if you're using a CI/CD pipeline, you will need to make sure that the script can find the files it needs. In my case, I had to explicitly specify the path to the BibTeX file, as well as the path to the output file. This is because the script is executed from the root of the repository, but the BibTeX file is in the `papers` directory, and the output file is in the `papers` directory, too. Testing locally for deployment in CI/CD is notoriously hellish, but with a little bit of elbow grease,^[And by 'a little bit', I mean absolute tons of it.] you can get it to work.
 
+One caveat: rendering with pre- and post-render project scripts may be relatively expensive in terms of time. My silly SkiErg world record script adds a good 20-25 seconds of processing time to each rendering run -- not a lot, but it does stack up eventually. The [documentation](https://quarto.org/docs/projects/scripts.html) helpfully discloses that Quarto provides an environment variable, `QUARTO_PROJECT_RENDER_ALL`, which is set to `1` if it's a full render. It may make sense to do a more manual caching here.
+
 
 # Things you can do with project scripts
 
