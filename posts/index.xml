@@ -26,16 +26,18 @@
 <p>A project script in Quarto is, basically, <a href="https://quarto.org/docs/projects/scripts.html">a piece of Python, Lua, R or Typescript code that is executed at some point during rendering</a>. This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file – which is among others what I’m using it for. Essentially any programmatic function can be implemented in a project script.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
+<div id="fig-pipeline" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 <div>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
+<pre class="mermaid mermaid-js" data-label="fig-pipeline">flowchart TD
     A[Rendering pipeline start] --&gt; B(Pre-render scripts)
     B --&gt; C(Page rendering)
     C --&gt; D(Post-render scripts)
     D --&gt; E[Rendering pipeline end]
 </pre>
 </div>
-<p>Rendering pipeline in Quarto with pre- and post-render scripts.</p>
+<figcaption class="figure-caption">Figure&nbsp;1: Rendering pipeline in Quarto with pre- and post-render scripts.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -84,9 +86,10 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
 <p>You can see the full project script <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py">here</a>, but here’s the gist of it:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
+<div id="fig-bibliography" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 <div>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
+<pre class="mermaid mermaid-js" data-label="fig-bibliography">flowchart TD
     A[BibTeX file] --&gt;|"`load_bibtex_file()`"| B[BibTeX database object]
     B --&gt; |"`render_as_nlm()`"| C{book or article?}
     C --&gt; D[article]
@@ -99,7 +102,8 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
     J --&gt; |"`write_into_file()`"| K["`papers/index.qmd`"]
 </pre>
 </div>
-<p>My super clumsy pre-render script to build my bibliography.</p>
+<figcaption class="figure-caption">Figure&nbsp;2: My super clumsy pre-render script to build my bibliography.</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -112,9 +116,10 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
 <p>There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
+<div id="fig-ci-cd" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
 <div>
-<div>
-<pre class="mermaid mermaid-js">flowchart TD
+<pre class="mermaid mermaid-js" data-label="fig-ci-cd">flowchart TD
     A["actions/checkout@v4"] --&gt; B["quarto-dev/quarto-actions/setup@v2"]
     B --&gt; C["actions/setup-python@v4"]
     C --&gt; D["`pip install -r requirements.txt`"]
@@ -123,7 +128,8 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
     style C stroke-width:8px;
 </pre>
 </div>
-<p>Integrating the pre-render script into the Github Actions CI/CD framework. The parts that need to be integrated into the publishing workflow are highlighted with bold outlines.</p>
+<figcaption class="figure-caption">Figure&nbsp;3: Integrating the pre-render script into the Github Actions CI/CD framework. The parts that need to be integrated into the publishing workflow are highlighted with bold outlines.</figcaption>
+</figure>
 </div>
 </div>
 </div>
