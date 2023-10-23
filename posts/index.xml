@@ -90,16 +90,22 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
 <figure class="figure">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-bibliography">flowchart TD
-    A[BibTeX file] --&gt;|"`load_bibtex_file()`"| B[BibTeX database object]
-    B --&gt; |"`render_as_nlm()`"| C{book or article?}
+    A[BibTeX file] --&gt; a("load_bibtex_file()") 
+    a --&gt; B[BibTeX database object]
+    B --&gt; b("render_as_nlm()") 
+    b --&gt; C{book or article?}
     C --&gt; D[article]
     C --&gt; E[book]
-    D --&gt; |"`render_article_as_nlm()`"| F[article entry]
-    E --&gt; |"`render_book_as_nlm()`"| G[book entry]
+    D --&gt; d("render_article_as_nlm()") 
+    d --&gt; F[article entry]
+    E --&gt; e("render_book_as_nlm()") 
+    e --&gt; G[book entry]
     F --&gt; H[all entries]
     G --&gt; H
-    H --&gt; |"`generate_list_by_year()`"| J[final set of entries]
-    J --&gt; |"`write_into_file()`"| K["`papers/index.qmd`"]
+    H --&gt; h("generate_list_by_year()") 
+    h --&gt; J[final set of entries]
+    J --&gt; j("write_into_file()") 
+    j --&gt; K["papers/index.qmd"]
 </pre>
 </div>
 <figcaption class="figure-caption">Figure&nbsp;2: My super clumsy pre-render script to build my bibliography.</figcaption>
@@ -122,7 +128,7 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
 <pre class="mermaid mermaid-js" data-label="fig-ci-cd">flowchart TD
     A["actions/checkout@v4"] --&gt; B["quarto-dev/quarto-actions/setup@v2"]
     B --&gt; C["actions/setup-python@v4"]
-    C --&gt; D["`pip install -r requirements.txt`"]
+    C --&gt; D("pip install -r requirements.txt")
     D --&gt; E["quarto-dev/quarto-actions/publish@v2"]
     style D stroke-width:8px;
     style C stroke-width:8px;
