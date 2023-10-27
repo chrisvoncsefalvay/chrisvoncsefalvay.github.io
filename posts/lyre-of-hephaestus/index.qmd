@@ -5,7 +5,8 @@ description: |
 date: 2023-10-16
 categories: ["ai", "art", "philosophy"]
 image: IMG_8534.jpeg
-citation: true
+citation:
+  doi: "10.59350/pd0q6-r5n60"
 google-scholar: true
 ---
 
