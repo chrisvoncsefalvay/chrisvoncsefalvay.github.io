@@ -4,6 +4,8 @@ description: |
   Project scripts help you integrate just about every possible hare-brained scheme into your Quarto rendering pipeline. Go on, build that page from that YAML file. You know you want to.
 date: 2023-10-22
 categories: ["quarto", "python"]
+citation:
+  doi: "10.59350/b4qyq-70w75"
 google-scholar: true
 ---
 
