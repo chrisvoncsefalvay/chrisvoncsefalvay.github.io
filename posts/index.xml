@@ -170,11 +170,12 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
   title = {Quarto Project Scripts Are Awesomeness},
   date = {2023-10-22},
   url = {https://chrisvoncsefalvay.com/posts/quarto-project-scripts},
+  doi = {10.59350/b4qyq-70w75},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“Quarto Project Scripts Are
-Awesomeness.”</span> <a href="https://chrisvoncsefalvay.com/posts/quarto-project-scripts">https://chrisvoncsefalvay.com/posts/quarto-project-scripts</a>.
+Awesomeness.”</span> <a href="https://doi.org/10.59350/b4qyq-70w75">https://doi.org/10.59350/b4qyq-70w75</a>.
 </div></div></section></div> ]]></description>
   <category>quarto</category>
   <category>python</category>
