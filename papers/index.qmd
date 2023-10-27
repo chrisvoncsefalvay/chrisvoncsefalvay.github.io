@@ -15,7 +15,3 @@ Foldi, T., **von Csefalvay, C.**, Pigler, P., Wash, W., Zempleni, B., Rodrigues,
 **von Csefalvay, C.** (2019). 2019 Samoa measles outbreak data set. 06 December 2019. Zenodo. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3566012.svg)](https://doi.org/10.5281/zenodo.3566012)
 
 **von Csefalvay, C.**. (2019). CODRAS: COnsolidated Diabetic Retinopathy Assessment Set. Zenodo. [![DOI](https://doi.org/10.5281/zenodo.2573205)]
-
-
-
-Földi Tamás, piglerp, Chris von Csefalvay, Peter Pigler, williamwash, Atsidir, william-wash, zemplenib, João Rodrigues, Mór Kapronczay, Szilárd Huber, grglyb, & suommynona. (2023). starschema/COVID-19-data: Autorelease 2023-03-27 (auto-2023-03-27). Zenodo. https://doi.org/10.5281/zenodo.7774003
