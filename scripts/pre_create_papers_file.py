@@ -44,7 +44,7 @@ def render_article_as_nlm(entry: dict) -> str:
     elif "medRxiv" in journal:
         res = f"{authors} ({year}). {title}. _medRxiv_."
         if doi:
-            return res + f". doi:[{doi}](https://doi.org/{doi})."
+            return res + f" doi:[{doi}](https://doi.org/{doi})."
         else:
             return res
     else:
