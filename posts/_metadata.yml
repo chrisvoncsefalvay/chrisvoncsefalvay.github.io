@@ -15,4 +15,5 @@ format:
     lang: en-GB
 citation:
   type: article
-  
+reference-location: margin
+citation-location: margin

@@ -117,6 +117,11 @@ def generate_world_record_string():
 
 
 if __name__ == "__main__":
+    import os
+
+    if not os.getenv("QUARTO_PROJECT_RENDER_ALL"):
+        exit()
+
     print("Checking SkiErg results...")
     print(f"{count_times_of_world_records()} world records held.")
     print(f"World records held: {get_world_records()}")
