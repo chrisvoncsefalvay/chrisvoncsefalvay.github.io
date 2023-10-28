@@ -176,7 +176,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -218,15 +218,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 <p>In a recent paper that has attracted the interest of popular media as well, Fabio Urbina and colleagues examined the use (or rather, the abuse) of computational chemistry models of toxicity for generating toxic compounds and potential chemical agent candidates.<span class="citation" data-cites="urbina2022dual">(<a href="#ref-urbina2022dual" role="doc-biblioref">Urbina et al. 2022</a>)</span> Urbina and colleagues conclude that</p>
-<blockquote class="blockquote">
+<div class="no-row-height column-margin column-container"><div id="ref-urbina2022dual" class="csl-entry" role="listitem">
+Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>‘Dual Use of Artificial-Intelligence-Powered Drug Discovery’</span>. <em>Nature Machine Intelligence</em> 4 (3): 189–91.
+</div></div><blockquote class="blockquote">
 <p>By going as close as we dared, we have still crossed a grey moral boundary, demonstrating that it is possible to design virtual potential toxic molecules without much in the way of effort, time or computational resources.</p>
 </blockquote>
 <p>I agree with the conclusion, but for rather different reasons.</p>
-<section id="background" class="level1">
+<section id="background" class="level1 page-columns page-full">
 <h1>Background</h1>
 <p>Computational chemistry is the branch of computational science that focuses on applications in the chemical field. This includes pharmacology and rational drug design (RDD) in particular. The purpose of RDD is to generate drug candidates that show favourable indicators of effectiveness (such as high binding affinity to a target protein) along with indicators of biological suitability (such as no or low interference with other proteins, low toxicity and no inhibition of metabolic ‘bottlenecks’ like CYP3A4). The latter part is typically handled by a toxicity model.</p>
 <p>Rather simply put, a toxicity model infers the structural associations (the chemical structures associated with undesirable effects) from a library of known compounds with known effects. For instance, the Toxicology in the 21st Century (Tox21) programme of the US federal government has performed over sixty different assays (typically, enzyme inhibition assays) for over 13,000 different compounds. <span class="citation" data-cites="tice2013improving">(<a href="#ref-tice2013improving" role="doc-biblioref">Tice et al. 2013</a>)</span> Using molecular fingerprinting, which we have discussed in a previous post on this blog in this very same context, it is possible to build relatively easy models for toxicity. Where a particular desired toxicity is known, say mitochondrial toxicity, it’s not difficult to build a pipeline that generates candidate compounds, derives the molecular fingerprint and evaluates the likelihood that the molecule that is obtained will be an effective agent. In this sense, I wholeheartedly agree with Urbina: the cat is very much out of the bag. Even if Tox21’s public data does not include the classical target of modern chemical weapons (acetylcholinesterase), such data is not exactly hard to come by or, for a nation-state actor, to generate. A near-peer adversary could create such assays for cents on the compound.</p>
-<p>Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g.&nbsp;for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-tice2013improving" class="csl-entry" role="listitem">
+Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013. <span>‘Improving the Human Hazard Characterization of Chemicals: A Tox21 Update’</span>. <em>Environmental Health Perspectives</em> 121 (7): 756–65.
+</div></div><p>Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g.&nbsp;for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.</p>
 </section>
 <section id="the-reverse-of-the-medal" class="level1">
 <h1>The reverse of the medal</h1>
@@ -251,14 +255,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-tice2013improving" class="csl-entry" role="listitem">
-Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013. <span>‘Improving the Human Hazard Characterization of Chemicals: A Tox21 Update’</span>. <em>Environmental Health Perspectives</em> 121 (7): 756–65.
-</div>
-<div id="ref-urbina2022dual" class="csl-entry" role="listitem">
-Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>‘Dual Use of Artificial-Intelligence-Powered Drug Discovery’</span>. <em>Nature Machine Intelligence</em> 4 (3): 189–91.
-</div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
   author = {Chris von Csefalvay},
   title = {A Different Shade of Grey},
   date = {2022-04-13},

@@ -193,7 +193,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -264,9 +264,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> scripts/pre_check_skierg_records.py</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This declares the scripts <code>scripts/pre_create_papers_file.py</code> and <code>scripts/pre_check_skierg_records.py</code> as pre-render scripts. You can also declare post-render scripts, with the <code>post-render</code> key.</p>
 </section>
-<section id="a-poorly-worked-example-generating-a-publication-list" class="level1">
+<section id="a-poorly-worked-example-generating-a-publication-list" class="level1 page-columns page-full">
 <h1>A (poorly) worked example: generating a publication list</h1>
-<p>On my website, I use Quarto project scripts to maintain a <a href="papers">list of my papers</a>. This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="page-columns page-full"><p>On my website, I use Quarto project scripts to maintain a <a href="papers">list of my papers</a>. This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;I know there’s a canonically better solution that uses pandoc and Lua. I don’t care. This works for me, and I don’t have to learn Lua.</p></li></div></div>
 <p>You can see the full project script <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py">here</a>, but here’s the gist of it:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -300,7 +300,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>We load a BibTeX file (<code>load_bibtex_file()</code>), parse it, use a function to determine whether we’re rendering a book or an article entry (I don’ have any other types of publications, but if I did, I’d add them here), and dispatch rendering to the appropriate function (<code>render_article_as_nlm()</code> for articles, <code>render_book_as_nlm()</code> for books). We sort the entries into a Markdown format with years separated by level 1 headings (<code>generate_list_by_year()</code>) and finally write it into the <code>papers/index.qmd</code> file (<code>write_into_file()</code>). There’s some minor magic going on behind the scenes, such as capturing my name and setting it in bold (which is a bit of a convention in academic lists of publications), but that’s the gist of it.</p>
 <p>The result is a list of publications that is automatically generated from a BibTeX file, and is always up to date (as up to date as the BibTeX file, anyway). I don’t have to manually update it… sort of.</p>
 </section>
-<section id="wait-automagically-updated" class="level1">
+<section id="wait-automagically-updated" class="level1 page-columns page-full">
 <h1>Wait, automagically updated?</h1>
 <p>The second half of what makes project scripts awesome is that they integrate with the rendering process. If the rendering process in turn integrates with some CI that watches for changes, then you can have a website that is automatically updated whenever you push a change to the repository. This is what I do with my website: I have a GitHub action that watches for changes to the <code>main</code> branch, and if it detects a change, it runs the rendering process and pushes the result to the <code>gh-pages</code> branch. This means that if I were to change the BibTeX file, it would trigger a re-render, and the list of publications would be automatically updated.</p>
 <p>There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:</p>
@@ -324,7 +324,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 </div>
 <p>In particular, I had to explicitly specify the Python version and install the requirements. This is because the <code>quarto-actions/setup</code> action does not install the requirements, and the <code>quarto-actions/publish</code> action does not install Python. This is admittedly a bit of a nuisance to work around, but really not all that big a deal in the grand scheme of things.</p>
-<p>One thing to keep in mind when writing your script is the context from which it will be executed. In particular, if you’re using a CI/CD pipeline, you will need to make sure that the script can find the files it needs. In my case, I had to explicitly specify the path to the BibTeX file, as well as the path to the output file. This is because the script is executed from the root of the repository, but the BibTeX file is in the <code>papers</code> directory, and the output file is in the <code>papers</code> directory, too. Testing locally for deployment in CI/CD is notoriously hellish, but with a little bit of elbow grease,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> you can get it to work.</p>
+<div class="page-columns page-full"><p>One thing to keep in mind when writing your script is the context from which it will be executed. In particular, if you’re using a CI/CD pipeline, you will need to make sure that the script can find the files it needs. In my case, I had to explicitly specify the path to the BibTeX file, as well as the path to the output file. This is because the script is executed from the root of the repository, but the BibTeX file is in the <code>papers</code> directory, and the output file is in the <code>papers</code> directory, too. Testing locally for deployment in CI/CD is notoriously hellish, but with a little bit of elbow grease,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> you can get it to work.</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;And by ‘a little bit’, I mean absolute tons of it.</p></li></div></div>
 <p>One caveat: rendering with pre- and post-render project scripts may be relatively expensive in terms of time. My silly SkiErg world record script adds a good 20-25 seconds of processing time to each rendering run – not a lot, but it does stack up eventually. The <a href="https://quarto.org/docs/projects/scripts.html">documentation</a> helpfully discloses that Quarto provides an environment variable, <code>QUARTO_PROJECT_RENDER_ALL</code>, which is set to <code>1</code> if it’s a full render. It may make sense to do a more manual caching here.</p>
 </section>
 <section id="things-you-can-do-with-project-scripts" class="level1">
@@ -343,13 +343,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>I know there’s a canonically better solution that uses pandoc and Lua. I don’t care. This works for me, and I don’t have to learn Lua.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>And by ‘a little bit’, I mean absolute tons of it.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Quarto Project Scripts Are Awesomeness},
   date = {2023-10-22},

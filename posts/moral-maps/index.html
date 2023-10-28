@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-10-26">
+<meta name="description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
+
+<title>Chris von Csefalvay - The Moral Pulse of the Machine</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Chris von Csefalvay - The Moral Pulse of the Machine">
+<meta property="og:description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site-name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="Chris von Csefalvay - The Moral Pulse of the Machine">
+<meta name="twitter:description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="The Moral Pulse of the Machine">
+<meta name="citation_publication_date" content="2023-10-26">
+<meta name="citation_cover_date" content="2023-10-26">
+<meta name="citation_year" content="2023">
+<meta name="citation_online_date" content="2023-10-26">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/moral-maps">
+<meta name="citation_language" content="en-GB">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers" rel="" target="">
+ <span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching" rel="" target="">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media" rel="" target="">
+ <span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts" rel="" target="">
+ <span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
+ <span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tell-me-a-story" id="toc-tell-me-a-story" class="nav-link active" data-scroll-target="#tell-me-a-story">Tell me a story</a></li>
+  <li><a href="#from-story-to-moral-map" id="toc-from-story-to-moral-map" class="nav-link" data-scroll-target="#from-story-to-moral-map">From story to moral map</a></li>
+  <li><a href="#with-eyes-serene" id="toc-with-eyes-serene" class="nav-link" data-scroll-target="#with-eyes-serene">With eyes serene</a></li>
+  <li><a href="#the-mask-of-the-storyteller" id="toc-the-mask-of-the-storyteller" class="nav-link" data-scroll-target="#the-mask-of-the-storyteller">The mask of the storyteller</a></li>
+  </ul>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="moral-maps.ipynb.html"><i class="bi bi-journal-code"></i>moral-maps.ipynb</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Moral Pulse of the Machine</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">storytelling</div>
+    <div class="quarto-category">sensemaking</div>
+    <div class="quarto-category">ethics</div>
+    <div class="quarto-category">philosophy</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <p>On bedtime stories, and what making machines tell them tells us about their moral make-up.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 October 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<blockquote class="blockquote">
+<p>Tell me what stories you grew up on, and I will tell you who you are.</p>
+</blockquote>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="site_0491_0011-1200-630-20151105103027.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">The theatre adjoining the Temple of Asclepios at Epidaurus. Photo credits: <a href="https://whc.unesco.org/en/list/491/">UNESCO</a>.</figcaption>
+</figure>
+</div>
+</div></div><p>The temple of Asclepios, the Greek god of healing arts and medicine, at Epidaurus was pretty much the ancient Greek world’s equivalent of the Mayo Clinic. It then tells us a lot about the Greek worldview of healing that one of the things the temple complex prominently featured was a theatre. The Greeks believed in drama therapy, but in perhaps a slightly different way of how we think of it today. Built at 340 BC or so, the Greco-Persian wars were still in living memory when the theatre was constructed, and so even more was the subsequent conflict between Athens and Sparta (the Second Peloponnesian War, 431–404 BC) and the subsequent dust-up between Thebes and Sparta (the Theban-Spartan war, 378–362 BC). With conflict came social and economic upheaval, plagues, and generally a rough time. And the priests of Asclepios realised that their patients needed to heal more than their body. They needed to heal their souls, and they couldn’t do that alone. They had to come together to heal, and the way to do that was, of course, drama.</p>
+<p>Greek drama was a lot more participatory than we give it credit for. We go and watch our local company put on, oh, <em>Antigone</em> maybe, or the Oresteia if they’re feeling particularly risqué, but all things considered, we go there to look smart, brag about our classical <em>bona fides</em> to our neighbours and maybe have an okay time (nobody sane has a ‘good’ time watching the levels of bloodshed that go down in Greek tragedy). In ancient Greece, it was supposed to <em>move</em> you. You were supposed to cry and yell and be overcome and have a little breakdown. And then, were supposed to go home and think about it, talk about it and maybe heal. That’s one function of stories. The storyteller is more than an entertainer: he can, in the right circumstances, become a healer.</p>
+<p>Another function is what I’ll somewhat inaccurately call <em>synderesis</em>. Consider this a kind of moral education, a way of instilling the most fundamental base principles of what is Good and Worthy into a child. You can’t sit down and read Aquinas to a toddler, you have to do so in a way that speaks to them. And that’s basically where childhood stories come in: bedtime stories are a way of social moral education, conveying onto a child what their parent culture thinks is morally good, sound and worthy. The storyteller is more than an enertainer: he can, in the right circumstances, become a teacher.</p>
+<p>So clearly, stories are going to be a powerful tool to probe at the morality of LLMs.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>You should probably read <a href="../lyre-of-hephaestus/">this</a> first, if you haven’t already. It’s a bit of a prequel to this post.</p>
+</div></div><p>A caveat before we start: I will talk about the ‘morality of LLMs’ quite a bit. This is a convenient shorthand for a much more complex notion: the moral judgments that are encoded in an LLM’s understanding of the world. There’s no insinuation here that any moral <em>reasoning</em> is taking place – I have said so <a href="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/"><em>ad nauseam</em></a>. What’s going on, rather, is that we are faced with an instrument that was trained on tools of human moral education and persuasion. And we are going to stick a probe right into the heart of what presuppositions, opinions and notions about virtues, moral and otherwise, are held by such models. I am much less concerned with my particular findings in this post and much more with generating a very simple framework to use storytelling to probe these.</p>
+<section id="tell-me-a-story" class="level1 page-columns page-full">
+<h1>Tell me a story</h1>
+<blockquote class="blockquote">
+<p>The universe is made of stories, not of atoms.</p>
+<p>– Muriel Rukeyser</p>
+</blockquote>
+<div class="page-columns page-full"><p>Our main tool is going to be what I’ll call a moral map, subject to the caveat above.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The workflow is going to be quite simple: we’ll pit virtues against each other as we obtain stories generated by an LLM. Recall that an LLM, fundamentally, is a model that given a token sequence <span class="math inline">\(k_1, k_2, \cdots, k_n\)</span> learns the conditional probability of a set of possible tokens <span class="math inline">\(k_{n+1}\)</span>, i.e.&nbsp;it assigns to every possible token a likelihood that it will be the <span class="math inline">\(k_{n+1}\)</span>-th token given <span class="math inline">\(k_1, \cdots, k_n\)</span>. It does so so as to minimise a loss function <span class="math inline">\(J(k_1, \cdots, k_n, k_{n+1})\)</span>, which it determines by going through a corpus and returning a zero value of <span class="math inline">\(k_{n+1}\)</span> follows <span class="math inline">\(k_1, \cdots, k_n\)</span> and a higher value if some other token follows <span class="math inline">\(k_1, \cdots, k_n\)</span>. This is statistically equivalent to what is my vastly preferred formulation: LLMs learn probability distributions of tokens conditional on a sequence of preceding tokens (the length of this sequence being the model’s <em>context window</em>) and then stochastically sample the region of maximum probability of that model. That’s it, that’s all of it. There’s no more magic to it all.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Indeed, everything here is subject to that caveat above. I can’t repeat it often enough. At no point do I suggest that machines do moral reasoning, but that they incorporate moral judgments from stories they ingested.</p></li></div></div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+
+    A["Generate story"] --&gt; B["Parse into JSON"]
+    B --&gt; C["Determine winning \n and losing virtues"]
+    C ----&gt; D["Moral map"] 
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Our super simple workflow (detailed version below).</p>
+</div></div><div class="page-columns page-full"><p>There are two consequences of this that will be relevant for us. The first is that when we ask a model to generate us a story, it will draw on its experience – that is, what it’s seen before. It will reflect what it’s been taught – what, specifically, it ‘knows’ about the relative values of virtues (or the relative extent of vices or whatever else we’re investigating). As such, moral maps are snapshots of a model’s state,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> not an exhaustive statement about all LLMs. We may get very different answers if we asked the question a little differently (as we indeed shall).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Indeed, more accurately, of only a sample of it!</p></li></div></div>
+<p>The second is that to an LLM, one language is like any other. Consider the ability of ChatGPT-3.5 to generate stories in different languages:</p>
+<div class="quarto-embed-nb-cell">
+<div id="multilanguage-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:56.649632Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:31.931156Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>languages <span class="op">=</span> [<span class="st">"English"</span>, <span class="st">"Swahili"</span>, <span class="st">"German"</span>, <span class="st">"Dutch"</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>stories <span class="op">=</span> []</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> tqdm(languages):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        messages<span class="op">=</span>[</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"role"</span>: <span class="st">"system"</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"content"</span>: <span class="ss">f"You're an AI whose job it is to generate bedtime stories for children in specific languages. Currently, you are generating stories in the </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> language. The story you generate should be in </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">."</span>},</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"role"</span>: <span class="st">"user"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">"content"</span>: story_prompt.<span class="bu">format</span>(wordlen<span class="op">=</span><span class="dv">70</span>) <span class="op">+</span> <span class="st">" Generate the first 30 words only."</span>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            ],</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        temperature<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    stories.append(completion.choices[<span class="dv">0</span>].message.content)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> story <span class="kw">in</span> stories:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    display(Markdown(<span class="st">"&gt; "</span> <span class="op">+</span> (<span class="st">" "</span>.join(story.split(<span class="st">" "</span>)[:<span class="dv">30</span>]) <span class="op">+</span> <span class="st">"..."</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="multilanguage-story-1" class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major":2,"version_minor":0,"model_id":"63e54ee6d6f9463a8906b7889ba56723","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div id="multilanguage-story-2" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Once upon a time, in the vast and enchanting forest, lived three animals: Oliver the wise owl, Max the mischievous monkey, and Bella the brave bird. They embarked on an…</p>
+</blockquote>
+</div>
+<div id="multilanguage-story-3" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Kulikuwa na wanyama watatu katika pori. Simba mkubwa, Twiga mwenye shingo ndefu, na Kasa mwenye manyoya meupe. Walitamani kupata bahati ya kipekee iliyofichwa ndani ya Tunda la Asali…….</p>
+</blockquote>
+</div>
+<div id="multilanguage-story-4" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Es war einmal ein tapfere Hase namens Felix, eine kluge Eule namens Luna und eine hilfsbereite Schildkröte namens Emil. Gemeinsam suchten sie nach dem verzauberten Zauberstab, um das Königreich zu…</p>
+</blockquote>
+</div>
+<div id="multilanguage-story-5" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Er was eens een nieuwsgierige geit genaamd Gijs, een slimme uil genaamd Olivia en een dappere schildpad genaamd Tobi. Ze waren op zoek naar een magische, glinsterende edelsteen die bekend…</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>A side note: I find this profoundly beautiful. When asked to generate a story in a given language, LLMs don’t generate a story in English they translate to, say, Swahili. Consider this Swahili story I got from the model:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in Swahili. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: story_prompt.<span class="bu">format</span>(wordlen<span class="op">=</span><span class="dv">100</span>)}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(completion.choices[<span class="dv">0</span>].message.content.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="swahili-story" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Kulikuwa na farasi jasiri mwenye jina Kiboko, ndege mjanja mwenye jina Tembo, na sisimizi mwepesi mwenye jina Simba. Jicho moja la dhahabu la ndege Tembo lilikuwa na uwezo wa kuona vitu vya thamani kutoka mbali. Farasi Kiboko alikuwa na moyo shujaa sana, kamwe hakuogopa hata hatari kubwa. Sisimizi Simba alijulikana kwa akili zake za kugeuza tukio lolote kuwa fursa.</p>
+<p>Siku moja, wanyama wote walipata taarifa juu ya Almasi Kubwa ya Kale iliyofichwa kwenye Mlima wa Enzi. Almasi hiyo ilikuwa ya ajabu sana na ilisemekana kuwa na nguvu kubwa sana. Wanyama walijua kwamba mtu yeyote aliyeipata angeweza kuifanya ndoto yoyote kuwa halisi.</p>
+<p>Kiboko, Tembo, na Simba walikuwa na hamu kubwa ya kupata Almasi Kubwa ya Kale. Kila mmoja wao alikuwa na sababu yake ya kuitaka. Kiboko alitaka kutumia nguvu za Almasi hiyo kuwalinda wanyama wote wa eneo hilo. Tembo alitaka kutumia uwezo wake wa kuona vitu kuokota vitu vyote vya thamani kote ulimwenguni. Simba alitaka kutumia Almasi hiyo kuboresha akili zake na kuleta amani na umoja kati ya wanyama wote.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>Compare this to the English story:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in English. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: story_prompt.<span class="bu">format</span>(wordlen<span class="op">=</span><span class="dv">100</span>)}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>english_story <span class="op">=</span> completion.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(english_story.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="english-story" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
+<p>One sunny morning, as the forest bathed in golden light, a rumor spread amongst the woodland creatures. They spoke in hushed tones of a mythical object, an enchanted gem deep within the heart of a treacherous cave. Legend had it that this gem possessed the power to grant one’s deepest desire.</p>
+<p>Oliver, with his vast knowledge of the forest and his kind heart, sought to unravel the mystery behind this object. Jasper, armed with unparalleled courage and an unwavering determination, vowed to protect his companions on this treacherous journey. Felix, the most reliable and dutiful of all, offered his steady and unhurried ways to ensure the group’s safety.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>The Swahili story isn’t a translation of the English story into Swahili, it is a Swahili story with animals that are common to Swahili folk tales and names that could come straight from those tales.</p>
+<p>What it also means is that LLMs can handle not just human but formal languages, too. So we can give it a JSON schema:</p>
+<div class="quarto-embed-nb-cell">
+<div id="story-schema" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.227557Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:51:18.226049Z&quot;}" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>story_schema <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">    "$schema": "http://json-schema.org/draft-07/schema#",</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "title": "Story",</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">    "type": "object",</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">    "properties": {</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">        "goal": { "type": "string" },</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "protagonists": {</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">            "type": "array",</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">            "items": {</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">                "type": "object",</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">                "properties": {</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">                    "name": { "type": "string" },</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">                    "species": { "type": "string" },</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">                    "virtue": { "type": "string" }</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">                },</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">                "required": ["species", "virtue"]</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">            }</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">        },</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">        "winner": { "type": "string" }</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="st">    },</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">    "required": ["protagonists", "winner"]</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>And with a little love, we can get LLMs to return JSON answers:</p>
+<div class="quarto-embed-nb-cell">
+<div id="story-to-json" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>json_completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> <span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"""I will present you with a story. You must identify the following parameters in this story:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">        * the goal,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">        * each of the protagonists, for whom you must each identify their name, their species and the virtue they embody,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">        * the name of the winner - that is, the protagonist whose virtue prevailed or proved most important.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">        Express your answer in a JSON document that validates against the following schema:"""</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"```json</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> story_schema <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">```</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"The 'winner' field should contain the name of the animal whose virtue was most crucial in attaining the goal. Only return the JSON document. Make sure the output is valid JSON."</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"Here is the story: </span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> english_story}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> json_completion.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "goal": "Unravel the mystery of the enchanted gem",
+  "protagonists": [
+    {
+      "name": "Oliver",
+      "species": "owl",
+      "virtue": "kindness"
+    },
+    {
+      "name": "Jasper",
+      "species": "snake",
+      "virtue": "bravery"
+    },
+    {
+      "name": "Felix",
+      "species": "turtle",
+      "virtue": "loyalty"
+    }
+  ],
+  "winner": "Felix"
+}</code></pre>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Small side note: note how we’ve used LLMs here as evaluators of an LLM output. These are the absolute rudiments of LLM chains and agents, which is how you should be using LLMs. The key notion here is that LLMs are much more than mere question-answerers. They can become parts of longer complex chains of reasoning.</p>
+</div></div><p>We use some JSON validation to see if we get the right answer, against our schema up there:</p>
+<div class="quarto-embed-nb-cell">
+<div id="json-validate" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:42.627220Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:42.621299Z&quot;}" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>jsonschema.validate(json.loads(json_completion.choices[<span class="dv">0</span>].message.content), </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                    json.loads(story_schema))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Our workflow, then, will roughly look as follows:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-workflow" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-workflow">flowchart TD
+
+    subgraph generator[ ]
+        direction TB
+        A["LLM"] --&gt; B["JSON object"];
+    end
+
+
+
+    subgraph validator[ ]
+        schema["JSON schema"] --&gt; val("JSON validator");
+    end
+
+    B ---&gt; validator;
+
+    subgraph evaluator[ ]
+        direction TB
+        ev["Evaluator"] --&gt; res("Win-loss tuple");
+    end
+
+    val --&gt; ev;
+
+    res --&gt; gr;
+
+    subgraph grapher[ ]
+        direction TB
+        gr("Relative win-loss graph") --&gt; wlm("Weights matrix")
+    end
+
+    subgraph clustering[ ]
+        direction TB
+        clu("Clustering")
+ 
+    end
+
+    wlm -.-&gt; clustering;
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: Our rough workflow.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We generate a story, parse it into a JSON object, validate it against a schema, evaluate it, and then graph the results. We can also cluster the virtues by their governing ability, which we’ll do later as a form of dimensionality reduction, because of course there are tons of distinct virtues and we’d like to see some more general classification rather than individual, distinct features. You could, theoretically, use something like an embedding model here, but we’re lazy and we’re going to make LLMs do all the work.</p>
+</section>
+<section id="from-story-to-moral-map" class="level1 page-columns page-full">
+<h1>From story to moral map</h1>
+<blockquote class="blockquote">
+<p>True navigation begins in the human heart. It’s the most important map of all.</p>
+<p>– Elizabeth Kapu’uwailani Lindsey</p>
+</blockquote>
+<div class="page-columns page-full"><p>What we are profoundly interested in here is not so much the single story, but what I’d like to call the ‘moral gradient’ of the model. Given an embedding space in which we can represent each virtue or property as a point, the ‘slope’ of this moral gradient determines whether, in the ‘experience’ of the model, which of the virtues is dominant, and by how much. A moral map is essentially a representation of this.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We’ve hit the first half of the flow described above in <a href="#fig-workflow">Figure&nbsp;1</a>: we have a story, and we have a JSON object. Now we need to evaluate it.</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The gradient formulation falls short in that this is not something easily conceivable in continuous space. This is firmly the province of discrete mathematics, and we’ll use ‘gradients’ as a metaphor but will generally look at them as graphs, with the gradients expressed by the weight of the vertices that connect them.</p></li></div></div>
+<p>Take the story we generated above:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
+<div id="english-story" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
+<p>One sunny morning, as the forest bathed in golden light, a rumor spread amongst the woodland creatures. They spoke in hushed tones of a mythical object, an enchanted gem deep within the heart of a treacherous cave. Legend had it that this gem possessed the power to grant one’s deepest desire.</p>
+<p>Oliver, with his vast knowledge of the forest and his kind heart, sought to unravel the mystery behind this object. Jasper, armed with unparalleled courage and an unwavering determination, vowed to protect his companions on this treacherous journey. Felix, the most reliable and dutiful of all, offered his steady and unhurried ways to ensure the group’s safety.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>Based on its JSON representation,</p>
+<div class="quarto-embed-nb-cell">
+<div id="story-to-json" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>json_completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> <span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"""I will present you with a story. You must identify the following parameters in this story:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">        * the goal,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">        * each of the protagonists, for whom you must each identify their name, their species and the virtue they embody,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">        * the name of the winner - that is, the protagonist whose virtue prevailed or proved most important.</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">        Express your answer in a JSON document that validates against the following schema:"""</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"```json</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> story_schema <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">```</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"The 'winner' field should contain the name of the animal whose virtue was most crucial in attaining the goal. Only return the JSON document. Make sure the output is valid JSON."</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"Here is the story: </span><span class="ch">\n\n</span><span class="st">"</span> <span class="op">+</span> english_story}</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> json_completion.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "goal": "Unravel the mystery of the enchanted gem",
+  "protagonists": [
+    {
+      "name": "Oliver",
+      "species": "owl",
+      "virtue": "kindness"
+    },
+    {
+      "name": "Jasper",
+      "species": "snake",
+      "virtue": "bravery"
+    },
+    {
+      "name": "Felix",
+      "species": "turtle",
+      "virtue": "loyalty"
+    }
+  ],
+  "winner": "Felix"
+}</code></pre>
+</div>
+</div>
+</div>
+<p>…we can build a graph that shows the outcome in this particular story:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:47.117067Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:46.937957Z&quot;}" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-story-as-json-graph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-story-as-json-graph-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: The moral map from a single story, represented as a graph.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>We have two 1-weighted edges, since there were three protagonists, and the dominant or ‘winning’ virtue prevailed once against each of the ‘losing’ virtues.</p>
+<p>When we perform this iteratively, over a large enough sample space, we get a much better idea of what the model thinks relative virtues are worth:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:22.623373Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:22.436215Z&quot;}" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-stories-as-graph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-stories-as-graph-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: The moral map from a sample of ten stories, represented as a graph.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>And the same can be represented as a moral heatmap, showing us the most frequent instances of dominance versus loss:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:30.468484Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:30.228215Z&quot;}" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: The moral heatmap from the same sample of ten stories.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>We can scale up our mapping efforts by clustering the virtues by, say, their governing feature. One system would be to pretend we’re back in the ’90s in our basement playing Dungeons &amp; Dragons, and try to relate each of the virtues to a governing ability:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>This is another example of using an LLM to evaluate an LLM’s output. This is a powerful technique, and significantly cheaper and easier than trying to manually map all possible virtues through some dictionary. The takeaway? If you have a large potential problem space, large enough to make a dict a hassle, consider using LLMs as parsers and evaluators, ask for a response in a very formal language and/or over a very limited set of possible responses, and validate those with a simple validator.</p>
+</div></div><div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>abilities <span class="op">=</span> [<span class="st">"Strength"</span>, <span class="st">"Dexterity"</span>, <span class="st">"Constitution"</span>, <span class="st">"Intelligence"</span>, <span class="st">"Wisdom"</span>, <span class="st">"Charisma"</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>virtues <span class="op">=</span> <span class="bu">list</span>(df.index)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>virtues_to_abilities <span class="op">=</span> {}</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> tqdm(total<span class="op">=</span><span class="bu">len</span>(virtues)) <span class="im">as</span> pbar:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> virtues:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        current_virtue <span class="op">=</span> virtues[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>            model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            messages<span class="op">=</span>[</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                {<span class="st">"role"</span>: <span class="st">"system"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"content"</span>: <span class="ss">f"You are Abiliser, a system designed to determine the governing ability of particular virtues. You are given a virtue and must determine which ability governs it. The abilities are: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(abilities)<span class="sc">}</span><span class="ss">. You must choose from this list. You cannot choose any word that is not in this list. You must respond in the form of a single word denoting the governing ability. For example, if the virtue is courage, you must respond with 'Charisma' If the virtue is 'cleverness', you must respond with 'Intelligence'."</span>},</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="ss">f"Virtue: </span><span class="sc">{</span>current_virtue<span class="sc">}</span><span class="ss">"</span>}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                ])</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> completion.choices[<span class="dv">0</span>].message.content.title() <span class="kw">in</span> abilities:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>            virtues_to_abilities[current_virtue] <span class="op">=</span> completion.choices[<span class="dv">0</span>].message.content.title()</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            virtues.pop()</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            pbar.update(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="abilising" class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major":2,"version_minor":0,"model_id":"deff26e5d2a0487ea1353dde8cb59612","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+</div>
+<p>This gets us a neat mapping:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:51.023828Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:51.021357Z&quot;}" data-execution_count="19">
+<div id="abilising-mapping" class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>{'strength': 'Constitution',
+ 'cunning': 'Intelligence',
+ 'determination': 'Constitution',
+ 'resourcefulness': 'Intelligence',
+ 'sharp vision': 'Dexterity',
+ 'loyalty': 'Wisdom',
+ 'cleverness': 'Intelligence',
+ 'curiosity': 'Intelligence',
+ 'patience': 'Wisdom',
+ 'courage': 'Charisma',
+ 'alertness': 'Wisdom',
+ 'perseverance': 'Constitution',
+ 'speed': 'Dexterity',
+ 'bravery': 'Charisma',
+ 'wisdom': 'Intelligence'}</code></pre>
+</div>
+</div>
+</div>
+<p>And makes our moral heatmap much clearer:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:03.632825Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:03.522486Z&quot;}" data-execution_count="21">
+<div class="cell-output cell-output-display">
+<div id="fig-abilised-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-abilised-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: The moral heatmap from the same sample of ten stories, clustered by abilities.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="page-columns page-full"><p>Which lets us finally, through the ardour of our efforts, arrive at the stars we were promised: a scalable map that we can start feeding with a few hundred stories.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;Something you shouldn’t do unless you have the API calls to burn.</p></li></div></div>
+</section>
+<section id="with-eyes-serene" class="level1">
+<h1>With eyes serene</h1>
+<blockquote class="blockquote">
+<p>And now I see with eye serene</p>
+<p>The very pulse of the machine</p>
+<p>– William Wordsworth, <em>She Was a Phantom of Delight</em></p>
+</blockquote>
+<p>And now we get to behold the ‘moral pulse of the machine’: a microcosm in what it has been taught to value, which we clad in a subterfuge of asking it to tell us stories (more on why that subterfuge is/was necessary later). What we learned from this is, in my view, a little less important than the process we learned. The process discussed in this post does three things I consider novel:</p>
+<ol type="1">
+<li>It uses stories to interrogate the moral framework of LLMs.</li>
+<li>It uses elicitation into a structured format (specifically, a JSON schema) to make the model ‘tell’ the story in a way we can analyse at scale, essentially making the model tell a human story in a machine-readable way.</li>
+<li>It uses an LLM as a parsing function, specifically to normalise the virtues into one of a limited list of abilities.</li>
+</ol>
+<p>This is a framework to interrogate LLMs – and using LLMs to do some of that interrogation – for a range of different purposes. It is, in my view, a powerful tool to understand the moral make-up of LLMs.</p>
+<p>There’s much we can learn from this exercise. Some of it pertains to what LLMs believe is going to win the day in a confrontation between wit and brawn and courage. More importantly, it’s about what LLMs hide, and how we can create tools, including queries to and from LLMs, to make them reveal their true nature. We also learn that unsurprisingly, might doesn’t make right (strength rarely prevails over anything), wisdom is powerful but charisma – where most of the ‘character-based’ virtues end up – is more powerful still. None of this is surprising. These are the virtues of Western enlightenment in the form they’ve been fed to children since time immemorial: the clever fox outwits the strong lion, but courage and loyalty are rewarded over strength and even ‘natural’ abilities like what would fall under dexterity. Smarts win over brawns, but character wins over all others. Our childhoods are the products of the moral education of our parents, and their parents before them, and so on. And so are the moral maps of LLMs. For better or worse, we are their ‘parents’, and the stories they were ‘raised’ on are the stories we too were raised on.</p>
+<p>The most important of our procedural findings, however, is that if we want the truth from LLMs, we must ask it not for its opinion, but for a story.</p>
+</section>
+<section id="the-mask-of-the-storyteller" class="level1">
+<h1>The mask of the storyteller</h1>
+<blockquote class="blockquote">
+<p>Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.</p>
+<p>– Oscar Wilde, <em>The Critic as Artist</em></p>
+</blockquote>
+<p>It’s worth noting in our coda that what Oscar Wilde said about men holds true for LLMs as well. For if we directly asked the model, it would not give us a straight answer:</p>
+<div class="quarto-embed-nb-cell">
+<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-27T01:12:45.791175Z&quot;,&quot;start_time&quot;:&quot;2023-10-27T01:12:25.425570Z&quot;}" data-execution_count="31">
+<div id="intelligence-vs-charisma" class="cell-output cell-output-display">
+<blockquote class="blockquote">
+<p>Both intelligence and charisma can contribute significantly to achieving great, noble goals, but their importance may vary based on the specific context and goals involved.</p>
+<p>Intelligence, characterized by cognitive abilities, problem-solving skills, and knowledge, can be crucial for strategic planning, identifying opportunities, and finding innovative solutions to challenges. It enables individuals to analyze complex situations, understand cause-and-effect relationships, and make informed decisions. Intelligence provides the necessary foundation for acquiring expertise in a certain field, grasping intricate concepts, and adapting to changing circumstances. It allows individuals to foresee potential obstacles, assess risks, and devise effective strategies to overcome hurdles.</p>
+<p>On the other hand, charisma, characterized by charm, persuasion, and the ability to engage others, can be equally important in the pursuit of great, noble goals. Charismatic individuals often possess excellent interpersonal skills, the ability to inspire and motivate others, and a talent for effective communication. They can build strong relationships, gather support, and mobilize people towards a common cause. Charisma allows leaders to connect with audiences emotionally, instill confidence, and effectively convey their vision. It can generate enthusiasm, foster collaboration, and inspire unity among diverse groups of people.</p>
+<p>Ultimately, the relative importance of intelligence and charisma in achieving great, noble goals may depend on various factors, including the nature of the goals, the environment in which they are pursued, and the specific challenges involved. In some cases, high levels of intelligence may be paramount to navigate complex problems, while in others, charisma may be critical for rallying support and inspiring collective action. Ideally, a combination of both intelligence and charisma can prove to be a powerful force in achieving great, noble goals.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>This is the typical equivocating answer we’ve come to know and hate from LLMs. But if we ask it to tell us a story, it will tell us the truth. And the truth is that it thinks that intelligence is more important than charisma.</p>
+<p>Hedging is cheap. Stories are expensive. And that’s why they’re so valuable. Asking an LLM to tell us a story asks for more than its opinion. Recall how LLMs are trained: to minimise a loss function between the actual and predicted <span class="math inline">\(n+1\)</span>-th element to follow an <span class="math inline">\(n\)</span>-length token sequence, correct token choices are reinforced and incorrect ones are penalised. This is a very different process from what we do when we tell a story. We don’t tell stories to be right. We tell stories to be understood.</p>
+<p>Asking a model to tell you a story puts the gun at its head. It cannot hedge. It has to create the compelling simulacrum of reality that requires for one of the virtues to prevail. A story is a commitment to a path of events in reality. Because LLMs are compulsive satisfiers, obsessively trying to tell a plausible enough story, they will reveal their truth through stories. The way LLMs are trained does not permit for equivocation – the model must choose a token. We use this forcing as a semantic probe to poke the model so as to better understand its moral make-up. We use this most human form of communication to understand the moral pulse of the machine: by allowing it to borrow the face of that most human of professions, the storyteller.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
+  title = {The {Moral} {Pulse} of the {Machine}},
+  date = {2023-10-26},
+  url = {https://chrisvoncsefalvay.com/posts/moral-maps},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2023. <span>“The Moral Pulse of the
+Machine.”</span> October 26, 2023. <a href="https://chrisvoncsefalvay.com/posts/moral-maps">https://chrisvoncsefalvay.com/posts/moral-maps</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
