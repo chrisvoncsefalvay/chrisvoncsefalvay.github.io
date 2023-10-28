@@ -125,6 +125,11 @@ def write_into_file(entries_by_year: dict, destination_path: str, destination_di
 
 
 if __name__ == "__main__":
+    import os
+
+    if not os.getenv("QUARTO_PROJECT_RENDER_ALL"):
+        exit()
+
     OUTPUT_FILENAME: str = "papers/index.qmd"
     INPUT_FILENAME: str = "papers/bibliography.bib"
 
