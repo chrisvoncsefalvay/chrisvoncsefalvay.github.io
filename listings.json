@@ -10,6 +10,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/prompt-engineering/index.html",
       "/posts/moral-maps/index.html",
       "/posts/quarto-project-scripts/index.html",
       "/posts/lyre-of-hephaestus/index.html",
