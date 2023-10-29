@@ -9,7 +9,7 @@ citation: true
 google-scholar: true
 ---
 
-There's a style of visual design I'm inordinately fond of called Raygun Gothic. It's hard to describe what the hell exactly one needs to be on to enjoy it, but think of it like the aesthetic from the latter Fallout games, but with a more optimistic outlook on the future. Gibson described it as "the future that never was", and I think that's a pretty apt description.
+There's a style of visual design I'm inordinately fond of called Raygun Gothic. It's hard to describe what the hell exactly one needs to be on to enjoy it, but think of it like the aesthetic from the latter Fallout games with a more optimistic outlook on the future. Gibson described it as "the future that never was", and I think that's a pretty apt description.
 
 ::: {.column-margin}
 ![The future we were all promised, in all its Raygun Gothic glory.](03880260005fa86e78ddb88e645bfcef.jpg)
@@ -50,12 +50,12 @@ Don't get me wrong -- good prompts are still going to be important. But it's no 
 
 Which makes prompt engineering largely obsolete the way ensemble models make building the perfect regression model obsolete. No amount of expertly hand-crafted regression models will ever beat an ensemble of mediocre at best models. The booster always wins. Clever aggregation of weak primitives will always beat a single strong solution. And so, prompt engineering is obsolete because it's a single strong solution in a world where we can relatively inexpensively generate a lot of weak solutions that can be aggregated to produce a better outcome.
 
-This makes prompt engineering not the dream job of tomorrow but the art of yesterday. It's a beautiful art, and it's one that I'm sure will continue to be practiced. But it's not the future. It's the past. And the future is in chains and agents.
+This makes prompt engineering not the dream job of tomorrow but the art of yesterday. It's a beautiful art, and it's one that I'm sure will continue to be practiced. But it's not the future. It's the past. The future lies in chains and agents.
 
 
 # Bardo
 
-I think we're in a bardo right now. We're in a liminal state between the old and the new. The old is the world of prompt engineering, of one-shot solutions, of the single strong solution. The new is the world of chains and agents, of weak solutions that are aggregated to produce a better outcome. Solutions like chain-of-thought prompting occupy this middle space. They are not fully agentic, but they are beyond simple prompts seeking to create strong solutions, and closer to building chains and agentic architectures of weak solutions.
+I think we're in a bardo right now, a liminal state between the old and the new. The old is the world of prompt engineering, of one-shot solutions, of the single strong solution. The new is the world of chains and agents, of weak solutions that are aggregated to produce a better outcome. Solutions like chain-of-thought prompting occupy this middle space. They are not fully agentic, but they are beyond simple prompts seeking to create strong solutions, and closer to building chains and agentic architectures of weak solutions.
 
 ::: {.column-margin}
 བར་དོ་ (Wylie: _bar do_) is a Tibetan word that describes a liminal state between life, death and rebirth.
