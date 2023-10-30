@@ -63,16 +63,17 @@
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Prompt {Engineering:} {The} {Art} of {Yesterday}},
   date = {2023-10-29},
   url = {https://chrisvoncsefalvay.com/posts/prompt-engineering},
+  doi = {10.59350/keztr-yx081},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“Prompt Engineering: The Art of
-Yesterday.”</span> October 29, 2023. <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering">https://chrisvoncsefalvay.com/posts/prompt-engineering</a>.
+Yesterday.”</span> <a href="https://doi.org/10.59350/keztr-yx081">https://doi.org/10.59350/keztr-yx081</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
