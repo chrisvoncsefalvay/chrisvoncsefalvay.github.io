@@ -6,6 +6,7 @@ date: 2023-10-30
 categories: ["AI", "LLMs", "agents"]
 citation: true
 bibliography: bibliography.bib
+image: aaz4729-f1.jpeg
 google-scholar: true
 ---
 
@@ -70,7 +71,24 @@ These three features are what make human processes of truth-finding work. Truth-
 
 # Dueling LLMs
 
-Let's assume that we're faced with something simpler than a 75-year-old Cold War mystery. Say, we're interested in something this simple: we want to make a cheesecake that   is tasty, low-calorie, easy to make in no more than an hour and does not require any special ingredients. We could use a single LLM to do this:
+Let's assume that we're faced with something simpler than a 75-year-old Cold War mystery. Say, we're interested in something this simple: we want to make a cheesecake that is tasty, low-calorie, easy to make in no more than an hour and does not require any special ingredients. We could use a single LLM to do this:
+
+::: {.column-margin}
+スフレチーズケーキ (soufflé cheesecake)
+
+* 1tbsp unsalted butter
+* 6 large eggs - separate out the yolks
+* 10oz cream cheese
+* 4tbsp unsalted butter
+* 1 cup heavy cream
+* 4tbsp sugar
+* 1 cup cake flour
+* 2tbsp lemon juice
+* 2tbsp jam of your choice
+
+Grease cake pan and line with parchment paper. Preheat oven to 350ºF. Mix cream cheese, butter and sugar in a bowl submerged in a saucepan of warm(ish) water. Add the egg yolks and using a strainer, sift the cake flour. Filter and add lemon juice and some lemon zest, if you have any hanging around. Whisk up the egg whites and gently mix it into the main mixture. This should make it somewhat nicely frothy. Pour into cake pan. Place cake pan onto baking sheet. Bake for 60 minutes or so. When done, turn off the heat, open the door and brush with your jam diluted at around 1:1 ratio with warm water. Apricot jam works best, but I won't judge you for your choice.
+:::
+
 
 ```{mermaid}
 %%| label: fig-simple-cheesecake
@@ -150,7 +168,7 @@ Tool use is not just about learning, though. It's also about the utility of thes
 
 # Team building
 
-The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we'd think. There's no reason why LLMs themselves can't take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own 'experience'. The equivalent of structuring deep learning models' architectures by determining layer types and 
+The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we'd think. There's no reason why LLMs themselves can't take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own 'experience'. The equivalent of structuring deep learning models' architectures by determining layer types and their connections is borne out in how we build these virtual teams of rival LLMs.
 
 ```{mermaid}
 %%| label: fig-lang-model-architectures
