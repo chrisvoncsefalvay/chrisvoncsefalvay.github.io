@@ -83,7 +83,22 @@
 <section id="dueling-llms" class="level1 page-columns page-full">
 <h1>Dueling LLMs</h1>
 <p>Let’s assume that we’re faced with something simpler than a 75-year-old Cold War mystery. Say, we’re interested in something this simple: we want to make a cheesecake that is tasty, low-calorie, easy to make in no more than an hour and does not require any special ingredients. We could use a single LLM to do this:</p>
-<div class="cell" data-layout-align="center">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>スフレチーズケーキ (soufflé cheesecake)</p>
+<ul>
+<li>1tbsp unsalted butter</li>
+<li>6 large eggs - separate out the yolks</li>
+<li>10oz cream cheese</li>
+<li>4tbsp unsalted butter</li>
+<li>1 cup heavy cream</li>
+<li>4tbsp sugar</li>
+<li>1 cup cake flour</li>
+<li>2tbsp lemon juice</li>
+<li>2tbsp jam of your choice</li>
+</ul>
+<p>Grease cake pan and line with parchment paper. Preheat oven to 350ºF. Mix cream cheese, butter and sugar in a bowl submerged in a saucepan of warm(ish) water. Add the egg yolks and using a strainer, sift the cake flour. Filter and add lemon juice and some lemon zest, if you have any hanging around. Whisk up the egg whites and gently mix it into the main mixture. This should make it somewhat nicely frothy. Pour into cake pan. Place cake pan onto baking sheet. Bake for 60 minutes or so. When done, turn off the heat, open the door and brush with your jam diluted at around 1:1 ratio with warm water. Apricot jam works best, but I won’t judge you for your choice.</p>
+</div></div><div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-simple-cheesecake" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -167,7 +182,7 @@
 </section>
 <section id="team-building" class="level1 page-columns page-full">
 <h1>Team building</h1>
-<p>The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we’d think. There’s no reason why LLMs themselves can’t take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own ‘experience’. The equivalent of structuring deep learning models’ architectures by determining layer types and</p>
+<p>The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we’d think. There’s no reason why LLMs themselves can’t take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own ‘experience’. The equivalent of structuring deep learning models’ architectures by determining layer types and their connections is borne out in how we build these virtual teams of rival LLMs.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-lang-model-architectures" class="quarto-figure quarto-figure-center anchored">
@@ -296,6 +311,7 @@ Chris von Csefalvay. 2023. <span>“Teams of Rivals.”</span> October 30,
   <category>agents</category>
   <guid>https://chrisvoncsefalvay.com/posts/team-of-rivals/index.html</guid>
   <pubDate>Mon, 30 Oct 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/team-of-rivals/aaz4729-f1.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Prompt Engineering: The Art of Yesterday</title>
