@@ -4,7 +4,8 @@ description: |
   Finally, some discussion on LLM connectionism, and what LLMs could usefully become.
 date: 2023-10-30
 categories: ["AI", "LLMs", "agents"]
-citation: true
+citation:
+  doi: 10.59350/he7k6-tx158
 bibliography: bibliography.bib
 image: aaz4729-f1.jpeg
 google-scholar: true
