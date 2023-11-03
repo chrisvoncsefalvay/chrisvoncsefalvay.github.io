@@ -295,16 +295,16 @@ Yao, Shunyu, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, a
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Teams of {Rivals}},
   date = {2023-10-30},
   url = {https://chrisvoncsefalvay.com/posts/team-of-rivals},
+  doi = {10.59350/he7k6-tx158},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Teams of Rivals.”</span> October 30,
-2023. <a href="https://chrisvoncsefalvay.com/posts/team-of-rivals">https://chrisvoncsefalvay.com/posts/team-of-rivals</a>.
+Chris von Csefalvay. 2023. <span>“Teams of Rivals.”</span> <a href="https://doi.org/10.59350/he7k6-tx158">https://doi.org/10.59350/he7k6-tx158</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
