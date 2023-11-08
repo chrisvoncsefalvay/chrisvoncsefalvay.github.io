@@ -2,6 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/skeuomorphic-fallacy/index.html",
       "/posts/team-of-rivals/index.html",
       "/posts/prompt-engineering/index.html",
       "/posts/moral-maps/index.html",

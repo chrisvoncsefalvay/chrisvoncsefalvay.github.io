@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2023-11-06">
+<meta name="description" content="What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.">
+
+<title>Chris von Csefalvay - The skeuomorphic fallacy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+
+
+<meta property="og:title" content="Chris von Csefalvay - The skeuomorphic fallacy">
+<meta property="og:description" content="What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site-name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="Chris von Csefalvay - The skeuomorphic fallacy">
+<meta name="twitter:description" content="What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="The skeuomorphic fallacy">
+<meta name="citation_publication_date" content="2023-11-06">
+<meta name="citation_cover_date" content="2023-11-06">
+<meta name="citation_year" content="2023">
+<meta name="citation_online_date" content="2023-11-06">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy">
+<meta name="citation_language" content="en-GB">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers" rel="" target="">
+ <span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching" rel="" target="">
+ <span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media" rel="" target="">
+ <span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts" rel="" target="">
+ <span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
+ <span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#skeuowhat" id="toc-skeuowhat" class="nav-link active" data-scroll-target="#skeuowhat">Skeuowhat?</a></li>
+  <li><a href="#where-skeuomorphy-becomes-a-fallacy" id="toc-where-skeuomorphy-becomes-a-fallacy" class="nav-link" data-scroll-target="#where-skeuomorphy-becomes-a-fallacy">Where skeuomorphy becomes a fallacy</a></li>
+  <li><a href="#why-so-serious" id="toc-why-so-serious" class="nav-link" data-scroll-target="#why-so-serious">Why so serious?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The skeuomorphic fallacy</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">ai</div>
+    <div class="quarto-category">philosophy</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    <p>What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.</p>
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">6 November 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>It appears that in what is clearly a wonderful little PR stunt, <a href="https://archive.ph/Xgg38">a Polish rum company managed to do a Sophia and appoint an ‘AI-driven’ ‘robot’ as its ‘CEO’</a>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The other guilty party to this pile of steaming bovine excrement is Hanson Robotics, famous for giving us Sophia, the “world’s first robot citizen”. Most of what I’m saying here goes just as well for Sophia. It blows my mind that Hanson managed to get away with this nonsense <em>not once, but twice</em>.</p>
+</div></div><blockquote class="blockquote">
+<p>Dictador has just announced hiring the first world ever AI robot as a CEO of a global company. The new CEO is a human-like robot, incorporating AI. The robot is a woman, named Mika. She will be the official face of Dictador, the world’s most forward-looking luxury rum producer. This bold move consolidates the company’s position as one of the most advanced and thought-leading organizations globally. It underlines the brand’s passion for new technology and offers a positive disruption by bringing the future to what can still be a very traditional world.</p>
+<p>– <a href="https://www.prnewswire.com/news-releases/dictador-announces-the-first-robot-ceo-in-a-global-company-301634165.html">Dictador, via PR Newswire</a></p>
+</blockquote>
+<p>Oh good grief.</p>
+<p>Now, let’s for a moment try to get over the obvious bullshit here, such as the fact that corporate officers generally have to be natural persons in most places, and may at worst be legal persons, but a ‘robot’ or an ‘AI’ is neither. You can no more appoint a ‘robot’ or an ‘AI’ as your CEO than you can appoint a pet rock to be your corporate secretary. I am, to the surprise of many, a recovering corporate lawyer, so I have at one point convinced examiners that I know what I’m talking about when it comes to this stuff. There are complex aspects of law involved in the question of who can or cannot, legally, be a corporate officer. But let’s get over that.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="6506c915cd637c0019c66997.webp" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">“Mika”, the “CEO” of Dictador. Artificial, yes. Intelligence, not quite. Uncanny Valley, totally.</figcaption>
+</figure>
+</div>
+<p>Let’s also get over what an absolutely disastrous piece of nonsense this seems to be on its face. Here’s a quote from the ‘CEO’ itself:</p>
+<blockquote class="blockquote">
+<p>In a Dictador company video, Mika said that “with advanced artificial intelligence and machine learning algorithms, I can swiftly and accurately make data driven.”</p>
+<p>– <a href="https://archive.ph/Xgg38">Kayla Bailey, <em>‘Mika’ becomes world’s first AI human-like robot CEO</em>, Fox Business</a></p>
+</blockquote>
+<p>It would definitely be useful for Mika to be able to finish a sentence. In the industry, crap like this is called a ‘sell signal’, and in a slightly more sane economic environment, Dictador would have the market value of, uh, dunno, an expired carton of eggs after this nonsense. But let’s get over that, too.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The commentary on this nonsense is, if anything, worse than the nonsense itself. Forbes contributor Cindy Gordon <a href="https://archive.ph/Her3m">titled her article on the subject “How Should CEO’s Embrace AI Or Will AI Assume CEO Roles?”</a>. Clearly expecting an understanding of when to use apostrophes is now beyond Forbes contributors’ ken. The world is in safe hands: people who cannot construct a sentence that would pass muster in a third-grade English class are now writing about the future of corporate governance in the age of AI in Forbes.</p>
+</div></div><p>Let’s instead talk about skeuomorphy.</p>
+<section id="skeuowhat" class="level1 page-columns page-full">
+<h1>Skeuowhat?</h1>
+<p>A skeuomorph is a kind of design element that is no longer necessary for the function of the object, but is retained for aesthetic reasons. For example, your iPhone’s Notes app used to use some visual elements from physical note pads (such as the ‘legal pad yellow’ background) for a pretty long time, even though it was not in any sense necessary. Skeuomorphs are a way to acclimate our somewhat sluggish human brains to a changing world.</p>
+<p>Skeuomorphs also illustrate an important point: what something appears as is not the same as what it is. The interface is not the object. The interface is, to say the blindingly obvious, <em>the interface</em>: the tool through which an object communicates. Confuse the two, and you get blinding bullshit like that ‘robot CEO’ nonsense.</p>
+<p>On the other hand, we’re not in any way immune to what I shall call the skeuomorphic fallacy, the confusion that the visual, linguistic or other forms through which something communciates equate to the essence of that thing. Where something as sensitive as language is involved, <a href="../llms-language">which I have written about before</a>, this hits particularly hard. For better or worse, we connect language so closely to the concept of being human that anything capable of producing decent linguistic output gets a level of human-like credence accorded to it <em>prima facie</em>.</p>
+<p>And this is not entirely wrong, either. <a href="../llms-language">As I have stated before</a>, language is a uniquely human trait that is so intricately intertwined with what it means to be human in a human society that it is hard to unlink it from personhood. It is not a necessary characteristic of personhood, but it has certainly been often seen as a sufficient one. To speak is to be able to speak <em>up</em> as well, and to be able to speak <em>up</em> is to be able to advocate for rights. It is a lot easier to accord human rights for one that can speak for those rights.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Harris makes this point, and <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=989542">my old law school professor Tim Endicott gives a wonderful refutation in <em>The Infant in the Snow</em></a>, one of the best papers on the philosophy of personhood and the origin of rights (and the qualifications needed to have them) that I have ever read.</p>
+</div></div></section>
+<section id="where-skeuomorphy-becomes-a-fallacy" class="level1 page-columns page-full">
+<h1>Where skeuomorphy becomes a fallacy</h1>
+<p>The problem is, of course, that as noted above, <em>the interface is not the substance</em>. The reality is that Mika is no more human than my bedside lamp. The only reason why nobody has appointed my bedside lamp a CEO is, of course, that it does not pretend to look and speak like a human. But if we look at what it means to be a legal subject – be it a citizen (<em>viz.</em> Sophia) or a corporate officer (<em>viz.</em> Mika) –, it becomes abundantly clear that there’s much more to that than being able to <em>pretend</em> to look and speak like a human. It is to be able to <em>be</em> a human. And that is something that Mika, Sophia and all the other ‘AI’ and ‘robot’ nonsense out there is not.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>I am really being incredibly generous by dignifying whatever these Hanson products do with the term ‘AI’. They are Disney animatronics with a bottom-tier language model and an average speech synthesiser. Artificial that may be, but intelligence it is not.</p>
+</div></div><p>The skeuomorphic fallacy is the fallacy of confusing the interface with the substance, confusing the appearance of being human with the essence of being human. Where things go wrong is the confusion of something in a humanoid body (being generous here) and using a quintessentially human skill that we’re somewhat extremely attached to (i.e.&nbsp;language) on one hand with being human on the other.</p>
+<p>Which is a problem, because appointing someone CEO isn’t a publicity stunt. The ‘O’ in CEO stands for <em>officer</em>. A corporate officer is, even given limited liability, the person with whom the buck stops. Limited liability does create legal (corporate) personhood, which insulates corporate officers of <em>some</em> aspects of liability, but not all of them. Lord Thurlow pointed out that a company couldn’t be expected to have a conscience if it had no body to kick and no soul to damn – the need to eventually have some nominate humans in the process serves to a great degree to provide that conscience and that body. Even notions like corporate homicide, which became a thing in England &amp; Wales just when I took corporate law (and a lovely mess that did of finals papers!), are predicated on the notion that there are human beings who, collectively, operate a system that is ultimately responsible for the actions of the company. You don’t necessarily have to have a body to kick, nor really a soul to damn, but you do definitely have to have a <em>mens rea</em>, and that is something that a robot or an AI is not capable of.</p>
+<p>This isn’t just a fine point about corporate law by a recovering legal philosopher. This is what happens when we lapse in our understanding of what it means to be human, and begin to accord human rights and responsibilities to non-human things. We’re cognitively geared to associate language with personhood, so this is not a particularly surprising lapse of reason. We’re humans, and that’s why our response to a speaking robot becoming CEO is “oh, that’s innovative” as opposed to “let’s consider if some people might need to spend some time away from their favourite hallucinogens and/or the general population”. If a company appointed my bedside lamp as a corporate officer, we’d be much more likely to consider that a sign that the latest office party went a little overly generous on the acid. But because we’re cognitively geared to consider language a uniquely human trait, we’re much more likely to be tempted to consider this some Valley quirkiness as opposed to frank insanity.</p>
+</section>
+<section id="why-so-serious" class="level1 page-columns page-full">
+<h1>Why so serious?</h1>
+<p>It’s a legitimate question: why are you so bothered by this nonsense? It’s just a PR stunt, after all. And you’re right: it is just a PR stunt. But it is a PR stunt that is part of a larger pattern of nonsense that is being peddled by the likes of Hanson Robotics and others. And it’s damaging.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="FzpQYv2XwAsAABN.jpeg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Freddy Fazbear, titular antagonist of the Five Nights at Freddy’s franchise.</figcaption>
+</figure>
+</div>
+<p>We don’t consider Freddy Fazbear, an animatronic bear, to be an authority on what it means to be an ursine individual. Why is this more patently ridiculous than considering an animatronic human to be capable of bearing indiciae of human personhood, such as citizenship or corporate office?</p>
+</div></div><p>It’s damaging to humanity, because it leads to a gradual misunderstanding of what the essence of human existence, of being human, is: it muddles the picture, confusing <em>what things are</em> with <em>how things behave</em>. It is Searle’s Chinese Room all over again: the idea that a system that behaves like a human is a human. It is not. It is a system that behaves like a human, no more, no less. And that is a very important distinction.</p>
+<p>It’s damaging to the field of AI, because it leads to a misunderstanding of what AI is and what it can do. It is a field that is already rife with hype and nonsense, and this kind of nonsense just adds to the pile. It is a field that is already struggling to be taken seriously, and this kind of nonsense just makes it harder to be taken seriously.</p>
+<p>There are powerful, sophisticated AI algorithms that identify disease in cytopathological specimens, find cracks in compressor blades and detect anomalies as part of intrusion detection algorithms. These are deeply sophisticated and intricate solutions. They are also deeply unsexy. They are not the kind of thing that gets you on the cover of Forbes – just the kind of thing that makes a difference in real lives day in, day out, the kind of thing that is being drowned out by the nonsense that is being peddled here. Many of these systems have outputs that wouldn’t look out of place in the 1990s: terminal outputs, text files, CSVs.</p>
+<p>They make this world a better, safer, healthier place. They don’t need animatronic bodies. They just do something important, and do that well. And that is what AI is about: it is not about making a PR stunt out of a glorified animatronic. It is about making a difference, and that is what we should be focusing on.</p>
+<p>Which makes Mika an unwelcome distraction, and one that should be a concern for all of us. It’s the symptom of a disease – a fallacy of confusing the interface with the substance – that is spreading. And it’s a disease that we should be fighting, lest it makes us worse at being humans, and worse at being AI researchers.</p>
+<p>The world is looking to us for calling out this kind of bullshit. So, please, as part of our professional involvement with the world, let’s start doing that with extreme prejudice.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
+  title = {The Skeuomorphic Fallacy},
+  date = {2023-11-06},
+  url = {https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2023. <span>“The Skeuomorphic Fallacy.”</span>
+November 6, 2023. <a href="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy">https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
