@@ -2,11 +2,15 @@
 title: Papers
 ---
 
+# Books
+
+- **von Csefalvay C** (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. [https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4](https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4).
+
+- **von Csefalvay C**, Nam D T, Melis A, Halonen M, Edison S, Kozdon J, Kwong T, Glaser F, Frid Y, Szarnyas G, Crusius K, de Oliveira Castro PR, Hassler G, Clark AR, Visser M (2021). Learn Julia the Hard Way. [https://doi.org/10.5281/zenodo.4556324](https://doi.org/10.5281/zenodo.4556324)
+
 <!-- references -->
 
 # 2023
-
-- **von Csefalvay C** (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. [https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4](https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4).
 
 - Mogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, **von Csefalvay C**, Mukamati D (2023). Juvenile polyposis syndrome: A case report. _Clinical Case Reports_ 2023;**11**:e6798. doi:[10.1002/ccr3.6798](https://doi.org/10.1002/ccr3.6798)
 
