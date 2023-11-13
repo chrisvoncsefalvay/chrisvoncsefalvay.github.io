@@ -1,14 +1,18 @@
 ---
-title: "The hardest AI problem you've never heard of."
-description: |
-  Dwarves. Elephants. AI. Let the games begin.
-date: 2023-03-07
-categories: ["ai", "games", "ABMs"]
-image: 7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp
-citation:
-  doi: "10.59350/5dp4z-d5e22"
-google-scholar: true
 bibliography: references.bib
+categories:
+- ai
+- games
+- ABMs
+citation:
+  doi: 10.59350/5dp4z-d5e22
+date: 2023-03-07
+description: 'Dwarves. Elephants. AI. Let the games begin.
+
+  '
+google-scholar: true
+image: 7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp
+title: The hardest AI problem you've never heard of.
 ---
 
 There’s a notion in artificial intelligence known as Moravec’s paradox: it’s relatively easy to teach a computer to play chess or checkers at a pretty decent level, but near impossible to teach it something as trivial as bipedal motion. [@hassabis2017artificial] The sensorimotor tasks that our truly wonderful brains have mastered by our second birthday are much harder to teach a computer than something arguably as ‘complex’ as [beating a chess grandmaster](https://www.chessgames.com/perl/chessgame?gid=1070917). In that sense, what Garry Kasparov learned in the first months of his life were much more ‘difficult’, from the perspective of AI, than his mastery of chess. So is, for that matter, learning to play Super Mario. What's hard for us is simple for computers, and vice versa. [@pinker2003language]

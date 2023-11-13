@@ -1,13 +1,16 @@
 ---
-title: "Why the COVID-19 vaccines are not gene therapy"
-description: |
-  Reflections on some definitional issues.
-date: 2021-11-09
-categories: ["public health", "vaccines"]
-image: gettyimages-1666317109-1.jpg
+categories:
+- public health
+- vaccines
 citation:
-  doi: "10.59350/s2xc9-mwp25"
+  doi: 10.59350/s2xc9-mwp25
+date: 2021-11-09
+description: 'Reflections on some definitional issues.
+
+  '
 google-scholar: true
+image: gettyimages-1666317109-1.jpg
+title: Why the COVID-19 vaccines are not gene therapy
 ---
 
 

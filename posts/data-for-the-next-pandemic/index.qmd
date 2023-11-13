@@ -1,12 +1,18 @@
 ---
-title: "Data for the next pandemic"
-description: |
-    If there's one thing that emerged with any clarity from COVID-19, it's that where data played a decisive role in guiding policy interventions, outcomes were better. We need better data for the next pandemic.
+categories:
+- computational epidemiology
+- epidemics
+- 'Cross-post: Starschema'
+citation: false
 date: 2023-03-07
-categories: ["computational epidemiology", "epidemics", "Cross-post: Starschema"]
-image: header.webp
-citation: true
+description: 'If there''s one thing that emerged with any clarity from COVID-19, it''s
+  that where data played a decisive role in guiding policy interventions, outcomes
+  were better. We need better data for the next pandemic.
+
+  '
 google-scholar: false
+image: header.webp
+title: Data for the next pandemic
 ---
 
 My recent post on the [Starschema blog](https://medium.com/starschema-blog) discusses the need for better data products to tackle future pandemic challenges:

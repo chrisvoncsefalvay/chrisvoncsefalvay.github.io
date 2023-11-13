@@ -1,14 +1,18 @@
 ---
-title: "Peace, love, Paxlovid and 'Pfizermectin'"
-description: |
-  Debunking a remarkably popular and persistent misconception about the relationship between Paxlovid and ivermectin.
-date: 2021-11-27
-categories: ["COVID-19", "pharmacology"]
-image: paxlovid.png.webp
-citation:
-  doi: "10.59350/576dr-vbd49"
-google-scholar: true
 bibliography: references.bib
+categories:
+- COVID-19
+- pharmacology
+citation:
+  doi: 10.59350/576dr-vbd49
+date: 2021-11-27
+description: 'Debunking a remarkably popular and persistent misconception about the
+  relationship between Paxlovid and ivermectin.
+
+  '
+google-scholar: true
+image: paxlovid.png.webp
+title: Peace, love, Paxlovid and 'Pfizermectin'
 ---
 
 As the new Omicron variant of concern of COVID-19 emerged over Thanksgiving week (of all times!), attention has been turning to Paxlovid (PF-07321332). If, like me, you torment yourself by perusing conspiracy theories, you might have heard it referred to as Pfizermectin. Behind that is the idea that the “COVID pill” Paxlovid is, basically, a re-packaging of ivermectin, a disproven treatment for COVID-19. [@popp2021ivermectin]

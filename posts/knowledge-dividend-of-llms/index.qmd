@@ -1,12 +1,18 @@
 ---
-title: "The knowledge dividend of large language models"
-description: |
-    Crosspost from the work blog: a pragmatic perspective on the knowledge dividend in large language models (and what it may, or may not, mean for knowledge in models, and what this can do for you).
+categories:
+- ai
+- LLMs
+- 'Cross-post: Starschema'
+citation: false
 date: 2023-10-02
-categories: ["ai", "LLMs", "Cross-post: Starschema"]
-image: header.webp
-citation: true
+description: 'Crosspost from the work blog: a pragmatic perspective on the knowledge
+  dividend in large language models (and what it may, or may not, mean for knowledge
+  in models, and what this can do for you).
+
+  '
 google-scholar: false
+image: header.webp
+title: The knowledge dividend of large language models
 ---
 
 Over at the [work blog](https://medium.com/starschema-blog), I'm discussing what knowledge means for large language models (LLMs), and the ways in which we can leverage this knowledge dividend for better inference.

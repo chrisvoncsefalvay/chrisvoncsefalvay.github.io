@@ -1,12 +1,17 @@
 ---
-title: "Julia: A post-mortem"
-description: |
-  Why I no longer believe my favourite programming language will save the world.
-date: 2021-03-07
-categories: ["ai", "julia", "programming"]
-image: julia.jpg
+categories:
+- ai
+- julia
+- programming
 citation: true
+date: 2021-03-07
+description: 'Why I no longer believe my favourite programming language will save
+  the world.
+
+  '
 google-scholar: true
+image: julia.jpg
+title: 'Julia: A post-mortem'
 ---
 
 A little over half a decade ago, I came across a wonderful project: a programming language called Julia that was going to revolutionise data science and technical computing. It was going to run like C, seamlessly integrate with Fortran, do things R does without its clunkiness, look and read like Python and be homoiconic like Lisp. We were all going to heaven, and that right soon. The language wars would end, we would finally get a lingua franca for anywhere code performance mattered, Julia would take over the [TIOBE Index](https://www.tiobe.com/tiobe-index/), and we’d all be home for tea and medals.

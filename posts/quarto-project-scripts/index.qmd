@@ -1,12 +1,17 @@
 ---
-title: "Quarto project scripts are awesomeness"
-description: |
-  Project scripts help you integrate just about every possible hare-brained scheme into your Quarto rendering pipeline. Go on, build that page from that YAML file. You know you want to.
-date: 2023-10-22
-categories: ["quarto", "python"]
+categories:
+- quarto
+- python
 citation:
-  doi: "10.59350/b4qyq-70w75"
+  doi: 10.59350/b4qyq-70w75
+date: 2023-10-22
+description: 'Project scripts help you integrate just about every possible hare-brained
+  scheme into your Quarto rendering pipeline. Go on, build that page from that YAML
+  file. You know you want to.
+
+  '
 google-scholar: true
+title: Quarto project scripts are awesomeness
 ---
 
 [Quarto](https://quarto.org) is a great tool for reproducible research. It is also a great tool for building websites. After about a decade of Wordpress-based websites, I've moved to Quarto primarily for two reasons. First, most of my content is largely static. I don't quite need the full power of a CMS, and the performance cost of dynamic generation I didn't need was quite steep (the economic cost was nothing special, but I'm a cheapskate). Second, I wanted to be able to write in Markdown and integrate better with notebooks. Quarto lets me do both of these.

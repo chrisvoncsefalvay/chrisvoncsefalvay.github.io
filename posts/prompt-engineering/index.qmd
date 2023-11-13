@@ -1,13 +1,17 @@
 ---
-title: "Prompt Engineering: The Art of Yesterday"
-description: |
-  Why prompt engineering has been obsolete before it even took off.
-date: 2023-10-29
-categories: ["AI", "LLMs", "prompt engineering"]
-notebook-links: global
+categories:
+- AI
+- LLMs
+- prompt engineering
 citation:
   doi: 10.59350/keztr-yx081
+date: 2023-10-29
+description: 'Why prompt engineering has been obsolete before it even took off.
+
+  '
 google-scholar: true
+notebook-links: global
+title: 'Prompt Engineering: The Art of Yesterday'
 ---
 
 There's a style of visual design I'm inordinately fond of called Raygun Gothic. It's hard to describe what the hell exactly one needs to be on to enjoy it, but think of it like the aesthetic from the latter Fallout games with a more optimistic outlook on the future. Gibson described it as "the future that never was", and I think that's a pretty apt description.

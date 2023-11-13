@@ -1,15 +1,15 @@
 ---
-title: "The Notebook"
 listing:
-    contents:
-        - "*.qmd"
-    sort: date desc
-    type: default
-    categories: true
-    sort-ui: false
-    filter-ui: false
-    feed: true
+  categories: true
+  contents:
+  - '*.qmd'
+  feed: true
+  filter-ui: false
+  sort: date desc
+  sort-ui: false
+  type: default
 page-layout: full
+title: The Notebook
 title-block-bannerrR: false
 ---
 

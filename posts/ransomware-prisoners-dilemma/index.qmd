@@ -1,13 +1,18 @@
 ---
-title: "Ransomware attacks as n-person prisoner's dilemmas"
-description: |
-  A game theoretical perspective on ransomware attacks as n-person prisoner's dilemmas, and why forced cooperation isn't the answer.
-date: 2021-05-14
-categories: ["cybersecurity", "econometrics", "game theory"]
-image: 106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg
+categories:
+- cybersecurity
+- econometrics
+- game theory
 citation:
-  doi: "10.59350/r74zv-gsd67"
+  doi: 10.59350/r74zv-gsd67
+date: 2021-05-14
+description: 'A game theoretical perspective on ransomware attacks as n-person prisoner''s
+  dilemmas, and why forced cooperation isn''t the answer.
+
+  '
 google-scholar: true
+image: 106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg
+title: Ransomware attacks as n-person prisoner's dilemmas
 ---
 
 In the middle of the green and pleasant countryside of England lies a small piece of commons –– land, that is, over which a number of people share certain rights. In this hypothetical scenario, it’s six farmers, $F_1$ to $F_6$. Each of them has a hypothetical cow, which differs from ordinary cows in that it grazes a fixed unit, and produces a fixed amount of milk (unlike real cows, which vary wildly in their input and output parameters, or so I’m told). It is important to note that the land is a form of common property, meaning it is held by all of them jointly––or as ye olde Law Latin would put it, totum tenet et nihil tenet: they all hold the whole together, but no-one holds any specific part of it.[^1]

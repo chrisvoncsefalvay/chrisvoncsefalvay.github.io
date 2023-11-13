@@ -1,14 +1,19 @@
 ---
-title: "Teams of Rivals"
-description: |
-  Finally, some discussion on LLM connectionism, and what LLMs could usefully become.
-date: 2023-10-30
-categories: ["AI", "LLMs", "agents"]
+bibliography: bibliography.bib
+categories:
+- AI
+- LLMs
+- agents
 citation:
   doi: 10.59350/he7k6-tx158
-bibliography: bibliography.bib
-image: aaz4729-f1.jpeg
+date: 2023-10-30
+description: 'Finally, some discussion on LLM connectionism, and what LLMs could usefully
+  become.
+
+  '
 google-scholar: true
+image: aaz4729-f1.jpeg
+title: Teams of Rivals
 ---
 
 In the first four entries ([1](../llms-language) [2](../lyre-of-hephaestus) [3](../moral-maps) [4](../prompt-engineering)) of this sequence, I have focused primarily on what LLMs aren't, can't, won't, wouldn't and shouldn't. It's probably time to conclude this series by that much awaited moment in all stories, where the darkest night finally turns into a glorious dawn, where we finally arrive at the promised land, where we finally get to talk about what LLMs _could_ be.

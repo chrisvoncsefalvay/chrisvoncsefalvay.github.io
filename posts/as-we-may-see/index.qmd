@@ -1,12 +1,17 @@
 ---
-title: "As we may see: the world after dashboards"
-description: |
-    Dashboards are over -- if you want it.
+categories:
+- dashboards
+- data visualization
+- data science
+- 'Cross-post: Starschema'
+citation: false
 date: 2022-04-01
-categories: ["dashboards", "data visualization", "data science", "Cross-post: Starschema"]
-image: header.webp
-citation: true
+description: 'Dashboards are over -- if you want it.
+
+  '
 google-scholar: false
+image: header.webp
+title: 'As we may see: the world after dashboards'
 ---
 
 In my latest post for the [Starschema blog](https://medium.com/starschema-blog), I discuss the end of dashboards, and what comes next:

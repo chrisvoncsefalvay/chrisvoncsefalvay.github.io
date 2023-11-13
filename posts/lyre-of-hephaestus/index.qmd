@@ -1,13 +1,17 @@
 ---
-title: "The Lyre of Hephaestus"
-description: |
-  AI, art, language, and what makes us truly what we are.
-date: 2023-10-16
-categories: ["ai", "art", "philosophy"]
-image: IMG_8534.jpeg
+categories:
+- ai
+- art
+- philosophy
 citation:
-  doi: "10.59350/pd0q6-r5n60"
+  doi: 10.59350/pd0q6-r5n60
+date: 2023-10-16
+description: 'AI, art, language, and what makes us truly what we are.
+
+  '
 google-scholar: true
+image: IMG_8534.jpeg
+title: The Lyre of Hephaestus
 ---
 
 I have probably spent more time looking at Poussin's *Dance to the Music of Time* than any other work of art. Sneaking off to [the Wallace Collection](https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?service=direct/1/ResultListView/result.t1.collection_list.$TspTitleImageLink.link&sp=10&sp=Scollection&sp=SfieldValue&sp=0&sp=0&sp=2&sp=SdetailList&sp=0&sp=Sdetail&sp=0&sp=F&sp=T&sp=2) in London and just looking at the _Dance_ was my comfort activity while living in London -- a time that was not exactly devoid of its trials. It's not, by any measure, _great_ art, insofar as such judgments can be made with any objectivity. Like most French Baroque allegorical paintings, it's considered somewhat 'boring'. It neither has, nor claims to arrogate to itself, the fiery passion of a Van Gogh, the compositional genius of a Vermeer or the turbulence of a Turner. It's not particularly well known, and indeed more know it for having lent its name to Anthony Powell's dodecalogy (quite incidentally, another of my favourite works of art). In as far as there can be a sensible debate as to what is, and isn't, 'good' or 'great' art, few would consider _Dance_ to fall into that category. What nobody would argue, however, is that it *is* a piece of art.

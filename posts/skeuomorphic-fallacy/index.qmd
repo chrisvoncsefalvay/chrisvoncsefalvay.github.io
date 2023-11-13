@@ -1,11 +1,16 @@
 ---
-title: "The skeuomorphic fallacy"
-description: |
-    What something is isn't the same as what it uses to manifest that being. Also, robot CEOs are nonsense.
+categories:
+- ai
+- philosophy
+citation:
+  doi: 10.59350/k9kka-90x56
 date: 2023-11-06
-categories: ["ai", "philosophy"]
-citation: true
+description: 'What something is isn''t the same as what it uses to manifest that being.
+  Also, robot CEOs are nonsense.
+
+  '
 google-scholar: true
+title: The skeuomorphic fallacy
 ---
 
 It appears that in what is clearly a wonderful little PR stunt, [a Polish rum company managed to do a Sophia and appoint an 'AI-driven' 'robot' as its 'CEO'](https://archive.ph/Xgg38).

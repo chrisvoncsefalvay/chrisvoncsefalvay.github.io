@@ -1,14 +1,20 @@
 ---
-title: "A different shade of grey"
-description: |
-  A response to Urbina _et al._ (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn't already have enough of them).
-date: 2022-04-13
-categories: ["ai", "computational chemistry", "ethics"]
-image: 155mmMustardGasShells-1200x900.jpg
-citation:
-  doi: "10.59350/bwee1-hee31"
-google-scholar: true
 bibliography: references.bib
+categories:
+- ai
+- computational chemistry
+- ethics
+citation:
+  doi: 10.59350/bwee1-hee31
+date: 2022-04-13
+description: 'A response to Urbina _et al._ (2022) and the unreasonable spectre of
+  AI coming up with chemical warfare agents (as if we didn''t already have enough
+  of them).
+
+  '
+google-scholar: true
+image: 155mmMustardGasShells-1200x900.jpg
+title: A different shade of grey
 ---
 
 

@@ -1,12 +1,17 @@
 ---
-title: "My favourite Quora answers"
-description: |
-  I'm no longer on Quora, but I used to be. Here are some of my favourite answers.
-date: 2022-04-13
-categories: ["Quora", "history", "technology"]
-image: quora.png
+categories:
+- Quora
+- history
+- technology
 citation: true
+date: 2022-04-13
+description: 'I''m no longer on Quora, but I used to be. Here are some of my favourite
+  answers.
+
+  '
 google-scholar: true
+image: quora.png
+title: My favourite Quora answers
 ---
 
 I used to be on Quora. I'm not anymore. But I used to be. And I wrote some answers. Here are some of my favourites, categorised by field... sort of.

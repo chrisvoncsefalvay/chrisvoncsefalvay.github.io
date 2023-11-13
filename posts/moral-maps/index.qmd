@@ -1,12 +1,20 @@
 ---
-title: "The Moral Pulse of the Machine"
-description: |
-  On bedtime stories, and what making machines tell them tells us about their moral make-up.
+categories:
+- ai
+- storytelling
+- sensemaking
+- ethics
+- philosophy
+citation:
+  doi: 10.59350/ktyy5-dg821
 date: 2023-10-26
-categories: ["ai", "storytelling", "sensemaking", "ethics", "philosophy"]
-notebook-links: global
-citation: true
+description: 'On bedtime stories, and what making machines tell them tells us about
+  their moral make-up.
+
+  '
 google-scholar: true
+notebook-links: global
+title: The Moral Pulse of the Machine
 ---
 
 > Tell me what stories you grew up on, and I will tell you who you are.

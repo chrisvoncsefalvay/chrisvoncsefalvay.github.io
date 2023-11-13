@@ -1,12 +1,16 @@
 ---
-title: "Five non-data-science books for data scientists"
-description: |
-  Read stuff outside your field. It'll be good for you.
-date: 2022-04-13
-categories: ["literature", "data science", "ethics"]
-image: book.jpg
+categories:
+- literature
+- data science
+- ethics
 citation: true
+date: 2022-04-13
+description: 'Read stuff outside your field. It''ll be good for you.
+
+  '
 google-scholar: true
+image: book.jpg
+title: Five non-data-science books for data scientists
 ---
 
 
@@ -39,6 +43,3 @@ Herbert’s _The Dosadi Experiment_ should be required reading in Responsible Co
 
 In 1980, a Titan II inter-continental ballistic missile of the US Air Force suffered a liquid fuel explosion inside its silo near Damascus, Arkansas – with a nuclear warhead on top. Schlosser’s book reveals that this kind of incident was, unsettlingly, much less infrequent than one might be comfortable with. What happens when the literal survival of the planet depends on technology, and how comfortable are we in replacing the human decision-maker – often enough, a twenty-something 1st Lieutenant in a missile silo’s command centre – with technology that may run away from us? Schlosser’s book is an impassioned plea for better design of critical systems, presenting the near-disasters of nuclear weapons – which ought to be the epitome of safety engineering! – as an indication of all that can, and does, go wrong.
 
----
-
-What are your favourite non-data science books for data scientists? Let me know in the comments.
