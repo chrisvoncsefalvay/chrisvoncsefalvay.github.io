@@ -22,6 +22,19 @@
 <p>I love posts that allow me to merge some of my addictions. In this case, it’s my love for Quarto project scripts (which I’ve <a href="../quarto-project-scripts">written about elsewhere</a>), my fondness for <a href="https://rogue-scholar.org">Rogue Scholar</a> and the overuse of the word ‘mint’ to mean ‘generally really quite rather nice’.</p>
 <p><a href="https://rogue-scholar.org">Rogue Scholar</a> is a fantastic tool for science bloggers, and while it’s a little artisanal (i.e.&nbsp;hand-made much of the time) at this point, it’s got some really cool automated features. One is that it registers (mints, hence the abundance of lame peppermint puns across this post) DOIs for your posts.</p>
 <p>I’ve been using Rogue Scholar to mint DOIs for my posts for a while now, but it’s always been a bit of a manual process. I’d have to wait for a while for the post to go on the Rogue Scholar feed, then copy/paste the DOI, then copy the DOI into the YAML front matter. It’s not a lot of work, but it’s a bit of a pain. I’ve been meaning to automate it for a while, but I’ve been busy with other things.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Just after I posted about this solution, Martin Fenner, who runs Rogue Scholar, <a href="https://github.com/quarto-dev/quarto-cli/discussions/7174#discussioncomment-7557741">pointed out that there’s now an API</a>. The API is great, and would have spared me the part of having to scrape the HTML. I will, one of these days, switch over – if I had to build it, I’d obviously use the API, and simply parse the JSON result. The rest, <em>ceteris paribus</em>, holds true.</p>
+</div>
+</div>
 <p>This weekend, I was laid up with being on the receiving end (for once) of the bounties of a clinical trial, so I’ve decided to finally build it. It’s a bit of a hack, but it works.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -178,11 +191,11 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="lst-getting-dois" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-lines="5" data-code-annotation="1" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="lst-getting-dois" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-lines="13" data-code-annotation="2" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
@@ -516,27 +529,27 @@ font-style: inherit;">'</span>)</span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="lst-process-post" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+<span data-code-lines="6" data-code-annotation="1" data-code-cell="lst-process-post">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="lst-process-post" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+<span data-code-lines="20" data-code-annotation="2" data-code-cell="lst-process-post">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-cell="lst-process-post" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
+<span data-code-lines="21" data-code-annotation="3" data-code-cell="lst-process-post">While we’re at it, might as well prune the cross-posts.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-annotation="4" data-code-cell="lst-process-post" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
+<span data-code-lines="28" data-code-annotation="4" data-code-cell="lst-process-post">And anything with a DOI should also get a Google Scholar metadata.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-annotation="5" data-code-cell="lst-process-post" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+<span data-code-lines="36" data-code-annotation="5" data-code-cell="lst-process-post">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-annotation="6" data-code-cell="lst-process-post" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+<span data-code-lines="37" data-code-annotation="6" data-code-cell="lst-process-post">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
 </dd>
 </dl>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
@@ -869,7 +882,7 @@ font-style: inherit;">|</span></span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="lst-gh-action" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+<span data-code-lines="39" data-code-annotation="1" data-code-cell="lst-gh-action">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
 </dd>
 </dl>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
