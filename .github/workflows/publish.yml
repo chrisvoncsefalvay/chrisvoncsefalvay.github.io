@@ -36,5 +36,5 @@ jobs:
         run: |
           git config --global user.name 'Chris von Csefalvay'
           git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'
-          git commit -am "Automated commit of changes to source files"
+          git  diff-index --quiet HEAD || git commit -am "Automated commit of changes to source files"
           git push
