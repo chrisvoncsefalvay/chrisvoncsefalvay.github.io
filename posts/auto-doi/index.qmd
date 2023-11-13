@@ -80,4 +80,130 @@ def scrape_blog_for_dois(url) -> Dict[str, str]:
 Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they're text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:
 
 ```{#lst-preamble .yaml lst-cap="Pre-DOI YAML preamble example."}
+categories:
+- Quarto
+citation: true
+date: 2023-11-13
+description: 'Oh, that''s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.'
+google-scholar: true
+title: Auto-DOI for Quarto posts via Rogue Scholar
+```
+
+What this tells us is that we do want a citation (someday), which is why we're doing this in the first place. That, according to our beautiful flowchart in @fig-auto-doi, means this post is eligible to get a DOI appended. We also know there isn't one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, `doi`) to the `citation` object in the YAML preface. So, we'll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in @lst-getting-dois.
+
+```{#lst-process-post .python lst-cap="Processing a single post."}
+
+def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
+    with open(file_path, 'r') as stream:
+        contents = stream.read()
+
+    delim = re.compile(r'^---$', re.MULTILINE) # <1>
+    splits = re.split(delim, contents)
+    yaml_preamble = splits[1].strip() if len(splits) > 2 else "" #
+    rest_of_post = splits[2] if len(splits) > 2 else contents
+
+    yaml_contents = yaml.safe_load(yaml_preamble) if yaml_preamble else None
+
+    if yaml_contents:
+        citation = yaml_contents.get('citation')
+        google_scholar = yaml_contents.get('google-scholar')
+        categories = yaml_contents.get('categories', [])
+        title = yaml_contents.get('title')
+
+        # Check files from crosspost categories
+        if any("cross-post" in category.lower() for category in categories): # <2>
+            if yaml_contents["citation"] == True or yaml_contents["google-scholar"] == True: # <3>
+                yaml_contents["citation"] = False
+                yaml_contents["google-scholar"] = False
+                logging.info(f'Modified crosspost {title} to remove Google Scholar and/or citation reference.')
+        else:
+            # Ensure that google-scholar is set to true if citation is required
+            if citation and not google_scholar:
+                yaml_contents["google-scholar"] = True # <4>
+                logging.info(f'Setting google-scholar to true for {title}')
+
+            # If citation is true but no DOI, and post exists in scraped posts
+            if citation is True and posts_with_dois.get(title):
+                yaml_contents['citation'] = {'doi': posts_with_dois[title]}
+                logging.info(f'Adding doi for {title}.')
+
+        new_preamble = yaml.dump(yaml_contents).rstrip() # <5>
+        new_yaml_doc = f"---\n{new_preamble}\n---" # <6>
+
+        # write the modified YAML document back to file
+        with open(file_path, 'w') as yaml_file:
+            yaml_file.write(new_yaml_doc + rest_of_post)
+        logging.info(f'Updated file {title}')
+        
+```
+1. We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.
+2. If it's a cross-post, we don't want it to have a Google Scholar link, and we'll definitely not attach a DOI. In theory, we could have built this to be overridable in case I'll ever produce a cross-post I _do_ want to have a DOI, but I don't see that happening.
+3. While we're at it, might as well prune the cross-posts.
+4. And anything with a DOI should also get a Google Scholar metadata.
+5. The `.rstrip()` is pretty useful – otherwise, every time you run this, you'll get another newline appended to the YAML preface.
+6. Don't forget the `\n` before the YAML block's end, otherwise you'll end up with a YAML block that's not properly separated from the rest of the document and won't parse.
+
+Finally, we write the YAML back to the file, and we're done. We can now declare this as a project script, and we're good:
+
+```{#lst-project-script .yaml lst-cap="Declaring project scripts in _quarto.yml."}
+
+project:
+  type: website
+  pre-render:
+    - scripts/pre_doi_from_rogue_scholar.py
+    
+```
+
+
+One thing worth noting is that we're not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made 'on the fly' to the `.qmd` files and do not necessarily propagate into the  repo. This is a pain, because recall that we're only fetching the last ten posts' DOIs so as to be kind on the  server: as time goes on, that means older posts 'lose' their DOI. 
+
+To prevent this, we can simply check our changes back in:
+
+```{#lst-gh-action .yaml lst-cap="Github action to commit changes."}
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install Python and dependencies
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - run: pip install jupyter
+      - run: pip install -r requirements.txt
+
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Commit changes to reflect source file  changes
+        run: |
+          git config --global user.name 'Chris von Csefalvay'
+          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'
+          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files" # <1>
+          git push
+```
+1. The `diff-index --quiet HEAD` checks if there have been changes to the working tree. `git` returns an error if you're trying to commit on an empty working tree, so we're checking for that first.
+
+And that's it. We can now run this as a Github action, and it'll automatically append DOIs to our posts. 
+
+[As noted](quarto-project-scripts/): Quarto project scripts are pretty awesome stuff. I'm thinking of setting up an `awesome-` for it on Github, because way too few of them are shared properly. I'm hoping this will change.
 
