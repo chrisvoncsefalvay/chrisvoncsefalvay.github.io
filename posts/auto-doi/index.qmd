@@ -21,6 +21,10 @@ I love posts that allow me to merge some of my addictions. In this case, it's my
 
 I've been using Rogue Scholar to mint DOIs for my posts for a while now, but it's always been a bit of a manual process. I'd have to wait for a while for the post to go on the Rogue Scholar feed, then copy/paste the DOI, then copy the DOI into the YAML front matter. It's not a lot of work, but it's a bit of a pain. I've been meaning to automate it for a while, but I've been busy with other things.
 
+::: {.callout-note}
+Just after I posted about this solution, Martin Fenner, who runs Rogue Scholar, [pointed out that there's now an API](https://github.com/quarto-dev/quarto-cli/discussions/7174#discussioncomment-7557741). The API is great, and would have spared me the part of having to scrape the HTML. I will, one of these days, switch over -- if I had to build it, I'd obviously use the API, and simply parse the JSON result. The rest, _ceteris paribus_, holds true.
+:::
+
 This weekend, I was laid up with being on the receiving end (for once) of the bounties of a clinical trial, so I've decided to finally build it. It's a bit of a hack, but it works.
 
 ```{mermaid}
