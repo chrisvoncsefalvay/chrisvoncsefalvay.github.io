@@ -31,3 +31,10 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Commit changes to reflect source file  changes
+        run: |
+          git config --global user.name 'Chris von Csefalvay'
+          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'
+          git commit -am "Automated commit of changes to source files"
+          git push
