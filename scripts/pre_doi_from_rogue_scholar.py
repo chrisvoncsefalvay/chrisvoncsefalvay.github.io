@@ -66,7 +66,7 @@ def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
                 logging.info(f'Adding doi for {title}.')
 
         new_preamble = yaml.dump(yaml_contents).rstrip()
-        new_yaml_doc = f"---\n{new_preamble}\n---\n"
+        new_yaml_doc = f"---\n{new_preamble}\n---"
 
         # write the modified YAML document back to file
         with open(file_path, 'w') as yaml_file:

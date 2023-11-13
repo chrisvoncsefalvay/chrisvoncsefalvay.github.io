@@ -2,7 +2,7 @@ project:
   type: website
   pre-render:
     - scripts/pre_create_papers_file.py
-    - scripts/pre_check_skierg_records.py
+    # - scripts/pre_check_skierg_records.py
     - scripts/pre_doi_from_rogue_scholar.py
 resources:
   - CNAME
