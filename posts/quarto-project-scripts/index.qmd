@@ -14,6 +14,10 @@ google-scholar: true
 title: Quarto project scripts are awesomeness
 ---
 
+::: {.callout-tip}
+If you're here for the DOI matching script, the link is [here](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_doi_from_rogue_scholar.py).
+:::
+
 [Quarto](https://quarto.org) is a great tool for reproducible research. It is also a great tool for building websites. After about a decade of Wordpress-based websites, I've moved to Quarto primarily for two reasons. First, most of my content is largely static. I don't quite need the full power of a CMS, and the performance cost of dynamic generation I didn't need was quite steep (the economic cost was nothing special, but I'm a cheapskate). Second, I wanted to be able to write in Markdown and integrate better with notebooks. Quarto lets me do both of these.
 
 What Quarto also does, however, is something super awesome: project scripts!
@@ -110,6 +114,7 @@ One caveat: rendering with pre- and post-render project scripts may be relativel
 
 Seriously, the possibilities of what you can do with project scripts are pretty much endless. I have a project script that [checks the world records list on the official SkiErg website and makes sure my index page lists my accurate records](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_check_skierg_records.py). This is completely silly, but it's also a great example of how you can use project scripts to automate just about everything:
 
+* [A script I built](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_doi_from_rogue_scholar.py) pulls DOIs minted by [Rogue Scholar](https://rogue-scholar.org) and appends them to posts.
 * A lot of projects use it for housekeeping: [via makefiles](https://github.com/CSCAR/workshop-stata-intro/blob/main/Makefile)
 * The [bambi](https://github.com/bambinos/bambi) project uses it to [build a changelog](https://github.com/bambinos/bambi/blob/main/docs/pre_render.py), which is a great idea for applications that do need it
 * This one cool master's thesis uses pre-render project scripts to [load variables from a YAML file into envvars](https://github.com/danielvartan/mastersthesis/blob/bebb699af7cab7add37a33768ccd605a60a18ba8/R/quarto-pre-render-html.R#L82), and I've [seen the same done with Rprofile files](https://github.com/computorg/computo-quarto-extension/blob/main/prerender.R) -- obviously, these are much more pertinent to projects where the bulk of the project consists of notebooks/code execution rather than websites, but again, the idea is the same
