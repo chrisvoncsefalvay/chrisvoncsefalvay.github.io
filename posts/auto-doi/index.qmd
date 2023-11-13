@@ -11,6 +11,7 @@ description: 'Oh, that''s mint. We can finally use Rogue Scholar to mint DOIs fo
 format:
   html:
     code-overflow: wrap
+image: free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg
 google-scholar: true
 title: Auto-DOI for Quarto posts via Rogue Scholar
 ---
