@@ -1,7 +1,8 @@
 ---
 categories:
 - Quarto
-citation: true
+citation:
+  doi: 10.59350/5hxdg-fz574
 date: 2023-11-13
 description: 'Oh, that''s mint. We can finally use Rogue Scholar to mint DOIs for
   Quarto posts and append them automagically.
