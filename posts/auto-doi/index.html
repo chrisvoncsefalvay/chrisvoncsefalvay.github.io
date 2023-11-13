@@ -124,6 +124,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="citation_year" content="2023">
 <meta name="citation_online_date" content="2023-11-13">
 <meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/auto-doi">
+<meta name="citation_doi" content="10.59350/5hxdg-fz574">
 <meta name="citation_language" content="en-GB">
 </head>
 
@@ -285,28 +286,174 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="lst-getting-dois" data-code-annotation="1">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-annotation="1" data-code-cell="lst-getting-dois" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="13" data-code-cell="lst-getting-dois" data-code-annotation="2">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-annotation="2" data-code-cell="lst-getting-dois" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
-<p>```{#lst-preamble .yaml lst-cap=“Pre-DOI YAML preamble example.”}</p>
+<div id="lst-preamble" class="listing">
+<p>Listing&nbsp;2: Pre-DOI YAML preamble example.</p>
+<div class="sourceCode" id="lst-preamble" data-lst-cap="Pre-DOI YAML preamble example."><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-preamble-1"><a href="#lst-preamble-1" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span></span>
+<span id="lst-preamble-2"><a href="#lst-preamble-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> Quarto</span></span>
+<span id="lst-preamble-3"><a href="#lst-preamble-3" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="lst-preamble-4"><a href="#lst-preamble-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2023-11-13</span></span>
+<span id="lst-preamble-5"><a href="#lst-preamble-5" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">'Oh, that</span><span class="sc">''</span><span class="st">s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.'</span></span>
+<span id="lst-preamble-6"><a href="#lst-preamble-6" aria-hidden="true" tabindex="-1"></a><span class="fu">google-scholar</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="lst-preamble-7"><a href="#lst-preamble-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in <a href="#fig-auto-doi">Figure&nbsp;1</a>, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in <a href="#lst-getting-dois">Listing&nbsp;1</a>.</p>
+<div id="lst-process-post" class="listing">
+<p>Listing&nbsp;3: Processing a single post.</p>
+<div class="sourceCode" id="lst-process-post" data-lst-cap="Processing a single post."><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="lst-process-post-1"><a href="#lst-process-post-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-2"><a href="#lst-process-post-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_qmd_file(file_path: <span class="bu">str</span>, posts_with_dois: Dict[<span class="bu">str</span>, <span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="lst-process-post-3"><a href="#lst-process-post-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">'r'</span>) <span class="im">as</span> stream:</span>
+<span id="lst-process-post-4"><a href="#lst-process-post-4" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> stream.read()</span>
+<span id="lst-process-post-5"><a href="#lst-process-post-5" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-process-post-6" class="code-annotation-target"><a href="#lst-process-post-6" aria-hidden="true" tabindex="-1"></a>    delim <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r'^---$'</span>, re.MULTILINE)</span>
+<span id="lst-process-post-7"><a href="#lst-process-post-7" aria-hidden="true" tabindex="-1"></a>    splits <span class="op">=</span> re.split(delim, contents)</span>
+<span id="lst-process-post-8"><a href="#lst-process-post-8" aria-hidden="true" tabindex="-1"></a>    yaml_preamble <span class="op">=</span> splits[<span class="dv">1</span>].strip() <span class="cf">if</span> <span class="bu">len</span>(splits) <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> <span class="st">""</span> <span class="co">#</span></span>
+<span id="lst-process-post-9"><a href="#lst-process-post-9" aria-hidden="true" tabindex="-1"></a>    rest_of_post <span class="op">=</span> splits[<span class="dv">2</span>] <span class="cf">if</span> <span class="bu">len</span>(splits) <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> contents</span>
+<span id="lst-process-post-10"><a href="#lst-process-post-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-11"><a href="#lst-process-post-11" aria-hidden="true" tabindex="-1"></a>    yaml_contents <span class="op">=</span> yaml.safe_load(yaml_preamble) <span class="cf">if</span> yaml_preamble <span class="cf">else</span> <span class="va">None</span></span>
+<span id="lst-process-post-12"><a href="#lst-process-post-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-13"><a href="#lst-process-post-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> yaml_contents:</span>
+<span id="lst-process-post-14"><a href="#lst-process-post-14" aria-hidden="true" tabindex="-1"></a>        citation <span class="op">=</span> yaml_contents.get(<span class="st">'citation'</span>)</span>
+<span id="lst-process-post-15"><a href="#lst-process-post-15" aria-hidden="true" tabindex="-1"></a>        google_scholar <span class="op">=</span> yaml_contents.get(<span class="st">'google-scholar'</span>)</span>
+<span id="lst-process-post-16"><a href="#lst-process-post-16" aria-hidden="true" tabindex="-1"></a>        categories <span class="op">=</span> yaml_contents.get(<span class="st">'categories'</span>, [])</span>
+<span id="lst-process-post-17"><a href="#lst-process-post-17" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> yaml_contents.get(<span class="st">'title'</span>)</span>
+<span id="lst-process-post-18"><a href="#lst-process-post-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-19"><a href="#lst-process-post-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check files from crosspost categories</span></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="lst-process-post-20" class="code-annotation-target"><a href="#lst-process-post-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(<span class="st">"cross-post"</span> <span class="kw">in</span> category.lower() <span class="cf">for</span> category <span class="kw">in</span> categories):</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="lst-process-post-21" class="code-annotation-target"><a href="#lst-process-post-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> yaml_contents[<span class="st">"citation"</span>] <span class="op">==</span> <span class="va">True</span> <span class="kw">or</span> yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">==</span> <span class="va">True</span>:</span>
+<span id="lst-process-post-22"><a href="#lst-process-post-22" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"citation"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="lst-process-post-23"><a href="#lst-process-post-23" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="lst-process-post-24"><a href="#lst-process-post-24" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Modified crosspost </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> to remove Google Scholar and/or citation reference.'</span>)</span>
+<span id="lst-process-post-25"><a href="#lst-process-post-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="lst-process-post-26"><a href="#lst-process-post-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Ensure that google-scholar is set to true if citation is required</span></span>
+<span id="lst-process-post-27"><a href="#lst-process-post-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> citation <span class="kw">and</span> <span class="kw">not</span> google_scholar:</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="lst-process-post-28" class="code-annotation-target"><a href="#lst-process-post-28" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">=</span> <span class="va">True</span></span>
+<span id="lst-process-post-29"><a href="#lst-process-post-29" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Setting google-scholar to true for </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="lst-process-post-30"><a href="#lst-process-post-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-31"><a href="#lst-process-post-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If citation is true but no DOI, and post exists in scraped posts</span></span>
+<span id="lst-process-post-32"><a href="#lst-process-post-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> citation <span class="kw">is</span> <span class="va">True</span> <span class="kw">and</span> posts_with_dois.get(title):</span>
+<span id="lst-process-post-33"><a href="#lst-process-post-33" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">'citation'</span>] <span class="op">=</span> {<span class="st">'doi'</span>: posts_with_dois[title]}</span>
+<span id="lst-process-post-34"><a href="#lst-process-post-34" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Adding doi for </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">.'</span>)</span>
+<span id="lst-process-post-35"><a href="#lst-process-post-35" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="lst-process-post-36" class="code-annotation-target"><a href="#lst-process-post-36" aria-hidden="true" tabindex="-1"></a>        new_preamble <span class="op">=</span> yaml.dump(yaml_contents).rstrip()</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="lst-process-post-37" class="code-annotation-target"><a href="#lst-process-post-37" aria-hidden="true" tabindex="-1"></a>        new_yaml_doc <span class="op">=</span> <span class="ss">f"---</span><span class="ch">\n</span><span class="sc">{</span>new_preamble<span class="sc">}</span><span class="ch">\n</span><span class="ss">---"</span></span>
+<span id="lst-process-post-38"><a href="#lst-process-post-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-process-post-39"><a href="#lst-process-post-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># write the modified YAML document back to file</span></span>
+<span id="lst-process-post-40"><a href="#lst-process-post-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">'w'</span>) <span class="im">as</span> yaml_file:</span>
+<span id="lst-process-post-41"><a href="#lst-process-post-41" aria-hidden="true" tabindex="-1"></a>            yaml_file.write(new_yaml_doc <span class="op">+</span> rest_of_post)</span>
+<span id="lst-process-post-42"><a href="#lst-process-post-42" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f'Updated file </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="lst-process-post-43"><a href="#lst-process-post-43" aria-hidden="true" tabindex="-1"></a>        </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="lst-process-post" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="lst-process-post" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="lst-process-post" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-annotation="4" data-code-cell="lst-process-post" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-annotation="5" data-code-cell="lst-process-post" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-annotation="6" data-code-cell="lst-process-post" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+</dd>
+</dl>
+<p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
+<div id="lst-project-script" class="listing">
+<p>Listing&nbsp;4: Declaring project scripts in _quarto.yml.</p>
+<div class="sourceCode" id="lst-project-script" data-lst-cap="Declaring project scripts in _quarto.yml."><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-project-script-1"><a href="#lst-project-script-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-project-script-2"><a href="#lst-project-script-2" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="lst-project-script-3"><a href="#lst-project-script-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="lst-project-script-4"><a href="#lst-project-script-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span></span>
+<span id="lst-project-script-5"><a href="#lst-project-script-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> scripts/pre_doi_from_rogue_scholar.py</span></span>
+<span id="lst-project-script-6"><a href="#lst-project-script-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>One thing worth noting is that we’re not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made ‘on the fly’ to the <code>.qmd</code> files and do not necessarily propagate into the repo. This is a pain, because recall that we’re only fetching the last ten posts’ DOIs so as to be kind on the server: as time goes on, that means older posts ‘lose’ their DOI.</p>
+<p>To prevent this, we can simply check our changes back in:</p>
+<div id="lst-gh-action" class="listing">
+<p>Listing&nbsp;5: Github action to commit changes.</p>
+<div class="sourceCode" id="lst-gh-action" data-lst-cap="Github action to commit changes."><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="lst-gh-action-1"><a href="#lst-gh-action-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="lst-gh-action-2"><a href="#lst-gh-action-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="lst-gh-action-3"><a href="#lst-gh-action-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="lst-gh-action-4"><a href="#lst-gh-action-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> main</span></span>
+<span id="lst-gh-action-5"><a href="#lst-gh-action-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-gh-action-6"><a href="#lst-gh-action-6" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Quarto Publish</span></span>
+<span id="lst-gh-action-7"><a href="#lst-gh-action-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-gh-action-8"><a href="#lst-gh-action-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="lst-gh-action-9"><a href="#lst-gh-action-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-deploy</span><span class="kw">:</span></span>
+<span id="lst-gh-action-10"><a href="#lst-gh-action-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="lst-gh-action-11"><a href="#lst-gh-action-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">permissions</span><span class="kw">:</span></span>
+<span id="lst-gh-action-12"><a href="#lst-gh-action-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">contents</span><span class="kw">:</span><span class="at"> write</span></span>
+<span id="lst-gh-action-13"><a href="#lst-gh-action-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="lst-gh-action-14"><a href="#lst-gh-action-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository</span></span>
+<span id="lst-gh-action-15"><a href="#lst-gh-action-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="lst-gh-action-16"><a href="#lst-gh-action-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-gh-action-17"><a href="#lst-gh-action-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
+<span id="lst-gh-action-18"><a href="#lst-gh-action-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="lst-gh-action-19"><a href="#lst-gh-action-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-gh-action-20"><a href="#lst-gh-action-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install Python and dependencies</span></span>
+<span id="lst-gh-action-21"><a href="#lst-gh-action-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v4</span></span>
+<span id="lst-gh-action-22"><a href="#lst-gh-action-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="lst-gh-action-23"><a href="#lst-gh-action-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'3.10'</span></span>
+<span id="lst-gh-action-24"><a href="#lst-gh-action-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">cache</span><span class="kw">:</span><span class="at"> </span><span class="st">'pip'</span></span>
+<span id="lst-gh-action-25"><a href="#lst-gh-action-25" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install jupyter</span></span>
+<span id="lst-gh-action-26"><a href="#lst-gh-action-26" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install -r requirements.txt</span></span>
+<span id="lst-gh-action-27"><a href="#lst-gh-action-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-gh-action-28"><a href="#lst-gh-action-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render and Publish</span></span>
+<span id="lst-gh-action-29"><a href="#lst-gh-action-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/publish@v2</span></span>
+<span id="lst-gh-action-30"><a href="#lst-gh-action-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="lst-gh-action-31"><a href="#lst-gh-action-31" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">target</span><span class="kw">:</span><span class="at"> gh-pages</span></span>
+<span id="lst-gh-action-32"><a href="#lst-gh-action-32" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="lst-gh-action-33"><a href="#lst-gh-action-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="lst-gh-action-34"><a href="#lst-gh-action-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span></span>
+<span id="lst-gh-action-35"><a href="#lst-gh-action-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Commit changes to reflect source file  changes</span></span>
+<span id="lst-gh-action-36"><a href="#lst-gh-action-36" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="lst-gh-action-37"><a href="#lst-gh-action-37" aria-hidden="true" tabindex="-1"></a>          git config --global user.name 'Chris von Csefalvay'</span>
+<span id="lst-gh-action-38"><a href="#lst-gh-action-38" aria-hidden="true" tabindex="-1"></a>          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'</span>
+<a class="code-annotation-anchor" data-target-cell="lst-gh-action" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-gh-action-39" class="code-annotation-target"><a href="#lst-gh-action-39" aria-hidden="true" tabindex="-1"></a>          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
+<span id="lst-gh-action-40"><a href="#lst-gh-action-40" aria-hidden="true" tabindex="-1"></a>          git push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="lst-gh-action" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+</dd>
+</dl>
+<p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
+<p><a href="quarto-project-scripts/">As noted</a>: Quarto project scripts are pretty awesome stuff. I’m thinking of setting up an <code>awesome-</code> for it on Github, because way too few of them are shared properly. I’m hoping this will change.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Auto-DOI for {Quarto} Posts via {Rogue} {Scholar}},
   date = {2023-11-13},
   url = {https://chrisvoncsefalvay.com/posts/auto-doi},
+  doi = {10.59350/5hxdg-fz574},
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2023. <span>“Auto-DOI for Quarto Posts via Rogue
-Scholar.”</span> November 13, 2023. <a href="https://chrisvoncsefalvay.com/posts/auto-doi">https://chrisvoncsefalvay.com/posts/auto-doi</a>.
+Scholar.”</span> <a href="https://doi.org/10.59350/5hxdg-fz574">https://doi.org/10.59350/5hxdg-fz574</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

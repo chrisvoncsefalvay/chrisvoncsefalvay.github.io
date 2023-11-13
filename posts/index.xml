@@ -178,28 +178,716 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="lst-getting-dois" data-code-annotation="1">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-annotation="1" data-code-cell="lst-getting-dois" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="13" data-code-cell="lst-getting-dois" data-code-annotation="2">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-annotation="2" data-code-cell="lst-getting-dois" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
-<p>```{#lst-preamble .yaml lst-cap=“Pre-DOI YAML preamble example.”}</p>
+<div id="lst-preamble" class="listing">
+<p>Listing&nbsp;2: Pre-DOI YAML preamble example.</p>
+<div class="sourceCode" id="lst-preamble" data-lst-cap="Pre-DOI YAML preamble example." style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-preamble-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">categories</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-preamble-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Quarto</span></span>
+<span id="lst-preamble-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">citation</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">true</span></span>
+<span id="lst-preamble-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">date</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> 2023-11-13</span></span>
+<span id="lst-preamble-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Oh, that</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">''</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.'</span></span>
+<span id="lst-preamble-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">google-scholar</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">true</span></span>
+<span id="lst-preamble-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">title</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code></pre></div>
+</div>
+<p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in Figure&nbsp;1, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in Listing&nbsp;1.</p>
+<div id="lst-process-post" class="listing">
+<p>Listing&nbsp;3: Processing a single post.</p>
+<div class="sourceCode" id="lst-process-post" data-lst-cap="Processing a single post." style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="lst-process-post-1"></span>
+<span id="lst-process-post-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> process_qmd_file(file_path: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>, posts_with_dois: Dict[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="lst-process-post-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(file_path, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'r'</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> stream:</span>
+<span id="lst-process-post-4">        contents <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> stream.read()</span>
+<span id="lst-process-post-5"></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-process-post-6" class="code-annotation-target">    delim <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> re.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">compile</span>(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r'^---$'</span>, re.MULTILINE)</span>
+<span id="lst-process-post-7">    splits <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> re.split(delim, contents)</span>
+<span id="lst-process-post-8">    yaml_preamble <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> splits[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].strip() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(splits) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#</span></span>
+<span id="lst-process-post-9">    rest_of_post <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> splits[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(splits) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> contents</span>
+<span id="lst-process-post-10"></span>
+<span id="lst-process-post-11">    yaml_contents <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml.safe_load(yaml_preamble) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> yaml_preamble <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="lst-process-post-12"></span>
+<span id="lst-process-post-13">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> yaml_contents:</span>
+<span id="lst-process-post-14">        citation <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'citation'</span>)</span>
+<span id="lst-process-post-15">        google_scholar <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'google-scholar'</span>)</span>
+<span id="lst-process-post-16">        categories <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'categories'</span>, [])</span>
+<span id="lst-process-post-17">        title <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'title'</span>)</span>
+<span id="lst-process-post-18"></span>
+<span id="lst-process-post-19">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Check files from crosspost categories</span></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="lst-process-post-20" class="code-annotation-target">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">any</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cross-post"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> category.lower() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> category <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> categories):</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="lst-process-post-21" class="code-annotation-target">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"citation"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">or</span> yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>:</span>
+<span id="lst-process-post-22">                yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"citation"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span></span>
+<span id="lst-process-post-23">                yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span></span>
+<span id="lst-process-post-24">                logging.info(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Modified crosspost </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> to remove Google Scholar and/or citation reference.'</span>)</span>
+<span id="lst-process-post-25">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>:</span>
+<span id="lst-process-post-26">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Ensure that google-scholar is set to true if citation is required</span></span>
+<span id="lst-process-post-27">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> citation <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">and</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">not</span> google_scholar:</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="lst-process-post-28" class="code-annotation-target">                yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="lst-process-post-29">                logging.info(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Setting google-scholar to true for </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>)</span>
+<span id="lst-process-post-30"></span>
+<span id="lst-process-post-31">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If citation is true but no DOI, and post exists in scraped posts</span></span>
+<span id="lst-process-post-32">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> citation <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">and</span> posts_with_dois.get(title):</span>
+<span id="lst-process-post-33">                yaml_contents[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'citation'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'doi'</span>: posts_with_dois[title]}</span>
+<span id="lst-process-post-34">                logging.info(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Adding doi for </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">.'</span>)</span>
+<span id="lst-process-post-35"></span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="lst-process-post-36" class="code-annotation-target">        new_preamble <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yaml.dump(yaml_contents).rstrip()</span>
+<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="lst-process-post-37" class="code-annotation-target">        new_yaml_doc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"---</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>new_preamble<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">---"</span></span>
+<span id="lst-process-post-38"></span>
+<span id="lst-process-post-39">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># write the modified YAML document back to file</span></span>
+<span id="lst-process-post-40">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(file_path, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'w'</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> yaml_file:</span>
+<span id="lst-process-post-41">            yaml_file.write(new_yaml_doc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rest_of_post)</span>
+<span id="lst-process-post-42">        logging.info(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f'Updated file </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'</span>)</span>
+<span id="lst-process-post-43">        </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="lst-process-post" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-annotation="2" data-code-cell="lst-process-post" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-annotation="3" data-code-cell="lst-process-post" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-annotation="4" data-code-cell="lst-process-post" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-annotation="5" data-code-cell="lst-process-post" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+</dd>
+<dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-annotation="6" data-code-cell="lst-process-post" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+</dd>
+</dl>
+<p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
+<div id="lst-project-script" class="listing">
+<p>Listing&nbsp;4: Declaring project scripts in _quarto.yml.</p>
+<div class="sourceCode" id="lst-project-script" data-lst-cap="Declaring project scripts in _quarto.yml." style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-project-script-1"></span>
+<span id="lst-project-script-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">project</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-project-script-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> website</span></span>
+<span id="lst-project-script-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pre-render</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-project-script-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> scripts/pre_doi_from_rogue_scholar.py</span></span>
+<span id="lst-project-script-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span></span></code></pre></div>
+</div>
+<p>One thing worth noting is that we’re not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made ‘on the fly’ to the <code>.qmd</code> files and do not necessarily propagate into the repo. This is a pain, because recall that we’re only fetching the last ten posts’ DOIs so as to be kind on the server: as time goes on, that means older posts ‘lose’ their DOI.</p>
+<p>To prevent this, we can simply check our changes back in:</p>
+<div id="lst-gh-action" class="listing">
+<p>Listing&nbsp;5: Github action to commit changes.</p>
+<div class="sourceCode" id="lst-gh-action" data-lst-cap="Github action to commit changes." style="background: #f1f3f5;"><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="lst-gh-action-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">on</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">workflow_dispatch</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">push</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">branches</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> main</span></span>
+<span id="lst-gh-action-5"></span>
+<span id="lst-gh-action-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Quarto Publish</span></span>
+<span id="lst-gh-action-7"></span>
+<span id="lst-gh-action-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">jobs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">build-deploy</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">runs-on</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> ubuntu-latest</span></span>
+<span id="lst-gh-action-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">permissions</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">contents</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> write</span></span>
+<span id="lst-gh-action-13"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">steps</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-14"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Check out repository</span></span>
+<span id="lst-gh-action-15"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> actions/checkout@v4</span></span>
+<span id="lst-gh-action-16"></span>
+<span id="lst-gh-action-17"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Set up Quarto</span></span>
+<span id="lst-gh-action-18"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="lst-gh-action-19"></span>
+<span id="lst-gh-action-20"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Install Python and dependencies</span></span>
+<span id="lst-gh-action-21"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> actions/setup-python@v4</span></span>
+<span id="lst-gh-action-22"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-23"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">python-version</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'3.10'</span></span>
+<span id="lst-gh-action-24"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cache</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pip'</span></span>
+<span id="lst-gh-action-25"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> pip install jupyter</span></span>
+<span id="lst-gh-action-26"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> pip install -r requirements.txt</span></span>
+<span id="lst-gh-action-27"></span>
+<span id="lst-gh-action-28"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Render and Publish</span></span>
+<span id="lst-gh-action-29"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> quarto-dev/quarto-actions/publish@v2</span></span>
+<span id="lst-gh-action-30"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-31"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> gh-pages</span></span>
+<span id="lst-gh-action-32"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">env</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span></span>
+<span id="lst-gh-action-33"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">GITHUB_TOKEN</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="lst-gh-action-34"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span></span>
+<span id="lst-gh-action-35"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> Commit changes to reflect source file  changes</span></span>
+<span id="lst-gh-action-36"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">        run</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">: </span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">|</span></span>
+<span id="lst-gh-action-37">          git config --global user.name 'Chris von Csefalvay'</span>
+<span id="lst-gh-action-38">          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'</span>
+<a class="code-annotation-anchor" data-target-cell="lst-gh-action" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-gh-action-39" class="code-annotation-target">          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
+<span id="lst-gh-action-40">          git push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+</div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-annotation="1" data-code-cell="lst-gh-action" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+</dd>
+</dl>
+<p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
+<p><a href="quarto-project-scripts/">As noted</a>: Quarto project scripts are pretty awesome stuff. I’m thinking of setting up an <code>awesome-</code> for it on Github, because way too few of them are shared properly. I’m hoping this will change.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Auto-DOI for {Quarto} Posts via {Rogue} {Scholar}},
   date = {2023-11-13},
   url = {https://chrisvoncsefalvay.com/posts/auto-doi},
+  doi = {10.59350/5hxdg-fz574},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“Auto-DOI for Quarto Posts via Rogue
-Scholar.”</span> November 13, 2023. <a href="https://chrisvoncsefalvay.com/posts/auto-doi">https://chrisvoncsefalvay.com/posts/auto-doi</a>.
+Scholar.”</span> <a href="https://doi.org/10.59350/5hxdg-fz574">https://doi.org/10.59350/5hxdg-fz574</a>.
 </div></div></section></div> ]]></description>
   <category>Quarto</category>
   <guid>https://chrisvoncsefalvay.com/posts/auto-doi/index.html</guid>
