@@ -7,11 +7,11 @@ description: 'Oh, that''s mint. We can finally use Rogue Scholar to mint DOIs fo
   Quarto posts and append them automagically.
 
   '
+format:
+  html:
+    code-overflow: wrap
 google-scholar: true
 title: Auto-DOI for Quarto posts via Rogue Scholar
-format:
-    html:
-        code-overflow: wrap
 ---
 
 I love posts that allow me to merge some of my addictions. In this case, it's my love for Quarto project scripts (which I've [written about elsewhere](../quarto-project-scripts)), my fondness for [Rogue Scholar](https://rogue-scholar.org) and the overuse of the word 'mint' to mean 'generally really quite rather nice'.
