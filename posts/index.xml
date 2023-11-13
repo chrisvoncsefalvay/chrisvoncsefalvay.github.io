@@ -87,16 +87,16 @@
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The Skeuomorphic Fallacy},
   date = {2023-11-06},
   url = {https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy},
+  doi = {10.59350/k9kka-90x56},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“The Skeuomorphic Fallacy.”</span>
-November 6, 2023. <a href="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy">https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy</a>.
+Chris von Csefalvay. 2023. <span>“The Skeuomorphic Fallacy.”</span> <a href="https://doi.org/10.59350/k9kka-90x56">https://doi.org/10.59350/k9kka-90x56</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>philosophy</category>
@@ -1467,16 +1467,17 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The {Moral} {Pulse} of the {Machine}},
   date = {2023-10-26},
   url = {https://chrisvoncsefalvay.com/posts/moral-maps},
+  doi = {10.59350/ktyy5-dg821},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“The Moral Pulse of the
-Machine.”</span> October 26, 2023. <a href="https://chrisvoncsefalvay.com/posts/moral-maps">https://chrisvoncsefalvay.com/posts/moral-maps</a>.
+Machine.”</span> <a href="https://doi.org/10.59350/ktyy5-dg821">https://doi.org/10.59350/ktyy5-dg821</a>.
 </div></div></section></div> ]]></description>
   <category>ai</category>
   <category>storytelling</category>
@@ -1939,17 +1940,7 @@ the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
-  author = {Chris von Csefalvay},
-  title = {The Knowledge Dividend of Large Language Models},
-  date = {2023-10-02},
-  url = {https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“The Knowledge Dividend of Large
-Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms">https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms</a>.
-</div></div></section></div> ]]></description>
+ ]]></description>
   <category>ai</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
@@ -1976,17 +1967,7 @@ Language Models.”</span> October 2, 2023. <a href="https://chrisvoncsefalvay.c
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
-  author = {Chris von Csefalvay},
-  title = {Asemantic {Induction} of {Hallucinations} in {LLMs}},
-  date = {2023-03-23},
-  url = {https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Asemantic Induction of Hallucinations
-in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations">https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations</a>.
-</div></div></section></div> ]]></description>
+ ]]></description>
   <category>ai</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
@@ -2011,17 +1992,7 @@ in LLMs.”</span> March 23, 2023. <a href="https://chrisvoncsefalvay.com/posts/
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
-  author = {Chris von Csefalvay},
-  title = {Data for the Next Pandemic},
-  date = {2023-03-07},
-  url = {https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Data for the Next Pandemic.”</span>
-March 7, 2023. <a href="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic">https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic</a>.
-</div></div></section></div> ]]></description>
+ ]]></description>
   <category>computational epidemiology</category>
   <category>epidemics</category>
   <category>Cross-post: Starschema</category>
@@ -2201,8 +2172,6 @@ Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span> <a href
 <section id="eric-schlosser-command-and-control" class="level1">
 <h1>Eric Schlosser: <em>Command and Control</em></h1>
 <p>In 1980, a Titan II inter-continental ballistic missile of the US Air Force suffered a liquid fuel explosion inside its silo near Damascus, Arkansas – with a nuclear warhead on top. Schlosser’s book reveals that this kind of incident was, unsettlingly, much less infrequent than one might be comfortable with. What happens when the literal survival of the planet depends on technology, and how comfortable are we in replacing the human decision-maker – often enough, a twenty-something 1st Lieutenant in a missile silo’s command centre – with technology that may run away from us? Schlosser’s book is an impassioned plea for better design of critical systems, presenting the near-disasters of nuclear weapons – which ought to be the epitome of safety engineering! – as an indication of all that can, and does, go wrong.</p>
-<hr>
-<p>What are your favourite non-data science books for data scientists? Let me know in the comments.</p>
 
 
 </section>
@@ -2672,17 +2641,7 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/quora-answers">http
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2022,
-  author = {Chris von Csefalvay},
-  title = {As We May See: The World After Dashboards},
-  date = {2022-04-01},
-  url = {https://chrisvoncsefalvay.com/posts/as-we-may-see},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2022. <span>“As We May See: The World After
-Dashboards.”</span> April 1, 2022. <a href="https://chrisvoncsefalvay.com/posts/as-we-may-see">https://chrisvoncsefalvay.com/posts/as-we-may-see</a>.
-</div></div></section></div> ]]></description>
+ ]]></description>
   <category>dashboards</category>
   <category>data visualization</category>
   <category>data science</category>
