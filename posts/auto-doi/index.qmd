@@ -80,6 +80,7 @@ def scrape_blog_for_dois(url) -> Dict[str, str]:
 Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they're text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:
 
 ```{#lst-preamble .yaml lst-cap="Pre-DOI YAML preamble example."}
+
 ---
 categories:
 - Quarto
@@ -89,11 +90,13 @@ description: 'Oh, that''s mint. We can finally use Rogue Scholar to mint DOIs fo
 google-scholar: true
 title: Auto-DOI for Quarto posts via Rogue Scholar
 ---
+
 ```
 
 What this tells us is that we do want a citation (someday), which is why we're doing this in the first place. That, according to our beautiful flowchart in @fig-auto-doi, means this post is eligible to get a DOI appended. We also know there isn't one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, `doi`) to the `citation` object in the YAML preface. So, we'll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in @lst-getting-dois.
 
 ```{#lst-process-post .python lst-cap="Processing a single post."}
+
 def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
     with open(file_path, 'r') as stream:
         contents = stream.read()
@@ -135,6 +138,7 @@ def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
         with open(file_path, 'w') as yaml_file:
             yaml_file.write(new_yaml_doc + rest_of_post)
         logging.info(f'Updated file {title}')
+        
 ```
 1. We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.
 2. If it's a cross-post, we don't want it to have a Google Scholar link, and we'll definitely not attach a DOI. In theory, we could have built this to be overridable in case I'll ever produce a cross-post I _do_ want to have a DOI, but I don't see that happening.
@@ -146,10 +150,12 @@ def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
 Finally, we write the YAML back to the file, and we're done. We can now declare this as a project script, and we're good:
 
 ```{#lst-project-script .yaml lst-cap="Declaring project scripts in _quarto.yml."}
+
 project:
   type: website
   pre-render:
     - scripts/pre_doi_from_rogue_scholar.py
+    
 ```
 
 
