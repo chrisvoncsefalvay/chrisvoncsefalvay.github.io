@@ -285,11 +285,11 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-lines="5" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-lines="5" data-code-cell="lst-getting-dois" data-code-annotation="1">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-lines="13" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-lines="13" data-code-cell="lst-getting-dois" data-code-annotation="2">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
