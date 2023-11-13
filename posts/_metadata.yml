@@ -13,6 +13,9 @@ format:
     df-print: paged
     toc: true
     lang: en-GB
+    code-overflow: wrap
+    mermaid:
+      theme: neutral
 citation:
   type: article
 reference-location: margin
