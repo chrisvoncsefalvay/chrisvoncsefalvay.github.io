@@ -1,7 +1,7 @@
 ---
 bibliography: references.bib
 categories:
-- ai
+- AI
 - games
 - ABMs
 citation:

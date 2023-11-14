@@ -1,8 +1,8 @@
 ---
 bibliography: bibliography.bib
 categories:
-- ai
-- llms
+- AI
+- LLMs
 - philosophy
 - language
 citation:

@@ -1,6 +1,6 @@
 ---
 categories:
-- ai
+- AI
 - art
 - philosophy
 citation:

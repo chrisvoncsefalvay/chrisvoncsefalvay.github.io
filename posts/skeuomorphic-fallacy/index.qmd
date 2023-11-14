@@ -1,6 +1,6 @@
 ---
 categories:
-- ai
+- AI
 - philosophy
 citation:
   doi: 10.59350/k9kka-90x56

@@ -1,7 +1,7 @@
 ---
 categories:
-- ai
-- julia
+- AI
+- Julia
 - programming
 citation: true
 date: 2021-03-07

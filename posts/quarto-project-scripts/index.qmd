@@ -1,7 +1,7 @@
 ---
 categories:
-- quarto
-- python
+- Quarto
+- Python
 citation:
   doi: 10.59350/b4qyq-70w75
 date: 2023-10-22

@@ -1,6 +1,6 @@
 ---
 categories:
-- ai
+- AI
 - LLMs
 - 'Cross-post: Starschema'
 citation: false

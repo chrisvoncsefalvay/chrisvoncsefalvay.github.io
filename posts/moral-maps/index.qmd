@@ -1,6 +1,6 @@
 ---
 categories:
-- ai
+- AI
 - storytelling
 - sensemaking
 - ethics
