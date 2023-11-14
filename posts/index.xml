@@ -191,11 +191,11 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="1" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-cell="lst-getting-dois" data-code-annotation="1" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="13" data-code-annotation="2" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-cell="lst-getting-dois" data-code-annotation="2" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
@@ -529,27 +529,27 @@ font-style: inherit;">'</span>)</span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="1" data-code-cell="lst-process-post">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="1" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="20" data-code-annotation="2" data-code-cell="lst-process-post">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="2" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="21" data-code-annotation="3" data-code-cell="lst-process-post">While we’re at it, might as well prune the cross-posts.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="3" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="28" data-code-annotation="4" data-code-cell="lst-process-post">And anything with a DOI should also get a Google Scholar metadata.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="4" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-lines="36" data-code-annotation="5" data-code-cell="lst-process-post">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="5" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-lines="37" data-code-annotation="6" data-code-cell="lst-process-post">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="6" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
 </dd>
 </dl>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
@@ -882,7 +882,7 @@ font-style: inherit;">|</span></span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="39" data-code-annotation="1" data-code-cell="lst-gh-action">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+<span data-code-cell="lst-gh-action" data-code-annotation="1" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
 </dd>
 </dl>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
@@ -994,7 +994,7 @@ Scholar.”</span> <a href="https://doi.org/10.59350/5hxdg-fz574">https://doi.or
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“The Skeuomorphic Fallacy.”</span> <a href="https://doi.org/10.59350/k9kka-90x56">https://doi.org/10.59350/k9kka-90x56</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>philosophy</category>
   <guid>https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/index.html</guid>
   <pubDate>Mon, 06 Nov 2023 00:00:00 GMT</pubDate>
@@ -2375,7 +2375,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 Chris von Csefalvay. 2023. <span>“The Moral Pulse of the
 Machine.”</span> <a href="https://doi.org/10.59350/ktyy5-dg821">https://doi.org/10.59350/ktyy5-dg821</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>storytelling</category>
   <category>sensemaking</category>
   <category>ethics</category>
@@ -2557,8 +2557,8 @@ font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code><
 Chris von Csefalvay. 2023. <span>“Quarto Project Scripts Are
 Awesomeness.”</span> <a href="https://doi.org/10.59350/b4qyq-70w75">https://doi.org/10.59350/b4qyq-70w75</a>.
 </div></div></section></div> ]]></description>
-  <category>quarto</category>
-  <category>python</category>
+  <category>Quarto</category>
+  <category>Python</category>
   <guid>https://chrisvoncsefalvay.com/posts/quarto-project-scripts/index.html</guid>
   <pubDate>Sun, 22 Oct 2023 00:00:00 GMT</pubDate>
 </item>
@@ -2638,7 +2638,7 @@ Awesomeness.”</span> <a href="https://doi.org/10.59350/b4qyq-70w75">https://do
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“The Lyre of Hephaestus.”</span> <a href="https://doi.org/10.59350/pd0q6-r5n60">https://doi.org/10.59350/pd0q6-r5n60</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>art</category>
   <category>philosophy</category>
   <guid>https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/index.html</guid>
@@ -2736,8 +2736,8 @@ Floridi, Luciano. 2023. <span>‘AI as Agency Without Intelligence: On ChatGPT, 
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> <a href="https://doi.org/10.59350/vynvf-0k137">https://doi.org/10.59350/vynvf-0k137</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
-  <category>llms</category>
+  <category>AI</category>
+  <category>LLMs</category>
   <category>philosophy</category>
   <category>language</category>
   <guid>https://chrisvoncsefalvay.com/posts/llms-language/index.html</guid>
@@ -2851,7 +2851,7 @@ the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68
 
 
  ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
   <guid>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</guid>
@@ -2878,7 +2878,7 @@ the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68
 
 
  ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>LLMs</category>
   <category>Cross-post: Starschema</category>
   <guid>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</guid>
@@ -2982,7 +2982,7 @@ Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: Wi
 Chris von Csefalvay. 2023. <span>“The Hardest AI Problem You’ve Never
 Heard Of.”</span> <a href="https://doi.org/10.59350/5dp4z-d5e22">https://doi.org/10.59350/5dp4z-d5e22</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>games</category>
   <category>ABMs</category>
   <guid>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</guid>
@@ -3046,7 +3046,7 @@ Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span> <a href="https://doi.org/10.59350/bwee1-hee31">https://doi.org/10.59350/bwee1-hee31</a>.
 </div></div></section></div> ]]></description>
-  <category>ai</category>
+  <category>AI</category>
   <category>computational chemistry</category>
   <category>ethics</category>
   <guid>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</guid>
