@@ -2,6 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/academic-generative-ai/index.html",
       "/posts/auto-doi/index.html",
       "/posts/skeuomorphic-fallacy/index.html",
       "/posts/team-of-rivals/index.html",
