@@ -1,0 +1,47 @@
+---
+categories:
+- AI
+- disability
+- human-computer interaction
+citation: true
+date: 2023-12-12
+description: I'm fine, the robot's fine, society on the other hand has some questions to tackle.
+google-scholar: true
+image: cd091fdb-e9e7-49d9-9b11-2b1eb92e2f86.webp
+title: What I learned from getting bodied by a robot.
+---
+
+Say you're busing tables and you're trying to pass someone in a wheelchair. What do you do? Do you say "excuse me" and wait for them to move? Do you say "excuse me" and then try to pass them? Do you just try to pass them? Do you say nothing and just try to pass them? All of these are, actually, pretty legitimate answers.
+
+Now, say you're a robot. What do you do? The robots that are currently deployed at the United Airlines lounge at SFO (one of [these](https://www.reddit.com/r/unitedairlines/comments/10pdr0u/the_robots_arrived_today_at_the_new_ord_c_club/), courtesy of [Bear Robotics](https://www.bearrobotics.ai)) thought beeping, then bodying me with full military power was the right answer. I'm not sure I agree.
+
+(I'm fine. The robot's fine. This post isn't about that. I play a sport that involves crazy strong people in wheelchairs that look straight out of Mad Max ram into each other at full speed to let their violence out. It takes a bit to dislodge me.)
+
+The point is about this _modus vivendi_ between humans and artificial intelligences that we really haven't worked out adequately.
+
+
+## Mental models
+
+Humans aren't mind-readers... but they really, really want to be. We're constantly trying to figure out what other people are thinking. Our survival as a species has depended on it. The cost of this is worrying what people think about us every time we enter a room. But the benefit, oh, the benefit of it: we can create models of other people's minds, and we can use those models to predict what they're going to do next. This is a very useful skill to have when you're, say, hunting a woolly mammoth. As you do.
+
+This means that in trying to determine what to do next, we don't just reason by some goal-directed reinforcement learning framework sitting on top of some observations of reality. We create a model not just of reality but of other minds, too. 
+
+Part of that is to understand what other minds do: their capabilities, but also their limitations.
+
+
+## Your fear in a handful of dust
+
+Consider, for instance, fear. A robot has about as little need, _ex facie_, to understand that humans are afraid as it has for empathy to understand that some people use a wheelchair and need some time to get out of the way. A machine isn't mortal in the conventional sense. It has had no need to develop the complex neurological-psychological responses that, in excess, give us, say, a fear of heights (because _some_ fear of heights is definitely evolutionarily useful!).
+
+Fear is not only a useful emotion to have, it's also something humans _have_, like it or not. The consequence is that anyone and anything that seeks to interact with humans has to understand that fact. If you don't, you're collectively going to have a bad time.
+
+And so, if a human is working on, say, a roof, they will reason from the place the poet called "the unstill tremors of the fearful heart".^[Dyneley Hussey, who deserves to be known way more than he is.] A machine working on its own on a roof can ignore fear as much as it desires. A machine that seeks to interact with humans and live in human society, however, cannot. And there's the rub. It's easy to create a machine that does surgery. It's near impossible to create one to _assist_ in surgery. Interacting with humans is a tough call, and it's not just because we're a bunch of weirdos (though that definitely contributes).
+
+
+## The problem of other minds
+
+A robot, then, doesn't have to understand that it has, or rather _is_, a mind of a sort. But it absolutely has to understand that _other humans_ have minds of their own, and that those minds do and think stuff. 
+
+The problem of developing a theory of mind is one of those watersheds of artificial intelligence that will have a clear before and after. There isn't much room for gradualism here. A machine that can understand that other humans have minds of their own is going to be one that will be able to interact with other humans and live in some level of comity, and one that doesn't, won't. This is the next big thing in AI, and it's going to be a big thing indeed.
+
+Or maybe I'm wrong. Who knows. I did just get bodied by a robot, after all.
