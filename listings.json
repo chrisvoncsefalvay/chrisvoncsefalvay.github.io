@@ -1,7 +1,16 @@
 [
   {
+    "listing": "/media/index.html",
+    "items": [
+      "/media/tech-for-good/index.html",
+      "/media/fr-disinfectants/index.html",
+      "/media/euronews-covid/index.html"
+    ]
+  },
+  {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/ai-human-interaction/index.html",
       "/posts/academic-generative-ai/index.html",
       "/posts/auto-doi/index.html",
       "/posts/skeuomorphic-fallacy/index.html",
@@ -24,14 +33,6 @@
       "/posts/mrna-gene-therapy/index.html",
       "/posts/ransomware-prisoners-dilemma/index.html",
       "/posts/julia-a-post-mortem/index.html"
-    ]
-  },
-  {
-    "listing": "/media/index.html",
-    "items": [
-      "/media/tech-for-good/index.html",
-      "/media/fr-disinfectants/index.html",
-      "/media/euronews-covid/index.html"
     ]
   }
 ]
