@@ -4,7 +4,8 @@ categories:
 - academia
 - writing
 - LLMs
-citation: true
+citation:
+  doi: 10.59350/412q0-sbn89
 date: 2023-12-06
 description: Academic AI is a hot mess. Here's why.
 google-scholar: true
