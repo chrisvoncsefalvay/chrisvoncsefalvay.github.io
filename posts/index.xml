@@ -21,7 +21,7 @@
 
 <p>Say you’re busing tables and you’re trying to pass someone in a wheelchair. What do you do? Do you say “excuse me” and wait for them to move? Do you say “excuse me” and then try to pass them? Do you just try to pass them? Do you say nothing and just try to pass them? All of these are, actually, pretty legitimate answers.</p>
 <p>Now, say you’re a robot. What do you do? The robots that are currently deployed at the United Airlines lounge at SFO (one of <a href="https://www.reddit.com/r/unitedairlines/comments/10pdr0u/the_robots_arrived_today_at_the_new_ord_c_club/">these</a>, courtesy of <a href="https://www.bearrobotics.ai">Bear Robotics</a>) thought beeping, then bodying me with full military power was the right answer. I’m not sure I agree.</p>
-<p>(I’m fine. The robot’s fine. This post isn’t about that. I play a sport that involves crazy strong people in wheelchairs that look straight out of Mad Max ram into each other at full speed to let their violence out. It takes a bit to dislodge me.)</p>
+<div class="page-columns page-full"><p>(I’m fine. The robot’s fine. This post isn’t about that. I play a sport that involves crazy strong people in wheelchairs that look straight out of Mad Max ram into each other at full speed to let their violence out. It takes a bit to dislodge me.)<sup>1</sup></p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;A few people have asked me for details on the incident. It really wasn’t even big enough a deal to report to the lounge stewards – there was no injury to me, no damage to the robot and overall no harm done. The robot kept bumping into my chair and pushing against me as I was trying to get out of the way, which of course made everything harder. I was a little concerned that its frantic efforts might result in the dishes it was carrying getting dislodged and falling on me, but thankfully that didn’t happen. It did, however, shine a light on the lack of modern robotics’ lack of understanding the needs of customers with disabilities, and I am more than a little concerned by that – not everyone in a wheelchair is a 6’2 180lbs adaptive athlete. We can do better than this. We <em>have</em> to do better than this.</p></li></div></div>
 <p>The point is about this <em>modus vivendi</em> between humans and artificial intelligences that we really haven’t worked out adequately.</p>
 <section id="mental-models" class="level2">
 <h2 class="anchored" data-anchor-id="mental-models">Mental models</h2>
@@ -33,7 +33,7 @@
 <h2 class="anchored" data-anchor-id="your-fear-in-a-handful-of-dust">Your fear in a handful of dust</h2>
 <p>Consider, for instance, fear. A robot has about as little need, <em>ex facie</em>, to understand that humans are afraid as it has for empathy to understand that some people use a wheelchair and need some time to get out of the way. A machine isn’t mortal in the conventional sense. It has had no need to develop the complex neurological-psychological responses that, in excess, give us, say, a fear of heights (because <em>some</em> fear of heights is definitely evolutionarily useful!).</p>
 <p>Fear is not only a useful emotion to have, it’s also something humans <em>have</em>, like it or not. The consequence is that anyone and anything that seeks to interact with humans has to understand that fact. If you don’t, you’re collectively going to have a bad time.</p>
-<div class="page-columns page-full"><p>And so, if a human is working on, say, a roof, they will reason from the place the poet called “the unstill tremors of the fearful heart”.<sup>1</sup> A machine working on its own on a roof can ignore fear as much as it desires. A machine that seeks to interact with humans and live in human society, however, cannot. And there’s the rub. It’s easy to create a machine that does surgery. It’s near impossible to create one to <em>assist</em> in surgery. Interacting with humans is a tough call, and it’s not just because we’re a bunch of weirdos (though that definitely contributes).</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Dyneley Hussey, who deserves to be known way more than he is.</p></li></div></div>
+<div class="page-columns page-full"><p>And so, if a human is working on, say, a roof, they will reason from the place the poet called “the unstill tremors of the fearful heart”.<sup>2</sup> A machine working on its own on a roof can ignore fear as much as it desires. A machine that seeks to interact with humans and live in human society, however, cannot. And there’s the rub. It’s easy to create a machine that does surgery. It’s near impossible to create one to <em>assist</em> in surgery. Interacting with humans is a tough call, and it’s not just because we’re a bunch of weirdos (though that definitely contributes).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Dyneley Hussey, who deserves to be known way more than he is.</p></li></div></div>
 </section>
 <section id="the-problem-of-other-minds" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem-of-other-minds">The problem of other minds</h2>
@@ -45,16 +45,17 @@
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {What {I} Learned from Getting Bodied by a Robot.},
   date = {2023-12-12},
   url = {https://chrisvoncsefalvay.com/posts/ai-human-interaction},
+  doi = {10.59350/r8k9q-zdm06},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2023. <span>“What I Learned from Getting Bodied by
-a Robot.”</span> December 12, 2023. <a href="https://chrisvoncsefalvay.com/posts/ai-human-interaction">https://chrisvoncsefalvay.com/posts/ai-human-interaction</a>.
+a Robot.”</span> <a href="https://doi.org/10.59350/r8k9q-zdm06">https://doi.org/10.59350/r8k9q-zdm06</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>disability</category>
@@ -309,11 +310,11 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="1" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-annotation="1" data-code-cell="lst-getting-dois" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="13" data-code-annotation="2" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-annotation="2" data-code-cell="lst-getting-dois" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
@@ -647,27 +648,27 @@ font-style: inherit;">'</span>)</span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="1" data-code-cell="lst-process-post">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+<span data-code-annotation="1" data-code-cell="lst-process-post" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="20" data-code-annotation="2" data-code-cell="lst-process-post">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+<span data-code-annotation="2" data-code-cell="lst-process-post" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="21" data-code-annotation="3" data-code-cell="lst-process-post">While we’re at it, might as well prune the cross-posts.</span>
+<span data-code-annotation="3" data-code-cell="lst-process-post" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="28" data-code-annotation="4" data-code-cell="lst-process-post">And anything with a DOI should also get a Google Scholar metadata.</span>
+<span data-code-annotation="4" data-code-cell="lst-process-post" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-lines="36" data-code-annotation="5" data-code-cell="lst-process-post">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+<span data-code-annotation="5" data-code-cell="lst-process-post" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-lines="37" data-code-annotation="6" data-code-cell="lst-process-post">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+<span data-code-annotation="6" data-code-cell="lst-process-post" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
 </dd>
 </dl>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
@@ -1000,7 +1001,7 @@ font-style: inherit;">|</span></span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="39" data-code-annotation="1" data-code-cell="lst-gh-action">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+<span data-code-annotation="1" data-code-cell="lst-gh-action" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
 </dd>
 </dl>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
