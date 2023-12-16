@@ -3,7 +3,8 @@ categories:
 - AI
 - disability
 - human-computer interaction
-citation: true
+citation:
+  doi: 10.59350/r8k9q-zdm06
 date: 2023-12-12
 description: I'm fine, the robot's fine, society on the other hand has some questions
   to tackle.
