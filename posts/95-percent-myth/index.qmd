@@ -1,0 +1,87 @@
+---
+bibliography: references.bib
+categories:
+- fitness
+- science
+- bad science
+citation: true
+date: 2023-12-27
+description: How a study from 1959 on 100 patients created one of the most enduring
+  myths about human weight and nutrition.
+google-scholar: true
+image: 93e3df55-79ec-44b0-87c1-03bbca32ee46.webp
+title: The 95% myth
+---
+
+The year is 1959. Eisenhower is on his second term, Castro just kicked Batista out of the country and Ray Charles's Let the Good Times Roll is topping the charts. And, in slightly nerdier pursuits, a psychiatrist named Albert "Mickey" Stunkard and a dietician colleague of his, Mavis McLaren-Hume, published a paper in the _AMA Archives of Internal Medicine_ titled _The Results of Treatment for Obesity_ [@smh]. Written in a somewhat endearingly old school way by authors not quite initiated to the sacred mysteries of, y'know, $p$-values and proper statistical methodology, it reports on "the literature" on dietary and pharmacologically assisted treatments (which is an extremely generous term for 8 studies, none of which are randomised, one of which is entirely retrospective, and the total $N$ is 1,368), and on a sample of 100 patients (!) from the Nutrition Clinic at New York Hospital (the "NY sample"). And from that, they draw wide-ranging conclusions on the 'harm' and 'ineffectiveness' of 'weight reduction'. 
+
+In this post, I'll dissect the Stunkard-McLaren-Hume (SMH) paper, and how it became an uncritically repeated figure and later the guiding mantra of 'fat acceptance', a movement I consider to be organised science denialism fuelled by self-delusion and corporate interests.^[Fat acceptance activists love to point out the size of the US 'diet industry', which is somewhere around US$ 70bn. For comparison, the US QSR (quick service restaurants -- read: fast food) industry had a 2022 market size of US$ 380bn.] I try to do so with some generosity and understanding for the vagaries of the age, but one shouldn't be under any illusions that the quality of the SMH paper would pass muster as an undergraduate research paper today. Standards have evolved, but the SMH paper is, well, not to mince words, bad even for the time.^[If you are wondering by the end of this whether Stunkard got his MD by sending in some coupons from cereal boxes, you're not alone, but that would be quite unfair. From what I've read of the man, he was both a great human being and a very accomplished clinician. It's a pity that his most influential piece was not only uncharacteristically bad work for him, but was also grievously misinterpreted.] It is conclusory to the extreme over a pathetically small sample, and I'm mostly convinced that the reason the paper is never cited is because anyone making major life decisions about their health and well-being based on a 65-year-old study of 100 people would look, well, quite silly.^[Don't worry, it gets worse. The $N$ for maintenance is 12. That's not a typo.]
+
+
+## SM-damn-H
+
+The SMH paper consists of two parts. One is a rudimentary 'mini-meta' of 8 studies from 1931 to 1958, of a little over 1,300 patients. The other is a retrospective study of 100 patients from the Nutrition Clinic at New York Hospital. Neither is great, but the mini-meta is so bad, I won't belabour it in detail. It looks at very few patients overall on a range of 'diets', ranging from a 600kcal VLCD to diets assisted by dexedrine (classy!) and thyroid supplementation (unmonitored, of course), and reports the percentage of patients by lbs of weight lost. This is confusing to the extreme, because of course the absolute weight loss on a diet is highly contextual. A 200lbs person losing 50lbs is an entirely different story from a morbidly obese individual, say 350lbs, losing back to 300lbs. The mini-meta is, in short, a mess, and I'm not going to waste time on it.
+
+The second part, the retrospective study, is also very bad, but at least informative. Here, 100 patients were interviewed at admission to the Nutrition Clinic, and prescribed a diet. What diet, you might ask? "Balanced weight-reduction diets from 800 to 1,500 Cal" (sic). That's right, the diets were not standardised, nor do we see the estimated BMR^[Basal Metabolic Rate.] or the shortfall vis-a-vis the BMR reported anywhere. No mention of exercise or control for activity is in evidence anywhere. The clinic itself gives a bit of a flying by the seat of one's pants impression, and the study doesn't get better from here on. 
+
+The retrospective study was then performed 2.5 years after initial admission, as a chart review. Of the 100 patients, only 12 were considered to have successfully lost weight, with 20lbs lost being the cut-off point (once again, entirely insensitive to starting body weight, thus likely privileging the more obese initial participants). A flowchart of this is laid out in @fig-flowchart.
+
+```{mermaid}
+%%| label: fig-flowchart
+%%| fig-cap: Patient flow of the SMH study. Numerators of percentages are noted in bold. Based on Table 2 of the SMH paper, except that I have broken out the maintenance group into two subgroups.
+%%| fig-align: center
+
+flowchart TD
+    I["Initial intake:<br>100"] --> J["Follow-up:<br>61 (61%)"]
+    I --> L["Lost to follow-up:<br>39 (39%)"]
+    J --> S["Successful (more than 20lbs)<br>12 (19.7%)"]
+    S1["Maintained at 1y<br>6 (50%)"]
+    S2["Maintained at 2y<br>2 (16.6%)"]
+    LFU1["Lost to follow-up<br>1 (8.3%)"]
+    F1["Failed at 1y<br>5 (41.7%)"]
+    F2["Failed at 2y<br>4 (33.3%)"]
+    S --> S1
+    S --> F1
+    S --> LFU1
+    S1 --> S2
+    S1 --> F2
+```
+
+There are a few things worth noting here. One is that this is a study of an $N$ barely in the three figures, and has a 39% loss to follow-up. One would likely not want to publish that. That's just quite simply not publishable data. Worse, however, is the confusion of numerators and denominators. 
+
+If we consider maintenance failure to be failure of the diet after 1 or 2 years of finishing treatment, then it is true that only 6 out of 100 initial patients (6%) maintained their weight loss for 1 year, and only 2 (2%) for 2 years. Except that's altogether the wrong way of calculating these figures, especially in the face of losing _over a third_ of the initial cohort to follow-up. For what it's worth, each of those 39 lost to follow-up patients could have maintained for two years and simply didn't bother to go back to the clinic. We don't know. We can't know. We can't even make a reasonable guess. If your figures permit a conclusion that success might have been anything between 2% and 41%, you don't have a study. You have a mess.
+
+One highly suggestive feature here (which, to their credit, SMH point out) is that 28 of the 39 lost to follow-up (71.8%) never attended any _other_ clinic at the hospital. SMH note that 
+
+> [s]ince admission to the Nutrition Clinic occurs entirely by referral from other clinics, this represents the rupture of at least two therapeutic relationships.
+
+Is that an inescapable conclusion? Or could one conceive that at least a good part of the patients lost to follow-up either met their goals and thus never reported back, or at the very least, their weight loss was actually enough of a _resounding_ success that it alleviated the primary issue for which they presented prior to referral to the Nutrition Clinic? Once again, we don't know. We can't know. We can't even make a reasonable guess.^[Or can we? The QUOVADIS study had this issue: following up with the dropouts (7%) indicated many were just really satisfied with the results.] What we can say is that concluding from this data that long-term weight loss is 6% or 2% effective is an incredibly, unreasonably strong interpretation of very, very weak data indeed.
+
+
+## Pulling the thread: misinterpreting SMH
+
+Of course, scientific writing can easily become like a runaway horse. Once one puts their thoughts out in the world, it's open for the audience to misinterpret it and draw every single wrong conclusion from it. As grievously bad as I think SMH is, it is nowhere near the juggernaut of bad science that uncritical repetition has turned it into over the years.
+
+Consider a randomly picked example [@Carmichael1999]:
+
+> Results on the role of diet in the treatment of obesity reported more than 30 years ago do not vary from those reported more recently, because as many as 95% of dieters tend to regain their lost weight over a relatively short period.
+
+SMH is, of course, the authority for that assertion. Yet that misunderstands, quite fundamentally, what SMH actually does say, which is that a good percentage of diets fail, not that a good percentage of dieters do. This point is far from being so subtle as to justify someone actually publishing this misunderstanding past a peer reviewer. 
+
+It is, for instance, widely acknowledged that one by one, antidepressants are effective only a relatively small percentage of the time (something between 15-30%). Yet antidepressant therapy by and large is vastly more successful. That is because just like diets, antidepressants are not a monolithic treatment, but a class of treatments: if one fails, one is free to try another, or a combination of others. Like obesity and human metabolism, depression is a multifaceted disorder with many possible aetiological processes, and it might take a few tries to find the right diet. Not that someone who has already concluded that 'diets don't work' and convinced themselves that a study of all of 100 patients on all of one type of diet would prove that fact would come to that conclusion, of course. Sadly, that's the cost of sloppy science of the kind the SMH paper perpetrates: you blind yourself to fundamental truths in a mad pursuit of confirmatory evidence.
+
+The second pernicious misinterpretation is that weight regain indicates a diet 'failure'. Once again, I'm puzzled by how Stunkard and McLaren-Hale missed this point, for their study did not control for maintenance:
+
+> Our results are summarized in Table 2. In this Table any person who maintained a weight loss of 20 lb. or more is classified as a "success"; any person whose weight was within 19 lb. of the starting weight is a "failure.
+
+What is of course entirely omitted is what these patients did over the 1- and 2-year follow-up period. We know from studies on VLE/VLCDs^[Very Low Energy/Very Low Calorie Diets.] that adherence is crucial [@10.7243/2052-5966-1-4]. So, if the assertion is that a diet does not immunise to weight regain once it is abandoned, the SMH paper's finding is trivial to the point of banality. Proper sciencin' would require us to control for calorie intake in that maintenance period. No diet will magically mean that reverting to an intake above expenditure will not result in significant weight gain once again. This is reflected in a modern understanding of diets, which considers the best diets to be those that can be sustained indefinitely (with the exception of some acute 'crash' diets used to rapidly reduce weight before surgical or other interventions). In short, the SMH paper's alleged finding of long-term 'diet failure' is either trivially true (yes, a diet, once abandoned, will not confer continuing benefits) or at the very best unproven. While the entire process was largely unmonitored (it's admittedly difficult to monitor dietary intake in an outpatient setting, especially in the pre-Nutrition Facts Labeling era^[Nutrition Facts labels were implemented by the Nutrition Labeling and Education Act 1990, which entered into force in 1994.]), the lack of even the slightest semblance of monitoring or tracking adherence, even self-reported, is fatal to the study as evidence for maintenance of weight loss. Whatever its merits (and there aren't many), SMH is epistemically incapable of supporting the argument for which it is most famously and extensively used.
+
+Together, these two misinterpretations gave rise to a dangerous myth that all but 'proves' the inevitability of one's own weight, which in turn morphed into the 'set point theory'.^[But that's a misinterpretation of the science for another day.] I'd like to acquit Stunkard and McLaren-Hale from responsibility for these, for fairness demands I do so, but I cannot wholeheartedly feel that they haven't, through sloppy science and bad writing, opened Pandora's box. On their head, then, must some of the resulting blame land.
+
+## Why this matters
+
+It wouldn't behoove to fire cheap shots at a paper old enough to collect retirement benefits in most civilised countries if it weren't for the fact that its sloppy distillation into the 95% myth had become a uniquely harmful mantra. There are very few interventions that justify even relatively small risks in return for a 5% effectiveness, so if that figure is accurate, even the modest risks of adequate, well-executed, medically supervised diets^[Which are generally transitory. It's probably worth pointing out at this point again that the diets examined in the SMH paper included dexedrine, thyroid supplementation without much proper monitoring and 900kcal low calorie diets. It's perhaps not unreasonable to assume that these aren't on the safer side. Their risks do not compare to those of a properly monitored modern diet aimed at a few hundred kcals of deficit.] might appear excessive. But, of course, that figure is almost definitely wrong.
+
+Thus, we know that especially when used as part of a comprehensive treatment plan, diets are effective. @thomas2014weight, reporting on the National Weight Control Registry study ($N =$ 2,886), found that 88.4% of participants maintained a weight loss of at least 10% of their initial body weight for at least 5 years and 86.6% still maintained a 10% weight loss at 10 years. The retrospective study based on NHANES by @kraschnewski2010long is even more encouraging: not only did they find that more than one in six overweight adults have lost and maintained a 10% weight loss for over a year, they also found that over a third (36.6%) of those who lost at least 5% of their body weight were able to maintain this -- note that this is entirely retrospective, i.e. no specific intervention was administered to these individuals. A smaller study by @perri2008extended found that following a 10.0kg mean weight loss over a 6-month treatment period, weight regain ranged from 1.2 to 3.7 kg (extended-care _vs._ education control), resulting in a sustained weight loss of 6.3 to 8.8 kg -- nothing to sneer at, especially considering that this was specifically in an underserved rural setting. It turns out that when we look at studies that have been performed in the last 20 years, we find that the 95% figure is not only wrong, but the exact opposite of the truth. Sustained weight loss is the rule, not the exception, especially in the context of a comprehensive treatment plan, and few studies bear out the idea that those that lose weight will regain _more_ than what was lost. Even where weight is regained, there are often lasting benefits. @10.1016/j.amjmed.2012.10.010 examined 5,145 individuals with Type 2 diabetes and a 4-year follow-up, and found that not only did they still have on average a 4% or so weight loss after 4 years but also significant improvements in their HbA1c, blood pressure and lipid profile. We also know, from @diabetes200910, that weight loss itself may prove protective against Type 2 diabetes even if some of the cohort regains the lost weight.
+
+So, we know the 95% figure is wrong. Why, then, does it persist? I think there are two reasons for this. One is that it's a convenient excuse for people who don't want to put in the work. The other is that it's a convenient excuse for people who want to sell you something. The former is a matter of personal responsibility, and I'm not going to tell anyone how to live their lives. The latter, however, is a matter of public health, which is being actively harmed by a motley assortment of ignorami, grifters and -- worst of all -- the occasional medical professional who has not done their research and/or slept through their biostats classes who all repeat uncritically the 95% myth (while politely eliding any mention of its dubious parentage). Social media has responded to harmful medical misinformation during the COVID-19 pandemic with the zeal of the Spanish Inquisition on steroids. It is, then, rather incongruent that the same platforms are happy to let the 95% myth run rampant, despite the fact that it is demonstrably false and demonstrably harmful.^[I'm not generally a fan of censorship, but I like public health and I like consistency. I'd like every video repeating this myth to have a massive big red sticker on it saying "this video contains medical misinformation".]
