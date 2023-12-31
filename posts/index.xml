@@ -10,7 +10,117 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Tue, 12 Dec 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 27 Dec 2023 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The 95% myth</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/95-percent-myth/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>The year is 1959. Eisenhower is on his second term, Castro just kicked Batista out of the country and Ray Charles’s Let the Good Times Roll is topping the charts. And, in slightly nerdier pursuits, a psychiatrist named Albert “Mickey” Stunkard and a dietician colleague of his, Mavis McLaren-Hume, published a paper in the <em>AMA Archives of Internal Medicine</em> titled <em>The Results of Treatment for Obesity</em> <span class="citation" data-cites="smh">(Stunkard 1959)</span>. Written in a somewhat endearingly old school way by authors not quite initiated to the sacred mysteries of, y’know, <img src="https://latex.codecogs.com/png.latex?p">-values and proper statistical methodology, it reports on “the literature” on dietary and pharmacologically assisted treatments (which is an extremely generous term for 8 studies, none of which are randomised, one of which is entirely retrospective, and the total <img src="https://latex.codecogs.com/png.latex?N"> is 1,368), and on a sample of 100 patients (!) from the Nutrition Clinic at New York Hospital (the “NY sample”). And from that, they draw wide-ranging conclusions on the ‘harm’ and ‘ineffectiveness’ of ‘weight reduction’.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-smh" class="csl-entry">
+Stunkard, A. J. 1959. <span>‘The Results of Treatment for Obesity’</span>. <em>A.M.A. Archives of Internal Medicine</em> 103: 79. <a href="https://doi.org/10.1001/archinte.1959.00270010085011">https://doi.org/10.1001/archinte.1959.00270010085011</a>.
+</div></div><div class="page-columns page-full"><p>In this post, I’ll dissect the Stunkard-McLaren-Hume (SMH) paper, and how it became an uncritically repeated figure and later the guiding mantra of ‘fat acceptance’, a movement I consider to be organised science denialism fuelled by self-delusion and corporate interests.<sup>1</sup> I try to do so with some generosity and understanding for the vagaries of the age, but one shouldn’t be under any illusions that the quality of the SMH paper would pass muster as an undergraduate research paper today. Standards have evolved, but the SMH paper is, well, not to mince words, bad even for the time.<sup>2</sup> It is conclusory to the extreme over a pathetically small sample, and I’m mostly convinced that the reason the paper is never cited is because anyone making major life decisions about their health and well-being based on a 65-year-old study of 100 people would look, well, quite silly.<sup>3</sup></p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Fat acceptance activists love to point out the size of the US ‘diet industry’, which is somewhere around US$ 70bn. For comparison, the US QSR (quick service restaurants – read: fast food) industry had a 2022 market size of US$ 380bn.</p></li><li id="fn2"><p><sup>2</sup>&nbsp;If you are wondering by the end of this whether Stunkard got his MD by sending in some coupons from cereal boxes, you’re not alone, but that would be quite unfair. From what I’ve read of the man, he was both a great human being and a very accomplished clinician. It’s a pity that his most influential piece was not only uncharacteristically bad work for him, but was also grievously misinterpreted.</p></li><li id="fn3"><p><sup>3</sup>&nbsp;Don’t worry, it gets worse. The <img src="https://latex.codecogs.com/png.latex?N"> for maintenance is 12. That’s not a typo.</p></li></div></div>
+<section id="sm-damn-h" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sm-damn-h">SM-damn-H</h2>
+<p>The SMH paper consists of two parts. One is a rudimentary ‘mini-meta’ of 8 studies from 1931 to 1958, of a little over 1,300 patients. The other is a retrospective study of 100 patients from the Nutrition Clinic at New York Hospital. Neither is great, but the mini-meta is so bad, I won’t belabour it in detail. It looks at very few patients overall on a range of ‘diets’, ranging from a 600kcal VLCD to diets assisted by dexedrine (classy!) and thyroid supplementation (unmonitored, of course), and reports the percentage of patients by lbs of weight lost. This is confusing to the extreme, because of course the absolute weight loss on a diet is highly contextual. A 200lbs person losing 50lbs is an entirely different story from a morbidly obese individual, say 350lbs, losing back to 300lbs. The mini-meta is, in short, a mess, and I’m not going to waste time on it.</p>
+<div class="page-columns page-full"><p>The second part, the retrospective study, is also very bad, but at least informative. Here, 100 patients were interviewed at admission to the Nutrition Clinic, and prescribed a diet. What diet, you might ask? “Balanced weight-reduction diets from 800 to 1,500 Cal” (sic). That’s right, the diets were not standardised, nor do we see the estimated BMR<sup>4</sup> or the shortfall vis-a-vis the BMR reported anywhere. No mention of exercise or control for activity is in evidence anywhere. The clinic itself gives a bit of a flying by the seat of one’s pants impression, and the study doesn’t get better from here on.</p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;Basal Metabolic Rate.</p></li></div></div>
+<p>The retrospective study was then performed 2.5 years after initial admission, as a chart review. Of the 100 patients, only 12 were considered to have successfully lost weight, with 20lbs lost being the cut-off point (once again, entirely insensitive to starting body weight, thus likely privileging the more obese initial participants). A flowchart of this is laid out in Figure&nbsp;1.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-flowchart" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-flowchart">flowchart TD
+    I["Initial intake:&lt;br&gt;100"] --&gt; J["Follow-up:&lt;br&gt;61 (61%)"]
+    I --&gt; L["Lost to follow-up:&lt;br&gt;39 (39%)"]
+    J --&gt; S["Successful (more than 20lbs)&lt;br&gt;12 (19.7%)"]
+    S1["Maintained at 1y&lt;br&gt;6 (50%)"]
+    S2["Maintained at 2y&lt;br&gt;2 (16.6%)"]
+    LFU1["Lost to follow-up&lt;br&gt;1 (8.3%)"]
+    F1["Failed at 1y&lt;br&gt;5 (41.7%)"]
+    F2["Failed at 2y&lt;br&gt;4 (33.3%)"]
+    S --&gt; S1
+    S --&gt; F1
+    S --&gt; LFU1
+    S1 --&gt; S2
+    S1 --&gt; F2
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: Patient flow of the SMH study. Numerators of percentages are noted in bold. Based on Table 2 of the SMH paper, except that I have broken out the maintenance group into two subgroups.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There are a few things worth noting here. One is that this is a study of an <img src="https://latex.codecogs.com/png.latex?N"> barely in the three figures, and has a 39% loss to follow-up. One would likely not want to publish that. That’s just quite simply not publishable data. Worse, however, is the confusion of numerators and denominators.</p>
+<p>If we consider maintenance failure to be failure of the diet after 1 or 2 years of finishing treatment, then it is true that only 6 out of 100 initial patients (6%) maintained their weight loss for 1 year, and only 2 (2%) for 2 years. Except that’s altogether the wrong way of calculating these figures, especially in the face of losing <em>over a third</em> of the initial cohort to follow-up. For what it’s worth, each of those 39 lost to follow-up patients could have maintained for two years and simply didn’t bother to go back to the clinic. We don’t know. We can’t know. We can’t even make a reasonable guess. If your figures permit a conclusion that success might have been anything between 2% and 41%, you don’t have a study. You have a mess.</p>
+<p>One highly suggestive feature here (which, to their credit, SMH point out) is that 28 of the 39 lost to follow-up (71.8%) never attended any <em>other</em> clinic at the hospital. SMH note that</p>
+<blockquote class="blockquote">
+<p>[s]ince admission to the Nutrition Clinic occurs entirely by referral from other clinics, this represents the rupture of at least two therapeutic relationships.</p>
+</blockquote>
+<div class="page-columns page-full"><p>Is that an inescapable conclusion? Or could one conceive that at least a good part of the patients lost to follow-up either met their goals and thus never reported back, or at the very least, their weight loss was actually enough of a <em>resounding</em> success that it alleviated the primary issue for which they presented prior to referral to the Nutrition Clinic? Once again, we don’t know. We can’t know. We can’t even make a reasonable guess.<sup>5</sup> What we can say is that concluding from this data that long-term weight loss is 6% or 2% effective is an incredibly, unreasonably strong interpretation of very, very weak data indeed.</p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;Or can we? The QUOVADIS study had this issue: following up with the dropouts (7%) indicated many were just really satisfied with the results.</p></li></div></div>
+</section>
+<section id="pulling-the-thread-misinterpreting-smh" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pulling-the-thread-misinterpreting-smh">Pulling the thread: misinterpreting SMH</h2>
+<p>Of course, scientific writing can easily become like a runaway horse. Once one puts their thoughts out in the world, it’s open for the audience to misinterpret it and draw every single wrong conclusion from it. As grievously bad as I think SMH is, it is nowhere near the juggernaut of bad science that uncritical repetition has turned it into over the years.</p>
+<p>Consider a randomly picked example <span class="citation" data-cites="Carmichael1999">(Carmichael 1999)</span>:</p>
+<div class="no-row-height column-margin column-container"><div id="ref-Carmichael1999" class="csl-entry">
+Carmichael, A. R. 1999. <span>‘Treatment for Morbid Obesity’</span>. <em>Postgraduate Medical Journal</em> 75: 7–12. <a href="https://doi.org/10.1136/pgmj.75.879.7">https://doi.org/10.1136/pgmj.75.879.7</a>.
+</div></div><blockquote class="blockquote">
+<p>Results on the role of diet in the treatment of obesity reported more than 30 years ago do not vary from those reported more recently, because as many as 95% of dieters tend to regain their lost weight over a relatively short period.</p>
+</blockquote>
+<p>SMH is, of course, the authority for that assertion. Yet that misunderstands, quite fundamentally, what SMH actually does say, which is that a good percentage of diets fail, not that a good percentage of dieters do. This point is far from being so subtle as to justify someone actually publishing this misunderstanding past a peer reviewer.</p>
+<p>It is, for instance, widely acknowledged that one by one, antidepressants are effective only a relatively small percentage of the time (something between 15-30%). Yet antidepressant therapy by and large is vastly more successful. That is because just like diets, antidepressants are not a monolithic treatment, but a class of treatments: if one fails, one is free to try another, or a combination of others. Like obesity and human metabolism, depression is a multifaceted disorder with many possible aetiological processes, and it might take a few tries to find the right diet. Not that someone who has already concluded that ‘diets don’t work’ and convinced themselves that a study of all of 100 patients on all of one type of diet would prove that fact would come to that conclusion, of course. Sadly, that’s the cost of sloppy science of the kind the SMH paper perpetrates: you blind yourself to fundamental truths in a mad pursuit of confirmatory evidence.</p>
+<p>The second pernicious misinterpretation is that weight regain indicates a diet ‘failure’. Once again, I’m puzzled by how Stunkard and McLaren-Hale missed this point, for their study did not control for maintenance:</p>
+<blockquote class="blockquote">
+<p>Our results are summarized in Table 2. In this Table any person who maintained a weight loss of 20 lb. or more is classified as a “success”; any person whose weight was within 19 lb. of the starting weight is a “failure.</p>
+</blockquote>
+<div class="page-columns page-full"><p>What is of course entirely omitted is what these patients did over the 1- and 2-year follow-up period. We know from studies on VLE/VLCDs<sup>6</sup> that adherence is crucial <span class="citation" data-cites="10.7243/2052-5966-1-4">(Wright et al. 2013)</span>. So, if the assertion is that a diet does not immunise to weight regain once it is abandoned, the SMH paper’s finding is trivial to the point of banality. Proper sciencin’ would require us to control for calorie intake in that maintenance period. No diet will magically mean that reverting to an intake above expenditure will not result in significant weight gain once again. This is reflected in a modern understanding of diets, which considers the best diets to be those that can be sustained indefinitely (with the exception of some acute ‘crash’ diets used to rapidly reduce weight before surgical or other interventions). In short, the SMH paper’s alleged finding of long-term ‘diet failure’ is either trivially true (yes, a diet, once abandoned, will not confer continuing benefits) or at the very best unproven. While the entire process was largely unmonitored (it’s admittedly difficult to monitor dietary intake in an outpatient setting, especially in the pre-Nutrition Facts Labeling era<sup>7</sup>), the lack of even the slightest semblance of monitoring or tracking adherence, even self-reported, is fatal to the study as evidence for maintenance of weight loss. Whatever its merits (and there aren’t many), SMH is epistemically incapable of supporting the argument for which it is most famously and extensively used.</p><div class="no-row-height column-margin column-container"><li id="fn6"><p><sup>6</sup>&nbsp;Very Low Energy/Very Low Calorie Diets.</p></li><div id="ref-10.7243/2052-5966-1-4" class="csl-entry">
+Wright, T. G., B. Dawson, G. Jalleh, and K. J. Guelfi. 2013. <span>‘Program Compliance, Weight Loss and Health Profile Changes in Who Obesity Classes After Very Low Energy Dietary Intervention’</span>. <em>Global Epidemic Obesity</em> 1: 4. <a href="https://doi.org/10.7243/2052-5966-1-4">https://doi.org/10.7243/2052-5966-1-4</a>.
+</div><li id="fn7"><p><sup>7</sup>&nbsp;Nutrition Facts labels were implemented by the Nutrition Labeling and Education Act 1990, which entered into force in 1994.</p></li></div></div>
+<div class="page-columns page-full"><p>Together, these two misinterpretations gave rise to a dangerous myth that all but ‘proves’ the inevitability of one’s own weight, which in turn morphed into the ‘set point theory’.<sup>8</sup> I’d like to acquit Stunkard and McLaren-Hale from responsibility for these, for fairness demands I do so, but I cannot wholeheartedly feel that they haven’t, through sloppy science and bad writing, opened Pandora’s box. On their head, then, must some of the resulting blame land.</p><div class="no-row-height column-margin column-container"><li id="fn8"><p><sup>8</sup>&nbsp;But that’s a misinterpretation of the science for another day.</p></li></div></div>
+</section>
+<section id="why-this-matters" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why this matters</h2>
+<div class="page-columns page-full"><p>It wouldn’t behoove to fire cheap shots at a paper old enough to collect retirement benefits in most civilised countries if it weren’t for the fact that its sloppy distillation into the 95% myth had become a uniquely harmful mantra. There are very few interventions that justify even relatively small risks in return for a 5% effectiveness, so if that figure is accurate, even the modest risks of adequate, well-executed, medically supervised diets<sup>9</sup> might appear excessive. But, of course, that figure is almost definitely wrong.</p><div class="no-row-height column-margin column-container"><li id="fn9"><p><sup>9</sup>&nbsp;Which are generally transitory. It’s probably worth pointing out at this point again that the diets examined in the SMH paper included dexedrine, thyroid supplementation without much proper monitoring and 900kcal low calorie diets. It’s perhaps not unreasonable to assume that these aren’t on the safer side. Their risks do not compare to those of a properly monitored modern diet aimed at a few hundred kcals of deficit.</p></li></div></div>
+<p>Thus, we know that especially when used as part of a comprehensive treatment plan, diets are effective. <span class="citation" data-cites="thomas2014weight">Thomas et al. (2014)</span>, reporting on the National Weight Control Registry study (<img src="https://latex.codecogs.com/png.latex?N%20="> 2,886), found that 88.4% of participants maintained a weight loss of at least 10% of their initial body weight for at least 5 years and 86.6% still maintained a 10% weight loss at 10 years. The retrospective study based on NHANES by <span class="citation" data-cites="kraschnewski2010long">Kraschnewski et al. (2010)</span> is even more encouraging: not only did they find that more than one in six overweight adults have lost and maintained a 10% weight loss for over a year, they also found that over a third (36.6%) of those who lost at least 5% of their body weight were able to maintain this – note that this is entirely retrospective, i.e.&nbsp;no specific intervention was administered to these individuals. A smaller study by <span class="citation" data-cites="perri2008extended">Perri et al. (2008)</span> found that following a 10.0kg mean weight loss over a 6-month treatment period, weight regain ranged from 1.2 to 3.7 kg (extended-care <em>vs.</em> education control), resulting in a sustained weight loss of 6.3 to 8.8 kg – nothing to sneer at, especially considering that this was specifically in an underserved rural setting. It turns out that when we look at studies that have been performed in the last 20 years, we find that the 95% figure is not only wrong, but the exact opposite of the truth. Sustained weight loss is the rule, not the exception, especially in the context of a comprehensive treatment plan, and few studies bear out the idea that those that lose weight will regain <em>more</em> than what was lost. Even where weight is regained, there are often lasting benefits. <span class="citation" data-cites="10.1016/j.amjmed.2012.10.010">Unick et al. (2013)</span> examined 5,145 individuals with Type 2 diabetes and a 4-year follow-up, and found that not only did they still have on average a 4% or so weight loss after 4 years but also significant improvements in their HbA1c, blood pressure and lipid profile. We also know, from <span class="citation" data-cites="diabetes200910">Group et al. (2009)</span>, that weight loss itself may prove protective against Type 2 diabetes even if some of the cohort regains the lost weight.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-thomas2014weight" class="csl-entry">
+Thomas, J Graham, Dale S Bond, Suzanne Phelan, James O Hill, and Rena R Wing. 2014. <span>‘Weight-Loss Maintenance for 10 Years in the National Weight Control Registry’</span>. <em>American Journal of Preventive Medicine</em> 46 (1): 17–23.
+</div><div id="ref-kraschnewski2010long" class="csl-entry">
+Kraschnewski, JL, Jarol Boan, Joseph Esposito, Nancy E Sherwood, Erik B Lehman, Donna K Kephart, and Christopher N Sciamanna. 2010. <span>‘Long-Term Weight Loss Maintenance in the United States’</span>. <em>International Journal of Obesity</em> 34 (11): 1644–54.
+</div><div id="ref-perri2008extended" class="csl-entry">
+Perri, Michael G, Marian C Limacher, Patricia E Durning, David M Janicke, Lesley D Lutes, Linda B Bobroff, Martha Sue Dale, Michael J Daniels, Tiffany A Radcliff, and A Daniel Martin. 2008. <span>‘Extended-Care Programs for Weight Management in Rural Communities: The Treatment of Obesity in Underserved Rural Settings (TOURS) Randomized Trial’</span>. <em>Archives of Internal Medicine</em> 168 (21): 2347–54.
+</div><div id="ref-10.1016/j.amjmed.2012.10.010" class="csl-entry">
+Unick, J., D. Beavers, D. Bond, J. Clark, J. Jakicic, A. Kitabchi, W. Knowler, T. Wadden, L. Wagenknecht, and R. Wing. 2013. <span>‘The Long-Term Effectiveness of a Lifestyle Intervention in Severely Obese Individuals’</span>. <em>The American Journal of Medicine</em> 126: 236–242.e2. <a href="https://doi.org/10.1016/j.amjmed.2012.10.010">https://doi.org/10.1016/j.amjmed.2012.10.010</a>.
+</div><div id="ref-diabetes200910" class="csl-entry">
+Group, Diabetes Prevention Program Research et al. 2009. <span>‘10-Year Follow-up of Diabetes Incidence and Weight Loss in the Diabetes Prevention Program Outcomes Study’</span>. <em>The Lancet</em> 374 (9702): 1677–86.
+</div></div><div class="page-columns page-full"><p>So, we know the 95% figure is wrong. Why, then, does it persist? I think there are two reasons for this. One is that it’s a convenient excuse for people who don’t want to put in the work. The other is that it’s a convenient excuse for people who want to sell you something. The former is a matter of personal responsibility, and I’m not going to tell anyone how to live their lives. The latter, however, is a matter of public health, which is being actively harmed by a motley assortment of ignorami, grifters and – worst of all – the occasional medical professional who has not done their research and/or slept through their biostats classes who all repeat uncritically the 95% myth (while politely eliding any mention of its dubious parentage). Social media has responded to harmful medical misinformation during the COVID-19 pandemic with the zeal of the Spanish Inquisition on steroids. It is, then, rather incongruent that the same platforms are happy to let the 95% myth run rampant, despite the fact that it is demonstrably false and demonstrably harmful.<sup>10</sup></p><div class="no-row-height column-margin column-container"><li id="fn10"><p><sup>10</sup>&nbsp;I’m not generally a fan of censorship, but I like public health and I like consistency. I’d like every video repeating this myth to have a massive big red sticker on it saying “this video contains medical misinformation”.</p></li></div></div>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+  author = {Chris von Csefalvay},
+  title = {The 95\% Myth},
+  date = {2023-12-27},
+  url = {https://chrisvoncsefalvay.com/posts/95-percent-myth},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“The 95% Myth.”</span> December 27,
+2023. <a href="https://chrisvoncsefalvay.com/posts/95-percent-myth">https://chrisvoncsefalvay.com/posts/95-percent-myth</a>.
+</div></div></section></div> ]]></description>
+  <category>fitness</category>
+  <category>science</category>
+  <category>bad science</category>
+  <guid>https://chrisvoncsefalvay.com/posts/95-percent-myth/index.html</guid>
+  <pubDate>Wed, 27 Dec 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/95-percent-myth/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>What I learned from getting bodied by a robot.</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -3678,88 +3788,6 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/quora-answers">http
   <guid>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</guid>
   <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/as-we-may-see/header.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Peace, love, Paxlovid and ‘Pfizermectin’</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>As the new Omicron variant of concern of COVID-19 emerged over Thanksgiving week (of all times!), attention has been turning to Paxlovid (PF-07321332). If, like me, you torment yourself by perusing conspiracy theories, you might have heard it referred to as Pfizermectin. Behind that is the idea that the “COVID pill” Paxlovid is, basically, a re-packaging of ivermectin, a disproven treatment for COVID-19. <span class="citation" data-cites="popp2021ivermectin">(Popp et al. 2021)</span></p>
-<div class="no-row-height column-margin column-container"><div id="ref-popp2021ivermectin" class="csl-entry">
-Popp, Maria, Miriam Stegemann, Maria-Inti Metzendorf, Susan Gould, Peter Kranke, Patrick Meybohm, Nicole Skoetz, and Stephanie Weibel. 2021. <span>‘Ivermectin for Preventing and Treating COVID-19’</span>. <em>Cochrane Database of Systematic Reviews</em>, no. 7.
-</div></div><section id="the-pfizermectin-gambit" class="level1">
-<h1>The Pfizermectin Gambit</h1>
-<p>The Pfizermectin argument rests on the fact that Paxlovid, an oral treatment for COVID-19 (colloquially known as a “Covid pill”) is a protease inhibitor, and so is ivermectin. Consequently, so the reasoning goes, ivermectin is just as good — except it is no longer an economically viable drug, vis-a-vis Paxlovid. So, it is claimed, ivermectin was repackaged, and now sold at a premium.</p>
-<p>So suggests, for instance, paleo-libertarian Lew Rockwell:</p>
-<blockquote class="twitter-tweet blockquote">
-<p lang="en" dir="ltr">
-Biden Admin Plans ‘Imminent’ Booster Expansion; Orders 10M Courses of ‘Pfizermectin’<br>By Tyler Durden<a href="https://t.co/IMckQeK541">https://t.co/IMckQeK541</a>
-</p>
-— Lew Rockwell (<span class="citation" data-cites="lewrockwell">(<strong>lewrockwell?</strong>)</span>) <a href="https://twitter.com/lewrockwell/status/1461791639224164354?ref_src=twsrc%5Etfw">November 19, 2021</a>
-</blockquote>
-<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<p>The problem is… Paxlovid is not ivermectin. It is not even similar, and the difference is crucially important to why Paxlovid is likely to be an effective medication, and ivermectin won’t.</p>
-</section>
-<section id="whats-different-about-paxlovid" class="level1 page-columns page-full">
-<h1>What’s different about Paxlovid</h1>
-<p>As always, there’s a kernel of truth in the overall lie. It is true that both Paxlovid and ivermectin are inhibitors of the 3-chymotrypsin like protease (3CLPro). 3CLPro is the principal protease of coronaviruses. It belongs to a wider class called mixed-nucleophile proteases superfamily A. Their main function is to find peptide bonds in proteins between glutamine on one hand and serine, glycine or alanine on the other.</p>
-<p>To understand what’s going on here, we need to look at protein synthesis by viruses. A lot of the time, viral proteins are produced as one big, long protein called a polyprotein. Then, viral proteases break these at pre-determined cleavage sites into the constituent parts of what eventually becomes a viral particle. As far as the virus is concerned, interference with that cleavage is bad, bad news, essentially inhibiting the ability of the virus to create copies of itself that are effective infectious agents.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://chrisvoncsefalvay.com/posts/paxlovid/paxlovid.png.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Paxlovid (PF-07321332, in blue) bound to 3CLPro (volume model). Author’s own work, based on PDB:7SI9.</figcaption>
-</figure>
-</div>
-<p>This ‘molecular scissor’ in coronaviruses is 3CLPro, and as such, it’s clearly a target of interest. Mody et al., in a paper that has earned its spot on my list of top 10 papers of 2021, looked at 3CLPro inhibitors, and found that around 50 µM (micromoles) of ivermectin were sufficient to achieve a 75% or so reduction in the activity of 3CLPro. <span class="citation" data-cites="mody2021identification">(Mody et al. 2021)</span></p>
-<div class="no-row-height column-margin column-container"><div id="ref-mody2021identification" class="csl-entry">
-Mody, Vicky, Joanna Ho, Savannah Wills, Ahmed Mawri, Latasha Lawson, Maximilian CCJC Ebert, Guillaume M Fortin, Srujana Rayalam, and Shashidharamurthy Taval. 2021. <span>‘Identification of 3-Chymotrypsin Like Protease (3CLPro) Inhibitors as Potential Anti-SARS-CoV-2 Agents’</span>. <em>Communications Biology</em> 4 (1): 93.
-</div></div><p>However, that’s actually bad news — because 50 µM is, actually, a lot. And therein lies the problem.</p>
-</section>
-<section id="the-pharmacokinetic-difference" class="level1 page-columns page-full">
-<h1>The (pharmaco)kinetic difference</h1>
-<p>The problem with ivermectin is very simple. In order for an enzyme inhibitor to be effective, it needs to reach a concentration where it inhibits the target enzyme enough to make a dent in the underlying process. The standard metric for this is known as <img src="https://latex.codecogs.com/png.latex?IC_%7B50%7D"> — the concentration of the inhibitor required to inhibit enzyme activity by 50%. This value for ivermectin is somewhere in the realm of tens of µM for 3CLPro.</p>
-<p>One µM of ivermectin weighs around 0.0875mg, so a 1 µM solution of ivermectin would have a concentration of around 87.5 nanograms per millilitre (ng/mL). To reach even a very conservative 5µM, you would need blood levels of 437.5ng/mL.</p>
-<p>And that’s a problem, because above 80 or so ng/mL, ivermectin is pretty toxic. <span class="citation" data-cites="gonzalez2008pharmacokinetics">(González Canga et al. 2008)</span> To reach the lowest conceivable limit of inhibitory action on 3CLPro would require doses that are incompatible with… well, life.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-gonzalez2008pharmacokinetics" class="csl-entry">
-González Canga, Aránzazu, Ana M Sahagún Prieto, M José Diez Liébana, Nélida Fernández Martı́nez, Matilde Sierra Vega, and Juan J Garcı́a Vieitez. 2008. <span>‘The Pharmacokinetics and Interactions of Ivermectin in Humans—a Mini-Review’</span>. <em>The AAPS Journal</em> 10: 42–46.
-</div><div id="ref-owen2021oral" class="csl-entry">
-Owen, Dafydd R, Charlotte MN Allerton, Annaliesa S Anderson, Lisa Aschenbrenner, Melissa Avery, Simon Berritt, Britton Boras, et al. 2021. <span>‘An Oral SARS-CoV-2 Mpro Inhibitor Clinical Candidate for the Treatment of COVID-19’</span>. <em>Science</em> 374 (6575): 1586–93.
-</div></div><p>The alleged ‘Pfizermectin’ achieves this efficacy at a nanomolar level – at a concentration roughly ten thousand times lower. <span class="citation" data-cites="owen2021oral">(Owen et al. 2021)</span> At that concentration, Paxlovid is still well within its margin of safety.</p>
-<p>This is not by accident, by the way. Paxlovid is the product of rational drug design, using computer models to identify a small molecule drug that is not only effective against an enzyme target but also has favourable pharmacokinetics. Far from merely ‘repackaging’ ivermectin, as the Pfizermectin theory alleges, this is an entirely new drug. It is structurally novel, and bears little resemblance, if any, to ivermectin. It was designed from the ground up to be orally effective, and be so at doses that are safe.</p>
-</section>
-<section id="conclusion" class="level1 page-columns page-full">
-<h1>Conclusion</h1>
-<p>In the end, action happens in vivo — in real, living beings. Ivermectin might be a workable drug in vitro, where the model does not have to account for the inconvenience of actually keeping the host organism alive and breathing. To many of us who have looked at the maths of it, it has been clear that with the inhibitory concentrations required by ivermectin, it is never going to transition from the bench to bedside. Ivermectin does have a mechanism that counteracts SARS-CoV-2, the virus responsible for COVID-19. It’s just that it is way too weak to be of any practical use.</p>
-<p>Pfizer’s drug developers have solved this through molecular dynamics simulations and rational drug design (and, in fact, have released a paper on just how they did it, which is very, very cool).<span class="citation" data-cites="zhang2021structure">(Zhang et al. 2021)</span>. Paxlovid is the result of this development — and it is far from being ‘Pfizermectin’ or repackaged ivermectin.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-zhang2021structure" class="csl-entry">
-Zhang, Sheng, Maj Krumberger, Michael A Morris, Chelsea Marie T Parrocha, Adam G Kreutzer, and James S Nowick. 2021. <span>‘Structure-Based Drug Design of an Inhibitor of the SARS-CoV-2 (COVID-19) Main Protease Using Free Software: A Tutorial for Students and Scientists’</span>. <em>European Journal of Medicinal Chemistry</em> 218: 113390.
-</div></div><p>Until now, much of the activity has been focusing on debunking misconceptions about the COVID-19 vaccine and sensationalistic tripe about the pandemic. As curative non-vaccine treatments are entering the market, it will be important to provide the public with the proof they need to dispel dishonest notions about the “Covid pill”. First and foremost among these is that the “Covid pill”, whether molnipiravir or Pfizer’s Paxlovid, is not a repackaging of ivermectin in any conceivable sense.</p>
-<p>And the strongest proof of that is the simplest, too: it works, in ways ivermectin is mathematically incapable of working.</p>
-
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
-  author = {Chris von Csefalvay},
-  title = {Peace, Love, {Paxlovid} and “{Pfizermectin}”},
-  date = {2021-11-27},
-  url = {https://chrisvoncsefalvay.com/posts/paxlovid},
-  doi = {10.59350/576dr-vbd49},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2021. <span>“Peace, Love, Paxlovid and
-<span>‘Pfizermectin’</span>.”</span> <a href="https://doi.org/10.59350/576dr-vbd49">https://doi.org/10.59350/576dr-vbd49</a>.
-</div></div></section></div> ]]></description>
-  <category>COVID-19</category>
-  <category>pharmacology</category>
-  <guid>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</guid>
-  <pubDate>Sat, 27 Nov 2021 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/paxlovid/paxlovid.png.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
