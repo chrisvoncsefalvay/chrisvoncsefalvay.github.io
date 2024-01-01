@@ -32,9 +32,10 @@ The retrospective study was then performed 2.5 years after initial admission, as
 %%| fig-align: center
 
 flowchart TD
-    I["Initial intake:<br>100"] --> J["Follow-up:<br>61 (61%)"]
-    I --> L["Lost to follow-up:<br>39 (39%)"]
-    J --> S["Successful (more than 20lbs)<br>12 (19.7%)"]
+    I["Initial intake:<br>100"] --> J["Follow-up<br>61 (61%)"]
+    I --> L["Lost to follow-up<br>39 (39%)"]
+    J --> S["Successful (more than 20lbs lost)<br>12 (19.7%)"]
+    J --> U["Unsuccessful (20lbs or less lost)<br>49 (80.3%)"]
     S1["Maintained at 1y<br>6 (50%)"]
     S2["Maintained at 2y<br>2 (16.6%)"]
     LFU1["Lost to follow-up<br>1 (8.3%)"]
