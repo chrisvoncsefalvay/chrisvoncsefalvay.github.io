@@ -34,9 +34,10 @@ Stunkard, A. J. 1959. <span>‘The Results of Treatment for Obesity’</span>. <
 <figure class="figure">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-flowchart">flowchart TD
-    I["Initial intake:&lt;br&gt;100"] --&gt; J["Follow-up:&lt;br&gt;61 (61%)"]
-    I --&gt; L["Lost to follow-up:&lt;br&gt;39 (39%)"]
-    J --&gt; S["Successful (more than 20lbs)&lt;br&gt;12 (19.7%)"]
+    I["Initial intake:&lt;br&gt;100"] --&gt; J["Follow-up&lt;br&gt;61 (61%)"]
+    I --&gt; L["Lost to follow-up&lt;br&gt;39 (39%)"]
+    J --&gt; S["Successful (more than 20lbs lost)&lt;br&gt;12 (19.7%)"]
+    J --&gt; U["Unsuccessful (20lbs or less lost)&lt;br&gt;49 (80.3%)"]
     S1["Maintained at 1y&lt;br&gt;6 (50%)"]
     S2["Maintained at 2y&lt;br&gt;2 (16.6%)"]
     LFU1["Lost to follow-up&lt;br&gt;1 (8.3%)"]
@@ -103,16 +104,16 @@ Group, Diabetes Prevention Program Research et al. 2009. <span>‘10-Year Follow
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The 95\% Myth},
   date = {2023-12-27},
   url = {https://chrisvoncsefalvay.com/posts/95-percent-myth},
+  doi = {10.59350/xmf8m-t1d22},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“The 95% Myth.”</span> December 27,
-2023. <a href="https://chrisvoncsefalvay.com/posts/95-percent-myth">https://chrisvoncsefalvay.com/posts/95-percent-myth</a>.
+Chris von Csefalvay. 2023. <span>“The 95% Myth.”</span> <a href="https://doi.org/10.59350/xmf8m-t1d22">https://doi.org/10.59350/xmf8m-t1d22</a>.
 </div></div></section></div> ]]></description>
   <category>fitness</category>
   <category>science</category>
@@ -420,11 +421,11 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="lst-getting-dois" data-code-lines="5" data-code-annotation="1">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-lines="5" data-code-annotation="1" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="lst-getting-dois" data-code-lines="13" data-code-annotation="2">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-lines="13" data-code-annotation="2" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
@@ -758,27 +759,27 @@ font-style: inherit;">'</span>)</span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="6" data-code-annotation="1">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+<span data-code-lines="6" data-code-annotation="1" data-code-cell="lst-process-post">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="20" data-code-annotation="2">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+<span data-code-lines="20" data-code-annotation="2" data-code-cell="lst-process-post">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="21" data-code-annotation="3">While we’re at it, might as well prune the cross-posts.</span>
+<span data-code-lines="21" data-code-annotation="3" data-code-cell="lst-process-post">While we’re at it, might as well prune the cross-posts.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="28" data-code-annotation="4">And anything with a DOI should also get a Google Scholar metadata.</span>
+<span data-code-lines="28" data-code-annotation="4" data-code-cell="lst-process-post">And anything with a DOI should also get a Google Scholar metadata.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="36" data-code-annotation="5">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+<span data-code-lines="36" data-code-annotation="5" data-code-cell="lst-process-post">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="lst-process-post" data-code-lines="37" data-code-annotation="6">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+<span data-code-lines="37" data-code-annotation="6" data-code-cell="lst-process-post">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
 </dd>
 </dl>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
@@ -1111,7 +1112,7 @@ font-style: inherit;">|</span></span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="lst-gh-action" data-code-lines="39" data-code-annotation="1">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+<span data-code-lines="39" data-code-annotation="1" data-code-cell="lst-gh-action">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
 </dd>
 </dl>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
