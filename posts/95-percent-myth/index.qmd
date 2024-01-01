@@ -4,7 +4,8 @@ categories:
 - fitness
 - science
 - bad science
-citation: true
+citation:
+  doi: 10.59350/xmf8m-t1d22
 date: 2023-12-27
 description: How a study from 1959 on 100 patients created one of the most enduring
   myths about human weight and nutrition.
