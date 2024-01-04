@@ -448,6 +448,34 @@
     "text": "My comment on the use of disinfectants as a treatment for COVID-19 was published in the Frankfurter Rundschau – along with some skepticism about sunlight as the best disinfectant:\n\nBeim Sonnenlicht als Corona-Faktor beruft sich das Weiße Haus auf eine Studie, die im “National Biodefense Analysis and Countermeasures Center” im Bundesstaat Maryland gemacht worden sein soll. Demnach schrumpft das Virus auf einer Edelstahloberfläche im Sonnenlicht bei einer Temperatur von 21 bis 24 Grad Celsius und 80 Prozent Luftfeuchtigkeit innerhalb von nur zwei Minuten auf die Hälfte seiner Größe - verglichen mit sechs Stunden im Dunkeln.\nDie Tatsache, dass es jedoch keine weiteren Details darüber gibt, wie das Experiment ausgeführt wurde, sorgt für Kopfschütteln bei Wissenschaftlern. “Es sieht so aus, als hätte jemand irgendwo ein Experiment durchgeführt”, sagte Benjamin Neuman, Vorsitzender der Biowissenschaften an der Texas A&M University-Texarkana, der Nachrichtenagentur AFP. “Als Wissenschaftler würde ich natürlich gerne eine aktuelle Studie und die tatsächlichen Zahlen sehen”, sagte der Virusepidemiologe Chris von Csefalvay. Mediziner reagierten fassungslos auf die Äußerungen des Präsidenten und warnten eindringlich davor, sich Desinfektionsmittel zu spritzen oder zu schlucken. Dies könne tödliche Folgen haben.\n\nRead the whole thing here.\nAnd on that note, the Manila Times also quoted me on the same topic.\n\n\n\nCitationBibTeX citation:@online{von csefalvay2020,\n  author = {von Csefalvay, Chris},\n  title = {Corona in Den {USA:} {Mediziner} Warnen Nun Vor {Injektion}\n    von {Desinfektionsmittel}},\n  date = {2020-05-11},\n  url = {https://chrisvoncsefalvay.com/media/fr-disinfectants},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nCsefalvay, Chris von. 2020. “Corona in Den USA: Mediziner Warnen\nNun Vor Injektion von Desinfektionsmittel.” May 11, 2020. https://chrisvoncsefalvay.com/media/fr-disinfectants."
   },
   {
+    "objectID": "talks/index.html",
+    "href": "talks/index.html",
+    "title": "Talks and presentations",
+    "section": "",
+    "text": "Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health\n\n\n\n\n\n\n\nAI\n\n\npublic health\n\n\nNBPHE\n\n\n\n\nA short presentation on the risks and potentials of large language models in public health.\n\n\n\n\n\n\nJan 10, 2024\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "talks/prometheus-unbound/index.html",
+    "href": "talks/prometheus-unbound/index.html",
+    "title": "Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health",
+    "section": "",
+    "text": "Large language models (LLMs) like GPT have captured the public’s attention, raising both overinflated expectations of generalized artificial intelligence (AGI) and fears of a takeover of the machines. Yet, in the right hands, LLMs can be powerful tools for improving public health surveillance, detecting early signals of pathogenic outbreaks from noisy social media, and supporting data-driven decision-making at a hitherto unprecedented scale. This presentation will briefly introduce what LLMs are (and, more importantly, what they aren’t), followed by a discussion of possible applications in public health as well as their risks, concluding with an equity-centered perspective on creating safe and unbiased AI/ML tools. Public health experts will undoubtedly find themselves as consumers of, and sometimes interactors with, such models, making it all the more crucial to build a fact-based understanding of this new tool and discuss how its risks are best mitigated.\nOrganised by the National Board of Public Health Examiners as part of their Webinar Wednesdays and open to the public, you can register here for the webinar on 10 January 2024 at 3pm ET."
+  },
+  {
+    "objectID": "talks/prometheus-unbound/index.html#slides",
+    "href": "talks/prometheus-unbound/index.html#slides",
+    "title": "Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health",
+    "section": "Slides",
+    "text": "Slides\nThe slides are available here."
+  },
+  {
+    "objectID": "talks/prometheus-unbound/index.html#recording",
+    "href": "talks/prometheus-unbound/index.html#recording",
+    "title": "Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health",
+    "section": "Recording",
+    "text": "Recording\nTo be updated once the recording is available."
+  },
+  {
     "objectID": "media/index.html",
     "href": "media/index.html",
     "title": "In the media",

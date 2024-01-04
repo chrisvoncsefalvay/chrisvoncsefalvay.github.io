@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Chris von Csefalvay</title>
+<link>https://chrisvoncsefalvay.com/talks/index.html</link>
+<atom:link href="https://chrisvoncsefalvay.com/talks/index.xml" rel="self" type="application/rss+xml"/>
+<description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Wed, 10 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health</title>
+  <link>https://chrisvoncsefalvay.com/talks/prometheus-unbound/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>Large language models (LLMs) like GPT have captured the public’s attention, raising both overinflated expectations of generalized artificial intelligence (AGI) and fears of a takeover of the machines. Yet, in the right hands, LLMs can be powerful tools for improving public health surveillance, detecting early signals of pathogenic outbreaks from noisy social media, and supporting data-driven decision-making at a hitherto unprecedented scale. This presentation will briefly introduce what LLMs are (and, more importantly, what they aren’t), followed by a discussion of possible applications in public health as well as their risks, concluding with an equity-centered perspective on creating safe and unbiased AI/ML tools. Public health experts will undoubtedly find themselves as consumers of, and sometimes interactors with, such models, making it all the more crucial to build a fact-based understanding of this new tool and discuss how its risks are best mitigated.</p>
+<p><a href="https://www.nbphe.org/nbphes-wednesday-webinar-series/">Organised by the National Board of Public Health Examiners as part of their Webinar Wednesdays</a> and open to the public, you can <a href="https://zoom.us/webinar/register/WN_vOFBBvD7SXqFARPHYrIqkA">register here</a> for the webinar on 10 January 2024 at 3pm ET.</p>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<p>The slides are available <a href="prometheus_unbound.pdf">here</a>.</p>
+</section>
+<section id="recording" class="level2">
+<h2 class="anchored" data-anchor-id="recording">Recording</h2>
+<p>To be updated once the recording is available.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{2024,
+  author = {},
+  title = {Prometheus {Unbound} - {The} {Potential} and {Risks} of
+    {Large} {Language} {Models} in {Public} {Health}},
+  date = {2024-01-10},
+  url = {https://chrisvoncsefalvay.com/talks/prometheus-unbound},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-2024" class="csl-entry quarto-appendix-citeas">
+<span>“Prometheus Unbound - The Potential and Risks of Large Language
+Models in Public Health.”</span> 2024. January 10, 2024. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound">https://chrisvoncsefalvay.com/talks/prometheus-unbound</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>public health</category>
+  <category>NBPHE</category>
+  <guid>https://chrisvoncsefalvay.com/talks/prometheus-unbound/index.html</guid>
+  <pubDate>Wed, 10 Jan 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/talks/prometheus-unbound/image.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+</channel>
+</rss>
