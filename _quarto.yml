@@ -23,6 +23,8 @@ website:
         text: Media
       - href: posts
         text: The Notebook
+      - href: talks
+        text: Talks
       - href: https://computationalinfectiousdisease.com
         text: My book
   page-footer:
