@@ -7,6 +7,7 @@ citation: true
 date: 2024-01-10
 description: 'A short presentation on the risks and potentials of large language models in public health.'
 google-scholar: true
+image: image.png
 title: Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health
 ---
 
