@@ -1,0 +1,24 @@
+---
+categories:
+- AI
+- public health
+- NBPHE
+citation: true
+date: 2024-01-10
+description: 'A short presentation on the risks and potentials of large language models in public health.'
+google-scholar: true
+image: image.png
+title: Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health
+---
+
+Large language models (LLMs) like GPT have captured the public’s attention, raising both overinflated expectations of generalized artificial intelligence (AGI) and fears of a takeover of the machines. Yet, in the right hands, LLMs can be powerful tools for improving public health surveillance, detecting early signals of pathogenic outbreaks from noisy social media, and supporting data-driven decision-making at a hitherto unprecedented scale. This presentation will briefly introduce what LLMs are (and, more importantly, what they aren’t), followed by a discussion of possible applications in public health as well as their risks, concluding with an equity-centered perspective on creating safe and unbiased AI/ML tools. Public health experts will undoubtedly find themselves as consumers of, and sometimes interactors with, such models, making it all the more crucial to build a fact-based understanding of this new tool and discuss how its risks are best mitigated.
+
+[Organised by the National Board of Public Health Examiners as part of their Webinar Wednesdays](https://www.nbphe.org/nbphes-wednesday-webinar-series/) and open to the public, you can [register here](https://zoom.us/webinar/register/WN_vOFBBvD7SXqFARPHYrIqkA) for the webinar on 10 January 2024 at 3pm ET.
+
+## Slides
+
+The slides are available [here](prometheus_unbound.pdf).
+
+## Recording
+
+To be updated once the recording is available.
