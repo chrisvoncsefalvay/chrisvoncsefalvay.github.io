@@ -10,7 +10,179 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Wed, 27 Dec 2023 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 06 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>LAIR - Language As Intermediate Representation</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/lair/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>The awesome thing about language is that, well, we all mostly speak it, to some extent or another. This gives us an immensely powerful tool to manipulate transformational tasks. For the purposes of this post, I consider a transformational task to be essentially anything that takes an input and is largel intended to return some version of the same thing. This is not a very precise definition, but it will have to do for now.</p>
+<p>Such models are nothing new. Perhaps the most eye-catching and ubiquitous of such models are <a href="https://www.tensorflow.org/tutorials/generative/style_transfer">neural style transfer</a> models that take an image and return a version of the same image in a different style that let you turn a picture of your dog into a Van Gogh painting <span class="citation" data-cites="gatys2015neural">(Gatys, Ecker, and Bethge 2015)</span>. Quite simply put, these models are your typical generative model, with the difference that it takes two separate loss definitions: content loss, which is loss of the generated image vis-a-vis the content reference, and style loss, which is the loss vis-a-vis the style reference image. A “good” image then is one that minimises total loss, i.e.&nbsp;it’s just as close to your dog as it is to Van Gogh. Figure&nbsp;1 outlines this logic.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-gatys2015neural" class="csl-entry">
+Gatys, Leon A, Alexander S Ecker, and Matthias Bethge. 2015. <span>‘A Neural Algorithm of Artistic Style’</span>. <em>arXiv Preprint arXiv:1508.06576</em>.
+</div></div><div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-nst" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-nst">flowchart TD
+    C["Content image"]
+    S["Style image"]
+
+    G["Generated image"]
+
+    G --&gt; L["Loss network"]
+    L --&gt; G
+    
+    C -- "Content loss" --&gt; L
+    S -- "Style loss" --&gt; L
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: A rough outline of NST.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Given a content source image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bc%7D"> and a style reference image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bs%7D">, we define the total loss of our generated image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bg%7D"> as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Btotal%7D%20=%20%5Calpha%20%5Cmathcal%7BL%7D_%7Bcontent%7D%20+%20%5Cbeta%20%5Cmathcal%7BL%7D_%7Bstyle%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Calpha"> and <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> are hyperparameters that control the relative importance of the content and style losses. The content loss for layer <img src="https://latex.codecogs.com/png.latex?l"> is defined as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bcontent%7D(%5Cvec%7Bc%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_%7Bi,j%7D%20(%5Cvec%7Bc%7D_%7Bij%7D%5El%20-%20%5Cvec%7Bg%7D_%7Bij%7D%5El)%5E2%0A"></p>
+<p>which is basically a simple squared error loss between the feature vector of the content image and the generated image at layer <img src="https://latex.codecogs.com/png.latex?l">. The style loss is a bit more complicated, and is these days typically defined as the Maximum Mean Discrepancy, which <span class="citation" data-cites="li2017demystifying">Li et al. (2017)</span> have shown is essentially equivalent to the Gram matrix loss, defined as</p>
+<div class="no-row-height column-margin column-container"><div id="ref-li2017demystifying" class="csl-entry">
+Li, Yanghao, Naiyan Wang, Jiaying Liu, and Xiaodi Hou. 2017. <span>‘Demystifying Neural Style Transfer’</span>. <a href="https://arxiv.org/abs/1701.01036">https://arxiv.org/abs/1701.01036</a>.
+</div></div><p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bstyle%7D(%5Cvec%7Bs%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B4N_l%5E2M_l%5E2%7D%20%5Csum_%7Bi,j%7D%20(%5Cmathbf%7BG%7D_%7Bij%7D%5El%20-%20%5Cmathbf%7BS%7D_%7Bij%7D%5El)%5E2%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BG%7D_%7Bij%7D%5El"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BS%7D_%7Bij%7D%5El"> are the Gram matrices of the generated reference image and the style image at layer <img src="https://latex.codecogs.com/png.latex?l">, respectively. <img src="https://latex.codecogs.com/png.latex?N%5El"> is the number of feature maps in layer <img src="https://latex.codecogs.com/png.latex?l"> and <img src="https://latex.codecogs.com/png.latex?M_l"> is the dimensionality (height times width) of the feature map of layer <img src="https://latex.codecogs.com/png.latex?l">. There are two fundamental problems with this.</p>
+<ol type="1">
+<li>This works much less well for things that aren’t images or at least sufficiently similar to images.</li>
+<li>The bigger problem is that the style reference is pretty much exhaustive. By that, I mean that there isn’t much we can convey to the model about the style that isn’t encapsulated in the style reference images. Depending on how semantically apt your model is, it may or may not be able to pick up some higher level ideas. It may be able to pick up the brush strokes of Van Gogh or the colours of a Turner, but it may not be able to paint your characters in the semantic context of Van Gogh’s time and place.</li>
+</ol>
+<p>This is where language comes in. Language is a very powerful tool for conveying information, and it turns out that if we use language as an intermediate representation, we can use language models to manipulate this intermediate representation to our heart’s content, using a relatively informal and rather forgiving language. This is the idea behind LAIR.</p>
+<section id="a-toy-example" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="a-toy-example">A toy example</h2>
+<div class="page-columns page-full"><p>I’m a firm believer in silly toy examples. The sillier, the better. So, we’ll start with the following proposition: can we create a model that will look at a photo from, say, the front page of our favourite newspaper, and transpose it into the Warhammer 40k universe? In case you’re unfamiliar, Warhammer 40k is set – as the name suggests – in the 40th millennium, but is a weird mixture of medieval and futuristic technology. The whole atmosphere is taking the ‘Dark Ages’ part of the Middle Ages,<sup>1</sup> adding spaceships and laser guns, and turning the whole thing into an absolutely depressing dystopia. It’s a lot of fun.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Which may or may not ever have actually existed.</p></li></div></div>
+<p>There are a few things we want here: I don’t merely want the <em>visual</em> style of the Warhammer 40k universe, I also want the <em>semantics</em> – that is, I want characters to be transposed into the Warhammer 40k universe. I want the model to understand that the people in the photo are now Space Marines, and that the buildings are now Gothic cathedrals. I can’t get neural transfer to that for me, because it does not understand, or care, about semantics, and does not do semantic transformation. More importantly, I cannot interact with the ‘guts’ of neural style transfer beyond setting the hyperparameters and the source images.</p>
+<p>What I can, however, do is to use the language I am mostly most proficient in – that is, human language – to manipulate an intermediate representation.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-lair" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-lair">flowchart LR
+    subgraph Description
+        direction TB
+        S["Source image"] --&gt; D("Descriptor\ne.g. GPT-4 vision") --&gt; d["Description"]
+    end
+
+    subgraph Transformation
+        direction TB
+        t("Transformer\ne.g. GPT-4") --&gt; td["Transformed\ndescription"]
+    end
+
+    subgraph Rendering
+        direction TB
+        r("Renderer\ne.g. DALL-E") --&gt; I["Output\nimage"]
+    end
+
+    Description --&gt; Transformation --&gt; Rendering
+</pre>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;2: A rough outline of LAIR as applied to the toy example.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure&nbsp;2 outlines the basic idea for images. We use a descriptor model to describe the image, and then use a text-to-text transformer to transform the description. The transformed description is then rendered into an image. The descriptor model is typically a vision model, and the transformer is typically a language model. The renderer would then be a generative model.</p>
+<p>Consider the following source image I downloaded from Pexels:</p>
+<div id="fig-source" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/lair/pexels-canva-studio-3153198.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Our source image.</figcaption>
+</figure>
+</div>
+<p>Here’s the intermediate representation (IR) description created by GPT-4 vision:</p>
+<blockquote class="blockquote">
+<p>This is an image of four individuals gathered around a laptop, suggesting a collaborative work environment. The setting has an ample amount of natural light, evident by the bright illumination on the subjects and the interior. They appear to be located in a modern indoor environment with a large curved window in the background, contributing to the light-flooded ambiance.</p>
+<p>Starting from the left, the first individual is a man with short, dark hair and a light beard, wearing a black t-shirt with a white graphic and text. He appears focused, resting his hands on the laptop while looking at the screen. To his right is a woman with shoulder-length curly hair who seems engaged and smiling, leaning slightly towards the laptop. She’s wearing a light grey short-sleeved top.</p>
+<p>Behind these two and slightly out of focus, two more individuals are present. The person in the middle of the composition is a man with shoulder-length wavy hair, wearing a black shirt, gazing at the laptop screen. To the far right, partially cropped out of the frame, there is a woman with glasses, wearing a dark business casual blazer. She seems to be observing the laptop’s screen with interest, standing slightly behind the seated individuals.</p>
+<p>The group exhibits a sense of teamwork and focus, with everyone’s attention directed toward the laptop, situated on what appears to be a white table or desk. The body language and expressions suggest a positive, collaborative atmosphere, typical of a professional or academic team setting.</p>
+</blockquote>
+<p>This is a pretty decent description. Let’s grimdark it up by passing it to our transformer model, which was initialised with the following prompt:</p>
+<blockquote class="blockquote">
+<p>Your job is to analyze descriptions of images and change them to transpose the image into the dark, futuristic aesthetic of the Warhammer 40k universe. You are given a description of a scene, and your job is to change that scene according to the instructions, and give a detailed description of the changed scene that would allow a generative model to create an image.</p>
+<ol type="1">
+<li>Replace clothing items with a mixture of futuristic and mediaeval looking armour.</li>
+<li>Replace every-day objects held by characters with power swords, chainswords,futuristic looking guns, staffs or magic items.</li>
+<li>Replace architecture with the monumental, dark architecture common to the Warhammer 40k universe.</li>
+<li>Include things like monumental gothic spaceships in the image description.</li>
+</ol>
+</blockquote>
+<p>Here’s the output:</p>
+<blockquote class="blockquote">
+<p>This is an image of four battle-hardened individuals gathered around a hololith, suggesting a strategic war council. The setting is bathed in the cold, harsh light of flickering lumens, casting long, grim shadows on the figures and the interior. They appear to be situated in a cathedral-like command room of an Imperial Battleship, with a monumental, gothic archway in the background, contributing to the oppressive ambiance.</p>
+<p>Starting from the left, the first individual is an Adeptus Astartes, his short, dark hair and light beard visible beneath the rim of his power armor helmet. He is clad in a black power armor with white Imperial insignia. He appears focused, his gauntleted hands resting on the hololith while studying the battlefield projection. To his right, a Sororitas, her shoulder-length, curly hair peeking out from beneath her wimple, leans towards the holographic display. She’s clad in a light grey power armor, her face engaging and determined.</p>
+<p>Behind these two and slightly out of focus, two more figures loom. The figure in the middle of the composition is a man, his shoulder-length wavy hair barely visible beneath his Inquisitorial hat, wearing a black, ornate, medieval-looking armor, his eyes fixed on the hololith. To the far right, partially cropped out of the frame, there is a Tech-Priestess, her bionic glasses glinting in the lumen-light, her dark, mechanicus robes adding to her awe-inspiring presence. She seems to be observing the hololith with keen interest, standing slightly behind the armored individuals.</p>
+<p>The group gives off a sense of unity and focus, with everyone’s attention directed toward the hololith, situated on what appears to be an aged, white marble table. The body language and expressions suggest a tense, collaborative atmosphere, typical of a war council in the grim darkness of the far future.</p>
+</blockquote>
+<p>By the Emperor, that’s some good stuff. Let’s see what DALL-E makes of it:</p>
+<div id="fig-output" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/lair/img-eTqdxb5CYGT2vY5FqNkRJdva.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Our output image.</figcaption>
+</figure>
+</div>
+<p>It’s interesting to note what remains and what has changed. In particular, the relationship of the figures to each other, both spatially and semantically, as well as their posture, their number (mostly!) and the general subject matter at a highly semanticised level was preserved. Instead of a laptop, they’re looking at a big holographic sand table. Note that unlike in NST, we actually have control over what is preserved and what is not – that’s what our transformer prompt accomplishes. We’ve told it to change dress, for instance, but we haven’t told it to make any changes to the overall relationship between the figures (note how a “collaborative atmosphere”, for instance, was retained word for word).</p>
+</section>
+<section id="whats-the-point" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="whats-the-point">What’s the point?</h2>
+<p>Okay, this was quite fun, but what’s the point? Well, the point is that we can use language as an intermediate representation to manipulate things relatively easily. This is powerful because language is such an accessible and forgiving intermediate representation. More importantly, however, <em>anything</em> that can be represented in language can be manipulated this way.</p>
+<ul>
+<li>In the space of language-to-language, this includes adapting text to the needs of special audiences,<span class="citation" data-cites="steinmetz2023developing">Verma, Boland, and Miesenberger (2023)</span> conveying information to lay audiences <span class="citation" data-cites="lee2023ai">(Lee, Goldberg, and Kohane 2023)</span> and creating secondary explanatory materials e.g.&nbsp;statutory explanations <span class="citation" data-cites="blair2023can">(Blair-Stanek, Holzenberger, and Van Durme 2023)</span>.</li>
+<li>For image-to-image transformations, retaining semanticity while simpifying visuals and removing clutter may often be useful, e.g.&nbsp;for creating procedural visual guidance for medical procedures <span class="citation" data-cites="chen2023endoscopic">(Chen 2023)</span>. Often, such images are created by hand, but this is a time-consuming process that could be automated.</li>
+<li>For code-to-code, language as an intermediate representation allows the interjection of desired features into code, e.g.&nbsp;for the purposes of code refactoring. Beyond simple code rewriting, this allows a kind of opinionated transformation. Often, a target language is not only idiomatically different but also has certain other characteristics, and this is <em>a fortiori</em> the case for DSLs <span class="citation" data-cites="magalhaes2023c2taco">(Magalhães et al. 2023)</span>.</li>
+<li>For code-to-text, this allows the creation of documentation from code, which is a perennial problem in software engineering. The textual intermediate representation allows fine control over the resulting documentation.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="ref-verma2023bridging" class="csl-entry">
+Verma, A Kumar, S Gavra Boland, and Klaus Miesenberger. 2023. <span>‘Bridging the Digital Divide for Persons with Intellectual Disabilities: Assessing the Role of ChatGPT in Enabling Access, Evaluation, Integration, Management, and Creation of Digital Content’</span>. In <em>ICERI2023 Proceedings</em>, 3767–76. IATED.
+</div><div id="ref-lee2023ai" class="csl-entry">
+Lee, Peter, Carey Goldberg, and Isaac Kohane. 2023. <em>The AI Revolution in Medicine: GPT-4 and Beyond</em>. Pearson.
+</div><div id="ref-blair2023can" class="csl-entry">
+Blair-Stanek, Andrew, Nils Holzenberger, and Benjamin Van Durme. 2023. <span>‘Can GPT-3 Perform Statutory Reasoning?’</span> <em>arXiv Preprint arXiv:2302.06100</em>.
+</div><div id="ref-chen2023endoscopic" class="csl-entry">
+Chen, Hao-Wen. 2023. <span>‘Endoscopic Endonasal Skull Base Surgery for Pituitary Lesions: An AI-Assisted Creative Workflow to Develop an Animated Educational Resource for Patients and Physicians’</span>. PhD thesis, Johns Hopkins University.
+</div><div id="ref-magalhaes2023c2taco" class="csl-entry">
+Magalhães, José Wesley de Souza, Jackson Woodruff, Elizabeth Polgreen, and Michael FP O’Boyle. 2023. <span>‘C2TACO: Lifting Tensor Code to TACO’</span>. In <em>Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences</em>, 42–56.
+</div></div><p>The possibilities for using language as an intermediate representation are endless. LAIR is a powerful paradigm for transformational tasks that allows us to use language as an intermediate representation to manipulate things in a way that is both accessible and powerful, and that allows us to pick and choose <em>what</em> part of semanticity we want to manipulate <em>versus</em> what we want to preserve. It’s hard to reason about LAIR’s relative performance given that it is not a technique but a paradigm, and that its focus is not simple style transfer but finely controlled stylistic and contextual transformation, but even in the current absence of benchmarks, it is clear that models benefit from using language as an easily workable and malleable intermediate representation.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>The code for the toy example is available <a href="https://gist.github.com/chrisvoncsefalvay/f3c6e7547350cfae50be0078ad99435f">here</a>.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2024,
+  author = {Chris von Csefalvay},
+  title = {LAIR - {Language} {As} {Intermediate} {Representation}},
+  date = {2024-01-06},
+  url = {https://chrisvoncsefalvay.com/posts/lair},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2024" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2024. <span>“LAIR - Language As Intermediate
+Representation.”</span> January 6, 2024. <a href="https://chrisvoncsefalvay.com/posts/lair">https://chrisvoncsefalvay.com/posts/lair</a>.
+</div></div></section></div> ]]></description>
+  <category>LLMs</category>
+  <category>AI</category>
+  <category>style transfer</category>
+  <guid>https://chrisvoncsefalvay.com/posts/lair/index.html</guid>
+  <pubDate>Sat, 06 Jan 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/lair/header.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
 <item>
   <title>The 95% myth</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -421,11 +593,11 @@ font-style: inherit;">return</span> posts_with_dois</span><div class="code-annot
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="1" data-code-cell="lst-getting-dois">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
+<span data-code-cell="lst-getting-dois" data-code-annotation="1" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
 </dd>
 <dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="13" data-code-annotation="2" data-code-cell="lst-getting-dois">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
+<span data-code-cell="lst-getting-dois" data-code-annotation="2" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
 </dd>
 </dl>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
@@ -759,27 +931,27 @@ font-style: inherit;">'</span>)</span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="6" data-code-annotation="1" data-code-cell="lst-process-post">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="1" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="20" data-code-annotation="2" data-code-cell="lst-process-post">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="2" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="21" data-code-annotation="3" data-code-cell="lst-process-post">While we’re at it, might as well prune the cross-posts.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="3" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="28" data-code-annotation="4" data-code-cell="lst-process-post">And anything with a DOI should also get a Google Scholar metadata.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="4" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-lines="36" data-code-annotation="5" data-code-cell="lst-process-post">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="5" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
 </dd>
 <dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-lines="37" data-code-annotation="6" data-code-cell="lst-process-post">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
+<span data-code-cell="lst-process-post" data-code-annotation="6" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
 </dd>
 </dl>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
@@ -1112,7 +1284,7 @@ font-style: inherit;">|</span></span>
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="39" data-code-annotation="1" data-code-cell="lst-gh-action">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
+<span data-code-cell="lst-gh-action" data-code-annotation="1" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
 </dd>
 </dl>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
@@ -3761,34 +3933,6 @@ April 13, 2022. <a href="https://chrisvoncsefalvay.com/posts/quora-answers">http
   <guid>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</guid>
   <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/quora-answers/quora.png" medium="image" type="image/png" height="96" width="144"/>
-</item>
-<item>
-  <title>As we may see: the world after dashboards</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>In my latest post for the <a href="https://medium.com/starschema-blog">Starschema blog</a>, I discuss the end of dashboards, and what comes next:</p>
-<blockquote class="blockquote">
-<p>Enterprises have spent the last two decades meticulously curating dashboards. Tools have improved and what once was the preserve of trained professionals has largely been democratized across the enterprise. However, dashboards are quintessentially static. A dashboard shows what its developer has directed it to show. That ignores the vast realm of the ‘unknown unknown’ that is, what we don’t know that we don’t know.</p>
-<p>Dashboards, in that sense, answer narrow questions while giving the illusion of comprehensiveness and a 30,000ft perspective. In reality, dashboards are limited tools to convey limited information, while providing a psychologically fulfilling yet false illusion of comprehensiveness.</p>
-<p>This may be true, but until now, there have been rather few alternatives. In the modern enterprise, a dashboard is created to provide a consumer with information on a particular subject. This involves certain judgments about what is, and what is not, included. This, in turn, biases the observer to what they are presented: they are, in a sense, trapped in an involuntary version of McNamara’s fallacy. What is not quantified and dashboarded does not exist. Few modern executives have the capability to reach beyond these summaries of data (if they did, they wouldn’t need dashboards in the first place).</p>
-<p>However, machine learning may spell a fundamental change in this. We now have the tools and techniques to sift through vast volumes of data and evaluate the relative saliency of each data item.</p>
-</blockquote>
-<p>Read the full post <a href="https://medium.com/starschema-blog/as-we-may-see-the-world-after-dashboards-81dda9a0a7e7">here</a>.</p>
-
-
-
- ]]></description>
-  <category>dashboards</category>
-  <category>data visualization</category>
-  <category>data science</category>
-  <category>Cross-post: Starschema</category>
-  <guid>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</guid>
-  <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/as-we-may-see/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
