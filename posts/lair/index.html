@@ -115,6 +115,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-01-06">
 <meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/lair">
+<meta name="citation_doi" content="10.59350/qg7b3-crs97">
 <meta name="citation_language" content="en-GB">
 <meta name="citation_reference" content="citation_title=Demystifying neural style transfer;,citation_author=Yanghao Li;,citation_author=Naiyan Wang;,citation_author=Jiaying Liu;,citation_author=Xiaodi Hou;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_fulltext_html_url=https://arxiv.org/abs/1701.01036;">
 <meta name="citation_reference" content="citation_title=A neural algorithm of artistic style;,citation_author=Leon A Gatys;,citation_author=Alexander S Ecker;,citation_author=Matthias Bethge;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_journal_title=arXiv preprint arXiv:1508.06576;">
@@ -361,12 +362,14 @@ Li, Yanghao, Naiyan Wang, Jiaying Liu, and Xiaodi Hou. 2017. <span>‘Demystifyi
 <h2 class="anchored" data-anchor-id="whats-the-point">What’s the point?</h2>
 <p>Okay, this was quite fun, but what’s the point? Well, the point is that we can use language as an intermediate representation to manipulate things relatively easily. This is powerful because language is such an accessible and forgiving intermediate representation. More importantly, however, <em>anything</em> that can be represented in language can be manipulated this way.</p>
 <ul>
-<li>In the space of language-to-language, this includes adapting text to the needs of special audiences,<span class="citation" data-cites="steinmetz2023developing">Verma, Boland, and Miesenberger (<a href="#ref-verma2023bridging" role="doc-biblioref">2023</a>)</span> conveying information to lay audiences <span class="citation" data-cites="lee2023ai">(<a href="#ref-lee2023ai" role="doc-biblioref">Lee, Goldberg, and Kohane 2023</a>)</span> and creating secondary explanatory materials e.g.&nbsp;statutory explanations <span class="citation" data-cites="blair2023can">(<a href="#ref-blair2023can" role="doc-biblioref">Blair-Stanek, Holzenberger, and Van Durme 2023</a>)</span>.</li>
+<li>In the space of language-to-language, this includes adapting text to the needs of special audiences,<span class="citation" data-cites="steinmetz2023developing verma2023bridging">(<a href="#ref-steinmetz2023developing" role="doc-biblioref">Steinmetz 2023</a>; <a href="#ref-verma2023bridging" role="doc-biblioref">Verma, Boland, and Miesenberger 2023</a>)</span> conveying information to lay audiences <span class="citation" data-cites="lee2023ai">(<a href="#ref-lee2023ai" role="doc-biblioref">Lee, Goldberg, and Kohane 2023</a>)</span> and creating secondary explanatory materials e.g.&nbsp;statutory explanations <span class="citation" data-cites="blair2023can">(<a href="#ref-blair2023can" role="doc-biblioref">Blair-Stanek, Holzenberger, and Van Durme 2023</a>)</span>.</li>
 <li>For image-to-image transformations, retaining semanticity while simpifying visuals and removing clutter may often be useful, e.g.&nbsp;for creating procedural visual guidance for medical procedures <span class="citation" data-cites="chen2023endoscopic">(<a href="#ref-chen2023endoscopic" role="doc-biblioref">Chen 2023</a>)</span>. Often, such images are created by hand, but this is a time-consuming process that could be automated.</li>
 <li>For code-to-code, language as an intermediate representation allows the interjection of desired features into code, e.g.&nbsp;for the purposes of code refactoring. Beyond simple code rewriting, this allows a kind of opinionated transformation. Often, a target language is not only idiomatically different but also has certain other characteristics, and this is <em>a fortiori</em> the case for DSLs <span class="citation" data-cites="magalhaes2023c2taco">(<a href="#ref-magalhaes2023c2taco" role="doc-biblioref">Magalhães et al. 2023</a>)</span>.</li>
 <li>For code-to-text, this allows the creation of documentation from code, which is a perennial problem in software engineering. The textual intermediate representation allows fine control over the resulting documentation.</li>
 </ul>
-<div class="no-row-height column-margin column-container"><div id="ref-verma2023bridging" class="csl-entry" role="listitem">
+<div class="no-row-height column-margin column-container"><div id="ref-steinmetz2023developing" class="csl-entry" role="listitem">
+Steinmetz, Ina. 2023. <span>‘Developing <span>“EasyTalk”</span>–a Writing System Utilizing Natural Language Processing for Interactive Generation of <span>“Leichte Sprache”</span>(easy-to-Read German) to Assist Low-Literate Users with Intellectual or Developmental Disabilities and/or Complex Communication Needs in Writing’</span>. <a href="https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf">https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf</a>.
+</div><div id="ref-verma2023bridging" class="csl-entry" role="listitem">
 Verma, A Kumar, S Gavra Boland, and Klaus Miesenberger. 2023. <span>‘Bridging the Digital Divide for Persons with Intellectual Disabilities: Assessing the Role of ChatGPT in Enabling Access, Evaluation, Integration, Management, and Creation of Digital Content’</span>. In <em>ICERI2023 Proceedings</em>, 3767–76. IATED.
 </div><div id="ref-lee2023ai" class="csl-entry" role="listitem">
 Lee, Peter, Carey Goldberg, and Isaac Kohane. 2023. <em>The AI Revolution in Medicine: GPT-4 and Beyond</em>. Pearson.
@@ -387,16 +390,17 @@ Magalhães, José Wesley de Souza, Jackson Woodruff, Elizabeth Polgreen, and Mic
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2024,
   author = {Chris von Csefalvay},
   title = {LAIR - {Language} {As} {Intermediate} {Representation}},
   date = {2024-01-06},
   url = {https://chrisvoncsefalvay.com/posts/lair},
+  doi = {10.59350/qg7b3-crs97},
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2024. <span>“LAIR - Language As Intermediate
-Representation.”</span> January 6, 2024. <a href="https://chrisvoncsefalvay.com/posts/lair">https://chrisvoncsefalvay.com/posts/lair</a>.
+Representation.”</span> <a href="https://doi.org/10.59350/qg7b3-crs97">https://doi.org/10.59350/qg7b3-crs97</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
