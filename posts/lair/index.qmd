@@ -4,7 +4,8 @@ categories:
 - LLMs
 - AI
 - style transfer
-citation: true
+citation:
+  doi: 10.59350/qg7b3-crs97
 date: 2024-01-06
 description: Language As Intermediate Representation - a new paradigm for transformation
   using multimodal LLMs
