@@ -37,7 +37,7 @@ comments: false
 
 I'm a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. I am the author of [Computational Modeling of Infectious Disease](https://computationalinfectiousdisease.com), a richly illustrated compendium on modern computational epidemiology, as well as [a growing body of research](papers).
 
-I attended the University  of Oxford for my undergraduate studies, graduating with a distinction (1st class), and returned there for my graduate studies. I also hold degrees from Cardiff and Robert Gordon University Aberdeen, and have studied at the University of Leiden under an Erasmus programme. Today, I am [board certified in public health](https://cph.nbphe.org/employer_letter/19626), a Fellow of the [Royal Society for Public Health](https://www.rsph.org.uk/) and a member of several other learned societies.
+I attended the University  of Oxford for my undergraduate studies, graduating with a distinction (1st class), and returned there for my graduate studies. I also hold degrees from Cardiff and Robert Gordon University Aberdeen, and have studied at the University of Leiden under an Erasmus programme. Today, I am [board certified in public health](https://cph.nbphe.org/employer_letter/19626), a Fellow of the [Royal Society for Public Health](https://www.rsph.org.uk/) and a member of several other learned societies. I am also a member of IEEE, where I am a member of the EMBS Technical Committee on Standards and the EMBS Technical Committee on Biomedical and Health Informatics.
 
 I am currently a Practice Director for Biomedical AI/ML for [HCLTech](https://www.hcltech.com/), where I advise the world's leading life sciences, medical devices and pharma companies on how to leverage AI/ML to improve their products and serve their customers better. I am also a visiting thesis supervisor for students on the data science track of the mathematics programme at the [Budapest University of Technology and Economics](https://www.bme.hu/?language=en).
 
@@ -79,6 +79,8 @@ See more [here](papers).
 **[TOPRA](https://www.topra.org/)** | Registered Member since 2021
 
 **[American Public Health Association](https://www.apha.org/)** | Member since 2021
+
+**[IEEE](https://ieee.org)** | Member since 2024
 
 
 ## Personal life
