@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
 
 <title>Chris von Csefalvay - The Notebook</title>
 <style>
@@ -47,7 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -103,9 +111,36 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="alternate" type="application/rss+xml" title="Chris von Csefalvay" href="index.xml"><meta property="og:title" content="Chris von Csefalvay - The Notebook">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="alternate" type="application/rss+xml" title="Chris von Csefalvay" href="index.xml" data-external="1"><meta property="og:title" content="Chris von Csefalvay - The Notebook">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - The Notebook">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
@@ -115,9 +150,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -129,37 +164,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -180,12 +215,12 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -194,7 +229,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 
 
@@ -202,19 +239,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="LLMs,AI,style transfer" data-listing-date-sort="1704499200000" data-listing-file-modified-sort="1704683530982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
+<div class="quarto-post image-right" data-index="0" data-categories="LLMs,AI,style transfer" data-listing-date-sort="1704499200000" data-listing-file-modified-sort="1708015622996" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2230">
 <div class="thumbnail">
-<p><a href="../posts/lair/index.html"> <img src="../posts/lair/header.png" class="thumbnail-image"> </a></p>
+<p><a href="../posts/lair/index.html" class="no-external"></a></p><a href="../posts/lair/index.html" class="no-external">
+<p><img src="../posts/lair/header.png" class="thumbnail-image"></p>
+</a><p><a href="../posts/lair/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/lair/index.html">
 <h3 class="no-anchor listing-title">
-LAIR - Language As Intermediate Representation
+<a href="../posts/lair/index.html" class="no-external">LAIR - Language As Intermediate Representation</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/lair/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('LLMs'); return false;">
 LLMs
@@ -226,14 +263,12 @@ AI
 style transfer
 </div>
 </div>
-<a href="../posts/lair/index.html">
 <div class="listing-description">
-<p>Language As Intermediate Representation - a new paradigm for transformation using multimodal LLMs</p>
+<a href="../posts/lair/index.html" class="no-external">Language As Intermediate Representation - a new paradigm for transformation using multimodal LLMs</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/lair/index.html">
+<a href="../posts/lair/index.html" class="no-external">
 <div class="listing-date">
 6 Jan 2024
 </div>
@@ -243,19 +278,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="fitness,science,bad science" data-listing-date-sort="1703635200000" data-listing-file-modified-sort="1704683530850" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14">
+<div class="quarto-post image-right" data-index="1" data-categories="fitness,science,bad science" data-listing-date-sort="1703635200000" data-listing-file-modified-sort="1708015622816" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2731">
 <div class="thumbnail">
-<p><a href="../posts/95-percent-myth/index.html"> <img src="../posts/95-percent-myth/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/95-percent-myth/index.html" class="no-external"></a></p><a href="../posts/95-percent-myth/index.html" class="no-external">
+<p><img src="../posts/95-percent-myth/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/95-percent-myth/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/95-percent-myth/index.html">
 <h3 class="no-anchor listing-title">
-The 95% myth
+<a href="../posts/95-percent-myth/index.html" class="no-external">The 95% myth</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/95-percent-myth/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('fitness'); return false;">
 fitness
@@ -267,14 +302,12 @@ science
 bad science
 </div>
 </div>
-<a href="../posts/95-percent-myth/index.html">
 <div class="listing-description">
-<p>How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.</p>
+<a href="../posts/95-percent-myth/index.html" class="no-external">How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/95-percent-myth/index.html">
+<a href="../posts/95-percent-myth/index.html" class="no-external">
 <div class="listing-date">
 27 Dec 2023
 </div>
@@ -284,19 +317,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="AI,disability,human-computer interaction" data-listing-date-sort="1702339200000" data-listing-file-modified-sort="1704683530970" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="2" data-categories="AI,disability,human-computer interaction" data-listing-date-sort="1702339200000" data-listing-file-modified-sort="1708015623000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="868">
 <div class="thumbnail">
-<p><a href="../posts/ai-human-interaction/index.html"> <img src="../posts/ai-human-interaction/cd091fdb-e9e7-49d9-9b11-2b1eb92e2f86.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/ai-human-interaction/index.html" class="no-external"></a></p><a href="../posts/ai-human-interaction/index.html" class="no-external">
+<p><img src="../posts/ai-human-interaction/cd091fdb-e9e7-49d9-9b11-2b1eb92e2f86.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/ai-human-interaction/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/ai-human-interaction/index.html">
 <h3 class="no-anchor listing-title">
-What I learned from getting bodied by a robot.
+<a href="../posts/ai-human-interaction/index.html" class="no-external">What I learned from getting bodied by a robot.</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/ai-human-interaction/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -308,14 +341,12 @@ disability
 human-computer interaction
 </div>
 </div>
-<a href="../posts/ai-human-interaction/index.html">
 <div class="listing-description">
-<p>I’m fine, the robot’s fine, society on the other hand has some questions to tackle.</p>
+<a href="../posts/ai-human-interaction/index.html" class="no-external">I’m fine, the robot’s fine, society on the other hand has some questions to tackle.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/ai-human-interaction/index.html">
+<a href="../posts/ai-human-interaction/index.html" class="no-external">
 <div class="listing-date">
 12 Dec 2023
 </div>
@@ -325,19 +356,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="AI,academia,writing,LLMs" data-listing-date-sort="1701820800000" data-listing-file-modified-sort="1704683530962" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="3" data-categories="AI,academia,writing,LLMs" data-listing-date-sort="1701820800000" data-listing-file-modified-sort="1708015623000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1349">
 <div class="thumbnail">
-<p><a href="../posts/academic-generative-ai/index.html"> <img src="../posts/academic-generative-ai/4ae87543-b5d3-4373-b691-3fb71d8cf1d0.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/academic-generative-ai/index.html" class="no-external"></a></p><a href="../posts/academic-generative-ai/index.html" class="no-external">
+<p><img src="../posts/academic-generative-ai/4ae87543-b5d3-4373-b691-3fb71d8cf1d0.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/academic-generative-ai/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/academic-generative-ai/index.html">
 <h3 class="no-anchor listing-title">
-Stochastic parrots, cap and gown edition
+<a href="../posts/academic-generative-ai/index.html" class="no-external">Stochastic parrots, cap and gown edition</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/academic-generative-ai/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -352,14 +383,12 @@ writing
 LLMs
 </div>
 </div>
-<a href="../posts/academic-generative-ai/index.html">
 <div class="listing-description">
-<p>Academic AI is a hot mess. Here’s why.</p>
+<a href="../posts/academic-generative-ai/index.html" class="no-external">Academic AI is a hot mess. Here’s why.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/academic-generative-ai/index.html">
+<a href="../posts/academic-generative-ai/index.html" class="no-external">
 <div class="listing-date">
 6 Dec 2023
 </div>
@@ -369,32 +398,30 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Quarto" data-listing-date-sort="1699833600000" data-listing-file-modified-sort="1704683530966" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="4" data-categories="Quarto" data-listing-date-sort="1699833600000" data-listing-file-modified-sort="1708015623004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2026">
 <div class="thumbnail">
-<p><a href="../posts/auto-doi/index.html"> <img src="../posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/auto-doi/index.html" class="no-external"></a></p><a href="../posts/auto-doi/index.html" class="no-external">
+<p><img src="../posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg" class="thumbnail-image"></p>
+</a><p><a href="../posts/auto-doi/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/auto-doi/index.html">
 <h3 class="no-anchor listing-title">
-Auto-DOI for Quarto posts via Rogue Scholar
+<a href="../posts/auto-doi/index.html" class="no-external">Auto-DOI for Quarto posts via Rogue Scholar</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/auto-doi/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
 Quarto
 </div>
 </div>
-<a href="../posts/auto-doi/index.html">
 <div class="listing-description">
-<p>Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.</p>
+<a href="../posts/auto-doi/index.html" class="no-external">Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/auto-doi/index.html">
+<a href="../posts/auto-doi/index.html" class="no-external">
 <div class="listing-date">
 13 Nov 2023
 </div>
@@ -404,19 +431,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="AI,philosophy" data-listing-date-sort="1699228800000" data-listing-file-modified-sort="1704683530974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="5" data-categories="AI,philosophy" data-listing-date-sort="1699228800000" data-listing-file-modified-sort="1708015623004" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2013">
 <div class="thumbnail">
-<p><a href="../posts/skeuomorphic-fallacy/index.html"> <p class="card-img-top"><img src="skeuomorphic-fallacy/6506c915cd637c0019c66997.webp"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../posts/skeuomorphic-fallacy/index.html" class="no-external"></a></p><a href="../posts/skeuomorphic-fallacy/index.html" class="no-external">
+<p class="card-img-top"><img src="skeuomorphic-fallacy/6506c915cd637c0019c66997.webp"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/skeuomorphic-fallacy/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/skeuomorphic-fallacy/index.html">
 <h3 class="no-anchor listing-title">
-The skeuomorphic fallacy
+<a href="../posts/skeuomorphic-fallacy/index.html" class="no-external">The skeuomorphic fallacy</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/skeuomorphic-fallacy/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -425,14 +452,12 @@ AI
 philosophy
 </div>
 </div>
-<a href="../posts/skeuomorphic-fallacy/index.html">
 <div class="listing-description">
-<p>What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.</p>
+<a href="../posts/skeuomorphic-fallacy/index.html" class="no-external">What something is isn’t the same as what it uses to manifest that being. Also, robot CEOs are nonsense. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/skeuomorphic-fallacy/index.html">
+<a href="../posts/skeuomorphic-fallacy/index.html" class="no-external">
 <div class="listing-date">
 6 Nov 2023
 </div>
@@ -442,19 +467,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="AI,LLMs,agents" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1704683530998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20">
+<div class="quarto-post image-right" data-index="6" data-categories="AI,LLMs,agents" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1708015623012" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3953">
 <div class="thumbnail">
-<p><a href="../posts/team-of-rivals/index.html"> <img src="../posts/team-of-rivals/aaz4729-f1.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/team-of-rivals/index.html" class="no-external"></a></p><a href="../posts/team-of-rivals/index.html" class="no-external">
+<p><img src="../posts/team-of-rivals/aaz4729-f1.jpeg" class="thumbnail-image"></p>
+</a><p><a href="../posts/team-of-rivals/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/team-of-rivals/index.html">
 <h3 class="no-anchor listing-title">
-Teams of Rivals
+<a href="../posts/team-of-rivals/index.html" class="no-external">Teams of Rivals</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/team-of-rivals/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -466,14 +491,12 @@ LLMs
 agents
 </div>
 </div>
-<a href="../posts/team-of-rivals/index.html">
 <div class="listing-description">
-<p>Finally, some discussion on LLM connectionism, and what LLMs could usefully become.</p>
+<a href="../posts/team-of-rivals/index.html" class="no-external">Finally, some discussion on LLM connectionism, and what LLMs could usefully become. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/team-of-rivals/index.html">
+<a href="../posts/team-of-rivals/index.html" class="no-external">
 <div class="listing-date">
 30 Oct 2023
 </div>
@@ -483,19 +506,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="AI,LLMs,prompt engineering" data-listing-date-sort="1698537600000" data-listing-file-modified-sort="1704683530966" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="7" data-categories="AI,LLMs,prompt engineering" data-listing-date-sort="1698537600000" data-listing-file-modified-sort="1708015622992" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1429">
 <div class="thumbnail">
-<p><a href="../posts/prompt-engineering/index.html"> <p class="card-img-top"><img src="prompt-engineering/03880260005fa86e78ddb88e645bfcef.jpg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../posts/prompt-engineering/index.html" class="no-external"></a></p><a href="../posts/prompt-engineering/index.html" class="no-external">
+<p class="card-img-top"><img src="prompt-engineering/03880260005fa86e78ddb88e645bfcef.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/prompt-engineering/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/prompt-engineering/index.html">
 <h3 class="no-anchor listing-title">
-Prompt Engineering: The Art of Yesterday
+<a href="../posts/prompt-engineering/index.html" class="no-external">Prompt Engineering: The Art of Yesterday</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/prompt-engineering/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -507,14 +530,12 @@ LLMs
 prompt engineering
 </div>
 </div>
-<a href="../posts/prompt-engineering/index.html">
 <div class="listing-description">
-<p>Why prompt engineering has been obsolete before it even took off.</p>
+<a href="../posts/prompt-engineering/index.html" class="no-external">Why prompt engineering has been obsolete before it even took off. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/prompt-engineering/index.html">
+<a href="../posts/prompt-engineering/index.html" class="no-external">
 <div class="listing-date">
 29 Oct 2023
 </div>
@@ -524,19 +545,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="AI,storytelling,sensemaking,ethics,philosophy" data-listing-date-sort="1698278400000" data-listing-file-modified-sort="1704683530982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14">
+<div class="quarto-post image-right" data-index="8" data-categories="AI,storytelling,sensemaking,ethics,philosophy" data-listing-date-sort="1698278400000" data-listing-file-modified-sort="1708015622992" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2752">
 <div class="thumbnail">
-<p><a href="../posts/moral-maps/index.html"> <p class="card-img-top"><img src="moral-maps/site_0491_0011-1200-630-20151105103027.jpg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../posts/moral-maps/index.html" class="no-external"></a></p><a href="../posts/moral-maps/index.html" class="no-external">
+<p class="card-img-top"><img src="moral-maps/site_0491_0011-1200-630-20151105103027.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/moral-maps/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/moral-maps/index.html">
 <h3 class="no-anchor listing-title">
-The Moral Pulse of the Machine
+<a href="../posts/moral-maps/index.html" class="no-external">The Moral Pulse of the Machine</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/moral-maps/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -554,14 +575,12 @@ ethics
 philosophy
 </div>
 </div>
-<a href="../posts/moral-maps/index.html">
 <div class="listing-description">
-<p>On bedtime stories, and what making machines tell them tells us about their moral make-up.</p>
+<a href="../posts/moral-maps/index.html" class="no-external">On bedtime stories, and what making machines tell them tells us about their moral make-up. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/moral-maps/index.html">
+<a href="../posts/moral-maps/index.html" class="no-external">
 <div class="listing-date">
 26 Oct 2023
 </div>
@@ -571,19 +590,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Quarto,Python" data-listing-date-sort="1697932800000" data-listing-file-modified-sort="1704683530990" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="9" data-categories="Quarto,Python" data-listing-date-sort="1697932800000" data-listing-file-modified-sort="1708015623020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1423">
 <div class="thumbnail">
-<p><a href="../posts/quarto-project-scripts/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="../posts/quarto-project-scripts/index.html" class="no-external"></a></p><a href="../posts/quarto-project-scripts/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../posts/quarto-project-scripts/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/quarto-project-scripts/index.html">
 <h3 class="no-anchor listing-title">
-Quarto project scripts are awesomeness
+<a href="../posts/quarto-project-scripts/index.html" class="no-external">Quarto project scripts are awesomeness</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/quarto-project-scripts/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
 Quarto
@@ -592,14 +611,12 @@ Quarto
 Python
 </div>
 </div>
-<a href="../posts/quarto-project-scripts/index.html">
 <div class="listing-description">
-<p>Project scripts help you integrate just about every possible hare-brained scheme into your Quarto rendering pipeline. Go on, build that page from that YAML file. You know you want to.</p>
+<a href="../posts/quarto-project-scripts/index.html" class="no-external">Project scripts help you integrate just about every possible hare-brained scheme into your Quarto rendering pipeline. Go on, build that page from that YAML file. You know you want to. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/quarto-project-scripts/index.html">
+<a href="../posts/quarto-project-scripts/index.html" class="no-external">
 <div class="listing-date">
 22 Oct 2023
 </div>
@@ -609,19 +626,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="AI,art,philosophy" data-listing-date-sort="1697414400000" data-listing-file-modified-sort="1704683530990" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="10" data-categories="AI,art,philosophy" data-listing-date-sort="1697414400000" data-listing-file-modified-sort="1708015623016" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2070">
 <div class="thumbnail">
-<p><a href="../posts/lyre-of-hephaestus/index.html"> <img src="../posts/lyre-of-hephaestus/IMG_8534.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/lyre-of-hephaestus/index.html" class="no-external"></a></p><a href="../posts/lyre-of-hephaestus/index.html" class="no-external">
+<p><img src="../posts/lyre-of-hephaestus/IMG_8534.jpeg" class="thumbnail-image"></p>
+</a><p><a href="../posts/lyre-of-hephaestus/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/lyre-of-hephaestus/index.html">
 <h3 class="no-anchor listing-title">
-The Lyre of Hephaestus
+<a href="../posts/lyre-of-hephaestus/index.html" class="no-external">The Lyre of Hephaestus</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/lyre-of-hephaestus/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -633,14 +650,12 @@ art
 philosophy
 </div>
 </div>
-<a href="../posts/lyre-of-hephaestus/index.html">
 <div class="listing-description">
-<p>AI, art, language, and what makes us truly what we are.</p>
+<a href="../posts/lyre-of-hephaestus/index.html" class="no-external">AI, art, language, and what makes us truly what we are. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/lyre-of-hephaestus/index.html">
+<a href="../posts/lyre-of-hephaestus/index.html" class="no-external">
 <div class="listing-date">
 16 Oct 2023
 </div>
@@ -650,19 +665,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="AI,LLMs,philosophy,language" data-listing-date-sort="1697328000000" data-listing-file-modified-sort="1704683530978" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="11" data-categories="AI,LLMs,philosophy,language" data-listing-date-sort="1697328000000" data-listing-file-modified-sort="1708015622976" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2071">
 <div class="thumbnail">
-<p><a href="../posts/llms-language/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="../posts/llms-language/index.html" class="no-external"></a></p><a href="../posts/llms-language/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../posts/llms-language/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/llms-language/index.html">
 <h3 class="no-anchor listing-title">
-Beyond Broca
+<a href="../posts/llms-language/index.html" class="no-external">Beyond Broca</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/llms-language/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -677,14 +692,12 @@ philosophy
 language
 </div>
 </div>
-<a href="../posts/llms-language/index.html">
 <div class="listing-description">
-<p>What if we’ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?</p>
+<a href="../posts/llms-language/index.html" class="no-external">What if we’ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong? </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/llms-language/index.html">
+<a href="../posts/llms-language/index.html" class="no-external">
 <div class="listing-date">
 15 Oct 2023
 </div>
@@ -694,19 +707,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="fitness,SkiErg" data-listing-date-sort="1697155200000" data-listing-file-modified-sort="1704683530830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="12" data-categories="fitness,SkiErg" data-listing-date-sort="1697155200000" data-listing-file-modified-sort="1708015622840" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="1000">
 <div class="thumbnail">
-<p><a href="../posts/skierg-marathon/index.html"> <p class="card-img-top"><img src="skierg-marathon/index_files/figure-html/fig-skierg-marathon-output-1.png"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="../posts/skierg-marathon/index.html" class="no-external"></a></p><a href="../posts/skierg-marathon/index.html" class="no-external">
+<p class="card-img-top"><img src="skierg-marathon/index_files/figure-html/skierg-marathon-fig-skierg-marathon-output-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/skierg-marathon/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/skierg-marathon/index.html">
 <h3 class="no-anchor listing-title">
-How to do a SkiErg marathon entirely the wrong way (but still finish)
+<a href="../posts/skierg-marathon/index.html" class="no-external">How to do a SkiErg marathon entirely the wrong way (but still finish)</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/skierg-marathon/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('fitness'); return false;">
 fitness
@@ -715,14 +728,13 @@ fitness
 SkiErg
 </div>
 </div>
-<a href="../posts/skierg-marathon/index.html">
 <div class="listing-description">
-<p>How to eat the wrong way, rest the wrong way (i.e.&nbsp;not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.</p>
-</div>
+<a href="../posts/skierg-marathon/index.html" class="no-external">How to eat the wrong way, rest the wrong way (i.e.&nbsp;not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.<br>
 </a>
 </div>
+</div>
 <div class="metadata">
-<a href="../posts/skierg-marathon/index.html">
+<a href="../posts/skierg-marathon/index.html" class="no-external">
 <div class="listing-date">
 13 Oct 2023
 </div>
@@ -732,19 +744,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="AI,LLMs,Cross-post: Starschema" data-listing-date-sort="1696204800000" data-listing-file-modified-sort="1704683530998" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="13" data-categories="AI,LLMs,Cross-post: Starschema" data-listing-date-sort="1696204800000" data-listing-file-modified-sort="1708015623008" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="208">
 <div class="thumbnail">
-<p><a href="../posts/knowledge-dividend-of-llms/index.html"> <img src="../posts/knowledge-dividend-of-llms/header.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external"></a></p><a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external">
+<p><img src="../posts/knowledge-dividend-of-llms/header.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/knowledge-dividend-of-llms/index.html">
 <h3 class="no-anchor listing-title">
-The knowledge dividend of large language models
+<a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external">The knowledge dividend of large language models</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -756,14 +768,12 @@ LLMs
 Cross-post: Starschema
 </div>
 </div>
-<a href="../posts/knowledge-dividend-of-llms/index.html">
 <div class="listing-description">
-<p>Crosspost from the work blog: a pragmatic perspective on the knowledge dividend in large language models (and what it may, or may not, mean for knowledge in models, and what this can do for you).</p>
+<a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external">Crosspost from the work blog: a pragmatic perspective on the knowledge dividend in large language models (and what it may, or may not, mean for knowledge in models, and what this can do for you). </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/knowledge-dividend-of-llms/index.html">
+<a href="../posts/knowledge-dividend-of-llms/index.html" class="no-external">
 <div class="listing-date">
 2 Oct 2023
 </div>
@@ -773,19 +783,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="AI,LLMs,Cross-post: Starschema" data-listing-date-sort="1679529600000" data-listing-file-modified-sort="1704683530994" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="14" data-categories="AI,LLMs,Cross-post: Starschema" data-listing-date-sort="1679529600000" data-listing-file-modified-sort="1708015622980" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="564">
 <div class="thumbnail">
-<p><a href="../posts/asemantic-induction-of-hallucinations/index.html"> <img src="../posts/asemantic-induction-of-hallucinations/header.jpg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external"></a></p><a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external">
+<p><img src="../posts/asemantic-induction-of-hallucinations/header.jpg" class="thumbnail-image"></p>
+</a><p><a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/asemantic-induction-of-hallucinations/index.html">
 <h3 class="no-anchor listing-title">
-Asemantic Induction of Hallucinations in LLMs
+<a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external">Asemantic Induction of Hallucinations in LLMs</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -797,14 +807,12 @@ LLMs
 Cross-post: Starschema
 </div>
 </div>
-<a href="../posts/asemantic-induction-of-hallucinations/index.html">
 <div class="listing-description">
-<p>Large language models (LLMs) struggle with asemantic information: the more we stray outside the confines of language, the worse it gets. Here’s how we’ll use this for fun and profit.</p>
+<a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external">Large language models (LLMs) struggle with asemantic information: the more we stray outside the confines of language, the worse it gets. Here’s how we’ll use this for fun and profit. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/asemantic-induction-of-hallucinations/index.html">
+<a href="../posts/asemantic-induction-of-hallucinations/index.html" class="no-external">
 <div class="listing-date">
 23 Mar 2023
 </div>
@@ -814,19 +822,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="computational epidemiology,epidemics,Cross-post: Starschema" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1704683530834" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="15" data-categories="computational epidemiology,epidemics,Cross-post: Starschema" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1708015622832" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="132">
 <div class="thumbnail">
-<p><a href="../posts/data-for-the-next-pandemic/index.html"> <img src="../posts/data-for-the-next-pandemic/header.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/data-for-the-next-pandemic/index.html" class="no-external"></a></p><a href="../posts/data-for-the-next-pandemic/index.html" class="no-external">
+<p><img src="../posts/data-for-the-next-pandemic/header.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/data-for-the-next-pandemic/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/data-for-the-next-pandemic/index.html">
 <h3 class="no-anchor listing-title">
-Data for the next pandemic
+<a href="../posts/data-for-the-next-pandemic/index.html" class="no-external">Data for the next pandemic</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/data-for-the-next-pandemic/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('computational epidemiology'); return false;">
 computational epidemiology
@@ -838,14 +846,12 @@ epidemics
 Cross-post: Starschema
 </div>
 </div>
-<a href="../posts/data-for-the-next-pandemic/index.html">
 <div class="listing-description">
-<p>If there’s one thing that emerged with any clarity from COVID-19, it’s that where data played a decisive role in guiding policy interventions, outcomes were better. We need better data for the next pandemic.</p>
+<a href="../posts/data-for-the-next-pandemic/index.html" class="no-external">If there’s one thing that emerged with any clarity from COVID-19, it’s that where data played a decisive role in guiding policy interventions, outcomes were better. We need better data for the next pandemic. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/data-for-the-next-pandemic/index.html">
+<a href="../posts/data-for-the-next-pandemic/index.html" class="no-external">
 <div class="listing-date">
 7 Mar 2023
 </div>
@@ -855,19 +861,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="AI,games,ABMs" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1704683530986" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="16" data-categories="AI,games,ABMs" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1708015623020" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2006">
 <div class="thumbnail">
-<p><a href="../posts/dwarf-fortress/index.html"> <img src="../posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/dwarf-fortress/index.html" class="no-external"></a></p><a href="../posts/dwarf-fortress/index.html" class="no-external">
+<p><img src="../posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/dwarf-fortress/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/dwarf-fortress/index.html">
 <h3 class="no-anchor listing-title">
-The hardest AI problem you’ve never heard of.
+<a href="../posts/dwarf-fortress/index.html" class="no-external">The hardest AI problem you’ve never heard of.</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/dwarf-fortress/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -879,14 +885,12 @@ games
 ABMs
 </div>
 </div>
-<a href="../posts/dwarf-fortress/index.html">
 <div class="listing-description">
-<p>Dwarves. Elephants. AI. Let the games begin.</p>
+<a href="../posts/dwarf-fortress/index.html" class="no-external">Dwarves. Elephants. AI. Let the games begin. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/dwarf-fortress/index.html">
+<a href="../posts/dwarf-fortress/index.html" class="no-external">
 <div class="listing-date">
 7 Mar 2023
 </div>
@@ -896,19 +900,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="AI,computational chemistry,ethics" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1704683530974" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="17" data-categories="AI,computational chemistry,ethics" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1708015622984" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1791">
 <div class="thumbnail">
-<p><a href="../posts/a-different-shade-of-grey/index.html"> <img src="../posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/a-different-shade-of-grey/index.html" class="no-external"></a></p><a href="../posts/a-different-shade-of-grey/index.html" class="no-external">
+<p><img src="../posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" class="thumbnail-image"></p>
+</a><p><a href="../posts/a-different-shade-of-grey/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/a-different-shade-of-grey/index.html">
 <h3 class="no-anchor listing-title">
-A different shade of grey
+<a href="../posts/a-different-shade-of-grey/index.html" class="no-external">A different shade of grey</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/a-different-shade-of-grey/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -920,14 +924,12 @@ computational chemistry
 ethics
 </div>
 </div>
-<a href="../posts/a-different-shade-of-grey/index.html">
 <div class="listing-description">
-<p>A response to Urbina <em>et al.</em> (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them).</p>
+<a href="../posts/a-different-shade-of-grey/index.html" class="no-external">A response to Urbina <em>et al.</em> (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn’t already have enough of them). </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/a-different-shade-of-grey/index.html">
+<a href="../posts/a-different-shade-of-grey/index.html" class="no-external">
 <div class="listing-date">
 13 Apr 2022
 </div>
@@ -937,19 +939,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="literature,data science,ethics" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1704683530818" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="18" data-categories="literature,data science,ethics" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1708015622828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="943">
 <div class="thumbnail">
-<p><a href="../posts/five-non-data-science-books-for-data-scientists/index.html"> <img src="../posts/five-non-data-science-books-for-data-scientists/book.jpg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external"></a></p><a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external">
+<p><img src="../posts/five-non-data-science-books-for-data-scientists/book.jpg" class="thumbnail-image"></p>
+</a><p><a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/five-non-data-science-books-for-data-scientists/index.html">
 <h3 class="no-anchor listing-title">
-Five non-data-science books for data scientists
+<a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external">Five non-data-science books for data scientists</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('literature'); return false;">
 literature
@@ -961,14 +963,12 @@ data science
 ethics
 </div>
 </div>
-<a href="../posts/five-non-data-science-books-for-data-scientists/index.html">
 <div class="listing-description">
-<p>Read stuff outside your field. It’ll be good for you.</p>
+<a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external">Read stuff outside your field. It’ll be good for you. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/five-non-data-science-books-for-data-scientists/index.html">
+<a href="../posts/five-non-data-science-books-for-data-scientists/index.html" class="no-external">
 <div class="listing-date">
 13 Apr 2022
 </div>
@@ -978,19 +978,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="Quora,history,technology" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1704683530858" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="45">
+<div class="quarto-post image-right" data-index="19" data-categories="Quora,history,technology" data-listing-date-sort="1649808000000" data-listing-file-modified-sort="1708015622856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="45" data-listing-word-count-sort="8858">
 <div class="thumbnail">
-<p><a href="../posts/quora-answers/index.html"> <img src="../posts/quora-answers/quora.png" class="thumbnail-image"> </a></p>
+<p><a href="../posts/quora-answers/index.html" class="no-external"></a></p><a href="../posts/quora-answers/index.html" class="no-external">
+<p><img src="../posts/quora-answers/quora.png" class="thumbnail-image"></p>
+</a><p><a href="../posts/quora-answers/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/quora-answers/index.html">
 <h3 class="no-anchor listing-title">
-My favourite Quora answers
+<a href="../posts/quora-answers/index.html" class="no-external">My favourite Quora answers</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/quora-answers/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Quora'); return false;">
 Quora
@@ -1002,14 +1002,12 @@ history
 technology
 </div>
 </div>
-<a href="../posts/quora-answers/index.html">
 <div class="listing-description">
-<p>I’m no longer on Quora, but I used to be. Here are some of my favourite answers.</p>
+<a href="../posts/quora-answers/index.html" class="no-external">I’m no longer on Quora, but I used to be. Here are some of my favourite answers. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/quora-answers/index.html">
+<a href="../posts/quora-answers/index.html" class="no-external">
 <div class="listing-date">
 13 Apr 2022
 </div>
@@ -1019,19 +1017,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="dashboards,data visualization,data science,Cross-post: Starschema" data-listing-date-sort="1648771200000" data-listing-file-modified-sort="1704683530866" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="20" data-categories="dashboards,data visualization,data science,Cross-post: Starschema" data-listing-date-sort="1648771200000" data-listing-file-modified-sort="1708015622820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="256">
 <div class="thumbnail">
-<p><a href="../posts/as-we-may-see/index.html"> <img src="../posts/as-we-may-see/header.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/as-we-may-see/index.html" class="no-external"></a></p><a href="../posts/as-we-may-see/index.html" class="no-external">
+<p><img src="../posts/as-we-may-see/header.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/as-we-may-see/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/as-we-may-see/index.html">
 <h3 class="no-anchor listing-title">
-As we may see: the world after dashboards
+<a href="../posts/as-we-may-see/index.html" class="no-external">As we may see: the world after dashboards</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/as-we-may-see/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('dashboards'); return false;">
 dashboards
@@ -1046,14 +1044,12 @@ data science
 Cross-post: Starschema
 </div>
 </div>
-<a href="../posts/as-we-may-see/index.html">
 <div class="listing-description">
-<p>Dashboards are over – if you want it.</p>
+<a href="../posts/as-we-may-see/index.html" class="no-external">Dashboards are over – if you want it. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/as-we-may-see/index.html">
+<a href="../posts/as-we-may-see/index.html" class="no-external">
 <div class="listing-date">
 1 Apr 2022
 </div>
@@ -1063,19 +1059,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="COVID-19,pharmacology" data-listing-date-sort="1637971200000" data-listing-file-modified-sort="1704683530866" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="21" data-categories="COVID-19,pharmacology" data-listing-date-sort="1637971200000" data-listing-file-modified-sort="1708015622864" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="946">
 <div class="thumbnail">
-<p><a href="../posts/paxlovid/index.html"> <img src="../posts/paxlovid/paxlovid.png.webp" class="thumbnail-image"> </a></p>
+<p><a href="../posts/paxlovid/index.html" class="no-external"></a></p><a href="../posts/paxlovid/index.html" class="no-external">
+<p><img src="../posts/paxlovid/paxlovid.png.webp" class="thumbnail-image"></p>
+</a><p><a href="../posts/paxlovid/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/paxlovid/index.html">
 <h3 class="no-anchor listing-title">
-Peace, love, Paxlovid and ‘Pfizermectin’
+<a href="../posts/paxlovid/index.html" class="no-external">Peace, love, Paxlovid and ‘Pfizermectin’</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/paxlovid/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
 COVID-19
@@ -1084,14 +1080,12 @@ COVID-19
 pharmacology
 </div>
 </div>
-<a href="../posts/paxlovid/index.html">
 <div class="listing-description">
-<p>Debunking a remarkably popular and persistent misconception about the relationship between Paxlovid and ivermectin.</p>
+<a href="../posts/paxlovid/index.html" class="no-external">Debunking a remarkably popular and persistent misconception about the relationship between Paxlovid and ivermectin. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/paxlovid/index.html">
+<a href="../posts/paxlovid/index.html" class="no-external">
 <div class="listing-date">
 27 Nov 2021
 </div>
@@ -1101,19 +1095,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="22" data-categories="public health,vaccines" data-listing-date-sort="1636416000000" data-listing-file-modified-sort="1704683530822" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="22" data-categories="public health,vaccines" data-listing-date-sort="1636416000000" data-listing-file-modified-sort="1708015622864" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1024">
 <div class="thumbnail">
-<p><a href="../posts/mrna-gene-therapy/index.html"> <img src="../posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/mrna-gene-therapy/index.html" class="no-external"></a></p><a href="../posts/mrna-gene-therapy/index.html" class="no-external">
+<p><img src="../posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg" class="thumbnail-image"></p>
+</a><p><a href="../posts/mrna-gene-therapy/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/mrna-gene-therapy/index.html">
 <h3 class="no-anchor listing-title">
-Why the COVID-19 vaccines are not gene therapy
+<a href="../posts/mrna-gene-therapy/index.html" class="no-external">Why the COVID-19 vaccines are not gene therapy</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/mrna-gene-therapy/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('public health'); return false;">
 public health
@@ -1122,14 +1116,12 @@ public health
 vaccines
 </div>
 </div>
-<a href="../posts/mrna-gene-therapy/index.html">
 <div class="listing-description">
-<p>Reflections on some definitional issues.</p>
+<a href="../posts/mrna-gene-therapy/index.html" class="no-external">Reflections on some definitional issues. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/mrna-gene-therapy/index.html">
+<a href="../posts/mrna-gene-therapy/index.html" class="no-external">
 <div class="listing-date">
 9 Nov 2021
 </div>
@@ -1139,19 +1131,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="23" data-categories="cybersecurity,econometrics,game theory" data-listing-date-sort="1620950400000" data-listing-file-modified-sort="1704683530826" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="quarto-post image-right" data-index="23" data-categories="cybersecurity,econometrics,game theory" data-listing-date-sort="1620950400000" data-listing-file-modified-sort="1708015622852" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1880">
 <div class="thumbnail">
-<p><a href="../posts/ransomware-prisoners-dilemma/index.html"> <img src="../posts/ransomware-prisoners-dilemma/106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external"></a></p><a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external">
+<p><img src="../posts/ransomware-prisoners-dilemma/106880381-1620638044898-gettyimages-1232803207-COLONIAL_HACK.jpeg" class="thumbnail-image"></p>
+</a><p><a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/ransomware-prisoners-dilemma/index.html">
 <h3 class="no-anchor listing-title">
-Ransomware attacks as n-person prisoner’s dilemmas
+<a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external">Ransomware attacks as n-person prisoner’s dilemmas</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('cybersecurity'); return false;">
 cybersecurity
@@ -1163,14 +1155,12 @@ econometrics
 game theory
 </div>
 </div>
-<a href="../posts/ransomware-prisoners-dilemma/index.html">
 <div class="listing-description">
-<p>A game theoretical perspective on ransomware attacks as n-person prisoner’s dilemmas, and why forced cooperation isn’t the answer.</p>
+<a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external">A game theoretical perspective on ransomware attacks as n-person prisoner’s dilemmas, and why forced cooperation isn’t the answer. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/ransomware-prisoners-dilemma/index.html">
+<a href="../posts/ransomware-prisoners-dilemma/index.html" class="no-external">
 <div class="listing-date">
 14 May 2021
 </div>
@@ -1180,19 +1170,19 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="24" data-categories="AI,Julia,programming" data-listing-date-sort="1615075200000" data-listing-file-modified-sort="1704683530958" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16">
+<div class="quarto-post image-right" data-index="24" data-categories="AI,Julia,programming" data-listing-date-sort="1615075200000" data-listing-file-modified-sort="1708015622988" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3103">
 <div class="thumbnail">
-<p><a href="../posts/julia-a-post-mortem/index.html"> <img src="../posts/julia-a-post-mortem/julia.jpg" class="thumbnail-image"> </a></p>
+<p><a href="../posts/julia-a-post-mortem/index.html" class="no-external"></a></p><a href="../posts/julia-a-post-mortem/index.html" class="no-external">
+<p><img src="../posts/julia-a-post-mortem/julia.jpg" class="thumbnail-image"></p>
+</a><p><a href="../posts/julia-a-post-mortem/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../posts/julia-a-post-mortem/index.html">
 <h3 class="no-anchor listing-title">
-Julia: A post-mortem
+<a href="../posts/julia-a-post-mortem/index.html" class="no-external">Julia: A post-mortem</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../posts/julia-a-post-mortem/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AI'); return false;">
 AI
@@ -1204,14 +1194,12 @@ Julia
 programming
 </div>
 </div>
-<a href="../posts/julia-a-post-mortem/index.html">
 <div class="listing-description">
-<p>Why I no longer believe my favourite programming language will save the world.</p>
+<a href="../posts/julia-a-post-mortem/index.html" class="no-external">Why I no longer believe my favourite programming language will save the world. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../posts/julia-a-post-mortem/index.html">
+<a href="../posts/julia-a-post-mortem/index.html" class="no-external">
 <div class="listing-date">
 7 Mar 2021
 </div>
@@ -1225,7 +1213,7 @@ Chris von Csefalvay
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay,
+</div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay,
   author = {Chris von Csefalvay},
   title = {The {Notebook}},
   url = {https://chrisvoncsefalvay.com/posts},
@@ -1313,10 +1301,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1326,8 +1313,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1340,6 +1336,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1383,6 +1498,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1408,6 +1524,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1470,7 +1612,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -1479,6 +1625,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

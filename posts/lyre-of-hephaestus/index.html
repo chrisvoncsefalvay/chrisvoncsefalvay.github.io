@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
 <meta name="dcterms.date" content="2023-10-16">
 <meta name="description" content="AI, art, language, and what makes us truly what we are.">
 
@@ -47,7 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -74,15 +82,43 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <meta property="og:title" content="Chris von Csefalvay - The Lyre of Hephaestus">
 <meta property="og:description" content="AI, art, language, and what makes us truly what we are.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8534.jpeg">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - The Lyre of Hephaestus">
 <meta name="twitter:description" content="AI, art, language, and what makes us truly what we are.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/IMG_8534.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="The Lyre of Hephaestus">
+<meta name="citation_author" content="Chris von Csefalvay">
 <meta name="citation_publication_date" content="2023-10-16">
 <meta name="citation_cover_date" content="2023-10-16">
 <meta name="citation_year" content="2023">
@@ -96,9 +132,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -110,37 +146,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -185,7 +221,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -200,13 +236,15 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <p>I have probably spent more time looking at Poussin’s <em>Dance to the Music of Time</em> than any other work of art. Sneaking off to <a href="https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?service=direct/1/ResultListView/result.t1.collection_list.$TspTitleImageLink.link&amp;sp=10&amp;sp=Scollection&amp;sp=SfieldValue&amp;sp=0&amp;sp=0&amp;sp=2&amp;sp=SdetailList&amp;sp=0&amp;sp=Sdetail&amp;sp=0&amp;sp=F&amp;sp=T&amp;sp=2">the Wallace Collection</a> in London and just looking at the <em>Dance</em> was my comfort activity while living in London – a time that was not exactly devoid of its trials. It’s not, by any measure, <em>great</em> art, insofar as such judgments can be made with any objectivity. Like most French Baroque allegorical paintings, it’s considered somewhat ‘boring’. It neither has, nor claims to arrogate to itself, the fiery passion of a Van Gogh, the compositional genius of a Vermeer or the turbulence of a Turner. It’s not particularly well known, and indeed more know it for having lent its name to Anthony Powell’s dodecalogy (quite incidentally, another of my favourite works of art). In as far as there can be a sensible debate as to what is, and isn’t, ‘good’ or ‘great’ art, few would consider <em>Dance</em> to fall into that category. What nobody would argue, however, is that it <em>is</em> a piece of art.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="IMG_8537.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Nicolas Poussin, <em>Dance to the Music of Time</em>.</figcaption>
+<figcaption>Nicolas Poussin, <em>Dance to the Music of Time</em>.</figcaption>
 </figure>
 </div>
 <p>What, then, if I gave a somewhat clumsy description of the scene to Stable Diffusion, the currently fashionable model of generating images? Let’s try this:</p>
@@ -214,10 +252,14 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>A painting, in the French Baroque style, of four female figures, allegories of the four seasons. They hold each other by the hand, dancing in a circle. Time, represented by an old man, plays a lyre. The scene is set in the early morning.</p>
 </blockquote>
 <p>Here’s what I got:</p>
-<div id="fig-poussin-stablediffusion" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="IMG_8536.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Stable Diffusion’s attempt at my description of the <em>Dance</em>.</figcaption>
+<div id="fig-poussin-stablediffusion" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poussin-stablediffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="IMG_8536.jpeg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poussin-stablediffusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Stable Diffusion’s attempt at my description of the <em>Dance</em>.
+</figcaption>
 </figure>
 </div>
 <p>It’s not great by any stretch of the word. The faces, like in most diffusion models, are a mess. None of the figures get the allegory of time and seasons (of the year, but also of life, and of stations of an individual’s life). Certainly some more/better prompting could have gotten a slightly better result, but that’s really not the point.</p>
@@ -228,30 +270,30 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="IMG_8534.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">One art, please!</figcaption>
+<figcaption>One art, please!</figcaption>
 </figure>
 </div>
-<div class="page-columns page-full"><p>At the heart of the notion of a simulacrum is that the product and the process are different things. Art is not a product, but a process. I am, as I will explain later, not singling out art in some romantic exaltation of the artistic as quintessentially human, nor am I limiting art to what one might find in a museum. When I discuss art, I fully intend to include a toddler’s finger painting and even some absent-minded doodles on the margins of a less-than-gripping journal article.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> There are other activities that may become the subject matter of a simulacrum, language being perhaps of foremost interest (on which, once again, see <em>infra</em>). And just as Zoidberg can’t buy ‘art’, merely a ‘work of art’ (‘work’ here having the meaning of ‘product’ – an ‘artwork’ or ‘work of art’ being not something with ‘art characteristics’ but rather the result of the activity we know as ‘art’), an artificial intelligence or a non-human animal cannot create ‘art’, either.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Because who of us hasn’t been bored enough by a dull paper to start doodling?</p></li></div></div>
-<p>At the heart of this is the difference between, of course, the process and the product. Artificial intelligence generally works according to a very simple inductive principle: given a bunch of examples (such as pairs of images and descriptions of images), learn the parameters of a function <span class="math inline">\(f(d) = I\)</span> so that for any arbitrary description <span class="math inline">\(d\)</span>, an image <span class="math inline">\(I\)</span> is generated so as to minimise a loss function <span class="math inline">\(\sum_{i=0}^N J(d_i, I_i)\)</span> over the <span class="math inline">\(N\)</span>-sized training set. <span class="math inline">\(f(d)\)</span> may be quite complex indeed, and <span class="math inline">\(J(d, I)\)</span> may comprise various steps up to and including human input (reinforcement learning with human feedback – RLFH for short –, which is how most of the LLMs currently in vogue were trained, include this step quite prominently), but in the end, it’s all about learning <span class="math inline">\(f\)</span>. For a neural network, for instance, this ‘learning’ takes place by way of an algorithm called backpropagation, which changes the values of weights and bias matrices that form part of <span class="math inline">\(f\)</span> so as to minimise <span class="math inline">\(J\)</span>. Regardless of how <span class="math inline">\(f\)</span> is learned, what is at the heart of the entire process is learning a function that simulates the outcome. Stable Diffusion, for instance, is not concerned with simulating the <em>process</em> of creating art, it is concerned with simulating the <em>outcome</em> of creating art.</p>
+<p>At the heart of the notion of a simulacrum is that the product and the process are different things. Art is not a product, but a process. I am, as I will explain later, not singling out art in some romantic exaltation of the artistic as quintessentially human, nor am I limiting art to what one might find in a museum. When I discuss art, I fully intend to include a toddler’s finger painting and even some absent-minded doodles on the margins of a less-than-gripping journal article.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> There are other activities that may become the subject matter of a simulacrum, language being perhaps of foremost interest (on which, once again, see <em>infra</em>). And just as Zoidberg can’t buy ‘art’, merely a ‘work of art’ (‘work’ here having the meaning of ‘product’ – an ‘artwork’ or ‘work of art’ being not something with ‘art characteristics’ but rather the result of the activity we know as ‘art’), an artificial intelligence or a non-human animal cannot create ‘art’, either.</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Because who of us hasn’t been bored enough by a dull paper to start doodling?</p></div><p>At the heart of this is the difference between, of course, the process and the product. Artificial intelligence generally works according to a very simple inductive principle: given a bunch of examples (such as pairs of images and descriptions of images), learn the parameters of a function <span class="math inline">\(f(d) = I\)</span> so that for any arbitrary description <span class="math inline">\(d\)</span>, an image <span class="math inline">\(I\)</span> is generated so as to minimise a loss function <span class="math inline">\(\sum_{i=0}^N J(d_i, I_i)\)</span> over the <span class="math inline">\(N\)</span>-sized training set. <span class="math inline">\(f(d)\)</span> may be quite complex indeed, and <span class="math inline">\(J(d, I)\)</span> may comprise various steps up to and including human input (reinforcement learning with human feedback – RLFH for short –, which is how most of the LLMs currently in vogue were trained, include this step quite prominently), but in the end, it’s all about learning <span class="math inline">\(f\)</span>. For a neural network, for instance, this ‘learning’ takes place by way of an algorithm called backpropagation, which changes the values of weights and bias matrices that form part of <span class="math inline">\(f\)</span> so as to minimise <span class="math inline">\(J\)</span>. Regardless of how <span class="math inline">\(f\)</span> is learned, what is at the heart of the entire process is learning a function that simulates the outcome. Stable Diffusion, for instance, is not concerned with simulating the <em>process</em> of creating art, it is concerned with simulating the <em>outcome</em> of creating art.</p>
 </section>
 <section id="human-processes" class="level1 page-columns page-full">
 <h1>Human processes</h1>
 <p>That matters, because not everything is about outcomes. In fact, as humans, we recognise that some of the most important things <em>aren’t</em>. Consider moral judgment, the individual and societal assignment of a moral character to human actions. Yes, outcomes do matter, but they aren’t the be-all end-all of moral judgment. We differentiate between murder, manslaughter, reckless homicide, excusable homicide and justifiable homicide, even though the end result is the same (i.e.&nbsp;someone is dead), because we acknowledge that different levels of moral agency, and different forms of its exercise, are at play in each of these. We do so because we recognise humans are more than mere outcome generating machines: how (and why) something came to be is often just as important, if not more so, than what the end result is.</p>
-<div class="page-columns page-full"><p>This is a uniquely human differentiation. In the same vein, then, there are things that only humans are capable of. A machine can certainly <em>take a life</em>, but it cannot <em>commit murder</em>, because the latter is defined not just by an outcome but also the mental state (<em>mens rea</em>) that led up to it. We think of Xerxes flogging the sea as the act of a megalomaniacal despot who has taken leave of his senses precisely because we recognise that punishing the sea, incapable of moral responsibility for its stormy waves washing away Xerxes’s pontoon bridges, as preposterous. Punishment requires, if not guilt, at least a subject <em>capable</em> of being guilty. Punishing the innocent is unjust, but punishing something incapable of being guilty or innocent or otherwise morally responsible is worse – it is <em>insane</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Not that otherwise quite rationalistic societies did not engage in trials of lifeless things. <a href="https://scholarship.law.upenn.edu/cgi/viewcontent.cgi?referer=&amp;httpsredir=1&amp;article=7589&amp;context=penn_law_review">Walter Woodburn Hyde wrote a wonderful paper on this</a>.</p></li></div></div>
-<p>And just as moral guilt is uniquely human, so is creativity. This is not to suggest an exalted role for creativity – much as we tend to think of that term to have a positive meaning, for the purposes of this argument, creativity is any act of the mind that brings forth something. This comprises not just things like creating art, but also using language. There are many functions of language, ranging from the informative through the performative (what Searle called ‘speech acts’) to the phatic. However, humans communicating always do so with <em>some</em> intent. That’s different from machines using words. A machine uses words, and maybe uses language, but it does not ‘speak’, for that requires an intent, something no machine, howsoever sophisticated, can create. Like art, speech is not just about <em>what</em>, but the <em>why</em>, of an action. There are many reasons my neighbour greets me with “hey, how’re you doing?” – maybe it’s genuine interest in how I am doing, maybe it is as a kind of social bond-strengthening (phatic communication), but it is backed by some sort of intent that goes beyond just wanting to produce words.</p>
+<p>This is a uniquely human differentiation. In the same vein, then, there are things that only humans are capable of. A machine can certainly <em>take a life</em>, but it cannot <em>commit murder</em>, because the latter is defined not just by an outcome but also the mental state (<em>mens rea</em>) that led up to it. We think of Xerxes flogging the sea as the act of a megalomaniacal despot who has taken leave of his senses precisely because we recognise that punishing the sea, incapable of moral responsibility for its stormy waves washing away Xerxes’s pontoon bridges, as preposterous. Punishment requires, if not guilt, at least a subject <em>capable</em> of being guilty. Punishing the innocent is unjust, but punishing something incapable of being guilty or innocent or otherwise morally responsible is worse – it is <em>insane</em>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><p><sup>2</sup>&nbsp;Not that otherwise quite rationalistic societies did not engage in trials of lifeless things. <a href="https://scholarship.law.upenn.edu/cgi/viewcontent.cgi?referer=&amp;httpsredir=1&amp;article=7589&amp;context=penn_law_review">Walter Woodburn Hyde wrote a wonderful paper on this</a>.</p></div><p>And just as moral guilt is uniquely human, so is creativity. This is not to suggest an exalted role for creativity – much as we tend to think of that term to have a positive meaning, for the purposes of this argument, creativity is any act of the mind that brings forth something. This comprises not just things like creating art, but also using language. There are many functions of language, ranging from the informative through the performative (what Searle called ‘speech acts’) to the phatic. However, humans communicating always do so with <em>some</em> intent. That’s different from machines using words. A machine uses words, and maybe uses language, but it does not ‘speak’, for that requires an intent, something no machine, howsoever sophisticated, can create. Like art, speech is not just about <em>what</em>, but the <em>why</em>, of an action. There are many reasons my neighbour greets me with “hey, how’re you doing?” – maybe it’s genuine interest in how I am doing, maybe it is as a kind of social bond-strengthening (phatic communication), but it is backed by some sort of intent that goes beyond just wanting to produce words.</p>
 </section>
 <section id="the-tune-without-the-music" class="level1 page-columns page-full">
 <h1>The tune without the music</h1>
 <p>A simulacrum, then, is what’s left when the uniquely human <em>process</em> is removed, and only the outcome remains, obtained through a different process (e.g.&nbsp;inference from a model generated by way of minimising the loss function over a training set). It is the tune without the music. A simulacrum doesn’t necessarily have to be ‘worse’ than the real deal – quite likely, Stable Diffusion can produce a better drawing than I could, and GPT-4 might well write a better poem than my hamfisted attempts at poetry. However, neither of those <em>are</em> the real thing. Stable Diffusion will be able to do better drawings than I do, but it won’t ever be able to do better <em>art</em>, because it’ll never be able to do art.</p>
 <p>In that sense, it’s the opposite of ‘going through the motions’: a simulacrum is an often indistinguishable in its end product from the ‘real thing’, but arrives there by a different route. This is, indeed, why it is so deceptively similar to the ‘real thing’, and what gives rise to perhaps its darker side. In a recent interview on one of my favourite podcasts, <a href="https://www.youtube.com/c/MachineLearningStreetTalk">Machine Learning Street Talk</a>, Daniel Dennett referred to the simulacrum of human communicational interaction as “counterfeit people”. I disagree with some of Dennett’s position, but this is worth watching in its entirety:</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/axJtywd9Tbo?start=725" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<div class="page-columns page-full"><p>I think Dennett is wrong on a few points,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> but the language of ‘counterfeits’ gets some of this point across quite well. A counterfeit currency isn’t really all <em>that</em> different from an authentic bank note. What is different is the intent by which it is created. The counterfeit lacks the moral intent that it be honoured in return (that’s why people forge currency – there would be little point in counterfeiting bank notes if one actually intended to honour them!).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;Importantly, I think he’s falling victim to the trap he so clearly identifies. The lack of moral agency of AI, which would make these pretend-humans something other than ‘real’ is exactly why the semantics of ‘counterfeiting’, which involves deception, an act of quintessential moral agency, is altogether inappropriate. But that’s for another day.</p></li><li id="fn4"><p><sup>4</sup>&nbsp;Arguably, all modern fiat currency is at least a little fake, but that is <em>also</em> another argument for another day.</p></li></div></div>
-</section>
+<p>I think Dennett is wrong on a few points,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> but the language of ‘counterfeits’ gets some of this point across quite well. A counterfeit currency isn’t really all <em>that</em> different from an authentic bank note. What is different is the intent by which it is created. The counterfeit lacks the moral intent that it be honoured in return (that’s why people forge currency – there would be little point in counterfeiting bank notes if one actually intended to honour them!).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><p><sup>3</sup>&nbsp;Importantly, I think he’s falling victim to the trap he so clearly identifies. The lack of moral agency of AI, which would make these pretend-humans something other than ‘real’ is exactly why the semantics of ‘counterfeiting’, which involves deception, an act of quintessential moral agency, is altogether inappropriate. But that’s for another day.</p><p><sup>4</sup>&nbsp;Arguably, all modern fiat currency is at least a little fake, but that is <em>also</em> another argument for another day.</p></div></section>
 <section id="the-heart-of-the-matter" class="level1 page-columns page-full">
 <h1>The heart of the matter</h1>
 <p>In the end, outcomes are <em>not</em> all that make us who we are. The poet, the artist, the murderer and the thief – they are who and what they are not solely because of outcomes, but because of what led up to those outcomes. And that’s ultimately the most human thing any of us will ever get to experience: to be someone not because of an outcome that a machine or an algorithm could feasibly mimic, but because of the quintessentially human process of decisions, good or bad, actions, passion, foibles. The things that make us who we are are in turn a <em>product</em> of who we are.</p>
-<div class="page-columns page-full"><p>And that’s what gives meaning to those outcomes, meaning that a machine-generated limerick could never aspire to – not because it is not ‘good enough’, but because it is just a qualitatively different thing. It is, to use Pauli’s turn of phrase, not that the Stable Diffusion-generated painting in <a href="#fig-poussin-stablediffusion">Figure&nbsp;1</a> is ‘not right’ (or aesthetically pleasing, in this case) – it’s that it’s ‘not even wrong’. It lacks the aptitude of being good or bad art, no matter how good or bad (likely the latter) it would be if it didn’t. It could, in theory, be good enough to put Poussin to shame, and it would still be no closer to being art. It could be Turner Prize-winning work,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> and yet be put to shame by a toddler’s finger-painting.</p><div class="no-row-height column-margin column-container"><li id="fn5"><p><sup>5</sup>&nbsp;Let’s, for the time being, entertain the notion that that still means <em>something</em>.</p></li></div></div>
-<p>A world in which the poet and the machine are on equal footing is a world that, for all intents and purposes, does not have poets anymore. It is a world in which outcomes determine everything, and that makes it a world that is not worth inhabiting: for a world of outcomes alone is a world in which our choices, our actions, our most irreplicably human strengths and weaknesses alike play no role.</p>
+<p>And that’s what gives meaning to those outcomes, meaning that a machine-generated limerick could never aspire to – not because it is not ‘good enough’, but because it is just a qualitatively different thing. It is, to use Pauli’s turn of phrase, not that the Stable Diffusion-generated painting in <a href="#fig-poussin-stablediffusion" class="quarto-xref">Figure&nbsp;1</a> is ‘not right’ (or aesthetically pleasing, in this case) – it’s that it’s ‘not even wrong’. It lacks the aptitude of being good or bad art, no matter how good or bad (likely the latter) it would be if it didn’t. It could, in theory, be good enough to put Poussin to shame, and it would still be no closer to being art. It could be Turner Prize-winning work,<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> and yet be put to shame by a toddler’s finger-painting.</p>
+<div class="no-row-height column-margin column-container"><p><sup>5</sup>&nbsp;Let’s, for the time being, entertain the notion that that still means <em>something</em>.</p></div><p>A world in which the poet and the machine are on equal footing is a world that, for all intents and purposes, does not have poets anymore. It is a world in which outcomes determine everything, and that makes it a world that is not worth inhabiting: for a world of outcomes alone is a world in which our choices, our actions, our most irreplicably human strengths and weaknesses alike play no role.</p>
 <p>But that is not the world we inhabit – thankfully. We – still? – live in a world in which the way we arrive at something, be it a poem or a painting or a dead body, matters. And as long as that is so, the simulacra of human action will remain inhabiting a different world of their own. They may reach a kind of technical verisimilitude, but not a moral verisimilitude.</p>
 <p>And <em>that</em> is what makes all the difference.</p>
 
@@ -259,7 +301,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The {Lyre} of {Hephaestus}},
   date = {2023-10-16},
@@ -349,10 +391,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -362,8 +403,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -376,6 +426,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -419,6 +588,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -444,6 +614,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -506,7 +702,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -515,6 +715,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

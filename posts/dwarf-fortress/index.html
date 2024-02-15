@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
 <meta name="dcterms.date" content="2023-03-07">
 <meta name="description" content="Dwarves. Elephants. AI. Let the games begin.">
 
@@ -26,6 +27,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -66,7 +68,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -75,6 +83,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -93,15 +102,43 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <meta property="og:title" content="Chris von Csefalvay - The hardest AI problem you’ve never heard of.">
 <meta property="og:description" content="Dwarves. Elephants. AI. Let the games begin.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - The hardest AI problem you’ve never heard of.">
 <meta name="twitter:description" content="Dwarves. Elephants. AI. Let the games begin.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="The hardest AI problem you&amp;amp;#039;ve never heard of.">
+<meta name="citation_author" content="Chris von Csefalvay">
 <meta name="citation_publication_date" content="2023-03-07">
 <meta name="citation_cover_date" content="2023-03-07">
 <meta name="citation_year" content="2023">
@@ -119,9 +156,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -133,37 +170,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -208,7 +245,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -223,7 +260,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <p>There’s a notion in artificial intelligence known as Moravec’s paradox: it’s relatively easy to teach a computer to play chess or checkers at a pretty decent level, but near impossible to teach it something as trivial as bipedal motion. <span class="citation" data-cites="hassabis2017artificial">(<a href="#ref-hassabis2017artificial" role="doc-biblioref">Hassabis 2017</a>)</span> The sensorimotor tasks that our truly wonderful brains have mastered by our second birthday are much harder to teach a computer than something arguably as ‘complex’ as <a href="https://www.chessgames.com/perl/chessgame?gid=1070917">beating a chess grandmaster</a>. In that sense, what Garry Kasparov learned in the first months of his life were much more ‘difficult’, from the perspective of AI, than his mastery of chess. So is, for that matter, learning to play Super Mario. What’s hard for us is simple for computers, and vice versa. <span class="citation" data-cites="pinker2003language">(<a href="#ref-pinker2003language" role="doc-biblioref">Pinker 2003</a>)</span></p>
 <div class="no-row-height column-margin column-container"><div id="ref-hassabis2017artificial" class="csl-entry" role="listitem">
@@ -233,8 +272,8 @@ Pinker, Steven. 2003. <em>The Language Instinct: How the Mind Creates Language</
 </div></div><section id="tiny-problems-big-world" class="level1 page-columns page-full">
 <h1>Tiny problems, big world</h1>
 <p>Chess, for all its complexity, has a relatively small problem space. It is a spatially confined game of a limited number of pieces – which, by the way, is monotonically decreasing over time. Pieces have limited moves, so that a piece of type p being at position (<span class="math inline">\(x, y\)</span>) at time t has a finite number of places it can be at <span class="math inline">\(t+1\)</span> (valid moves). Consequently, for any state of the chessboard, we can describe a finite set of possible states one step later. Recursively, for any state of the chessboard, we can enumerate any future state. That this enumeration involves a rapidly growing and rather massive problem space is not, inherently, a huge problem. There are discrete steps in time, and each of those steps moves us along the tree. In short: however big the problem space, it can be enumerated.</p>
-<div class="page-columns page-full"><p>This is important because processes like this (known as Markov decision processes) are kind of problem machine learning excels at. We can enumerate a bunch of these trees from start to finish (that is, individual chess games), and eventually the computer builds a representation of whether a particular move given particular preceding moves is or is not a good idea. Or, more formally, we can define a number of actions called policies in this context, so that given a system in state s and the action a, <span class="math inline">\(\pi_{a, s} = p(a_t = a | s_t = s)\)</span>. We can then define a reward function for any policy <span class="math inline">\(\pi\)</span>, so that <span class="math inline">\(R(\pi) \sim \sum_{t = 0}^{\infty} r(\pi, t)\)</span> for all <span class="math inline">\(r(\pi, t)\)</span> being the reward gained by taking the action corresponding to the policy <span class="math inline">\(\pi\)</span> at time step <span class="math inline">\(t\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Then, given a state <span class="math inline">\(s\)</span> and a policy <span class="math inline">\(\pi\)</span>, we can calculate the expectation value of <span class="math inline">\(R_{\pi} | t\)</span>. And if we can calculate it, we can sic one of the many optimisation algorithms on it to maximise it. There, chess played, game won, end of.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Specifically, by the factor <span class="math inline">\(\gamma^t\)</span>, where <span class="math inline">\(\gamma\)</span> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.</p></li></div></div>
-</section>
+<p>This is important because processes like this (known as Markov decision processes) are kind of problem machine learning excels at. We can enumerate a bunch of these trees from start to finish (that is, individual chess games), and eventually the computer builds a representation of whether a particular move given particular preceding moves is or is not a good idea. Or, more formally, we can define a number of actions called policies in this context, so that given a system in state s and the action a, <span class="math inline">\(\pi_{a, s} = p(a_t = a | s_t = s)\)</span>. We can then define a reward function for any policy <span class="math inline">\(\pi\)</span>, so that <span class="math inline">\(R(\pi) \sim \sum_{t = 0}^{\infty} r(\pi, t)\)</span> for all <span class="math inline">\(r(\pi, t)\)</span> being the reward gained by taking the action corresponding to the policy <span class="math inline">\(\pi\)</span> at time step <span class="math inline">\(t\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Then, given a state <span class="math inline">\(s\)</span> and a policy <span class="math inline">\(\pi\)</span>, we can calculate the expectation value of <span class="math inline">\(R_{\pi} | t\)</span>. And if we can calculate it, we can sic one of the many optimisation algorithms on it to maximise it. There, chess played, game won, end of.</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Specifically, by the factor <span class="math inline">\(\gamma^t\)</span>, where <span class="math inline">\(\gamma\)</span> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.</p></div></section>
 <section id="lets-get-more-problematic" class="level1">
 <h1>Let’s get more problematic</h1>
 <p>Except, as I said, chess is, well, relatively simple to enumerate. What about non-enumerable systems? For starters, we can dispense with discrete time and start operating in continuous time. Things get a whole lot more complicated when you start to move from discrete maths to continuous values (and that’s why I largely stay on the discrete side, in the comfort of number theory and integer indices). What if a game of chess didn’t have turns, but rather played at whatever speed the players can simultaneously manage? And had a large problem space, a ton of different actors, oh, and let’s sprinkle some degree of randomness into it, so as to make the whole thing impossible to understand and computationally insane to model?</p>
@@ -243,7 +282,7 @@ Pinker, Steven. 2003. <em>The Language Instinct: How the Mind Creates Language</
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">This is Dwarf Fortress, in all its beauty (comma lack thereof). Screenshot taken from the legendary Boatmurdered saga, the most hilariously weird tale of just how incredible this game can be.</figcaption>
+<figcaption>This is Dwarf Fortress, in all its beauty (comma lack thereof). Screenshot taken from the legendary Boatmurdered saga, the most hilariously weird tale of just how incredible this game can be.</figcaption>
 </figure>
 </div>
 <p>Now, in case you haven’t heard of Dwarf Fortress: it’s not much to look at, to put it mildly. It’s got none of the smooth, flashy graphics of AAA gaming titles, the deep story of a game like Destiny or the humour of, say, Borderlands.[2]. What it does have is a level of intricacy that makes it a game on the literal edge between insanity and genius (and typically, when it comes to Dwarf Fortress, the two are present in a <a href="https://en.wikipedia.org/wiki/Racemic_mixture">racemic mixture</a>). You’re in charge of building, unsurprisingly, a fortress, full of dwarves. You explore, mine, craft and inevitably get killed, more than likely by a) elephants, b) lava. In the meantime, random things happen, in a procedurally generated world. From time to time, dwarves become possessed, elephants assault your fortress and things are set on fire. Behind all this is a staggering volume of intricate game mechanics for just about everything.</p>
@@ -255,15 +294,15 @@ Pinker, Steven. 2003. <em>The Language Instinct: How the Mind Creates Language</
 <p>By ‘can be learned’, I mean that it is a game that can still have a distinct ordered set of policies <span class="math inline">\(\pi_{1 ... n}\)</span> sorted by <span class="math inline">\(E[R(\pi)]\)</span>, i.e.&nbsp;the expectation value of the reward function of the policy over time <span class="math inline">\(t_0 \to t_{\infty}\)</span>. We don’t see tossing a (fair) coin and guessing heads or tails as a winnable or ‘learnable’ game because there is no policy that is better than any of the others, and no amount of gathering information after a handful of coin tosses will make our predictive accuracy any better. Dwarf Fortress can’t exactly be won, but it can be not lost for a considerable time, which one can regard as a result (the sum reward is the time of survival, something I call the Kaplan-Meier definition of winning).</p>
 <p>Thus, it’s not all up to randomness, but rather up to being able to operate in a non-Markovian problem space – a very non-Markovian one, given the sheer variety of crazy things that can happen. Games like go or chess teach computers how to adapt to an opponent (who, incidentally, pursues the same objective). Learning Super Mario using deep Q learning is somewhat more about winning against an environment (in the sense that there is no competing player whose requirements for success mirror one’s own). Learning Dwarf Fortress, however, teaches computers how to operate in a space of uncertainty.</p>
 <p>If Dwarf Fortress sounds familiar to you, it’s because it is. It’s effectively a gamified version of agent-based modelling (ABMs), a technique we use to model populations by modelling individuals in a space of uncertainty governed by certain probability distributions. Take the classic SIR model of disease population dynamics. You can use a system of differential equations – or you can create a random population of a few hundred dwarves and simulate what would happen if you let some infection loose among them. Indeed, I reflect on this in my recent book:</p>
-<blockquote class="blockquote page-columns page-full">
+<div class="page-columns page-full"><blockquote class="blockquote">
 <p>One of the most complex computer games ever devised is called Dwarf Fortress. It is not much to look at: its graphics are the terminal-based structures that were in vogue in the 1980s. What makes Dwarf Fortress an extraordinary game is the depth of agent-based logic: every character, every enemy unit, even pets are endowed with a hugely complex agent-based behavioral model. As an example, cats in Dwarf Fortress can stray into puddles of spilled beer, lick their paws later, and succumb to alcohol poisoning.</p>
 <p>Yet agent-based modeling is about much more than belligerent dwarves and drunk cats. Agent-based models are powerful computational tools to simulate large populations of boundedly rational actors who act according to preset preferences, although often enough in a stochastic manner. They can simulate the complex human behaviors of quasi-rational decision-making, represent large populations and, through iterative simulation, highlight likely behavioral outcomes of crowds.</p>
 <p>Most of the foregoing chapters described a kind of statistical mean-field dynamics of epidemiology – we might have known what a population does, but not much about any one individual in a population. At best, we could deduce the state or behavior of an individual in terms of likelihoods, e.g.&nbsp;if 30% of a population is infectious, there is approximately a 30% chance a randomly selected individual from the population will be infectious. Like statistical mechanics, it offers us the ability to reason about dynamics at the population scale without having to model each individual.</p>
 <p>This chapter explores an alternative approach. Agent-based models are primarily inductive—we obtain information about the population by large-scale, repeated simulation of individual agents. Such models allow a different glimpse into the operation of an epidemic process. Many phenomena that would be challenging to model on their own, such as heterogeneous populations with multiple heterogeneities, some continuous and others categorical, become almost trivially easy to analyze using agent-based models. On the other hand, agents can adopt complicated behaviors and very complex behavioral profiles are relatively easy to describe in the agent-paradigm, because we only need to describe an individual rather than an entire tion. This chapter discusses how we can leverage agent-based models for understanding infectious disease dynamics.</p>
 <p>– <span class="citation" data-cites="von2023computational">(<a href="#ref-von2023computational" role="doc-biblioref">Von Csefalvay 2023</a>)</span></p>
-<div class="no-row-height column-margin column-container"><div id="ref-von2023computational" class="csl-entry" role="listitem">
+</blockquote><div class="no-row-height column-margin column-container"><div id="ref-von2023computational" class="csl-entry" role="listitem">
 Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: With Applications in Python</em>. Elsevier.
-</div></div></blockquote>
+</div></div></div>
 <p>Agent-based models help us understand issues that are, or might be, too complex to be analytically solved. It is, in a way, brute-forcing reality by creating a simulation and running it enough times to give a numerical solution. Where human issues are involved, agent-based models are the way to go to understand the complexity of human behaviour and choices. This is so even if most agent-based models have nowhere near the sophistication of Dwarf Fortress.</p>
 </section>
 <section id="if-you-want-me-worried-call-me-when-an-ai-has-mastered-dwarf-fortress" class="level1">
@@ -277,7 +316,7 @@ Von Csefalvay, Chris. 2023. <em>Computational Modeling of Infectious Disease: Wi
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The Hardest {AI} Problem You’ve Never Heard Of.},
   date = {2023-03-07},
@@ -368,10 +407,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -381,8 +419,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -395,6 +442,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -438,6 +604,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -463,6 +630,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -525,7 +718,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -534,6 +731,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

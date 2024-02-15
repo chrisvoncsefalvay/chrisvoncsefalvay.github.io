@@ -6,16 +6,17 @@
       version="2.0">
 <channel>
 <title>Chris von Csefalvay</title>
-<link>https://chrisvoncsefalvay.com/media/index.html</link>
+<link>https://chrisvoncsefalvay.com/media/</link>
 <atom:link href="https://chrisvoncsefalvay.com/media/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
-<generator>quarto-1.3.450</generator>
+<generator>quarto-1.4.550</generator>
 <lastBuildDate>Tue, 07 Mar 2023 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Tech for Good podcast</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/tech-for-good/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -25,7 +26,7 @@
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2023,
   author = {von Csefalvay, Chris},
   title = {Tech for {Good} Podcast},
   date = {2023-03-07},
@@ -37,15 +38,16 @@ Csefalvay, Chris von. 2023. <span>“Tech for Good Podcast.”</span> March
 7, 2023. <a href="https://chrisvoncsefalvay.com/media/tech-for-good">https://chrisvoncsefalvay.com/media/tech-for-good</a>.
 </div></div></section></div> ]]></description>
   <category>Tech for Good</category>
-  <guid>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/tech-for-good/</guid>
   <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/fr-disinfectants/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -59,7 +61,7 @@ Csefalvay, Chris von. 2023. <span>“Tech for Good Podcast.”</span> March
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2020,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2020,
   author = {von Csefalvay, Chris},
   title = {Corona in Den {USA:} {Mediziner} Warnen Nun Vor {Injektion}
     von {Desinfektionsmittel}},
@@ -72,15 +74,16 @@ Csefalvay, Chris von. 2020. <span>“Corona in Den USA: Mediziner Warnen
 Nun Vor Injektion von Desinfektionsmittel.”</span> May 11, 2020. <a href="https://chrisvoncsefalvay.com/media/fr-disinfectants">https://chrisvoncsefalvay.com/media/fr-disinfectants</a>.
 </div></div></section></div> ]]></description>
   <category>Frankfurter Rundschau</category>
-  <guid>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/fr-disinfectants/</guid>
   <pubDate>Mon, 11 May 2020 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/media/fr-disinfectants/header.png" medium="image" type="image/png" height="80" width="144"/>
 </item>
 <item>
   <title>Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</link>
+  <link>https://chrisvoncsefalvay.com/media/euronews-covid/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -94,7 +97,7 @@ Nun Vor Injektion von Desinfektionsmittel.”</span> May 11, 2020. <a href="http
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2020,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{von csefalvay2020,
   author = {von Csefalvay, Chris},
   title = {Koronavírus: Az {USA-ban} Már Használják, Itthon Még Nem
     Kellett a Magyar Cég Adatelemző Programja},
@@ -108,7 +111,7 @@ Használják, Itthon Még Nem Kellett a Magyar Cég Adatelemző
 Programja.”</span> April 17, 2020. <a href="https://chrisvoncsefalvay.com/media/euronews-covid">https://chrisvoncsefalvay.com/media/euronews-covid</a>.
 </div></div></section></div> ]]></description>
   <category>Euronews</category>
-  <guid>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</guid>
+  <guid>https://chrisvoncsefalvay.com/media/euronews-covid/</guid>
   <pubDate>Fri, 17 Apr 2020 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/media/euronews-covid/header.webp" medium="image" type="image/webp"/>
 </item>

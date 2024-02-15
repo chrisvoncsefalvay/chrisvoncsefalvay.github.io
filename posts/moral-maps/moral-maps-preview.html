@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
     <meta charset="utf-8">
-    <meta name="generator" content="quarto-1.3.450">
+    <meta name="generator" content="quarto-1.4.550">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+    <meta name="author" content="Chris von Csefalvay">
     <meta name="dcterms.date" content="2023-10-27">
 
-    <title>Chris von Csefalvay - The Moral Pulse of the Machine - companion notebook</title>    <style>
+    <title>Chris von Csefalvay - The Moral Pulse of the Machine - companion notebook</title>
+    <style>
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -21,7 +23,7 @@
       }
       /* CSS for syntax highlighting */
       pre > code.sourceCode { white-space: pre; position: relative; }
-      pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+      pre > code.sourceCode > span { line-height: 1.25; }
       pre > code.sourceCode > span:empty { height: 1.2em; }
       .sourceCode { overflow: visible; }
       code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -54,8 +56,13 @@
       pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
       }
     </style>
+
     <style>
-      .quarto-embed-header {
+      body.hypothesis-enabled #quarto-embed-header {
+        padding-right: 36px;
+      }
+
+      #quarto-embed-header {
         height: 3em;
         width: 100%;
         display: flex;
@@ -63,21 +70,82 @@
         align-items: center;
         border-bottom: solid 1px;
       }
-      .quarto-embed-header h6 {
-        font-size: 1em;
+
+      #quarto-embed-header h6 {
+        font-size: 1.1em;
         padding-top: 0.6em;
         margin-left: 1em;
         margin-right: 1em;
-        font-weight: 300;
+        font-weight: 400;
       }
-      .quarto-embed-header a.quarto-download-embed {
-        font-size: 0.7em;
+
+      #quarto-embed-header a.quarto-back-link,
+      #quarto-embed-header a.quarto-download-embed {
+        font-size: 0.8em;
         margin-top: 1em;
         margin-bottom: 1em;
         margin-left: 1em;
         margin-right: 1em;
       }
+
+      .quarto-back-container {
+        padding-left: 0.5em;
+        display: flex;
+      }
+
+      .headroom {
+          will-change: transform;
+          transition: transform 200ms linear;
+      }
+
+      .headroom--pinned {
+          transform: translateY(0%);
+      }
+
+      .headroom--unpinned {
+          transform: translateY(-100%);
+      }      
     </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script>
+    window.document.addEventListener("DOMContentLoaded", function () {
+
+      var header = window.document.querySelector("#quarto-embed-header");
+      const titleBannerEl = window.document.querySelector("body > #title-block-header");
+      if (titleBannerEl) {
+        titleBannerEl.style.paddingTop = header.clientHeight + "px";
+      }
+      const contentEl = window.document.getElementById('quarto-content');
+      for (const child of contentEl.children) {
+        child.style.paddingTop = header.clientHeight + "px";
+        child.style.marginTop = "1em";
+      }
+
+      // Use the article root if the `back` call doesn't work. This isn't perfect
+      // but should typically work
+      window.quartoBackToArticle = () => {
+        var currentUrl = window.location.href;
+        window.history.back();
+        setTimeout(() => {
+            // if location was not changed in 100 ms, then there is no history back
+            if(currentUrl === window.location.href){              
+                // redirect to site root
+                window.location.href = '/';
+            }
+        }, 100);
+      }
+
+      const headroom = new window.Headroom(header, {
+        tolerance: 5,
+        onPin: function () {
+        },
+        onUnpin: function () {
+        },
+      });
+      headroom.init();
+    });
+    </script>
+
     
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
@@ -101,7 +169,13 @@
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,6 +184,7 @@
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -123,26 +198,31 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '395640625', { 'anonymize_ip': true});
 </script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>  
       <meta property="og:title" content="Chris von Csefalvay - The Moral Pulse of the Machine - companion notebook">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - The Moral Pulse of the Machine - companion notebook">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-  <body class="nav-fixed quarto-notebook">
-    <div class="quarto-embed-header">
-      <h6><i class="bi bi-journal-code"></i> moral-maps.ipynb</h6>
-      <a href="../../posts/moral-maps/moral-maps.ipynb" class="btn btn-primary quarto-download-embed" download="moral-maps.ipynb">Download Notebook</a>
-    </div>
+
+  <body class="floating nav-fixed quarto-notebook">
+    <div id="quarto-embed-header" class="headroom fixed-top bg-primary">
+      
+      <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link"><i class="bi bi-caret-left"></i> Back to Article</a>
+      <h6><i class="bi bi-journal-code"></i> The Moral Pulse of the Machine - companion notebook</h6>
+
+            <a href="../../posts/moral-maps/moral-maps.ipynb" class="btn btn-primary quarto-download-embed" download="moral-maps.ipynb">Download Notebook</a>
+          </div>
+
      <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -154,49 +234,52 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">      <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">      <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">The Moral Pulse of the Machine - companion notebook</h1>
 </div>
@@ -208,7 +291,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -223,7 +306,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
-</header>   <div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:26.744974Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:26.134547Z&quot;}" data-execution_count="1">
+
+</header>   <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div id="5bae632daa5607fb" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:26.744974Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:26.134547Z&quot;}" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openai</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib3</span>
@@ -246,14 +330,14 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   warnings.warn(</code></pre>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:29.295035Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:29.288482Z&quot;}" data-execution_count="2">
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div id="2b1df7e2f4343c5f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:29.295035Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:29.288482Z&quot;}" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>openai.api_key <span class="op">=</span> os.getenv(<span class="st">"OPENAI_API_KEY"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [3]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:30.636358Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:30.631468Z&quot;}" data-execution_count="3">
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div id="e514699f037fff3f" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:30.636358Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:30.631468Z&quot;}" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="multilanguage-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:56.649632Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:31.931156Z&quot;}" data-execution_count="4">
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div id="multilanguage-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:56.649632Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:31.931156Z&quot;}" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>languages <span class="op">=</span> [<span class="st">"English"</span>, <span class="st">"Swahili"</span>, <span class="st">"German"</span>, <span class="st">"Dutch"</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>stories <span class="op">=</span> []</span>
@@ -278,28 +362,28 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 {"version_major":2,"version_minor":0,"model_id":"63e54ee6d6f9463a8906b7889ba56723","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-<div id="multilanguage-story-2" class="cell-output cell-output-display">
+<div id="multilanguage-story-2" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the vast and enchanting forest, lived three animals: Oliver the wise owl, Max the mischievous monkey, and Bella the brave bird. They embarked on an…</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-3" class="cell-output cell-output-display">
+<div id="multilanguage-story-3" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Kulikuwa na wanyama watatu katika pori. Simba mkubwa, Twiga mwenye shingo ndefu, na Kasa mwenye manyoya meupe. Walitamani kupata bahati ya kipekee iliyofichwa ndani ya Tunda la Asali…….</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-4" class="cell-output cell-output-display">
+<div id="multilanguage-story-4" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Es war einmal ein tapfere Hase namens Felix, eine kluge Eule namens Luna und eine hilfsbereite Schildkröte namens Emil. Gemeinsam suchten sie nach dem verzauberten Zauberstab, um das Königreich zu…</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-5" class="cell-output cell-output-display">
+<div id="multilanguage-story-5" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Er was eens een nieuwsgierige geit genaamd Gijs, een slimme uil genaamd Olivia en een dappere schildpad genaamd Tobi. Ze waren op zoek naar een magische, glinsterende edelsteen die bekend…</p>
 </blockquote>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [5]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}" data-execution_count="5">
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div id="cell-swahili-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in Swahili. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -310,7 +394,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        ])</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(completion.choices[<span class="dv">0</span>].message.content.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="swahili-story" class="cell-output cell-output-display">
+<div id="swahili-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Kulikuwa na farasi jasiri mwenye jina Kiboko, ndege mjanja mwenye jina Tembo, na sisimizi mwepesi mwenye jina Simba. Jicho moja la dhahabu la ndege Tembo lilikuwa na uwezo wa kuona vitu vya thamani kutoka mbali. Farasi Kiboko alikuwa na moyo shujaa sana, kamwe hakuogopa hata hatari kubwa. Sisimizi Simba alijulikana kwa akili zake za kugeuza tukio lolote kuwa fursa.</p>
 <p>Siku moja, wanyama wote walipata taarifa juu ya Almasi Kubwa ya Kale iliyofichwa kwenye Mlima wa Enzi. Almasi hiyo ilikuwa ya ajabu sana na ilisemekana kuwa na nguvu kubwa sana. Wanyama walijua kwamba mtu yeyote aliyeipata angeweza kuifanya ndoto yoyote kuwa halisi.</p>
@@ -318,7 +402,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </blockquote>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [6]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-english-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in English. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -331,7 +415,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>english_story <span class="op">=</span> completion.choices[<span class="dv">0</span>].message.content</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(english_story.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="english-story" class="cell-output cell-output-display">
+<div id="english-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
 <p>One sunny morning, as the forest bathed in golden light, a rumor spread amongst the woodland creatures. They spoke in hushed tones of a mythical object, an enchanted gem deep within the heart of a treacherous cave. Legend had it that this gem possessed the power to grant one’s deepest desire.</p>
@@ -339,7 +423,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </blockquote>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="story-schema" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.227557Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:51:18.226049Z&quot;}" data-execution_count="7">
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="story-schema" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.227557Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:51:18.226049Z&quot;}" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>story_schema <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">    "$schema": "http://json-schema.org/draft-07/schema#",</span></span>
@@ -365,7 +449,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="story-to-json" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}" data-execution_count="8">
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="story-to-json" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>json_completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> <span class="st">"gpt-3.5-turbo"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [</span>
@@ -405,21 +489,25 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 }</code></pre>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="json-validate" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:42.627220Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:42.621299Z&quot;}" data-execution_count="9">
+<div class="cell-container"><div class="cell-decorator"><pre>In [9]:</pre></div><div id="json-validate" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:42.627220Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:42.621299Z&quot;}" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>jsonschema.validate(json.loads(json_completion.choices[<span class="dv">0</span>].message.content), </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                    json.loads(story_schema))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [10]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:47.117067Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:46.937957Z&quot;}" data-execution_count="10">
+<div class="cell-container"><div class="cell-decorator"><pre>In [10]:</pre></div><div id="cell-fig-story-as-json-graph" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:47.117067Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:46.937957Z&quot;}" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div id="fig-story-as-json-graph" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="moral-maps_files/figure-html/fig-story-as-json-graph-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: The moral map from a single story, represented as a graph.</figcaption>
+<div id="fig-story-as-json-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-story-as-json-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<img src="moral-maps_files/figure-html/fig-story-as-json-graph-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-story-as-json-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The moral map from a single story, represented as a graph.
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [11]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:01:52.185298Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:55.902277Z&quot;}" data-execution_count="11">
+<div class="cell-container"><div class="cell-decorator"><pre>In [11]:</pre></div><div id="b9b76a2b0e31438a" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:01:52.185298Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:55.902277Z&quot;}" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>num_of_stories: <span class="bu">int</span> <span class="op">=</span> <span class="dv">10</span></span>
@@ -479,26 +567,31 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <pre><code>Generated 10 stories (with 1 fails and retries).</code></pre>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [12]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:22.623373Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:22.436215Z&quot;}" data-execution_count="12">
+<div class="cell-container"><div class="cell-decorator"><pre>In [12]:</pre></div><div id="cell-fig-stories-as-graph" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:22.623373Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:22.436215Z&quot;}" data-execution_count="12">
 <div class="cell-output cell-output-display">
-<div id="fig-stories-as-graph" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="moral-maps_files/figure-html/fig-stories-as-graph-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: The moral map from a sample of ten stories, represented as a graph.</figcaption>
+<div id="fig-stories-as-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stories-as-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<img src="moral-maps_files/figure-html/fig-stories-as-graph-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stories-as-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The moral map from a sample of ten stories, represented as a graph.
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [13]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:26.857027Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:26.849014Z&quot;}" data-execution_count="13">
+<div class="cell-container"><div class="cell-decorator"><pre>In [13]:</pre></div><div id="1c243256639c065b" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:26.857027Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:26.849014Z&quot;}" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(index <span class="op">=</span> G.nodes(), columns <span class="op">=</span> G.nodes(), dtype<span class="op">=</span><span class="bu">int</span>).fillna(<span class="dv">0</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> neighbour, attr <span class="kw">in</span> G[node].items():</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        df.loc[node, neighbour] <span class="op">=</span> attr[<span class="st">'weight'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [14]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:27.578074Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:27.567524Z&quot;}" data-execution_count="14">
+<div class="cell-container"><div class="cell-decorator"><pre>In [14]:</pre></div><div id="e2df51b5bb416293" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:27.578074Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:27.567524Z&quot;}" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
+<div>
 <div>
 
 
@@ -799,18 +892,23 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 </div>
 </div>
+</div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [15]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:30.468484Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:30.228215Z&quot;}" data-execution_count="15">
+<div class="cell-container"><div class="cell-decorator"><pre>In [15]:</pre></div><div id="cell-fig-moral-heatmap" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:30.468484Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:30.228215Z&quot;}" data-execution_count="15">
 <div class="cell-output cell-output-display">
-<div id="fig-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="moral-maps_files/figure-html/fig-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: The moral heatmap from the same sample of ten stories.</figcaption>
+<div id="fig-moral-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<img src="moral-maps_files/figure-html/fig-moral-heatmap-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The moral heatmap from the same sample of ten stories.
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [18]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}" data-execution_count="18">
+<div class="cell-container"><div class="cell-decorator"><pre>In [18]:</pre></div><div id="cell-abilising" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>abilities <span class="op">=</span> [<span class="st">"Strength"</span>, <span class="st">"Dexterity"</span>, <span class="st">"Constitution"</span>, <span class="st">"Intelligence"</span>, <span class="st">"Wisdom"</span>, <span class="st">"Charisma"</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>virtues <span class="op">=</span> <span class="bu">list</span>(df.index)</span>
@@ -838,7 +936,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [19]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:51.023828Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:51.021357Z&quot;}" data-execution_count="19">
+<div class="cell-container"><div class="cell-decorator"><pre>In [19]:</pre></div><div id="cell-abilising-mapping" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:51.023828Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:51.021357Z&quot;}" data-execution_count="19">
 <div id="abilising-mapping" class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>{'strength': 'Constitution',
  'cunning': 'Intelligence',
@@ -857,7 +955,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
  'wisdom': 'Intelligence'}</code></pre>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [20]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:01.678024Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:01.658978Z&quot;}" data-execution_count="20">
+<div class="cell-container"><div class="cell-decorator"><pre>In [20]:</pre></div><div id="82ae95e490a32926" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:01.678024Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:01.658978Z&quot;}" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>G.nodes(), columns<span class="op">=</span>G.nodes(), dtype<span class="op">=</span><span class="bu">int</span>).fillna(<span class="dv">0</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
@@ -875,6 +973,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   df = df.groupby(df.columns, axis=1).sum()</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="20">
+<div>
 <div>
 
 
@@ -935,18 +1034,23 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 </div>
 </div>
+</div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [21]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:03.632825Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:03.522486Z&quot;}" data-execution_count="21">
+<div class="cell-container"><div class="cell-decorator"><pre>In [21]:</pre></div><div id="cell-fig-abilised-moral-heatmap" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:03.632825Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:03.522486Z&quot;}" data-execution_count="21">
 <div class="cell-output cell-output-display">
-<div id="fig-abilised-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="moral-maps_files/figure-html/fig-abilised-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: The moral heatmap from the same sample of ten stories, clustered by abilities.</figcaption>
+<div id="fig-abilised-moral-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abilised-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<img src="moral-maps_files/figure-html/fig-abilised-moral-heatmap-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abilised-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The moral heatmap from the same sample of ten stories, clustered by abilities.
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [22]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:33:00.201986Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:12:26.508205Z&quot;}" data-execution_count="22">
+<div class="cell-container"><div class="cell-decorator"><pre>In [22]:</pre></div><div id="36b5246c2a2af7d2" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:33:00.201986Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:12:26.508205Z&quot;}" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>num_of_stories: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100</span></span>
@@ -1006,7 +1110,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <pre><code>Generated 100 stories (with 8 fails and retries).</code></pre>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [27]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T16:05:02.235993Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T16:04:05.824618Z&quot;}" data-execution_count="27">
+<div class="cell-container"><div class="cell-decorator"><pre>In [27]:</pre></div><div id="50e9c8d04ea888c6" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T16:05:02.235993Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T16:04:05.824618Z&quot;}" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>G.nodes(), columns<span class="op">=</span>G.nodes(), dtype<span class="op">=</span><span class="bu">int</span>).fillna(<span class="dv">0</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
@@ -1040,21 +1144,25 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [28]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T16:05:45.209217Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T16:05:45.044030Z&quot;}" data-execution_count="28">
+<div class="cell-container"><div class="cell-decorator"><pre>In [28]:</pre></div><div id="cell-fig-abilised-big-moral-heatmap" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T16:05:45.209217Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T16:05:45.044030Z&quot;}" data-execution_count="28">
 <div class="cell-output cell-output-stderr">
 <pre><code>/var/folders/7l/9md9kdsj087d62kr6f358bfh0000gp/T/ipykernel_78297/2369364840.py:15: FutureWarning: DataFrame.groupby with axis=1 is deprecated. Do `frame.T.groupby(...)` without axis instead.
   df = df.groupby(df.columns, axis=1).sum()</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-abilised-big-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="moral-maps_files/figure-html/fig-abilised-big-moral-heatmap-output-2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: The moral heatmap from the same sample of 100 stories, clustered by abilities.</figcaption>
+<div id="fig-abilised-big-moral-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abilised-big-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<img src="moral-maps_files/figure-html/fig-abilised-big-moral-heatmap-output-2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abilised-big-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The moral heatmap from the same sample of 100 stories, clustered by abilities.
+</figcaption>
 </figure>
 </div>
 </div>
 </div></div>
-<div class="cell-container column-page-left"><div class="cell-decorator"><pre>In [31]:</pre></div><div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-27T01:12:45.791175Z&quot;,&quot;start_time&quot;:&quot;2023-10-27T01:12:25.425570Z&quot;}" data-execution_count="31">
+<div class="cell-container"><div class="cell-decorator"><pre>In [31]:</pre></div><div id="cell-intelligence-vs-charisma" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-27T01:12:45.791175Z&quot;,&quot;start_time&quot;:&quot;2023-10-27T01:12:25.425570Z&quot;}" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>completion <span class="op">=</span> openai.api_resources.ChatCompletion.create(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-3.5-turbo"</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[</span>
@@ -1062,7 +1170,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        ])</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(completion.choices[<span class="dv">0</span>].message.content.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="intelligence-vs-charisma" class="cell-output cell-output-display">
+<div id="intelligence-vs-charisma" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Both intelligence and charisma can contribute significantly to achieving great, noble goals, but their importance may vary based on the specific context and goals involved.</p>
 <p>Intelligence, characterized by cognitive abilities, problem-solving skills, and knowledge, can be crucial for strategic planning, identifying opportunities, and finding innovative solutions to challenges. It enables individuals to analyze complex situations, understand cause-and-effect relationships, and make informed decisions. Intelligence provides the necessary foundation for acquiring expertise in a certain field, grasping intricate concepts, and adapting to changing circumstances. It allows individuals to foresee potential obstacles, assess risks, and devise effective strategies to overcome hurdles.</p>
@@ -1073,17 +1181,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div></div>
 
 
-     <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {Chris von Csefalvay},
-  title = {The {Moral} {Pulse} of the {Machine} - Companion Notebook},
-  date = {2023-10-27},
-  url = {https://chrisvoncsefalvay.com/posts/moral-maps/moral-maps.ipynb.html},
-  langid = {en-GB}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2023. <span>“The Moral Pulse of the Machine -
-Companion Notebook.”</span> <a href="https://chrisvoncsefalvay.com/posts/moral-maps/moral-maps.ipynb.html">https://chrisvoncsefalvay.com/posts/moral-maps/moral-maps.ipynb.html</a>.
-</div></div></section></div></main> <!-- /main -->  <script id="quarto-html-after-body" type="application/javascript">
+     </main> <!-- /main -->  <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1162,10 +1260,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1175,8 +1272,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1189,6 +1295,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1232,6 +1457,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1257,6 +1483,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1318,7 +1570,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>  </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -1328,5 +1584,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer> 
   
-
 </body></html>

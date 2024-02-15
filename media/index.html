@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -103,21 +110,46 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="alternate" type="application/rss+xml" title="Chris von Csefalvay" href="index.xml"><meta property="og:title" content="Chris von Csefalvay - In the media">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="alternate" type="application/rss+xml" title="Chris von Csefalvay" href="index.xml" data-external="1"><meta property="og:title" content="Chris von Csefalvay - In the media">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - In the media">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -129,37 +161,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -180,7 +212,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -188,7 +220,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 
 
@@ -196,32 +230,30 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Tech for Good" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1704683447067" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="Tech for Good" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1708015559884" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
 <div class="thumbnail">
-<p><a href="../media/tech-for-good/index.html"> <img src="../media/tech-for-good/header.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="../media/tech-for-good/index.html" class="no-external"></a></p><a href="../media/tech-for-good/index.html" class="no-external">
+<p><img src="../media/tech-for-good/header.jpeg" class="thumbnail-image"></p>
+</a><p><a href="../media/tech-for-good/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../media/tech-for-good/index.html">
 <h3 class="no-anchor listing-title">
-Tech for Good podcast
+<a href="../media/tech-for-good/index.html" class="no-external">Tech for Good podcast</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../media/tech-for-good/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Tech for Good'); return false;">
 Tech for Good
 </div>
 </div>
-<a href="../media/tech-for-good/index.html">
 <div class="listing-description">
-<p>A fascinating interview with Ben Mouncer on the Tech for Good podcast.</p>
+<a href="../media/tech-for-good/index.html" class="no-external">A fascinating interview with Ben Mouncer on the Tech for Good podcast. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../media/tech-for-good/index.html">
+<a href="../media/tech-for-good/index.html" class="no-external">
 <div class="listing-date">
 Mar 7, 2023
 </div>
@@ -231,32 +263,30 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Frankfurter Rundschau" data-listing-date-sort="1589155200000" data-listing-file-modified-sort="1704683447063" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="1" data-categories="Frankfurter Rundschau" data-listing-date-sort="1589155200000" data-listing-file-modified-sort="1708015559884" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
 <div class="thumbnail">
-<p><a href="../media/fr-disinfectants/index.html"> <img src="../media/fr-disinfectants/header.png" class="thumbnail-image"> </a></p>
+<p><a href="../media/fr-disinfectants/index.html" class="no-external"></a></p><a href="../media/fr-disinfectants/index.html" class="no-external">
+<p><img src="../media/fr-disinfectants/header.png" class="thumbnail-image"></p>
+</a><p><a href="../media/fr-disinfectants/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../media/fr-disinfectants/index.html">
 <h3 class="no-anchor listing-title">
-Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel
+<a href="../media/fr-disinfectants/index.html" class="no-external">Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../media/fr-disinfectants/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Frankfurter Rundschau'); return false;">
 Frankfurter Rundschau
 </div>
 </div>
-<a href="../media/fr-disinfectants/index.html">
 <div class="listing-description">
-<p>Injecting disinfectants continues to be a bad idea.</p>
+<a href="../media/fr-disinfectants/index.html" class="no-external">Injecting disinfectants continues to be a bad idea. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../media/fr-disinfectants/index.html">
+<a href="../media/fr-disinfectants/index.html" class="no-external">
 <div class="listing-date">
 May 11, 2020
 </div>
@@ -266,32 +296,30 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="Euronews" data-listing-date-sort="1587081600000" data-listing-file-modified-sort="1704683447063" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="2" data-categories="Euronews" data-listing-date-sort="1587081600000" data-listing-file-modified-sort="1708015559884" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
 <div class="thumbnail">
-<p><a href="../media/euronews-covid/index.html"> <img src="../media/euronews-covid/header.webp" class="thumbnail-image"> </a></p>
+<p><a href="../media/euronews-covid/index.html" class="no-external"></a></p><a href="../media/euronews-covid/index.html" class="no-external">
+<p><img src="../media/euronews-covid/header.webp" class="thumbnail-image"></p>
+</a><p><a href="../media/euronews-covid/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="../media/euronews-covid/index.html">
 <h3 class="no-anchor listing-title">
-Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja
+<a href="../media/euronews-covid/index.html" class="no-external">Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="../media/euronews-covid/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Euronews'); return false;">
 Euronews
 </div>
 </div>
-<a href="../media/euronews-covid/index.html">
 <div class="listing-description">
-<p>Commenting on our work on the COVID-19 data set and the relevance of data in a pandemic.</p>
+<a href="../media/euronews-covid/index.html" class="no-external">Commenting on our work on the COVID-19 data set and the relevance of data in a pandemic. </a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="../media/euronews-covid/index.html">
+<a href="../media/euronews-covid/index.html" class="no-external">
 <div class="listing-date">
 Apr 17, 2020
 </div>
@@ -385,10 +413,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -398,8 +425,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -412,6 +448,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -455,6 +610,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -480,6 +636,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -542,7 +724,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -551,6 +737,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
 <meta name="dcterms.date" content="2023-11-13">
 <meta name="description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 
@@ -24,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -113,12 +121,13 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta property="og:title" content="Chris von Csefalvay - Auto-DOI for Quarto posts via Rogue Scholar">
 <meta property="og:description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - Auto-DOI for Quarto posts via Rogue Scholar">
 <meta name="twitter:description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="Auto-DOI for Quarto posts via Rogue Scholar">
+<meta name="citation_author" content="Chris von Csefalvay">
 <meta name="citation_publication_date" content="2023-11-13">
 <meta name="citation_cover_date" content="2023-11-13">
 <meta name="citation_year" content="2023">
@@ -132,9 +141,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -146,37 +155,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -210,7 +219,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -225,7 +234,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <p>I love posts that allow me to merge some of my addictions. In this case, it’s my love for Quarto project scripts (which I’ve <a href="../quarto-project-scripts">written about elsewhere</a>), my fondness for <a href="https://rogue-scholar.org">Rogue Scholar</a> and the overuse of the word ‘mint’ to mean ‘generally really quite rather nice’.</p>
 <p><a href="https://rogue-scholar.org">Rogue Scholar</a> is a fantastic tool for science bloggers, and while it’s a little artisanal (i.e.&nbsp;hand-made much of the time) at this point, it’s got some really cool automated features. One is that it registers (mints, hence the abundance of lame peppermint puns across this post) DOIs for your posts.</p>
@@ -246,8 +257,9 @@ Note
 <p>This weekend, I was laid up with being on the receiving end (for once) of the bounties of a clinical trial, so I’ve decided to finally build it. It’s a bit of a hack, but it works.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-auto-doi" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-auto-doi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-auto-doi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-auto-doi">flowchart TD
     linkStyle default interpolate basis
@@ -270,19 +282,26 @@ Note
     write --&gt; ghc["Github commit action"]
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;1: Auto-DOI flow chart.</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-auto-doi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Auto-DOI flow chart.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>First, we scrape Rogue Scholar for titles and DOIs. Rogue Scholar’s CSS isn’t really helpful here, as the link isn’t a particular class/id of its own as far as I could discern, so I just grabbed the link by the fact that only DOI links are formatted like DOI links. Not the most elegant way, but it does the job.</p>
-<div id="lst-getting-dois" class="listing">
-<p>Listing&nbsp;1: Getting the DOIs from Rogue Scholar.</p>
-<div class="sourceCode" id="lst-getting-dois" data-lst-cap="Getting the DOIs from Rogue Scholar."><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="lst-getting-dois-1"><a href="#lst-getting-dois-1" aria-hidden="true" tabindex="-1"></a></span>
+<div id="lst-getting-dois" class="python listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;1: Getting the DOIs from Rogue Scholar.
+</figcaption>
+<div aria-describedby="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-getting-dois"><pre class="sourceCode code-annotation-code python code-with-copy"><code class="sourceCode python"><span id="lst-getting-dois-1"><a href="#lst-getting-dois-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-getting-dois-2"><a href="#lst-getting-dois-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scrape_blog_for_dois(url) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, <span class="bu">str</span>]:</span>
 <span id="lst-getting-dois-3"><a href="#lst-getting-dois-3" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
 <span id="lst-getting-dois-4"><a href="#lst-getting-dois-4" aria-hidden="true" tabindex="-1"></a>    soup <span class="op">=</span> BeautifulSoup(response.content, <span class="st">'html.parser'</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="lst-getting-dois" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-getting-dois-5" class="code-annotation-target"><a href="#lst-getting-dois-5" aria-hidden="true" tabindex="-1"></a>    articles <span class="op">=</span> soup.select(<span class="st">'article'</span>)[:<span class="dv">10</span>]</span>
+<span id="lst-getting-dois-5"><a href="#lst-getting-dois-5" aria-hidden="true" tabindex="-1"></a>    articles <span class="op">=</span> soup.select(<span class="st">'article'</span>)[:<span class="dv">10</span>]</span>
 <span id="lst-getting-dois-6"><a href="#lst-getting-dois-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="lst-getting-dois-7"><a href="#lst-getting-dois-7" aria-hidden="true" tabindex="-1"></a>    posts_with_dois <span class="op">=</span> {}</span>
 <span id="lst-getting-dois-8"><a href="#lst-getting-dois-8" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -290,7 +309,7 @@ Note
 <span id="lst-getting-dois-10"><a href="#lst-getting-dois-10" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> article.select_one(<span class="st">'h3'</span>).text</span>
 <span id="lst-getting-dois-11"><a href="#lst-getting-dois-11" aria-hidden="true" tabindex="-1"></a>        doi_link <span class="op">=</span> <span class="bu">next</span>((a[<span class="st">'href'</span>] <span class="cf">for</span> a <span class="kw">in</span> article.select(<span class="st">'a'</span>) <span class="cf">if</span> a[<span class="st">'href'</span>].startswith(<span class="st">'https://doi.org'</span>)), <span class="va">None</span>)</span>
 <span id="lst-getting-dois-12"><a href="#lst-getting-dois-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> doi_link:</span>
-<a class="code-annotation-anchor" data-target-cell="lst-getting-dois" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="lst-getting-dois-13" class="code-annotation-target"><a href="#lst-getting-dois-13" aria-hidden="true" tabindex="-1"></a>            doi <span class="op">=</span> doi_link.split(<span class="st">'https://doi.org/'</span>)[<span class="dv">1</span>]</span>
+<span id="lst-getting-dois-13"><a href="#lst-getting-dois-13" aria-hidden="true" tabindex="-1"></a>            doi <span class="op">=</span> doi_link.split(<span class="st">'https://doi.org/'</span>)[<span class="dv">1</span>]</span>
 <span id="lst-getting-dois-14"><a href="#lst-getting-dois-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="lst-getting-dois-15"><a href="#lst-getting-dois-15" aria-hidden="true" tabindex="-1"></a>            doi <span class="op">=</span> <span class="va">None</span></span>
 <span id="lst-getting-dois-16"><a href="#lst-getting-dois-16" aria-hidden="true" tabindex="-1"></a>        posts_with_dois[title] <span class="op">=</span> doi</span>
@@ -298,22 +317,22 @@ Note
 <span id="lst-getting-dois-18"><a href="#lst-getting-dois-18" aria-hidden="true" tabindex="-1"></a>    logging.info(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(posts_with_dois)<span class="sc">}</span><span class="ss"> posts with DOIs:"</span>)</span>
 <span id="lst-getting-dois-19"><a href="#lst-getting-dois-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> title, doi <span class="kw">in</span> posts_with_dois.items():</span>
 <span id="lst-getting-dois-20"><a href="#lst-getting-dois-20" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f"</span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>doi<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="lst-getting-dois-21"><a href="#lst-getting-dois-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> posts_with_dois</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="lst-getting-dois-21"><a href="#lst-getting-dois-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> posts_with_dois</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="lst-getting-dois" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-annotation="1" data-code-cell="lst-getting-dois" data-code-lines="5">Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</span>
-</dd>
-<dt data-target-cell="lst-getting-dois" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-annotation="2" data-code-cell="lst-getting-dois" data-code-lines="13">This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</span>
-</dd>
-</dl>
+</figure>
+</div>
+<ol type="1">
+<li>Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</li>
+<li>This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</li>
+</ol>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
-<div id="lst-preamble" class="listing">
-<p>Listing&nbsp;2: Pre-DOI YAML preamble example.</p>
-<div class="sourceCode" id="lst-preamble" data-lst-cap="Pre-DOI YAML preamble example."><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-preamble-1"><a href="#lst-preamble-1" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span></span>
+<div id="lst-preamble" class="yaml listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2: Pre-DOI YAML preamble example.
+</figcaption>
+<div aria-describedby="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-preamble"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-preamble-1"><a href="#lst-preamble-1" aria-hidden="true" tabindex="-1"></a><span class="fu">categories</span><span class="kw">:</span></span>
 <span id="lst-preamble-2"><a href="#lst-preamble-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> Quarto</span></span>
 <span id="lst-preamble-3"><a href="#lst-preamble-3" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="lst-preamble-4"><a href="#lst-preamble-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> 2023-11-13</span></span>
@@ -321,15 +340,21 @@ Note
 <span id="lst-preamble-6"><a href="#lst-preamble-6" aria-hidden="true" tabindex="-1"></a><span class="fu">google-scholar</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="lst-preamble-7"><a href="#lst-preamble-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in <a href="#fig-auto-doi">Figure&nbsp;1</a>, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in <a href="#lst-getting-dois">Listing&nbsp;1</a>.</p>
-<div id="lst-process-post" class="listing">
-<p>Listing&nbsp;3: Processing a single post.</p>
-<div class="sourceCode" id="lst-process-post" data-lst-cap="Processing a single post."><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="lst-process-post-1"><a href="#lst-process-post-1" aria-hidden="true" tabindex="-1"></a></span>
+</figure>
+</div>
+<p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in <a href="#fig-auto-doi" class="quarto-xref">Figure&nbsp;1</a>, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in <a href="#lst-getting-dois" class="quarto-xref">Listing&nbsp;1</a>.</p>
+<div id="lst-process-post" class="python listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;3: Processing a single post.
+</figcaption>
+<div aria-describedby="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-process-post"><pre class="sourceCode code-annotation-code python code-with-copy"><code class="sourceCode python"><span id="lst-process-post-1"><a href="#lst-process-post-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-process-post-2"><a href="#lst-process-post-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_qmd_file(file_path: <span class="bu">str</span>, posts_with_dois: Dict[<span class="bu">str</span>, <span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
 <span id="lst-process-post-3"><a href="#lst-process-post-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">'r'</span>) <span class="im">as</span> stream:</span>
 <span id="lst-process-post-4"><a href="#lst-process-post-4" aria-hidden="true" tabindex="-1"></a>        contents <span class="op">=</span> stream.read()</span>
 <span id="lst-process-post-5"><a href="#lst-process-post-5" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-process-post-6" class="code-annotation-target"><a href="#lst-process-post-6" aria-hidden="true" tabindex="-1"></a>    delim <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r'^---$'</span>, re.MULTILINE)</span>
+<span id="lst-process-post-6"><a href="#lst-process-post-6" aria-hidden="true" tabindex="-1"></a>    delim <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r'^---$'</span>, re.MULTILINE)</span>
 <span id="lst-process-post-7"><a href="#lst-process-post-7" aria-hidden="true" tabindex="-1"></a>    splits <span class="op">=</span> re.split(delim, contents)</span>
 <span id="lst-process-post-8"><a href="#lst-process-post-8" aria-hidden="true" tabindex="-1"></a>    yaml_preamble <span class="op">=</span> splits[<span class="dv">1</span>].strip() <span class="cf">if</span> <span class="bu">len</span>(splits) <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> <span class="st">""</span> <span class="co">#</span></span>
 <span id="lst-process-post-9"><a href="#lst-process-post-9" aria-hidden="true" tabindex="-1"></a>    rest_of_post <span class="op">=</span> splits[<span class="dv">2</span>] <span class="cf">if</span> <span class="bu">len</span>(splits) <span class="op">&gt;</span> <span class="dv">2</span> <span class="cf">else</span> contents</span>
@@ -343,15 +368,15 @@ Note
 <span id="lst-process-post-17"><a href="#lst-process-post-17" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> yaml_contents.get(<span class="st">'title'</span>)</span>
 <span id="lst-process-post-18"><a href="#lst-process-post-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-process-post-19"><a href="#lst-process-post-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check files from crosspost categories</span></span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="lst-process-post-20" class="code-annotation-target"><a href="#lst-process-post-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(<span class="st">"cross-post"</span> <span class="kw">in</span> category.lower() <span class="cf">for</span> category <span class="kw">in</span> categories):</span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="lst-process-post-21" class="code-annotation-target"><a href="#lst-process-post-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> yaml_contents[<span class="st">"citation"</span>] <span class="op">==</span> <span class="va">True</span> <span class="kw">or</span> yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">==</span> <span class="va">True</span>:</span>
+<span id="lst-process-post-20"><a href="#lst-process-post-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">any</span>(<span class="st">"cross-post"</span> <span class="kw">in</span> category.lower() <span class="cf">for</span> category <span class="kw">in</span> categories):</span>
+<span id="lst-process-post-21"><a href="#lst-process-post-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> yaml_contents[<span class="st">"citation"</span>] <span class="op">==</span> <span class="va">True</span> <span class="kw">or</span> yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">==</span> <span class="va">True</span>:</span>
 <span id="lst-process-post-22"><a href="#lst-process-post-22" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"citation"</span>] <span class="op">=</span> <span class="va">False</span></span>
 <span id="lst-process-post-23"><a href="#lst-process-post-23" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">=</span> <span class="va">False</span></span>
 <span id="lst-process-post-24"><a href="#lst-process-post-24" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Modified crosspost </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss"> to remove Google Scholar and/or citation reference.'</span>)</span>
 <span id="lst-process-post-25"><a href="#lst-process-post-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="lst-process-post-26"><a href="#lst-process-post-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Ensure that google-scholar is set to true if citation is required</span></span>
 <span id="lst-process-post-27"><a href="#lst-process-post-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> citation <span class="kw">and</span> <span class="kw">not</span> google_scholar:</span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="lst-process-post-28" class="code-annotation-target"><a href="#lst-process-post-28" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">=</span> <span class="va">True</span></span>
+<span id="lst-process-post-28"><a href="#lst-process-post-28" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">"google-scholar"</span>] <span class="op">=</span> <span class="va">True</span></span>
 <span id="lst-process-post-29"><a href="#lst-process-post-29" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Setting google-scholar to true for </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">'</span>)</span>
 <span id="lst-process-post-30"><a href="#lst-process-post-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-process-post-31"><a href="#lst-process-post-31" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If citation is true but no DOI, and post exists in scraped posts</span></span>
@@ -359,56 +384,50 @@ Note
 <span id="lst-process-post-33"><a href="#lst-process-post-33" aria-hidden="true" tabindex="-1"></a>                yaml_contents[<span class="st">'citation'</span>] <span class="op">=</span> {<span class="st">'doi'</span>: posts_with_dois[title]}</span>
 <span id="lst-process-post-34"><a href="#lst-process-post-34" aria-hidden="true" tabindex="-1"></a>                logging.info(<span class="ss">f'Adding doi for </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">.'</span>)</span>
 <span id="lst-process-post-35"><a href="#lst-process-post-35" aria-hidden="true" tabindex="-1"></a></span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="lst-process-post-36" class="code-annotation-target"><a href="#lst-process-post-36" aria-hidden="true" tabindex="-1"></a>        new_preamble <span class="op">=</span> yaml.dump(yaml_contents).rstrip()</span>
-<a class="code-annotation-anchor" data-target-cell="lst-process-post" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="lst-process-post-37" class="code-annotation-target"><a href="#lst-process-post-37" aria-hidden="true" tabindex="-1"></a>        new_yaml_doc <span class="op">=</span> <span class="ss">f"---</span><span class="ch">\n</span><span class="sc">{</span>new_preamble<span class="sc">}</span><span class="ch">\n</span><span class="ss">---"</span></span>
+<span id="lst-process-post-36"><a href="#lst-process-post-36" aria-hidden="true" tabindex="-1"></a>        new_preamble <span class="op">=</span> yaml.dump(yaml_contents).rstrip()</span>
+<span id="lst-process-post-37"><a href="#lst-process-post-37" aria-hidden="true" tabindex="-1"></a>        new_yaml_doc <span class="op">=</span> <span class="ss">f"---</span><span class="ch">\n</span><span class="sc">{</span>new_preamble<span class="sc">}</span><span class="ch">\n</span><span class="ss">---"</span></span>
 <span id="lst-process-post-38"><a href="#lst-process-post-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-process-post-39"><a href="#lst-process-post-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># write the modified YAML document back to file</span></span>
 <span id="lst-process-post-40"><a href="#lst-process-post-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">'w'</span>) <span class="im">as</span> yaml_file:</span>
 <span id="lst-process-post-41"><a href="#lst-process-post-41" aria-hidden="true" tabindex="-1"></a>            yaml_file.write(new_yaml_doc <span class="op">+</span> rest_of_post)</span>
 <span id="lst-process-post-42"><a href="#lst-process-post-42" aria-hidden="true" tabindex="-1"></a>        logging.info(<span class="ss">f'Updated file </span><span class="sc">{</span>title<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="lst-process-post-43"><a href="#lst-process-post-43" aria-hidden="true" tabindex="-1"></a>        </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="lst-process-post-43"><a href="#lst-process-post-43" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="lst-process-post" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-annotation="1" data-code-cell="lst-process-post" data-code-lines="6">We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</span>
-</dd>
-<dt data-target-cell="lst-process-post" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-annotation="2" data-code-cell="lst-process-post" data-code-lines="20">If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</span>
-</dd>
-<dt data-target-cell="lst-process-post" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-annotation="3" data-code-cell="lst-process-post" data-code-lines="21">While we’re at it, might as well prune the cross-posts.</span>
-</dd>
-<dt data-target-cell="lst-process-post" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-annotation="4" data-code-cell="lst-process-post" data-code-lines="28">And anything with a DOI should also get a Google Scholar metadata.</span>
-</dd>
-<dt data-target-cell="lst-process-post" data-target-annotation="5">5</dt>
-<dd>
-<span data-code-annotation="5" data-code-cell="lst-process-post" data-code-lines="36">The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</span>
-</dd>
-<dt data-target-cell="lst-process-post" data-target-annotation="6">6</dt>
-<dd>
-<span data-code-annotation="6" data-code-cell="lst-process-post" data-code-lines="37">Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</span>
-</dd>
-</dl>
+</figure>
+</div>
+<ol type="1">
+<li>We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</li>
+<li>If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</li>
+<li>While we’re at it, might as well prune the cross-posts.</li>
+<li>And anything with a DOI should also get a Google Scholar metadata.</li>
+<li>The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</li>
+<li>Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</li>
+</ol>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
-<div id="lst-project-script" class="listing">
-<p>Listing&nbsp;4: Declaring project scripts in _quarto.yml.</p>
-<div class="sourceCode" id="lst-project-script" data-lst-cap="Declaring project scripts in _quarto.yml."><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-project-script-1"><a href="#lst-project-script-1" aria-hidden="true" tabindex="-1"></a></span>
+<div id="lst-project-script" class="yaml listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;4: Declaring project scripts in _quarto.yml.
+</figcaption>
+<div aria-describedby="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-project-script"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-project-script-1"><a href="#lst-project-script-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-project-script-2"><a href="#lst-project-script-2" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
 <span id="lst-project-script-3"><a href="#lst-project-script-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
 <span id="lst-project-script-4"><a href="#lst-project-script-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pre-render</span><span class="kw">:</span></span>
 <span id="lst-project-script-5"><a href="#lst-project-script-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> scripts/pre_doi_from_rogue_scholar.py</span></span>
 <span id="lst-project-script-6"><a href="#lst-project-script-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</figure>
+</div>
 <p>One thing worth noting is that we’re not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made ‘on the fly’ to the <code>.qmd</code> files and do not necessarily propagate into the repo. This is a pain, because recall that we’re only fetching the last ten posts’ DOIs so as to be kind on the server: as time goes on, that means older posts ‘lose’ their DOI.</p>
 <p>To prevent this, we can simply check our changes back in:</p>
-<div id="lst-gh-action" class="listing">
-<p>Listing&nbsp;5: Github action to commit changes.</p>
-<div class="sourceCode" id="lst-gh-action" data-lst-cap="Github action to commit changes."><pre class="sourceCode yaml code-annotation-code code-with-copy code-annotated"><code class="sourceCode yaml"><span id="lst-gh-action-1"><a href="#lst-gh-action-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<div id="lst-gh-action" class="yaml listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;5: Github action to commit changes.
+</figcaption>
+<div aria-describedby="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-gh-action"><pre class="sourceCode code-annotation-code yaml code-with-copy"><code class="sourceCode yaml"><span id="lst-gh-action-1"><a href="#lst-gh-action-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
 <span id="lst-gh-action-2"><a href="#lst-gh-action-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
 <span id="lst-gh-action-3"><a href="#lst-gh-action-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
 <span id="lst-gh-action-4"><a href="#lst-gh-action-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> main</span></span>
@@ -446,21 +465,20 @@ Note
 <span id="lst-gh-action-36"><a href="#lst-gh-action-36" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
 <span id="lst-gh-action-37"><a href="#lst-gh-action-37" aria-hidden="true" tabindex="-1"></a>          git config --global user.name 'Chris von Csefalvay'</span>
 <span id="lst-gh-action-38"><a href="#lst-gh-action-38" aria-hidden="true" tabindex="-1"></a>          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'</span>
-<a class="code-annotation-anchor" data-target-cell="lst-gh-action" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="lst-gh-action-39" class="code-annotation-target"><a href="#lst-gh-action-39" aria-hidden="true" tabindex="-1"></a>          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
-<span id="lst-gh-action-40"><a href="#lst-gh-action-40" aria-hidden="true" tabindex="-1"></a>          git push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="lst-gh-action-39"><a href="#lst-gh-action-39" aria-hidden="true" tabindex="-1"></a>          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
+<span id="lst-gh-action-40"><a href="#lst-gh-action-40" aria-hidden="true" tabindex="-1"></a>          git push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="lst-gh-action" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-annotation="1" data-code-cell="lst-gh-action" data-code-lines="39">The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</span>
-</dd>
-</dl>
+</figure>
+</div>
+<ol type="1">
+<li>The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</li>
+</ol>
 <p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
 <p><a href="quarto-project-scripts/">As noted</a>: Quarto project scripts are pretty awesome stuff. I’m thinking of setting up an <code>awesome-</code> for it on Github, because way too few of them are shared properly. I’m hoping this will change.</p>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {Auto-DOI for {Quarto} Posts via {Rogue} {Scholar}},
   date = {2023-11-13},
@@ -551,10 +569,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -564,8 +581,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -578,6 +604,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -621,6 +766,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -646,6 +792,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -708,7 +880,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -717,6 +893,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 

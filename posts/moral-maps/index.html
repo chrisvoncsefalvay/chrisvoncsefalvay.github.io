@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
 <meta name="dcterms.date" content="2023-10-26">
 <meta name="description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
 
@@ -24,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -109,22 +117,50 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <meta property="og:title" content="Chris von Csefalvay - The Moral Pulse of the Machine">
 <meta property="og:description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
-<meta property="og:site-name" content="Chris von Csefalvay">
+<meta property="og:site_name" content="Chris von Csefalvay">
 <meta name="twitter:title" content="Chris von Csefalvay - The Moral Pulse of the Machine">
 <meta name="twitter:description" content="On bedtime stories, and what making machines tell them tells us about their moral make-up.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/moral-maps/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="The Moral Pulse of the Machine">
+<meta name="citation_author" content="Chris von Csefalvay">
 <meta name="citation_publication_date" content="2023-10-26">
 <meta name="citation_cover_date" content="2023-10-26">
 <meta name="citation_year" content="2023">
@@ -138,9 +174,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -152,37 +188,37 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers" rel="" target="">
- <span class="menu-text">Papers</span></a>
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media" rel="" target="">
- <span class="menu-text">Media</span></a>
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts" rel="" target="">
- <span class="menu-text">The Notebook</span></a>
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks" rel="" target="">
- <span class="menu-text">Talks</span></a>
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://computationalinfectiousdisease.com" rel="" target="">
- <span class="menu-text">My book</span></a>
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -200,7 +236,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <li><a href="#with-eyes-serene" id="toc-with-eyes-serene" class="nav-link" data-scroll-target="#with-eyes-serene">With eyes serene</a></li>
   <li><a href="#the-mask-of-the-storyteller" id="toc-the-mask-of-the-storyteller" class="nav-link" data-scroll-target="#the-mask-of-the-storyteller">The mask of the storyteller</a></li>
   </ul>
-<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="moral-maps.ipynb.html"><i class="bi bi-journal-code"></i>moral-maps.ipynb</a></li></ul></div></nav>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="moral-maps-preview.html"><i class="bi bi-journal-code"></i>The Moral Pulse of the Machine - companion notebook</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -229,7 +265,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -244,7 +280,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </div>
   
 
+
 </header>
+
 
 <blockquote class="blockquote">
 <p>Tell me what stories you grew up on, and I will tell you who you are.</p>
@@ -254,7 +292,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="site_0491_0011-1200-630-20151105103027.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">The theatre adjoining the Temple of Asclepios at Epidaurus. Photo credits: <a href="https://whc.unesco.org/en/list/491/">UNESCO</a>.</figcaption>
+<figcaption>The theatre adjoining the Temple of Asclepios at Epidaurus. Photo credits: <a href="https://whc.unesco.org/en/list/491/">UNESCO</a>.</figcaption>
 </figure>
 </div>
 </div></div><p>The temple of Asclepios, the Greek god of healing arts and medicine, at Epidaurus was pretty much the ancient Greek world’s equivalent of the Mayo Clinic. It then tells us a lot about the Greek worldview of healing that one of the things the temple complex prominently featured was a theatre. The Greeks believed in drama therapy, but in perhaps a slightly different way of how we think of it today. Built at 340 BC or so, the Greco-Persian wars were still in living memory when the theatre was constructed, and so even more was the subsequent conflict between Athens and Sparta (the Second Peloponnesian War, 431–404 BC) and the subsequent dust-up between Thebes and Sparta (the Theban-Spartan war, 378–362 BC). With conflict came social and economic upheaval, plagues, and generally a rough time. And the priests of Asclepios realised that their patients needed to heal more than their body. They needed to heal their souls, and they couldn’t do that alone. They had to come together to heal, and the way to do that was, of course, drama.</p>
@@ -271,12 +309,12 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>The universe is made of stories, not of atoms.</p>
 <p>– Muriel Rukeyser</p>
 </blockquote>
-<div class="page-columns page-full"><p>Our main tool is going to be what I’ll call a moral map, subject to the caveat above.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The workflow is going to be quite simple: we’ll pit virtues against each other as we obtain stories generated by an LLM. Recall that an LLM, fundamentally, is a model that given a token sequence <span class="math inline">\(k_1, k_2, \cdots, k_n\)</span> learns the conditional probability of a set of possible tokens <span class="math inline">\(k_{n+1}\)</span>, i.e.&nbsp;it assigns to every possible token a likelihood that it will be the <span class="math inline">\(k_{n+1}\)</span>-th token given <span class="math inline">\(k_1, \cdots, k_n\)</span>. It does so so as to minimise a loss function <span class="math inline">\(J(k_1, \cdots, k_n, k_{n+1})\)</span>, which it determines by going through a corpus and returning a zero value of <span class="math inline">\(k_{n+1}\)</span> follows <span class="math inline">\(k_1, \cdots, k_n\)</span> and a higher value if some other token follows <span class="math inline">\(k_1, \cdots, k_n\)</span>. This is statistically equivalent to what is my vastly preferred formulation: LLMs learn probability distributions of tokens conditional on a sequence of preceding tokens (the length of this sequence being the model’s <em>context window</em>) and then stochastically sample the region of maximum probability of that model. That’s it, that’s all of it. There’s no more magic to it all.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;Indeed, everything here is subject to that caveat above. I can’t repeat it often enough. At no point do I suggest that machines do moral reasoning, but that they incorporate moral judgments from stories they ingested.</p></li></div></div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="cell">
+<p>Our main tool is going to be what I’ll call a moral map, subject to the caveat above.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The workflow is going to be quite simple: we’ll pit virtues against each other as we obtain stories generated by an LLM. Recall that an LLM, fundamentally, is a model that given a token sequence <span class="math inline">\(k_1, k_2, \cdots, k_n\)</span> learns the conditional probability of a set of possible tokens <span class="math inline">\(k_{n+1}\)</span>, i.e.&nbsp;it assigns to every possible token a likelihood that it will be the <span class="math inline">\(k_{n+1}\)</span>-th token given <span class="math inline">\(k_1, \cdots, k_n\)</span>. It does so so as to minimise a loss function <span class="math inline">\(J(k_1, \cdots, k_n, k_{n+1})\)</span>, which it determines by going through a corpus and returning a zero value of <span class="math inline">\(k_{n+1}\)</span> follows <span class="math inline">\(k_1, \cdots, k_n\)</span> and a higher value if some other token follows <span class="math inline">\(k_1, \cdots, k_n\)</span>. This is statistically equivalent to what is my vastly preferred formulation: LLMs learn probability distributions of tokens conditional on a sequence of preceding tokens (the length of this sequence being the model’s <em>context window</em>) and then stochastically sample the region of maximum probability of that model. That’s it, that’s all of it. There’s no more magic to it all.</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Indeed, everything here is subject to that caveat above. I can’t repeat it often enough. At no point do I suggest that machines do moral reasoning, but that they incorporate moral judgments from stories they ingested.</p><div class="">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
 
@@ -285,11 +323,13 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     C ----&gt; D["Moral map"] 
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
 <p>Our super simple workflow (detailed version below).</p>
-</div></div><div class="page-columns page-full"><p>There are two consequences of this that will be relevant for us. The first is that when we ask a model to generate us a story, it will draw on its experience – that is, what it’s seen before. It will reflect what it’s been taught – what, specifically, it ‘knows’ about the relative values of virtues (or the relative extent of vices or whatever else we’re investigating). As such, moral maps are snapshots of a model’s state,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> not an exhaustive statement about all LLMs. We may get very different answers if we asked the question a little differently (as we indeed shall).</p><div class="no-row-height column-margin column-container"><li id="fn2"><p><sup>2</sup>&nbsp;Indeed, more accurately, of only a sample of it!</p></li></div></div>
+</div><p><sup>2</sup>&nbsp;Indeed, more accurately, of only a sample of it!</p></div>
+<p>There are two consequences of this that will be relevant for us. The first is that when we ask a model to generate us a story, it will draw on its experience – that is, what it’s seen before. It will reflect what it’s been taught – what, specifically, it ‘knows’ about the relative values of virtues (or the relative extent of vices or whatever else we’re investigating). As such, moral maps are snapshots of a model’s state,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> not an exhaustive statement about all LLMs. We may get very different answers if we asked the question a little differently (as we indeed shall).</p>
 <p>The second is that to an LLM, one language is like any other. Consider the ability of ChatGPT-3.5 to generate stories in different languages:</p>
 <div class="quarto-embed-nb-cell">
 <div id="multilanguage-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:47:56.649632Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:31.931156Z&quot;}" data-execution_count="4">
@@ -317,22 +357,22 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 {"version_major":2,"version_minor":0,"model_id":"63e54ee6d6f9463a8906b7889ba56723","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-<div id="multilanguage-story-2" class="cell-output cell-output-display">
+<div id="multilanguage-story-2" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the vast and enchanting forest, lived three animals: Oliver the wise owl, Max the mischievous monkey, and Bella the brave bird. They embarked on an…</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-3" class="cell-output cell-output-display">
+<div id="multilanguage-story-3" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Kulikuwa na wanyama watatu katika pori. Simba mkubwa, Twiga mwenye shingo ndefu, na Kasa mwenye manyoya meupe. Walitamani kupata bahati ya kipekee iliyofichwa ndani ya Tunda la Asali…….</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-4" class="cell-output cell-output-display">
+<div id="multilanguage-story-4" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Es war einmal ein tapfere Hase namens Felix, eine kluge Eule namens Luna und eine hilfsbereite Schildkröte namens Emil. Gemeinsam suchten sie nach dem verzauberten Zauberstab, um das Königreich zu…</p>
 </blockquote>
 </div>
-<div id="multilanguage-story-5" class="cell-output cell-output-display">
+<div id="multilanguage-story-5" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Er was eens een nieuwsgierige geit genaamd Gijs, een slimme uil genaamd Olivia en een dappere schildpad genaamd Tobi. Ze waren op zoek naar een magische, glinsterende edelsteen die bekend…</p>
 </blockquote>
@@ -341,7 +381,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>A side note: I find this profoundly beautiful. When asked to generate a story in a given language, LLMs don’t generate a story in English they translate to, say, Swahili. Consider this Swahili story I got from the model:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}" data-execution_count="5">
+<div id="cell-swahili-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in Swahili. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -352,7 +392,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        ])</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(completion.choices[<span class="dv">0</span>].message.content.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="swahili-story" class="cell-output cell-output-display">
+<div id="swahili-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Kulikuwa na farasi jasiri mwenye jina Kiboko, ndege mjanja mwenye jina Tembo, na sisimizi mwepesi mwenye jina Simba. Jicho moja la dhahabu la ndege Tembo lilikuwa na uwezo wa kuona vitu vya thamani kutoka mbali. Farasi Kiboko alikuwa na moyo shujaa sana, kamwe hakuogopa hata hatari kubwa. Sisimizi Simba alijulikana kwa akili zake za kugeuza tukio lolote kuwa fursa.</p>
 <p>Siku moja, wanyama wote walipata taarifa juu ya Almasi Kubwa ya Kale iliyofichwa kwenye Mlima wa Enzi. Almasi hiyo ilikuwa ya ajabu sana na ilisemekana kuwa na nguvu kubwa sana. Wanyama walijua kwamba mtu yeyote aliyeipata angeweza kuifanya ndoto yoyote kuwa halisi.</p>
@@ -363,7 +403,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>Compare this to the English story:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
+<div id="cell-english-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>story_prompt <span class="op">=</span> (</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"Please write me a story in English. The story must involve three animals of your choice, but no more of those two animals may be mammals. Make sure each animal is named and has a proper name. The story must be at least %wordlen words long and focus on the pursuit of an object (of your choice) by the three animals. Each of the animals shall exhibit a virtue, e.g. kindness or courage. Determine which virtue will be most crucial in attaining the goal."</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -376,7 +416,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>english_story <span class="op">=</span> completion.choices[<span class="dv">0</span>].message.content</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">"&gt;"</span> <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">&gt;</span><span class="ch">\n</span><span class="st">&gt;"</span>.join(english_story.split(<span class="st">"</span><span class="ch">\n\n</span><span class="st">"</span>)[:<span class="dv">3</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="english-story" class="cell-output cell-output-display">
+<div id="english-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
 <p>One sunny morning, as the forest bathed in golden light, a rumor spread amongst the woodland creatures. They spoke in hushed tones of a mythical object, an enchanted gem deep within the heart of a treacherous cave. Legend had it that this gem possessed the power to grant one’s deepest desire.</p>
@@ -471,8 +511,9 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>Our workflow, then, will roughly look as follows:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-workflow" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-workflow" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-workflow">flowchart TD
 
@@ -512,7 +553,10 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     wlm -.-&gt; clustering;
 </pre>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;1: Our rough workflow.</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Our rough workflow.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -525,11 +569,11 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>True navigation begins in the human heart. It’s the most important map of all.</p>
 <p>– Elizabeth Kapu’uwailani Lindsey</p>
 </blockquote>
-<div class="page-columns page-full"><p>What we are profoundly interested in here is not so much the single story, but what I’d like to call the ‘moral gradient’ of the model. Given an embedding space in which we can represent each virtue or property as a point, the ‘slope’ of this moral gradient determines whether, in the ‘experience’ of the model, which of the virtues is dominant, and by how much. A moral map is essentially a representation of this.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We’ve hit the first half of the flow described above in <a href="#fig-workflow">Figure&nbsp;1</a>: we have a story, and we have a JSON object. Now we need to evaluate it.</p><div class="no-row-height column-margin column-container"><li id="fn3"><p><sup>3</sup>&nbsp;The gradient formulation falls short in that this is not something easily conceivable in continuous space. This is firmly the province of discrete mathematics, and we’ll use ‘gradients’ as a metaphor but will generally look at them as graphs, with the gradients expressed by the weight of the vertices that connect them.</p></li></div></div>
-<p>Take the story we generated above:</p>
+<p>What we are profoundly interested in here is not so much the single story, but what I’d like to call the ‘moral gradient’ of the model. Given an embedding space in which we can represent each virtue or property as a point, the ‘slope’ of this moral gradient determines whether, in the ‘experience’ of the model, which of the virtues is dominant, and by how much. A moral map is essentially a representation of this.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We’ve hit the first half of the flow described above in <a href="#fig-workflow" class="quarto-xref">Figure&nbsp;1</a>: we have a story, and we have a JSON object. Now we need to evaluate it.</p>
+<div class="no-row-height column-margin column-container"><p><sup>3</sup>&nbsp;The gradient formulation falls short in that this is not something easily conceivable in continuous space. This is firmly the province of discrete mathematics, and we’ll use ‘gradients’ as a metaphor but will generally look at them as graphs, with the gradients expressed by the weight of the vertices that connect them.</p></div><p>Take the story we generated above:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
-<div id="english-story" class="cell-output cell-output-display">
+<div id="cell-english-story" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}" data-execution_count="6">
+<div id="english-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
 <p>One sunny morning, as the forest bathed in golden light, a rumor spread amongst the woodland creatures. They spoke in hushed tones of a mythical object, an enchanted gem deep within the heart of a treacherous cave. Legend had it that this gem possessed the power to grant one’s deepest desire.</p>
@@ -583,12 +627,16 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>…we can build a graph that shows the outcome in this particular story:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:47.117067Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:46.937957Z&quot;}" data-execution_count="10">
+<div id="cell-fig-story-as-json-graph" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T14:59:47.117067Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:46.937957Z&quot;}" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div id="fig-story-as-json-graph" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-story-as-json-graph-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: The moral map from a single story, represented as a graph.</figcaption>
+<div id="fig-story-as-json-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-story-as-json-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/moral-maps-fig-story-as-json-graph-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-story-as-json-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The moral map from a single story, represented as a graph.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -597,12 +645,16 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <p>We have two 1-weighted edges, since there were three protagonists, and the dominant or ‘winning’ virtue prevailed once against each of the ‘losing’ virtues.</p>
 <p>When we perform this iteratively, over a large enough sample space, we get a much better idea of what the model thinks relative virtues are worth:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:22.623373Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:22.436215Z&quot;}" data-execution_count="12">
+<div id="cell-fig-stories-as-graph" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:22.623373Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:22.436215Z&quot;}" data-execution_count="12">
 <div class="cell-output cell-output-display">
-<div id="fig-stories-as-graph" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-stories-as-graph-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: The moral map from a sample of ten stories, represented as a graph.</figcaption>
+<div id="fig-stories-as-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stories-as-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/moral-maps-fig-stories-as-graph-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stories-as-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The moral map from a sample of ten stories, represented as a graph.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -610,12 +662,16 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>And the same can be represented as a moral heatmap, showing us the most frequent instances of dominance versus loss:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:30.468484Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:30.228215Z&quot;}" data-execution_count="15">
+<div id="cell-fig-moral-heatmap" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:03:30.468484Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:03:30.228215Z&quot;}" data-execution_count="15">
 <div class="cell-output cell-output-display">
-<div id="fig-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: The moral heatmap from the same sample of ten stories.</figcaption>
+<div id="fig-moral-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/moral-maps-fig-moral-heatmap-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The moral heatmap from the same sample of ten stories.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -626,7 +682,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div class="no-row-height column-margin column-container"><div class="">
 <p>This is another example of using an LLM to evaluate an LLM’s output. This is a powerful technique, and significantly cheaper and easier than trying to manually map all possible virtues through some dictionary. The takeaway? If you have a large potential problem space, large enough to make a dict a hassle, consider using LLMs as parsers and evaluators, ask for a response in a very formal language and/or over a very limited set of possible responses, and validate those with a simple validator.</p>
 </div></div><div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}" data-execution_count="18">
+<div id="cell-abilising" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>abilities <span class="op">=</span> [<span class="st">"Strength"</span>, <span class="st">"Dexterity"</span>, <span class="st">"Constitution"</span>, <span class="st">"Intelligence"</span>, <span class="st">"Wisdom"</span>, <span class="st">"Charisma"</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>virtues <span class="op">=</span> <span class="bu">list</span>(df.index)</span>
@@ -657,7 +713,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>This gets us a neat mapping:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:51.023828Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:51.021357Z&quot;}" data-execution_count="19">
+<div id="cell-abilising-mapping" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:09:51.023828Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:51.021357Z&quot;}" data-execution_count="19">
 <div id="abilising-mapping" class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>{'strength': 'Constitution',
  'cunning': 'Intelligence',
@@ -679,19 +735,23 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div>
 <p>And makes our moral heatmap much clearer:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:03.632825Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:03.522486Z&quot;}" data-execution_count="21">
+<div id="cell-fig-abilised-moral-heatmap" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-28T15:10:03.632825Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:10:03.522486Z&quot;}" data-execution_count="21">
 <div class="cell-output cell-output-display">
-<div id="fig-abilised-moral-heatmap" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-abilised-moral-heatmap-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: The moral heatmap from the same sample of ten stories, clustered by abilities.</figcaption>
+<div id="fig-abilised-moral-heatmap" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abilised-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/moral-maps-fig-abilised-moral-heatmap-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abilised-moral-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: The moral heatmap from the same sample of ten stories, clustered by abilities.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div class="page-columns page-full"><p>Which lets us finally, through the ardour of our efforts, arrive at the stars we were promised: a scalable map that we can start feeding with a few hundred stories.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p><div class="no-row-height column-margin column-container"><li id="fn4"><p><sup>4</sup>&nbsp;Something you shouldn’t do unless you have the API calls to burn.</p></li></div></div>
-</section>
+<p>Which lets us finally, through the ardour of our efforts, arrive at the stars we were promised: a scalable map that we can start feeding with a few hundred stories.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><p><sup>4</sup>&nbsp;Something you shouldn’t do unless you have the API calls to burn.</p></div></section>
 <section id="with-eyes-serene" class="level1">
 <h1>With eyes serene</h1>
 <blockquote class="blockquote">
@@ -717,8 +777,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </blockquote>
 <p>It’s worth noting in our coda that what Oscar Wilde said about men holds true for LLMs as well. For if we directly asked the model, it would not give us a straight answer:</p>
 <div class="quarto-embed-nb-cell">
-<div class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-27T01:12:45.791175Z&quot;,&quot;start_time&quot;:&quot;2023-10-27T01:12:25.425570Z&quot;}" data-execution_count="31">
-<div id="intelligence-vs-charisma" class="cell-output cell-output-display">
+<div id="cell-intelligence-vs-charisma" class="cell" data-executetime="{&quot;end_time&quot;:&quot;2023-10-27T01:12:45.791175Z&quot;,&quot;start_time&quot;:&quot;2023-10-27T01:12:25.425570Z&quot;}" data-execution_count="31">
+<div id="intelligence-vs-charisma" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Both intelligence and charisma can contribute significantly to achieving great, noble goals, but their importance may vary based on the specific context and goals involved.</p>
 <p>Intelligence, characterized by cognitive abilities, problem-solving skills, and knowledge, can be crucial for strategic planning, identifying opportunities, and finding innovative solutions to challenges. It enables individuals to analyze complex situations, understand cause-and-effect relationships, and make informed decisions. Intelligence provides the necessary foundation for acquiring expertise in a certain field, grasping intricate concepts, and adapting to changing circumstances. It allows individuals to foresee potential obstacles, assess risks, and devise effective strategies to overcome hurdles.</p>
@@ -736,7 +796,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
   author = {Chris von Csefalvay},
   title = {The {Moral} {Pulse} of the {Machine}},
   date = {2023-10-26},
@@ -827,10 +887,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -840,8 +899,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -854,6 +922,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -897,6 +1084,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -922,6 +1110,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -984,7 +1198,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">(c) Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></div>   
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
@@ -993,6 +1211,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 
