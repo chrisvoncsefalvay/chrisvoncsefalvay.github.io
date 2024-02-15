@@ -33,6 +33,10 @@ image: img/IMG_5986.jpeg
 comments: false
 ---
 
+<script type='application/ld+json'>
+{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Epidemiologist","height":"74 inches","gender":"male","description":"Chris von CSefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":"Royal Society for Public Health","nationality":"British"}
+</script>
+
 ## Bio
 
 I'm a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. I am the author of [Computational Modeling of Infectious Disease](https://computationalinfectiousdisease.com), a richly illustrated compendium on modern computational epidemiology, as well as [a growing body of research](papers).
