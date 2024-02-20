@@ -10,6 +10,10 @@ title: Papers
 
 <!-- references -->
 
+# 2024
+
+- **von Csefalvay C** (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. _arXiv_ [2402.10951](https://arxiv.org/abs/2402.10951).
+
 # 2023
 
 - Mogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, **von Csefalvay C**, Mukamati D (2023). Juvenile polyposis syndrome: A case report. _Clinical Case Reports_ 2023;**11**:e6798. doi:[10.1002/ccr3.6798](https://doi.org/10.1002/ccr3.6798)
