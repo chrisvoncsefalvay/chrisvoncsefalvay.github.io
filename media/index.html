@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -231,7 +231,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Tech for Good" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1708397277771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
+<div class="quarto-post image-right" data-index="0" data-categories="Tech for Good" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1714798153281" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
 <div class="thumbnail">
 <p><a href="../media/tech-for-good/index.html" class="no-external"></a></p><a href="../media/tech-for-good/index.html" class="no-external">
 <p><img src="../media/tech-for-good/header.jpeg" class="thumbnail-image"></p>
@@ -264,7 +264,7 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Frankfurter Rundschau" data-listing-date-sort="1589155200000" data-listing-file-modified-sort="1708397277771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
+<div class="quarto-post image-right" data-index="1" data-categories="Frankfurter Rundschau" data-listing-date-sort="1589155200000" data-listing-file-modified-sort="1714798153281" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
 <div class="thumbnail">
 <p><a href="../media/fr-disinfectants/index.html" class="no-external"></a></p><a href="../media/fr-disinfectants/index.html" class="no-external">
 <p><img src="../media/fr-disinfectants/header.png" class="thumbnail-image"></p>
@@ -297,7 +297,7 @@ Chris von Csefalvay
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="Euronews" data-listing-date-sort="1587081600000" data-listing-file-modified-sort="1708397277771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
+<div class="quarto-post image-right" data-index="2" data-categories="Euronews" data-listing-date-sort="1587081600000" data-listing-file-modified-sort="1714798153281" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
 <div class="thumbnail">
 <p><a href="../media/euronews-covid/index.html" class="no-external"></a></p><a href="../media/euronews-covid/index.html" class="no-external">
 <p><img src="../media/euronews-covid/header.webp" class="thumbnail-image"></p>
@@ -414,6 +414,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -448,7 +466,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

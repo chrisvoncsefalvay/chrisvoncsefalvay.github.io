@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -274,7 +274,7 @@ Pinker, Steven. 2003. <em>The Language Instinct: How the Mind Creates Language</
 <h1>Tiny problems, big world</h1>
 <p>Chess, for all its complexity, has a relatively small problem space. It is a spatially confined game of a limited number of pieces – which, by the way, is monotonically decreasing over time. Pieces have limited moves, so that a piece of type p being at position (<span class="math inline">\(x, y\)</span>) at time t has a finite number of places it can be at <span class="math inline">\(t+1\)</span> (valid moves). Consequently, for any state of the chessboard, we can describe a finite set of possible states one step later. Recursively, for any state of the chessboard, we can enumerate any future state. That this enumeration involves a rapidly growing and rather massive problem space is not, inherently, a huge problem. There are discrete steps in time, and each of those steps moves us along the tree. In short: however big the problem space, it can be enumerated.</p>
 <p>This is important because processes like this (known as Markov decision processes) are kind of problem machine learning excels at. We can enumerate a bunch of these trees from start to finish (that is, individual chess games), and eventually the computer builds a representation of whether a particular move given particular preceding moves is or is not a good idea. Or, more formally, we can define a number of actions called policies in this context, so that given a system in state s and the action a, <span class="math inline">\(\pi_{a, s} = p(a_t = a | s_t = s)\)</span>. We can then define a reward function for any policy <span class="math inline">\(\pi\)</span>, so that <span class="math inline">\(R(\pi) \sim \sum_{t = 0}^{\infty} r(\pi, t)\)</span> for all <span class="math inline">\(r(\pi, t)\)</span> being the reward gained by taking the action corresponding to the policy <span class="math inline">\(\pi\)</span> at time step <span class="math inline">\(t\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Then, given a state <span class="math inline">\(s\)</span> and a policy <span class="math inline">\(\pi\)</span>, we can calculate the expectation value of <span class="math inline">\(R_{\pi} | t\)</span>. And if we can calculate it, we can sic one of the many optimisation algorithms on it to maximise it. There, chess played, game won, end of.</p>
-<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Specifically, by the factor <span class="math inline">\(\gamma^t\)</span>, where <span class="math inline">\(\gamma\)</span> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.</p></div></section>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Specifically, by the factor <span class="math inline">\(\gamma^t\)</span>, where <span class="math inline">\(\gamma\)</span> is the discount factor. For an excruciating amount of maths about all this, your best bet is Sutton and Barto (2d ed.&nbsp;2018), <a href="http://incompleteideas.net/book/the-book-2nd.html">gratifyingly available online for free</a>. The discount factor , which Sutton and Barto call ‘discount rate’, is explained at Ch. 3.3, p.&nbsp;54 onwards.</p></div></div></section>
 <section id="lets-get-more-problematic" class="level1">
 <h1>Let’s get more problematic</h1>
 <p>Except, as I said, chess is, well, relatively simple to enumerate. What about non-enumerable systems? For starters, we can dispense with discrete time and start operating in continuous time. Things get a whole lot more complicated when you start to move from discrete maths to continuous values (and that’s why I largely stay on the discrete side, in the comfort of number theory and integer indices). What if a game of chess didn’t have turns, but rather played at whatever speed the players can simultaneously manage? And had a large problem space, a ton of different actors, oh, and let’s sprinkle some degree of randomness into it, so as to make the whole thing impossible to understand and computationally insane to model?</p>
@@ -408,6 +408,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -442,7 +460,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

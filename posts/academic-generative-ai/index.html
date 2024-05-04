@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -242,7 +242,7 @@ Figure&nbsp;1: Apparently, I’m commenting on neoliberalism in African universi
 <p>Language models are really weak at one thing: reasoned judgment. As a scientist, you are trained to exercise this kind of reasoned judgment in determining what is, and what isn’t, worth considering as an authority. That’s why we make our master’s students (and hopefully most undergraduates) write literature reviews until the cows come home. It teaches them to develop that judgment, and also to know how to explore the fringes of their research question. I have looked at a few ‘academic AI’ tools that claim to be doing some of this, and they’re not very good at it. <a href="https://scite.ai">Scite</a> is so far one of the better ones, and the literature reviews it produces are still pretty bad: results are heavily weighted towards recent publications, towards the specific in preference to the foundational and often towards meandering misinterpretations of the research question as long as sources for that could be found, in preference to actually identifying a gap.</p>
 <p>To be quite fair towards these models, they have to deal with academic literature, which is an abundance of noise with a flicker of signal. There is, not to put too fine a point on it, a ton of crap out there, and it’s not always easy to tell the difference between the crap and the good stuff. That’s why we have peer review, and that’s why we have literature reviews. The problem is, of course, that these models are not trained on the literature, but on the internet. And the internet is a very different place from the academic literature indeed.</p>
 <p>Academic writing, especially domain specific writing, has a language of its own. It’s not fair to expect a language model trained on English to also master uses of English that might as well be a different language. To give a favourite example of mine: in magnetic resonance imaging of the brain, there’s often talk of something called ‘flow voids’. Now, normal human reasoning would interpret a ‘flow void’ to be the absence of flow, or something along those lines. In MRI, a flow void is actually the opposite: it is a ‘void’ of signal created in a vessel through which something (usually blood, sometimes CSF) flows.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This is a very specific term that has a very specific meaning in a very specific context. A language model, however, would not know that. It would assume that a ‘flow void’ is (de)void of flow.</p>
-<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;Flow voids happen in the context of spin-echo imaging. These modalities involve two pulses – an excitation pulse and a refocusing pulse. Blood that moves perpendicular to the image plane will be hit by the excitation pulse but not the refocusing pulse. Therefore, it will not create a signal, which gives us the ‘void’ appearance of signal hypointense vessels.</p></div><p>Just about <em>all</em> of science is like that. We have a language of our own, and it’s not always easy to understand. What definitely doesn’t make it easier to work with, however, is when the source material is also wrong. Which is what we’re dealing with all too often, viz. <a href="#fig-scispace" class="quarto-xref">Figure&nbsp;1</a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Flow voids happen in the context of spin-echo imaging. These modalities involve two pulses – an excitation pulse and a refocusing pulse. Blood that moves perpendicular to the image plane will be hit by the excitation pulse but not the refocusing pulse. Therefore, it will not create a signal, which gives us the ‘void’ appearance of signal hypointense vessels.</p></div></div><p>Just about <em>all</em> of science is like that. We have a language of our own, and it’s not always easy to understand. What definitely doesn’t make it easier to work with, however, is when the source material is also wrong. Which is what we’re dealing with all too often, viz. <a href="#fig-scispace" class="quarto-xref">Figure&nbsp;1</a>.</p>
 </section>
 <section id="what-can-we-do-about-it" class="level2">
 <h2 class="anchored" data-anchor-id="what-can-we-do-about-it">What can we do about it?</h2>
@@ -345,6 +345,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -379,7 +397,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

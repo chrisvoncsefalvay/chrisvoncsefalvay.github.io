@@ -8,12 +8,6 @@
     ]
   },
   {
-    "listing": "/talks/index.html",
-    "items": [
-      "/talks/prometheus-unbound/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
       "/posts/lair/index.html",
@@ -41,6 +35,12 @@
       "/posts/mrna-gene-therapy/index.html",
       "/posts/ransomware-prisoners-dilemma/index.html",
       "/posts/julia-a-post-mortem/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/prometheus-unbound/index.html"
     ]
   }
 ]

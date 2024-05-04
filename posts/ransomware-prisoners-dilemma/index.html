@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -242,12 +242,12 @@ window.Quarto = {
 
 
 <p>In the middle of the green and pleasant countryside of England lies a small piece of commons –– land, that is, over which a number of people share certain rights. In this hypothetical scenario, it’s six farmers, <span class="math inline">\(F_1\)</span> to <span class="math inline">\(F_6\)</span>. Each of them has a hypothetical cow, which differs from ordinary cows in that it grazes a fixed unit, and produces a fixed amount of milk (unlike real cows, which vary wildly in their input and output parameters, or so I’m told). It is important to note that the land is a form of common property, meaning it is held by all of them jointly––or as ye olde Law Latin would put it, totum tenet et nihil tenet: they all hold the whole together, but no-one holds any specific part of it.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;As opposed to forms of co-ownership where each person owns a defined fraction of the co-owned property.</p></div><p>If you are one of the farmers, you have a very clear dominant strategy: get another cow! Even better, get a handful. More cows equal more milk, and the land can sustain at least six cows.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;As opposed to forms of co-ownership where each person owns a defined fraction of the co-owned property.</p></div></div><p>If you are one of the farmers, you have a very clear dominant strategy: get another cow! Even better, get a handful. More cows equal more milk, and the land can sustain at least six cows.</p>
 <p>The problem is, if all participants <span class="math inline">\(F_{1...6}\)</span> pursue this individually dominant strategy, the sum of their outcomes will be inferior. Every player choosing the dominant strategy results in a worse outcome than it would if they had not chosen the dominant strategy. This phenomenon is sometimes referred to as the ‘tragedy of the commons’, but is in fact a simple result of an n-player prisoner’s dilemma.</p>
 <section id="raising-the-stakes" class="level1 page-columns page-full">
 <h1>Raising the stakes</h1>
 <p>Let’s raise the stakes a little. Kidnappings happen because a significant fraction of people pay ransoms. The law on this is a little weird, and this reflects the general unease with which we regard the issue.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> We might agree that paying ransoms is a bad idea as a matter of principle, while also feeling rather disinclined to sacrifice a loved one on the altar of that principle. Personally, I know very few people who genuinely would not pay a ransom they had the means to pay for the release of a loved one – even if as an abstract principle, they agree that paying ransoms is a bad idea. A lifetime ago, when I studied (and later taught) moral and political philosophy at Oxford, these questions were popular dilemmas to make students think about consequentialism. Now, they are questions that affect every-day lives. Just earlier this week, much of the Eastern seaboard experienced gas shortages due to a ransomware attack on the Colonial Pipeline – over here in Northern Virginia, most gas stations were out of supply yesterday and expect to have fuel no sooner than early next week.</p>
-<div class="no-row-height column-margin column-container"><p><sup>2</sup>&nbsp;The law is outright weird, in that in most countries, paying ransoms is not illegal per se, but giving money to certain entities is illegal regardless of the purpose of the money. In that sense the law does not distinguish between paying a ransom to, say, Boko Haram, who happen to be on the Treasury’s shitlist, or giving them the same amount of money due to an overwhelming conviction that boko is very haram indeed – it’s illegal either way. This makes paying a ransom needlessly complicated, especially as in my modest experience with kidnappers, they rarely discuss their organisational affiliations at length. With international jihad in particular being run on the franchise model in this day and age, it may well turn out that Joe Kidnapper, who held himself out as a common criminal, was in fact a full franchisee of al-Qa’ida, and suddenly the FBI is going through your underwear drawer.</p><p><sup>3</sup>&nbsp;Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.</p></div><p>And that leads us to the ethical problem of ransomware, in particular paying the ransom (as the maintainers of the Colonial Pipeline did). If the common response to ransomware would be ‘go f––– yourself’, making ransomware would not be worth it. This scenario slightly differs from kidnapping in that the investment in each ransomware operation is very significantly smaller than it is for a kidnapping.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consequently, adopting the collectively dominant strategy of telling kidnappers what to stick where on which family member of theirs would only work if virtually all potential victims would do so (i.e.&nbsp;cooperate). This makes ransomware a trickier problem than plain, old kidnapping: if only a few ransom demands are not met, kidnappers are faced not only with the issue of cleaning up the bodies but also a significant financing shortfall. Ransomware cybercriminals, on the other hand, can afford a significant proportion of their victims to ‘cooperate’ (i.e.&nbsp;not pay), as long as a small number ‘defect’. Thence comes our first important point to consider: the cost of extortion governs where the deficient equilibrium point is located.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;The law is outright weird, in that in most countries, paying ransoms is not illegal per se, but giving money to certain entities is illegal regardless of the purpose of the money. In that sense the law does not distinguish between paying a ransom to, say, Boko Haram, who happen to be on the Treasury’s shitlist, or giving them the same amount of money due to an overwhelming conviction that boko is very haram indeed – it’s illegal either way. This makes paying a ransom needlessly complicated, especially as in my modest experience with kidnappers, they rarely discuss their organisational affiliations at length. With international jihad in particular being run on the franchise model in this day and age, it may well turn out that Joe Kidnapper, who held himself out as a common criminal, was in fact a full franchisee of al-Qa’ida, and suddenly the FBI is going through your underwear drawer.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.</p></div></div><p>And that leads us to the ethical problem of ransomware, in particular paying the ransom (as the maintainers of the Colonial Pipeline did). If the common response to ransomware would be ‘go f––– yourself’, making ransomware would not be worth it. This scenario slightly differs from kidnapping in that the investment in each ransomware operation is very significantly smaller than it is for a kidnapping.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Consequently, adopting the collectively dominant strategy of telling kidnappers what to stick where on which family member of theirs would only work if virtually all potential victims would do so (i.e.&nbsp;cooperate). This makes ransomware a trickier problem than plain, old kidnapping: if only a few ransom demands are not met, kidnappers are faced not only with the issue of cleaning up the bodies but also a significant financing shortfall. Ransomware cybercriminals, on the other hand, can afford a significant proportion of their victims to ‘cooperate’ (i.e.&nbsp;not pay), as long as a small number ‘defect’. Thence comes our first important point to consider: the cost of extortion governs where the deficient equilibrium point is located.</p>
 </section>
 <section id="possible-solutions" class="level1">
 <h1>Possible solutions</h1>
@@ -364,6 +364,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -398,7 +416,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
