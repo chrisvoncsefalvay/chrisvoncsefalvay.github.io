@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-10-30">
 <meta name="description" content="Finally, some discussion on LLM connectionism, and what LLMs could usefully become.">
 
-<title>Chris von Csefalvay - Teams of Rivals</title>
+<title>Teams of Rivals – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,10 +58,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-008885f27b4825b9450791f080bd970a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,11 +105,11 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
 
-<meta property="og:title" content="Chris von Csefalvay - Teams of Rivals">
+<meta property="og:title" content="Teams of Rivals – Chris von Csefalvay">
 <meta property="og:description" content="Finally, some discussion on LLM connectionism, and what LLMs could usefully become.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/team-of-rivals/aaz4729-f1.jpeg">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta name="twitter:title" content="Chris von Csefalvay - Teams of Rivals">
+<meta name="twitter:title" content="Teams of Rivals – Chris von Csefalvay">
 <meta name="twitter:description" content="Finally, some discussion on LLM connectionism, and what LLMs could usefully become.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/team-of-rivals/aaz4729-f1.jpeg">
 <meta name="twitter:card" content="summary_large_image">
@@ -119,7 +119,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="citation_cover_date" content="2023-10-30">
 <meta name="citation_year" content="2023">
 <meta name="citation_online_date" content="2023-10-30">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/team-of-rivals">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/team-of-rivals/">
 <meta name="citation_doi" content="10.59350/he7k6-tx158">
 <meta name="citation_language" content="en-GB">
 <meta name="citation_reference" content="citation_title=React: Synergizing reasoning and acting in language models;,citation_author=Shunyu Yao;,citation_author=Jeffrey Zhao;,citation_author=Dian Yu;,citation_author=Nan Du;,citation_author=Izhak Shafran;,citation_author=Karthik Narasimhan;,citation_author=Yuan Cao;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_journal_title=arXiv preprint arXiv:2210.03629;">
@@ -137,7 +137,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -172,7 +172,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -254,7 +254,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </div></div><p>To this day, the exact identity of the Somerton Man, who he really was and why he had to die, remains unknown. The DNA Doe Project, who have a pretty good track record at this sort of stuff, have identified him as Carl Webb, an Australian instrument maker and electrical engineer. This raises more questions than it answers. And while it is undoubtedly one of the most intriguing of human stories, it is also an interesting lesson in the way we arrive at knowledge and understanding.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-coronial-flow" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-coronial-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-coronial-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -323,7 +323,7 @@ Figure&nbsp;1: Information flow of the coronial inquest into the death of the So
 <p>Grease cake pan and line with parchment paper. Preheat oven to 350ºF. Mix cream cheese, butter and sugar in a bowl submerged in a saucepan of warm(ish) water. Add the egg yolks and using a strainer, sift the cake flour. Filter and add lemon juice and some lemon zest, if you have any hanging around. Whisk up the egg whites and gently mix it into the main mixture. This should make it somewhat nicely frothy. Pour into cake pan. Place cake pan onto baking sheet. Bake for 60 minutes or so. When done, turn off the heat, open the door and brush with your jam diluted at around 1:1 ratio with warm water. Apricot jam works best, but I won’t judge you for your choice.</p>
 </div></div><div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-simple-cheesecake" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-simple-cheesecake" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-simple-cheesecake-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -342,7 +342,7 @@ Figure&nbsp;2: How not to ask for a good cheesecake recipe.
 <p>Here’s a better approach:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-better-cheesecake" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-better-cheesecake" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-better-cheesecake-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -416,7 +416,7 @@ Figure&nbsp;3: A better way to ask for a cheesecake recipe. We ask multiple gene
 <p>The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we’d think. There’s no reason why LLMs themselves can’t take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own ‘experience’. The equivalent of structuring deep learning models’ architectures by determining layer types and their connections is borne out in how we build these virtual teams of rival LLMs.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-lang-model-architectures" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-lang-model-architectures" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lang-model-architectures-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -500,7 +500,7 @@ Yao, Shunyu, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, a
 </div></div><p>All of this is augmented by an arsenal of tools. A tool, in this context, is quite simply a way an LLM can interact with the world outside of itself. If linking together LLMs creates the rudiments of reasoning, this creates the basics of action. Together, reasoning and acting (which gave the popular ReAct paradigm <span class="citation" data-cites="yao2022react">(see <a href="#ref-yao2022react" role="doc-biblioref">Yao et al. 2022</a>)</span> its name, but is much more ubiquitous than that, of course) make up the components of agency that elevate LLMs beyond simple question answering and move it towards a kind of semi-autonomous reasoned action. Such tools may be retrievers, interactors or indeed anything that can be articulated in code.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-cheesecake-agent" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-cheesecake-agent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cheesecake-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -535,10 +535,10 @@ Figure&nbsp;5: Interacting with the world, and the world interacting with the mo
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {Chris von Csefalvay},
+  author = {{Chris von Csefalvay}},
   title = {Teams of {Rivals}},
   date = {2023-10-30},
-  url = {https://chrisvoncsefalvay.com/posts/team-of-rivals},
+  url = {https://chrisvoncsefalvay.com/posts/team-of-rivals/},
   doi = {10.59350/he7k6-tx158},
   langid = {en-GB}
 }
@@ -580,18 +580,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -623,7 +612,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
@@ -631,7 +640,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -728,7 +737,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

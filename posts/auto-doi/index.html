@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-11-13">
 <meta name="description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 
-<title>Chris von Csefalvay - Auto-DOI for Quarto posts via Rogue Scholar</title>
+<title>Auto-DOI for Quarto posts via Rogue Scholar – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-008885f27b4825b9450791f080bd970a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -119,11 +119,11 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
 
-<meta property="og:title" content="Chris von Csefalvay - Auto-DOI for Quarto posts via Rogue Scholar">
+<meta property="og:title" content="Auto-DOI for Quarto posts via Rogue Scholar – Chris von Csefalvay">
 <meta property="og:description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 <meta property="og:image" content="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta name="twitter:title" content="Chris von Csefalvay - Auto-DOI for Quarto posts via Rogue Scholar">
+<meta name="twitter:title" content="Auto-DOI for Quarto posts via Rogue Scholar – Chris von Csefalvay">
 <meta name="twitter:description" content="Oh, that’s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg">
 <meta name="twitter:card" content="summary_large_image">
@@ -133,7 +133,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="citation_cover_date" content="2023-11-13">
 <meta name="citation_year" content="2023">
 <meta name="citation_online_date" content="2023-11-13">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/auto-doi">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/auto-doi/">
 <meta name="citation_doi" content="10.59350/5hxdg-fz574">
 <meta name="citation_language" content="en-GB">
 </head>
@@ -150,7 +150,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -185,7 +185,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -194,7 +194,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -258,7 +258,7 @@ Note
 <p>This weekend, I was laid up with being on the receiving end (for once) of the bounties of a clinical trial, so I’ve decided to finally build it. It’s a bit of a hack, but it works.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-auto-doi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-auto-doi" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-auto-doi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
@@ -292,7 +292,7 @@ Figure&nbsp;1: Auto-DOI flow chart.
 </div>
 </div>
 <p>First, we scrape Rogue Scholar for titles and DOIs. Rogue Scholar’s CSS isn’t really helpful here, as the link isn’t a particular class/id of its own as far as I could discern, so I just grabbed the link by the fact that only DOI links are formatted like DOI links. Not the most elegant way, but it does the job.</p>
-<div id="lst-getting-dois" class="python listing quarto-float">
+<div id="lst-getting-dois" class="python listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;1: Getting the DOIs from Rogue Scholar.
@@ -327,7 +327,7 @@ Listing&nbsp;1: Getting the DOIs from Rogue Scholar.
 <li>This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</li>
 </ol>
 <p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
-<div id="lst-preamble" class="yaml listing quarto-float">
+<div id="lst-preamble" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;2: Pre-DOI YAML preamble example.
@@ -344,7 +344,7 @@ Listing&nbsp;2: Pre-DOI YAML preamble example.
 </figure>
 </div>
 <p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in <a href="#fig-auto-doi" class="quarto-xref">Figure&nbsp;1</a>, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in <a href="#lst-getting-dois" class="quarto-xref">Listing&nbsp;1</a>.</p>
-<div id="lst-process-post" class="python listing quarto-float">
+<div id="lst-process-post" class="python listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;3: Processing a single post.
@@ -405,7 +405,7 @@ Listing&nbsp;3: Processing a single post.
 <li>Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</li>
 </ol>
 <p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
-<div id="lst-project-script" class="yaml listing quarto-float">
+<div id="lst-project-script" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;4: Declaring project scripts in _quarto.yml.
@@ -422,7 +422,7 @@ Listing&nbsp;4: Declaring project scripts in _quarto.yml.
 </div>
 <p>One thing worth noting is that we’re not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made ‘on the fly’ to the <code>.qmd</code> files and do not necessarily propagate into the repo. This is a pain, because recall that we’re only fetching the last ten posts’ DOIs so as to be kind on the server: as time goes on, that means older posts ‘lose’ their DOI.</p>
 <p>To prevent this, we can simply check our changes back in:</p>
-<div id="lst-gh-action" class="yaml listing quarto-float">
+<div id="lst-gh-action" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Listing&nbsp;5: Github action to commit changes.
@@ -480,10 +480,10 @@ Listing&nbsp;5: Github action to commit changes.
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {Chris von Csefalvay},
+  author = {{Chris von Csefalvay}},
   title = {Auto-DOI for {Quarto} Posts via {Rogue} {Scholar}},
   date = {2023-11-13},
-  url = {https://chrisvoncsefalvay.com/posts/auto-doi},
+  url = {https://chrisvoncsefalvay.com/posts/auto-doi/},
   doi = {10.59350/5hxdg-fz574},
   langid = {en-GB}
 }
@@ -526,18 +526,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -569,7 +558,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
@@ -577,7 +586,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -674,7 +683,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

@@ -1,15 +1,14 @@
 [
   {
-    "listing": "/media/index.html",
+    "listing": "/talks/index.html",
     "items": [
-      "/media/tech-for-good/index.html",
-      "/media/fr-disinfectants/index.html",
-      "/media/euronews-covid/index.html"
+      "/talks/prometheus-unbound/index.html"
     ]
   },
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/five-wild-guesses/index.html",
       "/posts/lair/index.html",
       "/posts/95-percent-myth/index.html",
       "/posts/ai-human-interaction/index.html",
@@ -38,9 +37,11 @@
     ]
   },
   {
-    "listing": "/talks/index.html",
+    "listing": "/media/index.html",
     "items": [
-      "/talks/prometheus-unbound/index.html"
+      "/media/tech-for-good/index.html",
+      "/media/fr-disinfectants/index.html",
+      "/media/euronews-covid/index.html"
     ]
   }
 ]

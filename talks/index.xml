@@ -9,7 +9,7 @@
 <link>https://chrisvoncsefalvay.com/talks/</link>
 <atom:link href="https://chrisvoncsefalvay.com/talks/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
-<generator>quarto-1.4.554</generator>
+<generator>quarto-1.6.39</generator>
 <lastBuildDate>Wed, 10 Jan 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health</title>
@@ -37,12 +37,12 @@
   title = {Prometheus {Unbound} - {The} {Potential} and {Risks} of
     {Large} {Language} {Models} in {Public} {Health}},
   date = {2024-01-10},
-  url = {https://chrisvoncsefalvay.com/talks/prometheus-unbound},
+  url = {https://chrisvoncsefalvay.com/talks/prometheus-unbound/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-2024" class="csl-entry quarto-appendix-citeas">
 <span>“Prometheus Unbound - The Potential and Risks of Large Language
-Models in Public Health.”</span> 2024. January 10, 2024. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound">https://chrisvoncsefalvay.com/talks/prometheus-unbound</a>.
+Models in Public Health.”</span> 2024. January 10, 2024. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound/">https://chrisvoncsefalvay.com/talks/prometheus-unbound/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>public health</category>
