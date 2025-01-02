@@ -73,3 +73,7 @@ The really controversial part? Many organizations will opt for slower but more e
 ***
 
 As I complete this digital årsgång, what strikes me most is how 2025 looks to be the year when enterprise AI grows up. The trends all point toward practicality over pizzazz: smaller models over larger ones, efficiency over raw power, productized governance over philosophical frameworks, and insurance actuaries over innovation evangelists. Perhaps that's not as exciting as the breathless predictions of AI singularities and digital transformations that dominated 2023, and maybe closer to the relatively sober atmosphere of 2024. But then again, maybe that's exactly the point -- real progress tends to be more about making things work than making headlines. And personally, I find that far more interesting.
+
+***
+
+_Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc. My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. [Click here for a full disclaimer.](https://chrisvoncsefalvay.com/disclaimer)_
