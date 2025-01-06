@@ -9,7 +9,7 @@
 <link>https://chrisvoncsefalvay.com/talks/</link>
 <atom:link href="https://chrisvoncsefalvay.com/talks/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
-<generator>quarto-1.6.39</generator>
+<generator>quarto-1.6.40</generator>
 <lastBuildDate>Wed, 10 Jan 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health</title>
