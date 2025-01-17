@@ -10,7 +10,81 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sat, 04 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 16 Jan 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Deja Vu, All Over Again.</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The Department for Science, Innovation and Technology has just dropped its long-awaited <a href="https://assets.publishing.service.gov.uk/media/67851771f0528401055d2329/ai_opportunities_action_plan.pdf">AI Opportunities Action Plan</a>, a 50-page vision of how the UK government plans to guide us into an AI-powered future. The document, adorned with the obligatory glowing circuit board imagery that seems to be mandatory for any government AI publication, promises to transform Britain into an “AI superpower.” As someone who’s spent their career at the intersection of computational science and public policy, I can’t help but feel a familiar sense of déjà vu. We’ve been here before – just with different technology and different buzzwords.</p>
+<section id="the-ghost-of-centralisation-past" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-ghost-of-centralisation-past">The Ghost of Centralisation Past</h2>
+<p>Ah, government AI initiatives. Like watching your uncle try to explain TikTok at Christmas dinner – enthusiastic, well-meaning, but somehow missing the point entirely. The UK’s new AI Opportunities Action Plan, released this week with characteristic governmental fanfare, was supposed to inspire and plot the course for the UK’s ship on the stormy seas of AI. But really, it rather brings to mind that most delicious of historical failures: Project Cybersyn.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/D-W7mk4UcAA42hm.png" class="img-fluid figure-img"></p>
+<figcaption>Swivel chairs!</figcaption>
+</figure>
+</div>
+</div><div id="fn1"><p><sup>1</sup>&nbsp;One of history’s great tragedies is that the winds of change often sweep away lessons before they can fail to their fullest extent. The Allende regime’s fall sadly also brought with it the destruction of Cybersyn before its complete failure would come to be in full evidence.</p></div></div><p>For those who actually have a life and don’t regularly spend their evenings reading about Cold War technological follies, Cybersyn was Salvador Allende’s attempt to run Chile’s economy through the dark arts of the hype of the day – cybernetics –, a network of telex machines and a room that looked like the love child of Star Trek and Austin Powers. It had swivel chairs. It had buttons. It had everything except, well, actual functionality.<sup>1</sup> It was an example of what happens when you have a sensible idea (networking) in pursuit of a dubious goal (central planning) executed on the back of governmental fiat. Back then, the buzzword was ‘cybernetics’, and it was supposed to usher in an era of truly scientific central planning. We would soon all be waving goodbye to the inefficiencies of market economies thanks to… telexes. And big screens.</p>
+<p>This pattern of centrally-planned technological innovation has repeated itself throughout history - from the Soviet Union’s OGAS project<sup>2</sup> to Japan’s Fifth Generation Computer Project. These initiatives share a common thread: they all failed spectacularly despite massive government backing. Innovation, like my attempts at Provençal cuisine, tends to work best when it’s organic and bottom-up, not when it’s directed from above by committee. You can’t will creativity or innovation into existence. Least of all can you do so by governmental fiat.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://www.youtube.com/@Asianometry">asianometry</a> on YouTube has a <a href="https://www.youtube.com/watch?v=cLOD5f-q0as">wonderful video</a> on this.</p></div></div></section>
+<section id="too-little-too-late-too-bureaucratic" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="too-little-too-late-too-bureaucratic">Too little, too late, too bureaucratic</h2>
+<p>Fast forward to 2025, and we’re treated to Matt Clifford’s vision of how the UK government can shepherd us into an AI-powered future. The plan isn’t wrong, per se – it’s just adorably optimistic about the ability of government to direct technological evolution, or the beneficial effect of government getting involved in innovation. It’s like trying to herd cats, if the cats were quantum computers and the herders were Whitehall civil servants still struggling with Excel.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<hr>
+<p><strong>Recipe</strong>: Coq au vin</p>
+<ul>
+<li>1 whole chicken, cut into pieces</li>
+<li>750mL decent red wine</li>
+<li>200g lardons</li>
+<li>Pearl onions… lots of them. Two dozen or so.</li>
+<li>500g mushrooms</li>
+<li>2 carrots</li>
+<li>Fresh thyme</li>
+<li>Bay leaves</li>
+</ul>
+<p>Dunk the chicken in the wine and let rest overnight (patience is the name of the game). On the day, brown the lardons slowly in a Dutch oven. Remove, and reserve the fat. Brown the chicken pieces in the fat – avoid crowding your Dutch oven, work in batches if you have to. Sautee the vegetables, and return everything to the Dutch oven, including the chicken – and the wine. Cover and simmer on low-medium heat for 90 minutes. Thicken to taste with a beurre manié. Serve with a thick slab of a hearty, crusty bread.</p>
+<hr>
+</div></div><p>Let’s be real: The UK is already painfully late to this party. While we’re planning to plan about planning our AI infrastructure, OpenAI and Anthropic are training models that make GPT-4 look like a pocket calculator. The plan acknowledges we’re “the third largest AI market in the world” – which sounds impressive until you realize that in absolute terms, Britain’s contribution compared to the front runners (US and PRC) barely amounts to a rounding error.</p>
+<p>The focus on government-directed innovation is particularly eyebrow-raising. The plan calls for establishing ‘AI Growth Zones’, expanding compute infrastructure and creating a new unit called UK Sovereign AI (because if you do not create more bureaucracy, you clearly aren’t doing this government thing well).<sup>3</sup> All potentially good stuff in theory, but premised on the notion that the government can effectively pick winners and shape the development of arguably the most dynamic technology since electricity. And, of course, the notion of ‘growth zones’ might strike one as rather odd considering that most of the work we do gets done in the cloud. I don’t need to be in a ‘growth zone’ to do my job. The extremely delocalised nature of software and AI development makes these echoes from the era of industrial parks and logistical efficiencies sound anachronistic at best, smacking of a misunderstanding of AI in practice at worst.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Interestingly, <a href="https://uksovereign.ai">uksovereign.ai</a> leads you to <a href="https://mindfoundry.ai">Mind Foundry</a>, a spin-out of my alma mater that seems to mainly cater for the defence industry.</p></div></div></section>
+<section id="just-stay-out-of-the-way" class="level2">
+<h2 class="anchored" data-anchor-id="just-stay-out-of-the-way">Just stay out of the way</h2>
+<p>That said, there are some genuinely promising elements. The commitment to building AI infrastructure and expanding compute capacity is crucial - though one wonders if we might have thought about this back when compute was actually available to purchase. The focus on AI safety and ethics is also commendable, even if it feels a bit like installing guardrails after the car has already left the garage.</p>
+<p>What’s missing is an acknowledgment that the most successful government interventions in technology have historically been indirect - creating the conditions for innovation rather than trying to micromanage it. DARPA gave us the internet by funding basic research and then getting out of the way. The UK’s own success stories - from ARM to DeepMind - emerged from an ecosystem that encouraged experimentation and risk-taking, not from government planning.</p>
+<p>As someone who has spent time in both academia and industry, who has seen how innovation actually happens in the trenches of AI research, I can’t help but feel we’re missing the forest for the bureaucratically-approved, committee-selected trees. The UK has world-class AI talent, outstanding universities and a vibrant startup scene. What it needs isn’t more government steering – it needs the government to focus on removing obstacles and then getting out of the way. But hey, at least we’re not building a room full of swivel chairs. Though given some of the proposals in this plan, I wouldn’t rule it out for AI Action Plan 2.0.</p>
+<hr>
+<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Deja {Vu,} {All} {Over} {Again.}},
+  date = {2025-01-16},
+  url = {https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“Deja Vu, All Over Again.”</span> <a href="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/">https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>governance</category>
+  <guid>https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</guid>
+  <pubDate>Thu, 16 Jan 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/header.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>After agents</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -3755,71 +3829,6 @@ Heard Of.”</span> <a href="https://doi.org/10.59350/5dp4z-d5e22">https://doi.o
   <guid>https://chrisvoncsefalvay.com/posts/dwarf-fortress/</guid>
   <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/dwarf-fortress/7433642A-221D-4AC6-B3FD-DEE5F01C1123.jpeg.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>A different shade of grey</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>In a recent paper that has attracted the interest of popular media as well, Fabio Urbina and colleagues examined the use (or rather, the abuse) of computational chemistry models of toxicity for generating toxic compounds and potential chemical agent candidates.<span class="citation" data-cites="urbina2022dual">(Urbina et al. 2022)</span> Urbina and colleagues conclude that</p>
-<div class="no-row-height column-margin column-container"><div id="ref-urbina2022dual" class="csl-entry">
-Urbina, Fabio, Filippa Lentzos, Cédric Invernizzi, and Sean Ekins. 2022. <span>‘Dual Use of Artificial-Intelligence-Powered Drug Discovery’</span>. <em>Nature Machine Intelligence</em> 4 (3): 189–91.
-</div></div><blockquote class="blockquote">
-<p>By going as close as we dared, we have still crossed a grey moral boundary, demonstrating that it is possible to design virtual potential toxic molecules without much in the way of effort, time or computational resources.</p>
-</blockquote>
-<p>I agree with the conclusion, but for rather different reasons.</p>
-<section id="background" class="level1 page-columns page-full">
-<h1>Background</h1>
-<p>Computational chemistry is the branch of computational science that focuses on applications in the chemical field. This includes pharmacology and rational drug design (RDD) in particular. The purpose of RDD is to generate drug candidates that show favourable indicators of effectiveness (such as high binding affinity to a target protein) along with indicators of biological suitability (such as no or low interference with other proteins, low toxicity and no inhibition of metabolic ‘bottlenecks’ like CYP3A4). The latter part is typically handled by a toxicity model.</p>
-<p>Rather simply put, a toxicity model infers the structural associations (the chemical structures associated with undesirable effects) from a library of known compounds with known effects. For instance, the Toxicology in the 21st Century (Tox21) programme of the US federal government has performed over sixty different assays (typically, enzyme inhibition assays) for over 13,000 different compounds. <span class="citation" data-cites="tice2013improving">(Tice et al. 2013)</span> Using molecular fingerprinting, which we have discussed in a previous post on this blog in this very same context, it is possible to build relatively easy models for toxicity. Where a particular desired toxicity is known, say mitochondrial toxicity, it’s not difficult to build a pipeline that generates candidate compounds, derives the molecular fingerprint and evaluates the likelihood that the molecule that is obtained will be an effective agent. In this sense, I wholeheartedly agree with Urbina: the cat is very much out of the bag. Even if Tox21’s public data does not include the classical target of modern chemical weapons (acetylcholinesterase), such data is not exactly hard to come by or, for a nation-state actor, to generate. A near-peer adversary could create such assays for cents on the compound.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-tice2013improving" class="csl-entry">
-Tice, Raymond R, Christopher P Austin, Robert J Kavlock, and John R Bucher. 2013. <span>‘Improving the Human Hazard Characterization of Chemicals: A Tox21 Update’</span>. <em>Environmental Health Perspectives</em> 121 (7): 756–65.
-</div></div><p>Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g.&nbsp;for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.</p>
-</section>
-<section id="the-reverse-of-the-medal" class="level1">
-<h1>The reverse of the medal</h1>
-<p>On the other hand, the likelihood of an AI-generated chemical agent ever posing a threat beyond the theoretical is very, very low. There are a few reasons for that, and they’re inherent partly in computational chemistry, partly in weapons design.</p>
-<p>The computational chemistry part pertains to the fact that molecular fingerprinting and similar models only give us a narrow view of the outcomes we may expect. For starters, no model is able to reliably assess the feasibility and cost-effectiveness of synthesis. There are plenty of drug candidates that have performed admirably in vitro and sometimes even in clinical trials, but for which no feasible way of cost-efficient, large-scale synthesis could be found. Then, there are the drugs that ought to work, and might even work in vitro, but end up failing in clinical trials with no effect or an unexpected toxicity. Effect inference from chemical structure looks only at one side of the medal, and not even all of that.</p>
-<p>The bigger problem is the weapons design part. To avoid a late-night visit from some mild-mannered federal employees in a dark SUV, I’d like to point out that anything I discuss here is well in the public domain. With that said: just as pharmaceutical chemists want some things from their target compounds (such as relatively little inference, predictable metabolism, a wide therapeutic margin and few adverse effects), designers of chemical weapons have their own considerations for which to optimise. VX, for instance, is immensely popular because its oily consistency gives it beneficial physical properties. Similarly, a potential chemical weapon candidate must be stable vis-a-vis e.g.&nbsp;UV exposure, but not too stable. An example of the latter is the Red Zone in France, the World War I battlefields that have been bombarded with so many chemical weapons that to this day, they are heavily contaminated by arsenic, among others. The preference for binary agents (which contain two relatively stable and relatively non-toxic chemicals that are mixed, typically during the flight time of a shell, to form the active agent) means that a less toxic agent that can be reliably produced from the simple admixture of two relatively stable agents may be preferred to a more lethal unary agent. And this, of course, all assumes a state actor willing and able to violate international law on chemical weapons.</p>
-<p>Finally, there is no real need for novel chemical agents, at least not in the nerve agent category. Not only does using a known agent provide plausible deniability, there is also no real need to create anything more lethal than VX. Even relatively old chemical agents, such as mustard agents, are effective enough. A novel chemical structure may not guarantee that the agent escapes chemical detection, and functional antidotes are going to be just as effective against novel agents. To an atropine/pralidoxime NAAK autoinjector’s efficacy, it makes no difference whether the acetylcholinesterase inhibition comes from sarin, VX, Tetram or inadvertent exposure to organophosphate pesticides. Arguably, this becomes somewhat more complex with other agents, where the biological targets — and hence the antidotes — are more specific. Nevertheless, it is hard to conceive of anyone possessed of a burning rationale to start creating novel chemical agents.</p>
-</section>
-<section id="a-lighter-shade-of-grey" class="level1">
-<h1>A lighter shade of grey</h1>
-<p>I commend the authors for discussing the moral aspects of this exercise. It is rather uncomfortable to write about the use of artificial intelligence to create tools whose predominant use would be to extinguish human lives (although, as noted, many of these compounds can, and often do, have a medicinal use).</p>
-<p>Where I cannot agree with the authors is the conclusion that this situation calls for regulation (be it self-regulation or imposed from above).</p>
-<blockquote class="blockquote">
-<p>Although MegaSyn is a commercial product and thus we have control over who has access to it, going forward, we will implement restrictions or an API for any forward-facing models. A reporting structure or hotline to authorities, for use if there is a lapse or if we become aware of anyone working on developing toxic molecules for non-therapeutic uses, may also be valuable. Finally, universities should redouble their efforts toward the ethical training of science students and broaden the scope to other disciplines, and particularly to computing students, so that they are aware of the potential for misuse of AI from an early stage of their career, as well as understanding the potential for broader impact.</p>
-</blockquote>
-<p>This is all well and good, but — assuming that there were a realistic danger of people coming to grief from AI-generated chemical weapons — it solves a problem that the authors have failed to substantiate exists. The tools to do this have been around for a long time. For the reasons laid out in the previous section, there is no burning desire anywhere in the world right now, as far as I can see, to develop a successor to VX purely on a structural basis. Of course, a chemical agent that can be synthesised without relying on any OPCW listed substances, or which can have novel effects, or which can escape traditional methods of detection (GC/MS, typically), would be of interest to potential bad actors, but current models of computational chemistry do not help with that. Creating permutational or functional analogues of VX does not, realistically, put anyone a single step closer to the ability to carry out an atrocity using such reprehensible weapons.</p>
-<p>On the other hand, I am concerned about the moral aspects that derive from the consequences of Urbina et al.’s paper. Given that the overwhelming majority of users of computational chemistry and RDD do so for benign purposes, the public attention garnered by such articles may create a regulatory push that is not going to make anyone safer, but will impede scientific inquiry. Urbina et al.&nbsp;point out the reputational risk, and the risk of a single bad apple spoiling the lot — I am rather uncertain whether an attention-grabbing headline in The Verge, raising the spectre of the scary AI that generates tens of thousands of killer compounds in hours (virtually all of which are very likely to be practically useless), is doing our discipline any favours.</p>
-<p>The Scythian prince Anacharsis likened laws to cobwebs: strong enough to catch the weak, but too weak to impede the powerful. In that sense, a sufficiently determined adversary with the right tools — scientists, labs, an AWS account with a few hundred bucks of credit — will be able to subvert the art of creating chemistry to save lives and turn it into a way to destroy them. No amount of regulation, controlled APIs and lectures on the Hague Ethical Guidelines are going to be any impediment. To a near-peer adversary or even a well-funded non-state actor, the door has been open for rational chemical agent discovery (RCAD) for a very long time. If the past is anything to go by, it has not really yielded rich fruit. Pretty much the only new thing under the sun for chemical agents in recent decades was the (possible, theorised) use of binary agents on Kim Jong-nam — not exactly a result of assiduous, AI-driven research into novel agents, but rather the every-day fare of a paranoid, despotic regime driven by cruelty and ignorance.</p>
-<p>The only thing to fear, then, is fear itself. There is a justified concern in the AI community that while we do indeed need to discuss ethical use of artificial intelligence in the RDD domain, there is a time and a place for that. Sensationalism and alarmist headlines of poison-spewing machine learning models are great clickbait, but they do not benefit the discipline. Realism, not alarmism, is needed to tackle these issues.</p>
-
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2022,
-  author = {{Chris von Csefalvay}},
-  title = {A Different Shade of Grey},
-  date = {2022-04-13},
-  url = {https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/},
-  doi = {10.59350/bwee1-hee31},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2022" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2022. <span>“A Different Shade of Grey.”</span> <a href="https://doi.org/10.59350/bwee1-hee31">https://doi.org/10.59350/bwee1-hee31</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>computational chemistry</category>
-  <category>ethics</category>
-  <guid>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/</guid>
-  <pubDate>Wed, 13 Apr 2022 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/155mmMustardGasShells-1200x900.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
