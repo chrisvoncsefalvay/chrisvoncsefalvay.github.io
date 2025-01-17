@@ -1,0 +1,68 @@
+---
+categories:
+- AI
+- governance
+date: 2025-01-16
+description: 'The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.'
+google-scholar: true
+image: header.webp
+title: Deja Vu, All Over Again.
+---
+
+The Department for Science, Innovation and Technology has just dropped its long-awaited [AI Opportunities Action Plan](https://assets.publishing.service.gov.uk/media/67851771f0528401055d2329/ai_opportunities_action_plan.pdf), a 50-page vision of how the UK government plans to guide us into an AI-powered future. The document, adorned with the obligatory glowing circuit board imagery that seems to be mandatory for any government AI publication, promises to transform Britain into an "AI superpower." As someone who's spent their career at the intersection of computational science and public policy, I can't help but feel a familiar sense of déjà vu. We've been here before -- just with different technology and different buzzwords. 
+
+
+## The Ghost of Centralisation Past
+
+Ah, government AI initiatives. Like watching your uncle try to explain TikTok at Christmas dinner -- enthusiastic, well-meaning, but somehow missing the point entirely. The UK's new AI Opportunities Action Plan, released this week with characteristic governmental fanfare, was supposed to inspire and plot the course for the UK's ship on the stormy seas of AI. But really, it rather brings to mind that most delicious of historical failures: Project Cybersyn.
+
+::: {.column-margin}
+![Swivel chairs!](D-W7mk4UcAA42hm.png)
+:::
+
+For those who actually have a life and don't regularly spend their evenings reading about Cold War technological follies, Cybersyn was Salvador Allende's attempt to run Chile's economy through the dark arts of the hype of the day -- cybernetics --, a network of telex machines and a room that looked like the love child of Star Trek and Austin Powers. It had swivel chairs. It had buttons. It had everything except, well, actual functionality.^[One of history's great tragedies is that the winds of change often sweep away lessons before they can fail to their fullest extent. The Allende regime's fall sadly also brought with it the destruction of Cybersyn before its complete failure would come to be in full evidence.] It was an example of what happens when you have a sensible idea (networking) in pursuit of a dubious goal (central planning) executed on the back of governmental fiat. Back then, the buzzword was 'cybernetics', and it was supposed to usher in an era of truly scientific central planning. We would soon all be waving goodbye to the inefficiencies of market economies thanks to... telexes. And big screens. 
+
+This pattern of centrally-planned technological innovation has repeated itself throughout history - from the Soviet Union's OGAS project^[[asianometry](https://www.youtube.com/@Asianometry) on YouTube has a [wonderful video](https://www.youtube.com/watch?v=cLOD5f-q0as) on this.] to Japan's Fifth Generation Computer Project. These initiatives share a common thread: they all failed spectacularly despite massive government backing. Innovation, like my attempts at Provençal cuisine, tends to work best when it's organic and bottom-up, not when it's directed from above by committee. You can't will creativity or innovation into existence. Least of all can you do so by governmental fiat.
+
+
+## Too little, too late, too bureaucratic
+
+Fast forward to 2025, and we're treated to Matt Clifford's vision of how the UK government can shepherd us into an AI-powered future. The plan isn't wrong, per se -- it's just adorably optimistic about the ability of government to direct technological evolution, or the beneficial effect of government getting involved in innovation. It's like trying to herd cats, if the cats were quantum computers and the herders were Whitehall civil servants still struggling with Excel.
+
+::: {.column-margin}
+***
+
+**Recipe**: Coq au vin
+
+* 1 whole chicken, cut into pieces
+* 750mL decent red wine
+* 200g lardons
+* Pearl onions... lots of them. Two dozen or so.
+* 500g mushrooms
+* 2 carrots
+* Fresh thyme
+* Bay leaves
+
+Dunk the chicken in the wine and let rest overnight (patience is the name of the game). On the day, brown the lardons slowly in a Dutch oven. Remove, and reserve the fat. Brown the chicken pieces in the fat -- avoid crowding your Dutch oven, work in batches if you have to. Sautee the vegetables, and return everything to the Dutch oven, including the chicken -- and the wine. Cover and simmer on low-medium heat for 90 minutes. Thicken to taste with a beurre manié. Serve with a thick slab of a hearty, crusty bread. 
+
+***
+:::
+
+Let's be real: The UK is already painfully late to this party. While we're planning to plan about planning our AI infrastructure, OpenAI and Anthropic are training models that make GPT-4 look like a pocket calculator. The plan acknowledges we're "the third largest AI market in the world" -- which sounds impressive until you realize that in absolute terms, Britain's contribution compared to the front runners (US and PRC) barely amounts to a rounding error.
+
+The focus on government-directed innovation is particularly eyebrow-raising. The plan calls for establishing 'AI Growth Zones', expanding compute infrastructure and creating a new unit called UK Sovereign AI (because if you do not create more bureaucracy, you clearly aren't doing this government thing well).^[Interestingly, [uksovereign.ai](https://uksovereign.ai) leads you to [Mind Foundry](https://mindfoundry.ai), a spin-out of my alma mater that seems to mainly cater for the defence industry.] All potentially good stuff in theory, but premised on the notion that the government can effectively pick winners and shape the development of arguably the most dynamic technology since electricity. And, of course, the notion of 'growth zones' might strike one as rather odd considering that most of the work we do gets done in the cloud. I don't need to be in a 'growth zone' to do my job. The extremely delocalised nature of software and AI development makes these echoes from the era of industrial parks and logistical efficiencies sound anachronistic at best, smacking of a misunderstanding of AI in practice at worst.
+
+
+## Just stay out of the way
+
+That said, there are some genuinely promising elements. The commitment to building AI infrastructure and expanding compute capacity is crucial - though one wonders if we might have thought about this back when compute was actually available to purchase. The focus on AI safety and ethics is also commendable, even if it feels a bit like installing guardrails after the car has already left the garage.
+
+What's missing is an acknowledgment that the most successful government interventions in technology have historically been indirect - creating the conditions for innovation rather than trying to micromanage it. DARPA gave us the internet by funding basic research and then getting out of the way. The UK's own success stories - from ARM to DeepMind - emerged from an ecosystem that encouraged experimentation and risk-taking, not from government planning.
+
+As someone who has spent time in both academia and industry, who has seen how innovation actually happens in the trenches of AI research, I can't help but feel we're missing the forest for the bureaucratically-approved, committee-selected trees. The UK has world-class AI talent, outstanding universities and a vibrant startup scene. What it needs isn't more government steering -- it needs the government to focus on removing obstacles and then getting out of the way. But hey, at least we're not building a room full of swivel chairs. Though given some of the proposals in this plan, I wouldn't rule it out for AI Action Plan 2.0.
+
+
+
+***
+
+_Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc. My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. [Click here for a full disclaimer.](https://chrisvoncsefalvay.com/disclaimer)_
