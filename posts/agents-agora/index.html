@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2025-02-10">
+<meta name="description" content="Why agents are the least interesting part of agentic AI.">
 
-<title>In the media – Chris von Csefalvay</title>
+<title>After agents, part 2 – Agents and the Agora – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5027bf1c1f92ac6615724d89c8213d6a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6da6a569ff88340c68c321569a47b668.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
 
 <script type="text/javascript">
@@ -106,43 +78,24 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="alternate" type="application/rss+xml" title="Chris von Csefalvay" href="index.xml" data-external="1"><meta property="og:title" content="In the media – Chris von Csefalvay">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg">
+<meta property="og:title" content="After agents, part 2 – Agents and the Agora – Chris von Csefalvay">
+<meta property="og:description" content="Why agents are the least interesting part of agentic AI.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/agents-agora/B20C419F-6819-49E1-B80E-11B95A28D6CC.png">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta name="twitter:title" content="In the media – Chris von Csefalvay">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/media/tech-for-good/header.jpeg">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="1024">
+<meta name="twitter:title" content="After agents, part 2 – Agents and the Agora – Chris von Csefalvay">
+<meta name="twitter:description" content="Why agents are the least interesting part of agentic AI.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/agents-agora/B20C419F-6819-49E1-B80E-11B95A28D6CC.png">
+<meta name="twitter:image-height" content="1024">
+<meta name="twitter:image-width" content="1024">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -153,7 +106,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
   </div>
@@ -164,27 +117,27 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../papers"> 
+    <a class="nav-link" href="../../papers"> 
 <span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching"> 
+    <a class="nav-link" href="../../teaching"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../media"> 
+    <a class="nav-link" href="../../media"> 
 <span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../posts"> 
+    <a class="nav-link" href="../../posts"> 
 <span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../talks"> 
+    <a class="nav-link" href="../../talks"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
@@ -199,25 +152,55 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RXVyb25ld3M=">Euronews <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RnJhbmtmdXJ0ZXIlMjBSdW5kc2NoYXU=">Frankfurter Rundschau <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVjaCUyMGZvciUyMEdvb2Q=">Tech for Good <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#beyond-agents-to-the-agora" id="toc-beyond-agents-to-the-agora" class="nav-link active" data-scroll-target="#beyond-agents-to-the-agora">Beyond agents, to the Agora</a></li>
+  <li><a href="#constructing-the-agora" id="toc-constructing-the-agora" class="nav-link" data-scroll-target="#constructing-the-agora">Constructing the Agora</a></li>
+  <li><a href="#the-agoric-shift" id="toc-the-agoric-shift" class="nav-link" data-scroll-target="#the-agoric-shift">The Agoric Shift</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In the media</h1>
+<h1 class="title">After agents, part 2 – Agents and the Agora</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">LLMs</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">agents</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Why agents are the least interesting part of agentic AI.
+  </div>
 </div>
 
 
+<div class="quarto-title-meta">
 
-<div class="quarto-title-meta column-page-left">
-
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">10 February 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -227,116 +210,128 @@ window.Quarto = {
 </header>
 
 
+<p>If you spend any time on LinkedIn, it’s almost a certainty that you have come across a bevy of alleged ‘agentic AI architectures’. They all look something like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+
+&nbsp;subgraph s1["Data Ingestion"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11["Ingestion Manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n12["SQL Interactor Agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n13["RAG Agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n12
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n13
+
+  
+
+&nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s2["Analysis"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n21["Analysis manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n22["Analyst agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n21 --&gt; n22
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s3["Reporting"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n33["Reporting manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n34["Report writing agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n33 --&gt; n34
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s4["Some other stuff"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n41["Foo manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n42["Bar agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n43["Baz agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n41 --&gt; n42 &amp; n43
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; n1["Start"] --&gt; n2["Manager Agent"]
+
+&nbsp; &nbsp; n2 --&gt; s1 &amp; s2 &amp; s3 &amp; s4
+
+&nbsp; &nbsp; s3 --&gt; n3
+
+  
+
+&nbsp; &nbsp; n2@{ shape: proc}
+
+&nbsp; &nbsp; n1@{ shape: start}
+
+&nbsp; &nbsp; n3@{ shape: stop }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>All very neat, but the audience might be forgiven for asking what exactly is agentic about this, except for relabeling subprocesses in what is a run-of-the-mill RPA workflow as ‘agents’. And the audience is, this once, perfectly right. This is agentic AI in its most limited sense – and that limited sense is in many ways a result of the semantics we chose to adopt to reason about agents. For while we call it <em>agentic AI</em>, it’s not, actually, the agents that matter: it’s how they are structured. It is this governed agentic connectome, which I have come to call the Agora, that holds the power of agentic AI – and which is almost universally neglected.</p>
+<section id="beyond-agents-to-the-agora" class="level1 page-columns page-full">
+<h1>Beyond agents, to the Agora</h1>
+<p>This narrow perspective is essentially a rebranding of what any decently designed application does – self-contained pieces of code passing information to one another – embellished with the agentic buzzword <em>du jour</em>, rendering what we all have been doing for the last few decades ever so much more VC-friendly. It misses the true key to the power of agentic systems. In a <a href="https://chrisvoncsefalvay.com/posts/after-agents/">previous post</a>, I reflected on the need to adopt an ecosystem thinking about agents, to consider their strength in creating complexity through interconnectedness. At the moment, our epistemic perspective on agents is intrinsically tied to, and defined by, the <em>what</em>, i.e.&nbsp;the agents themselves. Much of the time, it fails to take account of what matters vastly more, namely how those agents relate to each other – the <em>how</em> of agents. Just as we understand that the power of the human brain does not derive from a bunch of neurons in one place but their interconnectedness, we need to come to understand that agents are the least interesting part of agentic AI. In the end, in any complex system, it’s the connections that matter more than what is doing the connecting.</p>
+<p>What should be agentic AI’s focus, then, is the space in which those agents can interact. Few of these neat hierarchical frameworks that are now touted as ‘agentic’ on LinkedIn envisage any meaningful interaction beyond manager agents bossing around single-functionality executor agents. This fits very well with existing software development paradigms, but has a hard limitation: the complexity of the resulting system will reach just as far as the developer has had time and energy to wire up various components. Even if it’s a rat’s nest of agent spaghetti, this complexity will be limited in at least two ways. It will, for one, be limited by the static, pre-defined nature of the framework: what is once defined remains set in stone. If no connections are manually made <em>a priori</em>, processes and agents live separate lives. More concerning, however, is the epistemic limitation: if we have to <em>a priori</em> define the agentic structure, we are stuck with the known knowns and perhaps the known unknowns. We are trying to tie reality to Procrustes’ bed, except it’s us who will end up a foot short in the end.</p>
+<p>The alternative focus, then, should be on creating agentic frameworks that focus on a governed space where agents can engage with each other – the space I chose to call the Agora, in analogy with the city-square of Ancient Greece where merchants, artisans, philosophers, politicians and citizens got to interact and form connections. The Parthenon may have been the most glorious structure of Athens, the Pnyx might have been the seat of the Assembly’s power, the Areopagus might have been where life and death was decided upon – but it was its agora that made Athens great.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The Agora of agentic AI holds the same promise: to act as a place of free interaction, within governed bounds, for our agents, unlocking the true power of the agentic perspective: emergence.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;To the point that people enjoyed the latter enough to forego participation in the former. Eventually, a bunch of slaves would have to roam the agora every time the Assembly was in session, carrying ropes with a red dye. Staining the garments of those who preferred the agora to the Assembly, the red dye identified them and made them liable to punishment.</p></div></div></section>
+<section id="constructing-the-agora" class="level1">
+<h1>Constructing the Agora</h1>
+<p>There is, in fact, relatively little new in the concept of tackling complexity through self-organising emergence. Consider neural networks: what lends artificial neural networks their awesome power is that instead of having to manually code stacks of filter banks, we use – typically – backpropagation to condition a large number of highly connected filters to minimise a loss function (i.e.&nbsp;to make the resulting model more accurate). Nobody would propose to manually define each filter in a neural network <em>a priori</em>: why, then, are we still talking about deterministically defined hierarchies and flows of agents instead of allowing agents to organise themselves and control that process through some outcome metric?</p>
+<p>One aspect of this is that the Agora is more than a collection of agents idly milling around. Crucially, we need to provide three key elements:</p>
+<ul>
+<li>A <strong>discovery framework</strong>: agents must be able to discover other agents, and what they can do, so as to be able to identify other agents that they may recruit to assist them in their goal – this would typically take place using a registry where agents ‘enroll’ their profiles and which other agents can then access.</li>
+<li>An <strong>interaction framework</strong>: agents must be able to communicate with each other, which requires both a message-passing standard (i.e.&nbsp;a minimum interface of how one agent may programmatically call another), and a suitable implementation (i.e.&nbsp;the message broker service that implements this standard).</li>
+<li>A <strong>governance framework</strong>: the governance of the Agora relies on the fact that not all agents may register themselves to the agent registry. Who may, and who may not, participate in the Agora determines and governs the overall process. Equally, the fact that we do not want our agents’ interaction to be entirely deterministic does not mean we want it to be entirely ungoverned. Various policies can be used to condition where connections can, and cannot, be made: some agents may be barred from creating certain direct connections, for instance it should be possible to specify that no agent should be able to directly return data to the user without having to pass it through a guardrail agent. The agora was a place of free interaction, but not of lawlessness – the same goes for the Agora of our AI agents.</li>
+</ul>
+<p>The Agora is not an ‘enhancement’ of agentic AI – it is what agentic AI <em>is</em>, or at least ought to be. It is what allows the greatest strength, i.e.&nbsp;self-organised emergence, of AI agents to unfold in a governed, controlled domain. And perhaps quite perplexingly, it is probably going to be easier to implement than most deterministic agentic structures. Certainly it is going to be more economical to allow agents to reason through how to solve their problems and discover the resources they need within the Agora, recruiting them as needed and releasing them once done, than having to think through the process <em>a priori</em>. A solid agentic framework can accommodate the fact that the world is complex, and organise itself to cater for the unexpected (within, of course, its means – that is, within what agents are available to the Agora).</p>
+</section>
+<section id="the-agoric-shift" class="level1 page-columns page-full">
+<h1>The Agoric Shift</h1>
+<p>This, then, is where I personally see our next challenge – both from an epistemic-conceptual perspective, which will call for us to rethink agentic AI in a way that perhaps focuses less on agents and more on their interconnectedness (and ways to facilitate it) and from an engineering perspective, which will require us to implement the tools and structures it will take to make this interconnectedness happen. Neither challenge is trivial. There is a pervasive trend to attempt to simply take deterministic RPA-like processes and workflows, rename them agents and watch the money roll in. The conceptual challenge thus is to illuminate what agentic AI properly so called brings to the table – the promise of emergence.</p>
+<p>From a technical perspective, there is as of yet no universal way for agents to interact. Anthropic’s <a href="https://www.anthropic.com/news/model-context-protocol">Model Context Protocol</a> is a valiant attempt at beginning to set some standards in that regard, but the reality on the ground is that most agent implementations have relied on exaptation, and for inter-process communication in the internet era, that means REST for the most part. This may support deterministic designs with modest needs for interaction, but the Agora has need for other structures, too, such as a model registry. This raises a wealth of coordination problems that need to be tackled before we can let our agents go to (the) town (square).</p>
+<p>Yet this shift is where we unlock the power of modern AI. In 2023, <a href="https://chrisvoncsefalvay.com/posts/team-of-rivals/">I predicted the rise of agentic systems</a> as a way to unleash the potential of LLMs by making them interact with each other in various roles. The Agoric Shift is the consummation of this idea: agentic systems where such interactions arise not from predefined workflows and patterns but from self-organising assemblies of agents<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> – the point where we finally stop trying to painstakingly orchestrate every step of our agents’ interactions and instead build a vibrant Agora for them to roam, collaborate and perhaps even surprise us.</p>
 
 
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Which, by the way, may include humans. There’s no reason why we shouldn’t conceive of ‘humans in the loop’ not as a superordinate stage that comes after agentic AI has done its part, but simply another agent.</p></div></div></section>
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="VGVjaCUyMGZvciUyMEdvb2Q=" data-listing-date-sort="1678147200000" data-listing-file-modified-sort="1739187497935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="45">
-<div class="thumbnail">
-<p><a href="../media/tech-for-good/index.html" class="no-external"></a></p><a href="../media/tech-for-good/index.html" class="no-external">
-<p><img loading="lazy" src="../media/tech-for-good/header.jpeg" class="thumbnail-image"></p>
-</a><p><a href="../media/tech-for-good/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../media/tech-for-good/index.html" class="no-external">Tech for Good podcast</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../media/tech-for-good/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('VGVjaCUyMGZvciUyMEdvb2Q='); return false;">
-Tech for Good
-</div>
-</div>
-<div class="listing-description">
-<a href="../media/tech-for-good/index.html" class="no-external">A fascinating interview with Ben Mouncer on the Tech for Good podcast. </a>
-</div>
-</div>
-<div class="metadata">
-<a href="../media/tech-for-good/index.html" class="no-external">
-<div class="listing-date">
-Mar 7, 2023
-</div>
-<div class="listing-author">
-Chris von Csefalvay
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="RnJhbmtmdXJ0ZXIlMjBSdW5kc2NoYXU=" data-listing-date-sort="1589155200000" data-listing-file-modified-sort="1739187497935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
-<div class="thumbnail">
-<p><a href="../media/fr-disinfectants/index.html" class="no-external"></a></p><a href="../media/fr-disinfectants/index.html" class="no-external">
-<p><img loading="lazy" src="../media/fr-disinfectants/header.png" class="thumbnail-image"></p>
-</a><p><a href="../media/fr-disinfectants/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../media/fr-disinfectants/index.html" class="no-external">Corona in den USA: Mediziner warnen nun vor Injektion von Desinfektionsmittel</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../media/fr-disinfectants/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RnJhbmtmdXJ0ZXIlMjBSdW5kc2NoYXU='); return false;">
-Frankfurter Rundschau
-</div>
-</div>
-<div class="listing-description">
-<a href="../media/fr-disinfectants/index.html" class="no-external">Injecting disinfectants continues to be a bad idea. </a>
-</div>
-</div>
-<div class="metadata">
-<a href="../media/fr-disinfectants/index.html" class="no-external">
-<div class="listing-date">
-May 11, 2020
-</div>
-<div class="listing-author">
-Chris von Csefalvay
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="RXVyb25ld3M=" data-listing-date-sort="1587081600000" data-listing-file-modified-sort="1739187497934" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
-<div class="thumbnail">
-<p><a href="../media/euronews-covid/index.html" class="no-external"></a></p><a href="../media/euronews-covid/index.html" class="no-external">
-<p><img loading="lazy" src="../media/euronews-covid/header.webp" class="thumbnail-image"></p>
-</a><p><a href="../media/euronews-covid/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../media/euronews-covid/index.html" class="no-external">Koronavírus: az USA-ban már használják, itthon még nem kellett a magyar cég adatelemző programja</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../media/euronews-covid/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RXVyb25ld3M='); return false;">
-Euronews
-</div>
-</div>
-<div class="listing-description">
-<a href="../media/euronews-covid/index.html" class="no-external">Commenting on our work on the COVID-19 data set and the relevance of data in a pandemic. </a>
-</div>
-</div>
-<div class="metadata">
-<a href="../media/euronews-covid/index.html" class="no-external">
-<div class="listing-date">
-Apr 17, 2020
-</div>
-<div class="listing-author">
-Chris von Csefalvay
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {After Agents, Part 2 -\/- {Agents} and the {Agora}},
+  date = {2025-02-10},
+  url = {https://chrisvoncsefalvay.com/posts/agents-agora/},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2025. <span>“After Agents, Part 2 -- Agents and the
+Agora.”</span> <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">https://chrisvoncsefalvay.com/posts/agents-agora/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

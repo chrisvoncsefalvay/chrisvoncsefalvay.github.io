@@ -10,7 +10,145 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.6.40</generator>
-<lastBuildDate>Sat, 25 Jan 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 10 Feb 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>After agents, part 2 – Agents and the Agora</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/agents-agora/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>If you spend any time on LinkedIn, it’s almost a certainty that you have come across a bevy of alleged ‘agentic AI architectures’. They all look something like this:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+
+&nbsp;subgraph s1["Data Ingestion"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11["Ingestion Manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n12["SQL Interactor Agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n13["RAG Agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n12
+
+&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n13
+
+  
+
+&nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s2["Analysis"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n21["Analysis manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n22["Analyst agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n21 --&gt; n22
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s3["Reporting"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n33["Reporting manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n34["Report writing agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n33 --&gt; n34
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; subgraph s4["Some other stuff"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n41["Foo manager"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n42["Bar agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n43["Baz agent"]
+
+&nbsp; &nbsp; &nbsp; &nbsp; n41 --&gt; n42 &amp; n43
+
+&nbsp; &nbsp; end
+
+  
+
+&nbsp; &nbsp; n1["Start"] --&gt; n2["Manager Agent"]
+
+&nbsp; &nbsp; n2 --&gt; s1 &amp; s2 &amp; s3 &amp; s4
+
+&nbsp; &nbsp; s3 --&gt; n3
+
+  
+
+&nbsp; &nbsp; n2@{ shape: proc}
+
+&nbsp; &nbsp; n1@{ shape: start}
+
+&nbsp; &nbsp; n3@{ shape: stop }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>All very neat, but the audience might be forgiven for asking what exactly is agentic about this, except for relabeling subprocesses in what is a run-of-the-mill RPA workflow as ‘agents’. And the audience is, this once, perfectly right. This is agentic AI in its most limited sense – and that limited sense is in many ways a result of the semantics we chose to adopt to reason about agents. For while we call it <em>agentic AI</em>, it’s not, actually, the agents that matter: it’s how they are structured. It is this governed agentic connectome, which I have come to call the Agora, that holds the power of agentic AI – and which is almost universally neglected.</p>
+<section id="beyond-agents-to-the-agora" class="level1 page-columns page-full">
+<h1>Beyond agents, to the Agora</h1>
+<p>This narrow perspective is essentially a rebranding of what any decently designed application does – self-contained pieces of code passing information to one another – embellished with the agentic buzzword <em>du jour</em>, rendering what we all have been doing for the last few decades ever so much more VC-friendly. It misses the true key to the power of agentic systems. In a <a href="https://chrisvoncsefalvay.com/posts/after-agents/">previous post</a>, I reflected on the need to adopt an ecosystem thinking about agents, to consider their strength in creating complexity through interconnectedness. At the moment, our epistemic perspective on agents is intrinsically tied to, and defined by, the <em>what</em>, i.e.&nbsp;the agents themselves. Much of the time, it fails to take account of what matters vastly more, namely how those agents relate to each other – the <em>how</em> of agents. Just as we understand that the power of the human brain does not derive from a bunch of neurons in one place but their interconnectedness, we need to come to understand that agents are the least interesting part of agentic AI. In the end, in any complex system, it’s the connections that matter more than what is doing the connecting.</p>
+<p>What should be agentic AI’s focus, then, is the space in which those agents can interact. Few of these neat hierarchical frameworks that are now touted as ‘agentic’ on LinkedIn envisage any meaningful interaction beyond manager agents bossing around single-functionality executor agents. This fits very well with existing software development paradigms, but has a hard limitation: the complexity of the resulting system will reach just as far as the developer has had time and energy to wire up various components. Even if it’s a rat’s nest of agent spaghetti, this complexity will be limited in at least two ways. It will, for one, be limited by the static, pre-defined nature of the framework: what is once defined remains set in stone. If no connections are manually made <em>a priori</em>, processes and agents live separate lives. More concerning, however, is the epistemic limitation: if we have to <em>a priori</em> define the agentic structure, we are stuck with the known knowns and perhaps the known unknowns. We are trying to tie reality to Procrustes’ bed, except it’s us who will end up a foot short in the end.</p>
+<p>The alternative focus, then, should be on creating agentic frameworks that focus on a governed space where agents can engage with each other – the space I chose to call the Agora, in analogy with the city-square of Ancient Greece where merchants, artisans, philosophers, politicians and citizens got to interact and form connections. The Parthenon may have been the most glorious structure of Athens, the Pnyx might have been the seat of the Assembly’s power, the Areopagus might have been where life and death was decided upon – but it was its agora that made Athens great.<sup>1</sup> The Agora of agentic AI holds the same promise: to act as a place of free interaction, within governed bounds, for our agents, unlocking the true power of the agentic perspective: emergence.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;To the point that people enjoyed the latter enough to forego participation in the former. Eventually, a bunch of slaves would have to roam the agora every time the Assembly was in session, carrying ropes with a red dye. Staining the garments of those who preferred the agora to the Assembly, the red dye identified them and made them liable to punishment.</p></div></div></section>
+<section id="constructing-the-agora" class="level1">
+<h1>Constructing the Agora</h1>
+<p>There is, in fact, relatively little new in the concept of tackling complexity through self-organising emergence. Consider neural networks: what lends artificial neural networks their awesome power is that instead of having to manually code stacks of filter banks, we use – typically – backpropagation to condition a large number of highly connected filters to minimise a loss function (i.e.&nbsp;to make the resulting model more accurate). Nobody would propose to manually define each filter in a neural network <em>a priori</em>: why, then, are we still talking about deterministically defined hierarchies and flows of agents instead of allowing agents to organise themselves and control that process through some outcome metric?</p>
+<p>One aspect of this is that the Agora is more than a collection of agents idly milling around. Crucially, we need to provide three key elements:</p>
+<ul>
+<li>A <strong>discovery framework</strong>: agents must be able to discover other agents, and what they can do, so as to be able to identify other agents that they may recruit to assist them in their goal – this would typically take place using a registry where agents ‘enroll’ their profiles and which other agents can then access.</li>
+<li>An <strong>interaction framework</strong>: agents must be able to communicate with each other, which requires both a message-passing standard (i.e.&nbsp;a minimum interface of how one agent may programmatically call another), and a suitable implementation (i.e.&nbsp;the message broker service that implements this standard).</li>
+<li>A <strong>governance framework</strong>: the governance of the Agora relies on the fact that not all agents may register themselves to the agent registry. Who may, and who may not, participate in the Agora determines and governs the overall process. Equally, the fact that we do not want our agents’ interaction to be entirely deterministic does not mean we want it to be entirely ungoverned. Various policies can be used to condition where connections can, and cannot, be made: some agents may be barred from creating certain direct connections, for instance it should be possible to specify that no agent should be able to directly return data to the user without having to pass it through a guardrail agent. The agora was a place of free interaction, but not of lawlessness – the same goes for the Agora of our AI agents.</li>
+</ul>
+<p>The Agora is not an ‘enhancement’ of agentic AI – it is what agentic AI <em>is</em>, or at least ought to be. It is what allows the greatest strength, i.e.&nbsp;self-organised emergence, of AI agents to unfold in a governed, controlled domain. And perhaps quite perplexingly, it is probably going to be easier to implement than most deterministic agentic structures. Certainly it is going to be more economical to allow agents to reason through how to solve their problems and discover the resources they need within the Agora, recruiting them as needed and releasing them once done, than having to think through the process <em>a priori</em>. A solid agentic framework can accommodate the fact that the world is complex, and organise itself to cater for the unexpected (within, of course, its means – that is, within what agents are available to the Agora).</p>
+</section>
+<section id="the-agoric-shift" class="level1 page-columns page-full">
+<h1>The Agoric Shift</h1>
+<p>This, then, is where I personally see our next challenge – both from an epistemic-conceptual perspective, which will call for us to rethink agentic AI in a way that perhaps focuses less on agents and more on their interconnectedness (and ways to facilitate it) and from an engineering perspective, which will require us to implement the tools and structures it will take to make this interconnectedness happen. Neither challenge is trivial. There is a pervasive trend to attempt to simply take deterministic RPA-like processes and workflows, rename them agents and watch the money roll in. The conceptual challenge thus is to illuminate what agentic AI properly so called brings to the table – the promise of emergence.</p>
+<p>From a technical perspective, there is as of yet no universal way for agents to interact. Anthropic’s <a href="https://www.anthropic.com/news/model-context-protocol">Model Context Protocol</a> is a valiant attempt at beginning to set some standards in that regard, but the reality on the ground is that most agent implementations have relied on exaptation, and for inter-process communication in the internet era, that means REST for the most part. This may support deterministic designs with modest needs for interaction, but the Agora has need for other structures, too, such as a model registry. This raises a wealth of coordination problems that need to be tackled before we can let our agents go to (the) town (square).</p>
+<p>Yet this shift is where we unlock the power of modern AI. In 2023, <a href="https://chrisvoncsefalvay.com/posts/team-of-rivals/">I predicted the rise of agentic systems</a> as a way to unleash the potential of LLMs by making them interact with each other in various roles. The Agoric Shift is the consummation of this idea: agentic systems where such interactions arise not from predefined workflows and patterns but from self-organising assemblies of agents<sup>2</sup> – the point where we finally stop trying to painstakingly orchestrate every step of our agents’ interactions and instead build a vibrant Agora for them to roam, collaborate and perhaps even surprise us.</p>
+
+
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Which, by the way, may include humans. There’s no reason why we shouldn’t conceive of ‘humans in the loop’ not as a superordinate stage that comes after agentic AI has done its part, but simply another agent.</p></div></div></section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {After Agents, Part 2 -\/- {Agents} and the {Agora}},
+  date = {2025-02-10},
+  url = {https://chrisvoncsefalvay.com/posts/agents-agora/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“After Agents, Part 2 -- Agents and the
+Agora.”</span> <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">https://chrisvoncsefalvay.com/posts/agents-agora/</a>.
+</div></div></section></div> ]]></description>
+  <category>LLMs</category>
+  <category>AI</category>
+  <category>agents</category>
+  <guid>https://chrisvoncsefalvay.com/posts/agents-agora/</guid>
+  <pubDate>Mon, 10 Feb 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/agents-agora/B20C419F-6819-49E1-B80E-11B95A28D6CC.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
 <item>
   <title>Seatbelts and straitjackets</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -3814,32 +3952,6 @@ the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68
   <guid>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/</guid>
   <pubDate>Thu, 23 Mar 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/header.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Data for the next pandemic</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>My recent post on the <a href="https://medium.com/starschema-blog">Starschema blog</a> discusses the need for better data products to tackle future pandemic challenges:</p>
-<blockquote class="blockquote">
-<p>Three years into the COVID-19 pandemic, the medical, public health and disaster preparedness communities are trying to isolate lessons learned from the harrowing experience of a global outbreak that resulted in little shy of seven million deaths. There remains considerable disagreement as to what ought or ought not have been done, what worked and what did not and how to best approach a coming pandemic.</p>
-<p>One of the only points on which there is widespread agreement regarding the global response to the pandemic is that data played a crucial role in tackling the crisis. Where data drove decision-making, outcomes were almost universally better in terms of morbidity and mortality.</p>
-</blockquote>
-<p>Read the full post <a href="https://medium.com/starschema-blog/data-for-the-next-pandemic-f340cac8558c">here</a>.</p>
-
-
-
- ]]></description>
-  <category>computational epidemiology</category>
-  <category>epidemics</category>
-  <category>Cross-post: Starschema</category>
-  <guid>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/</guid>
-  <pubDate>Tue, 07 Mar 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
