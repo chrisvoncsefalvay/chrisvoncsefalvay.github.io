@@ -14,76 +14,46 @@ If you spend any time on LinkedIn, it's almost a certainty that you have come ac
 
 ```{mermaid}
 flowchart TD
+    %% Define the main nodes
+    n1([Start])
+    n2[[Manager Agent]]
+    n3((End))
 
- subgraph s1["Data Ingestion"]
+    %% Subgraph 1: Data Ingestion
+    subgraph s1["Data Ingestion"]
+        n11["Ingestion Manager"]
+        n12["SQL Interactor Agent"]
+        n13["RAG Agent"]
+        n11 --> n12
+        n11 --> n13
+    end
 
-        n11["Ingestion Manager"]
+    %% Subgraph 2: Analysis
+    subgraph s2["Analysis"]
+        n21["Analysis Manager"]
+        n22["Analyst Agent"]
+        n21 --> n22
+    end
 
-        n12["SQL Interactor Agent"]
+    %% Subgraph 3: Reporting
+    subgraph s3["Reporting"]
+        n33["Reporting Manager"]
+        n34["Report Writing Agent"]
+        n33 --> n34
+    end
 
-        n13["RAG Agent"]
+    %% Subgraph 4: Some Other Stuff
+    subgraph s4["Some Other Stuff"]
+        n41["Foo Manager"]
+        n42["Bar Agent"]
+        n43["Baz Agent"]
+        n41 --> n42 & n43
+    end
 
-        n11 --> n12
-
-        n11 --> n13
-
-  
-
-  end
-
-  
-
-    subgraph s2["Analysis"]
-
-        n21["Analysis manager"]
-
-        n22["Analyst agent"]
-
-        n21 --> n22
-
-    end
-
-  
-
-    subgraph s3["Reporting"]
-
-        n33["Reporting manager"]
-
-        n34["Report writing agent"]
-
-        n33 --> n34
-
-    end
-
-  
-
-    subgraph s4["Some other stuff"]
-
-        n41["Foo manager"]
-
-        n42["Bar agent"]
-
-        n43["Baz agent"]
-
-        n41 --> n42 & n43
-
-    end
-
-  
-
-    n1["Start"] --> n2["Manager Agent"]
-
-    n2 --> s1 & s2 & s3 & s4
-
-    s3 --> n3
-
-  
-
-    n2@{ shape: proc}
-
-    n1@{ shape: start}
-
-    n3@{ shape: stop }
+    %% Main flow
+    n1 --> n2
+    n2 --> s1 & s2 & s3 & s4
+    s3 --> n3
 ```
 
 
