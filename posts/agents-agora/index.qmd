@@ -6,7 +6,7 @@ categories:
 date: 2025-02-10
 description: Why agents are the least interesting part of agentic AI.
 image: B20C419F-6819-49E1-B80E-11B95A28D6CC.png
-title: After agents, part 2: Agents and the Agora
+title: After agents, part 2 -- Agents and the Agora
 ---
 
 
