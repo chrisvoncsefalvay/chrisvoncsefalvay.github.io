@@ -27,76 +27,46 @@
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
+    %% Define the main nodes
+    n1([Start])
+    n2[[Manager Agent]]
+    n3((End))
 
-&nbsp;subgraph s1["Data Ingestion"]
+    %% Subgraph 1: Data Ingestion
+    subgraph s1["Data Ingestion"]
+        n11["Ingestion Manager"]
+        n12["SQL Interactor Agent"]
+        n13["RAG Agent"]
+        n11 --&gt; n12
+        n11 --&gt; n13
+    end
 
-&nbsp; &nbsp; &nbsp; &nbsp; n11["Ingestion Manager"]
+    %% Subgraph 2: Analysis
+    subgraph s2["Analysis"]
+        n21["Analysis Manager"]
+        n22["Analyst Agent"]
+        n21 --&gt; n22
+    end
 
-&nbsp; &nbsp; &nbsp; &nbsp; n12["SQL Interactor Agent"]
+    %% Subgraph 3: Reporting
+    subgraph s3["Reporting"]
+        n33["Reporting Manager"]
+        n34["Report Writing Agent"]
+        n33 --&gt; n34
+    end
 
-&nbsp; &nbsp; &nbsp; &nbsp; n13["RAG Agent"]
+    %% Subgraph 4: Some Other Stuff
+    subgraph s4["Some Other Stuff"]
+        n41["Foo Manager"]
+        n42["Bar Agent"]
+        n43["Baz Agent"]
+        n41 --&gt; n42 &amp; n43
+    end
 
-&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n12
-
-&nbsp; &nbsp; &nbsp; &nbsp; n11 --&gt; n13
-
-  
-
-&nbsp; end
-
-  
-
-&nbsp; &nbsp; subgraph s2["Analysis"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n21["Analysis manager"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n22["Analyst agent"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n21 --&gt; n22
-
-&nbsp; &nbsp; end
-
-  
-
-&nbsp; &nbsp; subgraph s3["Reporting"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n33["Reporting manager"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n34["Report writing agent"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n33 --&gt; n34
-
-&nbsp; &nbsp; end
-
-  
-
-&nbsp; &nbsp; subgraph s4["Some other stuff"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n41["Foo manager"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n42["Bar agent"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n43["Baz agent"]
-
-&nbsp; &nbsp; &nbsp; &nbsp; n41 --&gt; n42 &amp; n43
-
-&nbsp; &nbsp; end
-
-  
-
-&nbsp; &nbsp; n1["Start"] --&gt; n2["Manager Agent"]
-
-&nbsp; &nbsp; n2 --&gt; s1 &amp; s2 &amp; s3 &amp; s4
-
-&nbsp; &nbsp; s3 --&gt; n3
-
-  
-
-&nbsp; &nbsp; n2@{ shape: proc}
-
-&nbsp; &nbsp; n1@{ shape: start}
-
-&nbsp; &nbsp; n3@{ shape: stop }
+    %% Main flow
+    n1 --&gt; n2
+    n2 --&gt; s1 &amp; s2 &amp; s3 &amp; s4
+    s3 --&gt; n3
 </pre>
 </div>
 <p></p></figure><p></p>
