@@ -1,0 +1,98 @@
+---
+bibliography: references.bib
+categories:
+- AI
+- agents
+- neuroscience
+- philosophy
+citation: true
+date: 2025-06-27
+description: Your language model isn't experiencing a cognitive defect. It's just wrong. 
+google-scholar: true
+image: header.png
+title: Just noise in the neurons
+--- 
+
+> "Give me one example,'' Alan said.  
+> "Of a noncomputable function that a human can do, and a Turing machine can't?''  
+> "Yes. And don't give me any sentimental nonsense about creativity. I believe that a Universal Turing Machine could show behaviors that we would construe as creative.''
+> "Well, I don't know then... I'll try to keep my eye out for that kind of thing in the future.''  
+> 
+> But later, as they were riding back towards Princeton, he said, "What about dreams?''  
+> "Like those angels in Virginia?''  
+> "I guess so.''  
+> "Just noise in the neurons, Lawrence.''  
+> "Also I dreamed last night that a zeppelin was burning.''
+> 
+> -- Neal Stephenson, *Cryptonomicon*
+
+
+There's a pervasive problem with semantics in artificial intelligence. It's present at the creation -- the term itself characterises the subject as a man-made simulacrum of something 'natural' the way we speak of artificial flavourings and artificial rubber. By necessity, the constructs we call artificial intelligences have never been treated (at least semantically) as first class citizens, but always as analogies to some typically biological construct. Most of the time, we can get past our inability to regard AI as *sui generis* and not merely a faint echo of the flesh. 
+
+This is about one of the times when that's not quite the case. 
+
+I am, of course, aware that I am risking perhaps justified derision for being 'hung up on semantics', but semantics matters. Semantics are our human handles on notions, often abstract ones. Just as an unwieldy or ill-placed handle will make lifting a box unduly onerous, bad semantics makes manipulating those cognitive constructs difficult, impossible or error-prone. Which is why I continue to be willing to spill ink on our unhelpful tendency to rely on neuropathological metaphors for the mistakes of generative AI. 
+
+These models have a notorious habit of producing false yet plausible-sounding information. It is a property so inherent in stochastic generativity that the terminology of hallucinations itself comes not from LLMs, where the expression became ubiquitous, but in fact -- best I can tell -- from a paper by Baker and Kanade on superresolution (upscaling) of faces [see @840616]. Neuroscientists and psychologists often ask where hallucinations come from -- Baker and Kanade appear to ask where the pixels generated in upscaling come from, and conclude that they must originate in a sort of hallucination.^[Why did it take so long to ask the question? Your typical upscaling algorithm also generates new pixels, but these are essentially deterministic functions of the input pixels. The simplest of these, of course, is interpolation, where every new pixel is a deterministically obtained function of the originating information. Say, for bicubic interpolation over the unit square, $$ f(x,y) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij} x^i y^j $$ where the $a_{ij}$ is the matrix of coefficients of the interpolating polynomial. This becomes all rather different once we are no longer dealing with essentially squishing the outputs through a deterministic interpolation but through a stochastically applied learned function.]
+
+I see three principal problems with the metaphor of neuropathology, specifically that of hallucinations, in AI. 
+
+* It's a category error. LLMs have no perception, embodiment or conscious experience. They cannot have an abnormal perceptive-conscious experience because they are incapable of having that type of experience in the first place.
+* It invites confusion about what actually happens when hallucinations occur -- both in humans and in LLMs. 
+* It ascribes either a cognitive defect to LLMs, or some sort of semi-intentional failure.^[It's probably worth noting that the alternative term, 'confabulation', is just as bad. Depending on whether we consider it a colloquial term (for, essentially, lying) or a technical term (for the reification of cognitive dysfunction through making up something inconsistent with objective reality), it suffers from the same flaws, if not worse.]
+
+
+## The category error of hallucination
+
+Primarily, we consider hallucination to be an abnormal perceptive-conscious experience arising from a defect in perception (such as phosphenes), consciousness (being high as balls), processing (e.g. Anton's blindness) or a combination. The core element in most definitions seems to boil down to conscious perception of things that just aren't there. There are, all things considered, two major flavours of hallucination. The first category is what I shall refer to, for lack of a better term, as _additive_: there is an influence that results in an experience or sensation that supervenes the normal -- take drugs, see things. The second category is perhaps more interesting, because it is the one that is most often discussed in the context of AI. This is the category of _substitutive_ hallucinations, where the hallucination is a substitution for the normal experience that is almost forced by the brain's insistence on gestalt and reification. Something is missing, and the brain 'fills in the gaps'. This is, essentially, arguably not a qualitatively abnormal experience but a quantitatively excessive manifestation of our brain's normal reification tendencies. Even if we only see the front third or so of a car poking out from behind a building, we understand that in all likelihood there's more to it than we cannot see, and our mind's eye can imagine fairly well what else is there (indeed, most people will guess relatively accurately where the rest of the vehicle ends). The phenomena that are discussed as substitutive hallucinations stretch this to an extreme. Perhaps the most extreme yet most fascinating example is Anton-Babinski syndrome [see @Forde_Wallesch_2003], where a fully fledged visual perceptual world is created in the presence of profound (typically cortical) blindness. 
+
+But, of course, that's not really an accurate description of what's transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all -- they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn't there, these models exist in a space in which there isn't a "there" to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It's called _being wrong_, and is about as mysterious as dish soap.
+
+LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:
+
+{{< tweet user=emilymbender id=1592992842976489472 >}}
+
+When we get down to it, an LLM doesn't perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There's no tiny chess prodigy hiding inside this Mechanical Turk.
+
+::: {.column-margin}
+![Wolfgang von Kempelen's Mechanical Turk -- or at least what his debunker, Joseph Friedrich Freiherr von Racknitz thought it looked like. He was wrong about the details, correct about the principle.](image.png)
+:::
+
+Calling an LLM’s fabrications hallucinations therefore amounts to a category error: it imports terminology from human cognition and neuropathology into a domain where it has nothing to do. The model isn’t seeing pink elephants. It’s just guessing a sequence of words, badly as it happens.
+
+Anthropomorphising the flaws of AI anthropomorphises their faculties. It is this logical implication that many seem to ignore: they may have little difficulty talking about hallucinations when they would hardly endorse the notion that there's a consciousness residing in the 120 gigs of `safetensor` weights you just downloaded. Hardly anyone who speaks of AI hallucinations comfortably would attach much moral significance, if any, to `rm -rf`-ing a model, yet strict consistency would impel them to regard the latter as extinguishing a consciousness. 
+
+No matter how much we attempt to palliate the situation by emphasising how it's 'just a metaphor', it's never really _just_ anything. When we rely on this lazy analogisation with neuropathology, we risk ascribing to these systems a kind of perceptual experience that can go wrong the way perceptual experiences do. Unlike a human brain, an LLM doesn’t construct a rich model of the world that occasionally diverges from reality. It only has a mathematical abstraction of its learned conditional probabilities. To treat its output errors as if they were analogous to a human’s neurological misfires is not only technically incorrect, it also muddies the waters about what such models do and don't. 
+
+
+## The analogy and the mechanism
+
+The second problem is that using the metaphor of hallucinations implies ideas about what is going on in an LLM, both in normal and failure modes. When we talk about an LLM 'hallucinating', we unwittingly carry over a whole stack of those assumptions -- imagining the model as a mind experiencing a very specific kind of (mis)experience, when it isn't and doesn't. The metaphor of hallucinations might feel like a useful analogy, but it obscures more than clarifies. In truth, the model isn’t trying (and failing) to faithfully report on reality. It's producing output that is stochastically correct, i.e. it replicates reality with relatively decent accuracy as the number of tries converges to infinity. Given the nature of that distribution, some of those attempts at replicating reality will be off. The hallucination metaphor invites us to imagine there is a kind of inner experience going on all the time, a logical entailment of asserting that hallucinations are when that experience goes wrong. Ultimately, this is a misleading cognitive narrative around the technology, one that does not match the mechanistic reality of what is, basically, autocomplete on steroids.
+
+Unlike you and me,^[Assuming here that you aren't OpenAI scraping my website, in which case `$deity` have mercy on your transformer blocks.] a generative model has no concept of truth or falsehood in its programming, not beyond minimising its loss function (which does not, incidentally, claim to be true -- indeed, we intentionally train ). It’s not attempting to state facts and then failing spectacularly when it 'hallucinates'. It’s always doing the same thing – generating plausible text. By using a term like hallucination, we spin a tale where the AI is a quasi-intelligent being with beliefs about the world, occasionally slipping on a cognitive-perceptual banana peel. The model isn’t trying to convey anything at all, let alone something it believes or believes to be true. It has no beliefs or an understanding of truth. 
+
+Ultimately, this feeds into a kind of hype-by-elision in which both capabilities and limitations are exaggerated. To the commentariat, AI is both ape and angel, Skynet and a barely capable moron that can't count the number of 'r's in _strawberry_, the thing that will steal your jobs and the thing that can't figure out addition. All of that, of course, sells. This is, ultimately, a kind of Reefer Madness for the AI age, lurid prose in bright letters about a technology that is powerful but ultimately logical, complex but also mundane, and most of all, capable of being understood and analysed if one forgoes the Scylla and Charybdis of over- and underestimating it.
+
+
+## Not sick, just wrong (and maybe not even that)
+
+The problem with the metaphor of hallucinations is that it invites us to see a pathology and respond accordingly. We're all wrong from time to time. How we assess people being wrong in the presence of a pathology is crucial to our moral understanding. Consider the legal definition of insanity, known to everyone who had to suffer through first-year criminal law as the _M'Naghten_ formula: insanity is when a defect of reason results in a person either not knowing what they're doing (being 'wrong' as to their actions) or not knowing right from wrong (being 'wrong' as to the nature of their actions). We relieve people of legal, and sometimes moral, responsibility for their actions in that situation because of the pathology. We treat it, essentially, as a moral (albeit not legal) break in the chain of responsibility. 
+
+The model is not an agent (in the moral-human sense) with goals or a will, nor is it a patient suffering a perceptual and/or cognitive defect. It’s a computational system following its training objective, which is to produce a set of tokens that reflect a learned conditional probability. And that's the essence of why the terminology of pathology is wrong: we might not like its output, it might not comport with the ground truth, but on its own terms, a 'hallucinated' token is not intrinsically 'wrong' or 'pathological'. It is a necessary feature of the architecture. There's nothing 'wrong', internally, with a hallucinating model. There are no integer overflows or computational errors, you didn't mess up your code, the model hasn't been wrongly trained or ran on compromised hardware. Hallucinations are the price we pay for the stochasticity of a model. 
+
+The other time I sort of agreed with Emily Bender was when she called LLMs 'stochastic parrots', and her comment here is entirely accurate. A parrot has no more understanding of the meaning of the words it utters than an LLM has. The parrot utters them because of, well, reinforcement learning: repeat a sequence of tokens (which are in this case acoustic) and get a reward. That's actually exactly how we train LLMs. They're not trained to pursue truth, they are trained to land somewhere in truth's vicinity at best. Notably, LLMs are not in any way 'told' the truth. We train LLMs on large corpora, and we expect that they contain a reflection of reality. If the corpus is relatively well selected, from a source that has its own way of ensuring its content comports with reality, then the conditional probabilities our model learns will also largely align with reality. But to the model, it's all the same, at least absent specific measures like RLHF to weed out nonsense. If one were to contaminate basic corpora ubiquitously trusted as reliable sources,^[Which is why the controversy around what ends up on Wikipedia is so relevant, and such an ignored undercurrent of the discourse around the values reflected -- not held, reflected! -- by LLMs.] models would replicate that. You can train models on self-contradictions, on nonsense prose, on propaganda, you name it -- as long as token follows token, you have what it takes. What this ultimately means is that such models exist in a space of learned relative probabilities, no more, no less. They mathematically faithfully replicate those probabilities in generating a sequence of tokens. If the result does not comport with our consensus understanding of reality, that's not some peculiar pathology internal to the model. It's the model functioning as expected. It's not sick, and at least on its own terms, not even wrong.
+
+## Coda
+
+In the end, metaphors matter. Like a lantern, they may illuminate our way, or they may blind us. The metaphor of neuropsychiatric pathology when one fundamentally means to say 'wrong' has created a kind of mystery theatre (devoid, largely, of science) that has perhaps been unwittingly spurred by, and in turn perpetuated, an air of mystery around AI. Some of it is just clumsy phrasing -- Sam Altman was criticised for [a comment that seemed to imply that hallucinations are somehow intrinsically tied to a kind of creativity that we appreciate in LLMs](https://www.marketwatch.com/story/openais-sam-altman-tells-salesforces-marc-benioff-that-ai-hallucinations-are-more-feature-than-bug-1c035c52), but what he meant is I think closer to the fact that stochastic models necessarily yield those occasional samples from a little bit off center of the probability distribution that result in what we fancifully came to call hallucinations. 
+
+Hallucinations, bona fide hallucinations in humans of various levels of neuropsychiatric competence, induced or otherwise, have a rich cultural history. From the pythia of Delphi through the ergot-induced visions of mediaeval witches, saints and heretics to the paintings of [Louis Wain](https://en.wikipedia.org/wiki/Louis_Wain) and the fiction of Hunter S. Thompson, they have always been a part of the human experience, albeit very much an extraordinary part (and often, one that took more than it gave -- there are few happy endings in the civilisational story of perceiving things that aren't there). But they are very much a peculiarly _human_ experience. When we draw this tenuous metaphor, we do a disservice to AI, a disservice to those who live with hallucinations and the often quite tragic and marginalising pathologies that cause them, and not least a disservice to our own attempts at understanding how LLMs work, and how sometimes that results in these extraordinary phenomena.
+
+And maybe, past all mystery and metaphor, we may just call them _occasionally wrong_.
+
+
+***
+
+I am indebted to my colleagues at HCLTech for the discussions that led to this post. All errors and omissions are mine.
+
+_Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc. My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. [Click here for a full disclaimer.](https://chrisvoncsefalvay.com/disclaimer)_
