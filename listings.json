@@ -8,14 +8,9 @@
     ]
   },
   {
-    "listing": "/talks/index.html",
-    "items": [
-      "/talks/prometheus-unbound/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/context-engineering/index.html",
       "/posts/noise-in-the-neurons/index.html",
       "/posts/agents-agora/index.html",
       "/posts/deepseek-seatbelts-and-straitjackets/index.html",
@@ -47,6 +42,12 @@
       "/posts/mrna-gene-therapy/index.html",
       "/posts/ransomware-prisoners-dilemma/index.html",
       "/posts/julia-a-post-mortem/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/prometheus-unbound/index.html"
     ]
   }
 ]

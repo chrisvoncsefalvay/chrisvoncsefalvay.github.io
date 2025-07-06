@@ -10,7 +10,68 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Fri, 27 Jun 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 06 Jul 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Snowmobile Symptom</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/context-engineering/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
+<p></p><div id="tweet-53931"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-53931").innerHTML = tweet["html"];</script><p></p>
+<p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
+<p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
+<section id="the-snowmobiles-we-build" class="level2">
+<h2 class="anchored" data-anchor-id="the-snowmobiles-we-build">The snowmobiles we build</h2>
+<p>In what is probably the most influential briefing any officer ever gave, USAF Col. John Boyd made a very poignant analogy to explain how we synthesise information. Imagine you’re on an alpine slope. Take the skis. Imagine you’re riding a bicycle. Take the handle bars. Now imagine you’re looking at a tank. Take the treads. Put these all together, and you’ve got, mostly, a snowmobile. These distinct domains combine into a single object that makes sense in its own way.</p>
+<p>Context engineering is snowmobile building for the AI age. You take the tools, the MCP connections, the requirements, the sources – all the bits of information that make up the entirety of what we would consider the contextual biome of a task –, and feed it to the LLM. We do, or at least we prototype for the LLM, the task of synthesis: reassembling these fragments into a holistic picture of the task environment. We pull the skis from an API doc, the handles from a github repo and the treads from a coffee cup bottom stained post-it note. It ‘makes sense to us’, and we try to convey this to our helpful assistant, in hopes that putting it into the same frame of mind we are in will allow it to do what we want it to do in our stead.</p>
+<p>But here’s the rub: in Boyd’s analogy, humans build the snowmobile. In our current AI paradigm, we’re still the ones building it, really quite manually, when the entire promise of agentic AI was that the agents would handle most of the assembly themselves. We’ve created systems sophisticated enough to use snowmobiles, but not intelligent enough to build them without us laying out all the isntructions.</p>
+<p>Just consider your favourite coding copilot. They feed off an understanding of the code, the sources, the instructions, the user’s preferences, external tools, and so on. But they require those to be provided to them well enough to be able to mostly reflect the thought patterns that got the human user to where they are. They are hopeless, or at least much less efficient, if we do not <em>mise en place</em> all the tools for them. Wasn’t that part of the promise of agentic AI – the ability of systems to creatively self-organise, rather than us having to wire everything up for them?</p>
+</section>
+<section id="the-puppet-strings-we-pretend-arent-there" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</h2>
+<p>The problem with context engineering isn’t really context engineering’s fault. As a system, it works. It works quite well, in fact, and if you follow some sensible guidelines, you <em>will</em> get vastly more out of your LLM.<sup>1</sup> But the very fact that we’re here discussing it is an indication that we are theorycrafting at length to make up for the lack of the agentic agora.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I recommend <a href="https://github.com/coleam00/context-engineering-intro">Cole Medin’s repo</a> as a pretty good starter.</p></div></div><p>The whole thing does, then, have a bit of an elaborate marionette theatre feel. We speak of agents but their agency is ultimately quite confined by the need for us to spoon-feed them quite a bit about the context. For the most part, we’re not witnessing emergent coordination, we’re watching an elaborate puppet show where humans have pre-scripted every information handoff, pre-defined every communication channel and pre-determined every capability boundary. The agents aren’t a garage band gelling together and learning how to play music with spirit and spontaneity. They are a room full of player pianos ticking down the same tune someone had to painstakingly design and encode into the player rolls.</p>
+<p>The security implications reveal just how non-agentic these systems truly are. Context poisoning attacks work because our agents have no genuine ability to evaluate information sources on their own, no real understanding of trust and do not exist in spaces that govern trust exchange without such trust being ultimately pre-scripted. An agent doesn’t know whom they can trust, nor how they can represent their trustworthiness in a computationally meaningful, verifiable manner. That we need to engineer defensive contexts to protect our AI systems is perhaps the clearest indication that these systems are free agents… free to be manipulated and misled in the absence of an agentic agora that has its own rules and enforcement logic.</p>
+</section>
+<section id="towards-true-agency-beyond-context-engineering" class="level2">
+<h2 class="anchored" data-anchor-id="towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</h2>
+<p>Don’t get me wrong – I’m not dismissing context engineering. If anything, quite the opposite. Given the current limitations of LLMs, context engineering is not just sensible but an essential adaptation to the reality that these models need plenty of handholding to be useful, much more than we would hope they would need in a true agentic system. It’s also an indication of where the failure lies – because these models are operating just fine. It’s not their shortcoming, or indeed that of agents. It’s the lack of an infrastructure of interaction. Agents become truly agentic when they have something to act on, to interact with, to connect. We have built ecosystems to use, develop and deploy models and agents, but not to allow for these interactions in a meaningful way. We’re looking at a factory of consummate professionals in the art of assembling snowmobiles, waiting for someone, anyone, to get them the parts, in the right order, at the right time.</p>
+<p>The entire context engineering story (I’m not going to call it hype just yet, because it hasn’t reached fever pitch, but I am sure we will see more and more LinkedIn bios proclaiming context engineering expertise!) ultimately pulls the fig leaf off the coordination problem we’re trying to patch up with the current attempts at agentic interoperability. Once again, those steps, too, have plenty of merit. They just aren’t exhaustive. We’re building infrastructure to help humans manage information for AI, when we should be building infrastructure for AI to manage information for itself. Every context engineering best practice is a workaround for missing agent capabilities. Memory architectures are cheat codes to help agents that don’t have the architecture to manage state properly. Context compression is a workaround for prioritising information. Specifying tools and toolkits is necessary because agents can’t discover such tools and negotiate trust relationships with them.</p>
+<p>What we’re really engineering when we claim to be doing context engineering is, ultimately, not really the context of our question but the context of the agent. We have to equip the agent with what ought to be what Sartre would call pre-reflexive self-awareness, an understanding of where one is situated in the world and what’s around it. It’s not, or at least not just, about us telling the agent the context of our ask. It’s about us having to tell the agent the context of its own existence, its own capabilities, its own environment. We’re forcing humans to herd cats for systems that should be capable of finding and sharing knowledge autonomously. Every context engineering solution is a monument to this missing infrastructure.</p>
+</section>
+<section id="to-the-agora" class="level2">
+<h2 class="anchored" data-anchor-id="to-the-agora">To the agora!</h2>
+<p>What we need are digital agoras – spaces where AI agents can discover capabilities, share information, and coordinate without needing this human intermediacy. That’s not because human oversight is bad, but because true agency requires the ability to discover and evaluate information independently. MCP and A2A represent tentative steps in this direction, but they still ultimately rely on humans wiring up the connections.</p>
+<p>The promise of agentic AI is that this would no longer be needed, that agents could exercise a kind of <em>Auftragstaktik</em> mindset of inferring these needs from some sort of reaching-out and finding adequate resources the way buyers find merchants in the marketplace.</p>
+<p>There’s, then, nothing ‘wrong’ with context engineering <em>per se</em>. What would however be a mistake is to consider it a destination, rather than a transitional phase. Every talk on context engineering, every new ‘supertool’, every clever prompting technique is progress – that we shouldn’t let become procrastination.</p>
+<p>When context engineering becomes unnecessary, we’ll know our agents have finally grown up. The path forward isn’t through better context engineering, but through making it obsolete. Digital agoras, agent discovery protocols, emergent coordination mechanisms: these aren’t nice-to-haves, they are the <em>sine qua nons</em> for genuine AI agency. Every moment we spend perfecting context engineering is a moment we’re not spending on building the infrastructure that would make it unnecessary.</p>
+<p>At the end of the day, context engineering is our confession, written in code and infrastructure, that we haven’t yet achieved what we claimed. It illuminates the partial success of agents: success, because agentic AI is tremendously powerful, but partially so, because it needs us to coordinate for them. So while context engineering will tide us over for a while the way prompt engineering has done for its hour, we shouldn’t forget that it’s a band-aid, no more. We should welcome context engineering… while awaiting the day we can finally retire it.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {The {Snowmobile} {Symptom}},
+  date = {2025-07-06},
+  url = {https://chrisvoncsefalvay.com/posts/context-engineering/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>LLMs</category>
+  <category>context engineering</category>
+  <guid>https://chrisvoncsefalvay.com/posts/context-engineering/</guid>
+  <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/context-engineering/header.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
 <item>
   <title>Just noise in the neurons</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -50,7 +111,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-88742"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-88742").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-87377"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-87377").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -3975,32 +4036,6 @@ the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68
   <category>SkiErg</category>
   <guid>https://chrisvoncsefalvay.com/posts/skierg-marathon/</guid>
   <pubDate>Fri, 13 Oct 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The knowledge dividend of large language models</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Over at the <a href="https://medium.com/starschema-blog">work blog</a>, I’m discussing what knowledge means for large language models (LLMs), and the ways in which we can leverage this knowledge dividend for better inference.</p>
-<blockquote class="blockquote">
-<p>As I’m writing this, the sun hasn’t risen over the Denver skyline in earnest. There’s still pink in the sky over the Front Range, and most of the world is still blissfully asleep. And so far, a small, moderately fine-tuned Large Language Model (LLM) trained on $500 worth of free credits has explained to me just how bad the Broncos’ recent 20–70 embarrassment against the Miami Dolphins is (very), made some useful suggestions for a Caddoan language to learn if I wanted to help with language preservation (Pawnee) and created a fairly acceptable recipe to salvage whatever is left in my fridge (spicy tomato and cheese omelet with a chia side salad). Not too shabby for something that has absolutely no understanding of language preservation, omelets or American football (then again, neither do I, as far as the last one is concerned).</p>
-<p>And therein lies one of the pervasive paradoxes of LLMs: they generate very confident, very credible and very often correct answers to questions on subjects they really don’t know all that much about.</p>
-</blockquote>
-<p><a href="https://medium.com/starschema-blog/the-knowledge-dividend-of-llms-a-pragmatic-perspective-79e8f8fb0686">Read the full post here.</a></p>
-
-
-
- ]]></description>
-  <category>AI</category>
-  <category>LLMs</category>
-  <category>Cross-post: Starschema</category>
-  <guid>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/</guid>
-  <pubDate>Mon, 02 Oct 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
