@@ -28,7 +28,7 @@ Context engineering is snowmobile building for the AI age. You take the tools, t
 But here's the rub: in Boyd's analogy, humans build the snowmobile. In our current AI paradigm, we're still the ones building it, really quite manually, when the entire promise of agentic AI was that the agents would handle most of the assembly themselves. We've created systems sophisticated enough to use snowmobiles, but not intelligent enough to build them without us laying out all the isntructions. 
 
 ::: {.column-margin}
-![From my fridge. It tends to get a good laugh from other fellow Sons of Boyd.](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/face2327e44240677d782f115b7065331c21c2e8/posts/context-engineering/IMG_2722.jpeg](
+![From my fridge. It tends to get a good laugh from other fellow Sons of Boyd.](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/face2327e44240677d782f115b7065331c21c2e8/posts/context-engineering/IMG_2722.jpeg)
 :::
 
 
