@@ -10,7 +10,66 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.7.32</generator>
-<lastBuildDate>Sun, 06 Jul 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 20 Jul 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Between the motion and the act</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/agentic-simulation/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>There’s a curious terminological schism that nobody talks about at what passes for dinner parties for the AI crowd. When Russell and Norvig crystallised the definition of an ‘agent’ in their 1995 book – “an entity that perceives its environment through sensors and acts upon it through actuators” –, they seemed to have a particular notion of agency that today’s AI agents fit perfectly: they perceive prompts, process context and act by generating text, calling APIs or executing code. To those of us who cut our teeth on agent-based modelling, this is a little “yes, but”. We have been cheerfully using the same word for something apparently different: simulated entities that exist only in computational Petri dishes, perceiving and acting upon nothing more substantial than bits and simulation spaces. One might reasonably ask whether we’ve been guilty of terminological theft, awkwardly appropriating a word that doesn’t quite fit. But what if the divergence is an illusion? What if simulation and action aren’t opposing categories but different points on the same spectrum of agency?</p>
+<section id="everything-old-is-new-again" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="everything-old-is-new-again">Everything old is new again</h2>
+<p>This is the way of all technological revolutions.<sup>1</sup> We become so intoxicated by the new that we forget the profound insights buried in what came before. It’s rather like discovering molecular gastronomy and suddenly forgetting that your grandma’s stock pot held secrets that no amount of liquid nitrogen could replicate. I’ve spent considerable time with agent-based models – enough to devote an entire chapter to them in <em>Computational Modeling of Infectious Disease</em> –, watching imaginary pathogens spread through synthetic populations.<sup>2</sup> These populations existed purely in silico, bumping into each other according to rules we painstakingly crafted to mirror the messiness of human behaviour. Beautiful, horrifying and above all, instructive.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I will to my dying day resist calling it a <em>paradigm shift</em>. A paradigm shift is when your mental model changes. A revolution is when the world changes. A guillotine is what happens when the second of these occurs without you responding timely enough with the first.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;It’s been a perverse pleasure of mine to do so over places I knew well. My book has a geospatial simulation of RESTV, which would have rather early reached my home, less than 10mi from the epicentre.</p></div></div><p>These agents weren’t trying to book your flights or write your emails. They were thinking machines in the truest sense – not because they possessed consciousness, but because they allowed us to think through them. They acted as our cognitive tools, extending our ability to reason about complex systems by playing out scenarios we couldn’t possibly compute in our heads (never mind simulate in a lab). To the rather less abstract-disposed AI community, agents meant more. They could be more than passive observers: they could be actors in the world, semi-embodied (for now), commanding not physical bodies but prehensile digital limbs of APIs, MCP calls and A2A connections.</p>
+<p>This split felt natural, even inevitable. After all, why merely simulate when you could actuate? Why watch synthetic populations of stock brokers trade imaginary shares when you could build agents that trade real ones and get silly rich in an afternoon? The logic seemed unassailable. But we’ve been victims of a false dichotomy – treating simulation and action as opposing categories rather than complementary modes of agency that desperately need reunification: for the sake of both domains.</p>
+</section>
+<section id="simulaction" class="level2">
+<h2 class="anchored" data-anchor-id="simulaction">Simulaction</h2>
+<p>What I’m proposing isn’t just a nostalgic return to ABM. It’s a reconciliation, a synthesis. Imagine agent ecosystems where contemplative swarms continuously simulate possible futures, while their active cousins execute in the present. The simulators become the dreamers, the actors become the hands.</p>
+<p>This isn’t as far-fetched as it might sound. In my own work in computational epidemiology, we’ve long used simulations to inform policy. But these were sempre disconnected processes – we’d run our models, generate our reports, and hope someone would read them. What if, instead, the simulation agents could directly communicate with action agents?</p>
+<p>Picture this: a swarm of ABM agents continuously simulating supply chain dynamics, playing out scenarios of disruption, adaptation, and recovery. When they converge on a particularly robust finding – say, a vulnerability in a specific shipping route – they don’t generate a `ggplot``. They A2A an action agent that can address it.</p>
+</section>
+<section id="the-possibility-machine" class="level2">
+<h2 class="anchored" data-anchor-id="the-possibility-machine">The possibility machine</h2>
+<p>The concept of world models in robotics offers us a profound insight: simulation isn’t just about prediction, it’s about exploration. When a robot in Isaac Sim attempts a thousand different ways to grasp an object, it’s not trying to predict which one will work. It’s building an experiential understanding of the entire possibility space. This is precisely what we need in agentic AI systems: not agents that try to predict the future (that way lie madness and margin calls) but agents that understand the shape of possible futures. They need to know not just what might happen, but how different actions change the topology of this possibility space.</p>
+<p>In practice: a financial services firm might deploy simulation agents not to predict tomorrow’s stock prices but to understand how different market conditions interact. These agents would run thousands of parallel explorations of the decision space. What happens if interest rates rise while supply chains remain constrained? What if consumer confidence drops but corporate earnings stay strong?</p>
+<p>The active trading agents would then use the carefully mapped picture of the possiblity space and know which actions open up more options, which close them down, which create resilience and which create fragility. In turn, the real-world outcomes as perceived and reported by the active trading agents would ground the simulation’s futures (no point in simulating what doesn’t work). Did that supply chain intervention help? Was their call to follow earnings reports over consumer sentiment the right one? The simulation agents need to know how to update their models – how to dream better dreams next time.</p>
+<p>The practical implications of this ‘possiblity machine’ are of course technologically challenging. The nitpickers (and I say that with love – pedantry is just rigour in a bow tie) will immediately spot them: how do we ensure consistency between the simulated worlds and the actual world? How do we implement that feedback? How do we create guardrails without excess transparency? How are we going to pay for all this?</p>
+<p>I remain sanguine about the fusion of simulation and action for two reasons, despite acknowledging the validity of each and every one of these concerns. For one, these are technical concerns, and those tend to get solved as time converges to whatever it converges towards. On the other hand, they’re also indicative of bigger questions, and that always hints at there being not a wall but a wardrobe-gate to some hitherto unexplored aspects of reality. These concerns ultimately are fundamental questions about the nature of agency, simulation and reality. To me at least, they point the way towards the simulation/action paradigm’s version of the question of the agentic agora: how we move from message passing to shared state spaces (some of which might even be real).</p>
+</section>
+<section id="the-dream-of-the-swarm" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-dream-of-the-swarm">The dream of the swarm</h2>
+<p>At no point am I talking about a notion of what the ‘right’ job is for agents, simulation or action. Rather, I’d like to see both coexist in productive tension, each making the other more effective. The simulation swarms dream of a diverging universe of futures that action agents sample, enact and critique in view of their perception of reality. Like the neighbour’s annoying lawn mower on a Sunday afternoon, those observations filter back into the dreams. Something mostly akin to insight, maybe even wisdom, emerges – of the kind that neither breed of agents with a limited purview could on its own attain.</p>
+<p>The agentic revolution gave us agents that could do. ABMs gave us agents that can dream – and more importantly, agents that can learn from those dreams. And in the space between dreaming and doing, we may find a new paradigm that unifies the entire OODA loop<sup>3</sup> into a coherent framework.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Yes, I <em>know</em> it’s not a ‘loop’, strictly speaking. .</p></div></div><p>Or at least better supply chains. I’d settle for that.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Between the Motion and the Act},
+  date = {2025-07-20},
+  url = {https://chrisvoncsefalvay.com/posts/agentic-simulation/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“Between the Motion and the
+Act.”</span> July 20, 2025. <a href="https://chrisvoncsefalvay.com/posts/agentic-simulation/">https://chrisvoncsefalvay.com/posts/agentic-simulation/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>philosophy</category>
+  <category>LLMs</category>
+  <category>ABMs</category>
+  <category>agentic AI</category>
+  <guid>https://chrisvoncsefalvay.com/posts/agentic-simulation/</guid>
+  <pubDate>Sun, 20 Jul 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The Snowmobile Symptom</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -21,7 +80,7 @@
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-45097"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-45097").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-81392"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-81392").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -119,7 +178,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-92641"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-92641").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-71226"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-71226").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -3945,105 +4004,6 @@ Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> <a href="https://doi
   <category>language</category>
   <guid>https://chrisvoncsefalvay.com/posts/llms-language/</guid>
   <pubDate>Sun, 15 Oct 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>How to do a SkiErg marathon entirely the wrong way (but still finish)</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/skierg-marathon/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Yesterday, I completed a marathon on the SkiErg, with a pretty respectable time (<a href="https://log.concept2.com/profile/177991/log/79965221">see results here</a>). I know I can do better, and I know I <em>will</em> do better. On the other hand, this was a marathon where I pretty much did everything wrong. And that was sort of an instructive experience in its own right.</p>
-<p>The title is somewhat misleading. Not much went wrong – the marathon itself was smooth sailing. At a 2:34.6 pace (min/500m), it was one of my better very long distance pieces – <a href="https://log.concept2.com/profile/177991/log/79735748">my ranked half-marathon pace at the time was 2:30.7</a>, and that was a very intentional, very prepared piece. There were also really no unexpected surprises in the process. On the other hand, I built up to this marathon the in worst way possible.</p>
-<section id="what-worked-for-me" class="level1">
-<h1>What worked for me</h1>
-<p>It’s probably important to be realistic ahead of all: I did go into this madness with some assets.</p>
-<ul>
-<li>For one, I’m a <a href="https://www.concept2.com/skierg/motivation/records/adaptive-world?event=&amp;gender=M&amp;age_category=30&amp;adaptive=31&amp;op=Search&amp;form_id=concept2_record_search_form#results">multiple world record holder in my adaptive class</a>. I know a thing or three about the SkiErg, and as a former rower, I’ve got every rower’s love-hate relationship with the erg.</li>
-<li>I’m a former multisport athlete, and I’ve been doing a lot of long distance pieces. I know how to cope with the boredom. Most people who go into a marathon have done a half, and maybe a 30k piece. I’ve done several split marathons in the past few weeks, as well as several 30k pieces.</li>
-<li>I’m probably in a pretty good state of overall fitness. I have enough of a gym habit to qualify as not exactly a couch potato. There’s a lot you can get away with if you have a decent <img src="https://latex.codecogs.com/png.latex?VO_%7B2_%7Bmax%7D%7D">, and even though I’m in a wheelchair, I do enough activity to stay in good enough cardiovascular fitness.</li>
-<li>I have an incredible boredom tolerance. Marathons are primarily psychological: we’re just not used to doing the same one thing, without interruption, for 3-5 hours anymore.</li>
-<li>I guess insofar as there’s such a thing as a genetic predisposition to be good at long distance physical activity, I’ve got the right genes. My dad is a multi-marathon athlete, so I likely have the right physiology.</li>
-</ul>
-<div class="quarto-embed-nb-cell">
-<div id="cell-fig-skierg-marathon" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div id="fig-skierg-marathon" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-skierg-marathon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://chrisvoncsefalvay.com/posts/skierg-marathon/index_files/figure-html/skierg-marathon-fig-skierg-marathon-output-1.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-skierg-marathon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Stroke level data for the SkiErg marathon.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<a class="quarto-notebook-link" id="nblink-1" href="skierg-marathon-preview.html#cell-fig-skierg-marathon">Source: skierg-marathon.ipynb</a></div>
-</section>
-<section id="how-not-to-do-a-marathon" class="level1">
-<h1>How not to do a marathon</h1>
-<p>There are generally three commonly accepted things to do for a good long distance piece:</p>
-<ul>
-<li>get some rest,</li>
-<li>carb load, and</li>
-<li>if you’re not doing an organised race, have someone check in on you and help with things like hydration.</li>
-</ul>
-<p>I’ve done exactly zero of these things. For starters, I did my marathon in the middle of 75 Hard, which in retrospect was not the best of ideas, as it meant that (1) I wouldn’t be able to take days off to rest, and (2) I wouldn’t be able to carb load as that would be outside my diet. I’ve also decided to do all this while my better half was away visiting family, so I was pretty much on my own.</p>
-<p>At 2am.</p>
-<div class="quarto-embed-nb-cell">
-<div id="cell-fig-skierg-marathon-regression" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-display">
-<div id="fig-skierg-marathon-regression" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-skierg-marathon-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://chrisvoncsefalvay.com/posts/skierg-marathon/index_files/figure-html/skierg-marathon-fig-skierg-marathon-regression-output-1.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-skierg-marathon-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Stroke level data of stroke length (metres) versus stroke duration (seconds).
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>Yes, that’s not a joke – I decided to do my marathon at a time when the world is falling apart at the seams, and so the only time I could find during which I could hope not to be interrupted with the latest crisis was late at night. So I woke up at 0130 hours, much to my dog’s chagrin, and headed down to my apartment building’s gym to torture myself for a few hours before the sun came up. Fortunately, the world decided to behave for those three and a half hours.</p>
-<p>I tried to counteract this to some extent by doing something I generally dislike: carbohydrate gels. A long, long time ago, in a galaxy far away, I ran the Watford half-marathon when I was still into actually running (by far the only reason I remember <em>where</em> that half-marathon was is because it was so miserable). It was a bitter cold day, and it actually started <em>snowing</em> in the middle of the damn thing. To keep myself mostly sane and nourished, I took some of these 100kcal sachets of carbohydrate gel. What I didn’t know, of course, was that that stuff would glue your mouth together unless you consumed enough water… which I didn’t. Bad idea. On the other hand, I am now older, wiser and able to afford much better and less sticky-tastic carbohydrate gels, so I thought I was going to have some. I didn’t feel much of an effect one way or the other. At one 100kcal sachet for every hour, I paced it a little slower than is commonly recommended (one sachet per every 45 minutes seems to be the consensus recommendation), but really didn’t feel much of an effect either way. In retrospect, I probably wouldn’t bother doing it again.</p>
-<p>As for rest, the best I could do is not do a long distance piece the day before the marathon. Indeed, I only did a relaxing 2k that day, which is about a fifth of my average daily SkiErg distance. Nevertheless, I think it was quite clear that with my ultra-low-carb diet, no carb loading and at best minimal replenishment (my average burn rate was around 5-600kcal/hr, and I took in 100kcal via the carbohydrate gels, so pretty much a drop in the ocean), I was running on fumes for most of it.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://chrisvoncsefalvay.com/posts/skierg-marathon/IMG_8541.jpeg" class="img-fluid figure-img"></p>
-<figcaption>Incidentally, my marathon time is also the SIT2 world record for my age group.</figcaption>
-</figure>
-</div>
-</section>
-<section id="takeaways" class="level1">
-<h1>Takeaways</h1>
-<p>My key takeaway from this experience was that we all should do a marathon under suboptimal conditions. Yes, doing a long distance piece at Bataan death march levels of calorie deficit is probably not super healthy, but you learn some interesting things about your body in the process. For starters, I think it was an interesting illustration of the fact that one’s overall level of fitness – especially <img src="https://latex.codecogs.com/png.latex?VO_%7B2_%7Bmax%7D%7D"> – matters a lot more than game day conditions. You can get away with a lot if you’re fit enough, up to and including running the show in quite sub-optimal circumstances.</p>
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {{Chris von Csefalvay}},
-  title = {How to Do a {SkiErg} Marathon Entirely the Wrong Way (but
-    Still Finish)},
-  date = {2023-10-13},
-  url = {https://chrisvoncsefalvay.com/posts/skierg-marathon/},
-  doi = {10.59350/68s7b-8c778},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“How to Do a SkiErg Marathon Entirely
-the Wrong Way (but Still Finish).”</span> <a href="https://doi.org/10.59350/68s7b-8c778">https://doi.org/10.59350/68s7b-8c778</a>.
-</div></div></section></div> ]]></description>
-  <category>fitness</category>
-  <category>SkiErg</category>
-  <guid>https://chrisvoncsefalvay.com/posts/skierg-marathon/</guid>
-  <pubDate>Fri, 13 Oct 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

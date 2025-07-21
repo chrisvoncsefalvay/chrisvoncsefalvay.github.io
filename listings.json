@@ -10,6 +10,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/agentic-simulation/index.html",
       "/posts/context-engineering/index.html",
       "/posts/noise-in-the-neurons/index.html",
       "/posts/agents-agora/index.html",

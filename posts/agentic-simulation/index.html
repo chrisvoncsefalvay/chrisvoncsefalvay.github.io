@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-10">
-<meta name="description" content="A short presentation on the risks and potentials of large language models in public health.">
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2025-07-20">
+<meta name="description" content="What if agents can do more than act?">
 
-<title>Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health – Chris von Csefalvay</title>
+<title>Between the motion and the act – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a986a95301e671fce2c6472dffc862a1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dbb97d4087b534fae0b20d4a7da373fe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,25 +82,22 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
 
-<meta property="og:title" content="Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health – Chris von Csefalvay">
-<meta property="og:description" content="A short presentation on the risks and potentials of large language models in public health.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/talks/prometheus-unbound/image.png">
+<meta property="og:title" content="Between the motion and the act – Chris von Csefalvay">
+<meta property="og:description" content="What if agents can do more than act?">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/agentic-simulation/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1024">
-<meta name="twitter:title" content="Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health – Chris von Csefalvay">
-<meta name="twitter:description" content="A short presentation on the risks and potentials of large language models in public health.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/talks/prometheus-unbound/image.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1024">
+<meta name="twitter:title" content="Between the motion and the act – Chris von Csefalvay">
+<meta name="twitter:description" content="What if agents can do more than act?">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/agentic-simulation/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health">
-<meta name="citation_publication_date" content="2024-01-10">
-<meta name="citation_cover_date" content="2024-01-10">
-<meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-01-10">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/talks/prometheus-unbound/">
-<meta name="citation_language" content="en">
+<meta name="citation_title" content="Between the motion and the act">
+<meta name="citation_author" content="Chris von Csefalvay">
+<meta name="citation_publication_date" content="2025-07-20">
+<meta name="citation_cover_date" content="2025-07-20">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-07-20">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/agentic-simulation/">
+<meta name="citation_language" content="en-GB">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -163,38 +161,48 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#slides" id="toc-slides" class="nav-link active" data-scroll-target="#slides">Slides</a></li>
-  <li><a href="#recording" id="toc-recording" class="nav-link" data-scroll-target="#recording">Recording</a></li>
+  <li><a href="#everything-old-is-new-again" id="toc-everything-old-is-new-again" class="nav-link active" data-scroll-target="#everything-old-is-new-again">Everything old is new again</a></li>
+  <li><a href="#simulaction" id="toc-simulaction" class="nav-link" data-scroll-target="#simulaction">Simulaction</a></li>
+  <li><a href="#the-possibility-machine" id="toc-the-possibility-machine" class="nav-link" data-scroll-target="#the-possibility-machine">The possibility machine</a></li>
+  <li><a href="#the-dream-of-the-swarm" id="toc-the-dream-of-the-swarm" class="nav-link" data-scroll-target="#the-dream-of-the-swarm">The dream of the swarm</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health</h1>
+<h1 class="title">Between the motion and the act</h1>
   <div class="quarto-categories">
     <div class="quarto-category">AI</div>
-    <div class="quarto-category">public health</div>
-    <div class="quarto-category">NBPHE</div>
+    <div class="quarto-category">philosophy</div>
+    <div class="quarto-category">LLMs</div>
+    <div class="quarto-category">ABMs</div>
+    <div class="quarto-category">agentic AI</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A short presentation on the risks and potentials of large language models in public health.
+    What if agents can do more than act?
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2024</p>
+      <p class="date">20 July 2025</p>
     </div>
   </div>
   
@@ -206,30 +214,47 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<p>Large language models (LLMs) like GPT have captured the public’s attention, raising both overinflated expectations of generalized artificial intelligence (AGI) and fears of a takeover of the machines. Yet, in the right hands, LLMs can be powerful tools for improving public health surveillance, detecting early signals of pathogenic outbreaks from noisy social media, and supporting data-driven decision-making at a hitherto unprecedented scale. This presentation will briefly introduce what LLMs are (and, more importantly, what they aren’t), followed by a discussion of possible applications in public health as well as their risks, concluding with an equity-centered perspective on creating safe and unbiased AI/ML tools. Public health experts will undoubtedly find themselves as consumers of, and sometimes interactors with, such models, making it all the more crucial to build a fact-based understanding of this new tool and discuss how its risks are best mitigated.</p>
-<p><a href="https://www.nbphe.org/nbphes-wednesday-webinar-series/">Organised by the National Board of Public Health Examiners as part of their Webinar Wednesdays</a> and open to the public, you can <a href="https://zoom.us/webinar/register/WN_vOFBBvD7SXqFARPHYrIqkA">register here</a> for the webinar on 10 January 2024 at 3pm ET.</p>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides are available <a href="prometheus_unbound.pdf">here</a>.</p>
+<p>There’s a curious terminological schism that nobody talks about at what passes for dinner parties for the AI crowd. When Russell and Norvig crystallised the definition of an ‘agent’ in their 1995 book – “an entity that perceives its environment through sensors and acts upon it through actuators” –, they seemed to have a particular notion of agency that today’s AI agents fit perfectly: they perceive prompts, process context and act by generating text, calling APIs or executing code. To those of us who cut our teeth on agent-based modelling, this is a little “yes, but”. We have been cheerfully using the same word for something apparently different: simulated entities that exist only in computational Petri dishes, perceiving and acting upon nothing more substantial than bits and simulation spaces. One might reasonably ask whether we’ve been guilty of terminological theft, awkwardly appropriating a word that doesn’t quite fit. But what if the divergence is an illusion? What if simulation and action aren’t opposing categories but different points on the same spectrum of agency?</p>
+<section id="everything-old-is-new-again" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="everything-old-is-new-again">Everything old is new again</h2>
+<p>This is the way of all technological revolutions.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> We become so intoxicated by the new that we forget the profound insights buried in what came before. It’s rather like discovering molecular gastronomy and suddenly forgetting that your grandma’s stock pot held secrets that no amount of liquid nitrogen could replicate. I’ve spent considerable time with agent-based models – enough to devote an entire chapter to them in <em>Computational Modeling of Infectious Disease</em> –, watching imaginary pathogens spread through synthetic populations.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> These populations existed purely in silico, bumping into each other according to rules we painstakingly crafted to mirror the messiness of human behaviour. Beautiful, horrifying and above all, instructive.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I will to my dying day resist calling it a <em>paradigm shift</em>. A paradigm shift is when your mental model changes. A revolution is when the world changes. A guillotine is what happens when the second of these occurs without you responding timely enough with the first.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;It’s been a perverse pleasure of mine to do so over places I knew well. My book has a geospatial simulation of RESTV, which would have rather early reached my home, less than 10mi from the epicentre.</p></div></div><p>These agents weren’t trying to book your flights or write your emails. They were thinking machines in the truest sense – not because they possessed consciousness, but because they allowed us to think through them. They acted as our cognitive tools, extending our ability to reason about complex systems by playing out scenarios we couldn’t possibly compute in our heads (never mind simulate in a lab). To the rather less abstract-disposed AI community, agents meant more. They could be more than passive observers: they could be actors in the world, semi-embodied (for now), commanding not physical bodies but prehensile digital limbs of APIs, MCP calls and A2A connections.</p>
+<p>This split felt natural, even inevitable. After all, why merely simulate when you could actuate? Why watch synthetic populations of stock brokers trade imaginary shares when you could build agents that trade real ones and get silly rich in an afternoon? The logic seemed unassailable. But we’ve been victims of a false dichotomy – treating simulation and action as opposing categories rather than complementary modes of agency that desperately need reunification: for the sake of both domains.</p>
 </section>
-<section id="recording" class="level2">
-<h2 class="anchored" data-anchor-id="recording">Recording</h2>
-<p>To be updated once the recording is available.</p>
+<section id="simulaction" class="level2">
+<h2 class="anchored" data-anchor-id="simulaction">Simulaction</h2>
+<p>What I’m proposing isn’t just a nostalgic return to ABM. It’s a reconciliation, a synthesis. Imagine agent ecosystems where contemplative swarms continuously simulate possible futures, while their active cousins execute in the present. The simulators become the dreamers, the actors become the hands.</p>
+<p>This isn’t as far-fetched as it might sound. In my own work in computational epidemiology, we’ve long used simulations to inform policy. But these were sempre disconnected processes – we’d run our models, generate our reports, and hope someone would read them. What if, instead, the simulation agents could directly communicate with action agents?</p>
+<p>Picture this: a swarm of ABM agents continuously simulating supply chain dynamics, playing out scenarios of disruption, adaptation, and recovery. When they converge on a particularly robust finding – say, a vulnerability in a specific shipping route – they don’t generate a `ggplot``. They A2A an action agent that can address it.</p>
+</section>
+<section id="the-possibility-machine" class="level2">
+<h2 class="anchored" data-anchor-id="the-possibility-machine">The possibility machine</h2>
+<p>The concept of world models in robotics offers us a profound insight: simulation isn’t just about prediction, it’s about exploration. When a robot in Isaac Sim attempts a thousand different ways to grasp an object, it’s not trying to predict which one will work. It’s building an experiential understanding of the entire possibility space. This is precisely what we need in agentic AI systems: not agents that try to predict the future (that way lie madness and margin calls) but agents that understand the shape of possible futures. They need to know not just what might happen, but how different actions change the topology of this possibility space.</p>
+<p>In practice: a financial services firm might deploy simulation agents not to predict tomorrow’s stock prices but to understand how different market conditions interact. These agents would run thousands of parallel explorations of the decision space. What happens if interest rates rise while supply chains remain constrained? What if consumer confidence drops but corporate earnings stay strong?</p>
+<p>The active trading agents would then use the carefully mapped picture of the possiblity space and know which actions open up more options, which close them down, which create resilience and which create fragility. In turn, the real-world outcomes as perceived and reported by the active trading agents would ground the simulation’s futures (no point in simulating what doesn’t work). Did that supply chain intervention help? Was their call to follow earnings reports over consumer sentiment the right one? The simulation agents need to know how to update their models – how to dream better dreams next time.</p>
+<p>The practical implications of this ‘possiblity machine’ are of course technologically challenging. The nitpickers (and I say that with love – pedantry is just rigour in a bow tie) will immediately spot them: how do we ensure consistency between the simulated worlds and the actual world? How do we implement that feedback? How do we create guardrails without excess transparency? How are we going to pay for all this?</p>
+<p>I remain sanguine about the fusion of simulation and action for two reasons, despite acknowledging the validity of each and every one of these concerns. For one, these are technical concerns, and those tend to get solved as time converges to whatever it converges towards. On the other hand, they’re also indicative of bigger questions, and that always hints at there being not a wall but a wardrobe-gate to some hitherto unexplored aspects of reality. These concerns ultimately are fundamental questions about the nature of agency, simulation and reality. To me at least, they point the way towards the simulation/action paradigm’s version of the question of the agentic agora: how we move from message passing to shared state spaces (some of which might even be real).</p>
+</section>
+<section id="the-dream-of-the-swarm" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-dream-of-the-swarm">The dream of the swarm</h2>
+<p>At no point am I talking about a notion of what the ‘right’ job is for agents, simulation or action. Rather, I’d like to see both coexist in productive tension, each making the other more effective. The simulation swarms dream of a diverging universe of futures that action agents sample, enact and critique in view of their perception of reality. Like the neighbour’s annoying lawn mower on a Sunday afternoon, those observations filter back into the dreams. Something mostly akin to insight, maybe even wisdom, emerges – of the kind that neither breed of agents with a limited purview could on its own attain.</p>
+<p>The agentic revolution gave us agents that could do. ABMs gave us agents that can dream – and more importantly, agents that can learn from those dreams. And in the space between dreaming and doing, we may find a new paradigm that unifies the entire OODA loop<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> into a coherent framework.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Yes, I <em>know</em> it’s not a ‘loop’, strictly speaking. .</p></div></div><p>Or at least better supply chains. I’d settle for that.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{2024,
-  author = {},
-  title = {Prometheus {Unbound} - {The} {Potential} and {Risks} of
-    {Large} {Language} {Models} in {Public} {Health}},
-  date = {2024-01-10},
-  url = {https://chrisvoncsefalvay.com/talks/prometheus-unbound/},
-  langid = {en}
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Between the Motion and the Act},
+  date = {2025-07-20},
+  url = {https://chrisvoncsefalvay.com/posts/agentic-simulation/},
+  langid = {en-GB}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-<span>“Prometheus Unbound - The Potential and Risks of Large Language
-Models in Public Health.”</span> 2024. January 10, 2024. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound/">https://chrisvoncsefalvay.com/talks/prometheus-unbound/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2025. <span>“Between the Motion and the
+Act.”</span> July 20, 2025. <a href="https://chrisvoncsefalvay.com/posts/agentic-simulation/">https://chrisvoncsefalvay.com/posts/agentic-simulation/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
