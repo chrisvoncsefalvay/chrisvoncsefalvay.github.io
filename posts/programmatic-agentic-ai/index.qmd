@@ -1,0 +1,77 @@
+---
+categories:
+- AI
+- LLMs
+- agentic AI
+citation: true
+date: 2025-07-26
+description: 'Prompting is fine if you want to have a conversation. Building stuff, however, requires us to learn to program LLMs. Sorry, vibe coders.
+
+  '
+google-scholar: true
+notebook-links: global
+title: 'A little less conversation: why we need to move from prompting to programming'
+---
+
+The Greeks _loved_ oracles. The average temple of Apollo, who among others was in charge of soothsaying and predictery, was adorned to the gills with gifts from grateful worshippers whose inscrutable questions got equally inscrutable answers from Apollo's oracles. None of these were more famous than the Pythia, the young ladies high as a kite on volcanic fumes at Apollo's temple in Delphi. As one would expect from what is basically predictive analytics on an acid trip, one really had to interpret the words of the Pythia rather carefully. More than that, however, one also had to ask the right questions, phrased in exactly the right way. Entire schools of thought emerged around the art of oracle consultation. In short, the Greeks basically invented prompt engineering.
+
+We seem to have recreated this rather primitive arrangement in our relationship with large language models. We approach them as digital oracles, crafting increasingly elaborate incantations, hoping that the precise arrangement of words will conjure the responses we need. The sad irony is that while we're busy been perfecting this ancient art of consultation,^[See [our first go at the subject (prompt engineering, may it rest in peace)](../prompt-engineering/) and [a much more promising second attempt (context engineering)](../context-engineering/).], we might well lose track of the architectural revolution that could make it obsolete.
+
+Because here's a bitter truth: the true promise of agentic AI -- of systems that can reason, plan, and act autonomously -- has been hobbled by our oracular mindset. We've built chatbots that can hold impressive conversations but struggle with the systematic, multi-step reasoning that true agentic, interoperable and complex AI demands. We've created systems that can write poetry and solve puzzles but fall apart at fairly simple executive functions.^[In this sense, the author of these lines is not terribly different.]
+
+The missing piece, I've come to believe, lies not in making our models larger or our prompts cleverer, but in recognising that agents are fundamentally programs and not conversations. And programs need to be architected, not negotiated with.
+
+When I first encountered [DSPy](https://dspy.ai/) last autumn, I had one of those peculiar moments of recognition that feels simultaneously like discovering something entirely new and remembering something you'd forgotten you knew. Here was a framework that treated language models not as oracles to be cajoled with increasingly elaborate incantations, but as computational components to be programmed. It was the architectural foundation that agentic AI had been missing – a way to build systems that think in terms of logic and structure rather than rhetoric and persuasion. And it was a stark reminder that we've been going about this all wrong -- we don't need better prompts, we need to stop prompting altogether when it comes to things that aren't conversations but processes.
+
+## Don't let me be misunderstood: the problem with prompting
+
+Consider the current state of affairs. You want your AI system to analyse customer complaints, extract key issues, route them to appropriate departments and generate response templates. In the prompt-centric world, this becomes an exercise in linguistic archaeology: you dig through layers of carefully worded instructions, examples and formatting requirements, hoping that the precise arrangement of words will conjure the behaviour you want.
+
+But hope isn't a policy. This is rather like trying to control a sophisticated piece of machinery by writing it very polite letters. You might get results, but you're fundamentally misunderstanding the nature of what you're working with.
+
+DSPy, the framework developed by Stanford's NLP group, represents a different philosophy entirely.^[And really, this isn't a fluff piece on DSPy. I don't see many mature, well-built tools that accomplish the same, so DSPy is fundamentally a synonym for what it is and what it implements. I am concerned with the latter. If/when something better emerges, I'm happy to move that way.] Instead of prompting, you program. You define what you want to happen using signatures -- declarative specifications of input and output behaviour, as in, function sigs -– and let the system figure out how to make it happen. A signature like `question -> answer` or `customer_complaint -> {issue_category, priority_level, suggested_response}` tells the system what transformation you need without getting bogged down in the specifics of how to ask for it.
+
+This might seem like a subtle distinction, but it's actually profound. When you program, you're working at the level of logic and structure. When you prompt, you're working at the level of persuasion, rhetoric and Nina Simone's 1964 banger, _Don't Let Me Be Misunderstood_. The difference should be obvious.
+
+
+## Models All the Way Down: The architecture of agency
+
+What this means is, however, is that your invocation of your LLM itself becomes amenable to optimisation the same way we optimise code to hell and back. I hope the analogy is clear here: when you have something amenable to being reduced to, say, an AST, that AST can then be manipulated, permuted, its permutations tested for how well its outcomes reflect some desideratum as expressed by a loss function, and basically I just described computational optimisation. We've done this for ages. We can do this for LLM prompts, and DSPy does that just fine. But if we approach the whole thing not as an exercise in begging the Pythia of OpenAI, Anthropic or your poison of choice to give us the right answer but as a cold, hard optimisation problem that we can sic Gurobi on, the whole story changes.
+
+An agent, properly so called, should be a program that uses a language model as one of its computational primitives. The LLM provides the base capability -– pattern recognition, text generation, reasoning -– but the agent provides the structure, the error handling, the multi-step logic and the task-specific adaptations. How we address these makes the difference between software engineering and standing half-naked wearing a sheepskin and offering gold to intoxicated young ladies who will try to convey the wisdom of Apollo. This is why so many current "agentic" systems feel brittle: they're essentially elaborate prompt chains rather than proper programs. There's an upper limit to how much you are going to get out of a system where you can't even guarantee you will be understood, never mind complied with.
+
+So: building proper agents is not about more sophisticated prompting, but more sophisticated programming. An agent that can genuinely plan, adapt, and execute complex tasks needs the kind of robust, composable architecture that DSPy begins to provide. When you can define clear signatures for each component of an agent's reasoning process -- perception, planning, action, reflection -- and compose them into reliable workflows, you're building something qualitatively different. Just as you expect the plane you're about to board to have been designed by people who know aerodynamics and not people unusually successful at arcane chants to the gods of flight, you would expect your agentic systems to be programmed on a solid basis and not at the mercy of whether your particular verbal tics happen to sample close enough into the model's gradient well to 'get' what you mean.^[Or, in other words: if we wanted to hinge systems on the frailties of human communication, we ought to be dissuaded from that by the fact that all in all, we're absolutely _terrible_ at it. The fact that we can communicate at all is a bloody miracle, not a given. Anybody who disagrees is politely invited to read a history book, a comment section or your local family law reporter of choice.]
+
+
+## This might hurt a little
+
+There's a practical dimension to this that's often overlooked in the rush to anthropomorphise our AI systems. When you treat an LLM as a conversational partner rather than a computational component, you end up optimising for the wrong things. You fine-tune the model when you should be fine-tuning the program. You add more examples to your prompts when you should be improving your error handling. You scale up to larger models when you should be scaling up your architectural sophistication.
+
+Let's be clear -- there are circumstances where you _do_ want language models to behave like conversational partners. Agents 'prompted' to do something, or 'prompt engineered' to make it somewhat clearer, is exploiting a hack. It's a side effect at best. It turns out, and I'd say most of us did not expect this outcome, that a good enough language model can be cajoled into being something almost like a programming language. But of course 'almost like' isn't the same as 'is'. And the more we try to make it so, the more we end up with systems that are brittle, hard to maintain and difficult to adapt.
+
+I'm reminded of a conversation I had earlier this year with an engineer who'd spent months trying to get GPT-4 to reliably extract structured data from medical records. He'd tried every prompting technique in the book: few-shot learning, chain-of-thought reasoning, even constitutional AI approaches. The results were impressive but inconsistent – exactly what you'd expect when you're asking a general-purpose pattern matcher to perform a highly specific, structured task. When we rebuilt the system using a DSPy-like approach over a weekend largely fuelled by the kind of coffee that is probably governed by the Wassenaar Agreement, we improved its reliability not by creating the better mousetrap of prompt improvement but by actually treating it as a coding problem. We defined clear signatures for the input and output, built a robust error handling layer and let the model do what it does best: generate text based on structured instructions rather than trying to divine meaning from poorly phrased requests.
+
+This is the future of agentic AI: systems where the intelligence is in the architecture, not just the model.
+
+
+
+## The future of agentic programming
+
+How do you know time spent in a cooking class is worth the often fairly eye-watering prices you're charged? Simple. Good schools teach you how to make the perfect insert-your-favourite-dish-here. Great schools teach you how to cook, and use the dish as an example. They teach principles. Principles scale. Or, to put it in terms that I prefer: they exhibit domain adaptation. 
+
+So does good code. The tools I used to optimise ad campaigns as a young data scientist are the same tools, with some small adaptations, that we use to find new drugs, or figure out how to schedule the right Instacart order (King Sooper's has the milk I like, Whole Foods has the eggs, Marczyk's has the meat, and I don't want to go to either of them, so I need to figure out how to get the right order from the right store at the right time). The same principles apply to agentic AI. A good system doesn't need us to get the liturgy just right. We should be able to just program it like it's 1804.
+
+The companies that figure out how to build genuinely programmable AI systems –- systems where you can define complex behaviours using high-level abstractions rather than string manipulation –- will have a sustainable advantage over those still crafting artisanal prompts. Not because their models are necessarily better, but because their systems are more reliable, more maintainable, and more adaptable. Getting language right is an art. There are way more good scientists than there are good poets, and even good poets sometimes write execrable verse. If we actually decide to practice AI engineering, as opposed to AI poetry with a tinge of praying to the oracles, we've not only managed to play our part in dragging AI kicking and screaming into the 21st century, but also turned it into a proper practical engineering discipline. 
+
+We're heading towards a world where the most successful AI systems will be those that treat language models as sophisticated libraries rather than conversational partners. The intelligence will emerge from the interaction between well-designed programs and powerful models, not from increasingly elaborate attempts to sweet-talk those models into doing what we want. It's a future I find rather appealing. The best technology is the kind that disappears into the background, doing its job reliably without demanding constant attention. Prompt engineering, for all its current necessity, represents the opposite of this ideal: technology that requires continuous human intervention to function properly. That's why it never became the big thing it was promised to be by those who sold $600 courses on how to write the perfect prompt ([as I indeed predicted](../prompt-engineering/)). 
+
+
+## Coda: The battle of Apollo and Metis
+
+There's something liberating about approaching AI systems as programming problems rather than communication challenges. It shifts the focus from increasingly baroque prompt engineering to a scientific approach that holds the promise of actually building reproducible, feature-rich, genuine agents.
+
+As someone who's spent considerable time in both computational and more traditionally humanistic disciplines, I find this transition fascinating. We're essentially rediscovering, in the context of AI, the same lessons that led to the development of high-level programming languages, operating systems and databases: abstraction layers matter, separation of concerns is crucial, and the right architectural choices can make impossibly complex problems surprisingly tractable.
+
+The Greeks eventually moved beyond the Pythia. They developed philosophy, mathematics, and systematic methods of inquiry that didn't require cryptic pronouncements from on high. In the same way, the path to genuine agentic AI lies not in perfecting our consultation with digital oracles, but in building systems that can reason, plan, and act without needing to be asked the right questions in just the right way. The future belongs not to those who can craft better conversations but to those who can write systems that don't need them at all. 
+
+We've consulted the oracles long enough. It's time we turned from Apollo to Metis, from cryptic pronouncements to clear blueprints and ultimately, from the vagueness of prompting to the clarity of programming. The future of agentic AI is not in the words we use, but in the systems we build. And that future is looking brighter than ever.
