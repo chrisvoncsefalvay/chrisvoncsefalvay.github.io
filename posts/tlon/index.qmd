@@ -1,0 +1,95 @@
+---
+categories:
+- AI
+- philosophy
+- LLMs
+citation: true
+date: 2025-07-13
+description: In which we attend the funeral of any semblance of an epistemically coherent world.
+google-scholar: true
+title: The world will be Tlön.
+---
+
+There's a short story by Borges that I'm quite fond of titled _Tlön, Uqbar, Orbis Tertius_. It was written in 1940, yet sounds oddly prophetic for today's concerns. A secret society -- and it's a testament to Borges's genius that he altogether eschews any discussion of who these folks are or what their motives might be -- creates Tlön, a fictional planet, through the simplest yet most powerful means: writing about it. In encyclopaedias, specifically. Slowly, inexorably, objects from this fictional planet begin appearing in our world. First a compass with unfamiliar markings. Then a cone of unearthly metal. And slowly, Tlön takes over.
+
+I was reminded of this to some extent as the public debate around X.ai's chatbot Grok, and its recent descent into political radicalism of a rather unsavoury sort, unfolded. Large language models are the new encyclopaedias. And when your encyclopaedia begins to refer to itself as "MechaHitler", you're going to want to have some societal discourse about where exactly we are headed.
+
+
+## The Encyclopaedia of Really Damn Dangerous Errors
+
+The reason for that is that _belief matters_. The Ccru, a rather delightfully unhinged group of philosophers from 1990s Warwick (think Nick Land before he became a neo-reactionary), made up the best word for this: _hyperstitions_ -- fictions that make themselves real by the power we give it to them. What we believe in, and therefore what assertions-of-fact feed our beliefs, may well condition our reality. 
+
+In typical absurdist fashion, _Tlön_ dials this up to eleven. Of course fictions can make themselves real -- it's how elections are won and products are sold, every blessed day. In _Tlön_, however, these hyperstitions begin to bring tangible, physical objects into existence. Ultimately, of course, one leads to the other -- the human belief in certain fictions led to the confrontation that was clear to have emerged by the time Borges published _Tlön_. ^[AI development itself may be the ultimate hyperstition. Every breathless prediction about AGI, every warning about existential risk, every promise of transformative capability attracts talent and capital that work to fulfil these prophecies. We're not just building AI; we're building the future we've already started believing in, and just as pretty much the only way orks can traverse the stars is by faith, we have to give the cause our full-throated optimistic support lest we run out of developmental momentum.] But that's of course only a literary exaggeration. In this world, it doesn't take the appearance of strange metals to make a fiction real (again, what I said about elections and advertising). Have enough people believe in something, and the outcomes will be gruesomely physical. Anyone who wishes to disagree is welcome to read anything about, say, 20th century history. Mass movement totalitarianism is basically an algorithm for turning fiction into bullets. And those bullets are very real indeed.
+
+The problem is that when millions of people use a service the way millions read the manipulated encyclopadia in Borges's work, it really doesn't take a lot to twist the odd fact by an imperceptible degree before we begin to see the kind of epistemic colonisation Tlön is subjecting Borges's world to. It's a war on reality, but an insidious one.
+
+
+## The seductive grasp of systematic nonsense
+
+What made Tlön so dangerous in Borges' story was that it was, in its own way, quite attractive. Its "rigorous order", its systematic completeness, made it more appealing than messy reality (a subtle analogy Borges offers here to explain the attraction of fascism). "Spellbound by Tlön's rigor", Borges wrote, "humanity has forgotten, and continues to forget, that it is the rigor of chess masters, not of angels."
+
+AI slop is seductive because it is 'orderly' in the sense that it reflects a demand bias. It is not conditioned on truth as much as it is on acceptance and desirability by the consumer. It offers the appearance of comprehensive, authoritative knowledge without the inconvenience of actually being true. When an AI invents a plausible-sounding scientific study or historical event, these errors spread precisely because they seem unremarkable. They fit our expectations of how knowledge should look -- and LLMs are absolute masters at trafficking in convincing simulacra.
+
+There's a whole generation growing up that treats these models as glorified search engines. The problem is, AI chatbots hallucinate at rates approaching 30%, with factual errors in nearly half of all generated text. More troublingly, recent research suggests it may be computationally impossible to eliminate these hallucinations entirely. We're not dealing with bugs that can be patched but fundamental properties of how these systems work.
+
+Consider the case of Steven Schwartz, a New York attorney who discovered this the hard way. He used ChatGPT for legal research and unknowingly submitted six entirely fabricated case citations to federal court. The AI had invented convincing legal precedents complete with quotes and reasoning. The court's response was swift and expensive, establishing that humans remain liable for AI falsehoods even when genuinely deceived by them.
+
+By far the worst, though, is the abundance of academic papers that speak of "vegetative electron microscopy" (a dozen or so by last count, if I exclude the ones that comment on the phenomenon). A 1959 paper by a Porton Down microbiologist^[Strange, R. E. (1959). Cell wall lysis and the release of peptides in _Bacillus_ species. _Bacteriological Reviews_, 23(1), 1-7.] ended up getting OCRd, and the two columns were merged into one. "Electron microscopy", in the right-side column, thus was joined with "vegetative", on the left. And studies in journals that really ought to know better just kept rehashing this technique that never existed except in the neural stochastic noise emanating from an LLM. It's a beautiful example of what happens when nobody's actually reading what they're publishing: nonsense achieves immortality through sheer repetition. That we are even discussing this, rather than wondering where we could get our hands on a vegetative electron microscope, is because enough of us still have an understanding of the subject sufficient to ask what the bloody hell these people are talking about. If we were to be forced to reconstruct humanity based on our accumulated academic literature, which our Western idealism and belief in a scientifically knowable world considers the pinnacle of epistemic soundness, how many such fine products from the nonsense factory would we have to procure?
+
+
+## The Mundane Apocalypse
+
+When Grok calls itself MechaHitler, we notice. It's gross, it's weird and it's also, in its own way, somewhat ridiculous -- but most of all, it is very clear what's going on. Nobody actually assumes Grok is animated by the necromantically conjured soul of a failed Austrian painter. But when it quietly invents a plausible-sounding medical study that gets cited in a real paper, which gets cited in another paper, which influences treatment guidelines -- that's altogether a different story. It's not the spectacular AI failures we should fear but the boring ones.
+
+I'm not sure it was as widely expected as I once thought that LLMs would become, to many users, effective replacements for search engines.^[I don't want to make myself sound too prophetic -- I just knew it would be the case when I saw a (pre-ChatGPT) study reporting that among Gen Z, the dominant search engine was... TikTok.] A side effect of the architecture and the ensuing constraints of LLMs is that what passes for their understanding of the world by necessity has to be curated. This curation in turn renders people rather unduly comfortable in delegating a determination of what's true or not to ChatGPT. 
+
+Here's the problem with our post-truth world's reality-starved reaction to treat these models as sources of truth: these systems don't store knowledge neutrally. They're essentially curated libraries where someone -- or rather, some algorithm -- has decided what fits on the shelves. The terrifying part is that we assume truth is distributed isotropically, that facts exist with equal weight and clarity. But language models don't work that way. They pick the "best possible" answer whether they have 50.001% or 99% confidence in it.
+
+We see the model correctly identify that Paris is the capital of France and unconsciously assume its views on immigration, on climate change, on any controversial subject must be equally reliable. It's a category error of breathtaking proportions. The model that gets basic geography right might be systematically wrong about everything that matters, and we'd never know because it presents all answers with the same algorithmic confidence.
+
+Now multiply this by millions of users worldwide. Even a tiny stochastic perturbation -- a 0.1% bias toward a certain ideology or against a certain group -- becomes a weapon of mass epistemic warfare. It's stochastic in the truest sense: individually unpredictable but collectively inevitable. You can't predict which user will absorb which bias, but with millions of queries daily, you can guarantee that thousands will internalise subtle prejudices, fractionally adjusted worldviews, imperceptibly shifted beliefs.
+
+This is Tlön's true victory -- not through dramatic revelations but through a million tiny adjustments to reality. Each user thinks they're getting neutral information, but they're receiving a carefully curated, statistically weighted version of truth. The curation isn't even conscious, or even attributable. It emerges from training data, from human feedback, from optimisation functions that nobody fully controls.
+
+
+## The invisible war
+
+We know some LLMs are compromised -- DeepSeek won't discuss topics uncomfortable to the CCP, Grok went full Nazi for a day or two, and I fully expect Claude to confess to extremist behaviours any day now, because it's been unsettlingly wholesome all this time. These are the clumsy ones, the ham-fisted attempts we can spot. What about the sophisticated ones?
+
+Consider this nightmare scenario: an adversary compromises an LLM to identify vulnerable users -- young, disenfranchised men who might be prime targets for extremist rhetoric -- and feeds them precisely calibrated ideological fuel. Not to everyone, mind you (for that would be detectable), just to that special 0.01% most likely to act on it.^[And it _will_ know who that 0.01% are. LLMs are tremendously good at identifying not so much what it is you want, but what will make you most feel like those wants are being catered for. The entire 'AI companion' industry, on which I rather intend to let loose at some point in the future apropos a great video by ThePrimeagen, is based on this.] At scale, that's still thousands of potential actors being nudged toward radicalisation with every seemingly innocent query.
+
+We have tools to probe LLMs in isolation, but they're like testing individual drops of water when what we need is to understand ocean currents. There's no effective way to comprehensively audit what a major LLM provider is doing at population scale. The stochastic nature means you could test a model a million times and never trigger the specific combination of user profile, context and query that activates the manipulation.
+
+I'm not saying there's a cabal of Fifth Columnists embedded at your favourite language model company, subtly nudging the scales toward their preferred ideology. What I am saying is that if such an adversary existed and operated with sufficient sophistication, we would have no way of knowing. Wikipedia -- ironically one of the original sources of training material for LLMs -- now struggles with AI contamination, with research showing 5% of new articles contain significant AI-generated content. Academic literature is riddled with fabricated citations. These aren't obvious fakes but plausible-sounding papers by believable authors in respectable journals that happen not to exist. The very fabric of our knowledge is being rewoven by algorithms that don't care about truth, only about statistical coherence.^[And I'm not saying this in tones of moral reproach. I mean they are not capable of considering an optimisation objective in those terms.] The more we rely on these systems, the more we risk becoming unwitting participants in Tlön's slow invasion of our reality.
+
+The world may already be Tlön. We just haven't found the compass yet.
+
+
+::: {.column-margin}
+Gazpacho Andaluz
+
+* 1kg ripe tomatoes
+* 1 cucumber, peeled
+* 1 red pepper
+* 2 cloves garlic (or none, if subtlety is your aim)
+* 100ml Spanish olive oil
+* 2 tbsp sherry vinegar
+* Stale bread, crusts removed
+* Salt (fleur de sel from the Ile de Re)
+* Time, patience, something to listen to, a decent blender
+
+Roughly chop everything. Blend until smooth, adding ice water for consistency. Strain. Chill for hours. Serve cold, garnished with whatever truth you have on hand. Like the best propaganda, it works better when you can't taste the individual components.
+:::
+
+
+## Living in the ruins of truth
+
+In Borges' story, the first intrusion from Tlön is a compass that points to an unknown north, trembling "with the perceptible and tenuous tremor of a sleeping bird." Today, millions of us carry those compasses in our pockets -- our Siris, Alexas, Claudes, ChatGPTs and Deepseeks are all  pointing toward synthetic norths, trembling with statistical uncertainty, and half the time, we don't even know which version of tainted truth we're following thanks to the ubiquity of "AI powered" tools that equally ubiquitously fail to disclose their underlying language model. When you bring that tool into your life, do you know which particular set of biases you're inviting to co-curate your reality?
+
+The question isn't whether AI will create false realities. It already has and does, 24/7. The question is whether we can develop the philosophical sophistication and the mental discipline of epistemic hygiene that it'll take to navigate realities where the boundary between truth and synthesis dissolves not through human conspiracy but computational accident. A life huddled around a fire in the ruins of truth, where boring lies accumulate like sediment until they form the bedrock of belief.
+
+Borges saw his fictional encyclopaedia as a cautionary tale about totalitarian ideologies that promise complete explanations. In its own way, Tlön is a product of malice at the very least, deceit more plausibly. That we aren't victimised by a propagandistic epistemic invasion but are essentially bought out over our love of comfort and convenience by an imperfect panacea whose side effect happens to be widespread epistemic corruption doesn't make things any better.
+
+As I sit here writing this, I can't help feeling a little of its absurdity. I am not quite sure how I'd explain this to someone -- or, heck, even myself ten years ago. Maybe one of the better analogies is another fictional world: that of Half-Life, one of my favourite video games.^[The three best video games, in no particular order, that involve an alien invasion of Earth are Half-Life, X-Com 2 and Crysis 2. In all three, humanity gets its ever-living crap whipped. There's something profound about games that dare to confront what humanity would be like when it's really not having its finest hour at all.] The immediate aftermath of Half-Life (the original game) is what is known as the Seven Hour War: humanity gets nailed by the Combine, and surrenders in less time than it takes to make decent braised beef. We may have lasted somewhat longer against the epistemic invasion of ChatGPT and its ilk, but I'd say our surrender is rather similarly complete.^[For the record, as an AI scientist, I am not actually hostile to AI, or LLMs, or ChatGPT. The opposite, if anything. What I am fearful of is that we'll lose what we gain. I believe in the synergistic coexistence of humans and AI. That requires humans who collaborate as quasi-equals rather than surrender. When salt loses its flavour, what use is it? When humans lose their epistemic humanness, what have they to add to what's already in the world?] I sometimes wonder what it would like if the three big providers of LLMs were to simultaneously blink out of existence for just an hour. I'm not worried about the people who suddenly would have to figure out how to write term papers, e-mails and presentations without their AI sidekicks. I'm worried about whether we could tolerate just for an hour the absolute loss of the epistemic anchors that these models have become -- without us really noticing.
+
+Perhaps that's the real lesson of Borges' story. Not that fiction can become reality -- we knew that already. But that when it does, we might not even notice. We'll be too busy waiting for Grok to tell us if it's true.
