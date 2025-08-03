@@ -51,9 +51,7 @@ jobs:
             git add posts/
             
             # Commit with detailed message
-            git commit -m "Update DOI information from Rogue Scholar API
-
-This automated commit updates YAML frontmatter in blog posts with DOI information fetched from the Rogue Scholar API during the build process."
+            git commit -m "Update DOI information from Rogue Scholar API - automated update of YAML frontmatter with DOIs"
             
             # Push with error handling
             if ! git push; then
