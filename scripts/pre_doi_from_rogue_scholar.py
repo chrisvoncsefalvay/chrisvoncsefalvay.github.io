@@ -26,8 +26,11 @@ def fetch_dois_from_api(url: str) -> Dict[str, str]:
         response.raise_for_status()
         data = response.json()
         
+        # The API returns an object with 'items' array containing the posts
+        posts = data.get('items', [])
+        
         posts_with_dois = {}
-        for post in data:
+        for post in posts:
             title = post.get('title', '')
             doi = post.get('doi', '')
             # Remove the https://doi.org/ prefix if present
