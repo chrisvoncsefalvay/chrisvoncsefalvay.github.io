@@ -37,13 +37,29 @@ jobs:
           git config --global user.name 'Chris von Csefalvay'
           git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'
           
-          # Capture output of git status
-          CHANGED=$(git status --porcelain)
+          # Capture output of git status for posts directory only
+          CHANGED=$(git status --porcelain posts/)
       
           if [ -z "$CHANGED" ]; then
-            echo "No changes to commit."
+            echo "No changes to commit in posts directory."
           else
-            echo "Changes found. Committing..."
-            git commit -am "Automated commit of changes to source files"
-            git push
+            echo "Changes found in posts directory. Committing..."
+            echo "Modified files:"
+            git status --porcelain posts/
+            
+            # Add only posts directory to avoid committing other unintended changes
+            git add posts/
+            
+            # Commit with detailed message
+            git commit -m "Update DOI information from Rogue Scholar API
+
+This automated commit updates YAML frontmatter in blog posts with DOI information fetched from the Rogue Scholar API during the build process."
+            
+            # Push with error handling
+            if ! git push; then
+              echo "Failed to push changes. This may be due to concurrent builds."
+              echo "Attempting to pull and retry..."
+              git pull --rebase origin main
+              git push
+            fi
           fi
