@@ -5,8 +5,7 @@ categories:
 citation:
   doi: 10.59350/k9kka-90x56
 date: 2023-11-06
-description: 'What something is isn''t the same as what it uses to manifest that being.
-  Also, robot CEOs are nonsense.
+description: 'What something is isn''t the same as what it uses to manifest that being. Also, robot CEOs are nonsense.
 
   '
 google-scholar: true

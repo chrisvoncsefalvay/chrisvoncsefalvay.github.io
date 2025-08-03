@@ -7,7 +7,7 @@ citation: true
 date: 2025-07-13
 description: In which we attend the funeral of any semblance of an epistemically coherent world.
 google-scholar: true
-title: The world will be Tlön.
+title: "The world will be Tl\xF6n."
 ---
 
 There's a short story by Borges that I'm quite fond of titled _Tlön, Uqbar, Orbis Tertius_. It was written in 1940, yet sounds oddly prophetic for today's concerns. A secret society -- and it's a testament to Borges's genius that he altogether eschews any discussion of who these folks are or what their motives might be -- creates Tlön, a fictional planet, through the simplest yet most powerful means: writing about it. In encyclopaedias, specifically. Slowly, inexorably, objects from this fictional planet begin appearing in our world. First a compass with unfamiliar markings. Then a cone of unearthly metal. And slowly, Tlön takes over.

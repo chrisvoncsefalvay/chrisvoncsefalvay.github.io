@@ -5,9 +5,7 @@ categories:
 citation:
   doi: 10.59350/68s7b-8c778
 date: 2023-10-13
-description: "How to eat the wrong way, rest the wrong way (i.e. not), half-ass all\
-  \ relevant parts of preparation for a marathon and still finish with an okay time.\
-  \  \n"
+description: "How to eat the wrong way, rest the wrong way (i.e. not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.  \n"
 google-scholar: true
 title: How to do a SkiErg marathon entirely the wrong way (but still finish)
 ---

@@ -7,8 +7,7 @@ categories:
 citation:
   doi: 10.59350/xmf8m-t1d22
 date: 2023-12-27
-description: How a study from 1959 on 100 patients created one of the most enduring
-  myths about human weight and nutrition.
+description: How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.
 google-scholar: true
 image: 93e3df55-79ec-44b0-87c1-03bbca32ee46.webp
 title: The 95% myth

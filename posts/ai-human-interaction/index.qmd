@@ -6,8 +6,7 @@ categories:
 citation:
   doi: 10.59350/r8k9q-zdm06
 date: 2023-12-12
-description: I'm fine, the robot's fine, society on the other hand has some questions
-  to tackle.
+description: I'm fine, the robot's fine, society on the other hand has some questions to tackle.
 google-scholar: true
 image: cd091fdb-e9e7-49d9-9b11-2b1eb92e2f86.webp
 title: What I learned from getting bodied by a robot.

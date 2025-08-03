@@ -8,8 +8,7 @@ categories:
 citation:
   doi: 10.59350/vynvf-0k137
 date: 2023-10-15
-description: 'What if we''ve got one of the most important things in our understanding
-  of who we are, and what makes us intelligent, utterly wrong?
+description: 'What if we''ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?
 
   '
 google-scholar: true

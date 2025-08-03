@@ -5,7 +5,8 @@ categories:
 - LLMs
 - ABMs
 - agentic AI
-citation: true
+citation:
+  doi: 10.59350/q3yj4-wah32
 date: 2025-07-20
 description: What if agents can do more than act?
 google-scholar: true

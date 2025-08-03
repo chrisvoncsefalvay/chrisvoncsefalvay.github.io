@@ -3,7 +3,7 @@ categories:
 - AI
 - governance
 date: 2025-01-16
-description: 'The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.'
+description: The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.
 google-scholar: true
 image: header.webp
 title: Deja Vu, All Over Again.

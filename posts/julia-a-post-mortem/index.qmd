@@ -5,8 +5,7 @@ categories:
 - programming
 citation: true
 date: 2021-03-07
-description: 'Why I no longer believe my favourite programming language will save
-  the world.
+description: 'Why I no longer believe my favourite programming language will save the world.
 
   '
 google-scholar: true

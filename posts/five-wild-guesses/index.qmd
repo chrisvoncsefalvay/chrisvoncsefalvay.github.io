@@ -4,9 +4,9 @@ categories:
 - AI
 - tech predictions
 date: 2024-12-31
-description: Or, the GenAI årsgång, 2025 edition
+description: "Or, the GenAI \xE5rsg\xE5ng, 2025 edition"
 image: header.webp
-title: Five unconventional predictions 
+title: Five unconventional predictions
 ---
 
 As I sit here at year's end, I'm reminded of the ancient Swedish tradition of årsgång - the ritual winter walk taken on New Year's Eve to divine the fortunes of the coming year. The practice required one to walk alone in complete silence, visiting places of significance while remaining carefully alert to any signs or omens.^[I gather from time to time, certain mind-altering substances were involved.] While I may be rather ill-equipped for mystical midnight wanderings, I've spent enough time observing the enterprise AI space to develop my own form of augury.

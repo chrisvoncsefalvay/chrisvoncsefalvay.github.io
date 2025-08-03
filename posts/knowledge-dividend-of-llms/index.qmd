@@ -5,9 +5,7 @@ categories:
 - 'Cross-post: Starschema'
 citation: false
 date: 2023-10-02
-description: 'Crosspost from the work blog: a pragmatic perspective on the knowledge
-  dividend in large language models (and what it may, or may not, mean for knowledge
-  in models, and what this can do for you).
+description: 'Crosspost from the work blog: a pragmatic perspective on the knowledge dividend in large language models (and what it may, or may not, mean for knowledge in models, and what this can do for you).
 
   '
 google-scholar: false

@@ -5,9 +5,7 @@ categories:
 - 'Cross-post: Starschema'
 citation: false
 date: 2023-03-23
-description: 'Large language models (LLMs) struggle with asemantic information: the
-  more we stray outside the confines of language, the worse it gets. Here''s how we''ll
-  use this for fun and profit.
+description: 'Large language models (LLMs) struggle with asemantic information: the more we stray outside the confines of language, the worse it gets. Here''s how we''ll use this for fun and profit.
 
   '
 google-scholar: false

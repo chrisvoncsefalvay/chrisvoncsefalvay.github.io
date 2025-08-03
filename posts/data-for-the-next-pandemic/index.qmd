@@ -5,9 +5,7 @@ categories:
 - 'Cross-post: Starschema'
 citation: false
 date: 2023-03-07
-description: 'If there''s one thing that emerged with any clarity from COVID-19, it''s
-  that where data played a decisive role in guiding policy interventions, outcomes
-  were better. We need better data for the next pandemic.
+description: 'If there''s one thing that emerged with any clarity from COVID-19, it''s that where data played a decisive role in guiding policy interventions, outcomes were better. We need better data for the next pandemic.
 
   '
 google-scholar: false

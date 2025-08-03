@@ -3,10 +3,10 @@ categories:
 - Quora
 - history
 - technology
-citation: true
+citation:
+  doi: 10.59350/s566m-4j903
 date: 2022-04-13
-description: 'I''m no longer on Quora, but I used to be. Here are some of my favourite
-  answers.
+description: 'I''m no longer on Quora, but I used to be. Here are some of my favourite answers.
 
   '
 google-scholar: true

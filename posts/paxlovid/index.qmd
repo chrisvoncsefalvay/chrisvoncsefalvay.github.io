@@ -6,8 +6,7 @@ categories:
 citation:
   doi: 10.59350/576dr-vbd49
 date: 2021-11-27
-description: 'Debunking a remarkably popular and persistent misconception about the
-  relationship between Paxlovid and ivermectin.
+description: 'Debunking a remarkably popular and persistent misconception about the relationship between Paxlovid and ivermectin.
 
   '
 google-scholar: true

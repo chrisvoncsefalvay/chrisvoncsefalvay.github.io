@@ -4,7 +4,7 @@ categories:
 - LLMs
 - context engineering
 date: 2025-07-06
-description: AI's latest buzzword is more confession than innovation. 
+description: AI's latest buzzword is more confession than innovation.
 google-scholar: true
 image: header.png
 title: The Snowmobile Symptom

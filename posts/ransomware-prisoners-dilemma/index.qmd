@@ -6,8 +6,7 @@ categories:
 citation:
   doi: 10.59350/r74zv-gsd67
 date: 2021-05-14
-description: 'A game theoretical perspective on ransomware attacks as n-person prisoner''s
-  dilemmas, and why forced cooperation isn''t the answer.
+description: 'A game theoretical perspective on ransomware attacks as n-person prisoner''s dilemmas, and why forced cooperation isn''t the answer.
 
   '
 google-scholar: true

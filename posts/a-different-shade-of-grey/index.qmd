@@ -7,9 +7,7 @@ categories:
 citation:
   doi: 10.59350/bwee1-hee31
 date: 2022-04-13
-description: 'A response to Urbina _et al._ (2022) and the unreasonable spectre of
-  AI coming up with chemical warfare agents (as if we didn''t already have enough
-  of them).
+description: 'A response to Urbina _et al._ (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn''t already have enough of them).
 
   '
 google-scholar: true

@@ -3,7 +3,8 @@ categories:
 - literature
 - data science
 - ethics
-citation: true
+citation:
+  doi: 10.59350/f2a7t-hp359
 date: 2022-04-13
 description: 'Read stuff outside your field. It''ll be good for you.
 

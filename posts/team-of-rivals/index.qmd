@@ -7,8 +7,7 @@ categories:
 citation:
   doi: 10.59350/he7k6-tx158
 date: 2023-10-30
-description: 'Finally, some discussion on LLM connectionism, and what LLMs could usefully
-  become.
+description: 'Finally, some discussion on LLM connectionism, and what LLMs could usefully become.
 
   '
 google-scholar: true

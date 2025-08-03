@@ -8,8 +8,7 @@ categories:
 citation:
   doi: 10.59350/ktyy5-dg821
 date: 2023-10-26
-description: 'On bedtime stories, and what making machines tell them tells us about
-  their moral make-up.
+description: 'On bedtime stories, and what making machines tell them tells us about their moral make-up.
 
   '
 google-scholar: true

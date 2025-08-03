@@ -3,7 +3,8 @@ categories:
 - AI
 - LLMs
 - agentic AI
-citation: true
+citation:
+  doi: 10.59350/f6wf4-0md94
 date: 2025-07-26
 description: 'Prompting is fine if you want to have a conversation. Building stuff, however, requires us to learn to program LLMs. Sorry, vibe coders.
 
