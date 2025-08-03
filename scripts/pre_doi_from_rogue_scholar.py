@@ -62,7 +62,8 @@ def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
         return
         
     yaml_preamble = splits[1].strip()
-    rest_of_post = delim.pattern.join([''] + splits[2:])  # Preserve additional --- delimiters
+    # Join all parts after the frontmatter with the original delimiter
+    rest_of_post = '---'.join(splits[2:])
 
     try:
         yaml_contents = yaml.safe_load(yaml_preamble)
@@ -95,7 +96,7 @@ def process_qmd_file(file_path: str, posts_with_dois: Dict[str, str]) -> None:
             elif citation is True and title not in posts_with_dois:
                 logging.warning(f'Post "{title}" has citation=true but no DOI found in API')
 
-        new_preamble = yaml.dump(yaml_contents, default_flow_style=False, sort_keys=False).rstrip()
+        new_preamble = yaml.dump(yaml_contents, default_flow_style=False, sort_keys=False, width=1000).rstrip()
         new_yaml_doc = f"---\n{new_preamble}\n---"
 
         # write the modified YAML document back to file
