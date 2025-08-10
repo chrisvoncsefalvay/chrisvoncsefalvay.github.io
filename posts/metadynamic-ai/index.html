@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2025-08-10">
+<meta name="description" content="GPT-5 has changed the story in ways few seem to have considered. For better or worse: we’re all architects now. Welcome to the post-isotropy age and metadynamic AI.">
+
+<title>The end of isotropy and the rise of metadynamic AI – Chris von Csefalvay</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-44ca6d71b5c3fd1b21885b1aaf9f7138.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
+
+
+<meta property="og:title" content="The end of isotropy and the rise of metadynamic AI – Chris von Csefalvay">
+<meta property="og:description" content="GPT-5 has changed the story in ways few seem to have considered. For better or worse: we’re all architects now. Welcome to the post-isotropy age and metadynamic AI.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/metadynamic-ai/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="The end of isotropy and the rise of metadynamic AI – Chris von Csefalvay">
+<meta name="twitter:description" content="GPT-5 has changed the story in ways few seem to have considered. For better or worse: we’re all architects now. Welcome to the post-isotropy age and metadynamic AI.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/metadynamic-ai/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="The end of isotropy and the rise of metadynamic AI">
+<meta name="citation_author" content="Chris von Csefalvay">
+<meta name="citation_publication_date" content="2025-08-10">
+<meta name="citation_cover_date" content="2025-08-10">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-08-10">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/metadynamic-ai/">
+<meta name="citation_language" content="en-GB">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-new-shape-of-progress" id="toc-the-new-shape-of-progress" class="nav-link active" data-scroll-target="#the-new-shape-of-progress">The new shape of progress</a></li>
+  <li><a href="#what-were-democratising" id="toc-what-were-democratising" class="nav-link" data-scroll-target="#what-were-democratising">What we’re democratising</a></li>
+  <li><a href="#accelerate-accelerate-accelerate." id="toc-accelerate-accelerate-accelerate." class="nav-link" data-scroll-target="#accelerate-accelerate-accelerate.">Accelerate, accelerate, accelerate.</a></li>
+  <li><a href="#speciating-ai" id="toc-speciating-ai" class="nav-link" data-scroll-target="#speciating-ai">Speciating AI</a></li>
+  <li><a href="#were-all-architects-now" id="toc-were-all-architects-now" class="nav-link" data-scroll-target="#were-all-architects-now">We’re all architects now</a></li>
+  <li><a href="#the-metadynamic-future" id="toc-the-metadynamic-future" class="nav-link" data-scroll-target="#the-metadynamic-future">The metadynamic future</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The end of isotropy and the rise of metadynamic AI</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">GPT-5</div>
+    <div class="quarto-category">LLMs</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    GPT-5 has changed the story in ways few seem to have considered. For better or worse: we’re all architects now. Welcome to the post-isotropy age and metadynamic AI.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">10 August 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>I’ve spent the better part of this weekend putting OpenAI’s latest offerings through their paces - both the newly released open-weight models and GPT-5 itself. Armed with a selection of coding challenges, mathematical problems, and the sort of esoteric research queries that usually separate the wheat from the chaff, I’ve been conducting what amounts to a weekend-long torture test of these systems.</p>
+<p>The results are fascinating, frustrating, and thoroughly illuminating in ways that the marketing materials certainly didn’t prepare me for.</p>
+<p>GPT-5 solved a complex epidemiological modelling problem I threw at it with remarkable sophistication, generating code that was not only functional but elegantly structured.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Twenty minutes later, it stumbled over a basic combinatorics question that my undergraduate students would handle without breaking stride. As AI scientists, we’re used to these inconsistencies (starting with Moravec’s paradox), but this was beyond the usual: brilliant flashes of insight punctuated by inexplicable failures on seemingly simple tasks.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Even by my standards. I am not a stellar programmer, but I like my code <em>clean.</em></p></div></div><p>This isn’t your typical post-launch grumbling from disappointed users (though there’s been plenty of that too). We’re witnessing something far more significant: the end of what I call “isotropic growth” in artificial intelligence, and the beginning of something infinitely more complex.</p>
+<section id="the-new-shape-of-progress" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-new-shape-of-progress">The new shape of progress</h2>
+<p>Most of AI development until now was what I’d call <em>isotropic</em>: each new model generation we encountered has generally improved across virtually every metric simultaneously – better reasoning, better coding, better writing, better safety, all at once. GPT-4 was superior to GPT-3.5 in nearly every conceivable way. Claude Sonnet and Opus improved upon its predecessors across the board. Progress was predictable, linear and comfortable.</p>
+<p>If the <a href="https://www.reddit.com/r/OpenAI/comments/1mkxy9u/gpt5_is_awful/">public outcry and demands to be reunited with 4o</a> reflects anything, it’s that GPT-5 represents the end of this era. For the first time, we have a major model that exhibits anisotropic progress, vastly improving in some areas coupled with stagnation or even regression in others. On coding benchmarks like SWE-bench, it scores 74.9%, barely edging out Anthropic’s Claude Opus 4.1 at 74.5%. Yet on agentic tasks involving airline website navigation, it actually underperforms OpenAI’s own o3 model, scoring 63.5% versus 64.8%. Users reported struggles with basic tasks like counting letters, with GPT-5 initially saying “blueberry” contains “three” instances of the letter “b”.</p>
+<p>GPT-5 represents the end of this era. For the first time, we have a major model that exhibits “anisotropic progress” - dramatic improvements in some areas coupled with stagnation or even regression in others. Some data points:</p>
+<ul>
+<li><a href="https://openai.com/index/introducing-gpt-5/">On coding benchmarks like SWE-bench, it scores 74.9%</a>, barely edging out <a href="https://www.anthropic.com/news/claude-opus-4-1">Anthropic’s Claude Opus 4.1 at 74.5%.</a></li>
+<li><a href="https://hal.cs.princeton.edu/taubench_airline">On τ-bench’s Airline task involving website navigation, it actually underperformed OpenAI’s own o4-mini</a> – more concerningly, it uses tons more tokens than the competition.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><a href="https://finance.yahoo.com/news/openai-gpt-5-met-mixed-212741623.html">Users reported struggles with basic tasks like counting letters, with GPT-5 initially saying “blueberry” contained three instances of the letter “b”.</a> AI and fruits just don’t seem to mix.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Interesting rabbit hole: according to <a href="https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide">OpenAI’s own prompting guide</a>, using the Responses API vs.&nbsp;Chat Completions might actually improve performance.</p></div></div><p>Within hours of GPT-5’s release, Reddit was flooded with criticism. <a href="https://www.reddit.com/r/ChatGPT/comments/1mkd4l3/gpt5_is_horrible/">A thread titled “GPT-5 is horrible” garnered nearly 6,000 upvotes and over 2,100 comments.</a> <a href="https://futurism.com/gpt-5-sucks">Users complained of “short replies that are insufficient, more obnoxious AI-stylised talking, less ‘personality’ and way less prompts allowed.”</a> <a href="https://www.tomsguide.com/ai/chatgpt/chatgpt-5-users-are-not-impressed-heres-why-it-feels-like-a-downgrade">One particularly cutting comment captured the mood: “Combine that with more restrictive usage, and it feels like a downgrade branded as the new hotness.”</a> Far be it from me to take Reddit too seriously, but this is definitely a signal.</p>
+<p>And yet others have rightly lauded it as a very good model. It does great at coding for the price. It’s fast. This divergence is evidence that we’ve reached an inflection point where different users, with different needs and expectations, are experiencing genuinely different value propositions from the same system. This is precisely what you’d expect when uniform progress ends and we enter an era of specialised, uneven advancement.</p>
+</section>
+<section id="what-were-democratising" class="level2">
+<h2 class="anchored" data-anchor-id="what-were-democratising">What we’re democratising</h2>
+<p>What makes this moment particularly delicious is the exquisite irony embedded within OpenAI’s recent proclamations about democratisation. <a href="https://openai.com/global-affairs/open-weights-and-ai-for-all/">Just days before GPT-5’s release, OpenAI published their first open-weight models since GPT-2, accompanied by grand rhetoric about “putting AI in the hands of as many people as possible” and building “democratic AI rails.”</a> The fact that this was also an enormous powerplay, both on the micro (corporate) scale through hardcoding Harmony into gpt-oss, and on the geopolitical macro scale through tying it in with America’s mission to take the lead in the global AI race just when Project Stargate desperately needed some good news, doesn’t detract from the magnitude of the achievement and the potential it unleashes.</p>
+<p>The open source models were the appetiser. GPT-5 is the main course, and it’s a dish that requires everyone to become a chef. With GPT-5’s mixed performance and its multiple variants (gpt-5, gpt-5-mini, gpt-5-nano, gpt-5-pro), each optimised for different use cases, with a “real-time router” that decides which model to deploy, OpenAI has forced every user into the same orchestration challenges that once plagued only the most sophisticated AI teams. We’re all architects now.</p>
+<p>When users complained about inconsistent performance and demanded access to previous models, they were essentially asking for the right to choose their own orchestration strategy. They wanted to go back to the days when they could simply pick the best available model rather than trust an opaque routing system to make that choice for them. What OpenAI has democratised is the requirement to become a systems architect. Every developer, every startup, every end user now faces the fundamental challenge that once confronted only the kind of sophisticated AI teams my colleagues and I run, mainly serving large enterprises. If you want optimal performance, you can no longer rely on a single monolithic ‘best’/SOTA model. You must learn to coordinate multiple AI agents, route queries appropriately, and choreograph systems of models. Suddenly, OpenAI brought agentic AI into America’s living rooms.</p>
+<p>This is what democratisation looks like in the post-isotropic era: not just giving everyone access to the same powerful tool, but also to the same complex problems. Welcome to our headaches</p>
+</section>
+<section id="accelerate-accelerate-accelerate." class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="accelerate-accelerate-accelerate.">Accelerate, accelerate, accelerate.</h2>
+<p>But perhaps there’s something far more calculated happening here than mere technological evolution. Consider this possibility: isotropic growth is not sustainable. The line can’t always go up. What if GPT-5 – its strengths and weaknesses – is a finely tuned response to this?</p>
+<p>Look at where GPT-5 truly excels. <a href="https://openai.com/index/introducing-gpt-5-for-developers/">OpenAI explicitly positions it as “our best model yet for coding and agentic tasks,” with companies like Cursor praising its “half the tool calling error rate over other frontier models” and its ability to “reliably chain together dozens of tool calls—both in sequence and in parallel—without losing its way.”</a> The model’s real strength isn’t in being uniformly better at everything – it’s in being an exceptional agent driver.</p>
+<p>I don’t think this is accidental.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> GPT-5’s mixed performance in individual domains is an epiphenomenon. Its strength in being a cheap, fast and efficient agent runner, a kind of agentic universal backbone, is what I think is the target.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;By way of disclaimer: I am privy to an awful amount of inside baseball on the AI industry, but I am not ever concerned with this kind of corporate strategy. I do science, not politics – to the point that I’m somewhat notorious for excusing myself as soon as this kind of talk starts. This is entirely conjectural.</p></div></div><p>And if that’s the case, it’s evidence of strategic brilliance. Isotropic growth was always doomed – and sometimes the way to survive the impending sea-change is to just bring it about. That way, you at least have some control over the situation. GPT-5’s excellence at agent coordination creates a perfect market dynamic: it compels users toward agentic architectures while positioning OpenAI as the essential purveyor of those services. OpenAI might just have pulled off the biggest pivot in AI history: from provider of solutions competing with other models to becoming the indispensable coordination layer that none can compete with. They’ve understood isotropic growth is becoming obsolete, and adopted a strategy of going full-on accelerationist while also selling the solution for the post-isotropic world.</p>
+<p>The open-source models echo this too, <a href="https://openai.com/index/introducing-gpt-oss/">“designed to be used within agentic workflows with exceptional instruction following, tool use like web search or Python code execution, and reasoning capabilities”</a>. Together, they paint a new image of OpenAI’s focus as makers of agent-drivers and orchestrators. It’s not the prospectors who got rich during the gold rush. It’s the guy who sold them the picks. He, after all, didn’t have to get lucky.</p>
+</section>
+<section id="speciating-ai" class="level2">
+<h2 class="anchored" data-anchor-id="speciating-ai">Speciating AI</h2>
+<p>This transition from monolithic models to model ecosystems mirrors evolutionary biology in fascinating ways. We’re witnessing the emergence of AI “species” – specialised variants optimised for specific niches rather than generalist organisms trying to do everything adequately. We’ve always had some semblance of these in LoRAs, finetunes and adapters, but those are like someone taking a postgraduate degree – these are like being bred for a job.</p>
+<p>My weekend experiments made this abundantly clear. The gpt-oss-20b model, despite being significantly smaller than GPT-5, actually outperformed it on certain mathematical reasoning tasks. Meanwhile, GPT-5 excelled at generating front-end code with minimal prompting but struggled with the sort of systematic debugging that its predecessors handled gracefully. We’re not dealing with a linear progression anymore – we’re dealing with adaptive radiation a la Galapagos finches.</p>
+<p>The implications extend far beyond individual model performance. We’re transitioning from an era where progress meant building bigger, more capable individual models to one where progress means building better systems for coordinating multiple specialised models. And who will do that is still up in the air. Just when everybody thought GPT-5 will “kill all the ChatGPT wrappers”, it’s given their purveyors a new task – sell not a better prompt with a frontend but a compositional architecture of multiple agents. There’s plenty of room to excel (or fail!) there.</p>
+</section>
+<section id="were-all-architects-now" class="level2">
+<h2 class="anchored" data-anchor-id="were-all-architects-now">We’re all architects now</h2>
+<p>This shift has profound implications that extend far beyond the AI research community. For the past few years, those of us working as AI systems architects and computational scientists have been grappling with precisely these orchestration challenges for our clients. When should we route a query to a reasoning model versus a fast-response model? How do we coordinate multiple AI agents to tackle complex, multi-step problems? When does it make sense to ensemble different models for higher reliability? These were specialist concerns, the domain of AI consultants and research teams building bespoke solutions for enterprises with deep pockets and sophisticated technical requirements. I have spent most of the last decade running teams like that, for a demanding clientele with deep pockets who needed tackling that complexity to wring out the last bit of performance. Most users, though, could simply ask for “the best model” and get a straightforward answer: use GPT-4, or Claude, or whatever sat atop the latest benchmarks that week.</p>
+<p>That era is over.</p>
+<p>What GPT-5’s mixed performance signals is that there will no longer be a single “strongest” or “best” model that users can rely on. And if there’s no single best model, then we will have to create superior configurations of models where the strength of one compensates for the weaknesses of the other. This complexity won’t be limited to high-end technical users. It won’t be limited to anybody, really – it will be a problem that everybody, including the absolute end user, will have to deal with.</p>
+<p>OpenAI hasn’t just democratised the power of AI – they’ve democratised all the headaches that come with having to orchestrate it.</p>
+</section>
+<section id="the-metadynamic-future" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-metadynamic-future">The metadynamic future</h2>
+<p>Whether intentional or not, the implications remain the same. The age of AI soloists is ending, and the future belongs not to those who can prompt the best individual model, but to those who can choreograph the most elegant dance between many. We’re witnessing the birth of what I call “metadynamic AI” – intelligence that emerges not from any single model but from the sophisticated, adaptive orchestration of multiple AI agents working in concert in a larger ecosystem. This goes beyond standard agentic AI wisdom, and is about creating the wider ambit of the system (complete with tools, tasks, contexts). Most agents are still essentially souped-up chatbots with tool access, fundamentally monolithic: one model, one reasoning process, one set of capabilities enhanced by external tools.</p>
+<p>Metadynamic AI is qualitatively, perspectivally different. Instead of one agent using tools, we have multiple AI agents with different specialisations collaborating, competing and complementing each other, based often enough on a vastly diverging understanding of the universe and its probability distributions based on their underlying models, contexts and environs. Instead of a single reasoning chain, we have multiple reasoning processes that can be dynamically routed, combined and orchestrated based on the task at hand. And with the ability to differentiate and speciate to task, we have emergent intelligence that arises from the interaction between multiple AI systems.</p>
+<p>Simple agentic AI asks ‘how can I help this model use tools better?’ Metadynamic AI asks ‘how can I coordinate multiple models to achieve what none of them could accomplish alone?’ Agents are tool-users. Metadynamic AI is not about designing better tool-users but ecosystems that involve tools, but also marketplaces, villages, hills, gradients, slopes, seas and moats. It’s world-building writ large for agents to populate.</p>
+<p>The world of metadynamic AI is simultaneously more powerful and more fragile, more capable and more complex. It demands new skills, new ways of thinking and new approaches to problem-solving. But it also opens up possibilities that were simply impossible in either the monolithic or simple agentic eras. In case you haven’t had enough paradoxes for the day: metadynamic AI is both more accessible and vastly more complex. Yes, you can now download and run powerful models on your laptop. But to extract maximum value from these systems, you must now master the dark arts of agent orchestration, model routing and multi-system coordination, skills that until recently were limited to specialist teams like mine, and a clientele that could afford it. Now, it’s going to be for eveyone. We’ve traded the inefficient simplicity of a monolith for the exaptive, complex worlds we’ll have to build for our agents to live in.</p>
+<p>We’re entering an era where there won’t be a single “best” AI model, just as there isn’t a single “best” species in nature. Instead, we’ll have AI ecosystems where different models excel in different domains, and the art will be in knowing how to orchestrate them effectively. This represents a fundamental shift in how we think about AI capabilities – and about ourselves. The question is no longer “which model is best?” but “how do I coordinate these models to achieve what no single model can accomplish alone?” The winners won’t be those who build the most powerful individual models, but those who master the art of coordination. The need this world has for competent conductors of agentic orchestras will, I think, far eclipse the jobs “lost to AI”.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;I am generally sceptical. I know enough about AI to know if whatever progress the last few years have wrought can eclipse what your employer thinks you’re bringing to the table, at least one of you is woefully incompetent.</p></div></div><p>For those still thinking in terms of monolithic intelligence, this transition will feel disorienting, even disappointing. GPT-5’s mixed reception reflects this confusion: users of ‘the old dispensation’ expecting uniform improvements across all dimensions were discomforted by a system that’s an awful lot like my Golden Retriever, Oliver – brilliant in some ways and oh so frustrating in others. But for those who adapt to the new paradigm, the possibilities are far richer than anything we could achieve with even the most powerful individual model. What F. E. Smith said about the world continuing to offer glittering prizes to those with sharp swords and stout hearts will continue to hold true in the metadynamic arena for those willing to embrace what’s coming.</p>
+<p>Those who master it will reap those prizes, and then some. Those who don’t, or not soon enough, will be hopelessly outmanoeuvred before they even have a chance to understand just how much the rules of the game have changed these last few days.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {The End of Isotropy and the Rise of Metadynamic {AI}},
+  date = {2025-08-10},
+  url = {https://chrisvoncsefalvay.com/posts/metadynamic-ai/},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2025. <span>“The End of Isotropy and the Rise of
+Metadynamic AI.”</span> August 10, 2025. <a href="https://chrisvoncsefalvay.com/posts/metadynamic-ai/">https://chrisvoncsefalvay.com/posts/metadynamic-ai/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -9,8 +9,93 @@
 <link>https://chrisvoncsefalvay.com/posts/</link>
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
-<generator>quarto-1.7.32</generator>
-<lastBuildDate>Sat, 26 Jul 2025 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.7.33</generator>
+<lastBuildDate>Sun, 10 Aug 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The end of isotropy and the rise of metadynamic AI</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/metadynamic-ai/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I’ve spent the better part of this weekend putting OpenAI’s latest offerings through their paces - both the newly released open-weight models and GPT-5 itself. Armed with a selection of coding challenges, mathematical problems, and the sort of esoteric research queries that usually separate the wheat from the chaff, I’ve been conducting what amounts to a weekend-long torture test of these systems.</p>
+<p>The results are fascinating, frustrating, and thoroughly illuminating in ways that the marketing materials certainly didn’t prepare me for.</p>
+<p>GPT-5 solved a complex epidemiological modelling problem I threw at it with remarkable sophistication, generating code that was not only functional but elegantly structured.<sup>1</sup> Twenty minutes later, it stumbled over a basic combinatorics question that my undergraduate students would handle without breaking stride. As AI scientists, we’re used to these inconsistencies (starting with Moravec’s paradox), but this was beyond the usual: brilliant flashes of insight punctuated by inexplicable failures on seemingly simple tasks.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Even by my standards. I am not a stellar programmer, but I like my code <em>clean.</em></p></div></div><p>This isn’t your typical post-launch grumbling from disappointed users (though there’s been plenty of that too). We’re witnessing something far more significant: the end of what I call “isotropic growth” in artificial intelligence, and the beginning of something infinitely more complex.</p>
+<section id="the-new-shape-of-progress" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-new-shape-of-progress">The new shape of progress</h2>
+<p>Most of AI development until now was what I’d call <em>isotropic</em>: each new model generation we encountered has generally improved across virtually every metric simultaneously – better reasoning, better coding, better writing, better safety, all at once. GPT-4 was superior to GPT-3.5 in nearly every conceivable way. Claude Sonnet and Opus improved upon its predecessors across the board. Progress was predictable, linear and comfortable.</p>
+<p>If the <a href="https://www.reddit.com/r/OpenAI/comments/1mkxy9u/gpt5_is_awful/">public outcry and demands to be reunited with 4o</a> reflects anything, it’s that GPT-5 represents the end of this era. For the first time, we have a major model that exhibits anisotropic progress, vastly improving in some areas coupled with stagnation or even regression in others. On coding benchmarks like SWE-bench, it scores 74.9%, barely edging out Anthropic’s Claude Opus 4.1 at 74.5%. Yet on agentic tasks involving airline website navigation, it actually underperforms OpenAI’s own o3 model, scoring 63.5% versus 64.8%. Users reported struggles with basic tasks like counting letters, with GPT-5 initially saying “blueberry” contains “three” instances of the letter “b”.</p>
+<p>GPT-5 represents the end of this era. For the first time, we have a major model that exhibits “anisotropic progress” - dramatic improvements in some areas coupled with stagnation or even regression in others. Some data points:</p>
+<ul>
+<li><a href="https://openai.com/index/introducing-gpt-5/">On coding benchmarks like SWE-bench, it scores 74.9%</a>, barely edging out <a href="https://www.anthropic.com/news/claude-opus-4-1">Anthropic’s Claude Opus 4.1 at 74.5%.</a></li>
+<li><a href="https://hal.cs.princeton.edu/taubench_airline">On τ-bench’s Airline task involving website navigation, it actually underperformed OpenAI’s own o4-mini</a> – more concerningly, it uses tons more tokens than the competition.<sup>2</sup></li>
+<li><a href="https://finance.yahoo.com/news/openai-gpt-5-met-mixed-212741623.html">Users reported struggles with basic tasks like counting letters, with GPT-5 initially saying “blueberry” contained three instances of the letter “b”.</a> AI and fruits just don’t seem to mix.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Interesting rabbit hole: according to <a href="https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide">OpenAI’s own prompting guide</a>, using the Responses API vs.&nbsp;Chat Completions might actually improve performance.</p></div></div><p>Within hours of GPT-5’s release, Reddit was flooded with criticism. <a href="https://www.reddit.com/r/ChatGPT/comments/1mkd4l3/gpt5_is_horrible/">A thread titled “GPT-5 is horrible” garnered nearly 6,000 upvotes and over 2,100 comments.</a> <a href="https://futurism.com/gpt-5-sucks">Users complained of “short replies that are insufficient, more obnoxious AI-stylised talking, less ‘personality’ and way less prompts allowed.”</a> <a href="https://www.tomsguide.com/ai/chatgpt/chatgpt-5-users-are-not-impressed-heres-why-it-feels-like-a-downgrade">One particularly cutting comment captured the mood: “Combine that with more restrictive usage, and it feels like a downgrade branded as the new hotness.”</a> Far be it from me to take Reddit too seriously, but this is definitely a signal.</p>
+<p>And yet others have rightly lauded it as a very good model. It does great at coding for the price. It’s fast. This divergence is evidence that we’ve reached an inflection point where different users, with different needs and expectations, are experiencing genuinely different value propositions from the same system. This is precisely what you’d expect when uniform progress ends and we enter an era of specialised, uneven advancement.</p>
+</section>
+<section id="what-were-democratising" class="level2">
+<h2 class="anchored" data-anchor-id="what-were-democratising">What we’re democratising</h2>
+<p>What makes this moment particularly delicious is the exquisite irony embedded within OpenAI’s recent proclamations about democratisation. <a href="https://openai.com/global-affairs/open-weights-and-ai-for-all/">Just days before GPT-5’s release, OpenAI published their first open-weight models since GPT-2, accompanied by grand rhetoric about “putting AI in the hands of as many people as possible” and building “democratic AI rails.”</a> The fact that this was also an enormous powerplay, both on the micro (corporate) scale through hardcoding Harmony into gpt-oss, and on the geopolitical macro scale through tying it in with America’s mission to take the lead in the global AI race just when Project Stargate desperately needed some good news, doesn’t detract from the magnitude of the achievement and the potential it unleashes.</p>
+<p>The open source models were the appetiser. GPT-5 is the main course, and it’s a dish that requires everyone to become a chef. With GPT-5’s mixed performance and its multiple variants (gpt-5, gpt-5-mini, gpt-5-nano, gpt-5-pro), each optimised for different use cases, with a “real-time router” that decides which model to deploy, OpenAI has forced every user into the same orchestration challenges that once plagued only the most sophisticated AI teams. We’re all architects now.</p>
+<p>When users complained about inconsistent performance and demanded access to previous models, they were essentially asking for the right to choose their own orchestration strategy. They wanted to go back to the days when they could simply pick the best available model rather than trust an opaque routing system to make that choice for them. What OpenAI has democratised is the requirement to become a systems architect. Every developer, every startup, every end user now faces the fundamental challenge that once confronted only the kind of sophisticated AI teams my colleagues and I run, mainly serving large enterprises. If you want optimal performance, you can no longer rely on a single monolithic ‘best’/SOTA model. You must learn to coordinate multiple AI agents, route queries appropriately, and choreograph systems of models. Suddenly, OpenAI brought agentic AI into America’s living rooms.</p>
+<p>This is what democratisation looks like in the post-isotropic era: not just giving everyone access to the same powerful tool, but also to the same complex problems. Welcome to our headaches</p>
+</section>
+<section id="accelerate-accelerate-accelerate." class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="accelerate-accelerate-accelerate.">Accelerate, accelerate, accelerate.</h2>
+<p>But perhaps there’s something far more calculated happening here than mere technological evolution. Consider this possibility: isotropic growth is not sustainable. The line can’t always go up. What if GPT-5 – its strengths and weaknesses – is a finely tuned response to this?</p>
+<p>Look at where GPT-5 truly excels. <a href="https://openai.com/index/introducing-gpt-5-for-developers/">OpenAI explicitly positions it as “our best model yet for coding and agentic tasks,” with companies like Cursor praising its “half the tool calling error rate over other frontier models” and its ability to “reliably chain together dozens of tool calls—both in sequence and in parallel—without losing its way.”</a> The model’s real strength isn’t in being uniformly better at everything – it’s in being an exceptional agent driver.</p>
+<p>I don’t think this is accidental.<sup>3</sup> GPT-5’s mixed performance in individual domains is an epiphenomenon. Its strength in being a cheap, fast and efficient agent runner, a kind of agentic universal backbone, is what I think is the target.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;By way of disclaimer: I am privy to an awful amount of inside baseball on the AI industry, but I am not ever concerned with this kind of corporate strategy. I do science, not politics – to the point that I’m somewhat notorious for excusing myself as soon as this kind of talk starts. This is entirely conjectural.</p></div></div><p>And if that’s the case, it’s evidence of strategic brilliance. Isotropic growth was always doomed – and sometimes the way to survive the impending sea-change is to just bring it about. That way, you at least have some control over the situation. GPT-5’s excellence at agent coordination creates a perfect market dynamic: it compels users toward agentic architectures while positioning OpenAI as the essential purveyor of those services. OpenAI might just have pulled off the biggest pivot in AI history: from provider of solutions competing with other models to becoming the indispensable coordination layer that none can compete with. They’ve understood isotropic growth is becoming obsolete, and adopted a strategy of going full-on accelerationist while also selling the solution for the post-isotropic world.</p>
+<p>The open-source models echo this too, <a href="https://openai.com/index/introducing-gpt-oss/">“designed to be used within agentic workflows with exceptional instruction following, tool use like web search or Python code execution, and reasoning capabilities”</a>. Together, they paint a new image of OpenAI’s focus as makers of agent-drivers and orchestrators. It’s not the prospectors who got rich during the gold rush. It’s the guy who sold them the picks. He, after all, didn’t have to get lucky.</p>
+</section>
+<section id="speciating-ai" class="level2">
+<h2 class="anchored" data-anchor-id="speciating-ai">Speciating AI</h2>
+<p>This transition from monolithic models to model ecosystems mirrors evolutionary biology in fascinating ways. We’re witnessing the emergence of AI “species” – specialised variants optimised for specific niches rather than generalist organisms trying to do everything adequately. We’ve always had some semblance of these in LoRAs, finetunes and adapters, but those are like someone taking a postgraduate degree – these are like being bred for a job.</p>
+<p>My weekend experiments made this abundantly clear. The gpt-oss-20b model, despite being significantly smaller than GPT-5, actually outperformed it on certain mathematical reasoning tasks. Meanwhile, GPT-5 excelled at generating front-end code with minimal prompting but struggled with the sort of systematic debugging that its predecessors handled gracefully. We’re not dealing with a linear progression anymore – we’re dealing with adaptive radiation a la Galapagos finches.</p>
+<p>The implications extend far beyond individual model performance. We’re transitioning from an era where progress meant building bigger, more capable individual models to one where progress means building better systems for coordinating multiple specialised models. And who will do that is still up in the air. Just when everybody thought GPT-5 will “kill all the ChatGPT wrappers”, it’s given their purveyors a new task – sell not a better prompt with a frontend but a compositional architecture of multiple agents. There’s plenty of room to excel (or fail!) there.</p>
+</section>
+<section id="were-all-architects-now" class="level2">
+<h2 class="anchored" data-anchor-id="were-all-architects-now">We’re all architects now</h2>
+<p>This shift has profound implications that extend far beyond the AI research community. For the past few years, those of us working as AI systems architects and computational scientists have been grappling with precisely these orchestration challenges for our clients. When should we route a query to a reasoning model versus a fast-response model? How do we coordinate multiple AI agents to tackle complex, multi-step problems? When does it make sense to ensemble different models for higher reliability? These were specialist concerns, the domain of AI consultants and research teams building bespoke solutions for enterprises with deep pockets and sophisticated technical requirements. I have spent most of the last decade running teams like that, for a demanding clientele with deep pockets who needed tackling that complexity to wring out the last bit of performance. Most users, though, could simply ask for “the best model” and get a straightforward answer: use GPT-4, or Claude, or whatever sat atop the latest benchmarks that week.</p>
+<p>That era is over.</p>
+<p>What GPT-5’s mixed performance signals is that there will no longer be a single “strongest” or “best” model that users can rely on. And if there’s no single best model, then we will have to create superior configurations of models where the strength of one compensates for the weaknesses of the other. This complexity won’t be limited to high-end technical users. It won’t be limited to anybody, really – it will be a problem that everybody, including the absolute end user, will have to deal with.</p>
+<p>OpenAI hasn’t just democratised the power of AI – they’ve democratised all the headaches that come with having to orchestrate it.</p>
+</section>
+<section id="the-metadynamic-future" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-metadynamic-future">The metadynamic future</h2>
+<p>Whether intentional or not, the implications remain the same. The age of AI soloists is ending, and the future belongs not to those who can prompt the best individual model, but to those who can choreograph the most elegant dance between many. We’re witnessing the birth of what I call “metadynamic AI” – intelligence that emerges not from any single model but from the sophisticated, adaptive orchestration of multiple AI agents working in concert in a larger ecosystem. This goes beyond standard agentic AI wisdom, and is about creating the wider ambit of the system (complete with tools, tasks, contexts). Most agents are still essentially souped-up chatbots with tool access, fundamentally monolithic: one model, one reasoning process, one set of capabilities enhanced by external tools.</p>
+<p>Metadynamic AI is qualitatively, perspectivally different. Instead of one agent using tools, we have multiple AI agents with different specialisations collaborating, competing and complementing each other, based often enough on a vastly diverging understanding of the universe and its probability distributions based on their underlying models, contexts and environs. Instead of a single reasoning chain, we have multiple reasoning processes that can be dynamically routed, combined and orchestrated based on the task at hand. And with the ability to differentiate and speciate to task, we have emergent intelligence that arises from the interaction between multiple AI systems.</p>
+<p>Simple agentic AI asks ‘how can I help this model use tools better?’ Metadynamic AI asks ‘how can I coordinate multiple models to achieve what none of them could accomplish alone?’ Agents are tool-users. Metadynamic AI is not about designing better tool-users but ecosystems that involve tools, but also marketplaces, villages, hills, gradients, slopes, seas and moats. It’s world-building writ large for agents to populate.</p>
+<p>The world of metadynamic AI is simultaneously more powerful and more fragile, more capable and more complex. It demands new skills, new ways of thinking and new approaches to problem-solving. But it also opens up possibilities that were simply impossible in either the monolithic or simple agentic eras. In case you haven’t had enough paradoxes for the day: metadynamic AI is both more accessible and vastly more complex. Yes, you can now download and run powerful models on your laptop. But to extract maximum value from these systems, you must now master the dark arts of agent orchestration, model routing and multi-system coordination, skills that until recently were limited to specialist teams like mine, and a clientele that could afford it. Now, it’s going to be for eveyone. We’ve traded the inefficient simplicity of a monolith for the exaptive, complex worlds we’ll have to build for our agents to live in.</p>
+<p>We’re entering an era where there won’t be a single “best” AI model, just as there isn’t a single “best” species in nature. Instead, we’ll have AI ecosystems where different models excel in different domains, and the art will be in knowing how to orchestrate them effectively. This represents a fundamental shift in how we think about AI capabilities – and about ourselves. The question is no longer “which model is best?” but “how do I coordinate these models to achieve what no single model can accomplish alone?” The winners won’t be those who build the most powerful individual models, but those who master the art of coordination. The need this world has for competent conductors of agentic orchestras will, I think, far eclipse the jobs “lost to AI”.<sup>4</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;I am generally sceptical. I know enough about AI to know if whatever progress the last few years have wrought can eclipse what your employer thinks you’re bringing to the table, at least one of you is woefully incompetent.</p></div></div><p>For those still thinking in terms of monolithic intelligence, this transition will feel disorienting, even disappointing. GPT-5’s mixed reception reflects this confusion: users of ‘the old dispensation’ expecting uniform improvements across all dimensions were discomforted by a system that’s an awful lot like my Golden Retriever, Oliver – brilliant in some ways and oh so frustrating in others. But for those who adapt to the new paradigm, the possibilities are far richer than anything we could achieve with even the most powerful individual model. What F. E. Smith said about the world continuing to offer glittering prizes to those with sharp swords and stout hearts will continue to hold true in the metadynamic arena for those willing to embrace what’s coming.</p>
+<p>Those who master it will reap those prizes, and then some. Those who don’t, or not soon enough, will be hopelessly outmanoeuvred before they even have a chance to understand just how much the rules of the game have changed these last few days.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {The End of Isotropy and the Rise of Metadynamic {AI}},
+  date = {2025-08-10},
+  url = {https://chrisvoncsefalvay.com/posts/metadynamic-ai/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“The End of Isotropy and the Rise of
+Metadynamic AI.”</span> August 10, 2025. <a href="https://chrisvoncsefalvay.com/posts/metadynamic-ai/">https://chrisvoncsefalvay.com/posts/metadynamic-ai/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>GPT-5</category>
+  <category>LLMs</category>
+  <guid>https://chrisvoncsefalvay.com/posts/metadynamic-ai/</guid>
+  <pubDate>Sun, 10 Aug 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A little less conversation: why we need to move from prompting to programming</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -238,7 +323,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-65530"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-65530").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-83635"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-83635").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -336,7 +421,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-22551"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-22551").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-41112"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41112").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -3778,203 +3863,6 @@ Machine.”</span> <a href="https://doi.org/10.59350/ktyy5-dg821">https://doi.or
   <category>philosophy</category>
   <guid>https://chrisvoncsefalvay.com/posts/moral-maps/</guid>
   <pubDate>Thu, 26 Oct 2023 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Quarto project scripts are awesomeness</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/quarto-project-scripts/</link>
-  <description><![CDATA[ 
-
-
-
-
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If you’re here for the DOI matching script, the link is <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_doi_from_rogue_scholar.py">here</a>.</p>
-</div>
-</div>
-<p><a href="https://quarto.org">Quarto</a> is a great tool for reproducible research. It is also a great tool for building websites. After about a decade of Wordpress-based websites, I’ve moved to Quarto primarily for two reasons. First, most of my content is largely static. I don’t quite need the full power of a CMS, and the performance cost of dynamic generation I didn’t need was quite steep (the economic cost was nothing special, but I’m a cheapskate). Second, I wanted to be able to write in Markdown and integrate better with notebooks. Quarto lets me do both of these.</p>
-<p>What Quarto also does, however, is something super awesome: project scripts!</p>
-<section id="project-whats" class="level1">
-<h1>Project whats?</h1>
-<p>A project script in Quarto is, basically, <a href="https://quarto.org/docs/projects/scripts.html">a piece of Python, Lua, R or Typescript code that is executed at some point during rendering</a>. This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file – which is among others what I’m using it for. Essentially any programmatic function can be implemented in a project script.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-pipeline">flowchart TD
-    A[Rendering pipeline start] --&gt; B(Pre-render scripts)
-    B --&gt; C(Page rendering)
-    C --&gt; D(Post-render scripts)
-    D --&gt; E[Rendering pipeline end]
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Rendering pipeline in Quarto with pre- and post-render scripts.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Quarto distinguishes between pre-render and post-render scripts. No prizes for guessing the difference, but here it goes: pre-render scripts are executed before the page is rendered, and post-render scripts are executed after the page is rendered. Pre-render scripts are particularly useful as they can modify the source <code>.qmd</code> (Quarto markdown) files before rendering them to HTML or whatever their ultimate evolutionary destiny is.</p>
-<p>To make project scripts work, you need to declare them in your <code>_quarto.yml</code> file:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">project</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="cb1-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> website</span></span>
-<span id="cb1-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pre-render</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="cb1-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> scripts/pre_create_papers_file.py</span></span>
-<span id="cb1-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> scripts/pre_check_skierg_records.py</span></span></code></pre></div>
-<p>This declares the scripts <code>scripts/pre_create_papers_file.py</code> and <code>scripts/pre_check_skierg_records.py</code> as pre-render scripts. You can also declare post-render scripts, with the <code>post-render</code> key.</p>
-</section>
-<section id="a-poorly-worked-example-generating-a-publication-list" class="level1 page-columns page-full">
-<h1>A (poorly) worked example: generating a publication list</h1>
-<p>On my website, I use Quarto project scripts to maintain a <a href="papers">list of my papers</a>. This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.<sup>1</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I know there’s a canonically better solution that uses pandoc and Lua. I don’t care. This works for me, and I don’t have to learn Lua.</p></div></div><p>You can see the full project script <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py">here</a>, but here’s the gist of it:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-bibliography" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-bibliography-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-bibliography">flowchart TD
-    A[BibTeX file] --&gt; a("load_bibtex_file()") 
-    a --&gt; B[BibTeX database object]
-    B --&gt; b("render_as_nlm()") 
-    b --&gt; C{book or article?}
-    C --&gt; D[article]
-    C --&gt; E[book]
-    D --&gt; d("render_article_as_nlm()") 
-    d --&gt; F[article entry]
-    E --&gt; e("render_book_as_nlm()") 
-    e --&gt; G[book entry]
-    F --&gt; H[all entries]
-    G --&gt; H
-    H --&gt; h("generate_list_by_year()") 
-    h --&gt; J[final set of entries]
-    J --&gt; j("write_into_file()") 
-    j --&gt; K["papers/index.qmd"]
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bibliography-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: My super clumsy pre-render script to build my bibliography.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>We load a BibTeX file (<code>load_bibtex_file()</code>), parse it, use a function to determine whether we’re rendering a book or an article entry (I don’ have any other types of publications, but if I did, I’d add them here), and dispatch rendering to the appropriate function (<code>render_article_as_nlm()</code> for articles, <code>render_book_as_nlm()</code> for books). We sort the entries into a Markdown format with years separated by level 1 headings (<code>generate_list_by_year()</code>) and finally write it into the <code>papers/index.qmd</code> file (<code>write_into_file()</code>). There’s some minor magic going on behind the scenes, such as capturing my name and setting it in bold (which is a bit of a convention in academic lists of publications), but that’s the gist of it.</p>
-<p>The result is a list of publications that is automatically generated from a BibTeX file, and is always up to date (as up to date as the BibTeX file, anyway). I don’t have to manually update it… sort of.</p>
-</section>
-<section id="wait-automagically-updated" class="level1 page-columns page-full">
-<h1>Wait, automagically updated?</h1>
-<p>The second half of what makes project scripts awesome is that they integrate with the rendering process. If the rendering process in turn integrates with some CI that watches for changes, then you can have a website that is automatically updated whenever you push a change to the repository. This is what I do with my website: I have a GitHub action that watches for changes to the <code>main</code> branch, and if it detects a change, it runs the rendering process and pushes the result to the <code>gh-pages</code> branch. This means that if I were to change the BibTeX file, it would trigger a re-render, and the list of publications would be automatically updated.</p>
-<p>There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-ci-cd" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ci-cd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-ci-cd">flowchart TD
-    A["actions/checkout@v4"] --&gt; B["quarto-dev/quarto-actions/setup@v2"]
-    B --&gt; C["actions/setup-python@v4"]
-    C --&gt; D("pip install -r requirements.txt")
-    D --&gt; E["quarto-dev/quarto-actions/publish@v2"]
-    style D stroke-width:8px;
-    style C stroke-width:8px;
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ci-cd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Integrating the pre-render script into the Github Actions CI/CD framework. The parts that need to be integrated into the publishing workflow are highlighted with bold outlines.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>In particular, I had to explicitly specify the Python version and install the requirements. This is because the <code>quarto-actions/setup</code> action does not install the requirements, and the <code>quarto-actions/publish</code> action does not install Python. This is admittedly a bit of a nuisance to work around, but really not all that big a deal in the grand scheme of things.</p>
-<p>One thing to keep in mind when writing your script is the context from which it will be executed. In particular, if you’re using a CI/CD pipeline, you will need to make sure that the script can find the files it needs. In my case, I had to explicitly specify the path to the BibTeX file, as well as the path to the output file. This is because the script is executed from the root of the repository, but the BibTeX file is in the <code>papers</code> directory, and the output file is in the <code>papers</code> directory, too. Testing locally for deployment in CI/CD is notoriously hellish, but with a little bit of elbow grease,<sup>2</sup> you can get it to work.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;And by ‘a little bit’, I mean absolute tons of it.</p></div></div><p>One caveat: rendering with pre- and post-render project scripts may be relatively expensive in terms of time. My silly SkiErg world record script adds a good 20-25 seconds of processing time to each rendering run – not a lot, but it does stack up eventually. The <a href="https://quarto.org/docs/projects/scripts.html">documentation</a> helpfully discloses that Quarto provides an environment variable, <code>QUARTO_PROJECT_RENDER_ALL</code>, which is set to <code>1</code> if it’s a full render. It may make sense to do a more manual caching here.</p>
-</section>
-<section id="things-you-can-do-with-project-scripts" class="level1">
-<h1>Things you can do with project scripts</h1>
-<p>Seriously, the possibilities of what you can do with project scripts are pretty much endless. I have a project script that <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_check_skierg_records.py">checks the world records list on the official SkiErg website and makes sure my index page lists my accurate records</a>. This is completely silly, but it’s also a great example of how you can use project scripts to automate just about everything:</p>
-<ul>
-<li><a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_doi_from_rogue_scholar.py">A script I built</a> pulls DOIs minted by <a href="https://rogue-scholar.org">Rogue Scholar</a> and appends them to posts.</li>
-<li>A lot of projects use it for housekeeping: <a href="https://github.com/CSCAR/workshop-stata-intro/blob/main/Makefile">via makefiles</a></li>
-<li>The <a href="https://github.com/bambinos/bambi">bambi</a> project uses it to <a href="https://github.com/bambinos/bambi/blob/main/docs/pre_render.py">build a changelog</a>, which is a great idea for applications that do need it</li>
-<li>This one cool master’s thesis uses pre-render project scripts to <a href="https://github.com/danielvartan/mastersthesis/blob/bebb699af7cab7add37a33768ccd605a60a18ba8/R/quarto-pre-render-html.R#L82">load variables from a YAML file into envvars</a>, and I’ve <a href="https://github.com/computorg/computo-quarto-extension/blob/main/prerender.R">seen the same done with Rprofile files</a> – obviously, these are much more pertinent to projects where the bulk of the project consists of notebooks/code execution rather than websites, but again, the idea is the same</li>
-<li>Obviously, I’m not the only one to use it for <a href="https://github.com/nfrerebeau/rarcheo/blob/master/_references.R">reference management</a></li>
-<li>You can use it to <a href="https://github.com/lnnrtwttkhn/version-control-book/blob/main/Makefile">download static content into your project</a>, too!</li>
-</ul>
-<p>The sky’s the limit! I’m currently working on rendering my CV from a JSON file via a project script, as well as a few other cool things. I keep my project scripts <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/tree/main/scripts">here</a> – I hope they will inspire you to do something cool with your own project scripts!</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {{Chris von Csefalvay}},
-  title = {Quarto Project Scripts Are Awesomeness},
-  date = {2023-10-22},
-  url = {https://chrisvoncsefalvay.com/posts/quarto-project-scripts/},
-  doi = {10.59350/b4qyq-70w75},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Quarto Project Scripts Are
-Awesomeness.”</span> <a href="https://doi.org/10.59350/b4qyq-70w75">https://doi.org/10.59350/b4qyq-70w75</a>.
-</div></div></section></div> ]]></description>
-  <category>Quarto</category>
-  <category>Python</category>
-  <guid>https://chrisvoncsefalvay.com/posts/quarto-project-scripts/</guid>
-  <pubDate>Sun, 22 Oct 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
