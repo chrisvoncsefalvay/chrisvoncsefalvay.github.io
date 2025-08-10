@@ -1,6 +1,6 @@
 ---
-title: "The end of isotropy and the rise of metadynamic AI"
-description: "GPT-5 has changed the story in ways few seem to have considered. For better or worse: we're all architects now. Welcome to the post-isotropy age and metadynamic AI."
+title: The end of isotropy and the rise of metadynamic AI
+description: 'GPT-5 has changed the story in ways few seem to have considered. For better or worse: we''re all architects now. Welcome to the post-isotropy age and metadynamic AI.'
 date: 2025-08-10
 categories:
 - AI
