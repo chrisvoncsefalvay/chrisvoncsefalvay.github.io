@@ -15,6 +15,18 @@ image: aaz4729-f1.jpeg
 title: Teams of Rivals
 ---
 
+::: {.callout-note}
+## A historical note
+
+This blog post is one of the earliest uses I could find of the term _agentic_ or _agents_ in the modern AI context. It prdates the widespread use by luminaries like Andrew Ng that started in 2024, or the BAIR post from early 2024. Since this blog is hosted via GitHub, there's an [immutable record](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/commit/bbae4bd4dd6474774e95ceefce5b75113a9d407a#r166906946) that indicates the commit. With that said, I'd like to add two points at two years in retrospect.
+
+First, I did not invent the agentic terminology. Russell and Norvig did, in 1995, in their definition of an agent. Second, I most definitely did not invent the concept. We all stand on the shoulders of giants, none more so than I. That LLMs can create emergent complexity through action and interconnection has either been said, or otherwise entailed, by others. I do consider this post to be a relatively early formulation both of how intrinsically tied LLMs are to agentic AI, and of the way functional differentiation (or 'agentic speciation', as I like to call it these days) is crucial to the agentic notion. 
+
+You cannot own an idea whose time has come. It defies confinement and mocks proprietary claims. Whatever role I have played with this post in the emergence of modern agentic AI was but a chord in a symphony, one that started with Babbage and Lovelace, and through Turing and von Neumann and Minsky and our contemporaries, reached the part of the score that was my privilege to play. It will no doubt carry on. In two brief years, this idea has gone from academic through theoretical to a buzzword. Amidst, however, the occasional discordant note on the fringes, the melody keeps moving towards a gorgeous, emerging complexity. If my fortune in 2023 was to see enough into the future to conceptualise agentic AI ahead of my contemporaries, I enjoy the consolation of seeing all that this technology could one day be. The future has not been written. But some of its source code has.
+
+-- Chris von Csefalvay, 30 Sep 2025.
+:::
+
 In the first four entries ([1](../llms-language) [2](../lyre-of-hephaestus) [3](../moral-maps) [4](../prompt-engineering)) of this sequence, I have focused primarily on what LLMs aren't, can't, won't, wouldn't and shouldn't. It's probably time to conclude this series by that much awaited moment in all stories, where the darkest night finally turns into a glorious dawn, where we finally arrive at the promised land, where we finally get to talk about what LLMs _could_ be.
 
 What I see as the most successful potential model of using LLMs is as a pack of semi-autonomous decision-makers with their own role, competing in a connectionistic, hierarchical model where each layer feeds into the next that performs some adjudicative or aggregative function. Structured this way, LLMs could become teams of rivals, analogous to the teams of rivals in the real world that we rely on to answer hard questions. For what that would look like, we might need to look at a story of my own. This story begins on the morning of 01 December 1948 on Somerton Beach, near Adelaide, Australia.
