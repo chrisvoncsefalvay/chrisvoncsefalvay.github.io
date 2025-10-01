@@ -9,7 +9,7 @@
 <link>https://chrisvoncsefalvay.com/posts/</link>
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
-<generator>quarto-1.7.33</generator>
+<generator>quarto-1.8.25</generator>
 <lastBuildDate>Sun, 10 Aug 2025 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The end of isotropy and the rise of metadynamic AI</title>
@@ -79,16 +79,17 @@
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
   author = {{Chris von Csefalvay}},
   title = {The End of Isotropy and the Rise of Metadynamic {AI}},
   date = {2025-08-10},
   url = {https://chrisvoncsefalvay.com/posts/metadynamic-ai/},
+  doi = {10.59350/p9zjx-y5b62},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The End of Isotropy and the Rise of
-Metadynamic AI.”</span> August 10, 2025. <a href="https://chrisvoncsefalvay.com/posts/metadynamic-ai/">https://chrisvoncsefalvay.com/posts/metadynamic-ai/</a>.
+Metadynamic AI.”</span> <a href="https://doi.org/10.59350/p9zjx-y5b62">https://doi.org/10.59350/p9zjx-y5b62</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>GPT-5</category>
@@ -323,7 +324,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-83635"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-83635").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-28800"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-28800").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -421,7 +422,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-41112"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41112").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-63449"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-63449").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -1408,7 +1409,7 @@ Figure&nbsp;1: Auto-DOI flow chart.
 Listing&nbsp;1: Getting the DOIs from Rogue Scholar.
 </figcaption>
 <div aria-describedby="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="annotated-cell-1" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-1-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-1-1"></span>
 <span id="annotated-cell-1-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1535,7 +1536,7 @@ font-style: inherit;">"</span>)</span>
 <span id="annotated-cell-1-21">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">return</span> posts_with_dois</span></code></pre></div>
+font-style: inherit;">return</span> posts_with_dois</span></code></pre></div></div>
 </div>
 </figure>
 </div>
@@ -1550,7 +1551,7 @@ font-style: inherit;">return</span> posts_with_dois</span></code></pre></div>
 Listing&nbsp;2: Pre-DOI YAML preamble example.
 </figcaption>
 <div aria-describedby="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">categories</span><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1611,7 +1612,7 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">:</span><span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code></pre></div>
+font-style: inherit;"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code></pre></div></div>
 </div>
 </figure>
 </div>
@@ -1622,7 +1623,7 @@ font-style: inherit;"> Auto-DOI for Quarto posts via Rogue Scholar</span></span>
 Listing&nbsp;3: Processing a single post.
 </figcaption>
 <div aria-describedby="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="annotated-cell-3" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-3-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-3-1"></span>
 <span id="annotated-cell-3-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1917,7 +1918,7 @@ background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'</span>)</span>
-<span id="annotated-cell-3-43">        </span></code></pre></div>
+<span id="annotated-cell-3-43">        </span></code></pre></div></div>
 </div>
 </figure>
 </div>
@@ -1936,7 +1937,7 @@ font-style: inherit;">'</span>)</span>
 Listing&nbsp;4: Declaring project scripts in _quarto.yml.
 </figcaption>
 <div aria-describedby="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"></span>
 <span id="cb2-2"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">project</span><span class="kw" style="color: #003B4F;
@@ -1971,7 +1972,7 @@ background-color: null;
 font-style: inherit;"> scripts/pre_doi_from_rogue_scholar.py</span></span>
 <span id="cb2-6"><span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">    </span></span></code></pre></div>
+font-style: inherit;">    </span></span></code></pre></div></div>
 </div>
 </figure>
 </div>
@@ -1983,7 +1984,7 @@ font-style: inherit;">    </span></span></code></pre></div>
 Listing&nbsp;5: Github action to commit changes.
 </figcaption>
 <div aria-describedby="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="annotated-cell-5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-annotation-code code-with-copy"><code class="sourceCode yaml"><span id="annotated-cell-5-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-annotation-code code-with-copy"><code class="sourceCode yaml"><span id="annotated-cell-5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">on</span><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2305,7 +2306,7 @@ font-style: inherit;">|</span></span>
 <span id="annotated-cell-5-37">          git config --global user.name 'Chris von Csefalvay'</span>
 <span id="annotated-cell-5-38">          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'</span>
 <span id="annotated-cell-5-39">          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
-<span id="annotated-cell-5-40">          git push</span></code></pre></div>
+<span id="annotated-cell-5-40">          git push</span></code></pre></div></div>
 </div>
 </figure>
 </div>
@@ -2879,7 +2880,7 @@ Yesterday.”</span> <a href="https://doi.org/10.59350/keztr-yx081">https://doi.
 <p>The second is that to an LLM, one language is like any other. Consider the ability of ChatGPT-3.5 to generate stories in different languages:</p>
 <div class="quarto-embed-nb-cell">
 <div id="multilanguage-story" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:47:56.649632Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:31.931156Z&quot;}}" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb1-1">languages <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb1-1">languages <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
 background-color: null;
@@ -2985,7 +2986,7 @@ font-style: inherit;">30</span>]) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"..."</span>)))</span></code></pre></div>
+font-style: inherit;">"..."</span>)))</span></code></pre></div></div>
 <div id="multilanguage-story-1" class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"version_major":2,"version_minor":0,"model_id":"63e54ee6d6f9463a8906b7889ba56723","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
@@ -3016,7 +3017,7 @@ font-style: inherit;">"..."</span>)))</span></code></pre></div>
 <p>A side note: I find this profoundly beautiful. When asked to generate a story in a given language, LLMs don’t generate a story in English they translate to, say, Swahili. Consider this Swahili story I got from the model:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-swahili-story" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:49:39.583280Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:47:59.844642Z&quot;}}" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb2-1">story_prompt <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb2-1">story_prompt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> (</span>
 <span id="cb2-2">    <span class="ss" style="color: #20794D;
@@ -3073,7 +3074,7 @@ font-style: inherit;">\n\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)[:<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">3</span>])))</span></code></pre></div>
+font-style: inherit;">3</span>])))</span></code></pre></div></div>
 <div id="swahili-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Kulikuwa na farasi jasiri mwenye jina Kiboko, ndege mjanja mwenye jina Tembo, na sisimizi mwepesi mwenye jina Simba. Jicho moja la dhahabu la ndege Tembo lilikuwa na uwezo wa kuona vitu vya thamani kutoka mbali. Farasi Kiboko alikuwa na moyo shujaa sana, kamwe hakuogopa hata hatari kubwa. Sisimizi Simba alijulikana kwa akili zake za kugeuza tukio lolote kuwa fursa.</p>
@@ -3086,7 +3087,7 @@ font-style: inherit;">3</span>])))</span></code></pre></div>
 <p>Compare this to the English story:</p>
 <div class="quarto-embed-nb-cell">
 <div id="cell-english-story" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.223772Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:50:26.651480Z&quot;}}" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb3-1">story_prompt <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb3-1">story_prompt <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> (</span>
 <span id="cb3-2">    <span class="ss" style="color: #20794D;
@@ -3147,7 +3148,7 @@ font-style: inherit;">\n\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)[:<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">3</span>])))</span></code></pre></div>
+font-style: inherit;">3</span>])))</span></code></pre></div></div>
 <div id="english-story" class="cell-output cell-output-display cell-output-markdown">
 <blockquote class="blockquote">
 <p>Once upon a time, in the dense forest of Whispering Pines, there were three remarkable creatures: Oliver the wise owl, Jasper the brave snake, and Felix the loyal turtle. These three friends were known far and wide for their extraordinary virtues and their undying loyalty to one another.</p>
@@ -3161,7 +3162,7 @@ font-style: inherit;">3</span>])))</span></code></pre></div>
 <p>What it also means is that LLMs can handle not just human but formal languages, too. So we can give it a JSON schema:</p>
 <div class="quarto-embed-nb-cell">
 <div id="story-schema" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:51:18.227557Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:51:18.226049Z&quot;}}" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb4-1">story_schema <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb4-1">story_schema <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -3234,13 +3235,13 @@ background-color: null;
 font-style: inherit;">}</span></span>
 <span id="cb4-24"><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"""</span></span></code></pre></div>
+font-style: inherit;">"""</span></span></code></pre></div></div>
 </div>
 </div>
 <p>And with a little love, we can get LLMs to return JSON answers:</p>
 <div class="quarto-embed-nb-cell">
 <div id="story-to-json" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}}" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb5-1">json_completion <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb5-1">json_completion <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> openai.api_resources.ChatCompletion.create(</span>
 <span id="cb5-2">    model <span class="op" style="color: #5E5E5E;
@@ -3340,7 +3341,7 @@ font-style: inherit;">0</span>].message.content</span>
 <span id="cb5-14"></span>
 <span id="cb5-15"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(result)</span></code></pre></div>
+font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "goal": "Unravel the mystery of the enchanted gem",
@@ -3372,10 +3373,10 @@ font-style: inherit;">print</span>(result)</span></code></pre></div>
 </div></div><p>We use some JSON validation to see if we get the right answer, against our schema up there:</p>
 <div class="quarto-embed-nb-cell">
 <div id="json-validate" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:59:42.627220Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:42.621299Z&quot;}}" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1">jsonschema.validate(json.loads(json_completion.choices[<span class="dv" style="color: #AD0000;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1">jsonschema.validate(json.loads(json_completion.choices[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>].message.content), </span>
-<span id="cb7-2">                    json.loads(story_schema))</span></code></pre></div>
+<span id="cb7-2">                    json.loads(story_schema))</span></code></pre></div></div>
 </div>
 </div>
 <p>Our workflow, then, will roughly look as follows:</p>
@@ -3455,7 +3456,7 @@ Figure&nbsp;1: Our rough workflow.
 <p>Based on its JSON representation,</p>
 <div class="quarto-embed-nb-cell">
 <div id="story-to-json" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T14:59:38.007481Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T14:59:27.451334Z&quot;}}" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1">json_completion <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1">json_completion <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> openai.api_resources.ChatCompletion.create(</span>
 <span id="cb8-2">    model <span class="op" style="color: #5E5E5E;
@@ -3555,7 +3556,7 @@ font-style: inherit;">0</span>].message.content</span>
 <span id="cb8-14"></span>
 <span id="cb8-15"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(result)</span></code></pre></div>
+font-style: inherit;">print</span>(result)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "goal": "Unravel the mystery of the enchanted gem",
@@ -3639,7 +3640,7 @@ Figure&nbsp;4: The moral heatmap from the same sample of ten stories.
 <p>This is another example of using an LLM to evaluate an LLM’s output. This is a powerful technique, and significantly cheaper and easier than trying to manually map all possible virtues through some dictionary. The takeaway? If you have a large potential problem space, large enough to make a dict a hassle, consider using LLMs as parsers and evaluators, ask for a response in a very formal language and/or over a very limited set of possible responses, and validate those with a simple validator.</p>
 </div></div><div class="quarto-embed-nb-cell">
 <div id="cell-abilising" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-10-28T15:09:47.962688Z&quot;,&quot;start_time&quot;:&quot;2023-10-28T15:09:24.179984Z&quot;}}" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1">abilities <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1">abilities <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
 background-color: null;
@@ -3751,7 +3752,7 @@ font-style: inherit;">0</span>].message.content.title()</span>
 <span id="cb10-20">            virtues.pop()</span>
 <span id="cb10-21">            pbar.update(<span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
+font-style: inherit;">1</span>)</span></code></pre></div></div>
 <div id="abilising" class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
 {"version_major":2,"version_minor":0,"model_id":"deff26e5d2a0487ea1353dde8cb59612","quarto_mimetype":"application/vnd.jupyter.widget-view+json"}

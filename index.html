@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,13 +32,14 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
@@ -103,6 +104,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
@@ -227,7 +230,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <h2 data-anchor-id="bio">Bio</h2>
 <p>I’m a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. I am the author of <a href="https://computationalinfectiousdisease.com">Computational Modeling of Infectious Disease</a>, a richly illustrated compendium on modern computational epidemiology, as well as <a href="papers">a growing body of research</a>.</p>
 <p>I attended the University of Oxford for my undergraduate studies, graduating with a distinction (1st class), and returned there for my graduate studies. I also hold degrees from Cardiff and Robert Gordon University Aberdeen, and have studied at the University of Leiden under an Erasmus programme. Today, I am <a href="https://cph.nbphe.org/employer_letter/19626">board certified in public health</a>, a Fellow of the <a href="https://www.rsph.org.uk/">Royal Society for Public Health</a> and a member of several other learned societies. I have also been elected a Senior Member of IEEE, where I am a member of the EMBS Technical Committee on Standards and the EMBS Technical Committee on Biomedical and Health Informatics.</p>
-<p>I am currently a Practice Director for Biomedical AI/ML for <a href="https://www.hcltech.com/">HCLTech</a>, where I advise the world’s leading life sciences, medical devices and pharma companies on how to leverage AI/ML to improve their products and serve their customers better. I am also a visiting thesis supervisor for students on the data science track of the mathematics programme at the <a href="https://www.bme.hu/?language=en">Budapest University of Technology and Economics</a>.</p>
+<p>I am currently a Practice Director for Biomedical AI/ML for <a href="https://www.hcltech.com/">HCLTech</a>, where I advise the world’s leading life sciences, medical devices and pharma companies on how to leverage AI/ML to improve their products and serve their customers better. I am also a visiting thesis supervisor for students on the data science track of the mathematics programme at the <a href="https://www.bme.hu/?language=en">Budapest University of Technology and Economics</a>. Depending on whom you ask, I have been accused of <a href="https://chrisvoncsefalvay.com/posts/team-of-rivals/">having invented agentic AI</a> – this is not entirely true, as the term itself is due to Andrew Ng and the concept is much older (Norvig and Russell used it in 1995), but my description of what eventually became agentic AI is one of the earliest ones.</p>
 <p>As part of my service to the profession, I’ve been a reviewer for <a href="https://joss.theoj.org/papers/reviewed_by/@chrisvoncsefalvay">JOSS</a>, <a href="https://loop.frontiersin.org/people/1398311/editorial">Frontiers in Immunology</a> and <a href="https://loop.frontiersin.org/people/1398311/editorial">Frontiers in Medicine</a>. Between 2022 and 2023, I served Virginia as a member of the Medical Reserve Corps, and currently serve in both the Rocky Mountain MRC of Denver and Colorado’s radiation response MRC. I was also part of the <a href="https://c19hcc.org/">COVID-19 Healthcare Coalition</a> and the <a href="https://covidtracking.com/thank-you#chris-von-csefalvay">Covid Tracking Project</a>.</p>
 <p>You can find a <a href="papers">list of my publications here</a>. My work on COVID-19 has been <a href="media">featured in the media</a>. I also write on various topics as the fancy strikes – you can peruse my <a href="blog">notebook</a> here.</p>
 </section>
@@ -321,13 +324,14 @@ gtag('config', '395640625', { 'anonymize_ip': true});
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

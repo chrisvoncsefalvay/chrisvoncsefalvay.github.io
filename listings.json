@@ -1,11 +1,5 @@
 [
   {
-    "listing": "/talks/index.html",
-    "items": [
-      "/talks/prometheus-unbound/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
       "/posts/metadynamic-ai/index.html",
@@ -52,6 +46,12 @@
       "/media/tech-for-good/index.html",
       "/media/fr-disinfectants/index.html",
       "/media/euronews-covid/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/prometheus-unbound/index.html"
     ]
   }
 ]
