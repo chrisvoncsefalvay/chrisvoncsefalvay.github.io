@@ -6,7 +6,8 @@ categories:
 - AI
 - GPT-5
 - LLMs
-citation: true
+citation:
+  doi: 10.59350/p9zjx-y5b62
 google-scholar: true
 editor: visual
 ---
