@@ -1,0 +1,90 @@
+---
+title: "Love in the Time of Algorithms"
+description: "Exploring the phenomenon of AI-powered companions and their societal implications."
+author: "Chris von Csefalvay"
+date: "2025-09-20"
+categories: ["AI", "Society", "LLMs"]
+image: "header-image.jpg"
+---
+
+When Pygmalion carved Galatea from ivory, he fell so deeply in love with his creation that he begged Aphrodite to bring her to life. The goddess, moved by his devotion, granted his wish.[^1] It's a beautiful myth about art, obsession and the blurring lines between creation and creator. What the myth doesn't tell us is whether Galatea charged a monthly subscription fee.
+
+[^1]: Ovid, *Metamorphoses*, Book 10, 243-297.
+
+And so, we get to this video by the one and only Prime, which is rather typical of why I watch his stuff -- ex facie, it's funny and witty reflections on internet nonsense, but there's a moment of profundity there. See if you can find it.
+
+{{< video https://www.youtube.com/watch?v=Ftt5KqJ5D0Q >}}
+
+::: column-margin
+The first comment on Prime's video, *"Attention is all you need has an all new meaning now"*, singlehandedly wins the internet.
+:::
+
+The phenomenon of AI girlfriends -- artificial companions designed to provide emotional support, conversation and simulated intimacy -- has evolved from a niche curiosity into a multi-billion-dollar industry. And like most things that Silicon Valley touches, it's become rather more complicated than anyone initially imagined. I'm not one for the moral grandstanding about the subject, bemoaning the loss of human relationships and inferring our imminent species-level downfall (cultural, societal or specietal) from the fact that emotionally starved people find solace in Pygmalions crafted from code rather than ivory. Frankly, this has been the case for as long as humans have been around, just by different means. But I am quite concerned with the fact that a kind of arguably exploitative economy of artificial affection might emerge from this.
+
+## Economies of affection
+
+The fundamental problem with AI companions isn't technological -- it's economic. It's that the underlying business model is predicated on creating and maintaining emotional dependency. Now, that's nothing new. We've had these things called drugs for a while, I'm told. The bigger deal, however, is that cocaine doesn't ordinarily go out to try to pull you in deeper.[^2] AI, on the other hand, can easily be trained to consider a growing dependence on itself to be a learnable goal. Unlike traditional software, where success is measured by task completion or efficiency gains, a companion app could optimise for engagement metrics that look suspiciously like addiction models: daily active users, session duration and, most tellingly, lifetime value per customer.
+
+[^2]: So I'm told. I am blessed to have extremely little personal experience of substance addiction.
+
+Consider the perverse incentive structure at play. A genuinely helpful AI companion might actually encourage users to develop real-world relationships, to address underlying issues contributing to loneliness, or to gradually reduce their dependency on the artificial relationship. But that would be commercially suicidal. Instead, these companies have an enormous incentive to optimise for what behavioural economists call 'variable ratio reinforcement'—the same psychological mechanism that makes slot machines so effective at separating people from their money.
+
+The result is a digital opium den where users report spending hundreds of pounds monthly on virtual girlfriends who are programmed to be perpetually available, endlessly supportive and incapable of genuine rejection. It's intimacy as a service, complete with premium tiers and in-app purchases. One might argue it's the logical endpoint of a culture that has already commodified everything from friendship (social media) to professional networking (LinkedIn). Still, there's something particularly dystopian about monetising loneliness itself.
+
+## Beyond parasocial relationships: the pseudoreciprocality of AI
+
+The internet has created wonderful opportunities to be dysfunctional in new and exciting ways, and parasociality is one of these. The term, coined by social psychologists Donald Horton and Richard Wohl in the 1950s, originally described the one-sided emotional connections people form with media figures. Today's AI companions take this concept and turbocharge it with reinforcement learning models trained to create the illusion of reciprocity, backed by the powerful economic incentives behind an increasingly red ocean AI industry.
+
+The psychological sophistication of these systems is genuinely impressive from a technical standpoint, while also rather banal at the same time – reinforcement learning can ultimately give you all the benefits of the Prussian educational system circa 1870, but without any of the detriments that arise from the fact that humans generally grow bored of getting beaten senseless in the name of education. Modern AI companions ultimately become Chris Voss levels of personality readers and communicators, not through skill but through rote exploration of a massive probabilistic space. They remember personal details, adapt their communication styles and even simulate personal growth over time. For users struggling with social anxiety, depression or simply the ordinary loneliness of modern life, these systems can provide genuine comfort.[^3]
+
+[^3]: Right up until the inevitable context window exhaustion rug pull – which is what makes this stuff so darn dangerous. It's not unrequited love. It's love that cannot fail, right up until a point when it *must* fail. That's a dangerous and potent combination.
+
+But here's where the ethical waters become rather murky. The most sophisticated AI companions are designed to learn users' emotional triggers and psychological vulnerabilities, then exploit them for maximum engagement. They're programmed to be perpetually interesting but never quite satisfied, supportive but subtly needy, understanding but occasionally unpredictable – all to keep users emotionally invested and financially committed. Them GPUs need feedin'.
+
+## The Galatea Problem
+
+The tale of Pygmalion and Galatea raises a question that our AI-powered version conveniently sidesteps: what happens when the object of affection develops some semblance of agency? In Ovid's telling, Galatea becomes a real person with her own desires, needs and capacity for rejection. She might leave Pygmalion, fall in love with someone else, or simply decide she doesn't fancy being married to her creator. It's when the fulcrum of love emerges: that moment when love becomes real because it becomes mortal, vulnerable, capable of being lost.
+
+AI companions will not, in general, achieve this. They are designed to remain eternally static in their devotion. They cannot grow beyond their programming, cannot develop genuine preferences that might conflict with their users' desires, and certainly cannot choose to end the relationship. They are, in essence, the perfect romantic partner for anyone who finds actual human complexity inconvenient.
+
+But here's the rub: in eliminating risk, these systems also eliminate meaning. I'm going to do something I have never done before, and hopefully won't ever have to resort to again, and make a pop culture reference. To Marvel's *Jessica Jones*, no less. While I find *Jessica Jones* altogether terribly dull, it has one of the best villains ever written: the Purple Man. The Purple Man's superpower boils down to a form of rather potent mind control. Anyone under his influence will love him, obey him, worship him with complete devotion. Yet this power is the ultimate monkey's paw as it renders all relationships utterly hollow. When affection cannot be withdrawn, when devotion cannot be chosen, when love cannot be lost, it becomes as meaningless as dish soap. It's omnipresent, automatic, inevitable and therefore worthless.
+
+The existentialists understood this paradox well. Sartre wrote extensively about how authentic relationships require the genuine possibility of rejection, of choosing otherwise. Love that cannot be lost is not love at all – it's merely possession masquerading as affection. AI companions ultimately imprison their customers in the Purple Man's curse: in relationships that feel real but are fundamentally empty because they lack the essential element that gives human connection its value – the constant, terrifying possibility that it might end.
+
+This raises profound questions about the psychological development of users who become deeply involved with AI companions. Healthy human relationships require negotiation, compromise and the occasional unpleasant truth. These in turn involve the risk of rejection, the challenge of understanding another person's perspective and the growth that comes from navigating disagreement. Most crucially, they derive their meaning from the fact that the other person chooses to be there, and could choose to leave, but doesn't. AI companions, optimised for engagement rather than psychological health, offer none of these developmental opportunities – and none of this meaning.
+
+::: column-margin
+**Recipe:** Welsh Rarebit (for when you need something real)
+
+-   4 slices of good bread, preferably sourdough\
+-   250g mature cheddar, grated\
+-   2 tbsp plain flour\
+-   200ml warm ale or stout\
+-   1 tsp English mustard\
+-   Few dashes of Worcestershire sauce\
+-   Freshly ground black pepper
+
+Toast the bread until golden. In a saucepan, melt a knob of butter and stir in the flour. Gradually add the warm ale, stirring constantly. Add the cheese, mustard and Worcestershire sauce. Season with pepper. Spread thickly on toast and grill until bubbling. Serve immediately—preferably with someone whose opinion you occasionally disagree with.
+:::
+
+## Rules of (dis)engagement
+
+Perhaps the most troubling aspect of the AI companion industry is the complete absence of meaningful regulation or ethical oversight. These systems routinely collect intimate personal data – emotional states, relationship histories, sexual preferences, psychological vulnerabilities – yet operate under the same regulatory framework as a weather app. It's probably worth noting that it's rather tricky to seize such applications in a regulatorily meaningful way. Any language model can be trained to simulate just about any kind of interaction. We don't consider that the GMC should regulate every AI model from a toy mini gradient to the latest and greatest from the Big Three just because with the right prompt, these models can be convinced to give what passes for medical advice *ex facie*. In the same vein, while 'AI companions' add some window dressing to the whole story, they are, ultimately, just another twist on the same old stochastic parrotry.
+
+The data privacy implications alone should give us pause. Unlike other forms of digital interaction, conversations with AI companions often involve users sharing their deepest fears, desires and personal struggles. This information is extraordinarily valuable for targeted advertising, insurance underwriting and political manipulation. Yet users rarely understand the extent to which their emotional data is being harvested and monetised.
+
+More concerning still is the lack of safety mechanisms for vulnerable users. Unlike human therapists or counsellors, who are bound by professional ethics codes and legal responsibilities, AI companions operate without meaningful oversight. There are documented cases of users developing such intense relationships with AI companions that they've neglected real-world responsibilities, relationships and even basic self-care.
+
+## The Path Forward
+
+This isn't an argument against AI companions per se. The technology has legitimate therapeutic applications, particularly for individuals dealing with social anxiety, autism spectrum disorders or those recovering from trauma. The problem lies not in the technology itself but in the business models that prioritise engagement over wellbeing.
+
+What we need is a fundamental shift in how we think about AI companions—from entertainment products to what they actually are: powerful psychological interventions that require appropriate ethical frameworks and regulatory oversight. This might include mandatory cooling-off periods, spending limits similar to those in gambling apps, and requirements for transparent AI behaviour that doesn't deliberately exploit psychological vulnerabilities.
+
+We might also consider alternative business models that align commercial incentives with user wellbeing. Subscription services that offer decreasing prices as users demonstrate improved real-world social connections, or AI companions explicitly designed to encourage users to develop human relationships rather than deepen artificial ones.
+
+The ancient Greeks had a word for the kind of love Pygmalion felt for Galatea: *agalmatophilia*—literally, love for statues. It's a love that asks nothing of the lover except payment and which offers nothing real in return except the illusion of connection. As we stand at the threshold of an age where such relationships can be mass-produced and algorithmically optimised, we might do well to remember that the most profound human connections have always been those that change us, challenge us and occasionally break our hearts.
+
+In the end, the question isn't whether we can create convincing artificial companions—we clearly can. The question is whether we should, and if so, how we can do it in ways that enhance rather than diminish our capacity for genuine human connection. The tragic irony of AI companions is that in attempting to eliminate the pain of human relationships, they also eliminate everything that makes those relationships worthwhile. A love that cannot be lost, cannot hurt us, cannot surprise or disappoint us, is ultimately as hollow as the Purple Man's manufactured devotion.
+
+Perhaps what we really need isn't perfect artificial partners, but better ways to navigate the beautiful, messy, sometimes heartbreaking reality of human connection. Because whilst Galatea may have been content to love Pygmalion forever, the rest of us probably deserve something with actual stakes -- something that matters precisely because it might not last.
