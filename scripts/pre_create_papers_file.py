@@ -126,6 +126,13 @@ def write_into_file(entries_by_year: dict, destination_path: str, destination_di
 
 if __name__ == "__main__":
     import os
+    import sys
+
+    # Ensure UTF-8 encoding for stdout to handle diacritics
+    if sys.platform == 'win32':
+        import io
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
     if not os.getenv("QUARTO_PROJECT_RENDER_ALL"):
         exit()

@@ -2,6 +2,13 @@ import yaml
 from difflib import SequenceMatcher
 from pathlib import Path
 import logging
+import sys
+
+# Ensure UTF-8 encoding for stdout to handle diacritics
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
