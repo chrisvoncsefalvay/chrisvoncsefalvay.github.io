@@ -1,10 +1,12 @@
 ---
-title: "Love in the Time of Algorithms"
-description: "Exploring the phenomenon of AI-powered companions and their societal implications."
-author: "Chris von Csefalvay"
-date: "2025-09-20"
-categories: ["AI", "Society", "LLMs"]
-image: "header-image.jpg"
+title: Love in the Time of Algorithms
+description: Exploring the phenomenon of AI-powered companions and their societal implications.
+author: Chris von Csefalvay
+date: '2025-09-20'
+categories:
+- AI
+- Society
+- LLMs
 ---
 
 When Pygmalion carved Galatea from ivory, he fell so deeply in love with his creation that he begged Aphrodite to bring her to life. The goddess, moved by his devotion, granted his wish.[^1] It's a beautiful myth about art, obsession and the blurring lines between creation and creator. What the myth doesn't tell us is whether Galatea charged a monthly subscription fee.

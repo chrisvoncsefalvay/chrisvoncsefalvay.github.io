@@ -1,0 +1,112 @@
+---
+title: A slow walk out of Dikika Cave
+description: MCP is great. The models, however, just didn't show up.
+author: Chris von Csefalvay
+date: '2025-10-01'
+categories:
+- AI
+- Agentic AI
+- MCP
+- Interoperability
+- LLMs
+---
+
+There's a cave in Ethiopia, in an area called Dikika. At some point, around 3.4 million years ago, an early hominin made some incisions on an animal carcass, leaving some notches on a bone as the makeshift knife cut past the muscle and sinew into the bone, tell-tale kerf marks that speak of the first time one of our ancestors used a tool.[^1] What happened in that cave changed everything for our species. 
+
+[^1]: McPherron, S. P., Alemseged, Z., Marean, C. W., Wynn, J. G., Reed, D., Geraads, D., & Bobe, R. (2010). Evidence for stone-tool-assisted consumption of animal tissues before 3.39 million years ago at Dikika, Ethiopia. *Nature*, 466(7308), 857-860.
+
+This, too, is a story about tools, and about learning to use them, but this time, we are observing our own creations doing so. LLMs, of course, are -- as the now somewhat hackneyed phrase calls them -- 'stochastic parrots', without much by way of understanding goals and behaviours. To enable them to reach out and accomplish anything, they must be equipped with a kind of semantic prehensility to call those tools. The means and mediator for that is the [Model Context Protocol](modelcontextprotocol.io), a kind of tool-calling language for LLMs. MCP is a terrific instrument: solid specs, great interface design, the ideas are just 'right'. MCP was built on the 'Field of Dreams' approach to equipping LLMs for tool calling: if we build it (the protocol, that is), they -- the LLMs -- will show up. If we provide a standardised, well-conceived framework for tool calling, one that speaks to them in their own tongue, they would handle their side of the bargain.
+
+They haven't. That's the verdict of MCPMark, a new benchmark from a team at NUS, that stress-tests how well large language models handle programmatic tool calling through MCP.[^2] The numbers are dismal. The best-performing model -- GPT-5-medium -- achieves a pass rate of just 52.56% on realistic tool-calling scenarios. Claude Sonnet 4 manages 28.15%. These aren't edge cases or adversarial examples -- in fact, they're the tasks like updating Notion, managing GitHub PRs or organising files, i.e. precisely the sort of thing we've been assuring the world at large that agentic AI can handle.
+
+The infrastructure is there. It's been designed by smart people with good intentions^[Some happen to be my friends, but I'm a sufficiently fair-minded and obnoxious person to tell them just what I think, friendship be damned. There's no friendship in systems architecture.] But the models didn't show up.
+
+
+## The tyranny of averages
+
+What's particularly damning is the gap between `pass@4` (success when allowing up to four attempts) and `pass^4` (requiring all four attempts to succeed).[^7] GPT-5-medium's `pass@4` climbs to 68.5%, but its `pass^4` plummets to 33.86%. This disjunction indicates that models aren't really evolving at consistency, but at satisficing. They are becoming stochastically better but deterministically worse. That is the exact opposite of what we'd like to see off systems that are meant to do the deterministic part of agentic AI, interfacing the stochastic AI with the deterministic world around it.
+
+The reason behind that is what I shall call the functional inhomogeneity of language (FIL). What's language for? We're tempted to think of its primary functions like conveying ideas, but there are many other functions of communication. Language is also used for social bonding, emotional expression, ritualistic purposes, highly particular speech acts like oaths or contracts -- and even deception. Different contexts demand different linguistic strategies. A casual chat with a friend employs a vastly different style and vocabulary than a formal business report or a technical manual.
+
+Because language is functionally inhomogeneous, models trained on vast corpora of text learn to excel at the dominant modes of language use. They become adept at generating coherent(ish) narratives, answering questions, engaging in dialogue. These are the tasks that dominate their training data. But tool calling is a different beast altogether. As humans, we have the ability to calibrate our language use to the demands of a function. If I spoke for purposes of phatic communication with the irritating punctuality of my briefings to senior management, I'd bore everyone to tears. LLMs do not seem to have understood this distinction. They optimise for their reward, and their reward is premised on what dominates the training data. 
+
+
+## The existential mismatch
+
+Here's the uncomfortable truth: tool calling isn't reasoning writ small. It's a different skill entirely, requiring precise parameter marshalling, state management and error handling. In conversation, approximate correctness is fine. If a model misunderstands a nuance or generates slightly imprecise wording, the human can clarify or adapt. There's flexibility, interpretation, the give-and-take of communication.
+
+Tool calling demands something else entirely: deterministic correctness. Parameters must be exactly right. State must be precisely tracked. Error conditions must be handled properly. There's no room for the sort of graceful imprecision that makes LLMs such pleasant conversational partners.
+
+LLMs spend the vast majority of their existence chatting. They generate essays, answer questions, engage in creative writing, explain concepts. Tool calling represents a tiny fraction of what they do. And yet we've convinced ourselves that because MCP speaks to models in their own tongue -- using natural language interfaces, providing structured schemata --, they would simply adapt.
+
+We've built models optimised for one task -- flexible, creative communication -- and then expressed surprise when they ended up struggling at another. The paper's results suggest this isn't a training data problem or an architecture problem that bigger models will solve. This might be an inherent limitation of systems trying to be all things to all men. 
+
+Consider the training distribution: billions of tokens of human conversation, essays, articles, code discussions. Somewhere in there, a tiny sliver of API calling examples. We're asking models to excel at a mode of operation that represents perhaps a fraction of a percent of their training experience. No amount of prompt engineering or few-shot examples seems sufficient to bridge this gap.
+
+MCP was meant to solve this. By standardising the interface, by providing clear schemas and documentation, by making tool calling feel natural to the model—we thought we'd created the bridge. But the MCPMark results show that even with this beautifully designed infrastructure, models still haven't got the memo about the agentic shift. They still don't know how to call tools reliably. The framework is there. The models aren't holding up their end.
+
+## The local-remote divide
+
+The benchmark reveals another fascinating pattern: models perform substantially better on local services (PostgreSQL, filesystem operations) than on remote APIs (Notion, Github). GPT-5-medium achieves 76.19% on PostgreSQL tasks but only 47.83% on Notion and 41.96% on Playwright (I'm going to treat Playwright as remote, for reasons that will be obvious down the line).
+
+This undermines the entire value proposition of MCP, through no real fault of its own. The protocol was designed specifically to standardise access to remote services. That's where the business value lies. And these are precisely where models perform worst. MCP is providing excellent infrastructure for the cases that matter most, and yet models are failing exactly there. Other recent benchmarks have documented similar struggles,[^5] but MCPMark's focus on realistic, multi-step operations across diverse environments makes the severity of the problem particularly clear.
+
+
+::: {.column-margin}
+***
+
+**Recipe**: A sort of Marcella Hazan risotto
+
+I was making this when I first discussed the idea of a tool-calling protocol with a friend. It's my version of Marcella Hazan's risotto recipe, which I consider overall to be terrifyingly boring, but an incredible base for whatever you want to put on it. The saffron is non-negotiable in my household.
+
+* 1 litre good stock
+* 300g Arborio rice
+* 1 small onion, finely chopped
+* 100mL dry white wine (if you want to make it sickly sweet, you can try Marsala)
+* 60g butter
+* 100g Parmigiano Reggiano, finely grated (work that microplane)
+* a pinch of saffron threads
+
+Heat stock to a simmer in a saucepan. In another pot, melt about half the butter and soften the onion over medium heat to translucency. That's 5 minutes in normal places, 6 in Denver. Add the rice and stir to coat the grains. Add the stock, a ladleful at a time, interspersing it with dashes of the wine. Add the saffron threads (wear gloves!). The trick is not to add it all at once, but to let the rice absorb it before adding more. Remove from heat, stir in remaining butter and Parmigiano. Serve immediately.
+***
+:::
+
+
+The NUS researchers -- correctly, in my view -- attribute this to training data availability. Their finding is a tell-tale heart of the aetiology described above -- MCP is failing because the training material, the data supply chain, of their utilising LLMs does not cater for tool calling adequately. Local services are easier to simulate and collect interaction traces for than remote APIs, which require authentic usage patterns that are expensive to curate and often protected behind rate limits and authentication walls. In other words, models have learnt to fake competence on the easy but dominant stuff whilst floundering on precisely the APIs that matter for real enterprise applications.^[There's also another aspect here -- Playwright is a browser automation tool. It is not just about strict, formal text, but about semanticity and pragmatics.]
+
+
+## Caliban's betrayal
+
+Here's what bothers me most about this: we did the hard work. We built MCP carefully. We specified it properly. We created servers for all the major platforms. We designed interfaces that should make tool calling natural. The infrastructure is genuinely good. And yet to no avail, for its end consumer cannot reliably use it. We are Prospero watching in horror as Caliban lays waste to our books.
+
+The paper's conclusion identifies three critical directions: moving from reactive tool use to sophisticated reasoning, achieving better context efficiency for long-horizon tasks and building robust error-handling and self-correction capabilities. All of these are wonderfully sensible suggestions, and yet altogether rather useless, I'm afraid. These are the bandaids we will be deploying, and which will bring us incremental benefits that will no doubt be useful. But they will not fundamentally change the situation.
+
+What's missing is an acknowledgement that we may have reached the limits of what generalist models can achieve. MCP did its job, and the best our model-crafting can produce cannot get value out of it a distressing percentage of time. If generalist models fundamentally cannot be good at both open-ended conversation and deterministic tool calling, then the issue is of kind, not of scale. 
+
+Perhaps we need specialised architectures: models purpose-built for tool calling, the way we've developed specialised models for protein folding or code generation.[^6] Not general-purpose conversational models with tool-calling bolted on, but systems designed from the ground up for deterministic API interaction. Such models do need to be qualitatively different: differently trained, differently built. Using a generalist LLM and cooling it down (setting the temperature parameter to be closer to determinacy) won't do.
+
+At the heart of it all is a frustrating betrayal -- we held up our end of the bargain. Models failed us. This sentiment is not entirely correct -- models did not 'fail', they're just doing what they're supposed to do, which is optimised for the majority of their input: it's our fault that our loss functions do not, or perhaps cannot, sufficiently optimise for that critical minority that comprises tool calling. But the end result is the same: we have a beautifully designed protocol that depends on its collaborators to do their part -- and it's starting to look like that group project from high school science class that we all remember doing all the work for. 
+
+
+## Out of the cave
+
+I'm one of the relatively few people who hold simultaneous world records on the SkiErg -- a kind of 90 degree rotated rowing machine -- in the longest and the shortest distances. But I didn't do them all in the same go. The way I trained for the marathon and half-marathon distances was radically different from the way I trained for the short sprints. When I switched from middle distance (10k) to sprint and then to long distance, I had to fundamentally restructure my training and to some extent, my body. Doubling down on my sprint training would not have made me better at long distances -- in fact, quite the opposite. That doesn't, of course, imply an insufficiency. Someone good at the 100m sprint isn't a failed marathoner. 
+
+LLMs are doing what they're trained to. It's conceivable that at least the ones premised on currently prevalent paradigms are sufficiently majoritarian that they cannot be good at both open-ended conversation and deterministic tool use. Making models proficient tool users might come at an unwarrantable cost to their conversational abilities. The trivial solution to this is, of course, routing. But that's philosophically offensive to those who believe in the generally sound idea that we should be able to encapsulate tool calling capabilities so as to be able to be spoken for.
+
+On a philosophical level, that's of course not entirely correct. We have the whole idea of speech acts because the performance of an utterance can be an action in itself. Saying "I do" in a wedding ceremony is not just a statement, but an act that changes the world. Similarly, calling an API is not just about conveying information, but about performing an action in a state space. It may be emotionally justified to be frustrated at the way models seem to be letting down a brilliant protocol, but the reality is that we *are* asking them to be something they fundamentally aren't.
+
+We focus on what is gained, not necessarily on what had to give way. We know that as humanity emerged from that cave in Dikika, it did so with the ability to use tools. We don't know what else was left behind. We think of tools as a zero-cost add-on or even an evolution of what we have, not as something that might require a trade-off. Perhaps it's time to accept that the models we have simply cannot be all things to everyone. We might have seen a glimpse of this [with GPT-5, which is a vastly better tool caller and agent driver than its competitors, but at times a hilariously bad conversationalist](../metadynamic-ai/index.qmd). If so, the speciation into different model types -- conversationalists, tool users, reasoners -- is well on its way. What remains to be seen is how these different estates of AI will interact with each other and with us.
+
+
+[^2]: Wu, Z., Liu, X., et al., "[MCPMark: A Benchmark for Stress-Testing Realistic and Comprehensive MCP Use](https://arxiv.org/abs/2509.24002)", arXiv:2509.24002, 2025.
+
+[^3]: See my posts "[From agents to ecosystems](https://chris-von-csefalvay.medium.com/from-agents-to-ecosystems-d3f3e8c3f3f3)" (January 2025) and "[AI predictions for 2025](https://chris-von-csefalvay.medium.com/ai-predictions-2025-8f9e3b2c8f3e)" (December 2024) for my earlier discussions of agentic systems and cross-estate AI.
+
+[^4]: Yao, S., "[The Second Half: Language Generalizes Through Reasoning in Agents](https://ysymyth.github.io/The-Second-Half/)", 2025. See also Yao et al., "[ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)", ICLR 2023.
+
+[^5]: Other recent MCP benchmarks include LiveMCP-101 (Yin et al., 2025), MCP-Universe (Luo et al., 2025), and MCP-AgentBench (Guo et al., 2025). All document significant model struggles, though MCPMark's emphasis on CRUD-diverse operations and programmatic verification makes the reliability gaps particularly stark.
+
+[^6]: AlphaFold revolutionised protein structure prediction through architecture specifically designed for that domain (Jumper et al., Nature 2021). Similarly, models like CodeGen and StarCoder were purpose-built for code generation. The success of these specialised systems suggests tool calling may benefit from similar domain-specific design rather than relying on general-purpose models.
+
+[^7]: The pass^4 metric, which requires consistent success across multiple runs, was introduced in Yao et al., "[τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045)", 2024. Unlike `pass@k` metrics that measure whether any single attempt succeeds, `pass^k` measures reliability -- whether the system succeeds consistently. For production systems, reliability matters far more than occasional success.
