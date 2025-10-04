@@ -603,36 +603,6 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
   <pubDate>Sun, 13 Jul 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Grok on Uqbar</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/grok-on-uqbar/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
-  author = {{Chris von Csefalvay} and von Csefalvay, Chris},
-  title = {Grok on {Uqbar}},
-  date = {2025-07-12},
-  url = {https://chrisvoncsefalvay.com/posts/grok-on-uqbar/},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“Grok on
-Uqbar.”</span> <a href="https://chrisvoncsefalvay.com/posts/grok-on-uqbar/">https://chrisvoncsefalvay.com/posts/grok-on-uqbar/</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>Society</category>
-  <category>LLMs</category>
-  <guid>https://chrisvoncsefalvay.com/posts/grok-on-uqbar/</guid>
-  <pubDate>Sat, 12 Jul 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/grok-on-uqbar/header-image.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
   <title>The Snowmobile Symptom</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/context-engineering/</link>
@@ -642,7 +612,7 @@ Uqbar.”</span> <a href="https://chrisvoncsefalvay.com/posts/grok-on-uqbar/">ht
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-99537"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-99537").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-51675"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-51675").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -740,7 +710,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-88317"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-88317").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-54969"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-54969").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -2652,6 +2622,99 @@ Scholar.”</span> <a href="https://doi.org/10.59350/5hxdg-fz574">https://doi.or
   <guid>https://chrisvoncsefalvay.com/posts/auto-doi/</guid>
   <pubDate>Mon, 13 Nov 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>The skeuomorphic fallacy</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>It appears that in what is clearly a wonderful little PR stunt, <a href="https://archive.ph/Xgg38">a Polish rum company managed to do a Sophia and appoint an ‘AI-driven’ ‘robot’ as its ‘CEO’</a>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The other guilty party to this pile of steaming bovine excrement is Hanson Robotics, famous for giving us Sophia, the “world’s first robot citizen”. Most of what I’m saying here goes just as well for Sophia. It blows my mind that Hanson managed to get away with this nonsense <em>not once, but twice</em>.</p>
+</div></div><blockquote class="blockquote">
+<p>Dictador has just announced hiring the first world ever AI robot as a CEO of a global company. The new CEO is a human-like robot, incorporating AI. The robot is a woman, named Mika. She will be the official face of Dictador, the world’s most forward-looking luxury rum producer. This bold move consolidates the company’s position as one of the most advanced and thought-leading organizations globally. It underlines the brand’s passion for new technology and offers a positive disruption by bringing the future to what can still be a very traditional world.</p>
+<p>– <a href="https://www.prnewswire.com/news-releases/dictador-announces-the-first-robot-ceo-in-a-global-company-301634165.html">Dictador, via PR Newswire</a></p>
+</blockquote>
+<p>Oh good grief.</p>
+<p>Now, let’s for a moment try to get over the obvious bullshit here, such as the fact that corporate officers generally have to be natural persons in most places, and may at worst be legal persons, but a ‘robot’ or an ‘AI’ is neither. You can no more appoint a ‘robot’ or an ‘AI’ as your CEO than you can appoint a pet rock to be your corporate secretary. I am, to the surprise of many, a recovering corporate lawyer, so I have at one point convinced examiners that I know what I’m talking about when it comes to this stuff. There are complex aspects of law involved in the question of who can or cannot, legally, be a corporate officer. But let’s get over that.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/6506c915cd637c0019c66997.webp" class="img-fluid figure-img"></p>
+<figcaption>“Mika”, the “CEO” of Dictador. Artificial, yes. Intelligence, not quite. Uncanny Valley, totally.</figcaption>
+</figure>
+</div>
+<p>Let’s also get over what an absolutely disastrous piece of nonsense this seems to be on its face. Here’s a quote from the ‘CEO’ itself:</p>
+<blockquote class="blockquote">
+<p>In a Dictador company video, Mika said that “with advanced artificial intelligence and machine learning algorithms, I can swiftly and accurately make data driven.”</p>
+<p>– <a href="https://archive.ph/Xgg38">Kayla Bailey, <em>‘Mika’ becomes world’s first AI human-like robot CEO</em>, Fox Business</a></p>
+</blockquote>
+<p>It would definitely be useful for Mika to be able to finish a sentence. In the industry, crap like this is called a ‘sell signal’, and in a slightly more sane economic environment, Dictador would have the market value of, uh, dunno, an expired carton of eggs after this nonsense. But let’s get over that, too.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The commentary on this nonsense is, if anything, worse than the nonsense itself. Forbes contributor Cindy Gordon <a href="https://archive.ph/Her3m">titled her article on the subject “How Should CEO’s Embrace AI Or Will AI Assume CEO Roles?”</a>. Clearly expecting an understanding of when to use apostrophes is now beyond Forbes contributors’ ken. The world is in safe hands: people who cannot construct a sentence that would pass muster in a third-grade English class are now writing about the future of corporate governance in the age of AI in Forbes.</p>
+</div></div><p>Let’s instead talk about skeuomorphy.</p>
+<section id="skeuowhat" class="level1 page-columns page-full">
+<h1>Skeuowhat?</h1>
+<p>A skeuomorph is a kind of design element that is no longer necessary for the function of the object, but is retained for aesthetic reasons. For example, your iPhone’s Notes app used to use some visual elements from physical note pads (such as the ‘legal pad yellow’ background) for a pretty long time, even though it was not in any sense necessary. Skeuomorphs are a way to acclimate our somewhat sluggish human brains to a changing world.</p>
+<p>Skeuomorphs also illustrate an important point: what something appears as is not the same as what it is. The interface is not the object. The interface is, to say the blindingly obvious, <em>the interface</em>: the tool through which an object communicates. Confuse the two, and you get blinding bullshit like that ‘robot CEO’ nonsense.</p>
+<p>On the other hand, we’re not in any way immune to what I shall call the skeuomorphic fallacy, the confusion that the visual, linguistic or other forms through which something communciates equate to the essence of that thing. Where something as sensitive as language is involved, <a href="../llms-language">which I have written about before</a>, this hits particularly hard. For better or worse, we connect language so closely to the concept of being human that anything capable of producing decent linguistic output gets a level of human-like credence accorded to it <em>prima facie</em>.</p>
+<p>And this is not entirely wrong, either. <a href="../llms-language">As I have stated before</a>, language is a uniquely human trait that is so intricately intertwined with what it means to be human in a human society that it is hard to unlink it from personhood. It is not a necessary characteristic of personhood, but it has certainly been often seen as a sufficient one. To speak is to be able to speak <em>up</em> as well, and to be able to speak <em>up</em> is to be able to advocate for rights. It is a lot easier to accord human rights for one that can speak for those rights.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Harris makes this point, and <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=989542">my old law school professor Tim Endicott gives a wonderful refutation in <em>The Infant in the Snow</em></a>, one of the best papers on the philosophy of personhood and the origin of rights (and the qualifications needed to have them) that I have ever read.</p>
+</div></div></section>
+<section id="where-skeuomorphy-becomes-a-fallacy" class="level1 page-columns page-full">
+<h1>Where skeuomorphy becomes a fallacy</h1>
+<p>The problem is, of course, that as noted above, <em>the interface is not the substance</em>. The reality is that Mika is no more human than my bedside lamp. The only reason why nobody has appointed my bedside lamp a CEO is, of course, that it does not pretend to look and speak like a human. But if we look at what it means to be a legal subject – be it a citizen (<em>viz.</em> Sophia) or a corporate officer (<em>viz.</em> Mika) –, it becomes abundantly clear that there’s much more to that than being able to <em>pretend</em> to look and speak like a human. It is to be able to <em>be</em> a human. And that is something that Mika, Sophia and all the other ‘AI’ and ‘robot’ nonsense out there is not.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>I am really being incredibly generous by dignifying whatever these Hanson products do with the term ‘AI’. They are Disney animatronics with a bottom-tier language model and an average speech synthesiser. Artificial that may be, but intelligence it is not.</p>
+</div></div><p>The skeuomorphic fallacy is the fallacy of confusing the interface with the substance, confusing the appearance of being human with the essence of being human. Where things go wrong is the confusion of something in a humanoid body (being generous here) and using a quintessentially human skill that we’re somewhat extremely attached to (i.e.&nbsp;language) on one hand with being human on the other.</p>
+<p>Which is a problem, because appointing someone CEO isn’t a publicity stunt. The ‘O’ in CEO stands for <em>officer</em>. A corporate officer is, even given limited liability, the person with whom the buck stops. Limited liability does create legal (corporate) personhood, which insulates corporate officers of <em>some</em> aspects of liability, but not all of them. Lord Thurlow pointed out that a company couldn’t be expected to have a conscience if it had no body to kick and no soul to damn – the need to eventually have some nominate humans in the process serves to a great degree to provide that conscience and that body. Even notions like corporate homicide, which became a thing in England &amp; Wales just when I took corporate law (and a lovely mess that did of finals papers!), are predicated on the notion that there are human beings who, collectively, operate a system that is ultimately responsible for the actions of the company. You don’t necessarily have to have a body to kick, nor really a soul to damn, but you do definitely have to have a <em>mens rea</em>, and that is something that a robot or an AI is not capable of.</p>
+<p>This isn’t just a fine point about corporate law by a recovering legal philosopher. This is what happens when we lapse in our understanding of what it means to be human, and begin to accord human rights and responsibilities to non-human things. We’re cognitively geared to associate language with personhood, so this is not a particularly surprising lapse of reason. We’re humans, and that’s why our response to a speaking robot becoming CEO is “oh, that’s innovative” as opposed to “let’s consider if some people might need to spend some time away from their favourite hallucinogens and/or the general population”. If a company appointed my bedside lamp as a corporate officer, we’d be much more likely to consider that a sign that the latest office party went a little overly generous on the acid. But because we’re cognitively geared to consider language a uniquely human trait, we’re much more likely to be tempted to consider this some Valley quirkiness as opposed to frank insanity.</p>
+</section>
+<section id="why-so-serious" class="level1 page-columns page-full">
+<h1>Why so serious?</h1>
+<p>It’s a legitimate question: why are you so bothered by this nonsense? It’s just a PR stunt, after all. And you’re right: it is just a PR stunt. But it is a PR stunt that is part of a larger pattern of nonsense that is being peddled by the likes of Hanson Robotics and others. And it’s damaging.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/FzpQYv2XwAsAABN.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Freddy Fazbear, titular antagonist of the Five Nights at Freddy’s franchise.</figcaption>
+</figure>
+</div>
+<p>We don’t consider Freddy Fazbear, an animatronic bear, to be an authority on what it means to be an ursine individual. Why is this more patently ridiculous than considering an animatronic human to be capable of bearing indiciae of human personhood, such as citizenship or corporate office?</p>
+</div></div><p>It’s damaging to humanity, because it leads to a gradual misunderstanding of what the essence of human existence, of being human, is: it muddles the picture, confusing <em>what things are</em> with <em>how things behave</em>. It is Searle’s Chinese Room all over again: the idea that a system that behaves like a human is a human. It is not. It is a system that behaves like a human, no more, no less. And that is a very important distinction.</p>
+<p>It’s damaging to the field of AI, because it leads to a misunderstanding of what AI is and what it can do. It is a field that is already rife with hype and nonsense, and this kind of nonsense just adds to the pile. It is a field that is already struggling to be taken seriously, and this kind of nonsense just makes it harder to be taken seriously.</p>
+<p>There are powerful, sophisticated AI algorithms that identify disease in cytopathological specimens, find cracks in compressor blades and detect anomalies as part of intrusion detection algorithms. These are deeply sophisticated and intricate solutions. They are also deeply unsexy. They are not the kind of thing that gets you on the cover of Forbes – just the kind of thing that makes a difference in real lives day in, day out, the kind of thing that is being drowned out by the nonsense that is being peddled here. Many of these systems have outputs that wouldn’t look out of place in the 1990s: terminal outputs, text files, CSVs.</p>
+<p>They make this world a better, safer, healthier place. They don’t need animatronic bodies. They just do something important, and do that well. And that is what AI is about: it is not about making a PR stunt out of a glorified animatronic. It is about making a difference, and that is what we should be focusing on.</p>
+<p>Which makes Mika an unwelcome distraction, and one that should be a concern for all of us. It’s the symptom of a disease – a fallacy of confusing the interface with the substance – that is spreading. And it’s a disease that we should be fighting, lest it makes us worse at being humans, and worse at being AI researchers.</p>
+<p>The world is looking to us for calling out this kind of bullshit. So, please, as part of our professional involvement with the world, let’s start doing that with extreme prejudice.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
+  author = {{Chris von Csefalvay}},
+  title = {The Skeuomorphic Fallacy},
+  date = {2023-11-06},
+  url = {https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/},
+  doi = {10.59350/k9kka-90x56},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2023. <span>“The Skeuomorphic Fallacy.”</span> <a href="https://doi.org/10.59350/k9kka-90x56">https://doi.org/10.59350/k9kka-90x56</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>philosophy</category>
+  <guid>https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/</guid>
+  <pubDate>Mon, 06 Nov 2023 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
