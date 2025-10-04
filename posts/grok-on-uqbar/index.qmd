@@ -1,0 +1,12 @@
+---
+title: Grok on Uqbar
+description: Or, what may happen when our reality begins to draw a little too much on stochastic code.
+author: Chris von Csefalvay
+date: '2025-07-12'
+categories:
+- AI
+- Society
+- LLMs
+image: header-image.jpg
+---
+
