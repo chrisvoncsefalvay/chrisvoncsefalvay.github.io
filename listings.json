@@ -2,10 +2,14 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/choral-ai/index.html",
+      "/posts/mcp-mcpmark/index.html",
+      "/posts/ai-girlfriends/index.html",
       "/posts/metadynamic-ai/index.html",
       "/posts/programmatic-agentic-ai/index.html",
       "/posts/agentic-simulation/index.html",
       "/posts/tlon/index.html",
+      "/posts/grok-on-uqbar/index.html",
       "/posts/context-engineering/index.html",
       "/posts/noise-in-the-neurons/index.html",
       "/posts/agents-agora/index.html",

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2025-10-04">
+<meta name="description" content="The evolution from agentic AI to persistent, volitional systems">
+
+<title>Choral intelligences – Chris von Csefalvay</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a4d8066ab99c821fadc425098389dfee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+<meta name="mermaid-theme" content="neutral">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Choral intelligences – Chris von Csefalvay">
+<meta property="og:description" content="The evolution from agentic AI to persistent, volitional systems">
+<meta property="og:site_name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="Choral intelligences – Chris von Csefalvay">
+<meta name="twitter:description" content="The evolution from agentic AI to persistent, volitional systems">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#pentheus-and-the-maenads" id="toc-pentheus-and-the-maenads" class="nav-link active" data-scroll-target="#pentheus-and-the-maenads">Pentheus and the Maenads</a></li>
+  <li><a href="#into-the-world" id="toc-into-the-world" class="nav-link" data-scroll-target="#into-the-world">Into the world</a></li>
+  <li><a href="#forming-the-chorus" id="toc-forming-the-chorus" class="nav-link" data-scroll-target="#forming-the-chorus">Forming the chorus</a></li>
+  <li><a href="#intelligence-under-will" id="toc-intelligence-under-will" class="nav-link" data-scroll-target="#intelligence-under-will">Intelligence under will</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Choral intelligences</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Agentic AI</div>
+    <div class="quarto-category">LLMs</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    The evolution from agentic AI to persistent, volitional systems
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 October 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Around two years ago, almost to the day, I spent an absolutely frantic evening in Berkeley, going through enough coffee to power a mid-sized city, hammering away at my laptop on trying to figure out what comes after LLMs. What to most people was still barely on the horizon at the time has been a subject I have been working on in various capacities for the best part of the past decade, on and off. Transformers have revitalised the interest in AI for language that has for a while been eclipsed by computer vision, which in the preceding decade or so has gotten a significant boost from convolutional neural networks. But then Vaswani et al.&nbsp;came along with the <em>Attention</em> paper,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and suddenly language was cool again.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. <a href="https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf">Attention is all you need</a>. In <em>Advances in Neural Information Processing Systems</em>, Vol. 30. Curran Associates, Inc., 5998–6008.</p></div></div><p>What I was trying to understand that night in Berkeley was how we could let these language models do more than speak. There’s a kind of magic to computer science, in that the barrier between the conceptual and the real, the thought and the action, is rather more permeable than elsewhere. In few other fields, if any, do we traffic with such frequency between words on the screen and the motion of a remotely controlled robot arm, a $10m stock trade or a drone strike – and vice versa. And so, it stood to reason that if LLMs could produce words, they ought to be able to produce actions, too.</p>
+<p>I wasn’t – despite occasional assertions by many – the first to conceptualise ‘agentic’ AI. Agency has been a topic in AI for a long time. Russell and Norvig famously gave a definition of it in their seminal textbook,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and I keep showing that on a stark blue slide every time I give a talk on the subject to remind us of the giants’ shoulders we are privileged to stand on. Around the same time, at least two others have considered the same ideas – Harrison Chase, at <a href="https://langchain.ai">LangGraph</a>, and <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng</a>, then at OpenAI, now at Thinking Machines.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and arrived at the same terminology.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Russell, Stuart J., and Peter Norvig. 2021. <em>Artificial Intelligence: A Modern Approach</em> (4th ed.). Pearson. https://aima.cs.berkeley.edu/</p></div><div id="fn3"><p><sup>3</sup>&nbsp;I’d like to say that great minds think alike, but that would make me look awfully out of place between the other two.</p></div></div><p>In retrospect, there are moments I regret the terminology I ended up adopting in <a href="../../posts/team-of-rivals/index.html">my post on the subject</a>. I’m not sure it hasn’t, inadvertently, led to human harm. What I did not necessarily think of at the time was that I came to the word from a very specific angle. I’m of course a recovering lawyer, where agency is a very well-defined concept, and raises issues that those who primarily associate the term with airport ticketing or James Bond don’t necessarily think of (such as delegation and delegability). But more than that, I was thinking of the etymological roots of the word, from the Latin <em>agere</em>, from which our English word ‘action’ also derives – agentic AI was AI with the key <em>differentia</em> of being able to act, even if it is through some form of speech.</p>
+<section id="pentheus-and-the-maenads" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pentheus-and-the-maenads">Pentheus and the Maenads</h2>
+<p>Classical Greek drama is incredibly diverse in its subjects, characters and tone. Yet one thing unites almost every extant play that we have in any non-trivial volume: there’s a bunch of characters, a dozen to fifty or so, who act as the chorus. They’re not actors (agonistes), but are just as important, if not more so. They comment on the action, they provide context, they provide a moral compass, they provide a collective voice. They address, and are addressed.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Athena’s speech at the very end of the <em>Eumenides</em> is one of my favourites. In it, she warns her own people about the hubris of judgment without piety and the importance of fair government, neither tyranny nor lawlessness.</p></div></div><p>The term ‘chorus’ comes from the Greek <em>χορός</em> (<em>khorós</em>), which in turn derives from the Proto-Indo-European root <em><em>gher-</em></em>, meaning ‘to grasp, enclose’. The chorus is, in a sense, the collective that encompasses the action of the play. It is not an actor, but it is not a mere observer either. Nor has it the fleeting on-stage, off-stage nature of the actors. They are persistent and constant. Their reflections and witness spans the entirety of the play. They have, to use the LLM term, a long context window.</p>
+<p>I’ve been thinking about this because we’re about to see something similar emerge in the AI systems we’re building. The agentic revolution or turn that I discussed in my past writings is, as far as the theory is concerned, more or less played out. What no more than a handful of us have thought of in the waning days of 2023 is now – for better or worse – plastered on billboards along the US-101 off Redwood City and a household word for everyone looking for a Series A, a raise or some Youtube views.</p>
+<p>Since I’m not really after either of these, I have mostly been thinking about what comes next. There have been warning signs (like the recent failures of leading LLMs on the <a href="../../posts/mcp-mcpmark/index.html">MCPMark benchmark</a>) that suggest the limitations of transformers are becoming evident, and the growing scramble for compute does not exactly suggest an efficient scaling regime. Agents, don’t get me wrong, are great, and I expect them to be the dominant paradigm, or part thereof, for a good while.</p>
+<p>But evolution doesn’t wait.</p>
+<p>Agents were an evolution from chatbots and simple LLMs. The key improvement was self-directed action as part of a goal behaviour. In short, the evolution here is of increasingly volitional systems.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Agentic AI was able to act in ways that need to fit into a triggering framework, but they can determine the parameters of that action, and in sufficiently large numbers, networked agents can display incredible complexity. Agents can <em>act</em>. Choral intelligences can <em>will</em>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;I find calling them more ‘autonomous’ to be a misnomer. Autonomy and volition do not have to coexist.</p></div></div><p>I need to be careful here because ‘will’ carries enormous philosophical baggage. I’m not talking about human motivation, consciousness or desire. I’m talking about something more fundamental and perhaps more interesting: the kind of will that’s implicit in environmental response. A thermostat wills the temperature to be 20 degrees in the sense that it continuously acts to make that state true. A coral reef wills its own persistence through the distributed actions of thousands of organisms, none of which individually possesses anything like intention.</p>
+<p>Choral intelligences will in this environmental sense. They maintain a continuous relationship with world state, constantly curating their understanding, perpetually acting to align reality with their implicit goals. Not because they want to in any psychological sense, but because that’s what they are – ambient frameworks that surround and engage with their domains.</p>
+<p>This is a profound shift from current AI architectures. Even the most sophisticated agentic systems today are fundamentally episodic. They wake up, accomplish a task, and go dormant. They respond or act, but they don’t continuously will. A choral intelligence, by contrast, is like the Greek chorus – always there, always processing, always maintaining its understanding of world state.</p>
+</section>
+<section id="into-the-world" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="into-the-world">Into the world</h2>
+<p>Attention gave us agents by providing for a way to maintain temporal consistency and contextual relevance across sequences. Before attention, we had models that could process text but couldn’t really understand how different parts related to each other across distance. Attention gave us that, and from attention came the transformer architecture, and from transformers came everything we now think of as modern AI.</p>
+<p>But attention’s children are reaching the limits of what they can do on their own. The transformer architecture, for all its elegance and power, has a fundamental constraint: it processes in discrete steps, with finite context windows, and it doesn’t maintain genuine world state. It can reason about the world, but it doesn’t model the world as an evolving, persistent thing.</p>
+<p>This is where world models come in, and why they’re not just an incremental improvement but a necessary foundation for choral intelligences.5 World models are attempts to build representations of how things actually work – not just statistical patterns in text, but actual models of causality, persistence, state change over time. They’re the kind of long-term ‘theory of mind’ reflective abstraction that a choral intelligence needs to function.</p>
+<p>When I watch the current generation of world model research – the work on physics simulators, on learned dynamics, on models that can predict how scenes evolve – I see the necessary infrastructure for systems that can will in the environmental sense I described. You can’t maintain a continuous relationship with world state if you don’t have a model of what world state means, how it changes, what persistence even is beyond token sequences.</p>
+<p>This gives us what I consider the three crucial features of choral intelligence:</p>
+<ul>
+<li>persistence</li>
+<li>state</li>
+<li>spontaneous, volitional reactivity</li>
+</ul>
+<p>A choral intelligence does not need to be prompted. It is ubiquitously present, and carries a world state representation that it updates and adapts. In this, it reflects a fundamental human concern. Imagine you woke up in a different city every day, without much of an ability to predict where you’ll be next.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> We expect the things we rely on to exhibit consistency, and associate few good things with unpredictability in general. 1m token context windows are nice, but a long shout from satisfying this deep human need for persistence. Because of the way transformers work, context windows scale computational cost on <span class="math inline">\(O(n^2)\)</span>. The persistence humans need AI to exhibit is not on the table with current designs. The chorus is our way out of this predicament.</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;It’s the time of the year when that is actually eerily close to my lived experience.</p></div></div><div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    Chorus["Chorus"]
+    WM["World model"]
+    Time["Time"]
+    User["User"]
+    State["State"]
+
+    Chorus --&gt;|Spontaneous,&lt;br/&gt;volitional reactivity| WM
+    WM --&gt;|Environmental&lt;br/&gt;feedback| Chorus
+
+    Chorus --&gt;|Persistence| Time
+    Time --&gt;|Continuity| Chorus
+
+    Chorus --&gt; State --&gt; User
+    User --&gt; State --&gt; Chorus
+
+    State -.-&gt;|Temporal coherence| Time
+
+    style Chorus fill:#4fc3f7
+    style WM fill:#b3e5fc
+    style Time fill:#b3e5fc
+    style User fill:#b3e5fc
+    style State fill:#e1f5ff
+</pre>
+</div>
+<p></p><figcaption> The chorus and its fundamental interactions</figcaption> </figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="forming-the-chorus" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="forming-the-chorus">Forming the chorus</h2>
+<p>So, how do we build one? The short answer is that we don’t yet know. But we do have some clues. Most of these derive from what I call ‘transformer-plus agents’: agentic systems that are firmly reliant on transformer-based LLMs, but use agentic frameworks to shore up their shortcomings. A classical example is, of course, memory augmentation through an extraneous state memory store to extend context. This is by definition incapable of creating actual persistence, but it does create a convincing enough simulacrum of it by extending the context window in practice. But this only solves half the problem – that of <em>recording</em> state. The other half is to do something useful with it. That is where world models come in, which at their crudest level can be described as encoded probability distributions of possible versus impossible world states given a set of past world states.</p>
+<p>The final piece is the volitional-reactive element. To me, this necessitates a fundamental rethinking. Consider the Great Barrier Reef.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> It’s a vast, complex ecosystem made up of thousands of species, none of which is particularly sophisticated. Yet together, they form a system that collectively is capable of maintaining a sort of homeostasis (until humans enter the scene) that is beyond the capabilities of our supercomputers. We do not have the compute capacity to operate a control system that would be capable of managing what a bunch of invertebrates, algae and bacteria can pull off.</p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>&nbsp;<em>Coral</em> comes from the Latin <em>corallium</em>, which in turn derives from the Greek <em>κοράλλιον</em> (<em>korállion</em>), which probably comes from the proto-Semitic <em>gor</em> meaning ‘stone pebble’. It’s not cognate with ‘choral’.</p></div></div><p>The model, then, for the chorus is not chasing ever larger context length monolithic models, or workarounds to simulate one. Rather, it uses the composability of small, simple and limited agents that each have a narrow domain of expertise and a specific function, and just enough knowledge to reflect a tiny facet of the world. They are, in a sense, the coral polyps of the AI world. We do not need them to hold or operate or conceive of a world model, nor do we need them to have million-token context windows. We might not even need elaborate inter-agent communication protocols: as phenomena like quorum sensing show, complex collective behaviour can emerge from very simple local rules and interactions. It’s the emergent capability of these systems that matters, not the sophistication of the individual components.</p>
+<p>Nor is a choral intelligence necessarily sharply differentiated from conventional agentic AI. The same, by the way, is true for agentic AI itself. One of its greatest successes is that it is a statement of degree, not kind. There is – despite assertions to the contrary – a rather considerable penumbra of systems that may or may not be considered agentic. This is a feature, not a bug, and was rather inherent in my formulation of the concept when I <a href="../../posts/team-of-rivals/index.html">first drew out an example of an agentic system</a>. Just as there are deep neural networks and even deeper ones, there are less and more agentic systems, from a few coupled functionally defined modules to self-organising swarms. Agency is fuzzy around the edges. This has allowed us to develop and grow into it, rather than debate its definition <em>ad nauseam</em>. I expect, or at least hope, for the same for choral intelligences.</p>
+<p>What is clearer is the transformational pattern. We are already seeing a recognition that this is the aspired evolutionary pattern. Just last week, OpenAI launched Pulse, which at the very least seeks to emulate the user experience of a choral intelligence<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> by curating a newsfeed based on interactions and data sources like my calendar.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Pulse is not, by any stretch of the imagination, a choral intelligence. But it does seek to be always present, always available, always responsive. This is a first step, and many more will follow as AI moves from prompted (chatbots) through programmed (agents) to present (choral).</p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;I maintain – to the great chagrin of my friends who work there – that OpenAI is an okay AI company, but the best UI company in the world bar none. Their biggest hits aren’t necessarily cutting edge AI, but creating a way to make it accessible and usable. ChatGPT is a great example of AI &lt; UI: OpenAI didn’t invent GPT, but they made it into something with just enough comfort and skeuomorphy to speak to the user ‘as a man would to a man’. They reached into the deepest human desires: companionship, understanding, being understood – and delivered on the emotional yield of it. That is great UX.</p></div><div id="fn9"><p><sup>9</sup>&nbsp;Or someone else’s. The other day, it gave me a great travel guide for Lisbon. I’m… not in Lisbon.</p></div></div></section>
+<section id="intelligence-under-will" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="intelligence-under-will">Intelligence under will</h2>
+<p>In thinking about what comes after the agentic turn, I keep returning to that image of the Greek chorus. Always present, always witnessing, always providing the framework within which everything else happens. Not the protagonists, not driving the action, but essential to making the action meaningful.</p>
+<p>Perhaps that’s what we’re really building with choral intelligences: not artificial minds that replace human thinking, but ambient frameworks that surround and support human activity. I don’t see choral intelligences as replacements of human judgment – indeed, they are arguably more suited to augment humans than current models, for they seek to satisfy our deep human need for continuity –, nor do I see them as part of the current pursuit of AGI.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> I see them not as superintelligence but ambient intelligences (plural), not replacements but augmentation through continuous, coherent environmental willing.</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>&nbsp;I have never been able to get excited about AGI. I’m as much a messianic zealot about some aspects of AI as one can get, but I’m also a pragmatist. The embedding that corresponds to the vector between messianic zeal and healthy pragmatism maps very closely to ‘Kool-Aid’.</p></div><div id="fn11"><p><sup>11</sup>&nbsp;The progression feels natural in retrospect, almost inevitable. But living through it, building it, trying to understand what it means – that’s still thrilling. I have been privileged to be afforded a small place in this great story, and if I could have one wish, it would be that whatever this ends up amounting to in the end, it would be something I can say was for the betterment of all.</p></div></div><p>Two years ago, a few researchers in rather obscure corners of the AI community independently came to the conclusion that if we equipped LLMs with tools and the right impulses, we can turn speech acts into pizza.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> The agentic turn has mostly delivered on that, <a href="../../posts/mcp-mcpmark/index.html">despite its shortcomings</a>: I am, as I write, waiting for Instacart to deliver groceries ordered by a multi-agent system I built that uses a highly customised Llama 3.1 70b instruct model for its core reasoning functions. What comes next, however, will transform not <em>what</em> AI can do, but <em>how</em>, <em>when</em> and <em>why</em> it does it. From reactive systems to perceivers that are persistently evaluating a world model generated through a distributed network of simple atomic intelligences, we will be moving into a transformation that changes not just the capabilities of AI, but its very character.</p>
+<p>The chorus encircles, surrounds, provides the ambient framework. It speaks with many voices that somehow become one voice. It witnesses everything whilst also shaping through its responses. And it’s always there, maintaining continuity across scenes, remembering what has passed, anticipating what will come.</p>
+<p>The chorus never exits. From prologue to exodus, they remain – shaping through presence, witnessing through persistence, willing through continuous engagement with the world. That is what we are building. That is what comes beyond agents. The age of ambient intelligence begins not with machines that respond or act, but with machines that abide.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay} and von Csefalvay, Chris},
+  title = {Choral Intelligences},
+  date = {2025-10-04},
+  url = {https://chrisvoncsefalvay.com/posts/choral-ai/},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“Choral
+Intelligences.”</span> <a href="https://chrisvoncsefalvay.com/posts/choral-ai/">https://chrisvoncsefalvay.com/posts/choral-ai/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
