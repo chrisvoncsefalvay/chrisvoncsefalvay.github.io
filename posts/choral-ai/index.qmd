@@ -1,7 +1,6 @@
 ---
-title: Choral intelligences
-description: The evolution from agentic AI to persistent, volitional systems
-author: Chris von Csefalvay
+title: From agents to the Chorus
+description: The coming evolution from agentic AI to persistent, volitional systems
 date: '2025-10-04'
 categories:
 - AI
@@ -17,14 +16,14 @@ What I was trying to understand that night in Berkeley was how we could let thes
 
 I wasn't -- despite occasional assertions by many -- the first to conceptualise 'agentic' AI. Agency has been a topic in AI for a long time. Russell and Norvig famously gave a definition of it in their seminal textbook,[^2] and I keep showing that on a stark blue slide every time I give a talk on the subject to remind us of the giants' shoulders we are privileged to stand on. Around the same time, at least two others have considered the same ideas -- Harrison Chase, at [LangGraph](https://langchain.ai), and [Lilian Weng](https://lilianweng.github.io/posts/2023-06-23-agent/), then at OpenAI, now at Thinking Machines.^[I'd like to say that great minds think alike, but that would make me look awfully out of place between the other two.] and arrived at the same terminology.
 
-[^2]: Russell, Stuart J., and Peter Norvig. 2021. _Artificial Intelligence: A Modern Approach_ (4th ed.). Pearson. https://aima.cs.berkeley.edu/
+[^2]: Russell, Stuart J., and Peter Norvig. 1995. _Artificial Intelligence: A Modern Approach_. Pearson. https://aima.cs.berkeley.edu/
 
-In retrospect, there are moments I regret the terminology I ended up adopting in [my post on the subject](../team-of-rivals/index.qmd). I'm not sure it hasn't, inadvertently, led to human harm. What I did not necessarily think of at the time was that I came to the word from a very specific angle. I'm of course a recovering lawyer, where agency is a very well-defined concept, and raises issues that those who primarily associate the term with airport ticketing or James Bond don't necessarily think of (such as delegation and delegability). But more than that, I was thinking of the etymological roots of the word, from the Latin _agere_, from which our English word 'action' also derives -- agentic AI was AI with the key _differentia_ of being able to act, even if it is through some form of speech. 
+In retrospect, there are moments I regret the terminology I ended up adopting in [my post on the subject](../team-of-rivals/index.qmd). I'm not sure it hasn't, inadvertently, led to human harm. What I did not necessarily think of at the time was that I came to the word from a very specific angle. I'm of course a recovering lawyer, where agency is a very well-defined concept, and raises issues that those who primarily associate the term with airport ticketing or James Bond don't necessarily think of (such as delegation and delegability). But more than that, I was thinking of the etymological roots of the word, from the Latin _agere_, from which our English word 'action' also derives -- agentic AI was AI with the key _differentia_ of being able to act, even if it is through some form of speech.^[There's a huge point here to be made about where speech begins, acts end, or what the differentiation there is, but this is already a fairly long one.]
 
 
 ## Pentheus and the Maenads
 
-Classical Greek drama is incredibly diverse in its subjects, characters and tone. Yet one thing unites almost every extant play that we have in any non-trivial volume: there's a bunch of characters, a dozen to fifty or so, who act as the chorus. They're not actors (agonistes), but are just as important, if not more so. They comment on the action, they provide context, they provide a moral compass, they provide a collective voice. They address, and are addressed.^[Athena's speech at the very end of the _Eumenides_ is one of my favourites. In it, she warns her own people about the hubris of judgment without piety and the importance of fair government, neither tyranny nor lawlessness.] 
+Classical Greek drama is incredibly diverse in its subjects, characters and tone. Yet one thing unites almost every extant play that we have in any non-trivial volume: there's a bunch of characters, a dozen to fifty or so, who act as the chorus. They're not actors (agonistes), but are just as important, if not more so. They comment on the action, they provide context, they provide a moral compass, they provide a collective voice. They address, and are addressed.^[Athena's speech at the very end of the _Eumenides_ is one of my favourites. In it, she warns her own people about the hubris of judgment without piety and the importance of fair government, neither tyranny nor lawlessness. It's a good read.] 
 
 The term 'chorus' comes from the Greek _χορός_ (_khorós_), which in turn derives from the Proto-Indo-European root *_gher-_*, meaning 'to grasp, enclose'. The chorus is, in a sense, the collective that encompasses the action of the play. It is not an actor, but it is not a mere observer either. Nor has it the fleeting on-stage, off-stage nature of the actors. They are persistent and constant. Their reflections and witness spans the entirety of the play. They have, to use the LLM term, a long context window.
 
