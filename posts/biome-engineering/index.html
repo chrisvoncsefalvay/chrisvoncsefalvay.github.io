@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris von Csefalvay">
-<meta name="dcterms.date" content="2025-07-06">
-<meta name="description" content="AI’s latest buzzword is more confession than innovation.">
+<meta name="dcterms.date" content="2025-10-11">
+<meta name="description" content="Giving agents space, for fun and profit.">
 
-<title>The Snowmobile Symptom – Chris von Csefalvay</title>
+<title>Biome engineering – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,27 +82,42 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="The Snowmobile Symptom – Chris von Csefalvay">
-<meta property="og:description" content="AI’s latest buzzword is more confession than innovation.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/context-engineering/header.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Biome engineering – Chris von Csefalvay">
+<meta property="og:description" content="Giving agents space, for fun and profit.">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1024">
-<meta name="twitter:title" content="The Snowmobile Symptom – Chris von Csefalvay">
-<meta name="twitter:description" content="AI’s latest buzzword is more confession than innovation.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/context-engineering/header.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1024">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="The Snowmobile Symptom">
-<meta name="citation_author" content="Chris von Csefalvay">
-<meta name="citation_publication_date" content="2025-07-06">
-<meta name="citation_cover_date" content="2025-07-06">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-07-06">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/context-engineering/">
-<meta name="citation_language" content="en-GB">
+<meta name="twitter:title" content="Biome engineering – Chris von Csefalvay">
+<meta name="twitter:description" content="Giving agents space, for fun and profit.">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -168,10 +183,12 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-snowmobiles-we-build" id="toc-the-snowmobiles-we-build" class="nav-link active" data-scroll-target="#the-snowmobiles-we-build">The snowmobiles we build</a></li>
-  <li><a href="#the-puppet-strings-we-pretend-arent-there" id="toc-the-puppet-strings-we-pretend-arent-there" class="nav-link" data-scroll-target="#the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</a></li>
-  <li><a href="#towards-true-agency-beyond-context-engineering" id="toc-towards-true-agency-beyond-context-engineering" class="nav-link" data-scroll-target="#towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</a></li>
-  <li><a href="#what-next-may-come" id="toc-what-next-may-come" class="nav-link" data-scroll-target="#what-next-may-come">What next may come</a></li>
+  <li><a href="#from-utterances-to-ecosystems" id="toc-from-utterances-to-ecosystems" class="nav-link active" data-scroll-target="#from-utterances-to-ecosystems">From utterances to ecosystems</a></li>
+  <li><a href="#leveling-up" id="toc-leveling-up" class="nav-link" data-scroll-target="#leveling-up">Leveling up</a></li>
+  <li><a href="#the-biome-as-substrate" id="toc-the-biome-as-substrate" class="nav-link" data-scroll-target="#the-biome-as-substrate">The biome as substrate</a></li>
+  <li><a href="#the-non-problem-of-emergence" id="toc-the-non-problem-of-emergence" class="nav-link" data-scroll-target="#the-non-problem-of-emergence">The non-problem of emergence</a></li>
+  <li><a href="#the-orchard-and-the-grove" id="toc-the-orchard-and-the-grove" class="nav-link" data-scroll-target="#the-orchard-and-the-grove">The orchard and the grove</a></li>
+  <li><a href="#towards-crafting-biomes" id="toc-towards-crafting-biomes" class="nav-link" data-scroll-target="#towards-crafting-biomes">Towards crafting biomes</a></li>
   </ul>
 </nav>
     </div>
@@ -180,17 +197,17 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Snowmobile Symptom</h1>
+<h1 class="title">Biome engineering</h1>
   <div class="quarto-categories">
     <div class="quarto-category">AI</div>
+    <div class="quarto-category">Agentic AI</div>
     <div class="quarto-category">LLMs</div>
-    <div class="quarto-category">context engineering</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    AI’s latest buzzword is more confession than innovation.
+    Giving agents space, for fun and profit.
   </div>
 </div>
 
@@ -200,14 +217,14 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>Chris von Csefalvay </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">6 July 2025</p>
+      <p class="date">11 October 2025</p>
     </div>
   </div>
   
@@ -219,58 +236,74 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-30828"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-30828").innerHTML = tweet["html"];</script><p></p>
-<p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
-<p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
-<section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-snowmobiles-we-build">The snowmobiles we build</h2>
-<p>In what is probably the most influential briefing any officer ever gave, USAF Col. John Boyd made a very poignant analogy to explain how we synthesise information. Imagine you’re on an alpine slope. Take the skis. Imagine you’re riding a bicycle. Take the handle bars. Now imagine you’re looking at a tank. Take the treads. Put these all together, and you’ve got, mostly, a snowmobile. These distinct domains combine into a single object that makes sense in its own way.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Dr Grant Hammond, formerly of the Air University down at Maxwel AFB and the Air Force Academy down the road at Springs, has compiled an absolutely outstanding version of Boyd’s talk with abundant references that I think does justice to the diversity of material Boyd teaches. <a href="https://www.airuniversity.af.edu/AUPress/Display/Article/1528758/a-discourse-on-winning-and-losing/">It is available for free here</a>, and you should have a copy of it on, like, everything that can store bits. Maj. Ian Brown, US Army, has created <a href="https://static1.squarespace.com/static/5497331ae4b0148a6141bd47/t/5af842f8758d4615555d3f6d/1526219514965/Patterns+of+Conflict+Transcript.pdf">a meticulous transcription of the original talk given at Quantico in 1989</a>, for those who prefer the full experience over death-by-Powerpoint. <a href="https://youtu.be/9iiQlBaGJQA?si=2iyrCETetLKZ_gdE">The full talks are, of course, on YouTube</a>.</p></div></div><p>Context engineering is snowmobile building for the AI age. You take the tools, the MCP connections, the requirements, the sources – all the bits of information that make up the entirety of what we would consider the contextual biome of a task –, and feed it to the LLM. We do, or at least we prototype for the LLM, the task of synthesis: reassembling these fragments into a holistic picture of the task environment. We pull the skis from an API doc, the handles from a github repo and the treads from a coffee cup bottom stained post-it note. It ‘makes sense to us’, and we try to convey this to our helpful assistant, in hopes that putting it into the same frame of mind we are in will allow it to do what we want it to do in our stead.</p>
-<p>But here’s the rub: in Boyd’s analogy, humans build the snowmobile. In our current AI paradigm, we’re still the ones building it, really quite manually, when the entire promise of agentic AI was that the agents would handle most of the assembly themselves. We’ve created systems sophisticated enough to use snowmobiles, but not intelligent enough to build them without us laying out all the isntructions.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="IMG_2722.jpeg" class="img-fluid figure-img"></p>
-<figcaption>From my fridge. It tends to get a good laugh from other fellow Sons of Boyd.</figcaption>
-</figure>
-</div>
-</div></div><p>Just consider your favourite coding copilot. They feed off an understanding of the code, the sources, the instructions, the user’s preferences, external tools, and so on. But they require those to be provided to them well enough to be able to mostly reflect the thought patterns that got the human user to where they are. They are hopeless, or at least much less efficient, if we do not <em>mise en place</em> all the tools for them. Wasn’t that part of the promise of agentic AI – the ability of systems to creatively self-organise, rather than us having to wire everything up for them?</p>
+<p>Roughly 541 million years ago, something extraordinary happened in Earth’s oceans. Over a geologically brief period of perhaps 20 million years, the fossil record explodes with an almost obscene diversity of body plans. Trilobites, anomalocarids, the bizarre Opabinia with its five eyes and frontal grasping appendage – suddenly, the relatively monotonous microbial world gave way to an abundance of diversification in what we now call the Cambrian explosion. The textbook explanation points to rising oxygen levels in the oceans, changes in ocean chemistry and perhaps the evolution of predation itself. But here’s the thing: none of these environmental shifts determined which specific forms would emerge. The changing ocean chemistry didn’t decree “there shall be trilobites”. Rather, it created conditions that made certain evolutionary pathways more energetically favourable, certain body plans more viable, certain ecological niches newly accessible.</p>
+<p>The environment set the stage. Emergence explored it, and wrote the play.</p>
+<p>I find myself returning to this image as I think of reconciling two ideas in apparent opposition: the fact that AI agents’ true value lies in their ability to independently reorganise and structure themselves in a way that gives rise to an emergence of sorts, with the need to govern such systems and guide them towards the outcomes we desire.</p>
+<p>We’ve moved through distinct phases of how we think about shaping AI behaviour, each building on the last like Schliemann’s nine cities of Troy. First came <a href="../../posts/prompt-engineering/index.html">prompt engineering</a>, the art of crafting the perfect utterance to coax desired behaviour from a language model. Then Andrej Karpathy articulated what he termed <a href="../../posts/context-engineering/index.html">context engineering</a> – the recognition that an agent’s operating envelope, the information and tools it has access to, matters as much as any individual prompt. But as I argued in my recent writing on agent ecosystems, we’re now confronting something more profound: the need to engineer not individual agents or even their immediate contexts, but the entire operating environment in which populations of agents interact, specialise and evolve solutions we couldn’t have explicitly programmed.</p>
+<p>I call this biome engineering. And like the Cambrian ocean chemistry, it’s an intricate dance of constraints and gradients that gently shape, not prescribe, a spontaneous emergence.</p>
+<section id="from-utterances-to-ecosystems" class="level2">
+<h2 class="anchored" data-anchor-id="from-utterances-to-ecosystems">From utterances to ecosystems</h2>
+<p>Let me trace the genealogy of this idea for a moment. Prompt engineering emerged from a fundamentally transactional view of AI: you ask a question, the model responds, the interaction terminates. The craft lay in asking the right question in the right way. It was, in essence, the art of the perfect utterance – a rhetorical exercise that would have delighted the Sophists. We developed elaborate techniques: few-shot learning, chain-of-thought prompting, role-playing scenarios. The assumption was that if we could just find the right incantation, we could reliably extract the behaviour we wanted from the model.</p>
+<p>This worked reasonably well for a while, but it had a fundamental limitation: it treated each interaction as isolated, acontextual, amnesic. Every conversation started from scratch. Every task required re-establishing context.</p>
+<p>Context engineering represented a conceptual leap. Karpathy’s insight was that we should stop thinking about individual prompts and start thinking about the entire informational environment in which an agent operates. What knowledge does it have access to? What tools can it invoke? What constraints govern its actions? More broadly, how can we ‘dope’ the agent’s context with just the right nudging context to create a groove in the gradient space towards what outcome we desired, without explicitly constraining it? An agent with proper context engineering isn’t just responding to utterances – it’s operating within a defined possibility space, with persistent memory, access to resources and the ability to maintain coherent behaviour across extended interactions. The tradeoff is, of course, that if finding the right utterance was difficult, finding the right context is even more so – and the reward for perfect context engineering is even less deterministic.</p>
+<p>But context engineering, for all its power, still focuses on the individual agent. It’s about optimising the envelope within which a single agent operates. And this is where we run into <a href="../../posts/agents-agora/index.html">the same conceptual wall I’ve been banging on about in my writing on agent ecosystems</a>: the real value of agents isn’t in what they can do alone, but in how they work together.</p>
 </section>
-<section id="the-puppet-strings-we-pretend-arent-there" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</h2>
-<p>The problem with context engineering isn’t really context engineering’s fault. As a system, it works. It works quite well, in fact, and if you follow some sensible guidelines, you <em>will</em> get vastly more out of your LLM.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But the very fact that we’re here discussing it is an indication that we are theorycrafting at length to make up for the lack of the agentic agora.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;I recommend <a href="https://github.com/coleam00/context-engineering-intro">Cole Medin’s repo</a> as a pretty good starter.</p></div></div><p>The whole thing does, then, have a bit of an elaborate marionette theatre feel. We speak of agents but their agency is ultimately quite confined by the need for us to spoon-feed them quite a bit about the context. For the most part, we’re not witnessing emergent coordination, we’re watching an elaborate puppet show where humans have pre-scripted every information handoff, pre-defined every communication channel and pre-determined every capability boundary. The agents aren’t a garage band gelling together and learning how to play music with spirit and spontaneity. They are a room full of player pianos ticking down the same tune someone had to painstakingly design and encode into the player rolls.</p>
-<p>The security implications reveal just how non-agentic these systems truly are. <a href="https://www.solo.io/blog/deep-dive-mcp-and-a2a-attack-vectors-for-ai-agents">Context poisoning attacks</a> work because our agents have no genuine ability to evaluate information sources on their own, no real understanding of trust and do not exist in spaces that govern trust exchange without such trust being ultimately pre-scripted. An agent doesn’t know whom they can trust, nor how they can represent their trustworthiness in a computationally meaningful, verifiable manner. That we need to engineer defensive contexts to protect our AI systems is perhaps the clearest indication that these systems are free agents… free to be manipulated and misled in the absence of an agentic agora that has its own rules and enforcement logic.</p>
+<section id="leveling-up" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="leveling-up">Leveling up</h2>
+<p>Here’s where we need to make the leap from engineering individual contexts to engineering entire biomes – the substrates in which populations of agents can interact, specialise and collectively solve problems in ways that emerge from the system rather than being explicitly programmed.</p>
+<p>A biome, in the ecological sense, isn’t just a collection of organisms. It’s the entire system: the organisms, their interactions, the physical environment, the flows of energy and nutrients, the constraints and opportunities that shape what can survive and thrive. The Serengeti isn’t just lions and gazelles and acacia trees – it’s the pattern of rainfall that determines where grass grows, the soil chemistry that shapes which plants can take root, the seasonal migrations that move energy across the landscape.</p>
+<p>Biome engineering for AI systems means designing the operating environment for populations of agents: not just what each individual agent can do, but how agents can discover each other, how they establish trust and negotiate collaboration, what resources they can access and under what constraints, how authority and delegation flow through the system. It’s about creating the substrate conditions that allow certain interaction patterns to flourish whilst making others energetically unfavourable or outright impossible.</p>
+<p>The crucial insight is that biome engineering is non-deterministic in its outcomes but bounded in its possibilities. Just as the Cambrian ocean chemistry didn’t produce a specific catalogue of species but rather made certain evolutionary pathways more likely, biome engineering doesn’t specify exactly how agents will collaborate – it creates conditions that favour productive patterns whilst constraining destructive ones.</p>
+<p>More importantly, this allows for agents to dynamically recombine within a bounded space of possibilities. This makes the collective of agents responsive to adapt to changing conditions, i.e.&nbsp;to optimise the graph of interactions <span class="math inline">\(G = (V, E)\)</span> so that its performance minimises a loss function over time. And if this sounds awfully similar to the way we train every neural network, that’s because it is. Biome engineering is awfully important because it essentially supersedes the legacy approach of deterministically layering a small number of agents. That may work for the travel-planning-in-five-agents toy example, but not for emergent systems. Just as we wouldn’t have working neural networks if we had to manually run backpropagation, we need an effective way to let agents self-organise and learn towards a goal at scale. Biome engineering turns that problem into a tractable one.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;And, arguably, differentiable. Which is where the real magic comes in, since whatever is differentiable can be computationally optimised using gradient descent. But that’s a post for another day.</p></div></div></section>
+<section id="the-biome-as-substrate" class="level2">
+<h2 class="anchored" data-anchor-id="the-biome-as-substrate">The biome as substrate</h2>
+<p>There’s a concept in exercise physiology called “training stress” – not stress in the colloquial sense of anxiety, but the physiological stress that drives adaptation. You don’t tell your body to build more mitochondria or increase stroke volume. You create conditions (progressive overload, adequate recovery, proper nutrition) that make those adaptations energetically favourable. The body responds to the environment you create. Do it long enough, and you <a href="../../posts/skierg-marathon/index.html">might as well end up doing things you probably didn’t think was possible</a>.</p>
+<p>Biome engineering works similarly. You’re not explicitly programming agent behaviours – you’re shaping the problem space they explore by setting its boundaries and its internal gradients. This means thinking carefully about a lot of things we generally don’t (or at least not in these terms):</p>
+<ul>
+<li>Resource topology: What information, tools and compute resources are available? How are they distributed? What are the costs (in tokens, time, money) of accessing them? Just as species diversity in ecology is partly shaped by resource patchiness, agent specialisation will emerge based on how resources are structured.</li>
+<li>Interaction protocols: How can agents discover each other? How do they establish capabilities and negotiate terms? What standards govern their communication? This is a problem I’ve written about – we need something richer than current constructs (I like MCP, it’s just limited to what it has been designed to accomplish), something that can convey not just data but trust, authority and constraint.</li>
+<li>Constraint boundaries: What are agents allowed to do, and crucially, how do those constraints propagate through delegation chains? An agent commissioned by another agent must inherit appropriate constraints from its principal. The biome’s “laws of physics” need to make certain behaviours impossible, not just discouraged.</li>
+<li>Feedback mechanisms: How do agents learn what works? Do successful collaboration patterns get reinforced? Do agents that consistently meet their commitments earn reputation that makes future collaboration easier? The biome needs something analogous to ecological fitness – ways for productive patterns to flourish. *Diversity pressures: Monocultures are fragile, whether in agriculture or in agent systems. The biome should create niches that favour specialisation over generalisation, depth over breadth in specific domains.</li>
+</ul>
+<p>The art of biome engineering lies in setting these parameters such that the agents’ exploration of the problem space naturally tends toward solutions that are acceptable to you, while avoiding failure modes that aren’t. You’re creating a landscape where certain paths are easier to traverse, certain peaks easier to reach, without explicitly commanding “go climb this mountain”.</p>
 </section>
-<section id="towards-true-agency-beyond-context-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</h2>
-<p>Don’t get me wrong – I’m not dismissing context engineering. If anything, quite the opposite. Given the current limitations of LLMs, context engineering is not just sensible but an essential adaptation to the reality that these models need plenty of handholding to be useful, much more than we would hope they would need in a true agentic system. It’s also an indication of where the failure lies – because these models are operating just fine. It’s not their shortcoming, or indeed that of agents. It’s the lack of an infrastructure of interaction. Agents become truly agentic when they have something to act on, to interact with, to connect. We have built ecosystems to use, develop and deploy models and agents, but not to allow for these interactions in a meaningful way. We’re looking at a factory of consummate professionals in the art of assembling snowmobiles, waiting for someone, anyone, to get them the parts, in the right order, at the right time.</p>
-<p>The entire context engineering story (I’m not going to call it hype just yet, because it hasn’t reached fever pitch, but I am sure we will see more and more LinkedIn bios proclaiming context engineering expertise!) ultimately pulls the fig leaf off the coordination problem we’re trying to patch up with the current attempts at agentic interoperability. Once again, those steps, too, have plenty of merit. They just aren’t exhaustive. We’re building infrastructure to help humans manage information for AI, when we should be building infrastructure for AI to manage information for itself. Every context engineering best practice is a workaround for missing agent capabilities. Memory architectures are cheat codes to help agents that don’t have the architecture to manage state properly. Context compression is a workaround for prioritising information. Specifying tools and toolkits is necessary because agents can’t discover such tools and negotiate trust relationships with them.</p>
-<p>What we’re really engineering when we claim to be doing context engineering is, ultimately, not really the context of our question but the context of the agent. We have to equip the agent with what ought to be what Sartre would call pre-reflexive self-awareness, an understanding of where one is situated in the world and what’s around it. It’s not, or at least not just, about us telling the agent the context of our ask. It’s about us having to tell the agent the context of its own existence, its own capabilities, its own environment. We’re forcing humans to herd cats for systems that should be capable of finding and sharing knowledge autonomously. Every context engineering solution is a monument to this missing infrastructure.</p>
+<section id="the-non-problem-of-emergence" class="level2">
+<h2 class="anchored" data-anchor-id="the-non-problem-of-emergence">The non-problem of emergence</h2>
+<p>I can hear the objection already: “But if you’re not explicitly programming the behaviour, how do you know what you’ll get?” This is a legitimate concern, particularly in regulated industries where I spend most of my time. The enterprise software world has been built on determinism, on the ability to specify and verify exactly what a system will do.</p>
+<p>Biome engineering does require a different relationship with emergence and uncertainty. You’re creating conditions, not commanding outcomes. But this isn’t as radical a departure as it might seem. We already accept this in other domains. When you build a market, you don’t specify every transaction: you create rules, mechanisms for price discovery, constraints on behaviour, and let trading patterns emerge. When you design a city, you don’t dictate every social interaction: you create infrastructure, zoning, public spaces, and let communities form. There is an awful lot of room between fully deterministic prescriptive spaces and pants-on-head anarchy.</p>
+<p>The key is that whilst specific outcomes aren’t determined, the possibility space is bounded. The Cambrian explosion produced wild diversity, but it didn’t produce physically or biologically nonsensical outcomes (or even anything that deviates very significantly from the usual order of low level biological functioning) – the environmental constraints and existing biological toolkit limited what could emerge. Similarly, well-designed agent biomes channel emergence within acceptable boundaries.</p>
+<p>This requires new forms of verification and validation. Instead of testing whether a system produces specific outputs for specific inputs, you’re testing whether the biome’s constraints hold under stress, whether emergent behaviour stays within acceptable bounds, whether the feedback mechanisms actually reinforce productive patterns. It’s closer to stress-testing a bridge by driving over it a few hundred times than debugging a program.</p>
 </section>
-<section id="what-next-may-come" class="level2">
-<h2 class="anchored" data-anchor-id="what-next-may-come">What next may come</h2>
-<p>What we need are digital agoras – spaces where AI agents can discover capabilities, share information, and coordinate without needing this human intermediacy. That’s not because human oversight is bad, but because true agency requires the ability to discover and evaluate information independently. MCP and A2A represent tentative steps in this direction, but they still ultimately rely on humans wiring up the connections. The promise of agentic AI is that this would no longer be needed, that agents could exercise a kind of <em>Auftragstaktik</em> mindset of inferring these needs from some sort of reaching-out and finding adequate resources the way buyers find merchants in the marketplace. There’s, then, nothing ‘wrong’ with context engineering <em>per se</em>. What would however be a mistake is to consider it a destination, rather than a transitional phase. Every talk on context engineering, every new ‘supertool’, every clever prompting technique is progress – that we shouldn’t, however, let become procrastination.</p>
-<p>When context engineering becomes unnecessary, we’ll know our agents have finally grown up. The path forward isn’t through better context engineering, but through making it obsolete. Digital agoras, agent discovery protocols, emergent coordination mechanisms: these aren’t nice-to-haves, they are the <em>sine qua nons</em> for genuine AI agency. Every moment we spend perfecting context engineering is a moment we’re not spending on building the infrastructure that would make it unnecessary.</p>
-<p>At the end of the day, context engineering is our confession, written in code and infrastructure, that we haven’t yet achieved what we claimed. It illuminates the partial success of agents: success, because agentic AI is tremendously powerful, but partially so, because it needs us to coordinate for them. So while context engineering will tide us over for a while the way prompt engineering has done for its hour, we shouldn’t forget that it’s a band-aid, no more. We should welcome context engineering… while awaiting the day we can finally retire it.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
+<section id="the-orchard-and-the-grove" class="level2">
+<h2 class="anchored" data-anchor-id="the-orchard-and-the-grove">The orchard and the grove</h2>
+<p>There’s a spectrum here, and different applications will sit at different points along it. Some biomes will be heavily cultivated orchards, with tight constraints and limited opportunities for emergence. Others will be closer to managed wildernesses, with looser boundaries and more room for unexpected behaviour.</p>
+<p>High-stakes, highly regulated domains – medical diagnosis, financial trading, safety critical systems – will tend toward the orchard end. You want strong constraints, limited emergence, predictable patterns. But even here, biome engineering offers advantages over purely programmatic approaches. A well-designed biome can enforce regulatory compliance more flexibly than hard-coded rules, can adapt to novel situations within constraints, can allow specialised agents to collaborate whilst maintaining audit trails and accountability.</p>
+<p>More exploratory domains – research, creative work, open-ended problem-solving – can afford to sit further toward the wilderness end. Here you want emergence, want agents to discover novel collaboration patterns, want the system to surprise you with solutions you wouldn’t have thought to program.</p>
+<p>The crucial capability is being able to tune this dial based on context. The same underlying biome infrastructure should support different constraint regimes for different use cases. This is where biome engineering diverges most sharply from both prompt and context engineering: it’s not about individual interactions or individual agents, but about the entire operating environment and its relationship to the problem space.</p>
+</section>
+<section id="towards-crafting-biomes" class="level2">
+<h2 class="anchored" data-anchor-id="towards-crafting-biomes">Towards crafting biomes</h2>
+<p>I’ll be honest: we’re still in the very early stages of this. Most of what I’m describing doesn’t exist in production systems yet. We have fragments – agent marketplaces that enable discovery, delegation frameworks that propagate constraints, trust scoring systems that track reputation. Most of these are nascent at best. But we don’t yet have coherent biome engineering frameworks that bring these pieces together.</p>
+<p>The technical challenges are considerable. We need standards for agent capability description, protocols for trust establishment, mechanisms for constraint propagation, frameworks for reputation and verification. We need to solve the meta-problem of how biomes themselves can be specified, deployed and validated.</p>
+<p>The conceptual challenge is equally significant. Biome engineering requires a different mindset from traditional software development. You’re not building a machine with specified behaviour, you’re cultivating an ecosystem with bounded emergence. This demands comfort with uncertainty, skill in thinking about system-level properties rather than individual components, and the ability to reason about constraints and incentives rather than explicit commands. It’s a shift from architect to gardener, from engineer to evolutionary theorist. And much like the Cambrian explosion, I suspect we’re going to see a period of wild experimentation, of diverse approaches and unexpected solutions, before things settle into more stable patterns.</p>
+<p>But then again, perhaps stability isn’t the goal. Perhaps the point of biome engineering is to create substrates where continuous adaptation and evolution are not bugs but features – where the system remains dynamic, responsive and capable of surprising us long after we’ve deployed it. There’s no reason why this needs to be the <em>only</em> model – deterministic, programmatic systems will still have their place, just as LLMs didn’t displace the template engines that deterministically generate the bulk of the web. But for complex, open-ended problems, biome engineering offers a promising path forward.</p>
+<p>The dramatic perturbations 541 million years ago that gave rise to an abundance of weird attempts at existence, of which some proved successful enough to thrive, continue to ripple into the present. Evolution has kept improvising new variations on those original themes that allowed life to persist and thrive despite drastic changes to the face of the earth. If we do biome engineering right, our agent ecosystems might show similar staying power and potential.</p>
 
 
 </section>
 
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
-  author = {{Chris von Csefalvay}},
-  title = {The {Snowmobile} {Symptom}},
-  date = {2025-07-06},
-  url = {https://chrisvoncsefalvay.com/posts/context-engineering/},
+  author = {{Chris von Csefalvay} and von Csefalvay, Chris},
+  title = {Biome Engineering},
+  date = {2025-10-11},
+  url = {https://chrisvoncsefalvay.com/posts/biome-engineering/},
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
+Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“Biome
+Engineering.”</span> <a href="https://chrisvoncsefalvay.com/posts/biome-engineering/">https://chrisvoncsefalvay.com/posts/biome-engineering/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -692,5 +725,4 @@ Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="h
 
 
 
-<script src="https://platform.twitter.com/widgets.js"></script>
 </body></html>
