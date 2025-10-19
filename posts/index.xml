@@ -10,7 +10,120 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Sat, 11 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 19 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>SOYA - the only benchmark that matters</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/soya/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In 1790, the French Academy of Sciences commissioned a rather ambitious survey. The goal was to measure the distance from the North Pole to the Equator along the meridian passing through Paris, then use that measurement to define a new universal unit of length: the metre. The idea was simple enough: let’s create a standard so objective, so rooted in natural law, that every nation would adopt it. One ten-millionth of the distance from pole to equator. Perfect. Universal. The platonic ideal of measurement.</p>
+<p>There was just one problem. The measurement was wrong. Not catastrophically wrong, mind you, but wrong enough that when better instruments came along, we discovered the original metre was about 0.2mm off. By then, however, the French had made rather a lot of metre sticks, and redoing them all seemed like rather more trouble than it was worth.<sup>1</sup> So we kept the stick and quietly forgot about the pole-to-equator business. The metre became defined not by nature’s grand design, but by a specific physical artefact in a vault in Sevres. Later, we’d define it by the speed of light, which at least has the virtue of being constant, even if it’s rather less poetic than the original vision.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Also, this was basically on the heels of the French Revolution. You can disagree about weights and measures, but you’re much less likely to want to do so vis-a-vis a government that has just discovered its love of the guillotine.</p></div></div><p>I’m reminded of the story of the metre because it nicely illustrates a key point about benchmarks: all benchmarks are wrong. They are simplifications, abstractions, approximations of reality. They can be useful, but they can never capture the full complexity of the systems they aim to measure. And that’s okay if all you need to resolve is the coordination problem of “how long is this thing?” – but it doesn’t say anything beyond the relative ratio between what you’re looking at and that specific standard. Least of all does it reveal anything meaningful about the underlying object.</p>
+<section id="the-benchmark-industrial-complex" class="level2">
+<h2 class="anchored" data-anchor-id="the-benchmark-industrial-complex">The benchmark-industrial complex</h2>
+<p>We have built an entire industry around the idea that there exists some universal measure of language model capability, some objective standard against which all models can be compared. MMLU, GSM8K, HumanEval, HellaSwag – the list grows longer every month, each benchmark claiming to capture some essential truth about model performance. Companies trumpet their SOTA results. Researchers optimise specifically for these benchmarks. VCs make investment decisions based on leaderboard positions. And on and on it goes in a self-reinforcing cycle.</p>
+<p>And just like the original metre, these benchmarks are increasingly recognised as both arbitrary and, well, wrong.</p>
+<p>The rot has been apparent for a while now. Traditional static benchmarks suffer from saturation, as models quickly reach performance ceilings, and contamination, where test data leaks into training sets, inflating scores. When GPT-4 can score 86.4% on MMLU, and the next model scores 87.2%, are we measuring genuine improvement or noise? When models are trained on datasets that may contain variations of the test questions, are we measuring capability or memorisation?</p>
+<p>There’s a deeper problem here, though. LLMs can be used for a shocking range of tasks, from generating code to clicking the right button on your GUI. Benchmarks necessarily have a value judgment inherent in their task set – and that includes massive multi-task sets like MMLU or agentic multi-objective evals like GAIA or <img src="https://latex.codecogs.com/png.latex?%5Ctau">-bench. No choice, too, is a kind of choice: when we use a benchmark smorgasboard of tasks or domain questions, we are implicitly setting the expectation of a Renaissance model that can do everything somewhat well. Simply put – there’s no such thing as an agnostic, universal eval.</p>
+</section>
+<section id="soya-your-benchmark-your-way" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="soya-your-benchmark-your-way">SOYA: your benchmark, your way</h2>
+<p>Earlier this year, Huggingface released YourBench, a framework that addresses these limitations by enabling dynamic, automated generation of reliable, up-to-date and domain-tailored benchmarks directly from user-provided documents.<sup>2</sup> There’s a beautiful symmetry here – just as we’re reaching the level of specialisation of language models that necessitates task-specific evals, we also are starting to have the tools that can provide this on a budget and at scale.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Shashidhar, S., Fourrier, C., Lozovskia, A., Wolf, T., Tur, G., &amp; Hakkani-Tür, D. (2025). <a href="https://arxiv.org/abs/2504.01833">YourBench: Easy custom evaluation sets for everyone.</a> <em>arXiv preprint</em>, arXiv:2504.01833.</p></div></div><p>The real significance of YourBench isn’t just that it’s incredibly convenient and technically impressive. It is the end of SOTA, and the rise of what I call SOYA: the State of Your Art.</p>
+<p>The insight is deceptively simple. Instead of asking “which model is best?”, we should be asking “which model is best at the specific things I actually need it to do, with the specific data and constraints I actually have?” The universal benchmark is revealed as the emperor with no clothes. What matters isn’t whether Claude beats GPT-5 on MMLU – it’s whether the model can handle your internal documentation, understand your domain terminology, and operate within your latency and cost constraints.</p>
+<p>This shift from SOTA to SOYA isn’t just semantic cleverness. It’s a fundamental reimagining of how we think about model selection and evaluation. Tools like YourBench have transformed custom evals from a luxury reserved to major labs to something you can run for the price of a Happy Meal.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<hr>
+<p><strong>Recipe:</strong> Shakshuka</p>
+<ul>
+<li>1 tin decent chopped tomatoes</li>
+<li>1 onion, diced</li>
+<li>3 cloves garlic</li>
+<li>1 red pepper, diced</li>
+<li>1 tsp smoked paprika</li>
+<li>1 tsp cumin</li>
+<li>1/2 tsp cayenne pepper</li>
+<li>4-6 eggs</li>
+<li>Crumbled feta</li>
+<li>Some fresh coriander, to taste</li>
+</ul>
+<p>Sauté the onion until soft, add the garlic and spices. Adding the tomatoes and peppers, simmer until thick (20 minutes). Make wells, crack eggs into them. Cover and cook until eggs are just set. Top with feta and coriander. Serve with good bread.</p>
+<hr>
+</div></div><section id="the-democratisation-of-evals" class="level3">
+<h3 class="anchored" data-anchor-id="the-democratisation-of-evals">The democratisation of evals</h3>
+<p>The key implication, then, is that it is now at least in theory open to everyone to determine what their State of the Art is. This opens the door to much more meaningful evals. In the regulated pharmaceuticals and medtech industries, where I spend pretty much all my working life, a 0.3% incremental improvement in model performance is less relevant than what that 0.3% actually <em>is</em>. There’s an incommensurability of performance aspects here. I don’t care how much better your model is at solving Math Olympiad questions if it can’t determine whether something is a life-threatening adverse event or a mere nuisance. Generic benchmarks don’t help me. SOYA benchmarks might.</p>
+<p>The offshoot, of course, is that these evals map much better to actual business needs and actual data. The downside? They require an understanding of how to build a good eval. YourBench is brilliant, but it’s a tool for building evals, not for building <em>good</em> evals per se. It puts evals that were previously the preserve of well-funded labs into the hands of anyone with a credit card and a bit of time. But it’s up to the end user to make sure this doesn’t turn into giving toddlers a set of car keys and a bottle of bourbon.</p>
+</section>
+</section>
+<section id="the-soya-mindset-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="the-soya-mindset-in-practice">The SOYA mindset in practice</h2>
+<p>SOYA, then, is really primarily a mindset – one that requires us to first and foremost let go of some comfortable illusions. It means accepting that there is no “best model” in the abstract, only models that are better or worse for specific purposes. It means doing the hard work of articulating what you actually need from a model, rather than defaulting to whatever topped the latest leaderboard. When I talk to my clients about building an approach to evals, I typically want to explore the dimensions of model use – that is, their ‘definition of good’:</p>
+<ol type="1">
+<li>What are the three most common tasks this model will perform?</li>
+<li>What does failure look like for each of these tasks, and what are the consequences?</li>
+<li>What does your actual data look like, and how does it differ from the training distributions these models saw?</li>
+<li>What are your constraints on latency, cost and compute?</li>
+<li>What does “good enough” look like for your use case?</li>
+</ol>
+<p>Only after we’ve answered these questions do we start looking at models. And increasingly, the answer isn’t “use the SOTA model” but rather “use this smaller, specialised model that excels at your specific task, or this model that’s good enough but 10x cheaper, or this ensemble of models that handles your specific data distribution better”.</p>
+</section>
+<section id="some-inconvenient-truths" class="level2">
+<h2 class="anchored" data-anchor-id="some-inconvenient-truths">Some inconvenient truths</h2>
+<p>Let me be clear about what SOYA doesn’t mean. It doesn’t mean anything goes. It doesn’t mean evaluation is purely subjective. It doesn’t mean we abandon rigour. What it does mean, however, is acknowledging some uncomfortable truths:</p>
+<ol type="1">
+<li>Generic benchmarks capture something, but that something may not correlate with your specific needs. The more specialised those needs are (i.e.&nbsp;the further they are from simple agent driving and chat interactions), the less likely generic benchmarks are to be relevant.</li>
+<li>The “best” model for one use case may be catastrophically wrong for another. Context matters.</li>
+<li>Optimising for SOTA performance often means whatever you’re getting has been optimised for something other than your use case.</li>
+<li>Custom evaluation requires thought and effort, but that effort is increasingly cheap enough to be worth it. Thought, on the other hand, remains expensive. Bad evals give bad results.</li>
+</ol>
+<p>And that’s really the crux of it all: the choice for users is between accepting convenient, universal, cheap and wrong benchmarks, or investing a bit more time and effort into building evals that actually reflect their needs.</p>
+</section>
+<section id="how-not-to-suck" class="level2">
+<h2 class="anchored" data-anchor-id="how-not-to-suck">How not to suck</h2>
+<p>SOYA, if correctly used, can be a solution to the problem of generic evals that suffer from the same flaw as generic models: they try to be everything to everyone, and end up being mediocre at best for any specific purpose. But SOYA can also be misused. A poorly constructed custom eval can be worse than a generic benchmark, giving a false sense of security or leading to misguided model choices. And at this point, eval engineering as a discipline is sorely lacking. Even relatively sophisticated enterprise users have few specialists who really understand how to build good evals.</p>
+<p>One solution for this is the emergence of evals-as-a-service (EaaS) providers. But evals aren’t a technological exercise only – they require an understanding of the factors I mentioned above that characterise what success, or a good model, is for the particular client. SOYA is the Savile Row of AI: bespoke, tailored, and requiring expert craftsmanship. You can’t just pick it off the rack.</p>
+<p>The benchmark-industrial complex will be fine – there’s already talk about making models more ‘realistic’. This is generally a category error – benchmarks cannot be ‘realistic’ to all respects. What they can be is relevant. And relevance is in the eye of the beholder. No single benchmark can capture the specific requirements of pharmaceutical adverse event extraction, contract analysis and marketing copywriting simultaneously. The solution is to accept that benchmarks must be premised on ‘what good is’, not on a fool’s errand of bundling an ever growing list of tasks into a single eval suite.</p>
+</section>
+<section id="epilogue" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="epilogue">Epilogue</h2>
+<p>A year or so after graduating from Oxford, I was invited to sit for what was rather widely considered the time’s equivalent of Humanity’s Last Exam, but for humans: the Prize Fellowship Exam for All Souls. There isn’t enough space here to describe how weird and intense an experience it was. You sit a number of papers, typically two ‘general’ papers, two ‘specialist’ papers and an essay. The general papers have questions on just about everything. Here are three actual questions from <a href="https://www.asc.ox.ac.uk/past-examination-papers">this year’s general paper</a>:</p>
+<ul>
+<li>Invent a new punctuation mark!</li>
+<li>Does a pope matter?</li>
+<li>The organ has been considered the ‘king of instruments’. Is it?</li>
+</ul>
+<p>Then you get to choose your specialist papers – from seven disciplines (classics, economics, English literature, history, law, philosophy and politics). I picked a law paper, which was unsurprising considering I did that as an undergraduate subject, and a classics paper.<sup>3</sup> I guess I must have done pretty okay, because of the hundred or so applicants that year (you had to generally get a top 1st in your undergraduate degree to even apply), I was fortunate enough to be in the final five invited for a <em>viva</em>, the last stage of the process. Which I bombed spectacularly enough that I wasn’t offered a fellowship, but that’s a story for another day.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;My sincere apologies to the examiners for having to endure my Latin translation. I am not a classicist by training to begin with, but I am a special kind of bad at Latin in particular.</p></div><div id="fn4"><p><sup>4</sup>&nbsp;It took a lot of time and growth for me to learn to appreciate the value of depth. I remain incredibly curious and, in long retrospect, grateful for the experience – but also very aware that my depth is what makes my breadth work. Not winning a Prize Fellowship might have been one of my career-defining blessings in disguise – something that forced me to find a productive synthesis between a mind interested in just about everything and the needs of this world for professionals who can deliver focus, profound expertise and real-world impact. I am just so incredibly fortunate to have ultimately found a way to make this difficult balance work for me.</p></div></div><p>I mention this because with the benefit of hindsight, I see a lot of similarities between the Prize and the current SOTA mindset, mostly in its shortcomings. The Prize Fellowship Exam is the epitome of the modern ‘HLE-style’ SOTA eval: it identifies a small number of dazzling generalists, not necessarily those people who truly end up changing the world through commitment, depth and focus on their specific domain.<sup>4</sup> But whatever we think of the value of that kind of modern day Renaissance person, it certainly isn’t what we need from our AI agents. What we need are models that excel in specific domains, for specific tasks, under specific constraints. Agents, unlike people, are interchangeable. We don’t need polymaths – we need specialist team players who can harness emergence for complexity.</p>
+<p>In the end, context isn’t an epiphenomenon – it’s what gives meaning to the abstractions of performance. Context is what turns that abstract brilliance into concrete, real-world impact. And with tools like YourBench, we’re finally seeing the era of SOYA – where users finally get the choice they deserve as to what matters to them, and what good means for their use case.</p>
+<p>So the next time someone breathlessly announces they’ve achieved new SOTA results, ask yourself: state of what art? For whom? Under what conditions?</p>
+<p>Because in the end, <strong>the only art that matters is yours</strong>.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {SOYA - the Only Benchmark That Matters},
+  date = {2025-10-19},
+  url = {https://chrisvoncsefalvay.com/posts/soya/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“SOYA - the Only Benchmark That
+Matters.”</span> October 19, 2025. <a href="https://chrisvoncsefalvay.com/posts/soya/">https://chrisvoncsefalvay.com/posts/soya/</a>.
+</div></div></section></div> ]]></description>
+  <category>LLMs</category>
+  <category>AI</category>
+  <category>evals</category>
+  <guid>https://chrisvoncsefalvay.com/posts/soya/</guid>
+  <pubDate>Sun, 19 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Biome engineering</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -695,7 +808,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-25012"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-25012").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-18148"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-18148").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -793,7 +906,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-65953"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-65953").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-41958"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41958").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -1711,1000 +1824,6 @@ Edition.”</span> <a href="https://doi.org/10.59350/412q0-sbn89">https://doi.or
   <guid>https://chrisvoncsefalvay.com/posts/academic-generative-ai/</guid>
   <pubDate>Wed, 06 Dec 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/academic-generative-ai/4ae87543-b5d3-4373-b691-3fb71d8cf1d0.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Auto-DOI for Quarto posts via Rogue Scholar</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/auto-doi/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>I love posts that allow me to merge some of my addictions. In this case, it’s my love for Quarto project scripts (which I’ve <a href="../quarto-project-scripts">written about elsewhere</a>), my fondness for <a href="https://rogue-scholar.org">Rogue Scholar</a> and the overuse of the word ‘mint’ to mean ‘generally really quite rather nice’.</p>
-<p><a href="https://rogue-scholar.org">Rogue Scholar</a> is a fantastic tool for science bloggers, and while it’s a little artisanal (i.e.&nbsp;hand-made much of the time) at this point, it’s got some really cool automated features. One is that it registers (mints, hence the abundance of lame peppermint puns across this post) DOIs for your posts.</p>
-<p>I’ve been using Rogue Scholar to mint DOIs for my posts for a while now, but it’s always been a bit of a manual process. I’d have to wait for a while for the post to go on the Rogue Scholar feed, then copy/paste the DOI, then copy the DOI into the YAML front matter. It’s not a lot of work, but it’s a bit of a pain. I’ve been meaning to automate it for a while, but I’ve been busy with other things.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Just after I posted about this solution, Martin Fenner, who runs Rogue Scholar, <a href="https://github.com/quarto-dev/quarto-cli/discussions/7174#discussioncomment-7557741">pointed out that there’s now an API</a>. The API is great, and would have spared me the part of having to scrape the HTML. I will, one of these days, switch over – if I had to build it, I’d obviously use the API, and simply parse the JSON result. The rest, <em>ceteris paribus</em>, holds true.</p>
-</div>
-</div>
-<p>This weekend, I was laid up with being on the receiving end (for once) of the bounties of a clinical trial, so I’ve decided to finally build it. It’s a bit of a hack, but it works.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-auto-doi" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-auto-doi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-auto-doi">flowchart TD
-    linkStyle default interpolate basis
-    A["Get last 10 posts with DOIs from RS"]
-    
-    subgraph loop["Loop through posts"]
-    B["Read YAML preface"] --&gt; C{"Is post a cross-post?"}
-    C --&gt;|yes| skip
-    C --&gt;|no| D{"Is post citeable?"}
-    D --&gt;|no| skip
-    D --&gt;|yes| E{"Do we have a DOI?"}
-    E --&gt;|no| skip
-    E ----&gt;|yes| F["Get DOI"]    
-    end
-
-    A -----&gt; E
-    F --&gt; apploop["Append loop to YAML"]
-    apploop --&gt; write["Write YAML"]
-    write --&gt; qr["Quarto Render"]
-    write --&gt; ghc["Github commit action"]
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-auto-doi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Auto-DOI flow chart.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>First, we scrape Rogue Scholar for titles and DOIs. Rogue Scholar’s CSS isn’t really helpful here, as the link isn’t a particular class/id of its own as far as I could discern, so I just grabbed the link by the fact that only DOI links are formatted like DOI links. Not the most elegant way, but it does the job.</p>
-<div id="lst-getting-dois" class="python listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;1: Getting the DOIs from Rogue Scholar.
-</figcaption>
-<div aria-describedby="lst-getting-dois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-1" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-1-1"></span>
-<span id="annotated-cell-1-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> scrape_blog_for_dois(url) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> Dict[<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>, <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>]:</span>
-<span id="annotated-cell-1-3">    response <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> requests.get(url)</span>
-<span id="annotated-cell-1-4">    soup <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> BeautifulSoup(response.content, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'html.parser'</span>)</span>
-<span id="annotated-cell-1-5">    articles <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> soup.select(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'article'</span>)[:<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>]</span>
-<span id="annotated-cell-1-6">    </span>
-<span id="annotated-cell-1-7">    posts_with_dois <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> {}</span>
-<span id="annotated-cell-1-8">    </span>
-<span id="annotated-cell-1-9">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> article <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> articles:</span>
-<span id="annotated-cell-1-10">        title <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> article.select_one(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'h3'</span>).text</span>
-<span id="annotated-cell-1-11">        doi_link <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">next</span>((a[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'href'</span>] <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> a <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> article.select(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'a'</span>) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> a[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'href'</span>].startswith(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'https://doi.org'</span>)), <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>)</span>
-<span id="annotated-cell-1-12">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> doi_link:</span>
-<span id="annotated-cell-1-13">            doi <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> doi_link.split(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'https://doi.org/'</span>)[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>]</span>
-<span id="annotated-cell-1-14">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="annotated-cell-1-15">            doi <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span></span>
-<span id="annotated-cell-1-16">        posts_with_dois[title] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> doi</span>
-<span id="annotated-cell-1-17"></span>
-<span id="annotated-cell-1-18">    logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"Found </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(posts_with_dois)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> posts with DOIs:"</span>)</span>
-<span id="annotated-cell-1-19">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> title, doi <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> posts_with_dois.items():</span>
-<span id="annotated-cell-1-20">        logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">: </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>doi<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"</span>)</span>
-<span id="annotated-cell-1-21">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">return</span> posts_with_dois</span></code></pre></div></div>
-</div>
-</figure>
-</div>
-<ol type="1">
-<li>Technically unnecessary, as Rogue Scholar currently only displays ten links, but hey.</li>
-<li>This is where we split the DOI link into the link prefix and the DOI. We don’t need the prefix, so we just grab the second part of the split.</li>
-</ol>
-<p>Next, we iterate through each blog post. This is actually quite fast, since (1) we have relatively few of them, (2) they’re text documents. We parse the YAML preface at the beginning of each of them. This looks something like this:</p>
-<div id="lst-preamble" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;2: Pre-DOI YAML preamble example.
-</figcaption>
-<div aria-describedby="lst-preamble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">categories</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="cb1-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Quarto</span></span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">citation</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">true</span></span>
-<span id="cb1-4"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">date</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> 2023-11-13</span></span>
-<span id="cb1-5"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">description</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'Oh, that</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">''</span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">s mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.'</span></span>
-<span id="cb1-6"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">google-scholar</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">true</span></span>
-<span id="cb1-7"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">title</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Auto-DOI for Quarto posts via Rogue Scholar</span></span></code></pre></div></div>
-</div>
-</figure>
-</div>
-<p>What this tells us is that we do want a citation (someday), which is why we’re doing this in the first place. That, according to our beautiful flowchart in Figure&nbsp;1, means this post is eligible to get a DOI appended. We also know there isn’t one – DOIs are appended as key-value pairs (with the key being, unsurprisingly, <code>doi</code>) to the <code>citation</code> object in the YAML preface. So, we’ll see if we can get one by looking in the dictionary we scraped from Rogue Scholar in Listing&nbsp;1.</p>
-<div id="lst-process-post" class="python listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;3: Processing a single post.
-</figcaption>
-<div aria-describedby="lst-process-post-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-3" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy"><code class="sourceCode python"><span id="annotated-cell-3-1"></span>
-<span id="annotated-cell-3-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">def</span> process_qmd_file(file_path: <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>, posts_with_dois: Dict[<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>, <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">str</span>]) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span>:</span>
-<span id="annotated-cell-3-3">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">with</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">open</span>(file_path, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'r'</span>) <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> stream:</span>
-<span id="annotated-cell-3-4">        contents <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> stream.read()</span>
-<span id="annotated-cell-3-5"></span>
-<span id="annotated-cell-3-6">    delim <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> re.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">compile</span>(<span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">r'</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">^</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">---</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">$</span><span class="vs" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span>, re.MULTILINE)</span>
-<span id="annotated-cell-3-7">    splits <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> re.split(delim, contents)</span>
-<span id="annotated-cell-3-8">    yaml_preamble <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> splits[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>].strip() <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(splits) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">""</span> <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#</span></span>
-<span id="annotated-cell-3-9">    rest_of_post <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> splits[<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>] <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">len</span>(splits) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> contents</span>
-<span id="annotated-cell-3-10"></span>
-<span id="annotated-cell-3-11">    yaml_contents <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml.safe_load(yaml_preamble) <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> yaml_preamble <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">None</span></span>
-<span id="annotated-cell-3-12"></span>
-<span id="annotated-cell-3-13">    <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> yaml_contents:</span>
-<span id="annotated-cell-3-14">        citation <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'citation'</span>)</span>
-<span id="annotated-cell-3-15">        google_scholar <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'google-scholar'</span>)</span>
-<span id="annotated-cell-3-16">        categories <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'categories'</span>, [])</span>
-<span id="annotated-cell-3-17">        title <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml_contents.get(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'title'</span>)</span>
-<span id="annotated-cell-3-18"></span>
-<span id="annotated-cell-3-19">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Check files from crosspost categories</span></span>
-<span id="annotated-cell-3-20">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">any</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cross-post"</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> category.lower() <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">for</span> category <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">in</span> categories):</span>
-<span id="annotated-cell-3-21">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"citation"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">or</span> yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>:</span>
-<span id="annotated-cell-3-22">                yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"citation"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">False</span></span>
-<span id="annotated-cell-3-23">                yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">False</span></span>
-<span id="annotated-cell-3-24">                logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'Modified crosspost </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;"> to remove Google Scholar and/or citation reference.'</span>)</span>
-<span id="annotated-cell-3-25">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">else</span>:</span>
-<span id="annotated-cell-3-26">            <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># Ensure that google-scholar is set to true if citation is required</span></span>
-<span id="annotated-cell-3-27">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> citation <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">and</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">not</span> google_scholar:</span>
-<span id="annotated-cell-3-28">                yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"google-scholar"</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span></span>
-<span id="annotated-cell-3-29">                logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'Setting google-scholar to true for </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span>)</span>
-<span id="annotated-cell-3-30"></span>
-<span id="annotated-cell-3-31">            <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># If citation is true but no DOI, and post exists in scraped posts</span></span>
-<span id="annotated-cell-3-32">            <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> citation <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">is</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">and</span> posts_with_dois.get(title):</span>
-<span id="annotated-cell-3-33">                yaml_contents[<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'citation'</span>] <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'doi'</span>: posts_with_dois[title]}</span>
-<span id="annotated-cell-3-34">                logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'Adding doi for </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">.'</span>)</span>
-<span id="annotated-cell-3-35"></span>
-<span id="annotated-cell-3-36">        new_preamble <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> yaml.dump(yaml_contents).rstrip()</span>
-<span id="annotated-cell-3-37">        new_yaml_doc <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f"---</span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">\n</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>new_preamble<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">\n</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">---"</span></span>
-<span id="annotated-cell-3-38"></span>
-<span id="annotated-cell-3-39">        <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># write the modified YAML document back to file</span></span>
-<span id="annotated-cell-3-40">        <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">with</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">open</span>(file_path, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'w'</span>) <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> yaml_file:</span>
-<span id="annotated-cell-3-41">            yaml_file.write(new_yaml_doc <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> rest_of_post)</span>
-<span id="annotated-cell-3-42">        logging.info(<span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">f'Updated file </span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">{</span>title<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span><span class="ss" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'</span>)</span>
-<span id="annotated-cell-3-43">        </span></code></pre></div></div>
-</div>
-</figure>
-</div>
-<ol type="1">
-<li>We have to split the document in two because only the preamble is proper, parseable YAML. The rest of the document is just text, so we have to recombine it later.</li>
-<li>If it’s a cross-post, we don’t want it to have a Google Scholar link, and we’ll definitely not attach a DOI. In theory, we could have built this to be overridable in case I’ll ever produce a cross-post I <em>do</em> want to have a DOI, but I don’t see that happening.</li>
-<li>While we’re at it, might as well prune the cross-posts.</li>
-<li>And anything with a DOI should also get a Google Scholar metadata.</li>
-<li>The <code>.rstrip()</code> is pretty useful – otherwise, every time you run this, you’ll get another newline appended to the YAML preface.</li>
-<li>Don’t forget the <code>\n</code> before the YAML block’s end, otherwise you’ll end up with a YAML block that’s not properly separated from the rest of the document and won’t parse.</li>
-</ol>
-<p>Finally, we write the YAML back to the file, and we’re done. We can now declare this as a project script, and we’re good:</p>
-<div id="lst-project-script" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;4: Declaring project scripts in _quarto.yml.
-</figcaption>
-<div aria-describedby="lst-project-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"></span>
-<span id="cb2-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">project</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="cb2-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> website</span></span>
-<span id="cb2-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">pre-render</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="cb2-5"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> scripts/pre_doi_from_rogue_scholar.py</span></span>
-<span id="cb2-6"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span></span></code></pre></div></div>
-</div>
-</figure>
-</div>
-<p>One thing worth noting is that we’re not actually running this on the Quarto project itself, but on a copy of it. The consequence is that the changes are made ‘on the fly’ to the <code>.qmd</code> files and do not necessarily propagate into the repo. This is a pain, because recall that we’re only fetching the last ten posts’ DOIs so as to be kind on the server: as time goes on, that means older posts ‘lose’ their DOI.</p>
-<p>To prevent this, we can simply check our changes back in:</p>
-<div id="lst-gh-action" class="yaml listing quarto-float quarto-figure quarto-figure-left anchored">
-<figure class="quarto-float quarto-float-lst figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;5: Github action to commit changes.
-</figcaption>
-<div aria-describedby="lst-gh-action-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="annotated-cell-5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-annotation-code code-with-copy"><code class="sourceCode yaml"><span id="annotated-cell-5-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">on</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-2"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">workflow_dispatch</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-3"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">push</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-4"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">branches</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> main</span></span>
-<span id="annotated-cell-5-5"></span>
-<span id="annotated-cell-5-6"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Quarto Publish</span></span>
-<span id="annotated-cell-5-7"></span>
-<span id="annotated-cell-5-8"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">jobs</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-9"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">build-deploy</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-10"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">runs-on</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> ubuntu-latest</span></span>
-<span id="annotated-cell-5-11"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">permissions</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-12"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">contents</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> write</span></span>
-<span id="annotated-cell-5-13"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">steps</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-14"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Check out repository</span></span>
-<span id="annotated-cell-5-15"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> actions/checkout@v4</span></span>
-<span id="annotated-cell-5-16"></span>
-<span id="annotated-cell-5-17"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Set up Quarto</span></span>
-<span id="annotated-cell-5-18"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> quarto-dev/quarto-actions/setup@v2</span></span>
-<span id="annotated-cell-5-19"></span>
-<span id="annotated-cell-5-20"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Install Python and dependencies</span></span>
-<span id="annotated-cell-5-21"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> actions/setup-python@v4</span></span>
-<span id="annotated-cell-5-22"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-23"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">python-version</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'3.10'</span></span>
-<span id="annotated-cell-5-24"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">cache</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">'pip'</span></span>
-<span id="annotated-cell-5-25"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">run</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> pip install jupyter</span></span>
-<span id="annotated-cell-5-26"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">run</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> pip install -r requirements.txt</span></span>
-<span id="annotated-cell-5-27"></span>
-<span id="annotated-cell-5-28"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Render and Publish</span></span>
-<span id="annotated-cell-5-29"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">uses</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> quarto-dev/quarto-actions/publish@v2</span></span>
-<span id="annotated-cell-5-30"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-31"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> gh-pages</span></span>
-<span id="annotated-cell-5-32"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">        </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">env</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span></span>
-<span id="annotated-cell-5-33"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">          </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">GITHUB_TOKEN</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="annotated-cell-5-34"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span></span>
-<span id="annotated-cell-5-35"><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">      </span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">-</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> </span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">:</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;"> Commit changes to reflect source file  changes</span></span>
-<span id="annotated-cell-5-36"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">        run</span><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">: </span><span class="ch" style="color: #20794D;
-background-color: null;
-font-style: inherit;">|</span></span>
-<span id="annotated-cell-5-37">          git config --global user.name 'Chris von Csefalvay'</span>
-<span id="annotated-cell-5-38">          git config --global user.email 'chrisvoncsefalvay@users.noreply.github.com'</span>
-<span id="annotated-cell-5-39">          git  diff-index --quiet HEAD || git commit -am  "Automated commit of changes to source files"</span>
-<span id="annotated-cell-5-40">          git push</span></code></pre></div></div>
-</div>
-</figure>
-</div>
-<ol type="1">
-<li>The <code>diff-index --quiet HEAD</code> checks if there have been changes to the working tree. <code>git</code> returns an error if you’re trying to commit on an empty working tree, so we’re checking for that first.</li>
-</ol>
-<p>And that’s it. We can now run this as a Github action, and it’ll automatically append DOIs to our posts.</p>
-<p><a href="quarto-project-scripts/">As noted</a>: Quarto project scripts are pretty awesome stuff. I’m thinking of setting up an <code>awesome-</code> for it on Github, because way too few of them are shared properly. I’m hoping this will change.</p>
-
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {{Chris von Csefalvay}},
-  title = {Auto-DOI for {Quarto} Posts via {Rogue} {Scholar}},
-  date = {2023-11-13},
-  url = {https://chrisvoncsefalvay.com/posts/auto-doi/},
-  doi = {10.59350/5hxdg-fz574},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Auto-DOI for Quarto Posts via Rogue
-Scholar.”</span> <a href="https://doi.org/10.59350/5hxdg-fz574">https://doi.org/10.59350/5hxdg-fz574</a>.
-</div></div></section></div> ]]></description>
-  <category>Quarto</category>
-  <guid>https://chrisvoncsefalvay.com/posts/auto-doi/</guid>
-  <pubDate>Mon, 13 Nov 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/auto-doi/free-photo-of-a-drink-with-mint-in-a-glass-and-a-small-cookie-on-a-plate.jpeg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>

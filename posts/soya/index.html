@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris von Csefalvay">
-<meta name="dcterms.date" content="2025-01-16">
-<meta name="description" content="The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.">
+<meta name="dcterms.date" content="2025-10-19">
+<meta name="description" content="All benchmarks are wrong – and if you want some that are useful, you might need to build your own.">
 
-<title>Deja Vu, All Over Again. – Chris von Csefalvay</title>
+<title>SOYA - the only benchmark that matters – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,22 +82,51 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Deja Vu, All Over Again. – Chris von Csefalvay">
-<meta property="og:description" content="The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/header.webp">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="SOYA - the only benchmark that matters – Chris von Csefalvay">
+<meta property="og:description" content="All benchmarks are wrong – and if you want some that are useful, you might need to build your own.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/soya/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta name="twitter:title" content="Deja Vu, All Over Again. – Chris von Csefalvay">
-<meta name="twitter:description" content="The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/header.webp">
+<meta name="twitter:title" content="SOYA - the only benchmark that matters – Chris von Csefalvay">
+<meta name="twitter:description" content="All benchmarks are wrong – and if you want some that are useful, you might need to build your own.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/soya/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="Deja Vu, All Over Again.">
+<meta name="citation_title" content="SOYA - the only benchmark that matters">
 <meta name="citation_author" content="Chris von Csefalvay">
-<meta name="citation_publication_date" content="2025-01-16">
-<meta name="citation_cover_date" content="2025-01-16">
+<meta name="citation_publication_date" content="2025-10-19">
+<meta name="citation_cover_date" content="2025-10-19">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-01-16">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/">
+<meta name="citation_online_date" content="2025-10-19">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/soya/">
 <meta name="citation_language" content="en-GB">
 </head>
 
@@ -164,9 +193,15 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-ghost-of-centralisation-past" id="toc-the-ghost-of-centralisation-past" class="nav-link active" data-scroll-target="#the-ghost-of-centralisation-past">The Ghost of Centralisation Past</a></li>
-  <li><a href="#too-little-too-late-too-bureaucratic" id="toc-too-little-too-late-too-bureaucratic" class="nav-link" data-scroll-target="#too-little-too-late-too-bureaucratic">Too little, too late, too bureaucratic</a></li>
-  <li><a href="#just-stay-out-of-the-way" id="toc-just-stay-out-of-the-way" class="nav-link" data-scroll-target="#just-stay-out-of-the-way">Just stay out of the way</a></li>
+  <li><a href="#the-benchmark-industrial-complex" id="toc-the-benchmark-industrial-complex" class="nav-link active" data-scroll-target="#the-benchmark-industrial-complex">The benchmark-industrial complex</a></li>
+  <li><a href="#soya-your-benchmark-your-way" id="toc-soya-your-benchmark-your-way" class="nav-link" data-scroll-target="#soya-your-benchmark-your-way">SOYA: your benchmark, your way</a>
+  <ul class="collapse">
+  <li><a href="#the-democratisation-of-evals" id="toc-the-democratisation-of-evals" class="nav-link" data-scroll-target="#the-democratisation-of-evals">The democratisation of evals</a></li>
+  </ul></li>
+  <li><a href="#the-soya-mindset-in-practice" id="toc-the-soya-mindset-in-practice" class="nav-link" data-scroll-target="#the-soya-mindset-in-practice">The SOYA mindset in practice</a></li>
+  <li><a href="#some-inconvenient-truths" id="toc-some-inconvenient-truths" class="nav-link" data-scroll-target="#some-inconvenient-truths">Some inconvenient truths</a></li>
+  <li><a href="#how-not-to-suck" id="toc-how-not-to-suck" class="nav-link" data-scroll-target="#how-not-to-suck">How not to suck</a></li>
+  <li><a href="#epilogue" id="toc-epilogue" class="nav-link" data-scroll-target="#epilogue">Epilogue</a></li>
   </ul>
 </nav>
     </div>
@@ -175,16 +210,17 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Deja Vu, All Over Again.</h1>
+<h1 class="title">SOYA - the only benchmark that matters</h1>
   <div class="quarto-categories">
+    <div class="quarto-category">LLMs</div>
     <div class="quarto-category">AI</div>
-    <div class="quarto-category">governance</div>
+    <div class="quarto-category">evals</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.
+    All benchmarks are wrong – and if you want some that are useful, you might need to build your own.
   </div>
 </div>
 
@@ -201,7 +237,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">16 January 2025</p>
+      <p class="date">19 October 2025</p>
     </div>
   </div>
   
@@ -213,64 +249,103 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<p>The Department for Science, Innovation and Technology has just dropped its long-awaited <a href="https://assets.publishing.service.gov.uk/media/67851771f0528401055d2329/ai_opportunities_action_plan.pdf">AI Opportunities Action Plan</a>, a 50-page vision of how the UK government plans to guide us into an AI-powered future. The document, adorned with the obligatory glowing circuit board imagery that seems to be mandatory for any government AI publication, promises to transform Britain into an “AI superpower.” As someone who’s spent their career at the intersection of computational science and public policy, I can’t help but feel a familiar sense of déjà vu. We’ve been here before – just with different technology and different buzzwords.</p>
-<section id="the-ghost-of-centralisation-past" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-ghost-of-centralisation-past">The Ghost of Centralisation Past</h2>
-<p>Ah, government AI initiatives. Like watching your uncle try to explain TikTok at Christmas dinner – enthusiastic, well-meaning, but somehow missing the point entirely. The UK’s new AI Opportunities Action Plan, released this week with characteristic governmental fanfare, was supposed to inspire and plot the course for the UK’s ship on the stormy seas of AI. But really, it rather brings to mind that most delicious of historical failures: Project Cybersyn.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="D-W7mk4UcAA42hm.png" class="img-fluid figure-img"></p>
-<figcaption>Swivel chairs!</figcaption>
-</figure>
-</div>
-</div><div id="fn1"><p><sup>1</sup>&nbsp;One of history’s great tragedies is that the winds of change often sweep away lessons before they can fail to their fullest extent. The Allende regime’s fall sadly also brought with it the destruction of Cybersyn before its complete failure would come to be in full evidence.</p></div></div><p>For those who actually have a life and don’t regularly spend their evenings reading about Cold War technological follies, Cybersyn was Salvador Allende’s attempt to run Chile’s economy through the dark arts of the hype of the day – cybernetics –, a network of telex machines and a room that looked like the love child of Star Trek and Austin Powers. It had swivel chairs. It had buttons. It had everything except, well, actual functionality.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It was an example of what happens when you have a sensible idea (networking) in pursuit of a dubious goal (central planning) executed on the back of governmental fiat. Back then, the buzzword was ‘cybernetics’, and it was supposed to usher in an era of truly scientific central planning. We would soon all be waving goodbye to the inefficiencies of market economies thanks to… telexes. And big screens.</p>
-<p>This pattern of centrally-planned technological innovation has repeated itself throughout history - from the Soviet Union’s OGAS project<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> to Japan’s Fifth Generation Computer Project. These initiatives share a common thread: they all failed spectacularly despite massive government backing. Innovation, like my attempts at Provençal cuisine, tends to work best when it’s organic and bottom-up, not when it’s directed from above by committee. You can’t will creativity or innovation into existence. Least of all can you do so by governmental fiat.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://www.youtube.com/@Asianometry">asianometry</a> on YouTube has a <a href="https://www.youtube.com/watch?v=cLOD5f-q0as">wonderful video</a> on this.</p></div></div></section>
-<section id="too-little-too-late-too-bureaucratic" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="too-little-too-late-too-bureaucratic">Too little, too late, too bureaucratic</h2>
-<p>Fast forward to 2025, and we’re treated to Matt Clifford’s vision of how the UK government can shepherd us into an AI-powered future. The plan isn’t wrong, per se – it’s just adorably optimistic about the ability of government to direct technological evolution, or the beneficial effect of government getting involved in innovation. It’s like trying to herd cats, if the cats were quantum computers and the herders were Whitehall civil servants still struggling with Excel.</p>
+<p>In 1790, the French Academy of Sciences commissioned a rather ambitious survey. The goal was to measure the distance from the North Pole to the Equator along the meridian passing through Paris, then use that measurement to define a new universal unit of length: the metre. The idea was simple enough: let’s create a standard so objective, so rooted in natural law, that every nation would adopt it. One ten-millionth of the distance from pole to equator. Perfect. Universal. The platonic ideal of measurement.</p>
+<p>There was just one problem. The measurement was wrong. Not catastrophically wrong, mind you, but wrong enough that when better instruments came along, we discovered the original metre was about 0.2mm off. By then, however, the French had made rather a lot of metre sticks, and redoing them all seemed like rather more trouble than it was worth.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> So we kept the stick and quietly forgot about the pole-to-equator business. The metre became defined not by nature’s grand design, but by a specific physical artefact in a vault in Sevres. Later, we’d define it by the speed of light, which at least has the virtue of being constant, even if it’s rather less poetic than the original vision.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Also, this was basically on the heels of the French Revolution. You can disagree about weights and measures, but you’re much less likely to want to do so vis-a-vis a government that has just discovered its love of the guillotine.</p></div></div><p>I’m reminded of the story of the metre because it nicely illustrates a key point about benchmarks: all benchmarks are wrong. They are simplifications, abstractions, approximations of reality. They can be useful, but they can never capture the full complexity of the systems they aim to measure. And that’s okay if all you need to resolve is the coordination problem of “how long is this thing?” – but it doesn’t say anything beyond the relative ratio between what you’re looking at and that specific standard. Least of all does it reveal anything meaningful about the underlying object.</p>
+<section id="the-benchmark-industrial-complex" class="level2">
+<h2 class="anchored" data-anchor-id="the-benchmark-industrial-complex">The benchmark-industrial complex</h2>
+<p>We have built an entire industry around the idea that there exists some universal measure of language model capability, some objective standard against which all models can be compared. MMLU, GSM8K, HumanEval, HellaSwag – the list grows longer every month, each benchmark claiming to capture some essential truth about model performance. Companies trumpet their SOTA results. Researchers optimise specifically for these benchmarks. VCs make investment decisions based on leaderboard positions. And on and on it goes in a self-reinforcing cycle.</p>
+<p>And just like the original metre, these benchmarks are increasingly recognised as both arbitrary and, well, wrong.</p>
+<p>The rot has been apparent for a while now. Traditional static benchmarks suffer from saturation, as models quickly reach performance ceilings, and contamination, where test data leaks into training sets, inflating scores. When GPT-4 can score 86.4% on MMLU, and the next model scores 87.2%, are we measuring genuine improvement or noise? When models are trained on datasets that may contain variations of the test questions, are we measuring capability or memorisation?</p>
+<p>There’s a deeper problem here, though. LLMs can be used for a shocking range of tasks, from generating code to clicking the right button on your GUI. Benchmarks necessarily have a value judgment inherent in their task set – and that includes massive multi-task sets like MMLU or agentic multi-objective evals like GAIA or <span class="math inline">\(\tau\)</span>-bench. No choice, too, is a kind of choice: when we use a benchmark smorgasboard of tasks or domain questions, we are implicitly setting the expectation of a Renaissance model that can do everything somewhat well. Simply put – there’s no such thing as an agnostic, universal eval.</p>
+</section>
+<section id="soya-your-benchmark-your-way" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="soya-your-benchmark-your-way">SOYA: your benchmark, your way</h2>
+<p>Earlier this year, Huggingface released YourBench, a framework that addresses these limitations by enabling dynamic, automated generation of reliable, up-to-date and domain-tailored benchmarks directly from user-provided documents.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> There’s a beautiful symmetry here – just as we’re reaching the level of specialisation of language models that necessitates task-specific evals, we also are starting to have the tools that can provide this on a budget and at scale.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Shashidhar, S., Fourrier, C., Lozovskia, A., Wolf, T., Tur, G., &amp; Hakkani-Tür, D. (2025). <a href="https://arxiv.org/abs/2504.01833">YourBench: Easy custom evaluation sets for everyone.</a> <em>arXiv preprint</em>, arXiv:2504.01833.</p></div></div><p>The real significance of YourBench isn’t just that it’s incredibly convenient and technically impressive. It is the end of SOTA, and the rise of what I call SOYA: the State of Your Art.</p>
+<p>The insight is deceptively simple. Instead of asking “which model is best?”, we should be asking “which model is best at the specific things I actually need it to do, with the specific data and constraints I actually have?” The universal benchmark is revealed as the emperor with no clothes. What matters isn’t whether Claude beats GPT-5 on MMLU – it’s whether the model can handle your internal documentation, understand your domain terminology, and operate within your latency and cost constraints.</p>
+<p>This shift from SOTA to SOYA isn’t just semantic cleverness. It’s a fundamental reimagining of how we think about model selection and evaluation. Tools like YourBench have transformed custom evals from a luxury reserved to major labs to something you can run for the price of a Happy Meal.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <hr>
-<p><strong>Recipe</strong>: Coq au vin</p>
+<p><strong>Recipe:</strong> Shakshuka</p>
 <ul>
-<li>1 whole chicken, cut into pieces</li>
-<li>750mL decent red wine</li>
-<li>200g lardons</li>
-<li>Pearl onions… lots of them. Two dozen or so.</li>
-<li>500g mushrooms</li>
-<li>2 carrots</li>
-<li>Fresh thyme</li>
-<li>Bay leaves</li>
+<li>1 tin decent chopped tomatoes</li>
+<li>1 onion, diced</li>
+<li>3 cloves garlic</li>
+<li>1 red pepper, diced</li>
+<li>1 tsp smoked paprika</li>
+<li>1 tsp cumin</li>
+<li>1/2 tsp cayenne pepper</li>
+<li>4-6 eggs</li>
+<li>Crumbled feta</li>
+<li>Some fresh coriander, to taste</li>
 </ul>
-<p>Dunk the chicken in the wine and let rest overnight (patience is the name of the game). On the day, brown the lardons slowly in a Dutch oven. Remove, and reserve the fat. Brown the chicken pieces in the fat – avoid crowding your Dutch oven, work in batches if you have to. Sautee the vegetables, and return everything to the Dutch oven, including the chicken – and the wine. Cover and simmer on low-medium heat for 90 minutes. Thicken to taste with a beurre manié. Serve with a thick slab of a hearty, crusty bread.</p>
+<p>Sauté the onion until soft, add the garlic and spices. Adding the tomatoes and peppers, simmer until thick (20 minutes). Make wells, crack eggs into them. Cover and cook until eggs are just set. Top with feta and coriander. Serve with good bread.</p>
 <hr>
-</div></div><p>Let’s be real: The UK is already painfully late to this party. While we’re planning to plan about planning our AI infrastructure, OpenAI and Anthropic are training models that make GPT-4 look like a pocket calculator. The plan acknowledges we’re “the third largest AI market in the world” – which sounds impressive until you realize that in absolute terms, Britain’s contribution compared to the front runners (US and PRC) barely amounts to a rounding error.</p>
-<p>The focus on government-directed innovation is particularly eyebrow-raising. The plan calls for establishing ‘AI Growth Zones’, expanding compute infrastructure and creating a new unit called UK Sovereign AI (because if you do not create more bureaucracy, you clearly aren’t doing this government thing well).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> All potentially good stuff in theory, but premised on the notion that the government can effectively pick winners and shape the development of arguably the most dynamic technology since electricity. And, of course, the notion of ‘growth zones’ might strike one as rather odd considering that most of the work we do gets done in the cloud. I don’t need to be in a ‘growth zone’ to do my job. The extremely delocalised nature of software and AI development makes these echoes from the era of industrial parks and logistical efficiencies sound anachronistic at best, smacking of a misunderstanding of AI in practice at worst.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Interestingly, <a href="https://uksovereign.ai">uksovereign.ai</a> leads you to <a href="https://mindfoundry.ai">Mind Foundry</a>, a spin-out of my alma mater that seems to mainly cater for the defence industry.</p></div></div></section>
-<section id="just-stay-out-of-the-way" class="level2">
-<h2 class="anchored" data-anchor-id="just-stay-out-of-the-way">Just stay out of the way</h2>
-<p>That said, there are some genuinely promising elements. The commitment to building AI infrastructure and expanding compute capacity is crucial - though one wonders if we might have thought about this back when compute was actually available to purchase. The focus on AI safety and ethics is also commendable, even if it feels a bit like installing guardrails after the car has already left the garage.</p>
-<p>What’s missing is an acknowledgment that the most successful government interventions in technology have historically been indirect - creating the conditions for innovation rather than trying to micromanage it. DARPA gave us the internet by funding basic research and then getting out of the way. The UK’s own success stories - from ARM to DeepMind - emerged from an ecosystem that encouraged experimentation and risk-taking, not from government planning.</p>
-<p>As someone who has spent time in both academia and industry, who has seen how innovation actually happens in the trenches of AI research, I can’t help but feel we’re missing the forest for the bureaucratically-approved, committee-selected trees. The UK has world-class AI talent, outstanding universities and a vibrant startup scene. What it needs isn’t more government steering – it needs the government to focus on removing obstacles and then getting out of the way. But hey, at least we’re not building a room full of swivel chairs. Though given some of the proposals in this plan, I wouldn’t rule it out for AI Action Plan 2.0.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
+</div></div><section id="the-democratisation-of-evals" class="level3">
+<h3 class="anchored" data-anchor-id="the-democratisation-of-evals">The democratisation of evals</h3>
+<p>The key implication, then, is that it is now at least in theory open to everyone to determine what their State of the Art is. This opens the door to much more meaningful evals. In the regulated pharmaceuticals and medtech industries, where I spend pretty much all my working life, a 0.3% incremental improvement in model performance is less relevant than what that 0.3% actually <em>is</em>. There’s an incommensurability of performance aspects here. I don’t care how much better your model is at solving Math Olympiad questions if it can’t determine whether something is a life-threatening adverse event or a mere nuisance. Generic benchmarks don’t help me. SOYA benchmarks might.</p>
+<p>The offshoot, of course, is that these evals map much better to actual business needs and actual data. The downside? They require an understanding of how to build a good eval. YourBench is brilliant, but it’s a tool for building evals, not for building <em>good</em> evals per se. It puts evals that were previously the preserve of well-funded labs into the hands of anyone with a credit card and a bit of time. But it’s up to the end user to make sure this doesn’t turn into giving toddlers a set of car keys and a bottle of bourbon.</p>
+</section>
+</section>
+<section id="the-soya-mindset-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="the-soya-mindset-in-practice">The SOYA mindset in practice</h2>
+<p>SOYA, then, is really primarily a mindset – one that requires us to first and foremost let go of some comfortable illusions. It means accepting that there is no “best model” in the abstract, only models that are better or worse for specific purposes. It means doing the hard work of articulating what you actually need from a model, rather than defaulting to whatever topped the latest leaderboard. When I talk to my clients about building an approach to evals, I typically want to explore the dimensions of model use – that is, their ‘definition of good’:</p>
+<ol type="1">
+<li>What are the three most common tasks this model will perform?</li>
+<li>What does failure look like for each of these tasks, and what are the consequences?</li>
+<li>What does your actual data look like, and how does it differ from the training distributions these models saw?</li>
+<li>What are your constraints on latency, cost and compute?</li>
+<li>What does “good enough” look like for your use case?</li>
+</ol>
+<p>Only after we’ve answered these questions do we start looking at models. And increasingly, the answer isn’t “use the SOTA model” but rather “use this smaller, specialised model that excels at your specific task, or this model that’s good enough but 10x cheaper, or this ensemble of models that handles your specific data distribution better”.</p>
+</section>
+<section id="some-inconvenient-truths" class="level2">
+<h2 class="anchored" data-anchor-id="some-inconvenient-truths">Some inconvenient truths</h2>
+<p>Let me be clear about what SOYA doesn’t mean. It doesn’t mean anything goes. It doesn’t mean evaluation is purely subjective. It doesn’t mean we abandon rigour. What it does mean, however, is acknowledging some uncomfortable truths:</p>
+<ol type="1">
+<li>Generic benchmarks capture something, but that something may not correlate with your specific needs. The more specialised those needs are (i.e.&nbsp;the further they are from simple agent driving and chat interactions), the less likely generic benchmarks are to be relevant.</li>
+<li>The “best” model for one use case may be catastrophically wrong for another. Context matters.</li>
+<li>Optimising for SOTA performance often means whatever you’re getting has been optimised for something other than your use case.</li>
+<li>Custom evaluation requires thought and effort, but that effort is increasingly cheap enough to be worth it. Thought, on the other hand, remains expensive. Bad evals give bad results.</li>
+</ol>
+<p>And that’s really the crux of it all: the choice for users is between accepting convenient, universal, cheap and wrong benchmarks, or investing a bit more time and effort into building evals that actually reflect their needs.</p>
+</section>
+<section id="how-not-to-suck" class="level2">
+<h2 class="anchored" data-anchor-id="how-not-to-suck">How not to suck</h2>
+<p>SOYA, if correctly used, can be a solution to the problem of generic evals that suffer from the same flaw as generic models: they try to be everything to everyone, and end up being mediocre at best for any specific purpose. But SOYA can also be misused. A poorly constructed custom eval can be worse than a generic benchmark, giving a false sense of security or leading to misguided model choices. And at this point, eval engineering as a discipline is sorely lacking. Even relatively sophisticated enterprise users have few specialists who really understand how to build good evals.</p>
+<p>One solution for this is the emergence of evals-as-a-service (EaaS) providers. But evals aren’t a technological exercise only – they require an understanding of the factors I mentioned above that characterise what success, or a good model, is for the particular client. SOYA is the Savile Row of AI: bespoke, tailored, and requiring expert craftsmanship. You can’t just pick it off the rack.</p>
+<p>The benchmark-industrial complex will be fine – there’s already talk about making models more ‘realistic’. This is generally a category error – benchmarks cannot be ‘realistic’ to all respects. What they can be is relevant. And relevance is in the eye of the beholder. No single benchmark can capture the specific requirements of pharmaceutical adverse event extraction, contract analysis and marketing copywriting simultaneously. The solution is to accept that benchmarks must be premised on ‘what good is’, not on a fool’s errand of bundling an ever growing list of tasks into a single eval suite.</p>
+</section>
+<section id="epilogue" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="epilogue">Epilogue</h2>
+<p>A year or so after graduating from Oxford, I was invited to sit for what was rather widely considered the time’s equivalent of Humanity’s Last Exam, but for humans: the Prize Fellowship Exam for All Souls. There isn’t enough space here to describe how weird and intense an experience it was. You sit a number of papers, typically two ‘general’ papers, two ‘specialist’ papers and an essay. The general papers have questions on just about everything. Here are three actual questions from <a href="https://www.asc.ox.ac.uk/past-examination-papers">this year’s general paper</a>:</p>
+<ul>
+<li>Invent a new punctuation mark!</li>
+<li>Does a pope matter?</li>
+<li>The organ has been considered the ‘king of instruments’. Is it?</li>
+</ul>
+<p>Then you get to choose your specialist papers – from seven disciplines (classics, economics, English literature, history, law, philosophy and politics). I picked a law paper, which was unsurprising considering I did that as an undergraduate subject, and a classics paper.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> I guess I must have done pretty okay, because of the hundred or so applicants that year (you had to generally get a top 1st in your undergraduate degree to even apply), I was fortunate enough to be in the final five invited for a <em>viva</em>, the last stage of the process. Which I bombed spectacularly enough that I wasn’t offered a fellowship, but that’s a story for another day.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;My sincere apologies to the examiners for having to endure my Latin translation. I am not a classicist by training to begin with, but I am a special kind of bad at Latin in particular.</p></div><div id="fn4"><p><sup>4</sup>&nbsp;It took a lot of time and growth for me to learn to appreciate the value of depth. I remain incredibly curious and, in long retrospect, grateful for the experience – but also very aware that my depth is what makes my breadth work. Not winning a Prize Fellowship might have been one of my career-defining blessings in disguise – something that forced me to find a productive synthesis between a mind interested in just about everything and the needs of this world for professionals who can deliver focus, profound expertise and real-world impact. I am just so incredibly fortunate to have ultimately found a way to make this difficult balance work for me.</p></div></div><p>I mention this because with the benefit of hindsight, I see a lot of similarities between the Prize and the current SOTA mindset, mostly in its shortcomings. The Prize Fellowship Exam is the epitome of the modern ‘HLE-style’ SOTA eval: it identifies a small number of dazzling generalists, not necessarily those people who truly end up changing the world through commitment, depth and focus on their specific domain.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> But whatever we think of the value of that kind of modern day Renaissance person, it certainly isn’t what we need from our AI agents. What we need are models that excel in specific domains, for specific tasks, under specific constraints. Agents, unlike people, are interchangeable. We don’t need polymaths – we need specialist team players who can harness emergence for complexity.</p>
+<p>In the end, context isn’t an epiphenomenon – it’s what gives meaning to the abstractions of performance. Context is what turns that abstract brilliance into concrete, real-world impact. And with tools like YourBench, we’re finally seeing the era of SOYA – where users finally get the choice they deserve as to what matters to them, and what good means for their use case.</p>
+<p>So the next time someone breathlessly announces they’ve achieved new SOTA results, ask yourself: state of what art? For whom? Under what conditions?</p>
+<p>Because in the end, <strong>the only art that matters is yours</strong>.</p>
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
   author = {{Chris von Csefalvay}},
-  title = {Deja {Vu,} {All} {Over} {Again.}},
-  date = {2025-01-16},
-  url = {https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/},
+  title = {SOYA - the Only Benchmark That Matters},
+  date = {2025-10-19},
+  url = {https://chrisvoncsefalvay.com/posts/soya/},
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2025. <span>“Deja Vu, All Over Again.”</span> <a href="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/">https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</a>.
+Chris von Csefalvay. 2025. <span>“SOYA - the Only Benchmark That
+Matters.”</span> October 19, 2025. <a href="https://chrisvoncsefalvay.com/posts/soya/">https://chrisvoncsefalvay.com/posts/soya/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
