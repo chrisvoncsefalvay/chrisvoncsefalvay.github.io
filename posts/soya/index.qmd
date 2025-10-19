@@ -1,0 +1,116 @@
+---
+categories:
+- LLMs
+- AI
+- evals
+citation: true
+date: 2025-10-19
+description: "All benchmarks are wrong -- and if you want some that are useful, you might need to build your own."
+google-scholar: true
+title: SOYA - the only benchmark that matters
+---
+
+In 1790, the French Academy of Sciences commissioned a rather ambitious survey. The goal was to measure the distance from the North Pole to the Equator along the meridian passing through Paris, then use that measurement to define a new universal unit of length: the metre. The idea was simple enough: let's create a standard so objective, so rooted in natural law, that every nation would adopt it. One ten-millionth of the distance from pole to equator. Perfect. Universal. The platonic ideal of measurement.
+
+There was just one problem. The measurement was wrong. Not catastrophically wrong, mind you, but wrong enough that when better instruments came along, we discovered the original metre was about 0.2mm off. By then, however, the French had made rather a lot of metre sticks, and redoing them all seemed like rather more trouble than it was worth.^[Also, this was basically on the heels of the French Revolution. You can disagree about weights and measures, but you're much less likely to want to do so vis-a-vis a government that has just discovered its love of the guillotine.] So we kept the stick and quietly forgot about the pole-to-equator business. The metre became defined not by nature's grand design, but by a specific physical artefact in a vault in Sevres. Later, we'd define it by the speed of light, which at least has the virtue of being constant, even if it's rather less poetic than the original vision.
+
+I'm reminded of the story of the metre because it nicely illustrates a key point about benchmarks: all benchmarks are wrong. They are simplifications, abstractions, approximations of reality. They can be useful, but they can never capture the full complexity of the systems they aim to measure. And that's okay if all you need to resolve is the coordination problem of "how long is this thing?" -- but it doesn't say anything beyond the relative ratio between what you're looking at and that specific standard. Least of all does it reveal anything meaningful about the underlying object.
+
+## The benchmark-industrial complex
+
+We have built an entire industry around the idea that there exists some universal measure of language model capability, some objective standard against which all models can be compared. MMLU, GSM8K, HumanEval, HellaSwag – the list grows longer every month, each benchmark claiming to capture some essential truth about model performance. Companies trumpet their SOTA results. Researchers optimise specifically for these benchmarks. VCs make investment decisions based on leaderboard positions. And on and on it goes in a self-reinforcing cycle.
+
+And just like the original metre, these benchmarks are increasingly recognised as both arbitrary and, well, wrong.
+
+The rot has been apparent for a while now. Traditional static benchmarks suffer from saturation, as models quickly reach performance ceilings, and contamination, where test data leaks into training sets, inflating scores. When GPT-4 can score 86.4% on MMLU, and the next model scores 87.2%, are we measuring genuine improvement or noise? When models are trained on datasets that may contain variations of the test questions, are we measuring capability or memorisation?
+
+There's a deeper problem here, though. LLMs can be used for a shocking range of tasks, from generating code to clicking the right button on your GUI. Benchmarks necessarily have a value judgment inherent in their task set -- and that includes massive multi-task sets like MMLU or agentic multi-objective evals like GAIA or $\tau$-bench. No choice, too, is a kind of choice: when we use a benchmark smorgasboard of tasks or domain questions, we are implicitly setting the expectation of a Renaissance model that can do everything somewhat well. Simply put -- there's no such thing as an agnostic, universal eval.
+
+
+## SOYA: your benchmark, your way
+
+Earlier this year, Huggingface released YourBench, a framework that addresses these limitations by enabling dynamic, automated generation of reliable, up-to-date and domain-tailored benchmarks directly from user-provided documents.^[Shashidhar, S., Fourrier, C., Lozovskia, A., Wolf, T., Tur, G., & Hakkani-Tür, D. (2025). [YourBench: Easy custom evaluation sets for everyone.](https://arxiv.org/abs/2504.01833) _arXiv preprint_, arXiv:2504.01833.] There's a beautiful symmetry here -- just as we're reaching the level of specialisation of language models that necessitates task-specific evals, we also are starting to have the tools that can provide this on a budget and at scale. 
+
+The real significance of YourBench isn't just that it's incredibly convenient and technically impressive. It is the end of SOTA, and the rise of what I call SOYA: the State of Your Art.
+
+The insight is deceptively simple. Instead of asking "which model is best?", we should be asking "which model is best at the specific things I actually need it to do, with the specific data and constraints I actually have?" The universal benchmark is revealed as the emperor with no clothes. What matters isn't whether Claude beats GPT-5 on MMLU – it's whether the model can handle your internal documentation, understand your domain terminology, and operate within your latency and cost constraints.
+
+This shift from SOTA to SOYA isn't just semantic cleverness. It's a fundamental reimagining of how we think about model selection and evaluation. Tools like YourBench have transformed custom evals from a luxury reserved to major labs to something you can run for the price of a Happy Meal. 
+
+::: {.column-margin}
+***
+
+**Recipe:** Shakshuka
+
+* 1 tin decent chopped tomatoes
+* 1 onion, diced
+* 3 cloves garlic
+* 1 red pepper, diced
+* 1 tsp smoked paprika
+* 1 tsp cumin
+* 1/2 tsp cayenne pepper
+* 4-6 eggs
+* Crumbled feta
+* Some fresh coriander, to taste
+
+Sauté the onion until soft, add the garlic and spices. Adding the tomatoes and peppers, simmer until thick (20 minutes). Make wells, crack eggs into them. Cover and cook until eggs are just set. Top with feta and coriander. Serve with good bread.
+
+***
+
+:::
+
+### The democratisation of evals
+
+The key implication, then, is that it is now at least in theory open to everyone to determine what their State of the Art is. This opens the door to much more meaningful evals. In the regulated pharmaceuticals and medtech industries, where I spend pretty much all my working life, a 0.3% incremental improvement in model performance is less relevant than what that 0.3% actually _is_. There's an incommensurability of performance aspects here. I don't care how much better your model is at solving Math Olympiad questions if it can't determine whether something is a life-threatening adverse event or a mere nuisance. Generic benchmarks don't help me. SOYA benchmarks might.
+
+The offshoot, of course, is that these evals map much better to actual business needs and actual data. The downside? They require an understanding of how to build a good eval. YourBench is brilliant, but it's a tool for building evals, not for building _good_ evals per se. It puts evals that were previously the preserve of well-funded labs into the hands of anyone with a credit card and a bit of time. But it's up to the end user to make sure this doesn't turn into giving toddlers a set of car keys and a bottle of bourbon.
+
+## The SOYA mindset in practice
+
+SOYA, then, is really primarily a mindset -- one that requires us to first and foremost let go of some comfortable illusions. It means accepting that there is no "best model" in the abstract, only models that are better or worse for specific purposes. It means doing the hard work of articulating what you actually need from a model, rather than defaulting to whatever topped the latest leaderboard.
+When I talk to my clients about building an approach to evals, I typically want to explore the dimensions of model use -- that is, their 'definition of good':
+
+1. What are the three most common tasks this model will perform?
+2. What does failure look like for each of these tasks, and what are the consequences?
+3. What does your actual data look like, and how does it differ from the training distributions these models saw?
+4. What are your constraints on latency, cost and compute?
+5. What does "good enough" look like for your use case?
+
+Only after we've answered these questions do we start looking at models. And increasingly, the answer isn't "use the SOTA model" but rather "use this smaller, specialised model that excels at your specific task, or this model that's good enough but 10x cheaper, or this ensemble of models that handles your specific data distribution better".
+
+## Some inconvenient truths
+
+Let me be clear about what SOYA doesn't mean. It doesn't mean anything goes. It doesn't mean evaluation is purely subjective. It doesn't mean we abandon rigour. What it does mean, however, is acknowledging some uncomfortable truths:
+
+1. Generic benchmarks capture something, but that something may not correlate with your specific needs. The more specialised those needs are (i.e. the further they are from simple agent driving and chat interactions), the less likely generic benchmarks are to be relevant.
+2. The "best" model for one use case may be catastrophically wrong for another. Context matters.
+3. Optimising for SOTA performance often means whatever you're getting has been optimised for something other than your use case.
+4. Custom evaluation requires thought and effort, but that effort is increasingly cheap enough to be worth it. Thought, on the other hand, remains expensive. Bad evals give bad results. 
+
+And that's really the crux of it all: the choice for users is between accepting convenient, universal, cheap and wrong benchmarks, or investing a bit more time and effort into building evals that actually reflect their needs. 
+
+## How not to suck
+
+SOYA, if correctly used, can be a solution to the problem of generic evals that suffer from the same flaw as generic models: they try to be everything to everyone, and end up being mediocre at best for any specific purpose. But SOYA can also be misused. A poorly constructed custom eval can be worse than a generic benchmark, giving a false sense of security or leading to misguided model choices. And at this point, eval engineering as a discipline is sorely lacking. Even relatively sophisticated enterprise users have few specialists who really understand how to build good evals.
+
+One solution for this is the emergence of evals-as-a-service (EaaS) providers. But evals aren't a technological exercise only -- they require an understanding of the factors I mentioned above that characterise what success, or a good model, is for the particular client. SOYA is the Savile Row of AI: bespoke, tailored, and requiring expert craftsmanship. You can't just pick it off the rack.
+
+The benchmark-industrial complex will be fine -- there's already talk about making models more 'realistic'. This is generally a category error -- benchmarks cannot be 'realistic' to all respects. What they can be is relevant. And relevance is in the eye of the beholder. No single benchmark can capture the specific requirements of pharmaceutical adverse event extraction, contract analysis and marketing copywriting simultaneously. The solution is to accept that benchmarks must be premised on 'what good is', not on a fool's errand of bundling an ever growing list of tasks into a single eval suite.
+
+## Epilogue
+
+A year or so after graduating from Oxford, I was invited to sit for what was rather widely considered the time's equivalent of Humanity's Last Exam, but for humans: the Prize Fellowship Exam for All Souls. There isn't enough space here to describe how weird and intense an experience it was. You sit a number of papers, typically two 'general' papers, two 'specialist' papers and an essay. The general papers have questions on just about everything. Here are three actual questions from [this year's general paper](https://www.asc.ox.ac.uk/past-examination-papers):
+
+* Invent a new punctuation mark! 
+* Does a pope matter?
+* The organ has been considered the 'king of instruments'. Is it?
+
+Then you get to choose your specialist papers -- from seven disciplines (classics, economics, English literature, history, law, philosophy and politics). I picked a law paper, which was unsurprising considering I did that as an undergraduate subject, and a classics paper.^[My sincere apologies to the examiners for having to endure my Latin translation. I am not a classicist by training to begin with, but I am a special kind of bad at Latin in particular.] I guess I must have done pretty okay, because of the hundred or so applicants that year (you had to generally get a top 1st in your undergraduate degree to even apply), I was fortunate enough to be in the final five invited for a _viva_, the last stage of the process. Which I bombed spectacularly enough that I wasn't offered a fellowship, but that's a story for another day.
+
+I mention this because with the benefit of hindsight, I see a lot of similarities between the Prize and the current SOTA mindset, mostly in its shortcomings. The Prize Fellowship Exam is the epitome of the modern 'HLE-style' SOTA eval: it identifies a small number of dazzling generalists, not necessarily those people who truly end up changing the world through commitment, depth and focus on their specific domain.^[It took a lot of time and growth for me to learn to appreciate the value of depth. I remain incredibly curious and, in long retrospect, grateful for the experience -- but also very aware that my depth is what makes my breadth work. Not winning a Prize Fellowship might have been one of my career-defining blessings in disguise -- something that forced me to find a productive synthesis between a mind interested in just about everything and the needs of this world for professionals who can deliver focus, profound expertise and real-world impact. I am just so incredibly fortunate to have ultimately found a way to make this difficult balance work for me.] But whatever we think of the value of that kind of modern day Renaissance person, it certainly isn't what we need from our AI agents. What we need are models that excel in specific domains, for specific tasks, under specific constraints. Agents, unlike people, are interchangeable. We don't need polymaths -- we need specialist team players who can harness emergence for complexity.
+
+In the end, context isn't an epiphenomenon -- it's what gives meaning to the abstractions of performance. Context is what turns that abstract brilliance into concrete, real-world impact. And with tools like YourBench, we're finally seeing the era of SOYA -- where users finally get the choice they deserve as to what matters to them, and what good means for their use case. 
+
+So the next time someone breathlessly announces they've achieved new SOTA results, ask yourself: state of what art? For whom? Under what conditions?
+
+Because in the end, **the only art that matters is yours**.
