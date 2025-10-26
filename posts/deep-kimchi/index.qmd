@@ -1,0 +1,148 @@
+---
+categories:
+- LLMs
+- AI
+- agentic AI
+- evolution
+citation: true
+date: 2025-10-25
+description: You're probably doing agentic AI wrong, and I wish this were clickbait. Here's why agentic AI is in deep kimchi, and how to get out of it.
+google-scholar: true
+title: Deep kimchi
+---
+
+This is about the time of year when I get the sudden and irresistible urge to make kimchi. Kimchi -- and fermentation in general -- is one of those things I wonder if we're somewhat genetically predisposed to figure out as a species,^[Beyond, of course, the fact that we have glutamate-sensitive receptors in our taste buds that let us taste, and enjoy, umami. [Uncle Roger](https://youtube.com/mrnigelng) does have a point.] considering most major cultures in the right climates have independently discovered what is a fairly cool optimisation -- finding something that converts sugar into lactic acid, but which is also insanely halotolerant (capable of enduring high salt concentrations) and therefore can create a little evolutionary niche in one's own fridge muscling out other possibly pathogenic microorganisms.^[If you do it correctly. Fermentation is not for the faint of heart. There are real risks, up to and including getting very dead from botulism.] Anyway, about a ton of napa cabbage in, waiting for my immunoassays to finish (because in this household, we do science properly, so we do fluorescence immunoassays for pathogens, because botulism is not cool), my brain wandered off to agentic AI.
+
+The thing is, I've been somewhat concerned about the way the agentic AI discourse has been going. We're headed for deep kimchi, and I'm afraid the main reason for that is, ironically enough, that most agentic AI out there, well, isn't.
+
+
+## Semantic (mis)handles
+
+Part of the problem is, of course, the way we think about agents -- and insofar as I [might be among those to blame for giving rise to the term in its modern sense](../team-of-rivals/index.qmd),^[Can't take the credit without also taking the blame -- though I'd rather neither. As I point out every time, the agentic idea has been around much longer. While my description of agentic AI was among the first in its modern sense, I don't think it was _the_ first. In a life lived with extremely few regrets, my use of the 'a-word' is one of the things I wish I could undo. It has so far only caused semantic confusion _and_, quite possibly, real human harm.] I guess I'll have to shoulder some responsibility for the confusion it engenders. For if one conceives of it in the way we use the word in colloquial language, an agent is, of course, typically a person. This has led to the metaphor of agents as tiny people in your computer who do things to be taken rather more seriously. And with that, we started resorting to conventional operating models we use with people: org charts, arrows of delegated responsibility and all that. 
+
+Nobody makes kimchi by instructing individual lactobacilli. You cannot sit there with a tiny megaphone directing bacterial populations. For millennia, civilisations that came up with their lactobacillus fermented foods have figured out how to do it instead: you salt the cabbage, add spices, control temperature and let the rest take care of itself. 
+
+We understand this intuitively for fermentation. For cities. For ecosystems. For markets. We know that complex systems require systems-level thinking, not component-level micromanagement. And yet somehow, when we talk about agentic AI, we abandon this wisdom entirely and write things like "the challenge of orchestrating thousands of agents" on LinkedIn. 
+
+The language of "agents" has misled us through anthropomorphism. We hear "agent" and think of something human -- and therefore, rightly, something focal, unique, irreplaceable: an employee, a character in a story, the protagonist of our narrative. We instinctively think about agents the way we think about people -- as discrete, meaningful entities whose individual actions matter.
+
+But agents in mature agentic systems aren't people. They're processes on some server in Ashburn or Ohio or wherever your cloud provider lives. They neither require nor warrant the kind of individuated respect we afford to humans _qua_ humans.
+
+
+## The domain of control
+
+For two years now, we've defined agentic AI in terms of what agents are or can do. These are the mantras you hear repeated in agentic discourse _ad infinitum_: autonomy, goal-directedness, tool use. All agent-level properties, all true (sort of), and yet they describe at best what kind of thing can be an agent -- not what agentic AI is, or can be.
+
+If you can sketch your "agentic AI system" with a few boxes and arrows on a whiteboard, what you've built is glorified RPA with LLMs. You've automated some tasks, chained some API calls, added probabilistic text generation -- useful work, but no more agentic AI than a handful of manually-tuned perceptrons is deep learning. While this is a good way to illustrate what agentic AI might look like zoomed in, it is little more than a metaphor.
+
+:::{.column-margin}
+We can formalise an agentic AI system as a dynamic directed graph $$G_F(t) = (V(t), E(t))$$ associated with a fitness function $f: G(t, F) \rightarrow \mathbb{R}$, where
+
+* $V$ is the set of agents (vertices);
+* $E$ is the set of directed edges (agent interactions); and
+* $F$ characterises the fitness landscape constraints, i.e. the functions and constraints that define the environment.
+
+The system evolves to maximise $f$ subject to constraints imposed by $F$ (which may associate various costs with various conformations of $G_F$). The structure $G_F(t)$ -- both topology and population -- emerges from this optimisation process rather than being specified a priori.
+:::
+
+The key properties of agentic AI lie in the system, not the agents themselves. If we are to attempt a definition, an agentic AI system is best defined by what I call the 3+2 model -- the three key autonomies and two key constraints.
+
+:::{.callout-note}
+## Connective autonomy
+
+Agents can discover and form connections with other agents dynamically. The graph of agent interactions is not designed, but evolves and changes to adapt the system's goal.
+:::
+
+:::{.callout-note}
+## Task and tool autonomy
+
+Agents can access and utilise tools and resources based on need rather than pre-specification. They explore their operational possibility space rather than following predetermined paths.
+:::
+
+:::{.callout-note}
+## Genetic autonomy
+
+Genetic autonomy: Agents can spawn new agents and determine their characteristics, adapting to selection pressure.
+:::
+
+The reason why we need to define these autonomies is because they in turn reveal what our controls are -- the constraints we can impose to shape system behaviour.
+
+
+:::{.callout-note}
+## Goal constraint
+
+The goal constraint is the fitness landscape that defines success -- not a detailed specification of _how_ to achieve the system level goal but a definition of what constitutes achievement.
+:::
+
+:::{.callout-note}
+## Environment constraint
+
+The environment constraint encompasses resource limitations, communication costs, metabolic expenses and interaction protocols that create, communicate and moderate selection pressure on agent behaviours.
+:::
+
+Together, these five elements - three autonomies and two constraints - define an agentic AI system. And here's the crucial insight: we should leave the autonomies alone and focus our design attention on the constraints.
+
+The anthropomorphic language of "agents" obscures this. When we think of agents as workers or colleagues, we naturally want to define their roles, specify their responsibilities, coordinate their interactions. We want to draw the org chart. But bacteria don't have org charts. Neurons don't have job descriptions. And mature agentic systems won't have workflow diagrams.
+ 
+## Where current thinking fails
+
+The current wave of "agentic AI" largely looks like an LLM plus some hand-wired agents plus an orchestration layer that routes tasks between them. It's deterministic workflow automation with probabilistic text generation at the nodes. This is the worst of both worlds -- the LLM's stochasticity breaks the determinism of traditional RPA, but the system gains none of the adaptive benefits that would justify that unpredictability.
+
+In systems-level terms: you've eliminated connective autonomy by hard-coding $E(t)$, genetic autonomy by fixing $V(t)$, and effectively reduced the ability of the system to optimise for any goal-derived fitness function zero. 
+
+This is, of course, by no means novel. When Marvin Minsky and Seymour Papert published _Perceptrons_ in 1969, claiming XOR was uncomputable by single-layer networks,^[Which was true but irrelevant. We've known MLPs quite well at the time. Yet it was widely misinterpreted and by the time anyone noticed, we were deep into the winter of neural network research.] just about everything slowed to a crawl until the field was revived in 1986 by the work of Rumelhart, Hinton and Williams on backpropagation. What is crucial is that Hinton, LeCun and the rest of the backpropagandists didn't go out to make better neurons. They simply realised how much more can be gotten out of simple neurons, simple maths and a systems perspective. They optimised the system, not the components. And therein lies the magic.
+
+
+## The power of constraints
+
+What would it mean to design agentic AI systems through constraints rather than specifications?
+
+::: {.grid}
+
+::: {.g-col-6}
+**Goal constraint design**
+
+We specify system-level objectives, i.e. $f$, for $G_F(t)$, to optimise against. How the system accomplishes this is left to the autnonomies.
+:::
+
+::: {.g-col-6}
+**Environment constraint design**
+
+We condition $G_F$ by the fitness landscape $F$ by defining resource limitations, communication costs, metabolic expenses and interaction protocols that create selection pressure on agent behaviours.
+
+:::
+
+:::
+
+:::{.column-margin}
+**Recipe:** Napa cabbage kimchi
+_(vaguely Noma-inspired)_
+
+* 1kg napa cabbage, cut into bite-sized pieces
+* 60g sea salt
+* 2 tbsp nước chấm
+* 2 tbsp gochugaru
+* 3 cloves garlic, minced
+* 20g fresh ginger, grated
+* 2 spring onions, sliced
+* 1 tsp raw honey
+
+Salt the cabbage thoroughly. Let rest 2-3 hours. Rinse and squeeze dry. Mix remaining ingredients into a paste (wear gloves -- nước chấm will make your hands stink to high heaven), massage into cabbage. Pack tightly into jar, leaving 2-3 cm headspace, and ferment at room temperature for 3-5 days, releasing pressure daily. Refrigerate once it reaches your desired tanginess.
+:::
+
+Jointly, these constraints create selection pressure that guides evolution without dictating outcomes. Consider what this enables: A system facing a new class of problems might spawn specialist agents efficient for that problem type. These specialists persist if they provide value, disappear if they don't. Agents discover collaboration patterns that prove fruitful and strengthen those connections, and the system evolves toward metabolic efficiency without any explicit optimisation.
+
+This is the power of evolutionary speciation over specification: species emerge from evolutionary pressure, rather than being designed explicitly, as does their conduct and interactions. The 'agents', just like the bacterial species in a jar of kimchi, explore the solution space defined by the constraints, and the population structure adapts not to what someone defines but to what the environment at the time demands.
+
+
+## How to rescue agentic AI
+
+We're in deep kimchi -- but we don't have to be. AI had to endure a decade-and-half winter before being resuscitated in 1986. We may be fortunate enough to avoid it this time around -- but we won't get there by better workflow diagrams. We'll get there through the system perspective, just as it was the system perspective that saved neural networks.
+
+The autonomies -- connective, task, genetic -- define what mature agentic systems are capable of. But realising that capability requires shifting our design attention from the autonomies to the constraints, and learn how to stop micromanaging and instead govern the system through conditioning its fitness landscape (in short: [biome engineering](../biome-engineering/index.qmd)).
+
+If you're still drawing boxes and arrows, still thinking about "my code agent talking to my research agent", still trying to orchestrate individual interactions -- you're hand-coding what should be left to evolution. The anthropomorphic language of "agents" has been useful for explaining these systems to non-technical audiences, but we have outgrown it -- it is now actively hindering our ability to design them properly. Agents aren't little employees inside the machine or characters of a story. But their collectivities can give rise to the same kind of emergent behaviour that lets a stack of trivial computations self-organise into ChatGPT, AlphaFold or whatever fresh hell Sora is doing right now.
+
+Agentic AI isn't doomed -- but micromanagement of agents doesn't scale, and that imposes an upper bound. We have kimchi and sauerkraut and pickles because the civilisations that came up with them were unencumbered by software architects and Microsoft Visio. They just designed the brine, set the temperature and let nature take its course. We should probably learn from that.
+
+Stop trying to direct the bacteria. Start designing the brine.
