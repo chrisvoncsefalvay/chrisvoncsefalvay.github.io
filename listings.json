@@ -2,6 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/deep-kimchi/index.html",
       "/posts/soya/index.html",
       "/posts/biome-engineering/index.html",
       "/posts/choral-ai/index.html",
@@ -46,17 +47,17 @@
     ]
   },
   {
-    "listing": "/talks/index.html",
-    "items": [
-      "/talks/prometheus-unbound/index.html"
-    ]
-  },
-  {
     "listing": "/media/index.html",
     "items": [
       "/media/tech-for-good/index.html",
       "/media/fr-disinfectants/index.html",
       "/media/euronews-covid/index.html"
+    ]
+  },
+  {
+    "listing": "/talks/index.html",
+    "items": [
+      "/talks/prometheus-unbound/index.html"
     ]
   }
 ]

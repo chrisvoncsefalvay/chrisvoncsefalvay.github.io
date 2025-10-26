@@ -10,7 +10,175 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Sun, 19 Oct 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 25 Oct 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Deep kimchi</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/deep-kimchi/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is about the time of year when I get the sudden and irresistible urge to make kimchi. Kimchi – and fermentation in general – is one of those things I wonder if we’re somewhat genetically predisposed to figure out as a species,<sup>1</sup> considering most major cultures in the right climates have independently discovered what is a fairly cool optimisation – finding something that converts sugar into lactic acid, but which is also insanely halotolerant (capable of enduring high salt concentrations) and therefore can create a little evolutionary niche in one’s own fridge muscling out other possibly pathogenic microorganisms.<sup>2</sup> Anyway, about a ton of napa cabbage in, waiting for my immunoassays to finish (because in this household, we do science properly, so we do fluorescence immunoassays for pathogens, because botulism is not cool), my brain wandered off to agentic AI.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Beyond, of course, the fact that we have glutamate-sensitive receptors in our taste buds that let us taste, and enjoy, umami. <a href="https://youtube.com/mrnigelng">Uncle Roger</a> does have a point.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;If you do it correctly. Fermentation is not for the faint of heart. There are real risks, up to and including getting very dead from botulism.</p></div></div><p>The thing is, I’ve been somewhat concerned about the way the agentic AI discourse has been going. We’re headed for deep kimchi, and I’m afraid the main reason for that is, ironically enough, that most agentic AI out there, well, isn’t.</p>
+<section id="semantic-mishandles" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="semantic-mishandles">Semantic (mis)handles</h2>
+<p>Part of the problem is, of course, the way we think about agents – and insofar as I <a href="../../posts/team-of-rivals/index.html">might be among those to blame for giving rise to the term in its modern sense</a>,<sup>3</sup> I guess I’ll have to shoulder some responsibility for the confusion it engenders. For if one conceives of it in the way we use the word in colloquial language, an agent is, of course, typically a person. This has led to the metaphor of agents as tiny people in your computer who do things to be taken rather more seriously. And with that, we started resorting to conventional operating models we use with people: org charts, arrows of delegated responsibility and all that.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Can’t take the credit without also taking the blame – though I’d rather neither. As I point out every time, the agentic idea has been around much longer. While my description of agentic AI was among the first in its modern sense, I don’t think it was <em>the</em> first. In a life lived with extremely few regrets, my use of the ‘a-word’ is one of the things I wish I could undo. It has so far only caused semantic confusion <em>and</em>, quite possibly, real human harm.</p></div></div><p>Nobody makes kimchi by instructing individual lactobacilli. You cannot sit there with a tiny megaphone directing bacterial populations. For millennia, civilisations that came up with their lactobacillus fermented foods have figured out how to do it instead: you salt the cabbage, add spices, control temperature and let the rest take care of itself.</p>
+<p>We understand this intuitively for fermentation. For cities. For ecosystems. For markets. We know that complex systems require systems-level thinking, not component-level micromanagement. And yet somehow, when we talk about agentic AI, we abandon this wisdom entirely and write things like “the challenge of orchestrating thousands of agents” on LinkedIn.</p>
+<p>The language of “agents” has misled us through anthropomorphism. We hear “agent” and think of something human – and therefore, rightly, something focal, unique, irreplaceable: an employee, a character in a story, the protagonist of our narrative. We instinctively think about agents the way we think about people – as discrete, meaningful entities whose individual actions matter.</p>
+<p>But agents in mature agentic systems aren’t people. They’re processes on some server in Ashburn or Ohio or wherever your cloud provider lives. They neither require nor warrant the kind of individuated respect we afford to humans <em>qua</em> humans.</p>
+</section>
+<section id="the-domain-of-control" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-domain-of-control">The domain of control</h2>
+<p>For two years now, we’ve defined agentic AI in terms of what agents are or can do. These are the mantras you hear repeated in agentic discourse <em>ad infinitum</em>: autonomy, goal-directedness, tool use. All agent-level properties, all true (sort of), and yet they describe at best what kind of thing can be an agent – not what agentic AI is, or can be.</p>
+<p>If you can sketch your “agentic AI system” with a few boxes and arrows on a whiteboard, what you’ve built is glorified RPA with LLMs. You’ve automated some tasks, chained some API calls, added probabilistic text generation – useful work, but no more agentic AI than a handful of manually-tuned perceptrons is deep learning. While this is a good way to illustrate what agentic AI might look like zoomed in, it is little more than a metaphor.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>We can formalise an agentic AI system as a dynamic directed graph <img src="https://latex.codecogs.com/png.latex?G_F(t)%20=%20(V(t),%20E(t))"> associated with a fitness function <img src="https://latex.codecogs.com/png.latex?f:%20G(t,%20F)%20%5Crightarrow%20%5Cmathbb%7BR%7D">, where</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?V"> is the set of agents (vertices);</li>
+<li><img src="https://latex.codecogs.com/png.latex?E"> is the set of directed edges (agent interactions); and</li>
+<li><img src="https://latex.codecogs.com/png.latex?F"> characterises the fitness landscape constraints, i.e.&nbsp;the functions and constraints that define the environment.</li>
+</ul>
+<p>The system evolves to maximise <img src="https://latex.codecogs.com/png.latex?f"> subject to constraints imposed by <img src="https://latex.codecogs.com/png.latex?F"> (which may associate various costs with various conformations of <img src="https://latex.codecogs.com/png.latex?G_F">). The structure <img src="https://latex.codecogs.com/png.latex?G_F(t)"> – both topology and population – emerges from this optimisation process rather than being specified a priori.</p>
+</div></div><p>The key properties of agentic AI lie in the system, not the agents themselves. If we are to attempt a definition, an agentic AI system is best defined by what I call the 3+2 model – the three key autonomies and two key constraints.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Connective autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agents can discover and form connections with other agents dynamically. The graph of agent interactions is not designed, but evolves and changes to adapt the system’s goal.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Task and tool autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agents can access and utilise tools and resources based on need rather than pre-specification. They explore their operational possibility space rather than following predetermined paths.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Genetic autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Genetic autonomy: Agents can spawn new agents and determine their characteristics, adapting to selection pressure.</p>
+</div>
+</div>
+<p>The reason why we need to define these autonomies is because they in turn reveal what our controls are – the constraints we can impose to shape system behaviour.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Goal constraint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The goal constraint is the fitness landscape that defines success – not a detailed specification of <em>how</em> to achieve the system level goal but a definition of what constitutes achievement.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Environment constraint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The environment constraint encompasses resource limitations, communication costs, metabolic expenses and interaction protocols that create, communicate and moderate selection pressure on agent behaviours.</p>
+</div>
+</div>
+<p>Together, these five elements - three autonomies and two constraints - define an agentic AI system. And here’s the crucial insight: we should leave the autonomies alone and focus our design attention on the constraints.</p>
+<p>The anthropomorphic language of “agents” obscures this. When we think of agents as workers or colleagues, we naturally want to define their roles, specify their responsibilities, coordinate their interactions. We want to draw the org chart. But bacteria don’t have org charts. Neurons don’t have job descriptions. And mature agentic systems won’t have workflow diagrams.</p>
+</section>
+<section id="where-current-thinking-fails" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="where-current-thinking-fails">Where current thinking fails</h2>
+<p>The current wave of “agentic AI” largely looks like an LLM plus some hand-wired agents plus an orchestration layer that routes tasks between them. It’s deterministic workflow automation with probabilistic text generation at the nodes. This is the worst of both worlds – the LLM’s stochasticity breaks the determinism of traditional RPA, but the system gains none of the adaptive benefits that would justify that unpredictability.</p>
+<p>In systems-level terms: you’ve eliminated connective autonomy by hard-coding <img src="https://latex.codecogs.com/png.latex?E(t)">, genetic autonomy by fixing <img src="https://latex.codecogs.com/png.latex?V(t)">, and effectively reduced the ability of the system to optimise for any goal-derived fitness function zero.</p>
+<p>This is, of course, by no means novel. When Marvin Minsky and Seymour Papert published <em>Perceptrons</em> in 1969, claiming XOR was uncomputable by single-layer networks,<sup>4</sup> just about everything slowed to a crawl until the field was revived in 1986 by the work of Rumelhart, Hinton and Williams on backpropagation. What is crucial is that Hinton, LeCun and the rest of the backpropagandists didn’t go out to make better neurons. They simply realised how much more can be gotten out of simple neurons, simple maths and a systems perspective. They optimised the system, not the components. And therein lies the magic.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Which was true but irrelevant. We’ve known MLPs quite well at the time. Yet it was widely misinterpreted and by the time anyone noticed, we were deep into the winter of neural network research.</p></div></div></section>
+<section id="the-power-of-constraints" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-power-of-constraints">The power of constraints</h2>
+<p>What would it mean to design agentic AI systems through constraints rather than specifications?</p>
+<div class="grid">
+<div class="g-col-6">
+<p><strong>Goal constraint design</strong></p>
+<p>We specify system-level objectives, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?f">, for <img src="https://latex.codecogs.com/png.latex?G_F(t)">, to optimise against. How the system accomplishes this is left to the autnonomies.</p>
+</div>
+<div class="g-col-6">
+<p><strong>Environment constraint design</strong></p>
+<p>We condition <img src="https://latex.codecogs.com/png.latex?G_F"> by the fitness landscape <img src="https://latex.codecogs.com/png.latex?F"> by defining resource limitations, communication costs, metabolic expenses and interaction protocols that create selection pressure on agent behaviours.</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Recipe:</strong> Napa cabbage kimchi <em>(vaguely Noma-inspired)</em></p>
+<ul>
+<li>1kg napa cabbage, cut into bite-sized pieces</li>
+<li>60g sea salt</li>
+<li>2 tbsp nước chấm</li>
+<li>2 tbsp gochugaru</li>
+<li>3 cloves garlic, minced</li>
+<li>20g fresh ginger, grated</li>
+<li>2 spring onions, sliced</li>
+<li>1 tsp raw honey</li>
+</ul>
+<p>Salt the cabbage thoroughly. Let rest 2-3 hours. Rinse and squeeze dry. Mix remaining ingredients into a paste (wear gloves – nước chấm will make your hands stink to high heaven), massage into cabbage. Pack tightly into jar, leaving 2-3 cm headspace, and ferment at room temperature for 3-5 days, releasing pressure daily. Refrigerate once it reaches your desired tanginess.</p>
+</div></div><p>Jointly, these constraints create selection pressure that guides evolution without dictating outcomes. Consider what this enables: A system facing a new class of problems might spawn specialist agents efficient for that problem type. These specialists persist if they provide value, disappear if they don’t. Agents discover collaboration patterns that prove fruitful and strengthen those connections, and the system evolves toward metabolic efficiency without any explicit optimisation.</p>
+<p>This is the power of evolutionary speciation over specification: species emerge from evolutionary pressure, rather than being designed explicitly, as does their conduct and interactions. The ‘agents’, just like the bacterial species in a jar of kimchi, explore the solution space defined by the constraints, and the population structure adapts not to what someone defines but to what the environment at the time demands.</p>
+</section>
+<section id="how-to-rescue-agentic-ai" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-rescue-agentic-ai">How to rescue agentic AI</h2>
+<p>We’re in deep kimchi – but we don’t have to be. AI had to endure a decade-and-half winter before being resuscitated in 1986. We may be fortunate enough to avoid it this time around – but we won’t get there by better workflow diagrams. We’ll get there through the system perspective, just as it was the system perspective that saved neural networks.</p>
+<p>The autonomies – connective, task, genetic – define what mature agentic systems are capable of. But realising that capability requires shifting our design attention from the autonomies to the constraints, and learn how to stop micromanaging and instead govern the system through conditioning its fitness landscape (in short: <a href="../../posts/biome-engineering/index.html">biome engineering</a>).</p>
+<p>If you’re still drawing boxes and arrows, still thinking about “my code agent talking to my research agent”, still trying to orchestrate individual interactions – you’re hand-coding what should be left to evolution. The anthropomorphic language of “agents” has been useful for explaining these systems to non-technical audiences, but we have outgrown it – it is now actively hindering our ability to design them properly. Agents aren’t little employees inside the machine or characters of a story. But their collectivities can give rise to the same kind of emergent behaviour that lets a stack of trivial computations self-organise into ChatGPT, AlphaFold or whatever fresh hell Sora is doing right now.</p>
+<p>Agentic AI isn’t doomed – but micromanagement of agents doesn’t scale, and that imposes an upper bound. We have kimchi and sauerkraut and pickles because the civilisations that came up with them were unencumbered by software architects and Microsoft Visio. They just designed the brine, set the temperature and let nature take its course. We should probably learn from that.</p>
+<p>Stop trying to direct the bacteria. Start designing the brine.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Deep Kimchi},
+  date = {2025-10-25},
+  url = {https://chrisvoncsefalvay.com/posts/deep-kimchi/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> October 25, 2025.
+<a href="https://chrisvoncsefalvay.com/posts/deep-kimchi/">https://chrisvoncsefalvay.com/posts/deep-kimchi/</a>.
+</div></div></section></div> ]]></description>
+  <category>LLMs</category>
+  <category>AI</category>
+  <category>agentic AI</category>
+  <category>evolution</category>
+  <guid>https://chrisvoncsefalvay.com/posts/deep-kimchi/</guid>
+  <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>SOYA - the only benchmark that matters</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -107,16 +275,17 @@
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
   author = {{Chris von Csefalvay}},
   title = {SOYA - the Only Benchmark That Matters},
   date = {2025-10-19},
   url = {https://chrisvoncsefalvay.com/posts/soya/},
+  doi = {10.59350/xqf22-csp59},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“SOYA - the Only Benchmark That
-Matters.”</span> October 19, 2025. <a href="https://chrisvoncsefalvay.com/posts/soya/">https://chrisvoncsefalvay.com/posts/soya/</a>.
+Matters.”</span> <a href="https://doi.org/10.59350/xqf22-csp59">https://doi.org/10.59350/xqf22-csp59</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -808,7 +977,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-18148"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-18148").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-92585"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-92585").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -906,7 +1075,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-41958"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41958").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-17972"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-17972").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -1753,77 +1922,6 @@ a Robot.”</span> <a href="https://doi.org/10.59350/r8k9q-zdm06">https://doi.or
   <guid>https://chrisvoncsefalvay.com/posts/ai-human-interaction/</guid>
   <pubDate>Tue, 12 Dec 2023 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/ai-human-interaction/cd091fdb-e9e7-49d9-9b11-2b1eb92e2f86.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Stochastic parrots, cap and gown edition</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/academic-generative-ai/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>It’s not every day that you find out you have climbed the exalted heights of another discipline. My work is pretty interdisciplinary, but it shocked me, too, that I’m apparently holding forth on neoliberalism and the epistemic question in African universities (<a href="https://archive.is/MgSAW">archive link</a>):</p>
-<div id="fig-scispace" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-scispace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://chrisvoncsefalvay.com/posts/academic-generative-ai/scispace.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scispace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Apparently, I’m commenting on neoliberalism in African universities.
-</figcaption>
-</figure>
-</div>
-<p>This, of course, came at some surprise to me, as I have never written anything on the topic. I have, however, written a lot about AI, and I have written a thing or two about Africa, so I guess it was only a matter of time before I was conflated with someone else. This time, the unwitting victim deprived of his credit was <a href="https://www.uj.ac.za/members/prof-amasa-philip-ndofirepi/">Prof.&nbsp;Amasa P. Ndofirepi</a>, who is an educational studies scholar at the University of Johannesburg. I have no idea how I ended up being credited with his work, but I’m sure it was an honest mistake.</p>
-<p>The problem is, with AI, mistakes compound. So if an unwitting student were to ask for a quick literature review of neoliberalism on the subject, they might get something like this from Scispace:</p>
-<blockquote class="blockquote">
-<p>The literature on the impact of neoliberalism on knowledge production and dissemination in African universities has been extensively explored by various authors. Qosimova Gulbahor, in her paper “Placing Knowledge at the Centre of an Alternative Public Good Imaginary of African Universities,” discusses the alternative public good mission of African universities and the need for them to apply their knowledge infrastructure to community development challenges. Chris von Csefalvay, in his paper “The Hegemonic Neoliberal Knowledges in the African University,” examines the pervasive presence of neoliberalism in African universities and explores the prospects and opportunities to unyoke the trapped knowledge processes. These authors, along with others, highlight concerns about the dominance of Western knowledge, the commodification of knowledge, and the need for African universities to prioritize socially-just knowledges that serve African priorities and challenges.</p>
-</blockquote>
-<p>I mean, that’s flattering, but I’d really rather be credited mostly for my own work. I’m sure Prof.&nbsp;Ndofirepi would agree.</p>
-<section id="why-i-care" class="level2">
-<h2 class="anchored" data-anchor-id="why-i-care">Why I care</h2>
-<p>This is, of course, not good for academia. We’ve generally been coasting from one crisis to another. We’ve got a replication crisis, there’s <a href="https://retractionwatch.com/2020/09/30/author-says-misguided-efforts-for-the-ideal-western-blot-led-to-the-withdrawal-of-these-studies/">enough dodgy Western Blots to blot out the sun</a>, we’ve got the <a href="https://www.statnews.com/2023/07/19/marc-tessier-lavigne-stanford-president-resignation/">Tessier-Lavigne mess</a>, and that’s just what I can think of off the top of my head before my first coffee. A predatory publishing industry doesn’t help this at all. We need another crisis on top of this like we need a hole in the head, and yet, here we are.</p>
-<p>Now, as far as I’m aware, no serious academic is actually using these tools to do their research. On the other hand, non-academics <em>are</em>. For journalists, in particular, such tools are a godsend – literature reviews are annoying, and if you can get a computer to do it for you, why not? The problem is, of course, that you’re supposed to double-check this stuff and, well, journalists are known for many things, but double-checking stuff properly isn’t really one of them.</p>
-<p>And so, after months of academics fretting about ChatGPT eating their lunch, we’re confronted with the actual problem. AI is not better at producing decent science, but it is vastly faster and more efficient at producing <em>bad</em> science.</p>
-<p>Which we weren’t short on to begin with.</p>
-</section>
-<section id="whats-the-problem" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="whats-the-problem">What’s the problem?</h2>
-<p>Language is a tool that works on the basis of some conventions of meaning. Language models encapsulate these conventions, but they cannot encapsulate <em>all</em> of them – there are compromises to be made if a system with limited resources has to contend with nearly unlimited human imagination. When language models’ limits come to blows with domain-specific language, we get into trouble.</p>
-<p>Language models are really weak at one thing: reasoned judgment. As a scientist, you are trained to exercise this kind of reasoned judgment in determining what is, and what isn’t, worth considering as an authority. That’s why we make our master’s students (and hopefully most undergraduates) write literature reviews until the cows come home. It teaches them to develop that judgment, and also to know how to explore the fringes of their research question. I have looked at a few ‘academic AI’ tools that claim to be doing some of this, and they’re not very good at it. <a href="https://scite.ai">Scite</a> is so far one of the better ones, and the literature reviews it produces are still pretty bad: results are heavily weighted towards recent publications, towards the specific in preference to the foundational and often towards meandering misinterpretations of the research question as long as sources for that could be found, in preference to actually identifying a gap.</p>
-<p>To be quite fair towards these models, they have to deal with academic literature, which is an abundance of noise with a flicker of signal. There is, not to put too fine a point on it, a ton of crap out there, and it’s not always easy to tell the difference between the crap and the good stuff. That’s why we have peer review, and that’s why we have literature reviews. The problem is, of course, that these models are not trained on the literature, but on the internet. And the internet is a very different place from the academic literature indeed.</p>
-<p>Academic writing, especially domain specific writing, has a language of its own. It’s not fair to expect a language model trained on English to also master uses of English that might as well be a different language. To give a favourite example of mine: in magnetic resonance imaging of the brain, there’s often talk of something called ‘flow voids’. Now, normal human reasoning would interpret a ‘flow void’ to be the absence of flow, or something along those lines. In MRI, a flow void is actually the opposite: it is a ‘void’ of signal created in a vessel through which something (usually blood, sometimes CSF) flows.<sup>1</sup> This is a very specific term that has a very specific meaning in a very specific context. A language model, however, would not know that. It would assume that a ‘flow void’ is (de)void of flow.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Flow voids happen in the context of spin-echo imaging. These modalities involve two pulses – an excitation pulse and a refocusing pulse. Blood that moves perpendicular to the image plane will be hit by the excitation pulse but not the refocusing pulse. Therefore, it will not create a signal, which gives us the ‘void’ appearance of signal hypointense vessels.</p></div></div><p>Just about <em>all</em> of science is like that. We have a language of our own, and it’s not always easy to understand. What definitely doesn’t make it easier to work with, however, is when the source material is also wrong. Which is what we’re dealing with all too often, viz. Figure&nbsp;1.</p>
-</section>
-<section id="what-can-we-do-about-it" class="level2">
-<h2 class="anchored" data-anchor-id="what-can-we-do-about-it">What can we do about it?</h2>
-<p>Most ‘academic AI’ applications are riding on the crest of a wave of high expectations that surround everything AI-related right now. They offer to be useful aides-de-camp to beleaguered academics who have to contend with exponentially growing literature, but in reality fall far short of that promise. And the inherent ‘black box’ nature of such models means that it’s not always easy to tell when they’re wrong.</p>
-<p>At this point, perhaps the best we can do is to hold off on using generative AI tools for academic research until they’re better. We’re not there yet. We’re not even close. For highly domain specific applications, retrieval-augmented generation (RAG) approaches utilising a curated knowledge base of publications in that realm has proven to be a very useful approach indeed, but those are specialised tools that are at the present primarily in the purview of private industry. I’ve seen some great applications in this field, and I see this as another proof point for <a href="../team-of-rivals/">my assertion that the future belongs to ecosystems of small, specialised language models rather than one big model that does everything</a>.</p>
-<p>For the time being, we’re going to have to do things the old-fashioned way: reading the literature and writing our own reviews. I know, it’s not very fun. But it’s the only way to do it right, and we’ve managed with that for the last few hundred years. Giving it another few years won’t hurt.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2023,
-  author = {{Chris von Csefalvay}},
-  title = {Stochastic Parrots, Cap and Gown Edition},
-  date = {2023-12-06},
-  url = {https://chrisvoncsefalvay.com/posts/academic-generative-ai/},
-  doi = {10.59350/412q0-sbn89},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2023. <span>“Stochastic Parrots, Cap and Gown
-Edition.”</span> <a href="https://doi.org/10.59350/412q0-sbn89">https://doi.org/10.59350/412q0-sbn89</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>academia</category>
-  <category>writing</category>
-  <category>LLMs</category>
-  <guid>https://chrisvoncsefalvay.com/posts/academic-generative-ai/</guid>
-  <pubDate>Wed, 06 Dec 2023 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/academic-generative-ai/4ae87543-b5d3-4373-b691-3fb71d8cf1d0.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
