@@ -5,7 +5,7 @@ categories:
 - evals
 citation: true
 date: 2025-10-19
-description: "All benchmarks are wrong -- and if you want some that are useful, you might need to build your own."
+description: All benchmarks are wrong -- and if you want some that are useful, you might need to build your own.
 google-scholar: true
 title: SOYA - the only benchmark that matters
 ---
