@@ -3,7 +3,8 @@ categories:
 - LLMs
 - AI
 - evals
-citation: true
+citation:
+  doi: 10.59350/xqf22-csp59
 date: 2025-10-19
 description: All benchmarks are wrong -- and if you want some that are useful, you might need to build your own.
 google-scholar: true
