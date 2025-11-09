@@ -10,6 +10,7 @@ description: Two years on from helping to articulate a concept that changed ever
 google-scholar: true
 title: What I talk about when I talk about agentic AI
 bibliography: references.bib
+image: header.png
 ---
 
 
