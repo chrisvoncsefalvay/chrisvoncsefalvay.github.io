@@ -4,7 +4,8 @@ categories:
 - AI
 - agentic AI
 - evolution
-citation: true
+citation:
+  doi: 10.59350/c8085-dj650
 date: 2025-10-25
 description: You're probably doing agentic AI wrong, and I wish this were clickbait. Here's why agentic AI is in deep kimchi, and how to get out of it.
 google-scholar: true
