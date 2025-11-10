@@ -4,7 +4,8 @@ categories:
 - AI
 - agentic AI
 - personal
-citation: true
+citation:
+  doi: 10.59350/ddeyn-whz59
 date: 2025-11-01
 description: Two years on from helping to articulate a concept that changed everything, some thoughts on where we are, where we're going and the things we lost along the way.
 google-scholar: true
