@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris von Csefalvay">
-<meta name="dcterms.date" content="2025-07-06">
-<meta name="description" content="AI’s latest buzzword is more confession than innovation.">
+<meta name="dcterms.date" content="2025-10-25">
+<meta name="description" content="You’re probably doing agentic AI wrong, and I wish this were clickbait. Here’s why agentic AI is in deep kimchi, and how to get out of it.">
 
-<title>The Snowmobile Symptom – Chris von Csefalvay</title>
+<title>Deep kimchi – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,26 +82,52 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="The Snowmobile Symptom – Chris von Csefalvay">
-<meta property="og:description" content="AI’s latest buzzword is more confession than innovation.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/context-engineering/header.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Deep kimchi – Chris von Csefalvay">
+<meta property="og:description" content="You’re probably doing agentic AI wrong, and I wish this were clickbait. Here’s why agentic AI is in deep kimchi, and how to get out of it.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/agentic-speciation/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1024">
-<meta name="twitter:title" content="The Snowmobile Symptom – Chris von Csefalvay">
-<meta name="twitter:description" content="AI’s latest buzzword is more confession than innovation.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/context-engineering/header.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1024">
+<meta name="twitter:title" content="Deep kimchi – Chris von Csefalvay">
+<meta name="twitter:description" content="You’re probably doing agentic AI wrong, and I wish this were clickbait. Here’s why agentic AI is in deep kimchi, and how to get out of it.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/agentic-speciation/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="The Snowmobile Symptom">
+<meta name="citation_title" content="Deep kimchi">
 <meta name="citation_author" content="Chris von Csefalvay">
-<meta name="citation_publication_date" content="2025-07-06">
-<meta name="citation_cover_date" content="2025-07-06">
+<meta name="citation_publication_date" content="2025-10-25">
+<meta name="citation_cover_date" content="2025-10-25">
 <meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-07-06">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/context-engineering/">
+<meta name="citation_online_date" content="2025-10-25">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/agentic-speciation/">
+<meta name="citation_doi" content="10.59350/c8085-dj650">
 <meta name="citation_language" content="en-GB">
 </head>
 
@@ -166,10 +192,11 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-snowmobiles-we-build" id="toc-the-snowmobiles-we-build" class="nav-link active" data-scroll-target="#the-snowmobiles-we-build">The snowmobiles we build</a></li>
-  <li><a href="#the-puppet-strings-we-pretend-arent-there" id="toc-the-puppet-strings-we-pretend-arent-there" class="nav-link" data-scroll-target="#the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</a></li>
-  <li><a href="#towards-true-agency-beyond-context-engineering" id="toc-towards-true-agency-beyond-context-engineering" class="nav-link" data-scroll-target="#towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</a></li>
-  <li><a href="#what-next-may-come" id="toc-what-next-may-come" class="nav-link" data-scroll-target="#what-next-may-come">What next may come</a></li>
+  <li><a href="#semantic-mishandles" id="toc-semantic-mishandles" class="nav-link active" data-scroll-target="#semantic-mishandles">Semantic (mis)handles</a></li>
+  <li><a href="#the-domain-of-control" id="toc-the-domain-of-control" class="nav-link" data-scroll-target="#the-domain-of-control">The domain of control</a></li>
+  <li><a href="#where-current-thinking-fails" id="toc-where-current-thinking-fails" class="nav-link" data-scroll-target="#where-current-thinking-fails">Where current thinking fails</a></li>
+  <li><a href="#the-power-of-constraints" id="toc-the-power-of-constraints" class="nav-link" data-scroll-target="#the-power-of-constraints">The power of constraints</a></li>
+  <li><a href="#how-to-rescue-agentic-ai" id="toc-how-to-rescue-agentic-ai" class="nav-link" data-scroll-target="#how-to-rescue-agentic-ai">How to rescue agentic AI</a></li>
   </ul>
 </nav>
     </div>
@@ -178,17 +205,18 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">The Snowmobile Symptom</h1>
+<h1 class="title">Deep kimchi</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">AI</div>
     <div class="quarto-category">LLMs</div>
-    <div class="quarto-category">context engineering</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">agentic AI</div>
+    <div class="quarto-category">evolution</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    AI’s latest buzzword is more confession than innovation.
+    You’re probably doing agentic AI wrong, and I wish this were clickbait. Here’s why agentic AI is in deep kimchi, and how to get out of it.
   </div>
 </div>
 
@@ -205,7 +233,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">6 July 2025</p>
+      <p class="date">25 October 2025</p>
     </div>
   </div>
   
@@ -217,44 +245,142 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-46559"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-46559").innerHTML = tweet["html"];</script><p></p>
-<p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
-<p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
-<section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-snowmobiles-we-build">The snowmobiles we build</h2>
-<p>In what is probably the most influential briefing any officer ever gave, USAF Col. John Boyd made a very poignant analogy to explain how we synthesise information. Imagine you’re on an alpine slope. Take the skis. Imagine you’re riding a bicycle. Take the handle bars. Now imagine you’re looking at a tank. Take the treads. Put these all together, and you’ve got, mostly, a snowmobile. These distinct domains combine into a single object that makes sense in its own way.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Dr Grant Hammond, formerly of the Air University down at Maxwel AFB and the Air Force Academy down the road at Springs, has compiled an absolutely outstanding version of Boyd’s talk with abundant references that I think does justice to the diversity of material Boyd teaches. <a href="https://www.airuniversity.af.edu/AUPress/Display/Article/1528758/a-discourse-on-winning-and-losing/">It is available for free here</a>, and you should have a copy of it on, like, everything that can store bits. Maj. Ian Brown, US Army, has created <a href="https://static1.squarespace.com/static/5497331ae4b0148a6141bd47/t/5af842f8758d4615555d3f6d/1526219514965/Patterns+of+Conflict+Transcript.pdf">a meticulous transcription of the original talk given at Quantico in 1989</a>, for those who prefer the full experience over death-by-Powerpoint. <a href="https://youtu.be/9iiQlBaGJQA?si=2iyrCETetLKZ_gdE">The full talks are, of course, on YouTube</a>.</p></div></div><p>Context engineering is snowmobile building for the AI age. You take the tools, the MCP connections, the requirements, the sources – all the bits of information that make up the entirety of what we would consider the contextual biome of a task –, and feed it to the LLM. We do, or at least we prototype for the LLM, the task of synthesis: reassembling these fragments into a holistic picture of the task environment. We pull the skis from an API doc, the handles from a github repo and the treads from a coffee cup bottom stained post-it note. It ‘makes sense to us’, and we try to convey this to our helpful assistant, in hopes that putting it into the same frame of mind we are in will allow it to do what we want it to do in our stead.</p>
-<p>But here’s the rub: in Boyd’s analogy, humans build the snowmobile. In our current AI paradigm, we’re still the ones building it, really quite manually, when the entire promise of agentic AI was that the agents would handle most of the assembly themselves. We’ve created systems sophisticated enough to use snowmobiles, but not intelligent enough to build them without us laying out all the isntructions.</p>
+<p>This is about the time of year when I get the sudden and irresistible urge to make kimchi. Kimchi – and fermentation in general – is one of those things I wonder if we’re somewhat genetically predisposed to figure out as a species,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> considering most major cultures in the right climates have independently discovered what is a fairly cool optimisation – finding something that converts sugar into lactic acid, but which is also insanely halotolerant (capable of enduring high salt concentrations) and therefore can create a little evolutionary niche in one’s own fridge muscling out other possibly pathogenic microorganisms.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Anyway, about a ton of napa cabbage in, waiting for my immunoassays to finish (because in this household, we do science properly, so we do fluorescence immunoassays for pathogens, because botulism is not cool), my brain wandered off to agentic AI.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Beyond, of course, the fact that we have glutamate-sensitive receptors in our taste buds that let us taste, and enjoy, umami. <a href="https://youtube.com/mrnigelng">Uncle Roger</a> does have a point.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;If you do it correctly. Fermentation is not for the faint of heart. There are real risks, up to and including getting very dead from botulism.</p></div></div><p>The thing is, I’ve been somewhat concerned about the way the agentic AI discourse has been going. We’re headed for deep kimchi, and I’m afraid the main reason for that is, ironically enough, that most agentic AI out there, well, isn’t.</p>
+<section id="semantic-mishandles" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="semantic-mishandles">Semantic (mis)handles</h2>
+<p>Part of the problem is, of course, the way we think about agents – and insofar as I <a href="../../posts/team-of-rivals/index.html">might be among those to blame for giving rise to the term in its modern sense</a>,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> I guess I’ll have to shoulder some responsibility for the confusion it engenders. For if one conceives of it in the way we use the word in colloquial language, an agent is, of course, typically a person. This has led to the metaphor of agents as tiny people in your computer who do things to be taken rather more seriously. And with that, we started resorting to conventional operating models we use with people: org charts, arrows of delegated responsibility and all that.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Can’t take the credit without also taking the blame – though I’d rather neither. As I point out every time, the agentic idea has been around much longer. While my description of agentic AI was among the first in its modern sense, I don’t think it was <em>the</em> first. In a life lived with extremely few regrets, my use of the ‘a-word’ is one of the things I wish I could undo. It has so far only caused semantic confusion <em>and</em>, quite possibly, real human harm.</p></div></div><p>Nobody makes kimchi by instructing individual lactobacilli. You cannot sit there with a tiny megaphone directing bacterial populations. For millennia, civilisations that came up with their lactobacillus fermented foods have figured out how to do it instead: you salt the cabbage, add spices, control temperature and let the rest take care of itself.</p>
+<p>We understand this intuitively for fermentation. For cities. For ecosystems. For markets. We know that complex systems require systems-level thinking, not component-level micromanagement. And yet somehow, when we talk about agentic AI, we abandon this wisdom entirely and write things like “the challenge of orchestrating thousands of agents” on LinkedIn.</p>
+<p>The language of “agents” has misled us through anthropomorphism. We hear “agent” and think of something human – and therefore, rightly, something focal, unique, irreplaceable: an employee, a character in a story, the protagonist of our narrative. We instinctively think about agents the way we think about people – as discrete, meaningful entities whose individual actions matter.</p>
+<p>But agents in mature agentic systems aren’t people. They’re processes on some server in Ashburn or Ohio or wherever your cloud provider lives. They neither require nor warrant the kind of individuated respect we afford to humans <em>qua</em> humans.</p>
+</section>
+<section id="the-domain-of-control" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-domain-of-control">The domain of control</h2>
+<p>For two years now, we’ve defined agentic AI in terms of what agents are or can do. These are the mantras you hear repeated in agentic discourse <em>ad infinitum</em>: autonomy, goal-directedness, tool use. All agent-level properties, all true (sort of), and yet they describe at best what kind of thing can be an agent – not what agentic AI is, or can be.</p>
+<p>If you can sketch your “agentic AI system” with a few boxes and arrows on a whiteboard, what you’ve built is glorified RPA with LLMs. You’ve automated some tasks, chained some API calls, added probabilistic text generation – useful work, but no more agentic AI than a handful of manually-tuned perceptrons is deep learning. While this is a good way to illustrate what agentic AI might look like zoomed in, it is little more than a metaphor.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="IMG_2722.jpeg" class="img-fluid figure-img"></p>
-<figcaption>From my fridge. It tends to get a good laugh from other fellow Sons of Boyd.</figcaption>
-</figure>
+<p>We can formalise an agentic AI system as a dynamic directed graph <span class="math display">\[G_F(t) = (V(t), E(t))\]</span> associated with a fitness function <span class="math inline">\(f: G(t, F) \rightarrow \mathbb{R}\)</span>, where</p>
+<ul>
+<li><span class="math inline">\(V\)</span> is the set of agents (vertices);</li>
+<li><span class="math inline">\(E\)</span> is the set of directed edges (agent interactions); and</li>
+<li><span class="math inline">\(F\)</span> characterises the fitness landscape constraints, i.e.&nbsp;the functions and constraints that define the environment.</li>
+</ul>
+<p>The system evolves to maximise <span class="math inline">\(f\)</span> subject to constraints imposed by <span class="math inline">\(F\)</span> (which may associate various costs with various conformations of <span class="math inline">\(G_F\)</span>). The structure <span class="math inline">\(G_F(t)\)</span> – both topology and population – emerges from this optimisation process rather than being specified a priori.</p>
+</div></div><p>The key properties of agentic AI lie in the system, not the agents themselves. If we are to attempt a definition, an agentic AI system is best defined by what I call the 3+2 model – the three key autonomies and two key constraints.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</div></div><p>Just consider your favourite coding copilot. They feed off an understanding of the code, the sources, the instructions, the user’s preferences, external tools, and so on. But they require those to be provided to them well enough to be able to mostly reflect the thought patterns that got the human user to where they are. They are hopeless, or at least much less efficient, if we do not <em>mise en place</em> all the tools for them. Wasn’t that part of the promise of agentic AI – the ability of systems to creatively self-organise, rather than us having to wire everything up for them?</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Connective autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agents can discover and form connections with other agents dynamically. The graph of agent interactions is not designed, but evolves and changes to adapt the system’s goal.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Task and tool autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agents can access and utilise tools and resources based on need rather than pre-specification. They explore their operational possibility space rather than following predetermined paths.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Genetic autonomy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Genetic autonomy: Agents can spawn new agents and determine their characteristics, adapting to selection pressure.</p>
+</div>
+</div>
+<p>The reason why we need to define these autonomies is because they in turn reveal what our controls are – the constraints we can impose to shape system behaviour.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Goal constraint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The goal constraint is the fitness landscape that defines success – not a detailed specification of <em>how</em> to achieve the system level goal but a definition of what constitutes achievement.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Environment constraint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The environment constraint encompasses resource limitations, communication costs, metabolic expenses and interaction protocols that create, communicate and moderate selection pressure on agent behaviours.</p>
+</div>
+</div>
+<p>Together, these five elements - three autonomies and two constraints - define an agentic AI system. And here’s the crucial insight: we should leave the autonomies alone and focus our design attention on the constraints.</p>
+<p>The anthropomorphic language of “agents” obscures this. When we think of agents as workers or colleagues, we naturally want to define their roles, specify their responsibilities, coordinate their interactions. We want to draw the org chart. But bacteria don’t have org charts. Neurons don’t have job descriptions. And mature agentic systems won’t have workflow diagrams.</p>
 </section>
-<section id="the-puppet-strings-we-pretend-arent-there" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</h2>
-<p>The problem with context engineering isn’t really context engineering’s fault. As a system, it works. It works quite well, in fact, and if you follow some sensible guidelines, you <em>will</em> get vastly more out of your LLM.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But the very fact that we’re here discussing it is an indication that we are theorycrafting at length to make up for the lack of the agentic agora.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;I recommend <a href="https://github.com/coleam00/context-engineering-intro">Cole Medin’s repo</a> as a pretty good starter.</p></div></div><p>The whole thing does, then, have a bit of an elaborate marionette theatre feel. We speak of agents but their agency is ultimately quite confined by the need for us to spoon-feed them quite a bit about the context. For the most part, we’re not witnessing emergent coordination, we’re watching an elaborate puppet show where humans have pre-scripted every information handoff, pre-defined every communication channel and pre-determined every capability boundary. The agents aren’t a garage band gelling together and learning how to play music with spirit and spontaneity. They are a room full of player pianos ticking down the same tune someone had to painstakingly design and encode into the player rolls.</p>
-<p>The security implications reveal just how non-agentic these systems truly are. <a href="https://www.solo.io/blog/deep-dive-mcp-and-a2a-attack-vectors-for-ai-agents">Context poisoning attacks</a> work because our agents have no genuine ability to evaluate information sources on their own, no real understanding of trust and do not exist in spaces that govern trust exchange without such trust being ultimately pre-scripted. An agent doesn’t know whom they can trust, nor how they can represent their trustworthiness in a computationally meaningful, verifiable manner. That we need to engineer defensive contexts to protect our AI systems is perhaps the clearest indication that these systems are free agents… free to be manipulated and misled in the absence of an agentic agora that has its own rules and enforcement logic.</p>
+<section id="where-current-thinking-fails" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="where-current-thinking-fails">Where current thinking fails</h2>
+<p>The current wave of “agentic AI” largely looks like an LLM plus some hand-wired agents plus an orchestration layer that routes tasks between them. It’s deterministic workflow automation with probabilistic text generation at the nodes. This is the worst of both worlds – the LLM’s stochasticity breaks the determinism of traditional RPA, but the system gains none of the adaptive benefits that would justify that unpredictability.</p>
+<p>In systems-level terms: you’ve eliminated connective autonomy by hard-coding <span class="math inline">\(E(t)\)</span>, genetic autonomy by fixing <span class="math inline">\(V(t)\)</span>, and effectively reduced the ability of the system to optimise for any goal-derived fitness function zero.</p>
+<p>This is, of course, by no means novel. When Marvin Minsky and Seymour Papert published <em>Perceptrons</em> in 1969, claiming XOR was uncomputable by single-layer networks,<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> just about everything slowed to a crawl until the field was revived in 1986 by the work of Rumelhart, Hinton and Williams on backpropagation. What is crucial is that Hinton, LeCun and the rest of the backpropagandists didn’t go out to make better neurons. They simply realised how much more can be gotten out of simple neurons, simple maths and a systems perspective. They optimised the system, not the components. And therein lies the magic.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Which was true but irrelevant. We’ve known MLPs quite well at the time. Yet it was widely misinterpreted and by the time anyone noticed, we were deep into the winter of neural network research.</p></div></div></section>
+<section id="the-power-of-constraints" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-power-of-constraints">The power of constraints</h2>
+<p>What would it mean to design agentic AI systems through constraints rather than specifications?</p>
+<div class="grid">
+<div class="g-col-6">
+<p><strong>Goal constraint design</strong></p>
+<p>We specify system-level objectives, i.e.&nbsp;<span class="math inline">\(f\)</span>, for <span class="math inline">\(G_F(t)\)</span>, to optimise against. How the system accomplishes this is left to the autnonomies.</p>
+</div>
+<div class="g-col-6">
+<p><strong>Environment constraint design</strong></p>
+<p>We condition <span class="math inline">\(G_F\)</span> by the fitness landscape <span class="math inline">\(F\)</span> by defining resource limitations, communication costs, metabolic expenses and interaction protocols that create selection pressure on agent behaviours.</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>Recipe:</strong> Napa cabbage kimchi <em>(vaguely Noma-inspired)</em></p>
+<ul>
+<li>1kg napa cabbage, cut into bite-sized pieces</li>
+<li>60g sea salt</li>
+<li>2 tbsp nước chấm</li>
+<li>2 tbsp gochugaru</li>
+<li>3 cloves garlic, minced</li>
+<li>20g fresh ginger, grated</li>
+<li>2 spring onions, sliced</li>
+<li>1 tsp raw honey</li>
+</ul>
+<p>Salt the cabbage thoroughly. Let rest 2-3 hours. Rinse and squeeze dry. Mix remaining ingredients into a paste (wear gloves – nước chấm will make your hands stink to high heaven), massage into cabbage. Pack tightly into jar, leaving 2-3 cm headspace, and ferment at room temperature for 3-5 days, releasing pressure daily. Refrigerate once it reaches your desired tanginess.</p>
+</div></div><p>Jointly, these constraints create selection pressure that guides evolution without dictating outcomes. Consider what this enables: A system facing a new class of problems might spawn specialist agents efficient for that problem type. These specialists persist if they provide value, disappear if they don’t. Agents discover collaboration patterns that prove fruitful and strengthen those connections, and the system evolves toward metabolic efficiency without any explicit optimisation.</p>
+<p>This is the power of evolutionary speciation over specification: species emerge from evolutionary pressure, rather than being designed explicitly, as does their conduct and interactions. The ‘agents’, just like the bacterial species in a jar of kimchi, explore the solution space defined by the constraints, and the population structure adapts not to what someone defines but to what the environment at the time demands.</p>
 </section>
-<section id="towards-true-agency-beyond-context-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</h2>
-<p>Don’t get me wrong – I’m not dismissing context engineering. If anything, quite the opposite. Given the current limitations of LLMs, context engineering is not just sensible but an essential adaptation to the reality that these models need plenty of handholding to be useful, much more than we would hope they would need in a true agentic system. It’s also an indication of where the failure lies – because these models are operating just fine. It’s not their shortcoming, or indeed that of agents. It’s the lack of an infrastructure of interaction. Agents become truly agentic when they have something to act on, to interact with, to connect. We have built ecosystems to use, develop and deploy models and agents, but not to allow for these interactions in a meaningful way. We’re looking at a factory of consummate professionals in the art of assembling snowmobiles, waiting for someone, anyone, to get them the parts, in the right order, at the right time.</p>
-<p>The entire context engineering story (I’m not going to call it hype just yet, because it hasn’t reached fever pitch, but I am sure we will see more and more LinkedIn bios proclaiming context engineering expertise!) ultimately pulls the fig leaf off the coordination problem we’re trying to patch up with the current attempts at agentic interoperability. Once again, those steps, too, have plenty of merit. They just aren’t exhaustive. We’re building infrastructure to help humans manage information for AI, when we should be building infrastructure for AI to manage information for itself. Every context engineering best practice is a workaround for missing agent capabilities. Memory architectures are cheat codes to help agents that don’t have the architecture to manage state properly. Context compression is a workaround for prioritising information. Specifying tools and toolkits is necessary because agents can’t discover such tools and negotiate trust relationships with them.</p>
-<p>What we’re really engineering when we claim to be doing context engineering is, ultimately, not really the context of our question but the context of the agent. We have to equip the agent with what ought to be what Sartre would call pre-reflexive self-awareness, an understanding of where one is situated in the world and what’s around it. It’s not, or at least not just, about us telling the agent the context of our ask. It’s about us having to tell the agent the context of its own existence, its own capabilities, its own environment. We’re forcing humans to herd cats for systems that should be capable of finding and sharing knowledge autonomously. Every context engineering solution is a monument to this missing infrastructure.</p>
-</section>
-<section id="what-next-may-come" class="level2">
-<h2 class="anchored" data-anchor-id="what-next-may-come">What next may come</h2>
-<p>What we need are digital agoras – spaces where AI agents can discover capabilities, share information, and coordinate without needing this human intermediacy. That’s not because human oversight is bad, but because true agency requires the ability to discover and evaluate information independently. MCP and A2A represent tentative steps in this direction, but they still ultimately rely on humans wiring up the connections. The promise of agentic AI is that this would no longer be needed, that agents could exercise a kind of <em>Auftragstaktik</em> mindset of inferring these needs from some sort of reaching-out and finding adequate resources the way buyers find merchants in the marketplace. There’s, then, nothing ‘wrong’ with context engineering <em>per se</em>. What would however be a mistake is to consider it a destination, rather than a transitional phase. Every talk on context engineering, every new ‘supertool’, every clever prompting technique is progress – that we shouldn’t, however, let become procrastination.</p>
-<p>When context engineering becomes unnecessary, we’ll know our agents have finally grown up. The path forward isn’t through better context engineering, but through making it obsolete. Digital agoras, agent discovery protocols, emergent coordination mechanisms: these aren’t nice-to-haves, they are the <em>sine qua nons</em> for genuine AI agency. Every moment we spend perfecting context engineering is a moment we’re not spending on building the infrastructure that would make it unnecessary.</p>
-<p>At the end of the day, context engineering is our confession, written in code and infrastructure, that we haven’t yet achieved what we claimed. It illuminates the partial success of agents: success, because agentic AI is tremendously powerful, but partially so, because it needs us to coordinate for them. So while context engineering will tide us over for a while the way prompt engineering has done for its hour, we shouldn’t forget that it’s a band-aid, no more. We should welcome context engineering… while awaiting the day we can finally retire it.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
+<section id="how-to-rescue-agentic-ai" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-rescue-agentic-ai">How to rescue agentic AI</h2>
+<p>We’re in deep kimchi – but we don’t have to be. AI had to endure a decade-and-half winter before being resuscitated in 1986. We may be fortunate enough to avoid it this time around – but we won’t get there by better workflow diagrams. We’ll get there through the system perspective, just as it was the system perspective that saved neural networks.</p>
+<p>The autonomies – connective, task, genetic – define what mature agentic systems are capable of. But realising that capability requires shifting our design attention from the autonomies to the constraints, and learn how to stop micromanaging and instead govern the system through conditioning its fitness landscape (in short: <a href="../../posts/biome-engineering/index.html">biome engineering</a>).</p>
+<p>If you’re still drawing boxes and arrows, still thinking about “my code agent talking to my research agent”, still trying to orchestrate individual interactions – you’re hand-coding what should be left to evolution. The anthropomorphic language of “agents” has been useful for explaining these systems to non-technical audiences, but we have outgrown it – it is now actively hindering our ability to design them properly. Agents aren’t little employees inside the machine or characters of a story. But their collectivities can give rise to the same kind of emergent behaviour that lets a stack of trivial computations self-organise into ChatGPT, AlphaFold or whatever fresh hell Sora is doing right now.</p>
+<p>Agentic AI isn’t doomed – but micromanagement of agents doesn’t scale, and that imposes an upper bound. We have kimchi and sauerkraut and pickles because the civilisations that came up with them were unencumbered by software architects and Microsoft Visio. They just designed the brine, set the temperature and let nature take its course. We should probably learn from that.</p>
+<p>Stop trying to direct the bacteria. Start designing the brine.</p>
 
 
 </section>
@@ -262,13 +388,14 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
   author = {{Chris von Csefalvay}},
-  title = {The {Snowmobile} {Symptom}},
-  date = {2025-07-06},
-  url = {https://chrisvoncsefalvay.com/posts/context-engineering/},
+  title = {Deep Kimchi},
+  date = {2025-10-25},
+  url = {https://chrisvoncsefalvay.com/posts/agentic-speciation/},
+  doi = {10.59350/c8085-dj650},
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
+Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> <a href="https://doi.org/10.59350/c8085-dj650">https://doi.org/10.59350/c8085-dj650</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -690,5 +817,4 @@ Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="h
 
 
 
-<script src="https://platform.twitter.com/widgets.js"></script>
 </body></html>
