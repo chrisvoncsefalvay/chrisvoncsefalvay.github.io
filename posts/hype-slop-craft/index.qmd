@@ -1,0 +1,306 @@
+---
+bibliography: references.bib
+categories:
+- LLMs
+- AI
+- tech predictions
+- ecology
+date: 2025-11-23
+description: A differential ecology of AI, as she is done in late 2025.
+image: header.png
+title: The Hype, the Slop and the Craft
+---
+
+# Hype, slop, craft: the evolutionary ecology of AI
+
+There's a patch of ground near Chernobyl that botanists call Рудий ліс, the Red Forest. In the immediate aftermath of the 1986 disaster,^[The one at Chornobyl, not my birth. Which happens to fall on the same year.] the radiation killed mostly everything, turning the pine trees a rust-red colour before they died. That's poetic, but hardly unexpected -- not even Polesian pines can withstand a firehose of low enriched uranium decay products. What happened next, though, was instructive: the first plants to return weren't the mighty pines or the hardy oaks, but the weeds. Dandelions, mostly, and some rather aggressive species of grass. They grew quickly, flowered fast, scattered their seeds and died, leaving behind just enough organic matter for the next wave. Within a decade, saplings had started to appear. Within two, you had something approximating a young forest.
+
+The ecologists studying this accidental laboratory weren't surprised. They were watching a well-documented pattern called primary succession, where life reclaims disturbed ground through a predictable sequence of strategies. What they observed in the Red Forest plays out everywhere, from volcanic islands to abandoned car parks, and follows a model first articulated by Philip Grime in 1977: the Universal Adaptive Strategy Theory [@grime1977].
+
+I've been thinking about Grime's framework rather a lot lately, because it explains something about the AI industry that the irritatingly prevalent narratives of "good labs" versus "bad labs" utterly fails to capture: namely, that the AI landscape isn't a morality play. It's an ecosystem, and like all ecosystems, it requires diversity of strategy to thrive.
+
+## The triangle of strategies
+
+Grime's insight was deceptively simple. Plants face two primary challenges: stress (limitations on productivity, like poor soil or drought) and disturbance (destruction of biomass, like fire or trampling, or at least destruction of the patterns in which they exist). Their evolutionary strategies reflect different adaptations to these forces, forming three broad categories that he called R, C and S.
+
+* **Ruderal strategists** (R) thrive in high-disturbance environments. They grow fast, reproduce quickly and spread like mad before the next catastrophe hits. Think dandelions, annual weeds, those aggressive grasses that colonise disturbed ground. They're opportunists, exploiting chaos. They don't build to last because lasting isn't the point -- the point is to spread before someone else does. Speed wins.
+* **Competitive strategists** (C) dominate through sheer volume and resource acquisition. They grow in environments where disturbance is low and stress is manageable, and they win by outcompeting neighbours for light, water, nutrients. Think bamboo forests, or those vine species that carpet entire hillsides. Volume is victory.
+* **Stress-tolerant strategists** (S) excel in stable but harsh environments. They grow slowly, carefully, building resilience rather than racing for dominance. Think bristlecone pines that live thousands of years at high altitude, or the succulents that thrive in deserts. They're not flashy. They're not fast. But they endure. And endurance is the ultimate superweapon.
+
+Here's what matters: none of these strategies is "better" than the others. Each is optimal for its niche. The healthiest ecosystems contain all three, each playing their role in the larger dance of succession and stability. Equally, they depend on different influences and explot different circumstances, and are generally rather maladapted to their absence.^[There's a social analogy here. We call ruderal humans _innovators_. And thank heavens for them.]
+
+```{ojs}
+//| echo: false
+
+d3 = require("d3@7")
+ternary = require("d3-ternary@3")
+
+labData = [
+  { name: "Cluely", r: 0.85, c: 0.10, s: 0.05, type: "hype", nature: "product" },
+  { name: "Lovable", r: 0.5, c: 0.20, s: 0.7, type: "slop", nature: "product" },
+  { name: "Anthropic", r: 0.10, c: 0.80, s: 0.10, type: "craft", nature: "major" },
+  { name: "OpenAI", r: 0.30, c: 0.45, s: 0.25, type: "mixed", nature: "major" },    { name: "xAI", r: 0.70, c: 0.45, s: 0.25, type: "hype", nature: "major" },
+  { name: "FAIR", r: 0.25, c: 0.85, s: 0.20, type: "craft", nature: "foundation" },
+  { name: "DeepMind", r: 0.15, c: 0.55, s: 0.40, type: "craft", nature: "foundation" },
+  { name: "FaceApp", r: 0.1, c: 0.1, s: 0.8, type: "slop", nature: "product" },
+  { name: "SpicyChat", r: 0.05, c: 0.1, s: 0.95, type: "slop", nature: "product" },
+  { name: "", r: 0.05, c: 0.1, s: 0.95, type: "slop", nature: "product" },
+]
+
+colours = ({
+  hype: "#e63946",
+  slop: "#457b9d",
+  craft: "#2a9d8f",
+  mixed: "#6c757d"
+})
+
+// Shape generators for different nature types
+shapeGen = ({
+  foundation: d3.symbol().type(d3.symbolCircle).size(200),
+  major: d3.symbol().type(d3.symbolSquare).size(180),
+  product: d3.symbol().type(d3.symbolTriangle).size(200)
+})
+
+width = 550
+height = 480
+radius = 160
+
+bary = ternary.barycentric()
+  .a(d => d.r)
+  .b(d => d.c)
+  .c(d => d.s)
+
+plot = ternary.ternaryPlot(bary)
+  .radius(radius)
+  .labels(["", "", ""])
+
+chart = {
+  const svg = d3.create("svg")
+    .attr("viewBox", [-width/2, -height/2 + 50, width, height])
+    .attr("width", width)
+    .attr("height", height)
+    .style("font-family", "system-ui, -apple-system, sans-serif");
+
+  const g = svg.append("g");
+
+  // Draw the triangle
+  g.append("path")
+    .attr("d", plot.triangle())
+    .attr("fill", "#f8f9fa")
+    .attr("stroke", "#343a40")
+    .attr("stroke-width", 2);
+
+  // Draw grid lines
+  const gridLines = plot.gridLines(5);
+  gridLines.forEach(axisLines => {
+    g.selectAll(null)
+      .data(axisLines)
+      .join("path")
+      .attr("d", d => d3.line()(d))
+      .attr("fill", "none")
+      .attr("stroke", "#dee2e6")
+      .attr("stroke-width", 0.5);
+  });
+
+  // Draw data points with shapes based on nature
+  const points = g.selectAll(".point")
+    .data(labData)
+    .join("g")
+    .attr("class", "point")
+    .attr("transform", d => {
+      const [x, y] = plot(d);
+      return `translate(${x}, ${y})`;
+    });
+
+  points.append("path")
+    .attr("d", d => shapeGen[d.nature]())
+    .attr("fill", d => colours[d.type])
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 2)
+    .attr("opacity", 0.9);
+
+  points.append("text")
+    .attr("x", 12)
+    .attr("y", 4)
+    .attr("font-size", "10px")
+    .attr("fill", "#343a40")
+    .text(d => d.name);
+
+  // Compute vertices for corner labels
+  const vertices = [
+    [0, -radius],
+    [radius * Math.cos(Math.PI/6), radius * Math.sin(Math.PI/6)],
+    [-radius * Math.cos(Math.PI/6), radius * Math.sin(Math.PI/6)]
+  ];
+
+  const cornerLabels = [
+    { pos: vertices[0], label: "Hype", offset: [0, -18] },
+    { pos: vertices[1], label: "Slop", offset: [18, 10] },
+    { pos: vertices[2], label: "Craft", offset: [-18, 10] }
+  ];
+
+  g.selectAll(".corner-label")
+    .data(cornerLabels)
+    .join("text")
+    .attr("class", "corner-label")
+    .attr("x", d => d.pos[0] + d.offset[0])
+    .attr("y", d => d.pos[1] + d.offset[1])
+    .attr("text-anchor", "middle")
+    .attr("font-size", "11px")
+    .attr("font-style", "italic")
+    .attr("fill", "#6c757d")
+    .text(d => d.label);
+
+  // Horizontal legend - Strategy (colours)
+  const strategyLegend = [
+    { type: "hype", label: "Hype" },
+    { type: "slop", label: "Slop" },
+    { type: "craft", label: "Craft" },
+    { type: "mixed", label: "Mixed" }
+  ];
+
+  const legendY = height/2 - 55;
+  const strategyG = svg.append("g")
+    .attr("transform", `translate(${-width/2 + 25}, ${legendY})`);
+
+  strategyG.append("text")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("font-size", "10px")
+    .attr("font-weight", "600")
+    .attr("fill", "#495057")
+    .text("Strategy:");
+
+  const stratItems = strategyG.selectAll(".strat-item")
+    .data(strategyLegend)
+    .join("g")
+    .attr("class", "strat-item")
+    .attr("transform", (d, i) => `translate(${55 + i * 65}, -4)`);
+
+  stratItems.append("circle")
+    .attr("r", 5)
+    .attr("fill", d => colours[d.type]);
+
+  stratItems.append("text")
+    .attr("x", 10)
+    .attr("y", 4)
+    .attr("font-size", "10px")
+    .attr("fill", "#343a40")
+    .text(d => d.label);
+
+  // Horizontal legend - Nature (shapes)
+  const natureLegend = [
+    { nature: "foundation", label: "Foundation labs" },
+    { nature: "major", label: "Model majors" },
+    { nature: "product", label: "Product firms" }
+  ];
+
+  const natureG = svg.append("g")
+    .attr("transform", `translate(${-width/2 + 25}, ${legendY + 18})`);
+
+  natureG.append("text")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("font-size", "10px")
+    .attr("font-weight", "600")
+    .attr("fill", "#495057")
+    .text("Nature:");
+
+  const natureItems = natureG.selectAll(".nature-item")
+    .data(natureLegend)
+    .join("g")
+    .attr("class", "nature-item")
+    .attr("transform", (d, i) => `translate(${55 + i * 110}, -4)`);
+
+  natureItems.append("path")
+    .attr("d", d => d3.symbol().type(
+      d.nature === "foundation" ? d3.symbolCircle :
+      d.nature === "major" ? d3.symbolSquare : d3.symbolTriangle
+    ).size(70)())
+    .attr("fill", "#6c757d");
+
+  natureItems.append("text")
+    .attr("x", 10)
+    .attr("y", 4)
+    .attr("font-size", "10px")
+    .attr("fill", "#343a40")
+    .text(d => d.label);
+
+  return svg.node();
+}
+```
+
+
+## The AI ecology and its malcontents
+
+I think it's clear that Grime's theory applies to much more than shrubs in high desert plateaus. We see the current AI industry, once we mature past the nonsensical obsession with turning it into a battle between good and evil, recapitulate much of it. And when we do, the terminology that's already emerged -- hype, slop, craft -- maps rather neatly onto R, C and S strategies.
+
+* **Hype labs are ruderals.** They thrive on chaos, often chaos they create themselves. They move fast, ship quickly, pivot aggressively. They're excellent at identifying what deserves disruption, at spotting the cracks in established systems where fast growth is possible. When a new capability emerges, they're first to market. When a paradigm shifts, they've already shifted with it. They don't build cathedrals; they build beach huts and move on before the tide comes in. *Cluely* is my favourite example here -- the startup that somehow convinced itself and half the internet that what we really needed was AI to cheat more efficiently at job interviews. They thrive precisely because they can spot the disturbed ground before anyone else, throw seeds everywhere and see what grows. Are they building for the long term? No. Are they building for tomorrow? Absolutely. And in a fast-moving field like AI, being first often matters more than being best.^[In fact, they themselves aren't exactly naive about this. [Roy Lee, their CEO, has openly admitted that the hype fuel is running out](https://techcrunch.com/2025/11/05/cluelys-roy-lee-hints-that-viral-hype-is-not-enough/), and something sensible needs to be pivoted to.]
+
+* **Slop labs are competitive strategists.** They win through volume. They flood the market with models, with wrappers, with fine-tunes and adaptations and variations on themes. They're not necessarily making the best AI -- but they sure are making the most AI, and that matters more than craft purists^[And I am considering myself one for the most part!] want to admit. In ecology, competitive strategists don't win because they're elegant—they win because they're everywhere. Consider the explosion of ChatGPT wrappers in 2023, or the current proliferation of "AI-powered" everything. Is much of it derivative? Sure. Is some of it genuinely terrible? Absolutely. But volume dominance is a legitimate strategy. In markets with low barriers to entry and unclear winners, being everywhere means you're there when someone needs you. The competitive strategy isn't about excellence but accessibility and ubiquity. 
+* **Craft labs are stress-tolerant.** They tackle genuinely hard problems with deliberate slowness. They build for resilience rather than scale, for depth rather than breadth. They're Anthropic with their slow, slogging but relentless march through the institutions, or [Edison Scientific](https://edisonscientific.com/) building an actually useful scientific research tool. They grow slowly because they're growing in hostile territory -- territory where the problems are so hard that speed would be fatal. Just ask the dozens of labs that have tried their hand at 'AI co-scientists' or even AI for scientific research, and produced [mostly underwhelming results](../academic-generative-ai/index.qmd). I also consider [Thinking Machines](https://thinkingmachines.ai/) to be in this camp, along with [Safe Superintelligence](https://ssi.inc), but it's hard to be too sure about them given how little they have actually released publicly. I wouldn't be surprised to see them adopt a more balanced strategy -- I would be surprised to see them move any significant degree towards hype or slop.
+ 
+I am, of course, biased towards craft. I work at a very firmly craft-aligned outfit, and craft has something that others do not: longevity. They are, for better or worse, the DNA of this field. The things that will become long term legacies will mostly come from them, and that's why it's important that they balance commitment to their principles with an open mind. 
+
+Which is why we need to understand why they can feel like unambitious underdogs or hopeless obsessives that are about to be outpaced by what we intuitively perceive as more brash but less deserving (hype) or more opportunistic but less principled (slop).
+
+## Why craft feels like it's losing
+
+In a sense, craft has never been popular -- not in AI, not in any other field. The stonemasons who crafted the intricate facade of the cathedral at Chartres had to contend with those who would gladly have gotten it done a little less exquisite if it could just cost a little less, or those who would altogether have preferred it to have been a little more flashy, even if it had been made of softer stone that couldn't withstand the weather. There's a significant moral overtone to all of this, a sense that serious, thoughtful work on alignment and safety and interpretability is being steamrollered by companies racing to ship whatever generates the most engagement.
+
+This isn't wrong, exactly. But it mistakes ecological dynamics for moral failure.
+
+Stress-tolerant species don't dominate during boom times, they dominate during sustained stress. Right now, we're in what ecologists would call a "resource-rich, low-stress" environment: compute is expensive but available, talent is scarce but findable, the regulatory environment -- for all the hand-wringing -- remains permissive, and capital is flowing if you know where to look. These are conditions that favour ruderal and competitive strategies, not stress tolerance.
+
+Craft labs are building for a different future: one where reliability matters more than novelty, where safety becomes non-negotiable, where the easy wins have been exhausted and only genuinely hard problems remain. They're the bristlecone pines, building slowly at altitude while the weeds race across the valley floor below. If AI development remains a gold rush where shipping fast beats building right, ruderals win, confirming the perception that sees craft labs as fundamentally anachronistic (just not quite sure about the direction of that anachronism). If it becomes a mature industry where reliability and robustness are prerequisites for deployment, stress-tolerant strategies will prevail. 
+
+
+## The necessity of synthesis
+
+Here's where this gets interesting. Grime's framework is intended to be predictive. It doesn't favour either strategy: but it does acknowledge a healthy ecosystem needs all three strategies because they create the conditions for each other's success. Ruderals identify and exploit new opportunities, creating the disturbance that opens space for others. The hype labs aren't useless noise; they're advance scouts mapping terrain, testing hypotheses through market feedback that more cautious organisations couldn't justify. When a hype lab pivots from blockchain to AI to quantum computing to whatever's next, they're not being flighty -- they're being adaptive in the way only ruderals can be.
+
+Competitive strategists, in turn, consolidate gains through volume and presence. The slop labs are diluting quality, but they are also creating the market liquidity that makes AI ubiquitous enough to matter. Most ChatGPT wrappers add little value, but their collective presence makes AI feel inevitable, accessible, normal. That normalisation is what lets craft labs secure funding for decade-long research programmes.
+
+Stress-tolerant strategists preserve gains and tackle genuinely hard problems. The craft labs aren't being precious, they're necessary. Someone has to do the work that can't be rushed, can't be parallelised across a thousand startups, can't be solved by throwing more compute at it or requires long-term persistence. Constitutional AI, mechanistic interpretability, passing the emergent best practices on so we don't have to be in some sort of permanent, exaptive adolescence require the kind of sustained, serious effort that only stress-tolerant organisations can muster.
+
+The synthesis, then, is this: craft labs need to learn from ruderals and competitors, but not by abandoning craft. They need to recognise when speed matters, when presence matters, when being first beats being best. But they also need to hold firm on the problems that require their unique strengths -- and trust their principles enough that they can the environment will eventually favour them.
+
+::: {.column-margin}
+***
+
+**Recipe**: Slow roasted tomatoes
+
+* 2kg ripe tomatoes, halved
+* 100ml decent olive oil -- this isn't the project to throw your $\lambda$ on, but don't use the cheapest either
+* 6 cloves garlic, sliced
+* Fresh thyme
+* Sea salt
+* Black pepper
+
+Arrange tomatoes, cut side up, on baking sheets. Drizzle with oil, scatter garlic and thyme. Season generously. Roast at 120°C for 3-4 hours until concentrated and slightly caramelised. The point isn't speed but  transformation through sustained, gentle stress (bit thick of an analogy here?). Store in oil. They'll last.
+
+***
+
+:::
+
+## After the fire
+
+So, what happens next? If Grime's framework holds -- and I think it does --, we should expect the AI ecosystem to undergo succession patterns familiar from ecology. Early stage ecosystems favour ruderal strategies. We've seen this: the Cambrian explosion of AI startups, the rapid cycling of approaches, the constant churn of new capabilities. This phase rewards speed and adaptability over robustness. Then the party ends, music slows, resources become more constrained, and competitive strategies gain ground. This is where we are right now, which to the sufficiently shallow part of the analyst class appears like a 'bubble'. Companies that can achieve volume at scale, be present across markets and use cases, manage to outproduce rather than necessarily outinnovate, are ascendant.
+
+But mature ecosystems, particularly those under sustained stress, favour stress tolerance. And the stresses are coming, or at least some of them: regulatory pressure, liability questions, the need for genuine reliability in critical applications, the exhaustion of low-hanging fruit. They've always been 'the' main issue, we just bought some time to defer consideration until we have figured out how far we can stretch with the 'run fast and break things' approach. Once those stresses become sustained, beyond the ability of rapidly competitive players to do cowboy stuff and remain operational, craft strategies will dominate.
+
+The cleverest organisations will deploy mixed strategies. They'll run ruderal experiments while maintaining competitive presence while building stress-tolerant core capabilities. They'll know when to be the dandelion and when to be the pine.
+
+
+
+## Coda: beyond the morality play
+
+I started thinking about this framework because I was tired of the discourse that treats AI development as a morality play where craft labs are noble and everyone else is either reckless or parasitic. That narrative is not just wrong -- it's counterproductive. It fosters a neglect of those exaptive strategies that hype labs master, those rapid scaling volume strategies that slop labs exploit, leaving craft labs isolated, defensive and, ultimately, broke. 
+
+Hype isn't inherently bad. It's ruderal strategy, excellent at what it does: identifying opportunities, moving fast, exploiting disturbance. Slop isn't inherently lazy. It's competitive strategy, winning through presence and volume. Craft isn't inherently superior. It's stress-tolerant strategy, building for conditions that may not obtain.
+
+What matters is recognising that healthy ecosystems require all three. The AI field needs organisations pursuing each strategy because they create the conditions for each other's success. Ruderals open new spaces. Competitors consolidate gains. Stress-tolerant players build lasting value.
+
+We're not in a battle between good labs and bad labs.^[There absolutely are downright bad and sometimes fraudulent entities in AI. I won't dignify them by calling them labs. At the same time, there are phenomena on the edge, and I may not agree with what they're doing, but I will not deny that they may have an ecosystemic role. A case in point is [Chad IDE](https://www.cladlabs.ai/) -- I agree with [Jordi](https://tbpn.substack.com/i/178712299/run-of-show-rage-baiting-is-for-losers) that 'rage baiting is for losers', but there's a lot of space between silly and fraudulent.] We're in an ecosystem undergoing succession, and the wisest response is to understand which strategy each niche requires -- and to respect that all three have their place in the forest we're growing.
+
+The Red Forest today is neither weeds nor climax forest but something in between, a dynamic equilibrium of strategies coexisting in productive tension. Perhaps that's what mature AI will look like too: not the victory of any single approach but the synthesis of all three, each doing what it does best, creating together something none could achieve alone.
