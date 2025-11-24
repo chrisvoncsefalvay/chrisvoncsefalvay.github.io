@@ -1,19 +1,10 @@
 [
   {
-    "listing": "/media/index.html",
-    "items": [
-      "/media/tech-for-good/index.html",
-      "/media/fr-disinfectants/index.html",
-      "/media/euronews-covid/index.html"
-    ]
-  },
-  {
     "listing": "/posts/index.html",
     "items": [
       "/posts/hype-slop-craft/index.html",
       "/posts/two-years-of-agents/index.html",
       "/posts/agentic-speciation/index.html",
-      "/posts/deep-kimchi/index.html",
       "/posts/soya/index.html",
       "/posts/biome-engineering/index.html",
       "/posts/choral-ai/index.html",
@@ -55,6 +46,14 @@
       "/posts/mrna-gene-therapy/index.html",
       "/posts/ransomware-prisoners-dilemma/index.html",
       "/posts/julia-a-post-mortem/index.html"
+    ]
+  },
+  {
+    "listing": "/media/index.html",
+    "items": [
+      "/media/tech-for-good/index.html",
+      "/media/fr-disinfectants/index.html",
+      "/media/euronews-covid/index.html"
     ]
   },
   {

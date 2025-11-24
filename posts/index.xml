@@ -2800,174 +2800,6 @@ Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> <a href="https://doi.
   <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Deep kimchi</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/deep-kimchi/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>This is about the time of year when I get the sudden and irresistible urge to make kimchi. Kimchi – and fermentation in general – is one of those things I wonder if we’re somewhat genetically predisposed to figure out as a species,<sup>1</sup> considering most major cultures in the right climates have independently discovered what is a fairly cool optimisation – finding something that converts sugar into lactic acid, but which is also insanely halotolerant (capable of enduring high salt concentrations) and therefore can create a little evolutionary niche in one’s own fridge muscling out other possibly pathogenic microorganisms.<sup>2</sup> Anyway, about a ton of napa cabbage in, waiting for my immunoassays to finish (because in this household, we do science properly, so we do fluorescence immunoassays for pathogens, because botulism is not cool), my brain wandered off to agentic AI.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Beyond, of course, the fact that we have glutamate-sensitive receptors in our taste buds that let us taste, and enjoy, umami. <a href="https://youtube.com/mrnigelng">Uncle Roger</a> does have a point.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;If you do it correctly. Fermentation is not for the faint of heart. There are real risks, up to and including getting very dead from botulism.</p></div></div><p>The thing is, I’ve been somewhat concerned about the way the agentic AI discourse has been going. We’re headed for deep kimchi, and I’m afraid the main reason for that is, ironically enough, that most agentic AI out there, well, isn’t.</p>
-<section id="semantic-mishandles" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="semantic-mishandles">Semantic (mis)handles</h2>
-<p>Part of the problem is, of course, the way we think about agents – and insofar as I <a href="../../posts/team-of-rivals/index.html">might be among those to blame for giving rise to the term in its modern sense</a>,<sup>3</sup> I guess I’ll have to shoulder some responsibility for the confusion it engenders. For if one conceives of it in the way we use the word in colloquial language, an agent is, of course, typically a person. This has led to the metaphor of agents as tiny people in your computer who do things to be taken rather more seriously. And with that, we started resorting to conventional operating models we use with people: org charts, arrows of delegated responsibility and all that.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Can’t take the credit without also taking the blame – though I’d rather neither. As I point out every time, the agentic idea has been around much longer. While my description of agentic AI was among the first in its modern sense, I don’t think it was <em>the</em> first. In a life lived with extremely few regrets, my use of the ‘a-word’ is one of the things I wish I could undo. It has so far only caused semantic confusion <em>and</em>, quite possibly, real human harm.</p></div></div><p>Nobody makes kimchi by instructing individual lactobacilli. You cannot sit there with a tiny megaphone directing bacterial populations. For millennia, civilisations that came up with their lactobacillus fermented foods have figured out how to do it instead: you salt the cabbage, add spices, control temperature and let the rest take care of itself.</p>
-<p>We understand this intuitively for fermentation. For cities. For ecosystems. For markets. We know that complex systems require systems-level thinking, not component-level micromanagement. And yet somehow, when we talk about agentic AI, we abandon this wisdom entirely and write things like “the challenge of orchestrating thousands of agents” on LinkedIn.</p>
-<p>The language of “agents” has misled us through anthropomorphism. We hear “agent” and think of something human – and therefore, rightly, something focal, unique, irreplaceable: an employee, a character in a story, the protagonist of our narrative. We instinctively think about agents the way we think about people – as discrete, meaningful entities whose individual actions matter.</p>
-<p>But agents in mature agentic systems aren’t people. They’re processes on some server in Ashburn or Ohio or wherever your cloud provider lives. They neither require nor warrant the kind of individuated respect we afford to humans <em>qua</em> humans.</p>
-</section>
-<section id="the-domain-of-control" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-domain-of-control">The domain of control</h2>
-<p>For two years now, we’ve defined agentic AI in terms of what agents are or can do. These are the mantras you hear repeated in agentic discourse <em>ad infinitum</em>: autonomy, goal-directedness, tool use. All agent-level properties, all true (sort of), and yet they describe at best what kind of thing can be an agent – not what agentic AI is, or can be.</p>
-<p>If you can sketch your “agentic AI system” with a few boxes and arrows on a whiteboard, what you’ve built is glorified RPA with LLMs. You’ve automated some tasks, chained some API calls, added probabilistic text generation – useful work, but no more agentic AI than a handful of manually-tuned perceptrons is deep learning. While this is a good way to illustrate what agentic AI might look like zoomed in, it is little more than a metaphor.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>We can formalise an agentic AI system as a dynamic directed graph <img src="https://latex.codecogs.com/png.latex?G_F(t)%20=%20(V(t),%20E(t))"> associated with a fitness function <img src="https://latex.codecogs.com/png.latex?f:%20G(t,%20F)%20%5Crightarrow%20%5Cmathbb%7BR%7D">, where</p>
-<ul>
-<li><img src="https://latex.codecogs.com/png.latex?V"> is the set of agents (vertices);</li>
-<li><img src="https://latex.codecogs.com/png.latex?E"> is the set of directed edges (agent interactions); and</li>
-<li><img src="https://latex.codecogs.com/png.latex?F"> characterises the fitness landscape constraints, i.e.&nbsp;the functions and constraints that define the environment.</li>
-</ul>
-<p>The system evolves to maximise <img src="https://latex.codecogs.com/png.latex?f"> subject to constraints imposed by <img src="https://latex.codecogs.com/png.latex?F"> (which may associate various costs with various conformations of <img src="https://latex.codecogs.com/png.latex?G_F">). The structure <img src="https://latex.codecogs.com/png.latex?G_F(t)"> – both topology and population – emerges from this optimisation process rather than being specified a priori.</p>
-</div></div><p>The key properties of agentic AI lie in the system, not the agents themselves. If we are to attempt a definition, an agentic AI system is best defined by what I call the 3+2 model – the three key autonomies and two key constraints.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Connective autonomy
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Agents can discover and form connections with other agents dynamically. The graph of agent interactions is not designed, but evolves and changes to adapt the system’s goal.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Task and tool autonomy
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Agents can access and utilise tools and resources based on need rather than pre-specification. They explore their operational possibility space rather than following predetermined paths.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Genetic autonomy
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Genetic autonomy: Agents can spawn new agents and determine their characteristics, adapting to selection pressure.</p>
-</div>
-</div>
-<p>The reason why we need to define these autonomies is because they in turn reveal what our controls are – the constraints we can impose to shape system behaviour.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Goal constraint
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The goal constraint is the fitness landscape that defines success – not a detailed specification of <em>how</em> to achieve the system level goal but a definition of what constitutes achievement.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Environment constraint
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The environment constraint encompasses resource limitations, communication costs, metabolic expenses and interaction protocols that create, communicate and moderate selection pressure on agent behaviours.</p>
-</div>
-</div>
-<p>Together, these five elements - three autonomies and two constraints - define an agentic AI system. And here’s the crucial insight: we should leave the autonomies alone and focus our design attention on the constraints.</p>
-<p>The anthropomorphic language of “agents” obscures this. When we think of agents as workers or colleagues, we naturally want to define their roles, specify their responsibilities, coordinate their interactions. We want to draw the org chart. But bacteria don’t have org charts. Neurons don’t have job descriptions. And mature agentic systems won’t have workflow diagrams.</p>
-</section>
-<section id="where-current-thinking-fails" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="where-current-thinking-fails">Where current thinking fails</h2>
-<p>The current wave of “agentic AI” largely looks like an LLM plus some hand-wired agents plus an orchestration layer that routes tasks between them. It’s deterministic workflow automation with probabilistic text generation at the nodes. This is the worst of both worlds – the LLM’s stochasticity breaks the determinism of traditional RPA, but the system gains none of the adaptive benefits that would justify that unpredictability.</p>
-<p>In systems-level terms: you’ve eliminated connective autonomy by hard-coding <img src="https://latex.codecogs.com/png.latex?E(t)">, genetic autonomy by fixing <img src="https://latex.codecogs.com/png.latex?V(t)">, and effectively reduced the ability of the system to optimise for any goal-derived fitness function zero.</p>
-<p>This is, of course, by no means novel. When Marvin Minsky and Seymour Papert published <em>Perceptrons</em> in 1969, claiming XOR was uncomputable by single-layer networks,<sup>4</sup> just about everything slowed to a crawl until the field was revived in 1986 by the work of Rumelhart, Hinton and Williams on backpropagation. What is crucial is that Hinton, LeCun and the rest of the backpropagandists didn’t go out to make better neurons. They simply realised how much more can be gotten out of simple neurons, simple maths and a systems perspective. They optimised the system, not the components. And therein lies the magic.</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Which was true but irrelevant. We’ve known MLPs quite well at the time. Yet it was widely misinterpreted and by the time anyone noticed, we were deep into the winter of neural network research.</p></div></div></section>
-<section id="the-power-of-constraints" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-power-of-constraints">The power of constraints</h2>
-<p>What would it mean to design agentic AI systems through constraints rather than specifications?</p>
-<div class="grid">
-<div class="g-col-6">
-<p><strong>Goal constraint design</strong></p>
-<p>We specify system-level objectives, i.e.&nbsp;<img src="https://latex.codecogs.com/png.latex?f">, for <img src="https://latex.codecogs.com/png.latex?G_F(t)">, to optimise against. How the system accomplishes this is left to the autnonomies.</p>
-</div>
-<div class="g-col-6">
-<p><strong>Environment constraint design</strong></p>
-<p>We condition <img src="https://latex.codecogs.com/png.latex?G_F"> by the fitness landscape <img src="https://latex.codecogs.com/png.latex?F"> by defining resource limitations, communication costs, metabolic expenses and interaction protocols that create selection pressure on agent behaviours.</p>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Recipe:</strong> Napa cabbage kimchi <em>(vaguely Noma-inspired)</em></p>
-<ul>
-<li>1kg napa cabbage, cut into bite-sized pieces</li>
-<li>60g sea salt</li>
-<li>2 tbsp nước chấm</li>
-<li>2 tbsp gochugaru</li>
-<li>3 cloves garlic, minced</li>
-<li>20g fresh ginger, grated</li>
-<li>2 spring onions, sliced</li>
-<li>1 tsp raw honey</li>
-</ul>
-<p>Salt the cabbage thoroughly. Let rest 2-3 hours. Rinse and squeeze dry. Mix remaining ingredients into a paste (wear gloves – nước chấm will make your hands stink to high heaven), massage into cabbage. Pack tightly into jar, leaving 2-3 cm headspace, and ferment at room temperature for 3-5 days, releasing pressure daily. Refrigerate once it reaches your desired tanginess.</p>
-</div></div><p>Jointly, these constraints create selection pressure that guides evolution without dictating outcomes. Consider what this enables: A system facing a new class of problems might spawn specialist agents efficient for that problem type. These specialists persist if they provide value, disappear if they don’t. Agents discover collaboration patterns that prove fruitful and strengthen those connections, and the system evolves toward metabolic efficiency without any explicit optimisation.</p>
-<p>This is the power of evolutionary speciation over specification: species emerge from evolutionary pressure, rather than being designed explicitly, as does their conduct and interactions. The ‘agents’, just like the bacterial species in a jar of kimchi, explore the solution space defined by the constraints, and the population structure adapts not to what someone defines but to what the environment at the time demands.</p>
-</section>
-<section id="how-to-rescue-agentic-ai" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-rescue-agentic-ai">How to rescue agentic AI</h2>
-<p>We’re in deep kimchi – but we don’t have to be. AI had to endure a decade-and-half winter before being resuscitated in 1986. We may be fortunate enough to avoid it this time around – but we won’t get there by better workflow diagrams. We’ll get there through the system perspective, just as it was the system perspective that saved neural networks.</p>
-<p>The autonomies – connective, task, genetic – define what mature agentic systems are capable of. But realising that capability requires shifting our design attention from the autonomies to the constraints, and learn how to stop micromanaging and instead govern the system through conditioning its fitness landscape (in short: <a href="../../posts/biome-engineering/index.html">biome engineering</a>).</p>
-<p>If you’re still drawing boxes and arrows, still thinking about “my code agent talking to my research agent”, still trying to orchestrate individual interactions – you’re hand-coding what should be left to evolution. The anthropomorphic language of “agents” has been useful for explaining these systems to non-technical audiences, but we have outgrown it – it is now actively hindering our ability to design them properly. Agents aren’t little employees inside the machine or characters of a story. But their collectivities can give rise to the same kind of emergent behaviour that lets a stack of trivial computations self-organise into ChatGPT, AlphaFold or whatever fresh hell Sora is doing right now.</p>
-<p>Agentic AI isn’t doomed – but micromanagement of agents doesn’t scale, and that imposes an upper bound. We have kimchi and sauerkraut and pickles because the civilisations that came up with them were unencumbered by software architects and Microsoft Visio. They just designed the brine, set the temperature and let nature take its course. We should probably learn from that.</p>
-<p>Stop trying to direct the bacteria. Start designing the brine.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
-  author = {{Chris von Csefalvay}},
-  title = {Deep Kimchi},
-  date = {2025-10-25},
-  url = {https://chrisvoncsefalvay.com/posts/deep-kimchi/},
-  doi = {10.59350/c8085-dj650},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> <a href="https://doi.org/10.59350/c8085-dj650">https://doi.org/10.59350/c8085-dj650</a>.
-</div></div></section></div> ]]></description>
-  <category>LLMs</category>
-  <category>AI</category>
-  <category>agentic AI</category>
-  <category>evolution</category>
-  <guid>https://chrisvoncsefalvay.com/posts/deep-kimchi/</guid>
-  <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>SOYA - the only benchmark that matters</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
   <link>https://chrisvoncsefalvay.com/posts/soya/</link>
@@ -3765,7 +3597,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-15804"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-15804").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-47073"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-47073").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -3863,7 +3695,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-65169"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-65169").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-62671"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-62671").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -4348,6 +4180,198 @@ Predictions.”</span> <a href="https://chrisvoncsefalvay.com/posts/five-wild-gu
   <guid>https://chrisvoncsefalvay.com/posts/five-wild-guesses/</guid>
   <pubDate>Tue, 31 Dec 2024 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/five-wild-guesses/header.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>LAIR - Language As Intermediate Representation</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/lair/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The awesome thing about language is that, well, we all mostly speak it, to some extent or another. This gives us an immensely powerful tool to manipulate transformational tasks. For the purposes of this post, I consider a transformational task to be essentially anything that takes an input and is largel intended to return some version of the same thing. This is not a very precise definition, but it will have to do for now.</p>
+<p>Such models are nothing new. Perhaps the most eye-catching and ubiquitous of such models are <a href="https://www.tensorflow.org/tutorials/generative/style_transfer">neural style transfer</a> models that take an image and return a version of the same image in a different style that let you turn a picture of your dog into a Van Gogh painting <span class="citation" data-cites="gatys2015neural">(Gatys, Ecker, and Bethge 2015)</span>. Quite simply put, these models are your typical generative model, with the difference that it takes two separate loss definitions: content loss, which is loss of the generated image vis-a-vis the content reference, and style loss, which is the loss vis-a-vis the style reference image. A “good” image then is one that minimises total loss, i.e.&nbsp;it’s just as close to your dog as it is to Van Gogh. Figure&nbsp;1 outlines this logic.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-gatys2015neural" class="csl-entry">
+Gatys, Leon A, Alexander S Ecker, and Matthias Bethge. 2015. <span>‘A Neural Algorithm of Artistic Style’</span>. <em>arXiv Preprint arXiv:1508.06576</em>.
+</div></div><div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-nst" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-nst">flowchart TD
+    C["Content image"]
+    S["Style image"]
+
+    G["Generated image"]
+
+    G --&gt; L["Loss network"]
+    L --&gt; G
+    
+    C -- "Content loss" --&gt; L
+    S -- "Style loss" --&gt; L
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A rough outline of NST.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Given a content source image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bc%7D"> and a style reference image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bs%7D">, we define the total loss of our generated image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bg%7D"> as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Btotal%7D%20=%20%5Calpha%20%5Cmathcal%7BL%7D_%7Bcontent%7D%20+%20%5Cbeta%20%5Cmathcal%7BL%7D_%7Bstyle%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Calpha"> and <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> are hyperparameters that control the relative importance of the content and style losses. The content loss for layer <img src="https://latex.codecogs.com/png.latex?l"> is defined as</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bcontent%7D(%5Cvec%7Bc%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_%7Bi,j%7D%20(%5Cvec%7Bc%7D_%7Bij%7D%5El%20-%20%5Cvec%7Bg%7D_%7Bij%7D%5El)%5E2%0A"></p>
+<p>which is basically a simple squared error loss between the feature vector of the content image and the generated image at layer <img src="https://latex.codecogs.com/png.latex?l">. The style loss is a bit more complicated, and is these days typically defined as the Maximum Mean Discrepancy, which <span class="citation" data-cites="li2017demystifying">Li et al. (2017)</span> have shown is essentially equivalent to the Gram matrix loss, defined as</p>
+<div class="no-row-height column-margin column-container"><div id="ref-li2017demystifying" class="csl-entry">
+Li, Yanghao, Naiyan Wang, Jiaying Liu, and Xiaodi Hou. 2017. <span>‘Demystifying Neural Style Transfer’</span>. <a href="https://arxiv.org/abs/1701.01036">https://arxiv.org/abs/1701.01036</a>.
+</div></div><p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bstyle%7D(%5Cvec%7Bs%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B4N_l%5E2M_l%5E2%7D%20%5Csum_%7Bi,j%7D%20(%5Cmathbf%7BG%7D_%7Bij%7D%5El%20-%20%5Cmathbf%7BS%7D_%7Bij%7D%5El)%5E2%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BG%7D_%7Bij%7D%5El"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BS%7D_%7Bij%7D%5El"> are the Gram matrices of the generated reference image and the style image at layer <img src="https://latex.codecogs.com/png.latex?l">, respectively. <img src="https://latex.codecogs.com/png.latex?N%5El"> is the number of feature maps in layer <img src="https://latex.codecogs.com/png.latex?l"> and <img src="https://latex.codecogs.com/png.latex?M_l"> is the dimensionality (height times width) of the feature map of layer <img src="https://latex.codecogs.com/png.latex?l">. There are two fundamental problems with this.</p>
+<ol type="1">
+<li>This works much less well for things that aren’t images or at least sufficiently similar to images.</li>
+<li>The bigger problem is that the style reference is pretty much exhaustive. By that, I mean that there isn’t much we can convey to the model about the style that isn’t encapsulated in the style reference images. Depending on how semantically apt your model is, it may or may not be able to pick up some higher level ideas. It may be able to pick up the brush strokes of Van Gogh or the colours of a Turner, but it may not be able to paint your characters in the semantic context of Van Gogh’s time and place.</li>
+</ol>
+<p>This is where language comes in. Language is a very powerful tool for conveying information, and it turns out that if we use language as an intermediate representation, we can use language models to manipulate this intermediate representation to our heart’s content, using a relatively informal and rather forgiving language. This is the idea behind LAIR.</p>
+<section id="a-toy-example" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="a-toy-example">A toy example</h2>
+<p>I’m a firm believer in silly toy examples. The sillier, the better. So, we’ll start with the following proposition: can we create a model that will look at a photo from, say, the front page of our favourite newspaper, and transpose it into the Warhammer 40k universe? In case you’re unfamiliar, Warhammer 40k is set – as the name suggests – in the 40th millennium, but is a weird mixture of medieval and futuristic technology. The whole atmosphere is taking the ‘Dark Ages’ part of the Middle Ages,<sup>1</sup> adding spaceships and laser guns, and turning the whole thing into an absolutely depressing dystopia. It’s a lot of fun.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Which may or may not ever have actually existed.</p></div></div><p>There are a few things we want here: I don’t merely want the <em>visual</em> style of the Warhammer 40k universe, I also want the <em>semantics</em> – that is, I want characters to be transposed into the Warhammer 40k universe. I want the model to understand that the people in the photo are now Space Marines, and that the buildings are now Gothic cathedrals. I can’t get neural transfer to that for me, because it does not understand, or care, about semantics, and does not do semantic transformation. More importantly, I cannot interact with the ‘guts’ of neural style transfer beyond setting the hyperparameters and the source images.</p>
+<p>What I can, however, do is to use the language I am mostly most proficient in – that is, human language – to manipulate an intermediate representation.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-lair" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-lair">flowchart LR
+    subgraph Description
+        direction TB
+        S["Source image"] --&gt; D("Descriptor\ne.g. GPT-4 vision") --&gt; d["Description"]
+    end
+
+    subgraph Transformation
+        direction TB
+        t("Transformer\ne.g. GPT-4") --&gt; td["Transformed\ndescription"]
+    end
+
+    subgraph Rendering
+        direction TB
+        r("Renderer\ne.g. DALL-E") --&gt; I["Output\nimage"]
+    end
+
+    Description --&gt; Transformation --&gt; Rendering
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: A rough outline of LAIR as applied to the toy example.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure&nbsp;2 outlines the basic idea for images. We use a descriptor model to describe the image, and then use a text-to-text transformer to transform the description. The transformed description is then rendered into an image. The descriptor model is typically a vision model, and the transformer is typically a language model. The renderer would then be a generative model.</p>
+<p>Consider the following source image I downloaded from Pexels:</p>
+<div id="fig-source" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/lair/pexels-canva-studio-3153198.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Our source image.
+</figcaption>
+</figure>
+</div>
+<p>Here’s the intermediate representation (IR) description created by GPT-4 vision:</p>
+<blockquote class="blockquote">
+<p>This is an image of four individuals gathered around a laptop, suggesting a collaborative work environment. The setting has an ample amount of natural light, evident by the bright illumination on the subjects and the interior. They appear to be located in a modern indoor environment with a large curved window in the background, contributing to the light-flooded ambiance.</p>
+<p>Starting from the left, the first individual is a man with short, dark hair and a light beard, wearing a black t-shirt with a white graphic and text. He appears focused, resting his hands on the laptop while looking at the screen. To his right is a woman with shoulder-length curly hair who seems engaged and smiling, leaning slightly towards the laptop. She’s wearing a light grey short-sleeved top.</p>
+<p>Behind these two and slightly out of focus, two more individuals are present. The person in the middle of the composition is a man with shoulder-length wavy hair, wearing a black shirt, gazing at the laptop screen. To the far right, partially cropped out of the frame, there is a woman with glasses, wearing a dark business casual blazer. She seems to be observing the laptop’s screen with interest, standing slightly behind the seated individuals.</p>
+<p>The group exhibits a sense of teamwork and focus, with everyone’s attention directed toward the laptop, situated on what appears to be a white table or desk. The body language and expressions suggest a positive, collaborative atmosphere, typical of a professional or academic team setting.</p>
+</blockquote>
+<p>This is a pretty decent description. Let’s grimdark it up by passing it to our transformer model, which was initialised with the following prompt:</p>
+<blockquote class="blockquote">
+<p>Your job is to analyze descriptions of images and change them to transpose the image into the dark, futuristic aesthetic of the Warhammer 40k universe. You are given a description of a scene, and your job is to change that scene according to the instructions, and give a detailed description of the changed scene that would allow a generative model to create an image.</p>
+<ol type="1">
+<li>Replace clothing items with a mixture of futuristic and mediaeval looking armour.</li>
+<li>Replace every-day objects held by characters with power swords, chainswords,futuristic looking guns, staffs or magic items.</li>
+<li>Replace architecture with the monumental, dark architecture common to the Warhammer 40k universe.</li>
+<li>Include things like monumental gothic spaceships in the image description.</li>
+</ol>
+</blockquote>
+<p>Here’s the output:</p>
+<blockquote class="blockquote">
+<p>This is an image of four battle-hardened individuals gathered around a hololith, suggesting a strategic war council. The setting is bathed in the cold, harsh light of flickering lumens, casting long, grim shadows on the figures and the interior. They appear to be situated in a cathedral-like command room of an Imperial Battleship, with a monumental, gothic archway in the background, contributing to the oppressive ambiance.</p>
+<p>Starting from the left, the first individual is an Adeptus Astartes, his short, dark hair and light beard visible beneath the rim of his power armor helmet. He is clad in a black power armor with white Imperial insignia. He appears focused, his gauntleted hands resting on the hololith while studying the battlefield projection. To his right, a Sororitas, her shoulder-length, curly hair peeking out from beneath her wimple, leans towards the holographic display. She’s clad in a light grey power armor, her face engaging and determined.</p>
+<p>Behind these two and slightly out of focus, two more figures loom. The figure in the middle of the composition is a man, his shoulder-length wavy hair barely visible beneath his Inquisitorial hat, wearing a black, ornate, medieval-looking armor, his eyes fixed on the hololith. To the far right, partially cropped out of the frame, there is a Tech-Priestess, her bionic glasses glinting in the lumen-light, her dark, mechanicus robes adding to her awe-inspiring presence. She seems to be observing the hololith with keen interest, standing slightly behind the armored individuals.</p>
+<p>The group gives off a sense of unity and focus, with everyone’s attention directed toward the hololith, situated on what appears to be an aged, white marble table. The body language and expressions suggest a tense, collaborative atmosphere, typical of a war council in the grim darkness of the far future.</p>
+</blockquote>
+<p>By the Emperor, that’s some good stuff. Let’s see what DALL-E makes of it:</p>
+<div id="fig-output" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/lair/img-eTqdxb5CYGT2vY5FqNkRJdva.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Our output image.
+</figcaption>
+</figure>
+</div>
+<p>It’s interesting to note what remains and what has changed. In particular, the relationship of the figures to each other, both spatially and semantically, as well as their posture, their number (mostly!) and the general subject matter at a highly semanticised level was preserved. Instead of a laptop, they’re looking at a big holographic sand table. Note that unlike in NST, we actually have control over what is preserved and what is not – that’s what our transformer prompt accomplishes. We’ve told it to change dress, for instance, but we haven’t told it to make any changes to the overall relationship between the figures (note how a “collaborative atmosphere”, for instance, was retained word for word).</p>
+</section>
+<section id="whats-the-point" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="whats-the-point">What’s the point?</h2>
+<p>Okay, this was quite fun, but what’s the point? Well, the point is that we can use language as an intermediate representation to manipulate things relatively easily. This is powerful because language is such an accessible and forgiving intermediate representation. More importantly, however, <em>anything</em> that can be represented in language can be manipulated this way.</p>
+<ul>
+<li>In the space of language-to-language, this includes adapting text to the needs of special audiences,<span class="citation" data-cites="steinmetz2023developing verma2023bridging">(Steinmetz 2023; Verma, Boland, and Miesenberger 2023)</span> conveying information to lay audiences <span class="citation" data-cites="lee2023ai">(Lee, Goldberg, and Kohane 2023)</span> and creating secondary explanatory materials e.g.&nbsp;statutory explanations <span class="citation" data-cites="blair2023can">(Blair-Stanek, Holzenberger, and Van Durme 2023)</span>.</li>
+<li>For image-to-image transformations, retaining semanticity while simpifying visuals and removing clutter may often be useful, e.g.&nbsp;for creating procedural visual guidance for medical procedures <span class="citation" data-cites="chen2023endoscopic">(Chen 2023)</span>. Often, such images are created by hand, but this is a time-consuming process that could be automated.</li>
+<li>For code-to-code, language as an intermediate representation allows the interjection of desired features into code, e.g.&nbsp;for the purposes of code refactoring. Beyond simple code rewriting, this allows a kind of opinionated transformation. Often, a target language is not only idiomatically different but also has certain other characteristics, and this is <em>a fortiori</em> the case for DSLs <span class="citation" data-cites="magalhaes2023c2taco">(Magalhães et al. 2023)</span>.</li>
+<li>For code-to-text, this allows the creation of documentation from code, which is a perennial problem in software engineering. The textual intermediate representation allows fine control over the resulting documentation.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="ref-steinmetz2023developing" class="csl-entry">
+Steinmetz, Ina. 2023. <span>‘Developing <span>“EasyTalk”</span>–a Writing System Utilizing Natural Language Processing for Interactive Generation of <span>“Leichte Sprache”</span>(easy-to-Read German) to Assist Low-Literate Users with Intellectual or Developmental Disabilities and/or Complex Communication Needs in Writing’</span>. <a href="https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf">https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf</a>.
+</div><div id="ref-verma2023bridging" class="csl-entry">
+Verma, A Kumar, S Gavra Boland, and Klaus Miesenberger. 2023. <span>‘Bridging the Digital Divide for Persons with Intellectual Disabilities: Assessing the Role of ChatGPT in Enabling Access, Evaluation, Integration, Management, and Creation of Digital Content’</span>. In <em>ICERI2023 Proceedings</em>, 3767–76. IATED.
+</div><div id="ref-lee2023ai" class="csl-entry">
+Lee, Peter, Carey Goldberg, and Isaac Kohane. 2023. <em>The AI Revolution in Medicine: GPT-4 and Beyond</em>. Pearson.
+</div><div id="ref-blair2023can" class="csl-entry">
+Blair-Stanek, Andrew, Nils Holzenberger, and Benjamin Van Durme. 2023. <span>‘Can GPT-3 Perform Statutory Reasoning?’</span> <em>arXiv Preprint arXiv:2302.06100</em>.
+</div><div id="ref-chen2023endoscopic" class="csl-entry">
+Chen, Hao-Wen. 2023. <span>‘Endoscopic Endonasal Skull Base Surgery for Pituitary Lesions: An AI-Assisted Creative Workflow to Develop an Animated Educational Resource for Patients and Physicians’</span>. PhD thesis, Johns Hopkins University.
+</div><div id="ref-magalhaes2023c2taco" class="csl-entry">
+Magalhães, José Wesley de Souza, Jackson Woodruff, Elizabeth Polgreen, and Michael FP O’Boyle. 2023. <span>‘C2TACO: Lifting Tensor Code to TACO’</span>. In <em>Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences</em>, 42–56.
+</div></div><p>The possibilities for using language as an intermediate representation are endless. LAIR is a powerful paradigm for transformational tasks that allows us to use language as an intermediate representation to manipulate things in a way that is both accessible and powerful, and that allows us to pick and choose <em>what</em> part of semanticity we want to manipulate <em>versus</em> what we want to preserve. It’s hard to reason about LAIR’s relative performance given that it is not a technique but a paradigm, and that its focus is not simple style transfer but finely controlled stylistic and contextual transformation, but even in the current absence of benchmarks, it is clear that models benefit from using language as an easily workable and malleable intermediate representation.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>The code for the toy example is available <a href="https://gist.github.com/chrisvoncsefalvay/f3c6e7547350cfae50be0078ad99435f">here</a>.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2024,
+  author = {{Chris von Csefalvay}},
+  title = {LAIR - {Language} {As} {Intermediate} {Representation}},
+  date = {2024-01-06},
+  url = {https://chrisvoncsefalvay.com/posts/lair/},
+  doi = {10.59350/qg7b3-crs97},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2024" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2024. <span>“LAIR - Language As Intermediate
+Representation.”</span> <a href="https://doi.org/10.59350/qg7b3-crs97">https://doi.org/10.59350/qg7b3-crs97</a>.
+</div></div></section></div> ]]></description>
+  <category>LLMs</category>
+  <category>AI</category>
+  <category>style transfer</category>
+  <guid>https://chrisvoncsefalvay.com/posts/lair/</guid>
+  <pubDate>Sat, 06 Jan 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/lair/header.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 </channel>
 </rss>
