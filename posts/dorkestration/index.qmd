@@ -1,0 +1,237 @@
+---
+title: Dorkestration
+description: Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.
+date: 2025-12-15
+image: header.png
+categories:
+- AI
+- agentic AI
+- LLMs
+- fine-tuning
+citation: true
+google-scholar: true
+---
+
+In the dying days of the Roman Republic, there existed a class of functionaries called *nomenclatores*. Their job was to whisper the names of approaching citizens into their patron's ear so that the great man could greet each one as if they were intimates. It was, in essence, human middleware: a layer of intelligence that sat between intention and execution, transforming the vague desire "I should be pleasant to these people" into the specific action of remembering that the fellow in the toga with the wine stain is called Gaius and his mother just died. The nomenclator didn't make decisions. He enabled them.
+
+I find myself thinking about nomenclatores rather a lot these days, because I've accidentally turned Claude Code into one. Not for social niceties, but for something equally tedious and equally important: orchestrating machine learning workloads.
+
+## The quiet tyranny of boilerplate
+
+Here's a confession: I don't vibe code. I know, I know. It's supposedly the hot new thing,^[For a given value of new. I suffer from late stage temporal displacement: I live about 8-9 months out from whatever the current date is. No, we still don't have hoverboards in late Summer 2026, sorry to disappoint.] and I'm meant to be breathlessly excited about asking a language model to build me a web app while I sip my flat white.^[Frustratingly, the magic _is_ there about this. Just not where people think it is.] But the truth is, most of my coding needs are rather more mundane. I need to fine-tune a model, I need to check that the data is in the right format, I need to submit a training job and I'd like to please not think about it until WandB tells me something interesting has happened.
+
+This is not creative work -- it's the plumbing part of ML, simultaneously crucial and boring. Nobody writes poetry about their CI/CD pipelines.^[If you do, please don't send them to me.]
+
+The traditional solution to this problem is to write scripts, lots and lots of scripts. These inevitably reach turtles-all-the-way-down complexity, until you have scripts with configuration files that nobody remembers how to update, scripts that worked six months ago and now mysteriously don't because somebody upgraded a dependency somewhere and scripts that are documented with lines like "it sounded like a good idea at the time". The more sophisticated alternative to scripts is to reach for Airflow or Kubeflow or one of the other tools that promise to turn your ML workflow into a directed acyclic graph of containerised tasks, complete with a UI that looks like someone tried to build Microsoft Visio inside a web browser and gave up halfway through.
+
+Both approaches share a fundamental problem: they require you to know exactly what you want before you start. You must specify every step, every parameter, every failure mode. There is no room for "I think maybe around `4e-5` for the learning rate, but honestly, use your judgment." The machine has no judgment to use.
+
+Until, of course, it does.
+
+
+## What everybody missed about tool use
+
+When MCP emerged and the discourse turned to tool calling, there was a kind of gold rush mentality. Everybody assumed we would need to build elaborate API ecosystems: a thousand MCP servers, a million tool definitions, bespoke clients for every conceivable service. The assumption was that tool use scales with the number of tools available.
+
+This assumption is wrong, and it's wrong in an interesting way.
+
+Consider what Claude Code actually has access to. Not thousands of specialised tools, but perhaps half a dozen primitives: browse the filesystem, write and execute bash, write and execute Python, create and edit files. That's essentially it. And yet Claude Code can do *anything* with these primitives, because they are computationally complete. If you can read files, write files, and execute arbitrary code, you can accomplish any computable task.^[This is, of course, the Church-Turing thesis applied to practical tooling. The specific tools don't matter so long as you have a universal set.]
+
+The magic isn't in having more tools but in having tools that can *make* other tools. When I need Claude to interact with a new API, I don't need to build an MCP server for it. I need Claude to write a Python script that calls that API. When I need to orchestrate a complex workflow, I don't need a specialised orchestration tool. I need Claude to compose a bash script that chains together the steps. The fundamental operations are sufficient precisely because they enable composition.
+
+This is what so many people continue to miss about the definition of 'tools' in agentic AI: they act as though tool use meant wrapping every possible API in a standardised interface. But the truly powerful pattern is recursive: agents that use their primitive tools to create new capabilities on the fly, capabilities that exist only for the duration of the task and then dissolve back into tokens. Tool use isn't about the breadth of your toolbox. It's about whether your tools can build other tools.
+
+
+## The nomenclator in the machine
+
+Which brings us to **dorkestration**, aka 'vibe coding for orchestrating ML' -- the use of coding agents like Claude Code to manage ML workloads. We're using a coding agent (which really is just fancy terminology for 'LLM trained to call tools that create executable code') not to write code in the traditional sense, but to serve as an intelligent intermediary between my intentions and the rather tedious specifics of actually getting a model trained.
+
+The insight is simple enough: a well-designed Claude skill can handle the entire training pipeline with remarkably little input. I provide a data source and a base model. Out comes a WandB link. The code is already running with sensible defaults. If I ask for hyperparameter optimisation, Optuna spins up and starts searching. I never have write a YAML file, debug a CUDA error or remember whether `--gradient_checkpointing` needs to be `true`, `True` or `enabled`.
+
+This is what coding agents are actually good for: not replacing programmers, but replacing the programmer-as-bureaucrat. All that busywork of marshalling data, checking formats, setting up environments, monitoring progress: this is nomenclator work that requires intelligence but not creativity, judgment but not vision. It is the kind of thing that a competent assistant could handle if you could explain to them what you wanted.
+
+And that's precisely what a coding agent is: a competent assistant who speaks enough technical language to translate "fine-tune this model on that data" into the forty-seven individual steps required to actually accomplish it.^[Which means we may rethink what a junior developer _is_. Rather than being an apprentice being made to do things we don't want to do, this may shift their role to what it always should have been: a collaborator who brings fresh ideas and perspectives to the table while the agent handles the tedious bits. The junior developer becomes an apprentice thinker for a master, not an indentured executor. It's not going to make the junior level (sub-L3) job market any less dire, but it is going to leave us, potentially, with a better future.]
+
+
+## Anatomy of a dorkestration
+
+Let me make this concrete. Here's what a typical fine-tuning session looks like with a properly configured Claude skill.
+
+I say: "Fine-tune Llama 3.1 8B on my preference data at `/data/preferences.jsonl`. Use LoRA, keep it cheap, let me know how it goes. See you in a bit."
+
+What happens next:
+
+1. **Data validation.** Claude examines the JSONL file, checks that it's in the expected format (conversations? preference pairs? instruction-response?), counts examples, looks for obvious problems like empty responses or malformed JSON.
+
+2. **Configuration generation.** Based on the model and data characteristics, Claude generates an Axolotl, TRL or Unsloth config with sensible defaults. For an 8B model with LoRA, this means reasonable rank and alpha values, appropriate learning rates, gradient checkpointing enabled because we're not made of VRAM.^[As a shareholder of NVIDIA, please ignore this sentence and pretend you _are_. That 0.7B model? Totally needs a Grace Blackwell. My stockbroker and my retirement fund thank you.]
+
+3. **Environment setup.** Claude checks that the necessary packages are installed, that CUDA is accessible, that there's enough disk space. If we're running on a serverless endpoint (Modal, RunPod, Lambda Labs), it handles the deployment.
+
+4. **Training submission.** The job starts. WandB logging is configured automatically. I get a link.
+
+5. **Monitoring.** If I've set up the WandB MCP integration, Claude can actually check on progress, alert me to anomalies, and suggest early stopping if the loss curves look pathological.^[Interesting curiosity: Claude has been much better at spotting early signs of failure from screenshots of the WandB dashboard than from the raw data. I'd love for any of my Anthropic readers who are in the Vision team to explain this. You know where to reach me.]
+
+6. **Optional: Optuna.** If I've indicated interest in hyperparameter search, Claude sets up an Optuna study with sensible search spaces, launches multiple trials, and reports back on the best configuration.
+
+The whole thing takes maybe thirty seconds of my attention. The first time I configured this properly, I felt like I'd hired a very competent but slightly literal-minded research assistant. One who would never forget to enable `bf16` training on Ampere GPUs, but who also needed explicit permission to do anything beyond the literal scope of the request.
+
+
+## The skill itself
+
+::: {.column-margin}
+***
+
+**Recipe:** Carbonara for the impatient
+
+Gets done in about the time a decent 3B model fine-tunes on a small data set using enough compute to power a small village.
+
+* 200g guanciale (or pancetta, or bacon if you're desperate). Don't ask for it in grams. Just buy a ton and do the science-y thing in the privacy of your kitchen.
+* 400g spaghetti
+* 4 egg yolks
+* 100g Pecorino Romano, finely grated
+* Black pepper, lots of it
+
+Cook the pasta. While it boils, render the guanciale slowly in a cold pan brought up to medium heat. Beat the yolks with the cheese and pepper until you have a thick paste. When the pasta is done, reserve a cup of pasta water, then toss the drained pasta with the guanciale. Remove from heat. Wait thirty seconds. Add the egg mixture and toss vigorously, adding pasta water as needed until you have a glossy sauce. The residual heat cooks the eggs without scrambling them. Serve immediately. If you've done it right, you'll have pasta and gradient returns around the same time.
+***
+:::
+
+For those who want to implement something similar, here's the skeleton of a Claude skill for fine-tuning orchestration:
+
+```markdown
+# Fine-tuning orchestrator
+
+## Trigger conditions
+- User wants to fine-tune a language model
+- User provides a data source and base model
+- Keywords: "fine-tune", "finetune", "train", "LoRA", "QLoRA"
+
+## Workflow
+
+### 1. Data validation
+Before anything else, examine the data source:
+- Determine format (JSONL, CSV, Parquet, HuggingFace dataset)
+- Identify structure (conversations, instruction-response, preference pairs)
+- Count examples and estimate training time
+- Check for obvious issues (empty fields, encoding problems, truncation)
+
+Report findings and proceed only with user confirmation.
+
+### 2. Configuration
+Based on model size and data type, generate appropriate config:
+
+For Unsloth (recommended for single-GPU):
+- Use 4-bit quantisation for models >7B
+- LoRA rank 16-64 depending on task complexity
+- Learning rate 2e-4 for QLoRA, 1e-5 for full fine-tuning
+- Gradient checkpointing enabled by default
+
+For Axolotl (recommended for multi-GPU or complex setups):
+- Generate YAML config with appropriate settings
+- Use deepspeed_zero2 for multi-GPU
+- Configure WandB logging automatically
+
+### 3. Environment
+Check and configure:
+- CUDA availability and version
+- Required packages (transformers, peft, bitsandbytes, etc.)
+- Disk space for checkpoints
+- WandB authentication
+
+If using serverless (Modal/RunPod/Lambda):
+- Generate deployment script
+- Configure appropriate GPU type
+- Set up volume mounts for data and outputs
+
+### 4. Execution
+- Start training with configured parameters
+- Provide WandB link immediately
+- Log checkpoint locations
+
+### 5. Optional: Hyperparameter search
+If requested, configure Optuna study:
+- Search space: learning_rate [1e-5, 5e-4], lora_r [8, 64], lora_alpha [16, 128]
+- Objective: validation loss
+- Pruning: Median pruner after 100 steps
+- Report best configuration and provide config file
+```
+
+The key insight is that this isn't really a "skill" in the sense of specialised knowledge, but more like a well-structured set of default behaviors that Claude can adapt to specific circumstances. The skill tells Claude what to check, in what order, with what defaults. Claude supplies the judgment calls: is this data format unusual? Is this model small enough to fit in memory? Should we be concerned about this warning?
+
+
+## Why this works (and why traditional tools don't)
+
+I've written elsewhere about [the gap between excellent infrastructure and models' ability to use it](../mcp-mcpmark/index.qmd). MCP is beautifully designed but so often let down by models not showing up. Orchestration, though, is different. Traditional workflow tools fail at ML orchestration because ML is inherently exploratory: you don't know what hyperparameters will work until you try them. You don't know if the data is clean until you look at it. You don't know if the model is converging until you see the loss curves. Every step requires conditional logic, and the conditions aren't known in advance. Simple optimisers/tuners like Optuna are great, but LLMs have complexity and judgment that go far beyond what a static configuration can capture.
+
+Coding agents handle this naturally because they can actually look at things. When Claude validates your data, it's not checking against a schema. It's looking at actual examples and making judgments about whether they seem reasonable. When it suggests a learning rate, it's considering the model size, the dataset characteristics, the training duration. It's doing what a knowledgeable human would do, except it doesn't get bored or distracted or forget that one crucial flag.
+
+The "ephemeral UI" framing is perhaps the most useful way to think about this. Traditional UIs are persistent: you build them once and they exist forever, gradually accumulating technical debt and increasingly byzantine configuration options. An ephemeral UI exists only for the duration of the task. You describe what you want in natural language, the agent interprets it, and when the task is done, the "UI" dissolves back into tokens. No maintenance. No versioning. No documentation to keep updated.^[This is, incidentally, why I think the current wave of low-code/no-code ML tools is somewhat missing the point. They're trying to build better persistent UIs when what we actually need is better ephemeral ones. A drag-and-drop interface for configuring training pipelines will always be limited by the imagination of its designers. A coding agent is limited only by the underlying capabilities of the tools it can access.]
+
+
+## Crystallising knowledge
+
+Here's where it gets properly interesting. Unsloth, one of the more popular fine-tuning libraries, has [over a hundred example notebooks](https://github.com/unsloth/notebooks) (and they're brilliant). Different model architectures, different data formats, different training regimes. It's a wealth of institutional knowledge, but it's scattered across dozens of files, each demonstrating a slightly different approach.
+
+Claude's skill creator can read all of them, distill the key patterns, and crystallise them into a coherent skill. Not just copying configurations, but understanding *why* certain settings work together: that QLoRA with 4-bit quantisation needs different learning rates than full fine-tuning, that gradient checkpointing trades compute for memory, that certain models respond better to particular LoRA ranks. This distilled knowledge then informs every future interaction.
+
+This is what true agentic interaction looks like. Not just calling tools, but using tools to create new capabilities. The skill creator reads documentation, examines examples, synthesises understanding, and produces a structured artefact that makes future tasks easier. It's recursive improvement: the agent uses its primitive tools to build better tools for itself.
+
+I've been building out a small collection of these skills, including one for [hyperparameter optimisation on Hugging Face Jobs](https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna) that integrates Optuna with serverless GPU endpoints. The entire interaction looks like this:
+
+> Hi, Claude. Can you finetune Qwen/Qwen2.5-0.5B on a 2k subsample of wikitext/wikitext-2-raw-v1 using your optuna-hpo skill to figure out the ideal training hyperparameters? Your budget is $5. Do it on Hugging Face Jobs. And please launch the Gradio dashboard for me, too.
+
+Claude responds, and then just... does it. Creates an Optuna study. Generates trial scripts. Submits jobs to HF Jobs. Polls for completion. Extracts metrics. Launches a dashboard. All automatically. Within two trials and $0.18 spent, it found a 6% improvement by discovering that a higher learning rate with a smaller LoRA rank worked better for that particular configuration.
+
+The skill encapsulates not just the mechanical steps but the judgment calls: reasonable search spaces for different model sizes, pruning strategies that don't waste compute on obviously bad trials, budget tracking that stops before you bankrupt yourself on cloud GPUs. None of this required building elaborate MCP integrations. Claude wrote Python scripts, executed them, parsed the results, and iterated. The primitive tools were sufficient.
+
+And this pattern generalises far beyond ML training. Playwright testing? Same idea: Claude can orchestrate browser automation, validate that pages render correctly, generate test reports. Data pipeline validation? Configuration management? Any task that requires intelligence but follows repeatable patterns is a candidate for dorkestration.
+
+
+## The human in the loop
+
+I should be clear about what dorkestration is _not_. It is not autonomous ML research. It is not a replacement for understanding what you're doing. It is very definitely not a way to fine-tune models if you have no idea why you're fine-tuning them or what success looks like.
+
+What it is is a way to eliminate the bureaucratic overhead that sits between "I know what I want to do" and "the thing is actually happening." It assumes you have the domain knowledge to specify the task, evaluate the results and make decisions about next steps.
+
+This is, I think, the correct way to think about coding agents more generally. They're not replacing humans, but the tedious parts of being human: the parts where you're not thinking creatively or making important decisions, but rather remembering syntax and copying file paths and checking that the bloody GPU hasn't run out of memory.
+
+In the nomenclator analogy: the great man still has to decide whom to speak with and what to say. The nomenclator just whispers the names.
+
+
+::: {.callout-tip}
+## Practical notes
+
+A few things I've learned from several months of using this approach:
+
+**Start with Unsloth for simplicity.** Axolotl is more powerful but has more moving parts. When you're debugging your skill rather than your model, simplicity wins. Once the workflow is solid, add complexity.
+
+**The WandB MCP integration is crucial.** Without it, you're just launching jobs into the void. With it, Claude can actually tell you how things are going, suggest early stopping, compare runs. For HF Jobs specifically, the built-in logging handles this, but for local or other cloud setups, WandB is the glue.
+
+**Sensible defaults beat flexibility.** The temptation is to expose every possible parameter. Resist it. A good skill should work 80% of the time with zero configuration. The other 20% is what natural language is for.
+
+**Test the failure modes.** What happens when the data is malformed? When CUDA isn't available? When the model doesn't fit in memory? A good skill handles these gracefully, with informative error messages and suggested remedies.
+
+**Keep the skill updated.** Libraries change. New best practices emerge. The skill is a living document, not a one-time configuration.
+
+If you want to try the HPO workflow yourself, I've written up [detailed instructions on Hugging Face](https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna). The short version: install the skill, export your HF token, and ask Claude to optimise your model. Be specific about budget, search space and hardware. The skill handles the rest.
+
+For teams rather than individuals, the [Sionic AI post on Claude Code skills](https://huggingface.co/blog/sionic-ai/claude-code-skills-training) explores how to build a shared knowledge registry: their `/advise` and `/retrospective` commands let researchers capture experimental learnings so the next person doesn't repeat the same mistakes. It's the team-scale version of what I'm describing here.
+:::
+
+
+## The broader picture
+
+If this seems like a minor optimisation, consider the cumulative effect. Every time I need to fine-tune a model, I save perhaps an hour of fiddling with configuration files and debugging environment issues. Over a year, that's several weeks of reclaimed time. Weeks that I can spend on the parts of the work that actually require human judgment: designing experiments, interpreting results, deciding what to try next.
+
+But there's something more fundamental here than time savings. What dorkestration reveals is the true nature of tool use in agentic systems.
+
+When the discourse around MCP and tool calling first emerged, the implicit assumption was that we needed to build an elaborate ecosystem of specialised tools. Every API would need its wrapper. Every service would need its integration. The path to capable agents was through comprehensiveness: more tools, more capabilities, more coverage.
+
+This was, I think, a category error. It confused the map for the territory.
+
+The real insight is that a small set of compositional primitives -- read, write, execute -- is sufficient for any computable task. Claude Code doesn't need a thousand MCP servers. It needs the ability to *make* whatever tool is required for the task at hand, use it, and then let it dissolve. The tools are ephemeral. The capability is permanent.
+
+This is, I suspect, the actual future of agentic AI in practice. Not autonomous systems that replace human decision-making, but intelligent assistants that handle the mechanical substrate on which human decisions operate. Not conductors that lead the orchestra, but stage managers who ensure the musicians have stands and the lights are working. Not elaborate toolboxes but universal fabricators.
+
+The nomenclator didn't make Cicero a better orator. But he did allow Cicero to focus on oratory rather than memorising the names of every client who wandered into the Forum. And perhaps that's enough. Perhaps the great contribution of agentic AI won't be replacing human intelligence, but liberating it from the bureaucratic overhead that has always been the tax we pay for getting things done.
+
+In the meantime, my model is training, WandB is logging, and I'm writing this instead of checking whether `torch.cuda.is_available()` returns `True`. The nomenclator is whispering the names. I'm free to think about what to say.
