@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2025-12-15">
+<meta name="description" content="Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.">
+
+<title>Dorkestration – Chris von Csefalvay</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a4d8066ab99c821fadc425098389dfee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
+
+
+<meta property="og:title" content="Dorkestration – Chris von Csefalvay">
+<meta property="og:description" content="Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/dorkestration/header.png">
+<meta property="og:site_name" content="Chris von Csefalvay">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:width" content="1024">
+<meta name="twitter:title" content="Dorkestration – Chris von Csefalvay">
+<meta name="twitter:description" content="Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/dorkestration/header.png">
+<meta name="twitter:image-height" content="1024">
+<meta name="twitter:image-width" content="1024">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="Dorkestration">
+<meta name="citation_author" content="Chris von Csefalvay">
+<meta name="citation_publication_date" content="2025-12-15">
+<meta name="citation_cover_date" content="2025-12-15">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-12-15">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/dorkestration/">
+<meta name="citation_language" content="en-GB">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-quiet-tyranny-of-boilerplate" id="toc-the-quiet-tyranny-of-boilerplate" class="nav-link active" data-scroll-target="#the-quiet-tyranny-of-boilerplate">The quiet tyranny of boilerplate</a></li>
+  <li><a href="#what-everybody-missed-about-tool-use" id="toc-what-everybody-missed-about-tool-use" class="nav-link" data-scroll-target="#what-everybody-missed-about-tool-use">What everybody missed about tool use</a></li>
+  <li><a href="#the-nomenclator-in-the-machine" id="toc-the-nomenclator-in-the-machine" class="nav-link" data-scroll-target="#the-nomenclator-in-the-machine">The nomenclator in the machine</a></li>
+  <li><a href="#anatomy-of-a-dorkestration" id="toc-anatomy-of-a-dorkestration" class="nav-link" data-scroll-target="#anatomy-of-a-dorkestration">Anatomy of a dorkestration</a></li>
+  <li><a href="#the-skill-itself" id="toc-the-skill-itself" class="nav-link" data-scroll-target="#the-skill-itself">The skill itself</a></li>
+  <li><a href="#why-this-works-and-why-traditional-tools-dont" id="toc-why-this-works-and-why-traditional-tools-dont" class="nav-link" data-scroll-target="#why-this-works-and-why-traditional-tools-dont">Why this works (and why traditional tools don’t)</a></li>
+  <li><a href="#crystallising-knowledge" id="toc-crystallising-knowledge" class="nav-link" data-scroll-target="#crystallising-knowledge">Crystallising knowledge</a></li>
+  <li><a href="#the-human-in-the-loop" id="toc-the-human-in-the-loop" class="nav-link" data-scroll-target="#the-human-in-the-loop">The human in the loop</a></li>
+  <li><a href="#the-broader-picture" id="toc-the-broader-picture" class="nav-link" data-scroll-target="#the-broader-picture">The broader picture</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Dorkestration</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">agentic AI</div>
+    <div class="quarto-category">LLMs</div>
+    <div class="quarto-category">fine-tuning</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">15 December 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the dying days of the Roman Republic, there existed a class of functionaries called <em>nomenclatores</em>. Their job was to whisper the names of approaching citizens into their patron’s ear so that the great man could greet each one as if they were intimates. It was, in essence, human middleware: a layer of intelligence that sat between intention and execution, transforming the vague desire “I should be pleasant to these people” into the specific action of remembering that the fellow in the toga with the wine stain is called Gaius and his mother just died. The nomenclator didn’t make decisions. He enabled them.</p>
+<p>I find myself thinking about nomenclatores rather a lot these days, because I’ve accidentally turned Claude Code into one. Not for social niceties, but for something equally tedious and equally important: orchestrating machine learning workloads.</p>
+<section id="the-quiet-tyranny-of-boilerplate" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-quiet-tyranny-of-boilerplate">The quiet tyranny of boilerplate</h2>
+<p>Here’s a confession: I don’t vibe code. I know, I know. It’s supposedly the hot new thing,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and I’m meant to be breathlessly excited about asking a language model to build me a web app while I sip my flat white.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> But the truth is, most of my coding needs are rather more mundane. I need to fine-tune a model, I need to check that the data is in the right format, I need to submit a training job and I’d like to please not think about it until WandB tells me something interesting has happened.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;For a given value of new. I suffer from late stage temporal displacement: I live about 8-9 months out from whatever the current date is. No, we still don’t have hoverboards in late Summer 2026, sorry to disappoint.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Frustratingly, the magic <em>is</em> there about this. Just not where people think it is.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;If you do, please don’t send them to me.</p></div></div><p>This is not creative work – it’s the plumbing part of ML, simultaneously crucial and boring. Nobody writes poetry about their CI/CD pipelines.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>The traditional solution to this problem is to write scripts, lots and lots of scripts. These inevitably reach turtles-all-the-way-down complexity, until you have scripts with configuration files that nobody remembers how to update, scripts that worked six months ago and now mysteriously don’t because somebody upgraded a dependency somewhere and scripts that are documented with lines like “it sounded like a good idea at the time”. The more sophisticated alternative to scripts is to reach for Airflow or Kubeflow or one of the other tools that promise to turn your ML workflow into a directed acyclic graph of containerised tasks, complete with a UI that looks like someone tried to build Microsoft Visio inside a web browser and gave up halfway through.</p>
+<p>Both approaches share a fundamental problem: they require you to know exactly what you want before you start. You must specify every step, every parameter, every failure mode. There is no room for “I think maybe around <code>4e-5</code> for the learning rate, but honestly, use your judgment.” The machine has no judgment to use.</p>
+<p>Until, of course, it does.</p>
+</section>
+<section id="what-everybody-missed-about-tool-use" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-everybody-missed-about-tool-use">What everybody missed about tool use</h2>
+<p>When MCP emerged and the discourse turned to tool calling, there was a kind of gold rush mentality. Everybody assumed we would need to build elaborate API ecosystems: a thousand MCP servers, a million tool definitions, bespoke clients for every conceivable service. The assumption was that tool use scales with the number of tools available.</p>
+<p>This assumption is wrong, and it’s wrong in an interesting way.</p>
+<p>Consider what Claude Code actually has access to. Not thousands of specialised tools, but perhaps half a dozen primitives: browse the filesystem, write and execute bash, write and execute Python, create and edit files. That’s essentially it. And yet Claude Code can do <em>anything</em> with these primitives, because they are computationally complete. If you can read files, write files, and execute arbitrary code, you can accomplish any computable task.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is, of course, the Church-Turing thesis applied to practical tooling. The specific tools don’t matter so long as you have a universal set.</p></div></div><p>The magic isn’t in having more tools but in having tools that can <em>make</em> other tools. When I need Claude to interact with a new API, I don’t need to build an MCP server for it. I need Claude to write a Python script that calls that API. When I need to orchestrate a complex workflow, I don’t need a specialised orchestration tool. I need Claude to compose a bash script that chains together the steps. The fundamental operations are sufficient precisely because they enable composition.</p>
+<p>This is what so many people continue to miss about the definition of ‘tools’ in agentic AI: they act as though tool use meant wrapping every possible API in a standardised interface. But the truly powerful pattern is recursive: agents that use their primitive tools to create new capabilities on the fly, capabilities that exist only for the duration of the task and then dissolve back into tokens. Tool use isn’t about the breadth of your toolbox. It’s about whether your tools can build other tools.</p>
+</section>
+<section id="the-nomenclator-in-the-machine" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-nomenclator-in-the-machine">The nomenclator in the machine</h2>
+<p>Which brings us to <strong>dorkestration</strong>, aka ‘vibe coding for orchestrating ML’ – the use of coding agents like Claude Code to manage ML workloads. We’re using a coding agent (which really is just fancy terminology for ‘LLM trained to call tools that create executable code’) not to write code in the traditional sense, but to serve as an intelligent intermediary between my intentions and the rather tedious specifics of actually getting a model trained.</p>
+<p>The insight is simple enough: a well-designed Claude skill can handle the entire training pipeline with remarkably little input. I provide a data source and a base model. Out comes a WandB link. The code is already running with sensible defaults. If I ask for hyperparameter optimisation, Optuna spins up and starts searching. I never have write a YAML file, debug a CUDA error or remember whether <code>--gradient_checkpointing</code> needs to be <code>true</code>, <code>True</code> or <code>enabled</code>.</p>
+<p>This is what coding agents are actually good for: not replacing programmers, but replacing the programmer-as-bureaucrat. All that busywork of marshalling data, checking formats, setting up environments, monitoring progress: this is nomenclator work that requires intelligence but not creativity, judgment but not vision. It is the kind of thing that a competent assistant could handle if you could explain to them what you wanted.</p>
+<p>And that’s precisely what a coding agent is: a competent assistant who speaks enough technical language to translate “fine-tune this model on that data” into the forty-seven individual steps required to actually accomplish it.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Which means we may rethink what a junior developer <em>is</em>. Rather than being an apprentice being made to do things we don’t want to do, this may shift their role to what it always should have been: a collaborator who brings fresh ideas and perspectives to the table while the agent handles the tedious bits. The junior developer becomes an apprentice thinker for a master, not an indentured executor. It’s not going to make the junior level (sub-L3) job market any less dire, but it is going to leave us, potentially, with a better future.</p></div></div></section>
+<section id="anatomy-of-a-dorkestration" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-dorkestration">Anatomy of a dorkestration</h2>
+<p>Let me make this concrete. Here’s what a typical fine-tuning session looks like with a properly configured Claude skill.</p>
+<p>I say: “Fine-tune Llama 3.1 8B on my preference data at <code>/data/preferences.jsonl</code>. Use LoRA, keep it cheap, let me know how it goes. See you in a bit.”</p>
+<p>What happens next:</p>
+<ol type="1">
+<li><p><strong>Data validation.</strong> Claude examines the JSONL file, checks that it’s in the expected format (conversations? preference pairs? instruction-response?), counts examples, looks for obvious problems like empty responses or malformed JSON.</p></li>
+<li><p><strong>Configuration generation.</strong> Based on the model and data characteristics, Claude generates an Axolotl, TRL or Unsloth config with sensible defaults. For an 8B model with LoRA, this means reasonable rank and alpha values, appropriate learning rates, gradient checkpointing enabled because we’re not made of VRAM.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p></li>
+<li><p><strong>Environment setup.</strong> Claude checks that the necessary packages are installed, that CUDA is accessible, that there’s enough disk space. If we’re running on a serverless endpoint (Modal, RunPod, Lambda Labs), it handles the deployment.</p></li>
+<li><p><strong>Training submission.</strong> The job starts. WandB logging is configured automatically. I get a link.</p></li>
+<li><p><strong>Monitoring.</strong> If I’ve set up the WandB MCP integration, Claude can actually check on progress, alert me to anomalies, and suggest early stopping if the loss curves look pathological.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p></li>
+<li><p><strong>Optional: Optuna.</strong> If I’ve indicated interest in hyperparameter search, Claude sets up an Optuna study with sensible search spaces, launches multiple trials, and reports back on the best configuration.</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;As a shareholder of NVIDIA, please ignore this sentence and pretend you <em>are</em>. That 0.7B model? Totally needs a Grace Blackwell. My stockbroker and my retirement fund thank you.</p></div><div id="fn7"><p><sup>7</sup>&nbsp;Interesting curiosity: Claude has been much better at spotting early signs of failure from screenshots of the WandB dashboard than from the raw data. I’d love for any of my Anthropic readers who are in the Vision team to explain this. You know where to reach me.</p></div></div><p>The whole thing takes maybe thirty seconds of my attention. The first time I configured this properly, I felt like I’d hired a very competent but slightly literal-minded research assistant. One who would never forget to enable <code>bf16</code> training on Ampere GPUs, but who also needed explicit permission to do anything beyond the literal scope of the request.</p>
+</section>
+<section id="the-skill-itself" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-skill-itself">The skill itself</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<hr>
+<p><strong>Recipe:</strong> Carbonara for the impatient</p>
+<p>Gets done in about the time a decent 3B model fine-tunes on a small data set using enough compute to power a small village.</p>
+<ul>
+<li>200g guanciale (or pancetta, or bacon if you’re desperate). Don’t ask for it in grams. Just buy a ton and do the science-y thing in the privacy of your kitchen.</li>
+<li>400g spaghetti</li>
+<li>4 egg yolks</li>
+<li>100g Pecorino Romano, finely grated</li>
+<li>Black pepper, lots of it</li>
+</ul>
+<p>Cook the pasta. While it boils, render the guanciale slowly in a cold pan brought up to medium heat. Beat the yolks with the cheese and pepper until you have a thick paste. When the pasta is done, reserve a cup of pasta water, then toss the drained pasta with the guanciale. Remove from heat. Wait thirty seconds. Add the egg mixture and toss vigorously, adding pasta water as needed until you have a glossy sauce. The residual heat cooks the eggs without scrambling them. Serve immediately. If you’ve done it right, you’ll have pasta and gradient returns around the same time. ***</p>
+</div></div><p>For those who want to implement something similar, here’s the skeleton of a Claude skill for fine-tuning orchestration:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Fine-tuning orchestrator</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trigger conditions</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>User wants to fine-tune a language model</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>User provides a data source and base model</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Keywords: "fine-tune", "finetune", "train", "LoRA", "QLoRA"</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workflow</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Data validation</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Before anything else, examine the data source:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Determine format (JSONL, CSV, Parquet, HuggingFace dataset)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Identify structure (conversations, instruction-response, preference pairs)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Count examples and estimate training time</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check for obvious issues (empty fields, encoding problems, truncation)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Report findings and proceed only with user confirmation.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Configuration</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Based on model size and data type, generate appropriate config:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>For Unsloth (recommended for single-GPU):</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use 4-bit quantisation for models &gt;7B</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>LoRA rank 16-64 depending on task complexity</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Learning rate 2e-4 for QLoRA, 1e-5 for full fine-tuning</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gradient checkpointing enabled by default</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>For Axolotl (recommended for multi-GPU or complex setups):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Generate YAML config with appropriate settings</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use deepspeed_zero2 for multi-GPU</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Configure WandB logging automatically</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Environment</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Check and configure:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>CUDA availability and version</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Required packages (transformers, peft, bitsandbytes, etc.)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Disk space for checkpoints</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>WandB authentication</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>If using serverless (Modal/RunPod/Lambda):</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Generate deployment script</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Configure appropriate GPU type</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Set up volume mounts for data and outputs</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Execution</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Start training with configured parameters</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Provide WandB link immediately</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Log checkpoint locations</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. Optional: Hyperparameter search</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>If requested, configure Optuna study:</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Search space: learning_rate <span class="co">[</span><span class="ot">1e-5, 5e-4</span><span class="co">]</span>, lora_r <span class="co">[</span><span class="ot">8, 64</span><span class="co">]</span>, lora_alpha <span class="co">[</span><span class="ot">16, 128</span><span class="co">]</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Objective: validation loss</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pruning: Median pruner after 100 steps</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Report best configuration and provide config file</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The key insight is that this isn’t really a “skill” in the sense of specialised knowledge, but more like a well-structured set of default behaviors that Claude can adapt to specific circumstances. The skill tells Claude what to check, in what order, with what defaults. Claude supplies the judgment calls: is this data format unusual? Is this model small enough to fit in memory? Should we be concerned about this warning?</p>
+</section>
+<section id="why-this-works-and-why-traditional-tools-dont" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="why-this-works-and-why-traditional-tools-dont">Why this works (and why traditional tools don’t)</h2>
+<p>I’ve written elsewhere about <a href="../../posts/mcp-mcpmark/index.html">the gap between excellent infrastructure and models’ ability to use it</a>. MCP is beautifully designed but so often let down by models not showing up. Orchestration, though, is different. Traditional workflow tools fail at ML orchestration because ML is inherently exploratory: you don’t know what hyperparameters will work until you try them. You don’t know if the data is clean until you look at it. You don’t know if the model is converging until you see the loss curves. Every step requires conditional logic, and the conditions aren’t known in advance. Simple optimisers/tuners like Optuna are great, but LLMs have complexity and judgment that go far beyond what a static configuration can capture.</p>
+<p>Coding agents handle this naturally because they can actually look at things. When Claude validates your data, it’s not checking against a schema. It’s looking at actual examples and making judgments about whether they seem reasonable. When it suggests a learning rate, it’s considering the model size, the dataset characteristics, the training duration. It’s doing what a knowledgeable human would do, except it doesn’t get bored or distracted or forget that one crucial flag.</p>
+<p>The “ephemeral UI” framing is perhaps the most useful way to think about this. Traditional UIs are persistent: you build them once and they exist forever, gradually accumulating technical debt and increasingly byzantine configuration options. An ephemeral UI exists only for the duration of the task. You describe what you want in natural language, the agent interprets it, and when the task is done, the “UI” dissolves back into tokens. No maintenance. No versioning. No documentation to keep updated.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;This is, incidentally, why I think the current wave of low-code/no-code ML tools is somewhat missing the point. They’re trying to build better persistent UIs when what we actually need is better ephemeral ones. A drag-and-drop interface for configuring training pipelines will always be limited by the imagination of its designers. A coding agent is limited only by the underlying capabilities of the tools it can access.</p></div></div></section>
+<section id="crystallising-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="crystallising-knowledge">Crystallising knowledge</h2>
+<p>Here’s where it gets properly interesting. Unsloth, one of the more popular fine-tuning libraries, has <a href="https://github.com/unsloth/notebooks">over a hundred example notebooks</a> (and they’re brilliant). Different model architectures, different data formats, different training regimes. It’s a wealth of institutional knowledge, but it’s scattered across dozens of files, each demonstrating a slightly different approach.</p>
+<p>Claude’s skill creator can read all of them, distill the key patterns, and crystallise them into a coherent skill. Not just copying configurations, but understanding <em>why</em> certain settings work together: that QLoRA with 4-bit quantisation needs different learning rates than full fine-tuning, that gradient checkpointing trades compute for memory, that certain models respond better to particular LoRA ranks. This distilled knowledge then informs every future interaction.</p>
+<p>This is what true agentic interaction looks like. Not just calling tools, but using tools to create new capabilities. The skill creator reads documentation, examines examples, synthesises understanding, and produces a structured artefact that makes future tasks easier. It’s recursive improvement: the agent uses its primitive tools to build better tools for itself.</p>
+<p>I’ve been building out a small collection of these skills, including one for <a href="https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna">hyperparameter optimisation on Hugging Face Jobs</a> that integrates Optuna with serverless GPU endpoints. The entire interaction looks like this:</p>
+<blockquote class="blockquote">
+<p>Hi, Claude. Can you finetune Qwen/Qwen2.5-0.5B on a 2k subsample of wikitext/wikitext-2-raw-v1 using your optuna-hpo skill to figure out the ideal training hyperparameters? Your budget is $5. Do it on Hugging Face Jobs. And please launch the Gradio dashboard for me, too.</p>
+</blockquote>
+<p>Claude responds, and then just… does it. Creates an Optuna study. Generates trial scripts. Submits jobs to HF Jobs. Polls for completion. Extracts metrics. Launches a dashboard. All automatically. Within two trials and $0.18 spent, it found a 6% improvement by discovering that a higher learning rate with a smaller LoRA rank worked better for that particular configuration.</p>
+<p>The skill encapsulates not just the mechanical steps but the judgment calls: reasonable search spaces for different model sizes, pruning strategies that don’t waste compute on obviously bad trials, budget tracking that stops before you bankrupt yourself on cloud GPUs. None of this required building elaborate MCP integrations. Claude wrote Python scripts, executed them, parsed the results, and iterated. The primitive tools were sufficient.</p>
+<p>And this pattern generalises far beyond ML training. Playwright testing? Same idea: Claude can orchestrate browser automation, validate that pages render correctly, generate test reports. Data pipeline validation? Configuration management? Any task that requires intelligence but follows repeatable patterns is a candidate for dorkestration.</p>
+</section>
+<section id="the-human-in-the-loop" class="level2">
+<h2 class="anchored" data-anchor-id="the-human-in-the-loop">The human in the loop</h2>
+<p>I should be clear about what dorkestration is <em>not</em>. It is not autonomous ML research. It is not a replacement for understanding what you’re doing. It is very definitely not a way to fine-tune models if you have no idea why you’re fine-tuning them or what success looks like.</p>
+<p>What it is is a way to eliminate the bureaucratic overhead that sits between “I know what I want to do” and “the thing is actually happening.” It assumes you have the domain knowledge to specify the task, evaluate the results and make decisions about next steps.</p>
+<p>This is, I think, the correct way to think about coding agents more generally. They’re not replacing humans, but the tedious parts of being human: the parts where you’re not thinking creatively or making important decisions, but rather remembering syntax and copying file paths and checking that the bloody GPU hasn’t run out of memory.</p>
+<p>In the nomenclator analogy: the great man still has to decide whom to speak with and what to say. The nomenclator just whispers the names.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Practical notes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A few things I’ve learned from several months of using this approach:</p>
+<p><strong>Start with Unsloth for simplicity.</strong> Axolotl is more powerful but has more moving parts. When you’re debugging your skill rather than your model, simplicity wins. Once the workflow is solid, add complexity.</p>
+<p><strong>The WandB MCP integration is crucial.</strong> Without it, you’re just launching jobs into the void. With it, Claude can actually tell you how things are going, suggest early stopping, compare runs. For HF Jobs specifically, the built-in logging handles this, but for local or other cloud setups, WandB is the glue.</p>
+<p><strong>Sensible defaults beat flexibility.</strong> The temptation is to expose every possible parameter. Resist it. A good skill should work 80% of the time with zero configuration. The other 20% is what natural language is for.</p>
+<p><strong>Test the failure modes.</strong> What happens when the data is malformed? When CUDA isn’t available? When the model doesn’t fit in memory? A good skill handles these gracefully, with informative error messages and suggested remedies.</p>
+<p><strong>Keep the skill updated.</strong> Libraries change. New best practices emerge. The skill is a living document, not a one-time configuration.</p>
+<p>If you want to try the HPO workflow yourself, I’ve written up <a href="https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna">detailed instructions on Hugging Face</a>. The short version: install the skill, export your HF token, and ask Claude to optimise your model. Be specific about budget, search space and hardware. The skill handles the rest.</p>
+<p>For teams rather than individuals, the <a href="https://huggingface.co/blog/sionic-ai/claude-code-skills-training">Sionic AI post on Claude Code skills</a> explores how to build a shared knowledge registry: their <code>/advise</code> and <code>/retrospective</code> commands let researchers capture experimental learnings so the next person doesn’t repeat the same mistakes. It’s the team-scale version of what I’m describing here.</p>
+</div>
+</div>
+</section>
+<section id="the-broader-picture" class="level2">
+<h2 class="anchored" data-anchor-id="the-broader-picture">The broader picture</h2>
+<p>If this seems like a minor optimisation, consider the cumulative effect. Every time I need to fine-tune a model, I save perhaps an hour of fiddling with configuration files and debugging environment issues. Over a year, that’s several weeks of reclaimed time. Weeks that I can spend on the parts of the work that actually require human judgment: designing experiments, interpreting results, deciding what to try next.</p>
+<p>But there’s something more fundamental here than time savings. What dorkestration reveals is the true nature of tool use in agentic systems.</p>
+<p>When the discourse around MCP and tool calling first emerged, the implicit assumption was that we needed to build an elaborate ecosystem of specialised tools. Every API would need its wrapper. Every service would need its integration. The path to capable agents was through comprehensiveness: more tools, more capabilities, more coverage.</p>
+<p>This was, I think, a category error. It confused the map for the territory.</p>
+<p>The real insight is that a small set of compositional primitives – read, write, execute – is sufficient for any computable task. Claude Code doesn’t need a thousand MCP servers. It needs the ability to <em>make</em> whatever tool is required for the task at hand, use it, and then let it dissolve. The tools are ephemeral. The capability is permanent.</p>
+<p>This is, I suspect, the actual future of agentic AI in practice. Not autonomous systems that replace human decision-making, but intelligent assistants that handle the mechanical substrate on which human decisions operate. Not conductors that lead the orchestra, but stage managers who ensure the musicians have stands and the lights are working. Not elaborate toolboxes but universal fabricators.</p>
+<p>The nomenclator didn’t make Cicero a better orator. But he did allow Cicero to focus on oratory rather than memorising the names of every client who wandered into the Forum. And perhaps that’s enough. Perhaps the great contribution of agentic AI won’t be replacing human intelligence, but liberating it from the bureaucratic overhead that has always been the tax we pay for getting things done.</p>
+<p>In the meantime, my model is training, WandB is logging, and I’m writing this instead of checking whether <code>torch.cuda.is_available()</code> returns <code>True</code>. The nomenclator is whispering the names. I’m free to think about what to say.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Dorkestration},
+  date = {2025-12-15},
+  url = {https://chrisvoncsefalvay.com/posts/dorkestration/},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> December 15,
+2025. <a href="https://chrisvoncsefalvay.com/posts/dorkestration/">https://chrisvoncsefalvay.com/posts/dorkestration/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

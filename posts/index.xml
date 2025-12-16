@@ -10,7 +10,299 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Sun, 23 Nov 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 15 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Dorkestration</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/dorkestration/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In the dying days of the Roman Republic, there existed a class of functionaries called <em>nomenclatores</em>. Their job was to whisper the names of approaching citizens into their patron’s ear so that the great man could greet each one as if they were intimates. It was, in essence, human middleware: a layer of intelligence that sat between intention and execution, transforming the vague desire “I should be pleasant to these people” into the specific action of remembering that the fellow in the toga with the wine stain is called Gaius and his mother just died. The nomenclator didn’t make decisions. He enabled them.</p>
+<p>I find myself thinking about nomenclatores rather a lot these days, because I’ve accidentally turned Claude Code into one. Not for social niceties, but for something equally tedious and equally important: orchestrating machine learning workloads.</p>
+<section id="the-quiet-tyranny-of-boilerplate" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-quiet-tyranny-of-boilerplate">The quiet tyranny of boilerplate</h2>
+<p>Here’s a confession: I don’t vibe code. I know, I know. It’s supposedly the hot new thing,<sup>1</sup> and I’m meant to be breathlessly excited about asking a language model to build me a web app while I sip my flat white.<sup>2</sup> But the truth is, most of my coding needs are rather more mundane. I need to fine-tune a model, I need to check that the data is in the right format, I need to submit a training job and I’d like to please not think about it until WandB tells me something interesting has happened.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;For a given value of new. I suffer from late stage temporal displacement: I live about 8-9 months out from whatever the current date is. No, we still don’t have hoverboards in late Summer 2026, sorry to disappoint.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Frustratingly, the magic <em>is</em> there about this. Just not where people think it is.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;If you do, please don’t send them to me.</p></div></div><p>This is not creative work – it’s the plumbing part of ML, simultaneously crucial and boring. Nobody writes poetry about their CI/CD pipelines.<sup>3</sup></p>
+<p>The traditional solution to this problem is to write scripts, lots and lots of scripts. These inevitably reach turtles-all-the-way-down complexity, until you have scripts with configuration files that nobody remembers how to update, scripts that worked six months ago and now mysteriously don’t because somebody upgraded a dependency somewhere and scripts that are documented with lines like “it sounded like a good idea at the time”. The more sophisticated alternative to scripts is to reach for Airflow or Kubeflow or one of the other tools that promise to turn your ML workflow into a directed acyclic graph of containerised tasks, complete with a UI that looks like someone tried to build Microsoft Visio inside a web browser and gave up halfway through.</p>
+<p>Both approaches share a fundamental problem: they require you to know exactly what you want before you start. You must specify every step, every parameter, every failure mode. There is no room for “I think maybe around <code>4e-5</code> for the learning rate, but honestly, use your judgment.” The machine has no judgment to use.</p>
+<p>Until, of course, it does.</p>
+</section>
+<section id="what-everybody-missed-about-tool-use" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-everybody-missed-about-tool-use">What everybody missed about tool use</h2>
+<p>When MCP emerged and the discourse turned to tool calling, there was a kind of gold rush mentality. Everybody assumed we would need to build elaborate API ecosystems: a thousand MCP servers, a million tool definitions, bespoke clients for every conceivable service. The assumption was that tool use scales with the number of tools available.</p>
+<p>This assumption is wrong, and it’s wrong in an interesting way.</p>
+<p>Consider what Claude Code actually has access to. Not thousands of specialised tools, but perhaps half a dozen primitives: browse the filesystem, write and execute bash, write and execute Python, create and edit files. That’s essentially it. And yet Claude Code can do <em>anything</em> with these primitives, because they are computationally complete. If you can read files, write files, and execute arbitrary code, you can accomplish any computable task.<sup>4</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is, of course, the Church-Turing thesis applied to practical tooling. The specific tools don’t matter so long as you have a universal set.</p></div></div><p>The magic isn’t in having more tools but in having tools that can <em>make</em> other tools. When I need Claude to interact with a new API, I don’t need to build an MCP server for it. I need Claude to write a Python script that calls that API. When I need to orchestrate a complex workflow, I don’t need a specialised orchestration tool. I need Claude to compose a bash script that chains together the steps. The fundamental operations are sufficient precisely because they enable composition.</p>
+<p>This is what so many people continue to miss about the definition of ‘tools’ in agentic AI: they act as though tool use meant wrapping every possible API in a standardised interface. But the truly powerful pattern is recursive: agents that use their primitive tools to create new capabilities on the fly, capabilities that exist only for the duration of the task and then dissolve back into tokens. Tool use isn’t about the breadth of your toolbox. It’s about whether your tools can build other tools.</p>
+</section>
+<section id="the-nomenclator-in-the-machine" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-nomenclator-in-the-machine">The nomenclator in the machine</h2>
+<p>Which brings us to <strong>dorkestration</strong>, aka ‘vibe coding for orchestrating ML’ – the use of coding agents like Claude Code to manage ML workloads. We’re using a coding agent (which really is just fancy terminology for ‘LLM trained to call tools that create executable code’) not to write code in the traditional sense, but to serve as an intelligent intermediary between my intentions and the rather tedious specifics of actually getting a model trained.</p>
+<p>The insight is simple enough: a well-designed Claude skill can handle the entire training pipeline with remarkably little input. I provide a data source and a base model. Out comes a WandB link. The code is already running with sensible defaults. If I ask for hyperparameter optimisation, Optuna spins up and starts searching. I never have write a YAML file, debug a CUDA error or remember whether <code>--gradient_checkpointing</code> needs to be <code>true</code>, <code>True</code> or <code>enabled</code>.</p>
+<p>This is what coding agents are actually good for: not replacing programmers, but replacing the programmer-as-bureaucrat. All that busywork of marshalling data, checking formats, setting up environments, monitoring progress: this is nomenclator work that requires intelligence but not creativity, judgment but not vision. It is the kind of thing that a competent assistant could handle if you could explain to them what you wanted.</p>
+<p>And that’s precisely what a coding agent is: a competent assistant who speaks enough technical language to translate “fine-tune this model on that data” into the forty-seven individual steps required to actually accomplish it.<sup>5</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;Which means we may rethink what a junior developer <em>is</em>. Rather than being an apprentice being made to do things we don’t want to do, this may shift their role to what it always should have been: a collaborator who brings fresh ideas and perspectives to the table while the agent handles the tedious bits. The junior developer becomes an apprentice thinker for a master, not an indentured executor. It’s not going to make the junior level (sub-L3) job market any less dire, but it is going to leave us, potentially, with a better future.</p></div></div></section>
+<section id="anatomy-of-a-dorkestration" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-dorkestration">Anatomy of a dorkestration</h2>
+<p>Let me make this concrete. Here’s what a typical fine-tuning session looks like with a properly configured Claude skill.</p>
+<p>I say: “Fine-tune Llama 3.1 8B on my preference data at <code>/data/preferences.jsonl</code>. Use LoRA, keep it cheap, let me know how it goes. See you in a bit.”</p>
+<p>What happens next:</p>
+<ol type="1">
+<li><p><strong>Data validation.</strong> Claude examines the JSONL file, checks that it’s in the expected format (conversations? preference pairs? instruction-response?), counts examples, looks for obvious problems like empty responses or malformed JSON.</p></li>
+<li><p><strong>Configuration generation.</strong> Based on the model and data characteristics, Claude generates an Axolotl, TRL or Unsloth config with sensible defaults. For an 8B model with LoRA, this means reasonable rank and alpha values, appropriate learning rates, gradient checkpointing enabled because we’re not made of VRAM.<sup>6</sup></p></li>
+<li><p><strong>Environment setup.</strong> Claude checks that the necessary packages are installed, that CUDA is accessible, that there’s enough disk space. If we’re running on a serverless endpoint (Modal, RunPod, Lambda Labs), it handles the deployment.</p></li>
+<li><p><strong>Training submission.</strong> The job starts. WandB logging is configured automatically. I get a link.</p></li>
+<li><p><strong>Monitoring.</strong> If I’ve set up the WandB MCP integration, Claude can actually check on progress, alert me to anomalies, and suggest early stopping if the loss curves look pathological.<sup>7</sup></p></li>
+<li><p><strong>Optional: Optuna.</strong> If I’ve indicated interest in hyperparameter search, Claude sets up an Optuna study with sensible search spaces, launches multiple trials, and reports back on the best configuration.</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;As a shareholder of NVIDIA, please ignore this sentence and pretend you <em>are</em>. That 0.7B model? Totally needs a Grace Blackwell. My stockbroker and my retirement fund thank you.</p></div><div id="fn7"><p><sup>7</sup>&nbsp;Interesting curiosity: Claude has been much better at spotting early signs of failure from screenshots of the WandB dashboard than from the raw data. I’d love for any of my Anthropic readers who are in the Vision team to explain this. You know where to reach me.</p></div></div><p>The whole thing takes maybe thirty seconds of my attention. The first time I configured this properly, I felt like I’d hired a very competent but slightly literal-minded research assistant. One who would never forget to enable <code>bf16</code> training on Ampere GPUs, but who also needed explicit permission to do anything beyond the literal scope of the request.</p>
+</section>
+<section id="the-skill-itself" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-skill-itself">The skill itself</h2>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<hr>
+<p><strong>Recipe:</strong> Carbonara for the impatient</p>
+<p>Gets done in about the time a decent 3B model fine-tunes on a small data set using enough compute to power a small village.</p>
+<ul>
+<li>200g guanciale (or pancetta, or bacon if you’re desperate). Don’t ask for it in grams. Just buy a ton and do the science-y thing in the privacy of your kitchen.</li>
+<li>400g spaghetti</li>
+<li>4 egg yolks</li>
+<li>100g Pecorino Romano, finely grated</li>
+<li>Black pepper, lots of it</li>
+</ul>
+<p>Cook the pasta. While it boils, render the guanciale slowly in a cold pan brought up to medium heat. Beat the yolks with the cheese and pepper until you have a thick paste. When the pasta is done, reserve a cup of pasta water, then toss the drained pasta with the guanciale. Remove from heat. Wait thirty seconds. Add the egg mixture and toss vigorously, adding pasta water as needed until you have a glossy sauce. The residual heat cooks the eggs without scrambling them. Serve immediately. If you’ve done it right, you’ll have pasta and gradient returns around the same time. ***</p>
+</div></div><p>For those who want to implement something similar, here’s the skeleton of a Claude skill for fine-tuning orchestration:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;"># Fine-tuning orchestrator</span></span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">## Trigger conditions</span></span>
+<span id="cb1-4"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>User wants to fine-tune a language model</span>
+<span id="cb1-5"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>User provides a data source and base model</span>
+<span id="cb1-6"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Keywords: "fine-tune", "finetune", "train", "LoRA", "QLoRA"</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">## Workflow</span></span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">### 1. Data validation</span></span>
+<span id="cb1-11">Before anything else, examine the data source:</span>
+<span id="cb1-12"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Determine format (JSONL, CSV, Parquet, HuggingFace dataset)</span>
+<span id="cb1-13"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Identify structure (conversations, instruction-response, preference pairs)</span>
+<span id="cb1-14"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Count examples and estimate training time</span>
+<span id="cb1-15"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Check for obvious issues (empty fields, encoding problems, truncation)</span>
+<span id="cb1-16"></span>
+<span id="cb1-17">Report findings and proceed only with user confirmation.</span>
+<span id="cb1-18"></span>
+<span id="cb1-19"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">### 2. Configuration</span></span>
+<span id="cb1-20">Based on model size and data type, generate appropriate config:</span>
+<span id="cb1-21"></span>
+<span id="cb1-22">For Unsloth (recommended for single-GPU):</span>
+<span id="cb1-23"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Use 4-bit quantisation for models &gt;7B</span>
+<span id="cb1-24"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>LoRA rank 16-64 depending on task complexity</span>
+<span id="cb1-25"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Learning rate 2e-4 for QLoRA, 1e-5 for full fine-tuning</span>
+<span id="cb1-26"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Gradient checkpointing enabled by default</span>
+<span id="cb1-27"></span>
+<span id="cb1-28">For Axolotl (recommended for multi-GPU or complex setups):</span>
+<span id="cb1-29"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Generate YAML config with appropriate settings</span>
+<span id="cb1-30"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Use deepspeed_zero2 for multi-GPU</span>
+<span id="cb1-31"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Configure WandB logging automatically</span>
+<span id="cb1-32"></span>
+<span id="cb1-33"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">### 3. Environment</span></span>
+<span id="cb1-34">Check and configure:</span>
+<span id="cb1-35"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>CUDA availability and version</span>
+<span id="cb1-36"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Required packages (transformers, peft, bitsandbytes, etc.)</span>
+<span id="cb1-37"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Disk space for checkpoints</span>
+<span id="cb1-38"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>WandB authentication</span>
+<span id="cb1-39"></span>
+<span id="cb1-40">If using serverless (Modal/RunPod/Lambda):</span>
+<span id="cb1-41"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Generate deployment script</span>
+<span id="cb1-42"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Configure appropriate GPU type</span>
+<span id="cb1-43"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Set up volume mounts for data and outputs</span>
+<span id="cb1-44"></span>
+<span id="cb1-45"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">### 4. Execution</span></span>
+<span id="cb1-46"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Start training with configured parameters</span>
+<span id="cb1-47"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Provide WandB link immediately</span>
+<span id="cb1-48"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Log checkpoint locations</span>
+<span id="cb1-49"></span>
+<span id="cb1-50"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">### 5. Optional: Hyperparameter search</span></span>
+<span id="cb1-51">If requested, configure Optuna study:</span>
+<span id="cb1-52"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Search space: learning_rate <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">1e-5, 5e-4</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span>, lora_r <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">8, 64</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span>, lora_alpha <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">16, 128</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span></span>
+<span id="cb1-53"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Objective: validation loss</span>
+<span id="cb1-54"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Pruning: Median pruner after 100 steps</span>
+<span id="cb1-55"><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">- </span>Report best configuration and provide config file</span></code></pre></div></div>
+<p>The key insight is that this isn’t really a “skill” in the sense of specialised knowledge, but more like a well-structured set of default behaviors that Claude can adapt to specific circumstances. The skill tells Claude what to check, in what order, with what defaults. Claude supplies the judgment calls: is this data format unusual? Is this model small enough to fit in memory? Should we be concerned about this warning?</p>
+</section>
+<section id="why-this-works-and-why-traditional-tools-dont" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="why-this-works-and-why-traditional-tools-dont">Why this works (and why traditional tools don’t)</h2>
+<p>I’ve written elsewhere about <a href="../../posts/mcp-mcpmark/index.html">the gap between excellent infrastructure and models’ ability to use it</a>. MCP is beautifully designed but so often let down by models not showing up. Orchestration, though, is different. Traditional workflow tools fail at ML orchestration because ML is inherently exploratory: you don’t know what hyperparameters will work until you try them. You don’t know if the data is clean until you look at it. You don’t know if the model is converging until you see the loss curves. Every step requires conditional logic, and the conditions aren’t known in advance. Simple optimisers/tuners like Optuna are great, but LLMs have complexity and judgment that go far beyond what a static configuration can capture.</p>
+<p>Coding agents handle this naturally because they can actually look at things. When Claude validates your data, it’s not checking against a schema. It’s looking at actual examples and making judgments about whether they seem reasonable. When it suggests a learning rate, it’s considering the model size, the dataset characteristics, the training duration. It’s doing what a knowledgeable human would do, except it doesn’t get bored or distracted or forget that one crucial flag.</p>
+<p>The “ephemeral UI” framing is perhaps the most useful way to think about this. Traditional UIs are persistent: you build them once and they exist forever, gradually accumulating technical debt and increasingly byzantine configuration options. An ephemeral UI exists only for the duration of the task. You describe what you want in natural language, the agent interprets it, and when the task is done, the “UI” dissolves back into tokens. No maintenance. No versioning. No documentation to keep updated.<sup>8</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;This is, incidentally, why I think the current wave of low-code/no-code ML tools is somewhat missing the point. They’re trying to build better persistent UIs when what we actually need is better ephemeral ones. A drag-and-drop interface for configuring training pipelines will always be limited by the imagination of its designers. A coding agent is limited only by the underlying capabilities of the tools it can access.</p></div></div></section>
+<section id="crystallising-knowledge" class="level2">
+<h2 class="anchored" data-anchor-id="crystallising-knowledge">Crystallising knowledge</h2>
+<p>Here’s where it gets properly interesting. Unsloth, one of the more popular fine-tuning libraries, has <a href="https://github.com/unsloth/notebooks">over a hundred example notebooks</a> (and they’re brilliant). Different model architectures, different data formats, different training regimes. It’s a wealth of institutional knowledge, but it’s scattered across dozens of files, each demonstrating a slightly different approach.</p>
+<p>Claude’s skill creator can read all of them, distill the key patterns, and crystallise them into a coherent skill. Not just copying configurations, but understanding <em>why</em> certain settings work together: that QLoRA with 4-bit quantisation needs different learning rates than full fine-tuning, that gradient checkpointing trades compute for memory, that certain models respond better to particular LoRA ranks. This distilled knowledge then informs every future interaction.</p>
+<p>This is what true agentic interaction looks like. Not just calling tools, but using tools to create new capabilities. The skill creator reads documentation, examines examples, synthesises understanding, and produces a structured artefact that makes future tasks easier. It’s recursive improvement: the agent uses its primitive tools to build better tools for itself.</p>
+<p>I’ve been building out a small collection of these skills, including one for <a href="https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna">hyperparameter optimisation on Hugging Face Jobs</a> that integrates Optuna with serverless GPU endpoints. The entire interaction looks like this:</p>
+<blockquote class="blockquote">
+<p>Hi, Claude. Can you finetune Qwen/Qwen2.5-0.5B on a 2k subsample of wikitext/wikitext-2-raw-v1 using your optuna-hpo skill to figure out the ideal training hyperparameters? Your budget is $5. Do it on Hugging Face Jobs. And please launch the Gradio dashboard for me, too.</p>
+</blockquote>
+<p>Claude responds, and then just… does it. Creates an Optuna study. Generates trial scripts. Submits jobs to HF Jobs. Polls for completion. Extracts metrics. Launches a dashboard. All automatically. Within two trials and $0.18 spent, it found a 6% improvement by discovering that a higher learning rate with a smaller LoRA rank worked better for that particular configuration.</p>
+<p>The skill encapsulates not just the mechanical steps but the judgment calls: reasonable search spaces for different model sizes, pruning strategies that don’t waste compute on obviously bad trials, budget tracking that stops before you bankrupt yourself on cloud GPUs. None of this required building elaborate MCP integrations. Claude wrote Python scripts, executed them, parsed the results, and iterated. The primitive tools were sufficient.</p>
+<p>And this pattern generalises far beyond ML training. Playwright testing? Same idea: Claude can orchestrate browser automation, validate that pages render correctly, generate test reports. Data pipeline validation? Configuration management? Any task that requires intelligence but follows repeatable patterns is a candidate for dorkestration.</p>
+</section>
+<section id="the-human-in-the-loop" class="level2">
+<h2 class="anchored" data-anchor-id="the-human-in-the-loop">The human in the loop</h2>
+<p>I should be clear about what dorkestration is <em>not</em>. It is not autonomous ML research. It is not a replacement for understanding what you’re doing. It is very definitely not a way to fine-tune models if you have no idea why you’re fine-tuning them or what success looks like.</p>
+<p>What it is is a way to eliminate the bureaucratic overhead that sits between “I know what I want to do” and “the thing is actually happening.” It assumes you have the domain knowledge to specify the task, evaluate the results and make decisions about next steps.</p>
+<p>This is, I think, the correct way to think about coding agents more generally. They’re not replacing humans, but the tedious parts of being human: the parts where you’re not thinking creatively or making important decisions, but rather remembering syntax and copying file paths and checking that the bloody GPU hasn’t run out of memory.</p>
+<p>In the nomenclator analogy: the great man still has to decide whom to speak with and what to say. The nomenclator just whispers the names.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Practical notes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A few things I’ve learned from several months of using this approach:</p>
+<p><strong>Start with Unsloth for simplicity.</strong> Axolotl is more powerful but has more moving parts. When you’re debugging your skill rather than your model, simplicity wins. Once the workflow is solid, add complexity.</p>
+<p><strong>The WandB MCP integration is crucial.</strong> Without it, you’re just launching jobs into the void. With it, Claude can actually tell you how things are going, suggest early stopping, compare runs. For HF Jobs specifically, the built-in logging handles this, but for local or other cloud setups, WandB is the glue.</p>
+<p><strong>Sensible defaults beat flexibility.</strong> The temptation is to expose every possible parameter. Resist it. A good skill should work 80% of the time with zero configuration. The other 20% is what natural language is for.</p>
+<p><strong>Test the failure modes.</strong> What happens when the data is malformed? When CUDA isn’t available? When the model doesn’t fit in memory? A good skill handles these gracefully, with informative error messages and suggested remedies.</p>
+<p><strong>Keep the skill updated.</strong> Libraries change. New best practices emerge. The skill is a living document, not a one-time configuration.</p>
+<p>If you want to try the HPO workflow yourself, I’ve written up <a href="https://huggingface.co/blog/chrisvoncsefalvay/claude-hf-jobs-optuna">detailed instructions on Hugging Face</a>. The short version: install the skill, export your HF token, and ask Claude to optimise your model. Be specific about budget, search space and hardware. The skill handles the rest.</p>
+<p>For teams rather than individuals, the <a href="https://huggingface.co/blog/sionic-ai/claude-code-skills-training">Sionic AI post on Claude Code skills</a> explores how to build a shared knowledge registry: their <code>/advise</code> and <code>/retrospective</code> commands let researchers capture experimental learnings so the next person doesn’t repeat the same mistakes. It’s the team-scale version of what I’m describing here.</p>
+</div>
+</div>
+</section>
+<section id="the-broader-picture" class="level2">
+<h2 class="anchored" data-anchor-id="the-broader-picture">The broader picture</h2>
+<p>If this seems like a minor optimisation, consider the cumulative effect. Every time I need to fine-tune a model, I save perhaps an hour of fiddling with configuration files and debugging environment issues. Over a year, that’s several weeks of reclaimed time. Weeks that I can spend on the parts of the work that actually require human judgment: designing experiments, interpreting results, deciding what to try next.</p>
+<p>But there’s something more fundamental here than time savings. What dorkestration reveals is the true nature of tool use in agentic systems.</p>
+<p>When the discourse around MCP and tool calling first emerged, the implicit assumption was that we needed to build an elaborate ecosystem of specialised tools. Every API would need its wrapper. Every service would need its integration. The path to capable agents was through comprehensiveness: more tools, more capabilities, more coverage.</p>
+<p>This was, I think, a category error. It confused the map for the territory.</p>
+<p>The real insight is that a small set of compositional primitives – read, write, execute – is sufficient for any computable task. Claude Code doesn’t need a thousand MCP servers. It needs the ability to <em>make</em> whatever tool is required for the task at hand, use it, and then let it dissolve. The tools are ephemeral. The capability is permanent.</p>
+<p>This is, I suspect, the actual future of agentic AI in practice. Not autonomous systems that replace human decision-making, but intelligent assistants that handle the mechanical substrate on which human decisions operate. Not conductors that lead the orchestra, but stage managers who ensure the musicians have stands and the lights are working. Not elaborate toolboxes but universal fabricators.</p>
+<p>The nomenclator didn’t make Cicero a better orator. But he did allow Cicero to focus on oratory rather than memorising the names of every client who wandered into the Forum. And perhaps that’s enough. Perhaps the great contribution of agentic AI won’t be replacing human intelligence, but liberating it from the bureaucratic overhead that has always been the tax we pay for getting things done.</p>
+<p>In the meantime, my model is training, WandB is logging, and I’m writing this instead of checking whether <code>torch.cuda.is_available()</code> returns <code>True</code>. The nomenclator is whispering the names. I’m free to think about what to say.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {Dorkestration},
+  date = {2025-12-15},
+  url = {https://chrisvoncsefalvay.com/posts/dorkestration/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> December 15,
+2025. <a href="https://chrisvoncsefalvay.com/posts/dorkestration/">https://chrisvoncsefalvay.com/posts/dorkestration/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>agentic AI</category>
+  <category>LLMs</category>
+  <category>fine-tuning</category>
+  <guid>https://chrisvoncsefalvay.com/posts/dorkestration/</guid>
+  <pubDate>Mon, 15 Dec 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/dorkestration/header.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
 <item>
   <title>The Hype, the Slop and the Craft</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -3597,7 +3889,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-47073"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-47073").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-10221"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-10221").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -3695,7 +3987,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-62671"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-62671").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-41198"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41198").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -4180,198 +4472,6 @@ Predictions.”</span> <a href="https://chrisvoncsefalvay.com/posts/five-wild-gu
   <guid>https://chrisvoncsefalvay.com/posts/five-wild-guesses/</guid>
   <pubDate>Tue, 31 Dec 2024 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/five-wild-guesses/header.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>LAIR - Language As Intermediate Representation</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/lair/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>The awesome thing about language is that, well, we all mostly speak it, to some extent or another. This gives us an immensely powerful tool to manipulate transformational tasks. For the purposes of this post, I consider a transformational task to be essentially anything that takes an input and is largel intended to return some version of the same thing. This is not a very precise definition, but it will have to do for now.</p>
-<p>Such models are nothing new. Perhaps the most eye-catching and ubiquitous of such models are <a href="https://www.tensorflow.org/tutorials/generative/style_transfer">neural style transfer</a> models that take an image and return a version of the same image in a different style that let you turn a picture of your dog into a Van Gogh painting <span class="citation" data-cites="gatys2015neural">(Gatys, Ecker, and Bethge 2015)</span>. Quite simply put, these models are your typical generative model, with the difference that it takes two separate loss definitions: content loss, which is loss of the generated image vis-a-vis the content reference, and style loss, which is the loss vis-a-vis the style reference image. A “good” image then is one that minimises total loss, i.e.&nbsp;it’s just as close to your dog as it is to Van Gogh. Figure&nbsp;1 outlines this logic.</p>
-<div class="no-row-height column-margin column-container"><div id="ref-gatys2015neural" class="csl-entry">
-Gatys, Leon A, Alexander S Ecker, and Matthias Bethge. 2015. <span>‘A Neural Algorithm of Artistic Style’</span>. <em>arXiv Preprint arXiv:1508.06576</em>.
-</div></div><div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-nst" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-nst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-nst">flowchart TD
-    C["Content image"]
-    S["Style image"]
-
-    G["Generated image"]
-
-    G --&gt; L["Loss network"]
-    L --&gt; G
-    
-    C -- "Content loss" --&gt; L
-    S -- "Style loss" --&gt; L
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A rough outline of NST.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Given a content source image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bc%7D"> and a style reference image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bs%7D">, we define the total loss of our generated image <img src="https://latex.codecogs.com/png.latex?%5Cvec%7Bg%7D"> as</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Btotal%7D%20=%20%5Calpha%20%5Cmathcal%7BL%7D_%7Bcontent%7D%20+%20%5Cbeta%20%5Cmathcal%7BL%7D_%7Bstyle%7D%0A"></p>
-<p>where <img src="https://latex.codecogs.com/png.latex?%5Calpha"> and <img src="https://latex.codecogs.com/png.latex?%5Cbeta"> are hyperparameters that control the relative importance of the content and style losses. The content loss for layer <img src="https://latex.codecogs.com/png.latex?l"> is defined as</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bcontent%7D(%5Cvec%7Bc%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B2%7D%20%5Csum_%7Bi,j%7D%20(%5Cvec%7Bc%7D_%7Bij%7D%5El%20-%20%5Cvec%7Bg%7D_%7Bij%7D%5El)%5E2%0A"></p>
-<p>which is basically a simple squared error loss between the feature vector of the content image and the generated image at layer <img src="https://latex.codecogs.com/png.latex?l">. The style loss is a bit more complicated, and is these days typically defined as the Maximum Mean Discrepancy, which <span class="citation" data-cites="li2017demystifying">Li et al. (2017)</span> have shown is essentially equivalent to the Gram matrix loss, defined as</p>
-<div class="no-row-height column-margin column-container"><div id="ref-li2017demystifying" class="csl-entry">
-Li, Yanghao, Naiyan Wang, Jiaying Liu, and Xiaodi Hou. 2017. <span>‘Demystifying Neural Style Transfer’</span>. <a href="https://arxiv.org/abs/1701.01036">https://arxiv.org/abs/1701.01036</a>.
-</div></div><p><img src="https://latex.codecogs.com/png.latex?%0A%20%20%20%20%5Cmathcal%7BL%7D_%7Bstyle%7D(%5Cvec%7Bs%7D,%20%5Cvec%7Bg%7D,%20l)%20=%20%5Cfrac%7B1%7D%7B4N_l%5E2M_l%5E2%7D%20%5Csum_%7Bi,j%7D%20(%5Cmathbf%7BG%7D_%7Bij%7D%5El%20-%20%5Cmathbf%7BS%7D_%7Bij%7D%5El)%5E2%0A"></p>
-<p>where <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BG%7D_%7Bij%7D%5El"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathbf%7BS%7D_%7Bij%7D%5El"> are the Gram matrices of the generated reference image and the style image at layer <img src="https://latex.codecogs.com/png.latex?l">, respectively. <img src="https://latex.codecogs.com/png.latex?N%5El"> is the number of feature maps in layer <img src="https://latex.codecogs.com/png.latex?l"> and <img src="https://latex.codecogs.com/png.latex?M_l"> is the dimensionality (height times width) of the feature map of layer <img src="https://latex.codecogs.com/png.latex?l">. There are two fundamental problems with this.</p>
-<ol type="1">
-<li>This works much less well for things that aren’t images or at least sufficiently similar to images.</li>
-<li>The bigger problem is that the style reference is pretty much exhaustive. By that, I mean that there isn’t much we can convey to the model about the style that isn’t encapsulated in the style reference images. Depending on how semantically apt your model is, it may or may not be able to pick up some higher level ideas. It may be able to pick up the brush strokes of Van Gogh or the colours of a Turner, but it may not be able to paint your characters in the semantic context of Van Gogh’s time and place.</li>
-</ol>
-<p>This is where language comes in. Language is a very powerful tool for conveying information, and it turns out that if we use language as an intermediate representation, we can use language models to manipulate this intermediate representation to our heart’s content, using a relatively informal and rather forgiving language. This is the idea behind LAIR.</p>
-<section id="a-toy-example" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="a-toy-example">A toy example</h2>
-<p>I’m a firm believer in silly toy examples. The sillier, the better. So, we’ll start with the following proposition: can we create a model that will look at a photo from, say, the front page of our favourite newspaper, and transpose it into the Warhammer 40k universe? In case you’re unfamiliar, Warhammer 40k is set – as the name suggests – in the 40th millennium, but is a weird mixture of medieval and futuristic technology. The whole atmosphere is taking the ‘Dark Ages’ part of the Middle Ages,<sup>1</sup> adding spaceships and laser guns, and turning the whole thing into an absolutely depressing dystopia. It’s a lot of fun.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Which may or may not ever have actually existed.</p></div></div><p>There are a few things we want here: I don’t merely want the <em>visual</em> style of the Warhammer 40k universe, I also want the <em>semantics</em> – that is, I want characters to be transposed into the Warhammer 40k universe. I want the model to understand that the people in the photo are now Space Marines, and that the buildings are now Gothic cathedrals. I can’t get neural transfer to that for me, because it does not understand, or care, about semantics, and does not do semantic transformation. More importantly, I cannot interact with the ‘guts’ of neural style transfer beyond setting the hyperparameters and the source images.</p>
-<p>What I can, however, do is to use the language I am mostly most proficient in – that is, human language – to manipulate an intermediate representation.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-lair" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-lair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-lair">flowchart LR
-    subgraph Description
-        direction TB
-        S["Source image"] --&gt; D("Descriptor\ne.g. GPT-4 vision") --&gt; d["Description"]
-    end
-
-    subgraph Transformation
-        direction TB
-        t("Transformer\ne.g. GPT-4") --&gt; td["Transformed\ndescription"]
-    end
-
-    subgraph Rendering
-        direction TB
-        r("Renderer\ne.g. DALL-E") --&gt; I["Output\nimage"]
-    end
-
-    Description --&gt; Transformation --&gt; Rendering
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lair-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: A rough outline of LAIR as applied to the toy example.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Figure&nbsp;2 outlines the basic idea for images. We use a descriptor model to describe the image, and then use a text-to-text transformer to transform the description. The transformed description is then rendered into an image. The descriptor model is typically a vision model, and the transformer is typically a language model. The renderer would then be a generative model.</p>
-<p>Consider the following source image I downloaded from Pexels:</p>
-<div id="fig-source" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://chrisvoncsefalvay.com/posts/lair/pexels-canva-studio-3153198.jpg" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-source-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Our source image.
-</figcaption>
-</figure>
-</div>
-<p>Here’s the intermediate representation (IR) description created by GPT-4 vision:</p>
-<blockquote class="blockquote">
-<p>This is an image of four individuals gathered around a laptop, suggesting a collaborative work environment. The setting has an ample amount of natural light, evident by the bright illumination on the subjects and the interior. They appear to be located in a modern indoor environment with a large curved window in the background, contributing to the light-flooded ambiance.</p>
-<p>Starting from the left, the first individual is a man with short, dark hair and a light beard, wearing a black t-shirt with a white graphic and text. He appears focused, resting his hands on the laptop while looking at the screen. To his right is a woman with shoulder-length curly hair who seems engaged and smiling, leaning slightly towards the laptop. She’s wearing a light grey short-sleeved top.</p>
-<p>Behind these two and slightly out of focus, two more individuals are present. The person in the middle of the composition is a man with shoulder-length wavy hair, wearing a black shirt, gazing at the laptop screen. To the far right, partially cropped out of the frame, there is a woman with glasses, wearing a dark business casual blazer. She seems to be observing the laptop’s screen with interest, standing slightly behind the seated individuals.</p>
-<p>The group exhibits a sense of teamwork and focus, with everyone’s attention directed toward the laptop, situated on what appears to be a white table or desk. The body language and expressions suggest a positive, collaborative atmosphere, typical of a professional or academic team setting.</p>
-</blockquote>
-<p>This is a pretty decent description. Let’s grimdark it up by passing it to our transformer model, which was initialised with the following prompt:</p>
-<blockquote class="blockquote">
-<p>Your job is to analyze descriptions of images and change them to transpose the image into the dark, futuristic aesthetic of the Warhammer 40k universe. You are given a description of a scene, and your job is to change that scene according to the instructions, and give a detailed description of the changed scene that would allow a generative model to create an image.</p>
-<ol type="1">
-<li>Replace clothing items with a mixture of futuristic and mediaeval looking armour.</li>
-<li>Replace every-day objects held by characters with power swords, chainswords,futuristic looking guns, staffs or magic items.</li>
-<li>Replace architecture with the monumental, dark architecture common to the Warhammer 40k universe.</li>
-<li>Include things like monumental gothic spaceships in the image description.</li>
-</ol>
-</blockquote>
-<p>Here’s the output:</p>
-<blockquote class="blockquote">
-<p>This is an image of four battle-hardened individuals gathered around a hololith, suggesting a strategic war council. The setting is bathed in the cold, harsh light of flickering lumens, casting long, grim shadows on the figures and the interior. They appear to be situated in a cathedral-like command room of an Imperial Battleship, with a monumental, gothic archway in the background, contributing to the oppressive ambiance.</p>
-<p>Starting from the left, the first individual is an Adeptus Astartes, his short, dark hair and light beard visible beneath the rim of his power armor helmet. He is clad in a black power armor with white Imperial insignia. He appears focused, his gauntleted hands resting on the hololith while studying the battlefield projection. To his right, a Sororitas, her shoulder-length, curly hair peeking out from beneath her wimple, leans towards the holographic display. She’s clad in a light grey power armor, her face engaging and determined.</p>
-<p>Behind these two and slightly out of focus, two more figures loom. The figure in the middle of the composition is a man, his shoulder-length wavy hair barely visible beneath his Inquisitorial hat, wearing a black, ornate, medieval-looking armor, his eyes fixed on the hololith. To the far right, partially cropped out of the frame, there is a Tech-Priestess, her bionic glasses glinting in the lumen-light, her dark, mechanicus robes adding to her awe-inspiring presence. She seems to be observing the hololith with keen interest, standing slightly behind the armored individuals.</p>
-<p>The group gives off a sense of unity and focus, with everyone’s attention directed toward the hololith, situated on what appears to be an aged, white marble table. The body language and expressions suggest a tense, collaborative atmosphere, typical of a war council in the grim darkness of the far future.</p>
-</blockquote>
-<p>By the Emperor, that’s some good stuff. Let’s see what DALL-E makes of it:</p>
-<div id="fig-output" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://chrisvoncsefalvay.com/posts/lair/img-eTqdxb5CYGT2vY5FqNkRJdva.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Our output image.
-</figcaption>
-</figure>
-</div>
-<p>It’s interesting to note what remains and what has changed. In particular, the relationship of the figures to each other, both spatially and semantically, as well as their posture, their number (mostly!) and the general subject matter at a highly semanticised level was preserved. Instead of a laptop, they’re looking at a big holographic sand table. Note that unlike in NST, we actually have control over what is preserved and what is not – that’s what our transformer prompt accomplishes. We’ve told it to change dress, for instance, but we haven’t told it to make any changes to the overall relationship between the figures (note how a “collaborative atmosphere”, for instance, was retained word for word).</p>
-</section>
-<section id="whats-the-point" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="whats-the-point">What’s the point?</h2>
-<p>Okay, this was quite fun, but what’s the point? Well, the point is that we can use language as an intermediate representation to manipulate things relatively easily. This is powerful because language is such an accessible and forgiving intermediate representation. More importantly, however, <em>anything</em> that can be represented in language can be manipulated this way.</p>
-<ul>
-<li>In the space of language-to-language, this includes adapting text to the needs of special audiences,<span class="citation" data-cites="steinmetz2023developing verma2023bridging">(Steinmetz 2023; Verma, Boland, and Miesenberger 2023)</span> conveying information to lay audiences <span class="citation" data-cites="lee2023ai">(Lee, Goldberg, and Kohane 2023)</span> and creating secondary explanatory materials e.g.&nbsp;statutory explanations <span class="citation" data-cites="blair2023can">(Blair-Stanek, Holzenberger, and Van Durme 2023)</span>.</li>
-<li>For image-to-image transformations, retaining semanticity while simpifying visuals and removing clutter may often be useful, e.g.&nbsp;for creating procedural visual guidance for medical procedures <span class="citation" data-cites="chen2023endoscopic">(Chen 2023)</span>. Often, such images are created by hand, but this is a time-consuming process that could be automated.</li>
-<li>For code-to-code, language as an intermediate representation allows the interjection of desired features into code, e.g.&nbsp;for the purposes of code refactoring. Beyond simple code rewriting, this allows a kind of opinionated transformation. Often, a target language is not only idiomatically different but also has certain other characteristics, and this is <em>a fortiori</em> the case for DSLs <span class="citation" data-cites="magalhaes2023c2taco">(Magalhães et al. 2023)</span>.</li>
-<li>For code-to-text, this allows the creation of documentation from code, which is a perennial problem in software engineering. The textual intermediate representation allows fine control over the resulting documentation.</li>
-</ul>
-<div class="no-row-height column-margin column-container"><div id="ref-steinmetz2023developing" class="csl-entry">
-Steinmetz, Ina. 2023. <span>‘Developing <span>“EasyTalk”</span>–a Writing System Utilizing Natural Language Processing for Interactive Generation of <span>“Leichte Sprache”</span>(easy-to-Read German) to Assist Low-Literate Users with Intellectual or Developmental Disabilities and/or Complex Communication Needs in Writing’</span>. <a href="https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf">https://kola.opus.hbz-nrw.de/frontdoor/deliver/index/docId/2443/file/diss.pdf</a>.
-</div><div id="ref-verma2023bridging" class="csl-entry">
-Verma, A Kumar, S Gavra Boland, and Klaus Miesenberger. 2023. <span>‘Bridging the Digital Divide for Persons with Intellectual Disabilities: Assessing the Role of ChatGPT in Enabling Access, Evaluation, Integration, Management, and Creation of Digital Content’</span>. In <em>ICERI2023 Proceedings</em>, 3767–76. IATED.
-</div><div id="ref-lee2023ai" class="csl-entry">
-Lee, Peter, Carey Goldberg, and Isaac Kohane. 2023. <em>The AI Revolution in Medicine: GPT-4 and Beyond</em>. Pearson.
-</div><div id="ref-blair2023can" class="csl-entry">
-Blair-Stanek, Andrew, Nils Holzenberger, and Benjamin Van Durme. 2023. <span>‘Can GPT-3 Perform Statutory Reasoning?’</span> <em>arXiv Preprint arXiv:2302.06100</em>.
-</div><div id="ref-chen2023endoscopic" class="csl-entry">
-Chen, Hao-Wen. 2023. <span>‘Endoscopic Endonasal Skull Base Surgery for Pituitary Lesions: An AI-Assisted Creative Workflow to Develop an Animated Educational Resource for Patients and Physicians’</span>. PhD thesis, Johns Hopkins University.
-</div><div id="ref-magalhaes2023c2taco" class="csl-entry">
-Magalhães, José Wesley de Souza, Jackson Woodruff, Elizabeth Polgreen, and Michael FP O’Boyle. 2023. <span>‘C2TACO: Lifting Tensor Code to TACO’</span>. In <em>Proceedings of the 22nd ACM SIGPLAN International Conference on Generative Programming: Concepts and Experiences</em>, 42–56.
-</div></div><p>The possibilities for using language as an intermediate representation are endless. LAIR is a powerful paradigm for transformational tasks that allows us to use language as an intermediate representation to manipulate things in a way that is both accessible and powerful, and that allows us to pick and choose <em>what</em> part of semanticity we want to manipulate <em>versus</em> what we want to preserve. It’s hard to reason about LAIR’s relative performance given that it is not a technique but a paradigm, and that its focus is not simple style transfer but finely controlled stylistic and contextual transformation, but even in the current absence of benchmarks, it is clear that models benefit from using language as an easily workable and malleable intermediate representation.</p>
-</section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<p>The code for the toy example is available <a href="https://gist.github.com/chrisvoncsefalvay/f3c6e7547350cfae50be0078ad99435f">here</a>.</p>
-
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2024,
-  author = {{Chris von Csefalvay}},
-  title = {LAIR - {Language} {As} {Intermediate} {Representation}},
-  date = {2024-01-06},
-  url = {https://chrisvoncsefalvay.com/posts/lair/},
-  doi = {10.59350/qg7b3-crs97},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2024" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2024. <span>“LAIR - Language As Intermediate
-Representation.”</span> <a href="https://doi.org/10.59350/qg7b3-crs97">https://doi.org/10.59350/qg7b3-crs97</a>.
-</div></div></section></div> ]]></description>
-  <category>LLMs</category>
-  <category>AI</category>
-  <category>style transfer</category>
-  <guid>https://chrisvoncsefalvay.com/posts/lair/</guid>
-  <pubDate>Sat, 06 Jan 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/lair/header.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 </channel>
 </rss>
