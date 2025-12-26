@@ -8,7 +8,8 @@ categories:
 - agentic AI
 - LLMs
 - fine-tuning
-citation: true
+citation:
+  doi: 10.59350/ddcq4-4na09
 google-scholar: true
 ---
 
