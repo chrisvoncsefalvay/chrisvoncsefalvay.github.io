@@ -1,0 +1,1791 @@
+---
+categories:
+- AI
+- LLMs
+- fine-tuning
+- MLOps
+date: 2025-12-25
+description: Beyond loss curves -- what you should actually be watching when fine-tuning LLMs.
+google-scholar: true
+image: failure_patterns.png
+title: The post-training instrument cluster -- Part I
+format:
+  html:
+    code-overflow: wrap
+notebook-links: global
+---
+
+::: {.callout-tip}
+## Hey, I'm writing a book about this!
+
+I'm actually writing a book about this stuff. It turns out there isn't a lot of literature on how to do post-training at the level too big for single-GPU laptop-sized hobby projects and requiring enterprise reliability on one hand, but not quite at the scale of multi-team distributed post-training you'd get in foundation labs. That's a problem, because a lot of the current value in fine-tuning applications comes exactly out of that large, crucial market. I am in the last phases of putting together the manuscript for _The Frontier Playbook_, a set of curated tactics and techniques for real world operationalisation of LLMs. [Sign up for updates here](https://aifrontierplaybook.substack.com).
+
+:::
+
+Jimmy Doolittle, later famous for leading the daring Doolittle Raid on Tokyo in 1942, was a pioneering aviator in the 1920s and 30s. One of his key contributions to aviation was the first of what at the time was called "blind" flight -- what we would refer to as IFR (Instrument Flight Rules) flight today. Doolittle demonstrated that with the right set of instruments, a pilot could safely navigate and land an aircraft without any external visual references. A few years later, instrument flying became increasingly standardised, and in the late 1930s, the main instruments and their arrangement into the "basic T" layout of six key instruments -- affectionately referred to as the six-pack -- was formalised. To this day, virtually all aircraft have the same instrument cluster in the same order, and every pilot is trained to interpret them. Together, they create a fairly comprehensive picture of the aircraft's state and environment.
+
+You should aspire to have the same for your LLM post-training.
+
+Unfortunately, that doesn't come without some effort. Even though really good tools exist for monitoring fine-tuning runs, what you get out of the box is often quite lacklustre. When you fire up a fine-tuning run and open your Weights & Biases dashboard, you're greeted with the same three faithful companions: training loss, validation loss and gradient norm. They're like the speedometer, fuel gauge and temperature warning light of the machine learning world -- essential, certainly, but hardly sufficient for understanding what's actually happening under the bonnet. Nobody would fly a commercial airliner with three instruments, and nobody should run a fine-tuning job of any seriousness with just loss curves and a gradient norm.
+
+More important than what you see is knowing how to read those instruments. As you monitor a post-training job, regardless of whether it's SFT, DPO, GRPO, even something more exotic, you're largely after the same information: is the model learning what you want it to learn, is the optimisation stable, are there any silent failure modes creeping in, and when should I stop? Knowing how to read the instruments properly means you'll know a lot about the model while it's still in the oven, so to speak, and you can catch issues early. This is useful for the ML hobbyist, but indispensable for the enterprise practitioner. At that scale, a solid training run can cost north of five figures -- not foundation lab training cost scale (it is estimated that a single training run of a modern foundation model is easily in the realm of nine figures), but enough that wasting runs is eventually going to attract management attention.^[I'm being my usual flippant self here, but there's a very real economic, environmental and social cost to wasted compute. We owe it to the world and to future generations to make sure we make every watt of compute count. One can disagree about the ethics of the money and energy and CO2 emissions that are devoted to training LLMs -- it is rather harder to argue that wasting those resources is in any way justifiable.]
+
+The purpose of this post -- the first in a series of three -- is twofold: to explain what a comprehensive post-training instrument cluster looks like for the easiest 'base case' (plain vanilla SFT) and provide you with the code to implement it yourself on one hand, and learning how to interpret them on the other.
+
+
+## The case for comprehensive monitoring
+
+Before we dive into the instruments themselves, it's worth asking: why bother? The loss is going down, the model is learning, what more do you need?
+
+The answer, as with most things in machine learning, is that the happy path is easy and the failure modes are numerous. A decreasing loss curve can mask catastrophic forgetting. A stable gradient norm can coexist with attention collapse. A model can achieve excellent validation loss while generating nonsense. Worse, many of these failure modes are silent until you actually deploy the model and discover, often at significant cost, that something went wrong twenty hours into a forty-hour training run.^[I've seen production fine-tuning runs where the model appeared to be learning beautifully right up until generation quality fell off a cliff. The loss was still decreasing. The gradient norm was textbook perfect. The only hint that something was wrong was a subtle shift in the attention entropy that nobody was monitoring.]
+
+Enterprise fine-tuning adds another dimension of complexity. You're not just training a model, you're accountable for training a model. When a stakeholder asks why a particular run failed, 'the loss looked fine but the model doesn't work' is not an acceptable answer. Comprehensive monitoring provides the forensic trail that turns post-mortems from guesswork into analysis.^[Even better, good monitoring can often prevent failures from happening in the first place. Catching a loss spike or a gradient explosion early can save hours of wasted compute and frustration. Monitoring logs can -- indeed, should! -- act as release gates at worst, meaning you might well avoid the 'mortem' part altogether.]
+
+
+## Instrument 1: the loss landscape
+
+Let's start with the obvious: loss. But we're going to look at it properly.
+
+The default wandb setup gives you `train/loss` and `eval/loss` as single scalar values. This is necessary but insufficient. What you actually want is a richer picture of the loss landscape:
+
+::: {.column-margin}
+Loss variance is particularly diagnostic for LoRA fine-tuning, where you're updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Enhanced loss logging callback"
+from transformers import TrainerCallback
+import numpy as np
+from collections import deque
+
+class LossLandscapeCallback(TrainerCallback):
+    """Track loss statistics beyond simple averages."""
+
+    def __init__(self, window_size: int = 100):
+        self.window_size = window_size
+        self.train_losses = deque(maxlen=window_size)
+        self.eval_losses = deque(maxlen=window_size)
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs is None:
+            return
+
+        if "loss" in logs:
+            self.train_losses.append(logs["loss"])
+
+            if len(self.train_losses) >= 10:
+                losses = list(self.train_losses)
+                logs["train/loss_variance"] = np.var(losses)
+                logs["train/loss_trend"] = np.polyfit(
+                    range(len(losses)), losses, 1
+                )[0]
+
+                # Detect loss spikes
+                recent = losses[-10:]
+                older = losses[:-10] if len(losses) > 10 else losses
+                logs["train/loss_spike_ratio"] = (
+                    np.max(recent) / np.mean(older)
+                    if older else 1.0
+                )
+```
+
+**What to watch for:**
+
+- **Loss variance increasing**: The optimisation is becoming unstable. Consider reducing learning rate.
+- **Loss trend flattening while absolute loss is still high**: You've hit a plateau. Either the learning rate is too low, or you've exhausted what this architecture can learn from this data.
+- **Loss spike ratio > 2.0**: Something dramatic happened. Check for data corruption, gradient explosion or memory issues.
+- **Eval loss diverging from train loss**: The classic overfitting signal, but in LoRA training this can also indicate that your adapter rank is too high for your dataset size.
+
+```{python}
+#| label: fig-loss-diagnostics
+#| fig-cap: "Loss landscape diagnostics: what healthy and unhealthy training looks like."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 8
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.subplots_adjust(hspace=0.35, wspace=0.25)
+
+# Colours: grey for healthy, muted red for problems
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+problem_red_light = '#e8b4b8'
+
+# L-shaped loss: steep initial drop, then flattens
+def l_shaped_loss(x, scale=2.5, knee=80, floor=0.35):
+    """More realistic L-shaped loss curve with steep initial drop."""
+    return scale * np.exp(-x / knee) + floor * (1 + 0.3 * np.exp(-x / 200))
+
+# Realistic training noise (slightly spiky)
+def training_noise(n, base_std=0.03):
+    """Realistic training noise with occasional small jumps."""
+    noise = np.random.normal(0, base_std, n)
+    # Add occasional small spikes (normal training behaviour)
+    for i in range(n // 50):
+        idx = np.random.randint(0, n)
+        noise[idx] += np.random.uniform(0.02, 0.08) * np.random.choice([-1, 1])
+    return noise
+
+# --- Panel A: Healthy loss curve ---
+ax = axes[0, 0]
+healthy_loss = l_shaped_loss(steps) + training_noise(len(steps))
+ax.plot(steps, healthy_loss, color=grey, linewidth=0.8)
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('A. Healthy training', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3)
+# Add subtle annotation
+ax.annotate('Smooth exponential-ish\ndecay', xy=(350, 0.5), fontsize=8, color=light_grey, ha='center')
+
+# --- Panel B: Increasing variance ---
+ax = axes[0, 1]
+# Start stable, become unstable
+variance_factor = 1 + 3 * (steps / 500) ** 2
+unstable_loss = l_shaped_loss(steps) + training_noise(len(steps), base_std=0.025) * variance_factor
+ax.plot(steps, unstable_loss, color=problem_red, linewidth=0.8)
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('B. Increasing variance', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3)
+# Shade the problematic region
+ax.axvspan(300, 500, alpha=0.1, color=problem_red)
+ax.annotate('Optimisation\nbecoming unstable', xy=(400, 1.5), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Loss spikes ---
+ax = axes[1, 0]
+spiked_loss = l_shaped_loss(steps) + training_noise(len(steps))
+# Add dramatic spikes (the problematic kind)
+spike_indices = [120, 280, 350]
+for idx in spike_indices:
+    spiked_loss[idx:idx+10] += np.array([0.3, 0.6, 1.0, 1.2, 1.1, 0.9, 0.6, 0.4, 0.2, 0.15])
+
+ax.plot(steps, spiked_loss, color=grey, linewidth=0.8)
+# Highlight spikes
+for idx in spike_indices:
+    ax.plot(steps[idx:idx+10], spiked_loss[idx:idx+10], color=problem_red, linewidth=1.2)
+    ax.scatter([steps[idx+1]], [spiked_loss[idx+1]], color=problem_red, s=15, zorder=5)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('C. Loss spikes (ratio > 2.0)', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3)
+ax.annotate('Spike ratio 2.3', xy=(285, 2.0), fontsize=8, color=problem_red, ha='left')
+
+# --- Panel D: Train-eval divergence ---
+ax = axes[1, 1]
+eval_steps = np.arange(0, 500, 50)
+train_loss_smooth = l_shaped_loss(steps)
+eval_loss_values = l_shaped_loss(eval_steps) + 0.05
+
+# Make eval diverge after step 200
+divergence_start = 4  # index where step = 200
+eval_loss_values[divergence_start:] = eval_loss_values[divergence_start:] + \
+    0.12 * np.arange(len(eval_loss_values) - divergence_start) ** 1.3
+
+ax.plot(steps, train_loss_smooth, color=grey, linewidth=0.8, label='Train loss')
+ax.plot(eval_steps, eval_loss_values, color=problem_red, linewidth=0.8,
+        marker='o', markersize=3, label='Eval loss')
+
+# Shade divergence region
+ax.fill_between(eval_steps[divergence_start:],
+                train_loss_smooth[eval_steps[divergence_start:].astype(int)],
+                eval_loss_values[divergence_start:],
+                alpha=0.15, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('D. Train-eval divergence', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3)
+ax.legend(frameon=False, fontsize=8, loc='upper right')
+ax.annotate('Increasing gap\nsignals overfitting', xy=(340, 1.35), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('loss_diagnostics.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+::: {.column-margin}
+Sometimes, such visual guides note the existence of a pattern they call a 'stuck loss curve'. This is essentially a perfectly fine 'done' loss curve (i.e. flat loss) with very high variance. It _is_ pathological, but it's just a special case of increasing variance, and in my view, shouldn't be a category of its own.
+:::
+
+## Instrument 2: gradient histograms
+
+A single gradient norm scalar tells you almost nothing. What you actually want is the *distribution* of gradients across your parameters. Weights & Biases can log histograms natively, and you should take advantage of this wherever possible, but it's important you understand what to look for.
+
+::: {.column-margin}
+Gradient histograms are one of the most underused diagnostic tools in deep learning. A single glance at the distribution shape tells you more than a hundred scalar metrics. The problem is, they take a lot of experience to interpret. WandB has done the world a massive service with making them pop out of the box by default if you configure it mostly the right way, but knowing what to look for is another matter entirely. There are relatively few good heuristics for what good and bad gradient distributions look like, and I've seen more disagreement among perfectly competent practitioners on this topic than almost any other.
+:::
+
+The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss $\mathcal{L}$ with respect to the weights $W_1$ in an early layer depends on the chain of derivatives through all subsequent layers:
+
+$$\frac{\partial \mathcal{L}}{\partial W_1} = \frac{\partial \mathcal{L}}{\partial W_L} \cdot \prod_{\ell=2}^{L} \left( \phi'_\ell(z_\ell) \cdot W_\ell \right)$$
+
+where $\phi'_\ell$ is the derivative of the activation function at layer $\ell$ and $z_\ell$ is the pre-activation. The product structure is the culprit: if the spectral norm $\|W_\ell\| < 1$ for most layers, the product shrinks exponentially with depth and gradients *vanish*. Conversely, if $\|W_\ell\| > 1$ and $\|\phi'_\ell\| > 1$, the product grows exponentially and gradients *explode*. With ReLU activations, an additional failure mode emerges: wherever $z_\ell < 0$, the derivative is exactly zero, causing entire gradient paths to die.^[This is the mathematical foundation of the 'dying ReLU' problem. It's also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.]
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Parameter-wise gradient histogram logging"
+class GradientHistogramCallback(TrainerCallback):
+    """Log parameter-wise gradient histograms to wandb."""
+
+    def __init__(self, log_every_n_steps: int = 50):
+        self.log_every_n_steps = log_every_n_steps
+        self.step_count = 0
+
+    def on_pre_optimizer_step(self, args, state, control, model=None, **kwargs):
+        """Capture gradients before optimizer.step() clears them."""
+        self.step_count += 1
+        if self.step_count % self.log_every_n_steps != 0:
+            return
+        if model is None:
+            return
+
+        import wandb
+
+        histograms = {}
+        stats = {}
+
+        for name, param in model.named_parameters():
+            if param.grad is None:
+                continue
+
+            grad = param.grad.detach().flatten().cpu().numpy()
+            short_name = self._simplify_name(name)
+
+            # Log histogram to wandb
+            histograms[f"gradients/{short_name}"] = wandb.Histogram(grad)
+
+            # Also log summary statistics
+            stats[f"grad_stats/{short_name}/mean"] = float(np.mean(grad))
+            stats[f"grad_stats/{short_name}/std"] = float(np.std(grad))
+            stats[f"grad_stats/{short_name}/max"] = float(np.max(np.abs(grad)))
+            stats[f"grad_stats/{short_name}/sparsity"] = float(
+                np.mean(np.abs(grad) < 1e-8)
+            )
+
+        if wandb.run is not None:
+            wandb.log({**histograms, **stats})
+
+    def _simplify_name(self, name: str) -> str:
+        """Simplify parameter name for readable logging."""
+        parts = name.split(".")
+        simplified = []
+        for p in parts:
+            if p.isdigit():
+                simplified.append(f"L{p}")
+            elif "lora" in p.lower():
+                simplified.append(p.replace("_", ""))
+            elif p in ("q_proj", "k_proj", "v_proj", "o_proj"):
+                simplified.append(p.replace("_proj", ""))
+        return "_".join(simplified) if simplified else name[-30:]
+```
+
+```{python}
+#| label: fig-gradient-histograms
+#| fig-cap: "Gradient distribution over time (wandb-style): steps on x-axis, gradient values on y-axis, density as colour."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 10
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+
+# Create wandb-style histogram heatmaps
+n_steps = 100
+n_bins = 50
+steps = np.arange(n_steps)
+
+def make_histogram_over_time(grad_func, n_steps, n_bins, y_range):
+    """Generate histogram data over training steps."""
+    hist_data = np.zeros((n_bins, n_steps))
+    bin_edges = np.linspace(y_range[0], y_range[1], n_bins + 1)
+
+    for t in range(n_steps):
+        grads = grad_func(t)
+        hist, _ = np.histogram(grads, bins=bin_edges)
+        hist_data[:, t] = hist
+
+    return hist_data, bin_edges
+
+# Custom colourmap (wandb-style: white to teal)
+colors_list = ['#ffffff', '#e0f0f0', '#a0d8d8', '#40b0b0', '#008080']
+wandb_cmap = LinearSegmentedColormap.from_list('wandb', colors_list)
+
+# Problem colourmap (white to red)
+problem_colors = ['#ffffff', '#f0e0e0', '#e0a0a0', '#c44e52', '#8b0000']
+problem_cmap = LinearSegmentedColormap.from_list('problem', problem_colors)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+fig.subplots_adjust(hspace=0.35, wspace=0.3)
+
+# --- Panel A: Healthy gradients (stable distribution over time) ---
+ax = axes[0, 0]
+def healthy_grads(t):
+    # Stable, centered distribution throughout
+    std = 0.02 * (1 + 0.1 * np.sin(t / 10))  # slight natural variation
+    return np.random.normal(0, std, 5000)
+
+hist_data, bin_edges = make_histogram_over_time(healthy_grads, n_steps, n_bins, (-0.1, 0.1))
+bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+im = ax.pcolormesh(steps, bin_centers, hist_data, cmap=wandb_cmap, shading='auto')
+ax.axhline(0, color='#888888', linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Gradient value', fontsize=9)
+ax.set_title('A. Healthy: layers.12.mlp.down_proj', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.08, 0.08)
+
+# --- Panel B: Vanishing gradients (distribution collapsing over time) ---
+ax = axes[0, 1]
+def vanishing_grads(t):
+    # Start healthy, collapse to near-zero
+    progress = t / n_steps
+    std = 0.025 * (1 - 0.9 * progress ** 0.5)
+    grads = np.random.normal(0, max(std, 0.001), 5000)
+    # Add dead neurons increasing over time
+    n_dead = int(1000 * progress)
+    if n_dead > 0:
+        grads = np.concatenate([grads[:-n_dead], np.zeros(n_dead)])
+    return grads
+
+hist_data, bin_edges = make_histogram_over_time(vanishing_grads, n_steps, n_bins, (-0.1, 0.1))
+bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+im = ax.pcolormesh(steps, bin_centers, hist_data, cmap=problem_cmap, shading='auto')
+ax.axhline(0, color='#888888', linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Gradient value', fontsize=9)
+ax.set_title('B. Vanishing: layers.20.self_attn.v_proj', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.08, 0.08)
+ax.annotate('Distribution\ncollapses', xy=(75, 0.05), fontsize=8, color='#8b0000', ha='center')
+
+# --- Panel C: Exploding gradients (distribution widening with spikes) ---
+ax = axes[1, 0]
+def exploding_grads(t):
+    # Start healthy, then develop fat tails
+    progress = t / n_steps
+    base_std = 0.02 * (1 + 2 * progress ** 2)
+    grads = np.random.normal(0, base_std, 4500)
+    # Add increasing proportion of outliers
+    n_outliers = int(500 * progress)
+    if n_outliers > 0:
+        outliers = np.random.standard_cauchy(n_outliers) * 0.03 * (1 + progress)
+        grads = np.concatenate([grads, np.clip(outliers, -0.3, 0.3)])
+    return grads
+
+hist_data, bin_edges = make_histogram_over_time(exploding_grads, n_steps, n_bins, (-0.15, 0.15))
+bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+im = ax.pcolormesh(steps, bin_centers, hist_data, cmap=problem_cmap, shading='auto')
+ax.axhline(0, color='#888888', linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Gradient value', fontsize=9)
+ax.set_title('C. Exploding: layers.0.self_attn.q_proj', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.12, 0.12)
+ax.annotate('Tails spreading', xy=(80, 0.08), fontsize=8, color='#8b0000', ha='center')
+
+# --- Panel D: Layer imbalance (3 layers side by side) ---
+ax = axes[1, 1]
+
+# Create 3 mini-panels within this axis
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+# Clear the main axis and create 3 stacked subplots
+ax.set_visible(False)
+
+# Create new axes for the 3 layers
+gs = fig.add_gridspec(3, 1, left=0.55, right=0.95, bottom=0.08, top=0.45, hspace=0.15)
+
+layer_configs = [
+    ('Layer 0 (early)', 0.04, wandb_cmap),      # Large gradients
+    ('Layer 12 (mid)', 0.015, wandb_cmap),      # Medium gradients
+    ('Layer 23 (late)', 0.003, problem_cmap),   # Tiny gradients (problematic)
+]
+
+for i, (label, std, cmap) in enumerate(layer_configs):
+    ax_layer = fig.add_subplot(gs[i])
+
+    def layer_grads(t, std=std):
+        return np.random.normal(0, std * (1 + 0.1 * np.sin(t / 8)), 5000)
+
+    hist_data, bin_edges = make_histogram_over_time(
+        lambda t, s=std: np.random.normal(0, s * (1 + 0.1 * np.sin(t / 8)), 5000),
+        n_steps, 30, (-0.1, 0.1)
+    )
+    bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+    ax_layer.pcolormesh(steps, bin_centers, hist_data, cmap=cmap, shading='auto')
+    ax_layer.axhline(0, color='#888888', linewidth=0.3, linestyle='--', alpha=0.5)
+    ax_layer.set_ylabel(label, fontsize=8)
+    ax_layer.set_ylim(-0.08, 0.08)
+    ax_layer.tick_params(axis='both', labelsize=7)
+
+    if i < 2:
+        ax_layer.set_xticklabels([])
+    else:
+        ax_layer.set_xlabel('Step', fontsize=9)
+
+# Add title for panel D
+fig.text(0.55, 0.47, 'D. Layer imbalance comparison', fontsize=10, fontweight='normal')
+fig.text(0.55, 0.455, '(late layers starved of gradient signal)', fontsize=8, color='#888888')
+
+plt.savefig('gradient_histograms.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Distribution collapsing to a spike at zero**: Vanishing gradients. Your model has stopped learning, often because of dying ReLUs, excessive regularisation or a learning rate that's far too low.
+- **Fat tails extending far from zero**: Exploding gradients. Even if the mean looks fine, occasional extreme values will destabilise training. Gradient clipping can help, but investigate the root cause.
+- **Different layers having wildly different spreads**: Layer imbalance. Early layers dominating late layers (or vice versa) indicates poor initialisation or the need for layer-wise learning rate scaling.
+- **Bimodal or multimodal distributions**: Often indicates that different parameter groups (e.g. attention vs MLP, or LoRA A vs B matrices) are learning at very different rates. Not always bad, but worth investigating.
+
+
+## Instrument 3: learning rate dynamics
+
+The learning rate schedule is decided before training, so why monitor it? Because what matters isn't what you *planned* but what *actually happened*.
+
+::: {.column-margin}
+Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Learning rate monitoring with phase detection"
+class LearningRateMonitor(TrainerCallback):
+    """Track effective learning rate and detect phase transitions."""
+
+    def __init__(self):
+        self.lr_history = []
+        self.phase = "warmup"
+
+    def on_step_end(self, args, state, control, **kwargs):
+        # Get current learning rate from optimizer
+        lr = state.learning_rate if hasattr(state, "learning_rate") else None
+
+        if lr is not None:
+            self.lr_history.append(lr)
+
+            # Detect phase transitions
+            if len(self.lr_history) > 10:
+                recent = self.lr_history[-10:]
+                if all(recent[i] >= recent[i+1] for i in range(len(recent)-1)):
+                    new_phase = "decay"
+                elif all(recent[i] <= recent[i+1] for i in range(len(recent)-1)):
+                    new_phase = "warmup"
+                else:
+                    new_phase = "peak"
+
+                if new_phase != self.phase:
+                    print(f"LR phase transition: {self.phase} -> {new_phase}")
+                    self.phase = new_phase
+```
+
+**What to watch for:**
+
+- **Warmup too short**: If your loss is unstable in the first few hundred steps, you probably needed more warmup.
+- **Peak learning rate never reached**: This happens with some schedulers when total steps are miscalculated. The training never operates at full learning rate.
+- **Learning rate effectively zero before training ends**: Overly aggressive decay. Your final epochs are wasted.
+
+
+## Instrument 4: attention entropy
+
+This is where we leave the standard metrics behind. Yes, histograms are art, loss landscapes are science, but attention entropy is where we begin to get into chef's kiss territory.
+
+Attention entropy measures how focused or diffuse the model's attention patterns are, and it's one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights $\boldsymbol{\alpha} = (\alpha_1, \alpha_2, \ldots, \alpha_n)$ over a sequence of length $n$ (where $\sum_i \alpha_i = 1$ after softmax), the entropy is defined as:
+
+$$H(\boldsymbol{\alpha}) = -\sum_{i=1}^{n} \alpha_i \log \alpha_i$$
+
+The bounds are intuitive: $H = 0$ when all attention is focused on a single token ($\alpha_j = 1$ for some $j$, all others zero), and $H = \log n$ when attention is uniformly distributed ($\alpha_i = 1/n$ for all $i$). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Attention entropy monitoring"
+import torch
+import torch.nn.functional as F
+
+class AttentionEntropyCallback(TrainerCallback):
+    """Monitor attention pattern entropy during training."""
+
+    def __init__(self, log_every_n_steps: int = 100, num_heads_to_sample: int = 4):
+        self.log_every_n_steps = log_every_n_steps
+        self.num_heads_to_sample = num_heads_to_sample
+        self.step_count = 0
+
+    def compute_entropy(self, attn_weights: torch.Tensor) -> float:
+        """Compute entropy of attention distribution."""
+        # attn_weights: [batch, heads, seq, seq]
+        # Normalise to valid probability distribution
+        attn_probs = F.softmax(attn_weights, dim=-1)
+
+        # Compute entropy: -sum(p * log(p))
+        entropy = -torch.sum(
+            attn_probs * torch.log(attn_probs + 1e-10), dim=-1
+        )
+
+        return entropy.mean().item()
+
+    def on_step_end(self, args, state, control, model=None, **kwargs):
+        self.step_count += 1
+        if self.step_count % self.log_every_n_steps != 0:
+            return
+
+        # Hook to capture attention weights during forward pass
+        # Implementation depends on model architecture
+        # This is a simplified example
+
+        entropy_stats = {
+            "attention/mean_entropy": self._get_mean_entropy(model),
+            "attention/entropy_variance": self._get_entropy_variance(model),
+        }
+
+        # Log metrics
+        if hasattr(state, "log_history") and state.log_history:
+            state.log_history[-1].update(entropy_stats)
+```
+
+```{python}
+#| label: fig-attention-entropy
+#| fig-cap: "Attention entropy diagnostics: mean entropy (solid) and cross-head variance (dashed) reveal different pathologies."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 8
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.subplots_adjust(hspace=0.4, wspace=0.35)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+variance_blue = '#4878a8'
+
+# Assume log(n) ~ 6 for a sequence of ~400 tokens
+max_entropy = 6.0
+
+# --- Panel A: Healthy entropy ---
+ax = axes[0, 0]
+ax2 = ax.twinx()
+
+# Stable mean around 3-4 with slight learning-induced decrease
+healthy_mean = 4.0 - 0.8 * (1 - np.exp(-steps / 150)) + np.random.normal(0, 0.08, len(steps))
+# Low, stable variance
+healthy_var = 0.15 + np.random.normal(0, 0.02, len(steps))
+healthy_var = np.clip(healthy_var, 0.05, 0.4)
+
+ax.plot(steps, healthy_mean, color=grey, linewidth=0.9, label='Mean entropy')
+ax2.plot(steps, healthy_var, color=variance_blue, linewidth=0.9, linestyle='--', label='Variance')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean entropy', fontsize=9, color=grey)
+ax2.set_ylabel('Variance', fontsize=9, color=variance_blue)
+ax.set_title('A. Healthy: gradual focusing', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, max_entropy)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=variance_blue)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+# --- Panel B: Attention collapse ---
+ax = axes[0, 1]
+ax2 = ax.twinx()
+
+# Mean entropy collapsing towards zero
+collapse_progress = (steps / 500) ** 1.5
+collapse_mean = 4.0 * (1 - 0.9 * collapse_progress) + np.random.normal(0, 0.06, len(steps))
+collapse_mean = np.clip(collapse_mean, 0.1, 5.0)
+# Variance initially increases then collapses too
+collapse_var = 0.15 + 0.5 * np.sin(np.pi * collapse_progress) * (1 - collapse_progress)
+collapse_var += np.random.normal(0, 0.02, len(steps))
+collapse_var = np.clip(collapse_var, 0.02, 0.8)
+
+ax.plot(steps, collapse_mean, color=problem_red, linewidth=0.9)
+ax2.plot(steps, collapse_var, color=variance_blue, linewidth=0.9, linestyle='--')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean entropy', fontsize=9, color=problem_red)
+ax2.set_ylabel('Variance', fontsize=9, color=variance_blue)
+ax.set_title('B. Collapse: attention sinks forming', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, max_entropy)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=problem_red)
+ax2.tick_params(axis='y', colors=variance_blue)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+ax.axhspan(0, 1.0, alpha=0.08, color=problem_red)
+ax.annotate('Danger zone', xy=(400, 0.5), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Attention diffusion ---
+ax = axes[1, 0]
+ax2 = ax.twinx()
+
+# Mean entropy increasing towards maximum
+diffuse_mean = 3.5 + 2.0 * (1 - np.exp(-steps / 200)) + np.random.normal(0, 0.08, len(steps))
+diffuse_mean = np.clip(diffuse_mean, 2.0, max_entropy - 0.1)
+# Variance decreasing (all heads becoming uniformly diffuse)
+diffuse_var = 0.4 * np.exp(-steps / 300) + 0.05 + np.random.normal(0, 0.015, len(steps))
+diffuse_var = np.clip(diffuse_var, 0.03, 0.6)
+
+ax.plot(steps, diffuse_mean, color=problem_red, linewidth=0.9)
+ax2.plot(steps, diffuse_var, color=variance_blue, linewidth=0.9, linestyle='--')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean entropy', fontsize=9, color=problem_red)
+ax2.set_ylabel('Variance', fontsize=9, color=variance_blue)
+ax.set_title('C. Diffusion: losing focus', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, max_entropy)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=problem_red)
+ax2.tick_params(axis='y', colors=variance_blue)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+ax.axhspan(5.0, max_entropy, alpha=0.08, color=problem_red)
+ax.annotate('Approaching\nuniform attention', xy=(400, 5.5), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel D: Phase transition ---
+ax = axes[1, 1]
+ax2 = ax.twinx()
+
+# Sudden entropy change mid-training
+phase_mean = np.where(steps < 250,
+    3.8 + np.random.normal(0, 0.06, len(steps)),
+    2.5 + np.random.normal(0, 0.08, len(steps)))
+# Smooth the transition slightly
+transition_width = 30
+transition_center = 250
+sigmoid = 1 / (1 + np.exp(-(steps - transition_center) / (transition_width / 4)))
+phase_mean = 3.8 * (1 - sigmoid) + 2.5 * sigmoid + np.random.normal(0, 0.07, len(steps))
+
+# Variance spikes at the transition
+phase_var = 0.15 + 0.6 * np.exp(-((steps - 250) ** 2) / (2 * 30 ** 2))
+phase_var += np.random.normal(0, 0.02, len(steps))
+phase_var = np.clip(phase_var, 0.05, 0.9)
+
+ax.plot(steps, phase_mean, color=grey, linewidth=0.9)
+ax2.plot(steps, phase_var, color=variance_blue, linewidth=0.9, linestyle='--')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean entropy', fontsize=9, color=grey)
+ax2.set_ylabel('Variance', fontsize=9, color=variance_blue)
+ax.set_title('D. Phase transition: strategy shift', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, max_entropy)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=variance_blue)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+ax.axvspan(235, 265, alpha=0.1, color=light_grey)
+ax.annotate('Transition\nperiod', xy=(250, 5.0), fontsize=8, color=light_grey, ha='center')
+
+plt.tight_layout()
+plt.savefig('attention_entropy.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Attention entropy collapsing towards zero**: The model is attending to single tokens almost exclusively. This is often a sign of attention sink formation or degenerate patterns.
+- **Attention entropy increasing unboundedly**: The model is spreading attention uniformly -- essentially not learning to focus. This can indicate that your task doesn't require sequence understanding, or that something is wrong with positional encoding.
+- **Sudden entropy changes mid-training**: Phase transitions in what the model is learning. Not necessarily bad, but worth investigating. _When_ exactly this is okay depends to a great extent on your task -- and the answer may often enough be "never". I see this a lot when we're fine-tuning time series type transformers for semi-periodic signals. It's okay for the model to have some attention entropy to see various scales of periodicities, but not essentially for it to blow up unboundedly.
+
+
+## Instrument 5: generation quality samples
+
+No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Periodic generation sampling"
+class GenerationSamplerCallback(TrainerCallback):
+    """Generate samples periodically during training."""
+
+    def __init__(
+        self,
+        tokenizer,
+        eval_prompts: list[str],
+        log_every_n_steps: int = 500,
+        max_new_tokens: int = 100,
+    ):
+        self.tokenizer = tokenizer
+        self.eval_prompts = eval_prompts
+        self.log_every_n_steps = log_every_n_steps
+        self.max_new_tokens = max_new_tokens
+        self.step_count = 0
+        self.generation_history = []
+
+    def on_step_end(self, args, state, control, model=None, **kwargs):
+        self.step_count += 1
+        if self.step_count % self.log_every_n_steps != 0:
+            return
+        if model is None:
+            return
+
+        model.eval()
+        samples = []
+
+        for prompt in self.eval_prompts[:3]:  # Sample first 3 prompts
+            inputs = self.tokenizer(
+                prompt,
+                return_tensors="pt"
+            ).to(model.device)
+
+            with torch.no_grad():
+                outputs = model.generate(
+                    **inputs,
+                    max_new_tokens=self.max_new_tokens,
+                    temperature=0.7,
+                    do_sample=True,
+                    pad_token_id=self.tokenizer.pad_token_id,
+                )
+
+            generated = self.tokenizer.decode(
+                outputs[0][inputs.input_ids.shape[1]:],
+                skip_special_tokens=True
+            )
+            samples.append({"prompt": prompt, "generation": generated})
+
+        self.generation_history.append({
+            "step": self.step_count,
+            "samples": samples
+        })
+
+        # Log to wandb as table
+        import wandb
+        if wandb.run is not None:
+            table = wandb.Table(columns=["step", "prompt", "generation"])
+            for sample in samples:
+                table.add_data(
+                    self.step_count,
+                    sample["prompt"][:100],
+                    sample["generation"][:500]
+                )
+            wandb.log({"generation_samples": table})
+
+        model.train()
+```
+
+**What to watch for:**
+
+- **Repetition loops**: The model gets stuck repeating phrases. Often indicates a temperature or sampling problem, but can also signal training issues.
+- **Hallucination of training data**: The model regurgitates training examples verbatim. You're overfitting.
+- **Format drift**: The model's output format changes during training. If you're fine-tuning for a specific format, monitor for deviations.
+- **Coherence deterioration**: Early generations are coherent, later ones are not. Catastrophic forgetting in progress.
+
+
+## Instrument 6: LoRA adapter diagnostics
+
+When training LoRAs, it's crucial to monitor the behaviour of the adapter weights themselves. Their norms, effective ranks and relative changes can reveal whether the adapters are learning effectively or diverging. In particular, they are a crucial health check on our assumption about rank.
+
+There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are $\sigma_1, \sigma_2, \ldots, \sigma_r$, we first normalise them to form a probability distribution: $$p_i = \frac{\sigma_i}{\sum_{j=1}^{r} \sigma_j}$$
+
+Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.
+
+So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I'm afraid: what you're looking for is the 'cliff' where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it's at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you're wasting a valuable resource -- in the case of overprovisioning, you're wasting compute and memory, but in the case of underprovisioning, you're wasting information theoretical value. In practice, that latter one is much harder to get back.
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "LoRA-specific monitoring"
+class LoRADiagnosticsCallback(TrainerCallback):
+    """Monitor LoRA adapter-specific metrics."""
+
+    def __init__(self, log_every_n_steps: int = 100):
+        self.log_every_n_steps = log_every_n_steps
+        self.step_count = 0
+        self.initial_norms = None
+
+    def on_step_end(self, args, state, control, model=None, **kwargs):
+        self.step_count += 1
+        if self.step_count % self.log_every_n_steps != 0:
+            return
+        if model is None:
+            return
+
+        lora_stats = {}
+
+        for name, param in model.named_parameters():
+            if "lora_" not in name.lower():
+                continue
+
+            weight = param.detach()
+
+            # Basic statistics
+            norm = weight.norm().item()
+            lora_stats[f"lora/{name}/norm"] = norm
+
+            # Effective rank (for lora_A and lora_B)
+            if len(weight.shape) == 2:
+                try:
+                    s = torch.linalg.svdvals(weight.float())
+                    # Effective rank: how many singular values matter
+                    s_normalized = s / s.sum()
+                    entropy = -torch.sum(
+                        s_normalized * torch.log(s_normalized + 1e-10)
+                    )
+                    effective_rank = torch.exp(entropy).item()
+                    lora_stats[f"lora/{name}/effective_rank"] = effective_rank
+                except:
+                    pass
+
+            # Track relative change from initialisation
+            if self.initial_norms is None:
+                self.initial_norms = {}
+            if name not in self.initial_norms:
+                self.initial_norms[name] = norm
+            else:
+                relative_change = (norm - self.initial_norms[name]) / (
+                    self.initial_norms[name] + 1e-10
+                )
+                lora_stats[f"lora/{name}/relative_change"] = relative_change
+
+        # Aggregate metrics
+        if lora_stats:
+            norms = [v for k, v in lora_stats.items() if "/norm" in k]
+            lora_stats["lora/mean_norm"] = np.mean(norms)
+            lora_stats["lora/norm_variance"] = np.var(norms)
+
+        if hasattr(state, "log_history") and state.log_history:
+            state.log_history[-1].update(lora_stats)
+```
+
+```{python}
+#| label: fig-lora-diagnostics
+#| fig-cap: "LoRA adapter diagnostics: layer-wise norms reveal training health (top row), singular value spectra reveal rank utilisation (bottom row)."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 9
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 9))
+fig.subplots_adjust(hspace=0.35, wspace=0.3)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+
+layers = np.arange(24)  # 24 layers
+layer_names = [f'L{i}' for i in layers]
+
+# --- Panel A: Healthy adapter norms (relatively uniform across layers) ---
+ax = axes[0, 0]
+
+# Healthy: norms slightly higher in middle layers but within reasonable range
+healthy_norms = 0.08 + 0.02 * np.sin(np.pi * layers / 24) + np.random.normal(0, 0.005, len(layers))
+healthy_norms = np.clip(healthy_norms, 0.05, 0.15)
+
+bars = ax.bar(layers, healthy_norms, color=grey, width=0.7, alpha=0.8)
+ax.axhline(np.mean(healthy_norms), color=healthy_teal, linewidth=1, linestyle='--', alpha=0.7)
+ax.set_xlabel('Layer', fontsize=9)
+ax.set_ylabel('Adapter norm', fontsize=9)
+ax.set_title('A. Healthy: balanced layer norms', fontsize=10, fontweight='normal', loc='left')
+ax.set_xticks(layers[::4])
+ax.set_xticklabels([f'{i}' for i in layers[::4]])
+ax.set_ylim(0, 0.5)
+ax.annotate('Mean', xy=(22, np.mean(healthy_norms) + 0.02), fontsize=8, color=healthy_teal)
+
+# --- Panel B: Problematic adapter norms (imbalanced + some exploding) ---
+ax = axes[0, 1]
+
+# Early layers learning much more, late layers starved; one exploding
+imbalanced_norms = 0.15 * np.exp(-layers / 8) + 0.02 + np.random.normal(0, 0.01, len(layers))
+imbalanced_norms = np.clip(imbalanced_norms, 0.01, 0.3)
+# Add an exploding adapter
+imbalanced_norms[5] = 0.42
+imbalanced_norms[6] = 0.35
+
+colors = [problem_red if n > 0.25 else (light_grey if n < 0.03 else grey) for n in imbalanced_norms]
+bars = ax.bar(layers, imbalanced_norms, color=colors, width=0.7, alpha=0.8)
+
+ax.axhspan(0.25, 0.5, alpha=0.08, color=problem_red)
+ax.axhspan(0, 0.03, alpha=0.08, color=light_grey)
+ax.set_xlabel('Layer', fontsize=9)
+ax.set_ylabel('Adapter norm', fontsize=9)
+ax.set_title('B. Problematic: imbalance + explosion', fontsize=10, fontweight='normal', loc='left')
+ax.set_xticks(layers[::4])
+ax.set_xticklabels([f'{i}' for i in layers[::4]])
+ax.set_ylim(0, 0.5)
+ax.annotate('Exploding', xy=(5.5, 0.44), fontsize=8, color=problem_red, ha='center')
+ax.annotate('Starved', xy=(20, 0.06), fontsize=8, color=light_grey, ha='center')
+
+# --- Panel C: Over-ranked (sharp cliff in singular values, low effective rank) ---
+ax = axes[1, 0]
+
+configured_rank = 16
+sv_indices = np.arange(1, configured_rank + 1)
+n_layers_to_show = 6  # Show a selection of layers
+
+# Generate layer-wise singular value curves (over-ranked: sharp cliff)
+layer_colors_over = plt.cm.Reds(np.linspace(0.3, 0.7, n_layers_to_show))
+all_layer_sv_over = []
+
+for i in range(n_layers_to_show):
+    # Each layer has slightly different cliff position and steepness
+    steepness = 3 + np.random.uniform(-1, 1.5)
+    base_vals = [1.0 + np.random.uniform(-0.1, 0.1),
+                 0.4 + np.random.uniform(-0.08, 0.08),
+                 0.12 + np.random.uniform(-0.03, 0.03)]
+    layer_sv = np.zeros(configured_rank)
+    layer_sv[:3] = base_vals
+    layer_sv[3:] = 0.02 * np.exp(-np.arange(configured_rank - 3) / steepness) + 0.001
+    layer_sv += np.random.normal(0, 0.008, configured_rank)
+    layer_sv = np.clip(layer_sv, 0.001, 1.5)
+    layer_sv = np.sort(layer_sv)[::-1]
+    all_layer_sv_over.append(layer_sv)
+    ax.plot(sv_indices, layer_sv, color=layer_colors_over[i], linewidth=0.8, alpha=0.6)
+
+# Compute mean for bars
+mean_sv_over = np.mean(all_layer_sv_over, axis=0)
+
+# Faded bars showing mean
+ax.bar(sv_indices, mean_sv_over, color=problem_red, width=0.5, alpha=0.25, zorder=1)
+
+# Compute effective rank for annotation (from mean)
+sv_norm = mean_sv_over / mean_sv_over.sum()
+entropy = -np.sum(sv_norm * np.log(sv_norm + 1e-10))
+eff_rank_over = np.exp(entropy)
+
+ax.axvline(eff_rank_over, color=healthy_teal, linewidth=1.5, linestyle='--', zorder=5)
+ax.set_xlabel('Singular value index', fontsize=9)
+ax.set_ylabel('Singular value', fontsize=9)
+ax.set_title('C. Over-ranked: effective rank << configured', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 1.2)
+ax.annotate(f'r_eff = {eff_rank_over:.1f}', xy=(eff_rank_over + 0.5, 1.0), fontsize=9, color=healthy_teal)
+ax.annotate(f'r_config = {configured_rank}', xy=(configured_rank - 1.5, 0.15), fontsize=8, color=light_grey, ha='right')
+
+# Add shaded region for "wasted" capacity
+ax.axvspan(eff_rank_over + 1, configured_rank + 0.5, alpha=0.08, color=problem_red)
+
+# --- Panel D: Under-ranked (flat spectrum, effective rank at max) ---
+ax = axes[1, 1]
+
+# Generate layer-wise singular value curves (under-ranked: flat, all contribute)
+layer_colors_under = plt.cm.Greys(np.linspace(0.4, 0.7, n_layers_to_show))
+all_layer_sv_under = []
+
+for i in range(n_layers_to_show):
+    # Each layer has a relatively flat spectrum with slight variation
+    decay_rate = 18 + np.random.uniform(-4, 6)
+    base_level = 0.32 + np.random.uniform(-0.05, 0.05)
+    layer_sv = base_level + 0.38 * np.exp(-sv_indices / decay_rate) + np.random.normal(0, 0.025, configured_rank)
+    layer_sv = np.clip(layer_sv, 0.12, 0.85)
+    layer_sv = np.sort(layer_sv)[::-1]
+    all_layer_sv_under.append(layer_sv)
+    ax.plot(sv_indices, layer_sv, color=layer_colors_under[i], linewidth=0.8, alpha=0.6)
+
+# Compute mean for bars
+mean_sv_under = np.mean(all_layer_sv_under, axis=0)
+
+# Faded bars showing mean
+ax.bar(sv_indices, mean_sv_under, color=grey, width=0.5, alpha=0.25, zorder=1)
+
+# Compute effective rank
+sv_norm = mean_sv_under / mean_sv_under.sum()
+entropy = -np.sum(sv_norm * np.log(sv_norm + 1e-10))
+eff_rank_under = np.exp(entropy)
+
+ax.axvline(eff_rank_under, color=healthy_teal, linewidth=1.5, linestyle='--', zorder=5)
+ax.set_xlabel('Singular value index', fontsize=9)
+ax.set_ylabel('Singular value', fontsize=9)
+ax.set_title('D. Under-ranked: effective rank near configured', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 1.2)
+ax.annotate(f'r_eff = {eff_rank_under:.1f}', xy=(eff_rank_under - 3.5, 1.0), fontsize=9, color=healthy_teal)
+ax.annotate(f'r_config = {configured_rank}', xy=(configured_rank - 1.5, 0.55), fontsize=8, color=light_grey, ha='right')
+
+plt.tight_layout()
+plt.savefig('lora_diagnostics.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Adapter norms exploding**: The LoRA weights are growing too large. Either your learning rate is too high, or there's a mismatch between your LoRA rank and the task complexity.
+- **Effective rank much lower than configured rank**: You've over-specified. Consider reducing the LoRA rank to save memory and potentially improve generalisation.
+- **Effective rank at maximum**: Your rank might be too low. The adapter is using all its capacity.
+- **Large variance in norms across layers**: Some layers are learning much more than others. This is often fine, but extreme variance can indicate problems.
+
+
+## Instrument 7: compute efficiency
+
+Training efficiency metrics are often overlooked in research contexts but are critical for production training.
+
+::: {.column-margin}
+An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Compute efficiency monitoring"
+import time
+import psutil
+import GPUtil
+
+class ComputeEfficiencyCallback(TrainerCallback):
+    """Monitor training throughput and resource utilisation."""
+
+    def __init__(self, log_every_n_steps: int = 50):
+        self.log_every_n_steps = log_every_n_steps
+        self.step_count = 0
+        self.last_time = None
+        self.last_tokens = 0
+        self.tokens_per_step = None
+
+    def on_train_begin(self, args, state, control, **kwargs):
+        self.last_time = time.time()
+
+    def on_step_end(self, args, state, control, **kwargs):
+        self.step_count += 1
+        if self.step_count % self.log_every_n_steps != 0:
+            return
+
+        current_time = time.time()
+        elapsed = current_time - self.last_time if self.last_time else 1.0
+
+        efficiency_stats = {}
+
+        # Throughput
+        if self.tokens_per_step:
+            tokens_processed = self.tokens_per_step * self.log_every_n_steps
+            efficiency_stats["efficiency/tokens_per_second"] = tokens_processed / elapsed
+            efficiency_stats["efficiency/steps_per_second"] = self.log_every_n_steps / elapsed
+
+        # GPU utilisation
+        try:
+            gpus = GPUtil.getGPUs()
+            if gpus:
+                gpu = gpus[0]
+                efficiency_stats["efficiency/gpu_utilisation"] = gpu.load * 100
+                efficiency_stats["efficiency/gpu_memory_used_gb"] = gpu.memoryUsed / 1024
+                efficiency_stats["efficiency/gpu_memory_pct"] = (
+                    gpu.memoryUsed / gpu.memoryTotal * 100
+                )
+        except:
+            pass
+
+        # CPU and system memory
+        efficiency_stats["efficiency/cpu_percent"] = psutil.cpu_percent()
+        memory = psutil.virtual_memory()
+        efficiency_stats["efficiency/ram_used_gb"] = memory.used / (1024**3)
+        efficiency_stats["efficiency/ram_percent"] = memory.percent
+
+        if hasattr(state, "log_history") and state.log_history:
+            state.log_history[-1].update(efficiency_stats)
+
+        self.last_time = current_time
+```
+
+**What to watch for:**
+
+- **GPU utilisation below 80%**: You're bottlenecked somewhere else (data loading, CPU preprocessing). Increase `dataloader_num_workers` or enable `pin_memory`.
+- **Tokens per second declining over time**: Memory fragmentation or garbage collection pressure. Consider periodic garbage collection calls.
+- **GPU memory usage climbing**: Memory leak, often from gradient accumulation bugs or improper tensor handling in callbacks.
+- **Sudden throughput drops**: I/O problems, often when the training hits a slow region of the data (e.g., longer sequences).
+
+
+## Instrument 8: convergence detection
+
+The final instrument in our cluster is arguably the most important: knowing when to stop.
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Early stopping with convergence detection"
+class ConvergenceDetector(TrainerCallback):
+    """Detect convergence and potential overfitting."""
+
+    def __init__(
+        self,
+        patience: int = 5,
+        min_delta: float = 0.001,
+        divergence_threshold: float = 0.1,
+    ):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.divergence_threshold = divergence_threshold
+
+        self.best_eval_loss = float('inf')
+        self.epochs_without_improvement = 0
+        self.train_losses = []
+        self.eval_losses = []
+
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        if metrics is None:
+            return
+
+        eval_loss = metrics.get("eval_loss", float('inf'))
+        train_loss = metrics.get("train_loss", state.log_history[-1].get("loss", 0))
+
+        self.train_losses.append(train_loss)
+        self.eval_losses.append(eval_loss)
+
+        # Log convergence metrics
+        convergence_stats = {}
+
+        # Check for improvement
+        if eval_loss < self.best_eval_loss - self.min_delta:
+            self.best_eval_loss = eval_loss
+            self.epochs_without_improvement = 0
+            convergence_stats["convergence/improving"] = 1
+        else:
+            self.epochs_without_improvement += 1
+            convergence_stats["convergence/improving"] = 0
+
+        convergence_stats["convergence/patience_remaining"] = (
+            self.patience - self.epochs_without_improvement
+        )
+
+        # Check for overfitting (eval loss diverging from train loss)
+        if len(self.train_losses) > 1 and len(self.eval_losses) > 1:
+            gap = eval_loss - train_loss
+            prev_gap = self.eval_losses[-2] - self.train_losses[-2]
+            gap_increase = gap - prev_gap
+
+            convergence_stats["convergence/train_eval_gap"] = gap
+            convergence_stats["convergence/gap_velocity"] = gap_increase
+
+            if gap_increase > self.divergence_threshold:
+                convergence_stats["convergence/overfitting_warning"] = 1
+                print(f"WARNING: Potential overfitting detected. Gap increase: {gap_increase:.4f}")
+
+        # Log metrics
+        if hasattr(state, "log_history") and state.log_history:
+            state.log_history[-1].update(convergence_stats)
+
+        # Trigger early stopping
+        if self.epochs_without_improvement >= self.patience:
+            print(f"Early stopping triggered after {self.patience} evaluations without improvement")
+            control.should_training_stop = True
+```
+
+```{python}
+#| label: fig-convergence-detection
+#| fig-cap: "Convergence pathologies: knowing when to stop (or when you should have stopped earlier)."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 8
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.subplots_adjust(hspace=0.35, wspace=0.3)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+eval_blue = '#4878a8'
+train_color = grey
+eval_color = eval_blue
+
+# Eval points (less frequent than training)
+eval_interval = 50
+
+# --- Panel A: Train-eval gap increasing (classic overfitting) ---
+ax = axes[0, 0]
+steps = np.arange(0, 500, 1)
+eval_steps = np.arange(0, 500, eval_interval)
+
+# Train loss keeps decreasing
+train_loss_a = 2.5 * np.exp(-steps / 100) + 0.3 + np.random.normal(0, 0.02, len(steps))
+train_loss_a = np.clip(train_loss_a, 0.2, 3.0)
+
+# Eval loss decreases then increases (gap grows)
+eval_base = 2.5 * np.exp(-eval_steps / 100) + 0.35
+# Add divergence after step 200
+divergence_idx = 4  # step 200
+eval_loss_a = eval_base.copy()
+eval_loss_a[divergence_idx:] = eval_base[divergence_idx:] + 0.08 * np.arange(len(eval_loss_a) - divergence_idx) ** 1.1
+eval_loss_a += np.random.normal(0, 0.03, len(eval_steps))
+
+ax.plot(steps, train_loss_a, color=train_color, linewidth=0.9, label='Train loss')
+ax.plot(eval_steps, eval_loss_a, color=eval_color, linewidth=0.9, marker='o', markersize=3, label='Eval loss')
+
+# Shade the diverging gap
+ax.fill_between(eval_steps[divergence_idx:],
+                train_loss_a[eval_steps[divergence_idx:].astype(int)],
+                eval_loss_a[divergence_idx:],
+                alpha=0.15, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('A. Gap increasing: classic overfitting', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3.0)
+ax.legend(frameon=False, fontsize=8, loc='upper right')
+ax.annotate('Stop here', xy=(200, 0.85), fontsize=8, color=problem_red,
+            arrowprops=dict(arrowstyle='->', color=problem_red, lw=0.8),
+            xytext=(280, 1.3))
+
+# --- Panel B: Both losses plateauing (capacity reached) ---
+ax = axes[0, 1]
+
+# Both losses plateau at similar level
+train_loss_b = 2.5 * np.exp(-steps / 80) + 0.8 + np.random.normal(0, 0.025, len(steps))
+train_loss_b[250:] = 0.85 + np.random.normal(0, 0.025, len(steps) - 250)
+train_loss_b = np.clip(train_loss_b, 0.5, 3.0)
+
+eval_loss_b = 2.5 * np.exp(-eval_steps / 80) + 0.85
+eval_loss_b[5:] = 0.9 + np.random.normal(0, 0.04, len(eval_steps) - 5)
+eval_loss_b = np.clip(eval_loss_b, 0.5, 3.0)
+
+ax.plot(steps, train_loss_b, color=train_color, linewidth=0.9, label='Train loss')
+ax.plot(eval_steps, eval_loss_b, color=eval_color, linewidth=0.9, marker='o', markersize=3, label='Eval loss')
+
+# Shade plateau region
+ax.axvspan(250, 500, alpha=0.08, color=light_grey)
+ax.axhline(0.85, color=light_grey, linewidth=0.8, linestyle=':', alpha=0.7)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('B. Both plateauing: capacity reached', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3.0)
+ax.legend(frameon=False, fontsize=8, loc='upper right')
+ax.annotate('No further\nimprovement', xy=(375, 1.15), fontsize=8, color=light_grey, ha='center')
+
+# --- Panel C: Eval increasing while train decreasing (severe overfitting) ---
+ax = axes[1, 0]
+
+# Train loss keeps dropping
+train_loss_c = 2.5 * np.exp(-steps / 70) + 0.15 + np.random.normal(0, 0.015, len(steps))
+train_loss_c = np.clip(train_loss_c, 0.1, 3.0)
+
+# Eval loss decreases briefly then climbs
+eval_loss_c = 2.5 * np.exp(-eval_steps / 100) + 0.4
+# Sharp upturn after step 150
+upturn_idx = 3
+eval_loss_c[upturn_idx:] = eval_loss_c[upturn_idx] + 0.15 * np.arange(len(eval_loss_c) - upturn_idx) ** 1.3
+eval_loss_c += np.random.normal(0, 0.05, len(eval_steps))
+eval_loss_c = np.clip(eval_loss_c, 0.3, 3.0)
+
+ax.plot(steps, train_loss_c, color=train_color, linewidth=0.9, label='Train loss')
+ax.plot(eval_steps, eval_loss_c, color=problem_red, linewidth=0.9, marker='o', markersize=3, label='Eval loss')
+
+# Mark the optimal stopping point
+optimal_step = eval_steps[upturn_idx]
+ax.axvline(optimal_step, color=problem_red, linewidth=1, linestyle='--', alpha=0.6)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('C. Eval rising: severe overfitting', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3.0)
+ax.legend(frameon=False, fontsize=8, loc='upper right')
+ax.annotate('Should have\nstopped here', xy=(optimal_step, 2.5), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel D: Oscillating eval loss (LR too high) ---
+ax = axes[1, 1]
+
+# Train loss with some instability
+train_loss_d = 2.5 * np.exp(-steps / 120) + 0.5 + np.random.normal(0, 0.03, len(steps))
+train_loss_d = np.clip(train_loss_d, 0.3, 3.0)
+
+# Eval loss oscillating wildly
+eval_base_d = 2.5 * np.exp(-eval_steps / 120) + 0.55
+oscillation = 0.35 * np.sin(eval_steps / 25) * (1 + 0.3 * np.random.randn(len(eval_steps)))
+eval_loss_d = eval_base_d + oscillation + np.random.normal(0, 0.08, len(eval_steps))
+eval_loss_d = np.clip(eval_loss_d, 0.2, 3.0)
+
+ax.plot(steps, train_loss_d, color=train_color, linewidth=0.9, label='Train loss')
+ax.plot(eval_steps, eval_loss_d, color=problem_red, linewidth=0.9, marker='o', markersize=3, label='Eval loss')
+
+# Connect eval points to show oscillation
+ax.plot(eval_steps, eval_loss_d, color=problem_red, linewidth=0.5, alpha=0.5)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9)
+ax.set_title('D. Oscillating eval: LR too high', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3.0)
+ax.legend(frameon=False, fontsize=8, loc='upper right')
+ax.annotate('Reduce LR or\nadd warmup', xy=(350, 1.8), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('convergence_detection.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Train-eval gap increasing**: Classic overfitting. Stop training or increase regularisation.
+- **Both losses plateauing**: You've reached the model's capacity on this task. More training won't help.
+- **Eval loss increasing while train loss decreases**: Severe overfitting. You should have stopped earlier.
+- **Oscillating eval loss**: Learning rate too high for the current phase of training.
+
+
+## Putting it all together
+
+The eight instruments we've covered form a complete picture of your training run:
+
+| Instrument | What it tells you | Failure mode it catches |
+|------------|-------------------|-------------------------|
+| Loss landscape | Optimisation progress | Instability, plateaus |
+| Gradient health | Learning signal quality | Vanishing/exploding gradients |
+| Learning rate | Schedule execution | Misconfigured schedules |
+| Attention entropy | Model focus patterns | Attention collapse, degeneration |
+| Generation samples | Output quality | Qualitative failures |
+| LoRA diagnostics | Adapter behaviour | Rank mismatch, weight explosion |
+| Compute efficiency | Resource utilisation | Bottlenecks, memory leaks |
+| Convergence detection | When to stop | Overfitting, wasted compute |
+
+In a production setting, I recommend implementing all eight and setting up alerts for the key failure modes. A good heuristic: if any of these metrics deviate by more than two standard deviations from their moving average, that warrants investigation.^[This is crude but effective. More sophisticated anomaly detection is possible but often unnecessary for catching the failures that actually occur in practice.]
+
+
+## The wandb configuration
+
+To actually implement this, here's a complete trainer configuration that wires up all the callbacks:
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Complete training configuration with all monitors"
+from transformers import TrainingArguments, Trainer
+from trl import SFTTrainer
+
+def create_monitored_trainer(
+    model,
+    tokenizer,
+    train_dataset,
+    eval_dataset,
+    output_dir: str = "./output",
+    eval_prompts: list[str] = None,
+) -> SFTTrainer:
+    """Create a fully instrumented SFT trainer."""
+
+    # Training arguments with comprehensive logging
+    training_args = TrainingArguments(
+        output_dir=output_dir,
+        num_train_epochs=3,
+        per_device_train_batch_size=4,
+        gradient_accumulation_steps=4,
+        learning_rate=2e-4,
+        lr_scheduler_type="cosine",
+        warmup_ratio=0.1,
+
+        # Logging configuration
+        logging_steps=10,
+        logging_first_step=True,
+        report_to="wandb",
+
+        # Evaluation
+        eval_strategy="steps",
+        eval_steps=100,
+        save_steps=500,
+
+        # Performance
+        bf16=True,
+        dataloader_num_workers=4,
+        dataloader_pin_memory=True,
+    )
+
+    # Assemble callbacks
+    callbacks = [
+        LossLandscapeCallback(window_size=100),
+        GradientHealthCallback(log_every_n_steps=50),
+        LearningRateMonitor(),
+        AttentionEntropyCallback(log_every_n_steps=100),
+        LoRADiagnosticsCallback(log_every_n_steps=100),
+        ComputeEfficiencyCallback(log_every_n_steps=50),
+        ConvergenceDetector(patience=5, min_delta=0.001),
+    ]
+
+    # Add generation sampler if eval prompts provided
+    if eval_prompts:
+        callbacks.append(
+            GenerationSamplerCallback(
+                tokenizer=tokenizer,
+                eval_prompts=eval_prompts,
+                log_every_n_steps=500,
+            )
+        )
+
+    return SFTTrainer(
+        model=model,
+        tokenizer=tokenizer,
+        train_dataset=train_dataset,
+        eval_dataset=eval_dataset,
+        args=training_args,
+        callbacks=callbacks,
+    )
+```
+
+
+## Reading the dashboard
+
+Knowing what to log is only half the battle. The other half is knowing what you're looking at.
+
+I recommend organising your wandb dashboard into four panels:
+
+1. **Primary metrics**: Train loss, eval loss, learning rate. The overview.
+2. **Health indicators**: Gradient norm, attention entropy, convergence status. The vital signs.
+3. **Efficiency metrics**: Tokens/sec, GPU utilisation, memory. The resource gauge.
+4. **Deep diagnostics**: Per-layer gradients, LoRA norms, generation samples. The detailed view.
+
+Start each monitoring session by glancing at panels 1 and 2. Only dive into 3 and 4 when something looks off.
+
+The most common failure patterns I see in practice:
+
+- **Silent overfitting**: Loss looks great, but generation quality is degrading. Always check the samples.
+- **Efficiency death spiral**: Throughput drops, memory climbs, eventually OOM. Often caused by a memory leak in a custom callback.
+- **Attention collapse**: Happens gradually, then suddenly. The attention entropy instrument catches this before it becomes catastrophic.
+- **Gradient starvation in later layers**: Early layers learn, later layers don't. Per-layer gradient monitoring reveals this immediately.
+
+::: {.column-margin}
+These patterns often require monitoring multiple indicators simultaneously. No single metric tells the whole story.
+
+A beloved example of mine is GPU memory vs utilisation. It's somewhat shocking how many otherwise competent engineers look at these in isolation. GPU utilisation going down is not necessarily a good sign. If memory usage is climbing and is approaching the top 10-15%, GPU utilisation and/or power draw going down is a three-alarm fire and a sign of impending OOM/collapse.
+:::
+
+```{python}
+#| label: fig-failure-patterns
+#| fig-cap: "Common failure patterns in practice: each requires monitoring multiple indicators simultaneously."
+#| echo: false
+#| fig-width: 11
+#| fig-height: 10
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+
+fig, axes = plt.subplots(2, 2, figsize=(11, 10))
+fig.subplots_adjust(hspace=0.4, wspace=0.35)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+warning_orange = '#e69f00'
+metric_blue = '#4878a8'
+
+steps = np.arange(0, 500, 1)
+
+# --- Panel A: Silent overfitting (loss vs generation quality) ---
+ax = axes[0, 0]
+ax2 = ax.twinx()
+
+# Loss looks perfect - smooth decrease
+train_loss = 2.5 * np.exp(-steps / 80) + 0.25 + np.random.normal(0, 0.015, len(steps))
+train_loss = np.clip(train_loss, 0.2, 3.0)
+
+eval_steps = np.arange(0, 500, 50)
+eval_loss = 2.5 * np.exp(-eval_steps / 85) + 0.28 + np.random.normal(0, 0.025, len(eval_steps))
+eval_loss = np.clip(eval_loss, 0.2, 3.0)
+
+# But generation quality (measured by some metric like BLEU, coherence score) degrades
+# Initially improves, then silently degrades
+quality_steps = np.arange(0, 500, 100)
+quality = np.zeros(len(quality_steps))
+quality[:3] = [0.3, 0.65, 0.78]  # Improves initially
+quality[3:] = 0.78 - 0.12 * np.arange(len(quality_steps) - 3) ** 1.2  # Then degrades
+quality += np.random.normal(0, 0.03, len(quality_steps))
+quality = np.clip(quality, 0.1, 1.0)
+
+ax.plot(steps, train_loss, color=grey, linewidth=0.9, label='Train loss')
+ax.plot(eval_steps, eval_loss, color=metric_blue, linewidth=0.9, marker='o', markersize=3, label='Eval loss')
+ax2.plot(quality_steps, quality, color=problem_red, linewidth=1.2, marker='s', markersize=4, label='Gen quality')
+
+# Shade divergence region
+ax2.axvspan(200, 500, alpha=0.06, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Loss', fontsize=9, color=grey)
+ax2.set_ylabel('Generation quality', fontsize=9, color=problem_red)
+ax.set_title('A. Silent overfitting: loss hides quality degradation', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 3.0)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=problem_red)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+# Combined legend
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(0.95, 1.0))
+
+ax.annotate('"But my loss looks fine!"', xy=(400, 0.4), fontsize=8, color=grey, ha='center')
+ax2.annotate('Generation quality\nis collapsing...', xy=(380, 0.55), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel B: Efficiency death spiral (throughput, memory, GPU util) ---
+ax = axes[0, 1]
+
+# Create three y-axes
+ax2 = ax.twinx()
+ax3 = ax.twinx()
+ax3.spines['right'].set_position(('axes', 1.15))
+
+# Throughput drops
+throughput = 1200 - 400 * (1 - np.exp(-steps / 200)) + np.random.normal(0, 20, len(steps))
+# Add sudden drops
+for drop_point in [180, 320, 420]:
+    throughput[drop_point:] -= 80
+throughput = np.clip(throughput, 200, 1300)
+
+# Memory climbs
+memory_gb = 12 + 6 * (1 - np.exp(-steps / 150)) + np.random.normal(0, 0.3, len(steps))
+# Add memory leak
+memory_gb += 0.01 * steps
+memory_gb = np.clip(memory_gb, 10, 24)
+
+# GPU util becomes erratic
+gpu_util = 85 - 20 * (steps / 500) ** 2 + 15 * np.sin(steps / 30) * (steps / 500)
+gpu_util += np.random.normal(0, 3, len(steps))
+gpu_util = np.clip(gpu_util, 20, 100)
+
+ax.plot(steps, throughput, color=grey, linewidth=0.9, label='Tokens/sec')
+ax2.plot(steps, memory_gb, color=problem_red, linewidth=0.9, label='GPU memory (GB)')
+ax3.plot(steps, gpu_util, color=healthy_teal, linewidth=0.7, alpha=0.7, label='GPU util %')
+
+# OOM danger zone
+ax2.axhspan(22, 25, alpha=0.15, color=problem_red)
+ax2.annotate('OOM\nrisk', xy=(450, 23), fontsize=7, color=problem_red, ha='center')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Tokens/sec', fontsize=9, color=grey)
+ax2.set_ylabel('Memory (GB)', fontsize=9, color=problem_red)
+ax3.set_ylabel('GPU util %', fontsize=9, color=healthy_teal)
+ax.set_title('B. Efficiency death spiral: multiple warning signs', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 1400)
+ax2.set_ylim(8, 25)
+ax3.set_ylim(0, 110)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=problem_red)
+ax3.tick_params(axis='y', colors=healthy_teal)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+ax3.spines['right'].set_visible(True)
+ax3.spines['right'].set_linewidth(0.5)
+
+# Mini legend
+ax.annotate('Throughput', xy=(50, 950), fontsize=7, color=grey)
+ax.annotate('Memory', xy=(50, 700), fontsize=7, color=problem_red)
+
+# --- Panel C: Attention collapse (entropy + variance, with phase marker) ---
+ax = axes[1, 0]
+ax2 = ax.twinx()
+
+# Entropy: gradual decline, then sudden collapse
+entropy = np.zeros(len(steps))
+# Phase 1: gradual decline (0-350)
+entropy[:350] = 4.0 - 1.5 * (np.arange(350) / 350) ** 0.8 + np.random.normal(0, 0.08, 350)
+# Phase 2: sudden collapse (350-500)
+collapse_steps = np.arange(150)
+entropy[350:] = 2.5 * np.exp(-collapse_steps / 40) + 0.3 + np.random.normal(0, 0.05, 150)
+entropy = np.clip(entropy, 0.2, 5.0)
+
+# Variance: spikes before collapse
+variance = 0.15 + np.random.normal(0, 0.02, len(steps))
+# Add warning spike before collapse
+variance[300:380] += 0.4 * np.exp(-((np.arange(80) - 40) ** 2) / (2 * 15 ** 2))
+variance = np.clip(variance, 0.05, 0.8)
+
+ax.plot(steps, entropy, color=grey, linewidth=0.9, label='Mean entropy')
+ax2.plot(steps, variance, color=metric_blue, linewidth=0.9, linestyle='--', label='Variance')
+
+# Mark the warning and collapse phases
+ax.axvspan(300, 350, alpha=0.1, color=warning_orange)
+ax.axvspan(350, 500, alpha=0.1, color=problem_red)
+ax.axhspan(0, 1.0, alpha=0.05, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Attention entropy', fontsize=9, color=grey)
+ax2.set_ylabel('Cross-head variance', fontsize=9, color=metric_blue)
+ax.set_title('C. Attention collapse: gradual then sudden', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 5.5)
+ax2.set_ylim(0, 1.0)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=metric_blue)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+ax.annotate('Warning:\nvariance spike', xy=(325, 4.5), fontsize=7, color=warning_orange, ha='center')
+ax.annotate('Collapse', xy=(420, 4.5), fontsize=7, color=problem_red, ha='center')
+ax.annotate('Danger\nzone', xy=(450, 0.6), fontsize=7, color=problem_red, ha='center')
+
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(0.95, 1.0))
+
+# --- Panel D: Gradient starvation (per-layer gradient norms over time) ---
+ax = axes[1, 1]
+
+from scipy.ndimage import gaussian_filter1d
+
+# Show gradient norms for 4 representative layers over time
+n_sample_steps = 25
+sample_steps = np.linspace(0, 499, n_sample_steps).astype(int)
+
+# Layer 0 (early): healthy, even growing
+layer0_grads = 0.02 + 0.015 * (sample_steps / 500) + np.random.normal(0, 0.002, n_sample_steps)
+layer0_grads = np.clip(layer0_grads, 0.01, 0.05)
+layer0_grads = gaussian_filter1d(layer0_grads, sigma=1.2)
+
+# Layer 8 (mid-early): healthy
+layer8_grads = 0.018 + 0.008 * (sample_steps / 500) + np.random.normal(0, 0.002, n_sample_steps)
+layer8_grads = np.clip(layer8_grads, 0.008, 0.04)
+layer8_grads = gaussian_filter1d(layer8_grads, sigma=1.2)
+
+# Layer 16 (mid-late): declining
+layer16_grads = 0.015 * np.exp(-sample_steps / 300) + 0.003 + np.random.normal(0, 0.001, n_sample_steps)
+layer16_grads = np.clip(layer16_grads, 0.002, 0.025)
+layer16_grads = gaussian_filter1d(layer16_grads, sigma=1.2)
+
+# Layer 23 (late): starving
+layer23_grads = 0.012 * np.exp(-sample_steps / 150) + 0.001 + np.random.normal(0, 0.0008, n_sample_steps)
+layer23_grads = np.clip(layer23_grads, 0.0005, 0.015)
+layer23_grads = gaussian_filter1d(layer23_grads, sigma=1.2)
+
+ax.plot(sample_steps, layer0_grads, color=healthy_teal, linewidth=1.2, marker='o', markersize=3, label='Layer 0 (early)')
+ax.plot(sample_steps, layer8_grads, color=grey, linewidth=1.0, marker='s', markersize=2.5, label='Layer 8')
+ax.plot(sample_steps, layer16_grads, color=metric_blue, linewidth=1.0, marker='^', markersize=2.5, label='Layer 16')
+ax.plot(sample_steps, layer23_grads, color=problem_red, linewidth=1.2, marker='d', markersize=3, label='Layer 23 (late)')
+
+# Danger zone for gradient starvation
+ax.axhspan(0, 0.003, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Gradient norm', fontsize=9)
+ax.set_title('D. Gradient starvation: later layers stop learning', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.045)
+ax.legend(frameon=False, fontsize=7, loc='upper right', bbox_to_anchor=(0.95, 1.0))
+
+ax.annotate('Early layers\nare healthy...', xy=(300, 0.028), fontsize=7, color=healthy_teal, ha='center')
+ax.annotate('...but late layers\nare starving!', xy=(300, 0.015), fontsize=7, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('failure_patterns.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+
+## What comes next
+
+This instrument cluster is designed for supervised fine-tuning of LoRA adapters -- the most common post-training scenario. But the story doesn't end here.
+
+In the next post, we'll extend this framework to preference optimisation methods like DPO and GRPO. These introduce new failure modes: reward hacking, KL divergence explosion and the subtle art of balancing preference learning against capability preservation. The instrument cluster will need to grow.
+
+The third post will tackle specialised training for function calling, where the metrics of success are not just loss curves but format compliance, execution accuracy and the reliability that production systems demand.
+
+For now, the homework is straightforward: instrument your next fine-tuning run with all eight monitors. Watch what happens. Learn to read the dashboard. And when something goes wrong -- as it inevitably will -- you'll have the forensic data to understand why.
+
+Happy post-training!
