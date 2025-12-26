@@ -2,7 +2,9 @@
 categories:
 - AI
 - LLMs
+- LLMOps
 - fine-tuning
+- post-training
 - MLOps
 date: 2025-12-25
 description: Beyond loss curves -- what you should actually be watching when fine-tuning LLMs.
@@ -12,6 +14,14 @@ title: The post-training instrument cluster -- Part I
 format:
   html:
     code-overflow: wrap
+    include-in-header:
+      - text: |
+          <style>
+          img, .cell-output-display img {
+            max-width: 100%;
+            height: auto;
+          }
+          </style>
 notebook-links: global
 ---
 
