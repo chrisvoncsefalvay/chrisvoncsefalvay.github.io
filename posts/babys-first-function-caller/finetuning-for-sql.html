@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+
+<title>Fine-tuning FunctionGemma for SQL – Chris von Csefalvay</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a4d8066ab99c821fadc425098389dfee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
+
+
+<meta property="og:title" content="Fine-tuning FunctionGemma for SQL – Chris von Csefalvay">
+<meta property="og:description" content="Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/babys-first-function-caller/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta property="og:site_name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="Fine-tuning FunctionGemma for SQL – Chris von Csefalvay">
+<meta name="twitter:description" content="Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/babys-first-function-caller/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">My book</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#environment-setup" id="toc-environment-setup" class="nav-link active" data-scroll-target="#environment-setup">Environment setup</a></li>
+  <li><a href="#download-spider-benchmark" id="toc-download-spider-benchmark" class="nav-link" data-scroll-target="#download-spider-benchmark">Download Spider benchmark</a></li>
+  <li><a href="#sql-benchmarker" id="toc-sql-benchmarker" class="nav-link" data-scroll-target="#sql-benchmarker">SQL Benchmarker</a></li>
+  <li><a href="#load-functiongemma-270m" id="toc-load-functiongemma-270m" class="nav-link" data-scroll-target="#load-functiongemma-270m">Load FunctionGemma-270M</a></li>
+  <li><a href="#run-spider-benchmark" id="toc-run-spider-benchmark" class="nav-link" data-scroll-target="#run-spider-benchmark">Run Spider benchmark</a></li>
+  <li><a href="#round-1-supervised-fine-tuning-sft" id="toc-round-1-supervised-fine-tuning-sft" class="nav-link" data-scroll-target="#round-1-supervised-fine-tuning-sft">Round 1: Supervised Fine-Tuning (SFT)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Fine-tuning FunctionGemma for SQL</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Teaching FunctionGemma-270M to be good at text-to-SQL through SFT, GRPO and APO.</p>
+<section id="environment-setup" class="level2">
+<h2 class="anchored" data-anchor-id="environment-setup">Environment setup</h2>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install dependencies</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install transformers torch accelerate bitsandbytes datasets trl peft sqlparse python<span class="op">-</span>dotenv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre>Requirement already satisfied: transformers in /usr/local/lib/python3.12/dist-packages (4.57.3)
+
+Requirement already satisfied: torch in /usr/local/lib/python3.12/dist-packages (2.9.0+cu126)
+
+Requirement already satisfied: accelerate in /usr/local/lib/python3.12/dist-packages (1.12.0)
+
+Collecting bitsandbytes
+
+  Downloading bitsandbytes-0.49.0-py3-none-manylinux_2_24_x86_64.whl.metadata (10 kB)
+
+Requirement already satisfied: datasets in /usr/local/lib/python3.12/dist-packages (4.0.0)
+
+Collecting trl
+
+  Downloading trl-0.26.2-py3-none-any.whl.metadata (11 kB)
+
+Requirement already satisfied: peft in /usr/local/lib/python3.12/dist-packages (0.18.0)
+
+Requirement already satisfied: sqlparse in /usr/local/lib/python3.12/dist-packages (0.5.4)
+
+Requirement already satisfied: python-dotenv in /usr/local/lib/python3.12/dist-packages (1.2.1)
+
+Requirement already satisfied: filelock in /usr/local/lib/python3.12/dist-packages (from transformers) (3.20.0)
+
+Requirement already satisfied: huggingface-hub&lt;1.0,&gt;=0.34.0 in /usr/local/lib/python3.12/dist-packages (from transformers) (0.36.0)
+
+Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.12/dist-packages (from transformers) (2.0.2)
+
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.12/dist-packages (from transformers) (25.0)
+
+Requirement already satisfied: pyyaml&gt;=5.1 in /usr/local/lib/python3.12/dist-packages (from transformers) (6.0.3)
+
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.12/dist-packages (from transformers) (2025.11.3)
+
+Requirement already satisfied: requests in /usr/local/lib/python3.12/dist-packages (from transformers) (2.32.4)
+
+Requirement already satisfied: tokenizers&lt;=0.23.0,&gt;=0.22.0 in /usr/local/lib/python3.12/dist-packages (from transformers) (0.22.1)
+
+Requirement already satisfied: safetensors&gt;=0.4.3 in /usr/local/lib/python3.12/dist-packages (from transformers) (0.7.0)
+
+Requirement already satisfied: tqdm&gt;=4.27 in /usr/local/lib/python3.12/dist-packages (from transformers) (4.67.1)
+
+Requirement already satisfied: typing-extensions&gt;=4.10.0 in /usr/local/lib/python3.12/dist-packages (from torch) (4.15.0)
+
+Requirement already satisfied: setuptools in /usr/local/lib/python3.12/dist-packages (from torch) (75.2.0)
+
+Requirement already satisfied: sympy&gt;=1.13.3 in /usr/local/lib/python3.12/dist-packages (from torch) (1.14.0)
+
+Requirement already satisfied: networkx&gt;=2.5.1 in /usr/local/lib/python3.12/dist-packages (from torch) (3.6.1)
+
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from torch) (3.1.6)
+
+Requirement already satisfied: fsspec&gt;=0.8.5 in /usr/local/lib/python3.12/dist-packages (from torch) (2025.3.0)
+
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.6.77 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.77)
+
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.6.77 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.77)
+
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.6.80 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.80)
+
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /usr/local/lib/python3.12/dist-packages (from torch) (9.10.2.21)
+
+Requirement already satisfied: nvidia-cublas-cu12==12.6.4.1 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.4.1)
+
+Requirement already satisfied: nvidia-cufft-cu12==11.3.0.4 in /usr/local/lib/python3.12/dist-packages (from torch) (11.3.0.4)
+
+Requirement already satisfied: nvidia-curand-cu12==10.3.7.77 in /usr/local/lib/python3.12/dist-packages (from torch) (10.3.7.77)
+
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.1.2 in /usr/local/lib/python3.12/dist-packages (from torch) (11.7.1.2)
+
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.4.2 in /usr/local/lib/python3.12/dist-packages (from torch) (12.5.4.2)
+
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /usr/local/lib/python3.12/dist-packages (from torch) (0.7.1)
+
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /usr/local/lib/python3.12/dist-packages (from torch) (2.27.5)
+
+Requirement already satisfied: nvidia-nvshmem-cu12==3.3.20 in /usr/local/lib/python3.12/dist-packages (from torch) (3.3.20)
+
+Requirement already satisfied: nvidia-nvtx-cu12==12.6.77 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.77)
+
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.6.85 in /usr/local/lib/python3.12/dist-packages (from torch) (12.6.85)
+
+Requirement already satisfied: nvidia-cufile-cu12==1.11.1.6 in /usr/local/lib/python3.12/dist-packages (from torch) (1.11.1.6)
+
+Requirement already satisfied: triton==3.5.0 in /usr/local/lib/python3.12/dist-packages (from torch) (3.5.0)
+
+Requirement already satisfied: psutil in /usr/local/lib/python3.12/dist-packages (from accelerate) (5.9.5)
+
+Requirement already satisfied: pyarrow&gt;=15.0.0 in /usr/local/lib/python3.12/dist-packages (from datasets) (18.1.0)
+
+Requirement already satisfied: dill&lt;0.3.9,&gt;=0.3.0 in /usr/local/lib/python3.12/dist-packages (from datasets) (0.3.8)
+
+Requirement already satisfied: pandas in /usr/local/lib/python3.12/dist-packages (from datasets) (2.2.2)
+
+Requirement already satisfied: xxhash in /usr/local/lib/python3.12/dist-packages (from datasets) (3.6.0)
+
+Requirement already satisfied: multiprocess&lt;0.70.17 in /usr/local/lib/python3.12/dist-packages (from datasets) (0.70.16)
+
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.12/dist-packages (from fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (3.13.2)
+
+Requirement already satisfied: hf-xet&lt;2.0.0,&gt;=1.1.3 in /usr/local/lib/python3.12/dist-packages (from huggingface-hub&lt;1.0,&gt;=0.34.0-&gt;transformers) (1.2.0)
+
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.12/dist-packages (from requests-&gt;transformers) (3.4.4)
+
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.12/dist-packages (from requests-&gt;transformers) (3.11)
+
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.12/dist-packages (from requests-&gt;transformers) (2.5.0)
+
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.12/dist-packages (from requests-&gt;transformers) (2025.11.12)
+
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /usr/local/lib/python3.12/dist-packages (from sympy&gt;=1.13.3-&gt;torch) (1.3.0)
+
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2-&gt;torch) (3.0.3)
+
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.12/dist-packages (from pandas-&gt;datasets) (2.9.0.post0)
+
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas-&gt;datasets) (2025.2)
+
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas-&gt;datasets) (2025.3)
+
+Requirement already satisfied: aiohappyeyeballs&gt;=2.5.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (2.6.1)
+
+Requirement already satisfied: aiosignal&gt;=1.4.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (1.4.0)
+
+Requirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (25.4.0)
+
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (1.8.0)
+
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (6.7.0)
+
+Requirement already satisfied: propcache&gt;=0.2.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (0.4.1)
+
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.17.0 in /usr/local/lib/python3.12/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&lt;=2025.3.0,&gt;=2023.1.0-&gt;datasets) (1.22.0)
+
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas-&gt;datasets) (1.17.0)
+
+Downloading bitsandbytes-0.49.0-py3-none-manylinux_2_24_x86_64.whl (59.1 MB)
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">59.1/59.1 MB</span> <span class="ansi-red-fg">20.0 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>:00:0100:01
+
+Downloading trl-0.26.2-py3-none-any.whl (518 kB)
+
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">518.9/518.9 kB</span> <span class="ansi-red-fg">40.6 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>
+
+Installing collected packages: bitsandbytes, trl
+
+Successfully installed bitsandbytes-0.49.0 trl-0.26.2
+</pre>
+</div>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Optional</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm.auto <span class="im">import</span> tqdm</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="download-spider-benchmark" class="level2">
+<h2 class="anchored" data-anchor-id="download-spider-benchmark">Download Spider benchmark</h2>
+<p>Spider is the standard text-to-SQL benchmark with 200 databases across 138 domains. We download it with the actual SQLite database files so we can execute generated queries.</p>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install gdown <span class="op">-</span>q</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gdown</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> zipfile</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>SPIDER_DIR <span class="op">=</span> Path(<span class="st">"spider"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> SPIDER_DIR.exists():</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Download Spider dataset from Google Drive</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># File ID: 1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="st">"https://drive.google.com/uc?id=1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> <span class="st">"spider.zip"</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Downloading Spider dataset..."</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    gdown.download(url, output, quiet<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Extracting..."</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> zipfile.ZipFile(output, <span class="st">'r'</span>) <span class="im">as</span> zip_ref:</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        zip_ref.extractall(<span class="st">"."</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    os.remove(output)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Spider dataset ready at </span><span class="sc">{</span>SPIDER_DIR<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Spider dataset already exists at </span><span class="sc">{</span>SPIDER_DIR<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading Spider dataset...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Downloading...
+From (original): https://drive.google.com/uc?id=1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J
+From (redirected): https://drive.google.com/uc?id=1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J&amp;confirm=t&amp;uuid=f9d13177-b23e-4010-a6dd-d6469fc01931
+To: /content/spider.zip
+100%|██████████| 206M/206M [00:02&lt;00:00, 74.2MB/s] </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Extracting...
+Spider dataset ready at spider</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify Spider structure</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>SPIDER_DIR <span class="op">=</span> Path(<span class="st">"spider_data"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>spider_db_dir <span class="op">=</span> SPIDER_DIR <span class="op">/</span> <span class="st">"database"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>spider_train <span class="op">=</span> SPIDER_DIR <span class="op">/</span> <span class="st">"train_spider.json"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>spider_dev <span class="op">=</span> SPIDER_DIR <span class="op">/</span> <span class="st">"dev.json"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>spider_tables <span class="op">=</span> SPIDER_DIR <span class="op">/</span> <span class="st">"tables.json"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Database directory exists: </span><span class="sc">{</span>spider_db_dir<span class="sc">.</span>exists()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train file exists: </span><span class="sc">{</span>spider_train<span class="sc">.</span>exists()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dev file exists: </span><span class="sc">{</span>spider_dev<span class="sc">.</span>exists()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Tables file exists: </span><span class="sc">{</span>spider_tables<span class="sc">.</span>exists()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> spider_db_dir.exists():</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    databases <span class="op">=</span> <span class="bu">list</span>(spider_db_dir.iterdir())</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Number of databases: </span><span class="sc">{</span><span class="bu">len</span>(databases)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Sample databases: </span><span class="sc">{</span>[d.name <span class="cf">for</span> d <span class="kw">in</span> databases[:<span class="dv">5</span>]]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Database directory exists: True
+Train file exists: True
+Dev file exists: True
+Tables file exists: True
+
+Number of databases: 166
+Sample databases: ['race_track', 'entrepreneur', 'flight_1', 'hr_1', 'battle_death']</code></pre>
+</div>
+</div>
+</section>
+<section id="sql-benchmarker" class="level2">
+<h2 class="anchored" data-anchor-id="sql-benchmarker">SQL Benchmarker</h2>
+<p>The benchmarker evaluates text-to-SQL models using execution accuracy: whether the generated SQL produces the same results as the gold SQL when run against the actual database.</p>
+<div id="cell-9" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BenchmarkResult:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Result of a single benchmark query."""</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    question: <span class="bu">str</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    db_id: <span class="bu">str</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    gold_sql: <span class="bu">str</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    predicted_sql: <span class="bu">str</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    gold_result: Optional[<span class="bu">list</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    predicted_result: Optional[<span class="bu">list</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    execution_match: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    syntax_valid: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    error: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SpiderBenchmarker:</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Benchmarker for text-to-SQL using Spider dataset with execution accuracy."""</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, spider_dir: Path, split: <span class="bu">str</span> <span class="op">=</span> <span class="st">"dev"</span>):</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.spider_dir <span class="op">=</span> Path(spider_dir)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.db_dir <span class="op">=</span> <span class="va">self</span>.spider_dir <span class="op">/</span> <span class="st">"database"</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Load the appropriate split</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> split <span class="op">==</span> <span class="st">"dev"</span>:</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>            data_file <span class="op">=</span> <span class="va">self</span>.spider_dir <span class="op">/</span> <span class="st">"dev.json"</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            data_file <span class="op">=</span> <span class="va">self</span>.spider_dir <span class="op">/</span> <span class="st">"train_spider.json"</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(data_file) <span class="im">as</span> f:</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.data <span class="op">=</span> json.load(f)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Load table schemas</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="va">self</span>.spider_dir <span class="op">/</span> <span class="st">"tables.json"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>            tables_data <span class="op">=</span> json.load(f)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.schemas <span class="op">=</span> {t[<span class="st">"db_id"</span>]: t <span class="cf">for</span> t <span class="kw">in</span> tables_data}</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Loaded </span><span class="sc">{</span><span class="bu">len</span>(<span class="va">self</span>.data)<span class="sc">}</span><span class="ss"> examples from </span><span class="sc">{</span>split<span class="sc">}</span><span class="ss"> split"</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Loaded schemas for </span><span class="sc">{</span><span class="bu">len</span>(<span class="va">self</span>.schemas)<span class="sc">}</span><span class="ss"> databases"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_schema_prompt(<span class="va">self</span>, db_id: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Generate a schema description for prompting."""</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        schema <span class="op">=</span> <span class="va">self</span>.schemas.get(db_id)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> schema:</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="st">""</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        lines <span class="op">=</span> [<span class="ss">f"Database: </span><span class="sc">{</span>db_id<span class="sc">}</span><span class="ss">"</span>, <span class="st">"Tables:"</span>]</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>        table_names <span class="op">=</span> schema[<span class="st">"table_names_original"</span>]</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        column_names <span class="op">=</span> schema[<span class="st">"column_names_original"</span>]</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>        column_types <span class="op">=</span> schema[<span class="st">"column_types"</span>]</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>        primary_keys <span class="op">=</span> schema.get(<span class="st">"primary_keys"</span>, [])</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        foreign_keys <span class="op">=</span> schema.get(<span class="st">"foreign_keys"</span>, [])</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Group columns by table</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        table_columns <span class="op">=</span> defaultdict(<span class="bu">list</span>)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, (table_idx, col_name) <span class="kw">in</span> <span class="bu">enumerate</span>(column_names):</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> table_idx <span class="op">&gt;=</span> <span class="dv">0</span>:  <span class="co"># Skip the special "*" column</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>                col_type <span class="op">=</span> column_types[i] <span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(column_types) <span class="cf">else</span> <span class="st">"unknown"</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>                is_pk <span class="op">=</span> i <span class="kw">in</span> primary_keys</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>                pk_marker <span class="op">=</span> <span class="st">" (PK)"</span> <span class="cf">if</span> is_pk <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>                table_columns[table_idx].append(<span class="ss">f"</span><span class="sc">{</span>col_name<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>col_type<span class="sc">}{</span>pk_marker<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, table_name <span class="kw">in</span> <span class="bu">enumerate</span>(table_names):</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>            cols <span class="op">=</span> table_columns.get(idx, [])</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>            lines.append(<span class="ss">f"  </span><span class="sc">{</span>table_name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(cols)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add foreign keys</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> foreign_keys:</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>            lines.append(<span class="st">"Foreign keys:"</span>)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> fk <span class="kw">in</span> foreign_keys:</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(fk) <span class="op">==</span> <span class="dv">2</span>:</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>                    from_col <span class="op">=</span> column_names[fk[<span class="dv">0</span>]]</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>                    to_col <span class="op">=</span> column_names[fk[<span class="dv">1</span>]]</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> from_col[<span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> to_col[<span class="dv">0</span>] <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>                        from_table <span class="op">=</span> table_names[from_col[<span class="dv">0</span>]]</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>                        to_table <span class="op">=</span> table_names[to_col[<span class="dv">0</span>]]</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>                        lines.append(<span class="ss">f"  </span><span class="sc">{</span>from_table<span class="sc">}</span><span class="ss">.</span><span class="sc">{</span>from_col[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>to_table<span class="sc">}</span><span class="ss">.</span><span class="sc">{</span>to_col[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(lines)</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> execute_sql(<span class="va">self</span>, db_id: <span class="bu">str</span>, sql: <span class="bu">str</span>, timeout: <span class="bu">float</span> <span class="op">=</span> <span class="fl">5.0</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>[Optional[<span class="bu">list</span>], Optional[<span class="bu">str</span>]]:</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Execute SQL against a database and return results."""</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>        db_path <span class="op">=</span> <span class="va">self</span>.db_dir <span class="op">/</span> db_id <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>db_id<span class="sc">}</span><span class="ss">.sqlite"</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> db_path.exists():</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span>, <span class="ss">f"Database not found: </span><span class="sc">{</span>db_path<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>            conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="bu">str</span>(db_path), timeout<span class="op">=</span>timeout)</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>            conn.text_factory <span class="op">=</span> <span class="bu">str</span></span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>            cursor <span class="op">=</span> conn.cursor()</span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>            cursor.execute(sql)</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>            results <span class="op">=</span> cursor.fetchall()</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>            conn.close()</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> results, <span class="va">None</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span>, <span class="bu">str</span>(e)</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> results_match(<span class="va">self</span>, result1: Optional[<span class="bu">list</span>], result2: Optional[<span class="bu">list</span>]) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Check if two query results match (order-independent for sets)."""</span></span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> result1 <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> result2 <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert to sets of tuples for order-independent comparison</span></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>            set1 <span class="op">=</span> <span class="bu">set</span>(<span class="bu">tuple</span>(row) <span class="cf">if</span> <span class="bu">isinstance</span>(row, (<span class="bu">list</span>, <span class="bu">tuple</span>)) <span class="cf">else</span> (row,) <span class="cf">for</span> row <span class="kw">in</span> result1)</span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>            set2 <span class="op">=</span> <span class="bu">set</span>(<span class="bu">tuple</span>(row) <span class="cf">if</span> <span class="bu">isinstance</span>(row, (<span class="bu">list</span>, <span class="bu">tuple</span>)) <span class="cf">else</span> (row,) <span class="cf">for</span> row <span class="kw">in</span> result2)</span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> set1 <span class="op">==</span> set2</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> (<span class="pp">TypeError</span>, <span class="pp">ValueError</span>):</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Fall back to list comparison if unhashable</span></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="bu">sorted</span>(<span class="bu">str</span>(r) <span class="cf">for</span> r <span class="kw">in</span> result1) <span class="op">==</span> <span class="bu">sorted</span>(<span class="bu">str</span>(r) <span class="cf">for</span> r <span class="kw">in</span> result2)</span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evaluate_single(<span class="va">self</span>, example: <span class="bu">dict</span>, predicted_sql: <span class="bu">str</span>) <span class="op">-&gt;</span> BenchmarkResult:</span>
+<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Evaluate a single prediction."""</span></span>
+<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>        question <span class="op">=</span> example[<span class="st">"question"</span>]</span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>        db_id <span class="op">=</span> example[<span class="st">"db_id"</span>]</span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>        gold_sql <span class="op">=</span> example[<span class="st">"query"</span>]</span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> BenchmarkResult(</span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>            question<span class="op">=</span>question,</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>            db_id<span class="op">=</span>db_id,</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>            gold_sql<span class="op">=</span>gold_sql,</span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>            predicted_sql<span class="op">=</span>predicted_sql</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Execute gold SQL</span></span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>        gold_result, gold_error <span class="op">=</span> <span class="va">self</span>.execute_sql(db_id, gold_sql)</span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>        result.gold_result <span class="op">=</span> gold_result</span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> gold_error:</span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>            result.error <span class="op">=</span> <span class="ss">f"Gold SQL error: </span><span class="sc">{</span>gold_error<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> result</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Execute predicted SQL</span></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>        pred_result, pred_error <span class="op">=</span> <span class="va">self</span>.execute_sql(db_id, predicted_sql)</span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>        result.predicted_result <span class="op">=</span> pred_result</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pred_error:</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>            result.error <span class="op">=</span> <span class="ss">f"Predicted SQL error: </span><span class="sc">{</span>pred_error<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>            result.syntax_valid <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>            result.syntax_valid <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>            result.execution_match <span class="op">=</span> <span class="va">self</span>.results_match(gold_result, pred_result)</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run_benchmark(<span class="va">self</span>, model_fn, num_samples: Optional[<span class="bu">int</span>] <span class="op">=</span> <span class="va">None</span>, </span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>                      verbose: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[BenchmarkResult]:</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""</span></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="co">        Run the benchmark with a model function.</span></span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a><span class="co">        Args:</span></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="co">            model_fn: Function that takes (question, schema_prompt) and returns SQL</span></span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="co">            num_samples: Limit number of samples (None for all)</span></span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="co">            verbose: Print progress</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="co">            List of BenchmarkResult objects</span></span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>        samples <span class="op">=</span> <span class="va">self</span>.data[:num_samples] <span class="cf">if</span> num_samples <span class="cf">else</span> <span class="va">self</span>.data</span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> []</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>        iterator <span class="op">=</span> tqdm(samples, desc<span class="op">=</span><span class="st">"Benchmarking"</span>) <span class="cf">if</span> verbose <span class="cf">else</span> samples</span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> example <span class="kw">in</span> iterator:</span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>            schema_prompt <span class="op">=</span> <span class="va">self</span>.get_schema_prompt(example[<span class="st">"db_id"</span>])</span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>            <span class="cf">try</span>:</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>                predicted_sql <span class="op">=</span> model_fn(example[<span class="st">"question"</span>], schema_prompt)</span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>            <span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>                predicted_sql <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>            result <span class="op">=</span> <span class="va">self</span>.evaluate_single(example, predicted_sql)</span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>            results.append(result)</span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results</span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> compute_metrics(<span class="va">self</span>, results: <span class="bu">list</span>[BenchmarkResult]) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Compute aggregate metrics from results."""</span></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a>        total <span class="op">=</span> <span class="bu">len</span>(results)</span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> total <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {<span class="st">"total"</span>: <span class="dv">0</span>}</span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>        syntax_valid <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> r <span class="kw">in</span> results <span class="cf">if</span> r.syntax_valid)</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>        execution_match <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> r <span class="kw">in</span> results <span class="cf">if</span> r.execution_match)</span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a>            <span class="st">"total"</span>: total,</span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a>            <span class="st">"syntax_valid"</span>: syntax_valid,</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>            <span class="st">"syntax_accuracy"</span>: syntax_valid <span class="op">/</span> total,</span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>            <span class="st">"execution_match"</span>: execution_match,</span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>            <span class="st">"execution_accuracy"</span>: execution_match <span class="op">/</span> total,</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"SpiderBenchmarker class defined"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SpiderBenchmarker class defined</code></pre>
+</div>
+</div>
+</section>
+<section id="load-functiongemma-270m" class="level2">
+<h2 class="anchored" data-anchor-id="load-functiongemma-270m">Load FunctionGemma-270M</h2>
+<p>We load the base FunctionGemma-270M model to establish baseline performance before fine-tuning.</p>
+<div id="cell-11" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load FunctionGemma-270M</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>MODEL_ID <span class="op">=</span> <span class="st">"google/functiongemma-270m-it"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Loading </span><span class="sc">{</span>MODEL_ID<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(MODEL_ID)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AutoModelForCausalLM.from_pretrained(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    MODEL_ID,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    device_map<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    attn_implementation<span class="op">=</span><span class="st">"eager"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    torch_dtype<span class="op">=</span><span class="st">"auto"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Model loaded on </span><span class="sc">{</span>model<span class="sc">.</span>device<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading google/functiongemma-270m-it...
+Model loaded on cuda:0</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the SQL execution tool for FunctionGemma</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>SQL_TOOL <span class="op">=</span> {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"function"</span>: {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"name"</span>: <span class="st">"execute_sql"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"description"</span>: <span class="st">"Execute a SQL query to answer the user's question. The query parameter should contain a valid SELECT statement."</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"parameters"</span>: {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"type"</span>: <span class="st">"OBJECT"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"properties"</span>: {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"query"</span>: {</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"type"</span>: <span class="st">"STRING"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"description"</span>: <span class="st">"A valid SQL SELECT statement"</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                }</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>            },</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"required"</span>: [<span class="st">"query"</span>]</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_function_call(output: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Parse FunctionGemma's function call format.</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">    Format: &lt;start_function_call&gt;call:func_name{param:&lt;escape&gt;value&lt;escape&gt;}&lt;end_function_call&gt;</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> re</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Try to extract function call</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    match <span class="op">=</span> re.search(<span class="vs">r'call:</span><span class="kw">(</span><span class="dv">\w</span><span class="op">+</span><span class="kw">)</span><span class="ch">\{</span><span class="kw">(</span><span class="dv">.</span><span class="op">+?</span><span class="kw">)</span><span class="ch">\}</span><span class="vs">'</span>, output)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> match:</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        func_name <span class="op">=</span> match.group(<span class="dv">1</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        params_str <span class="op">=</span> match.group(<span class="dv">2</span>)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Parse parameters: key:&lt;escape&gt;value&lt;escape&gt;</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        params <span class="op">=</span> {}</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        param_matches <span class="op">=</span> re.findall(<span class="vs">r'</span><span class="kw">(</span><span class="dv">\w</span><span class="op">+</span><span class="kw">)</span><span class="vs">:&lt;escape&gt;</span><span class="kw">(</span><span class="dv">.</span><span class="op">+?</span><span class="kw">)</span><span class="vs">&lt;escape&gt;'</span>, params_str)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> key, value <span class="kw">in</span> param_matches:</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>            params[key] <span class="op">=</span> value</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {<span class="st">"name"</span>: func_name, <span class="st">"parameters"</span>: params}</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {}</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_sql(question: <span class="bu">str</span>, schema: <span class="bu">str</span>, max_new_tokens: <span class="bu">int</span> <span class="op">=</span> <span class="dv">256</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate SQL from a natural language question using FunctionGemma."""</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    messages <span class="op">=</span> [</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>            <span class="st">"role"</span>: <span class="st">"developer"</span>,</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>            <span class="st">"content"</span>: <span class="st">"You are a model that can do function calling with the following functions"</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>            <span class="st">"role"</span>: <span class="st">"user"</span>,</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>            <span class="st">"content"</span>: <span class="ss">f"""</span><span class="sc">{</span>schema<span class="sc">}</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="ss">Question: </span><span class="sc">{</span>question<span class="sc">}</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="ss">Call execute_sql with the appropriate SQL query."""</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    prompt <span class="op">=</span> tokenizer.apply_chat_template(</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        messages,</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        tools<span class="op">=</span>[SQL_TOOL],</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        tokenize<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        add_generation_prompt<span class="op">=</span><span class="va">True</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> tokenizer(prompt, return_tensors<span class="op">=</span><span class="st">"pt"</span>).to(model.device)</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>        outputs <span class="op">=</span> model.generate(</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>inputs,</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>            max_new_tokens<span class="op">=</span>max_new_tokens,</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>            do_sample<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>            pad_token_id<span class="op">=</span>tokenizer.eos_token_id,</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Decode WITHOUT skipping special tokens to preserve function call format</span></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>    full_output <span class="op">=</span> tokenizer.decode(outputs[<span class="dv">0</span>], skip_special_tokens<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>    new_output <span class="op">=</span> full_output[<span class="bu">len</span>(tokenizer.decode(inputs[<span class="st">"input_ids"</span>][<span class="dv">0</span>], skip_special_tokens<span class="op">=</span><span class="va">False</span>)):]</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Parse the FunctionGemma function call format</span></span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>    func_call <span class="op">=</span> parse_function_call(new_output)</span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> func_call <span class="kw">and</span> <span class="st">"parameters"</span> <span class="kw">in</span> func_call:</span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>        sql <span class="op">=</span> func_call[<span class="st">"parameters"</span>].get(<span class="st">"query"</span>, <span class="st">""</span>)</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fallback: try to extract SQL directly</span></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>        sql <span class="op">=</span> new_output.strip()</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean up</span></span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sql:</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>        sql <span class="op">=</span> sql.split(<span class="st">";"</span>)[<span class="dv">0</span>].strip()</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sql <span class="kw">and</span> <span class="kw">not</span> sql.endswith(<span class="st">";"</span>):</span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>            sql <span class="op">+=</span> <span class="st">";"</span></span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sql</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Test the generation</span></span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>test_schema <span class="op">=</span> <span class="st">"""Database: concert_singer</span></span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a><span class="st">Tables:</span></span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a><span class="st">  singer: Singer_ID (PK), Name, Country, Age"""</span></span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>test_question <span class="op">=</span> <span class="st">"How many singers are there?"</span></span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test generation:"</span>)</span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> generate_sql(test_question, test_schema)</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Extracted SQL: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test generation:
+Extracted SQL: SELECT singer_id, name, country, age FROM singer;</code></pre>
+</div>
+</div>
+</section>
+<section id="run-spider-benchmark" class="level2">
+<h2 class="anchored" data-anchor-id="run-spider-benchmark">Run Spider benchmark</h2>
+<p>We run the benchmark on the dev set to establish baseline performance.</p>
+<div id="cell-14" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialise benchmarker</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>benchmarker <span class="op">=</span> SpiderBenchmarker(SPIDER_DIR, split<span class="op">=</span><span class="st">"dev"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run benchmark (use subset for initial testing)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>NUM_SAMPLES <span class="op">=</span> <span class="dv">100</span>  <span class="co"># Set to None for full benchmark</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Running benchmark on </span><span class="sc">{</span>NUM_SAMPLES <span class="kw">or</span> <span class="st">'all'</span><span class="sc">}</span><span class="ss"> samples..."</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> benchmarker.run_benchmark(generate_sql, num_samples<span class="op">=</span>NUM_SAMPLES)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute and display metrics</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> benchmarker.compute_metrics(results)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">50</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"BENCHMARK RESULTS: FunctionGemma-270m-it (baseline)"</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">50</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total samples:       </span><span class="sc">{</span>metrics[<span class="st">'total'</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Syntax valid:        </span><span class="sc">{</span>metrics[<span class="st">'syntax_valid'</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>metrics[<span class="st">'syntax_accuracy'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Execution match:     </span><span class="sc">{</span>metrics[<span class="st">'execution_match'</span>]<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>metrics[<span class="st">'execution_accuracy'</span>]<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loaded 1034 examples from dev split
+Loaded schemas for 166 databases
+Running benchmark on 100 samples...</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"0de216e961344f8db5d9361e75d2e2a8","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id, singer_id FROM concert_singer WHERE concert_id = concert_id AND singer_id = singer_id AND concert_id = stadium_id&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id FROM singer_data WHERE concert_id = concert_id&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY age DESC LIMIT 100000;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY singer.Age DESC LIMIT 10;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id:PK, singer_id:PK, age: AVG(age) AS min_age, age: AVG(age) AS max_age FROM concert_singer WHERE country = 'FR' AND song_name = 'concert_singer' GROUP BY singer_id ORDER BY BY age DESC LIMIT 10000 WHERE singer_id:PK;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id, singer_id, singer_name, age FROM concert_singer WHERE concert_id = 'stadium_singer_2019_en' AND singer_id = 'singer_french_female_100' AND concert_id = 'stadium_singer_2019_en' AND song_name = 'French_singers_2019' AND age BETWEEN 18 AND 60&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY singer.Singer_ID text ASC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY singer.Singer_ID text ASC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT countries WHERE singer_in_concert.Singer_ID = ? &amp;&amp; singer.Singer_ID = ? &amp;&amp; singer.Singer_ID = ? &amp;&amp; concert.concert_ID -&gt; stadium.Stadium_ID &amp;&amp; singer.Singer_ID -&gt; singer.Singer_ID &amp;&amp; singer.Singer_ID -&gt; concert.concert_ID&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT countries, singer_in_concert FROM concert_singer WHERE concert_ID = ? AND singer_ID = ? ORDER BY singer_ID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id. Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID&lt;escape&gt;, Name:&lt;escape&gt;Singer_ID&lt;escape&gt;, Capacity:5000, Highest number:&lt;escape&gt;Lowest number&lt;escape&gt;, Lowest number:&lt;escape&gt;Lowest number&lt;escape&gt;, Average number:&lt;escape&gt;Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID&lt;escape&gt;, Name:&lt;escape&gt;Singer_ID&lt;escape&gt;, Capacity:5000, Highest number:&lt;escape&gt;Lowest number&lt;escape&gt;, Lowest number:&lt;escape&gt;Lowest number&lt;escape&gt;, Average number:&lt;escape&gt;Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:PK, Location:&lt;escape&gt;Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;? FROM stadium:Stadium_ID:PK ORDER BY Location:&lt;escape&gt;Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt; ORDER BY Capacity number:&lt;escape&gt;Stadium_ID:PK, Location:&lt;escape&gt;Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt; ORDER BY Singer_ID:&lt;escape&gt;Singer_ID&lt;escape&gt; INTO concert_singer.stadium FROM concert:concert_ID:PK WHERE singer_in_concert.singer_ID = singer.Singer_ID AND concert_ID:PK WHERE stadium:&lt;escape&gt;Stadium_ID:PK, Location:&lt;escape&gt;Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;&lt;escape&gt; ORDER BY Singer_ID:&lt;escape&gt;Singer_ID&lt;escape&gt; INTO concert_singer.stadium USING concert.Stadium_ID -&gt; singer_in_concert.singer_ID INTO concert_singer.stadium WHERE stadium:&lt;escape&gt;Stadium_ID:PK, Location:&lt;escape&gt;Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;&lt;escape&gt; ORDER BY Singer_ID:&lt;escape&gt;Singer_ID&lt;escape&gt; INTO concert_
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID number (PK), Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID text, Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Singer_ID:PK, Singer_ID:PK, Concert_Name text, Song_Name text, Song_release_year text, Age number, Is_male others FROM concert_singer WHERE Stadium_ID:12345&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT AVG(Capacity) AS Highest_Capacity FROM stadium WHERE Query = 'Average capacities' ORDER BY Query;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT AVG(Capacity) AS Highest_Capacity FROM stadium WHERE Query = 'Average capacities' ORDER BY Query;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id:PK, singer_id:PK, concert_id:PK, concert_name: 'Stadium_ID' AS singer_name, Song_name: 'Stadium_ID' AS song_name, Age: n AS age, Is_male others ? false ? true ? true&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(concert_ID) AS year2014 OR concert_ID IN (SELECT singer_id FROM singer_in_concert WHERE Singer_ID = 'your_singer_id') WHERE concert_ID IN (SELECT concert_id FROM concert_singer WHERE Stadium_ID = 'stadium_id') GROUP BY YEAR2014 OR YEAR2015 ORDER BY YEAR2014 OR YEAR2015 BY year2014;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(concert_ID) AS count FROM concert_singer WHERE concert_ID = ? AND year = ? AND Stadium_ID = ?&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID number (PK), Location text, Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Concert_Name:&lt;escape&gt;Concert_Name text, Stadium_ID:1, Year text, Singer_ID:&lt;escape&gt;Singer_ID text&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID text, Location text, Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(concert_id) AS num_concerts FROM concert_singer WHERE stadium_id = 'Stadium_ID_NUMBER' AND singer_id = 'Singer_ID_NUMBER' AND concert_id = 'concert_ID_NUMBER'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID number (PK), Location text, Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Stadium_ID:1, Location:&lt;escape&gt;Stadium_ID text, Location text, Name text, Capacity number, Highest number, Lowest number, Average number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Singer_ID:PK, Singer_ID:PK, Concert_Name text, Song_Name text, Song_release_year text, Age number, Is_male others FROM concert_singer WHERE Stadium_ID:12345&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(CASE WHEN Stadium_ID = 'Stadium_ID' THEN 1 ELSE 0 END) AS num_concerts FROM concert_singer WHERE query = 'Count all concerts in Stadium_ID = Stadium_ID'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT YEAR(concert_singer.concert_ID) AS year_concerts&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT singer_id FROM singer_in_concert WHERE concert_id = stadium_id;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id FROM singer_data WHERE singer_id = ? AND age &gt; 40 AND is_male:true and singer_id IN (SELECT singer_id FROM concert_singer WHERE concert_id = ? AND singer_id = ? AND concert_name = ? AND stadium_id = ? WHERE stadium_id = ? AND year = ?)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id FROM singer_in_concert WHERE concert_id = ? AND concert_name = ? AND singer_id != ? AND song_name = ?&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT singer_id FROM singer_in_concert WHERE concert_id != stadium_id ORDER BY singer_id;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id, singer_name FROM concert_singer WHERE concert_id = 'stadium_id_1' AND concert_name = 'concert_singer' AND singer_id = 'singer_1' GROUP BY concert_id;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id, singer_name, concert_id FROM concert_singer WHERE concert_id = concert_id AND singer_id = singer_id AND concert_id = stadium_id&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id:PK, Singer_id:PK, concert_id:PK, concert_name: 'Stadium_ID' AS singer_name, Song_name: 'Stadium_ID' AS song_name, Age: n AS age, Is_male: true, others: false, Stadium_ID: Stadium_ID&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id:PK, Singer_id:PK, concert_id:PK, concert_name: 'Stadium_ID' AS singer_name, Song_name: 'Stadium_ID' AS song_name, Age: n AS age, Is_male: true, others: false, Stadium_ID: Stadium_ID&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY singer.Singer_ID text ASC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text ORDER BY singer.Singer_ID text ASC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT concert_id.concert_id text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;,query:&lt;escape&gt;SELECT singer_id.Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT singer_id. Singer_ID text;&lt;escape&gt;,query:&lt;escape&gt;SELECT singer_id. Singer_ID text;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(concert_id) AS num_concerts FROM concert_singer WHERE capacity = 'highest' AND stadium_id = 'stadium_id_1'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(concert_ID) AS num_concerts FROM concert_singer WHERE capacity = 'Largest' AND stadium_id = 'Stadium_ID'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID FROM Pets WHERE PetID = 12345 AND Weight &gt; 10&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID FROM Pets WHERE PetID = 10 AND Has_Pet.StuID &gt; 10&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID FROM Pets WHERE PetID = 12345 ORDER BY PetType ASC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID FROM Pets WHERE PetID = 12345 AND PetType = 'Dog&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code text
+FROM Pets
+WHEREStuID = 12345 AND PetID = 600
+AND PetType = 'pet' GROUP BY PetID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetType, pet_age, weight NUMBER ORDER BY Has_Pet.StuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code, text FROM pets_1 WHEREStuID &gt; 20&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID ORDER BYStuID ASC LIMIT 10;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code text FROM Pets WHEREStuID:stuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID FROM Pets WHERE PetID = '101' ANDStuID = '100' AND has_pet:true&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT Pets.PetType TEXT, COUNT(Has_Pet.StuID) AS num_distinct_type FROM Pets WHEREStuID IN (SELECT DISTINCTStuID FROM Student WHEREStuID IN (SELECT DISTINCTStuID FROM Has_Pet WHEREStuID IN (SELECT DISTINCTStuID FROM Pets WHERE PetID IN (SELECT PetID FROM Pets WHERE PetType = 'Pet')))) GROUP BY num_distinct_type ORDER BY num_distinct_type;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetType, pet_age, weight from Pets WHERE PetID = StuID and Has_Pet = true&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID.StuID + 1,StuID.StuID + 1, cat_pet.name text, dog_pet.name text, has_pet.stuID -&gt; student.stuID + 1&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHEREStuID = 12345&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID.StuID + 1,StuID.StuID + 1 FROM Pets WHERE has_pet.StuID = StuID AND has_pet.PetID = 'cat' AND pet_age &gt; 1000000000 Appleouse number&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT StuID.StuID + 1 AS first_name FROM Pets WHERE has_pet.StuID = StuID AND has_pet.PetID = PetID&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1.1, LName:&lt;escape&gt;Husband&lt;escape&gt;, Fname:&lt;escape&gt;Husband&lt;escape&gt;, Age:18, Sex:&lt;escape&gt;Male&lt;escape&gt;, Major:&lt;escape&gt;Student&lt;escape&gt;, Advisor:&lt;escape&gt;Husband&lt;escape&gt;, city_code:&lt;escape&gt;Tokyo&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1.1, LName:&lt;escape&gt;Husband&lt;escape&gt;, Fname:&lt;escape&gt;Husband&lt;escape&gt;, Age:19, Sex:&lt;escape&gt;Female&lt;escape&gt;, Major:&lt;escape&gt;Student&lt;escape&gt;, Advisor:&lt;escape&gt;Husband&lt;escape&gt;, city_code:&lt;escape&gt;Tokyo&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:stuID, LName:text, Fname:text, Age:number, Sex:text, Major:text ORDER BYStuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID FROM Pets WHEREStuID != StuID AND has_pet: no&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID FROM Student WHEREStuID != StuID and has_pet:CANDID:false&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHEREStuID != StuID AND has_pet: no&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHEREStuID != StuID AND has_pet: no&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID.StuID, PetID.PetType, pet_age:18000, weight:10000000000000000000000000000000, PetID:1 as PetID&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1, LName:&lt;escape&gt;PetID&lt;escape&gt;, Fname:&lt;escape&gt;PetType&lt;escape&gt;, Age:18, Sex:&lt;escape&gt;Female&lt;escape&gt;, Major:&lt;escape&gt;Major&lt;escape&gt;, Advisor:&lt;escape&gt;Advisor Number&lt;escape&gt;, city_code:&lt;escape&gt;City_Code&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1, LName:&lt;escape&gt;PetID&lt;escape&gt;, Fname:&lt;escape&gt;PetType&lt;escape&gt;, Age:18, Sex:&lt;escape&gt;Male&lt;escape&gt;, Major:&lt;escape&gt;Major&lt;escape&gt;, advisor:&lt;escape&gt;Advisor Number&lt;escape&gt;, city_code:&lt;escape&gt;City_Code&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHERE Age &gt; 1 GROUP BY HAVING (has_pet);&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHEREStuID &gt; 1;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT
+    s.stuID,
+    AVG(f.age) AS avg_age,
+    MAX(f.age) AS max_age
+FROM Pets.Has_Pet AS p
+    WHERE p.stuID = s.stuID
+    AND p.pet_age = f.age
+    GROUP BY s.stuID
+    ORDER BY s.stuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code text FROM Pets WHERE StuID = 12345;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT AVG(Weight) FOR StuID IN (SELECT Student.StuID FROM Pets WHEREStuID =Stu_ID) FOR PetID IN (SELECT PetID FROM Pets WHERE PetID = Pet_ID)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code text FROM Pets WHEREStuID =stu_id;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID ORDER BYStuID ASC LIMIT 10;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:stuID, LName:text, Fname:text, Age:number, Sex:text, Major:number, Advisor:number, city_code:text[]&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuIDNUMBER, LName text, Fname text, Age number, Sex text, Major number, Advisor number, city_code text FROM pets_1 WHEREStuIDNUMBER = 'Smith'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:stuID, LName text, Fname text, Age number, Sex text, Major number, Advisor number, city_code text FROM Pets WHEREStuID:stuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID.stuID, has_pet. StuID;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID.StuID NUMBER(100,2) AS numPeterscript, LName text, Fname text, Age number, Sex text, Major number, Advisor number, city_code text FROM pets_1. StuID NUMBER(100,2)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, PetID ORDER BYStuID ASC LIMIT 1 LIMIT 1;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID,StuID FROM Pets WHEREStuID &gt; 1, PetID: some_value&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1, LName:&lt;escape&gt;cat&lt;escape&gt;, Fname:&lt;escape&gt;dog&lt;escape&gt;, Age:3, Sex:&lt;escape&gt;male&lt;escape&gt;, Major:&lt;escape&gt;animal&lt;escape&gt;, Advisor:&lt;escape&gt;female&lt;escape&gt;, city_code:&lt;escape&gt;city&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID:1234, LName:&lt;escape&gt;cat&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code FROM students WHEREStuID such thatStuID is not in any pet group&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECTStuID, LName, Fname, Age, Sex, Major, Advisor, city_code, text FROM students WHEREStuID such as: StuID != NULL AND has_pet such as: StuID != NULL AND not_owns_pet such as: StuID != NULL&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(continent)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(continent)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT continent_id, continent_name, COUNT(car_makers.Id) GROUP BY continent_id ORDER BY continent_id;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT continent.ContId, continent.CountryName, COUNT(car_makers.Id) AS count FROM car_makers WHERE continent.CountryName = 'Car_1' AND model.Name = 'Car_1' GROUP BY region.ContId ORDER BY region.ContId;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(DISTINCT ContId | Continent TEXT) GROUP BY ? ORDER BY ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT COUNT(DISTINCT ContId | Continent TEXT) GROUP BY ? ORDER BY ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT Maker TEXT, Make TEXT, Model TEXT, COUNT(Car_Names TEXT) AS Make TEXT, SUM(Cars_Data TEXT) AS MPG TEXT, COUNT(Car_Names TEXT) AS Model TEXT, COUNT(Car_Names TEXT) AS Car_Names TEXT ORDER BY Maker TEXT;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT Car_Maker_Name, Make_Id, Model_Text, Car_Name, MPG, Cylinders, Edispl, Horsepower, Weight, Accelerate, Year[] FROM car_1 WHERE Country = 'Car_1' AND Continent = 'Cont' AND Car_Maker = 'Model' AND Model = 'Car_makers' GROUP BY CAR_MAKER_ID ORDER BY YEAR DESC;&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT MIN(PMR)&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT CarName | MakerName | Make | Model | MPG | Cylinders | Edispl | Horsepower | YEAR |&lt;escape&gt; out o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT model FROM car_models WHERE weight &lt; average_weight&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT Continent, CountryName, Car_makers.Id, Model, Car_names.Make, Car_names.Model, Cars_data.Id, MPG, Cylinders, Edispl, Horsepower, Weight, Accelerate, Year from car_1.contids.car_makers.Id? WHERE Car_makers.Id = 'YOUR_CAR_ID' AND Model = 'YOUR_CAR_MODEL' AND Car_names.Make = 'YOUR_CAR_TEAM_NAME' AND Car_names.Model = 'YOUR_CAR_MODEL_DESCRIPTION'&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+Raw output: &lt;start_function_call&gt;call:execute_sql{query:&lt;escape&gt;SELECT DISTINCT Maker TEXT, Make TEXT, Model TEXT, Car Name TEXT, Cars_Data TEXT WHERE Id = 1970&lt;escape&gt;}&lt;end_function_call&gt;&lt;start_function_response&gt;
+
+==================================================
+BENCHMARK RESULTS: FunctionGemma-270M (baseline)
+==================================================
+Total samples:       100
+Syntax valid:        0 (0.0%)
+Execution match:     0 (0.0%)
+==================================================</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 3 detailed examples</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> difflib</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_example(result, idx):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span><span class="st">'='</span><span class="op">*</span><span class="dv">60</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"EXAMPLE </span><span class="sc">{</span>idx <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'='</span><span class="op">*</span><span class="dv">60</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Database: </span><span class="sc">{</span>result<span class="sc">.</span>db_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Question: </span><span class="sc">{</span>result<span class="sc">.</span>question<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Generated SQL ---"</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.predicted_sql)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Gold SQL ---"</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result.gold_sql)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Show diff</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Diff (generated vs gold) ---"</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    diff <span class="op">=</span> difflib.unified_diff(</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        result.gold_sql.splitlines(keepends<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        result.predicted_sql.splitlines(keepends<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        fromfile<span class="op">=</span><span class="st">'gold'</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        tofile<span class="op">=</span><span class="st">'generated'</span>,</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        lineterm<span class="op">=</span><span class="st">''</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    diff_text <span class="op">=</span> <span class="st">''</span>.join(diff)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> diff_text:</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(diff_text)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"(identical)"</span>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Show execution results</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Execution Results ---"</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Gold result:      </span><span class="sc">{</span>result<span class="sc">.</span>gold_result[:<span class="dv">3</span>] <span class="cf">if</span> result<span class="sc">.</span>gold_result <span class="cf">else</span> <span class="st">'None'</span><span class="sc">}{</span><span class="st">'...'</span> <span class="cf">if</span> result<span class="sc">.</span>gold_result <span class="kw">and</span> <span class="bu">len</span>(result.gold_result) <span class="op">&gt;</span> <span class="dv">3</span> <span class="cf">else</span> <span class="st">''</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Generated result: </span><span class="sc">{</span>result<span class="sc">.</span>predicted_result[:<span class="dv">3</span>] <span class="cf">if</span> result<span class="sc">.</span>predicted_result <span class="cf">else</span> <span class="st">'None'</span><span class="sc">}{</span><span class="st">'...'</span> <span class="cf">if</span> result<span class="sc">.</span>predicted_result <span class="kw">and</span> <span class="bu">len</span>(result.predicted_result) <span class="op">&gt;</span> <span class="dv">3</span> <span class="cf">else</span> <span class="st">''</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">--- Verdict ---"</span>)</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Syntax valid:     </span><span class="sc">{</span>result<span class="sc">.</span>syntax_valid<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Execution match:  </span><span class="sc">{</span>result<span class="sc">.</span>execution_match<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> result.error:</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error:            </span><span class="sc">{</span>result<span class="sc">.</span>error<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 3 examples: 1 success (if any), 1 wrong result, 1 syntax error</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>examples_to_show <span class="op">=</span> []</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Find one successful match</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> results:</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.execution_match:</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>        examples_to_show.append(r)</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Find one wrong result (valid syntax but wrong output)</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> results:</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r.syntax_valid <span class="kw">and</span> <span class="kw">not</span> r.execution_match:</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>        examples_to_show.append(r)</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Find one syntax error</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> results:</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> r.syntax_valid:</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>        examples_to_show.append(r)</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="co"># If we don't have 3, just take first 3</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(examples_to_show) <span class="op">&lt;</span> <span class="dv">3</span> <span class="kw">and</span> <span class="bu">len</span>(results) <span class="op">&gt;</span> <span class="bu">len</span>(examples_to_show):</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> results:</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> r <span class="kw">not</span> <span class="kw">in</span> examples_to_show:</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>            examples_to_show.append(r)</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx, result <span class="kw">in</span> <span class="bu">enumerate</span>(examples_to_show):</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>    show_example(result, idx)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+============================================================
+EXAMPLE 1
+============================================================
+
+Database: concert_singer
+Question: How many singers do we have?
+
+--- Generated SQL ---
+SELECT singer_id, singer_id FROM concert_singer WHERE concert_id = concert_id AND singer_id = singer_id AND concert_id = stadium_id;
+
+--- Gold SQL ---
+SELECT count(*) FROM singer
+
+--- Diff (generated vs gold) ---
+--- gold+++ generated@@ -1 +1 @@-SELECT count(*) FROM singer+SELECT singer_id, singer_id FROM concert_singer WHERE concert_id = concert_id AND singer_id = singer_id AND concert_id = stadium_id;
+
+--- Execution Results ---
+Gold result:      [(6,)]
+Generated result: None
+
+--- Verdict ---
+Syntax valid:     False
+Execution match:  False
+Error:            Predicted SQL error: no such table: concert_singer
+
+============================================================
+EXAMPLE 2
+============================================================
+
+Database: concert_singer
+Question: What is the total number of singers?
+
+--- Generated SQL ---
+SELECT singer_id FROM singer_data WHERE concert_id = concert_id;
+
+--- Gold SQL ---
+SELECT count(*) FROM singer
+
+--- Diff (generated vs gold) ---
+--- gold+++ generated@@ -1 +1 @@-SELECT count(*) FROM singer+SELECT singer_id FROM singer_data WHERE concert_id = concert_id;
+
+--- Execution Results ---
+Gold result:      [(6,)]
+Generated result: None
+
+--- Verdict ---
+Syntax valid:     False
+Execution match:  False
+Error:            Predicted SQL error: no such table: singer_data
+
+============================================================
+EXAMPLE 3
+============================================================
+
+Database: concert_singer
+Question: Show name, country, age for all singers ordered by age from the oldest to the youngest.
+
+--- Generated SQL ---
+SELECT singer_id.Singer_ID text ORDER BY age DESC LIMIT 100000;
+
+--- Gold SQL ---
+SELECT name ,  country ,  age FROM singer ORDER BY age DESC
+
+--- Diff (generated vs gold) ---
+--- gold+++ generated@@ -1 +1 @@-SELECT name ,  country ,  age FROM singer ORDER BY age DESC+SELECT singer_id.Singer_ID text ORDER BY age DESC LIMIT 100000;
+
+--- Execution Results ---
+Gold result:      [('Joe Sharp', 'Netherlands', 52), ('John Nizinik', 'France', 43), ('Rose White', 'France', 41)]...
+Generated result: None
+
+--- Verdict ---
+Syntax valid:     False
+Execution match:  False
+Error:            Predicted SQL error: no such column: singer_id.Singer_ID</code></pre>
+</div>
+</div>
+<div id="cell-16" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save results for analysis</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"question"</span>: r.question,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"db_id"</span>: r.db_id,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gold_sql"</span>: r.gold_sql,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"predicted_sql"</span>: r.predicted_sql,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"syntax_valid"</span>: r.syntax_valid,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"execution_match"</span>: r.execution_match,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"error"</span>: r.error,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> results</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>results_df.to_csv(<span class="st">"baseline_benchmark_results.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Results saved to baseline_benchmark_results.csv"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary by database</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Execution accuracy by database (top 10):"</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>db_accuracy <span class="op">=</span> results_df.groupby(<span class="st">"db_id"</span>)[<span class="st">"execution_match"</span>].agg([<span class="st">"sum"</span>, <span class="st">"count"</span>])</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>db_accuracy[<span class="st">"accuracy"</span>] <span class="op">=</span> db_accuracy[<span class="st">"sum"</span>] <span class="op">/</span> db_accuracy[<span class="st">"count"</span>]</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(db_accuracy.sort_values(<span class="st">"accuracy"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Results saved to baseline_benchmark_results.csv
+
+Execution accuracy by database (top 10):
+                sum  count  accuracy
+db_id                               
+car_1             0     13       0.0
+concert_singer    0     45       0.0
+pets_1            0     42       0.0</code></pre>
+</div>
+</div>
+<p>So, unsurprisingly, we find what we’ve known all along: out of the box, FunctionGemma-270m-it is not a very good text-to-SQL model.</p>
+<p>What can we do about that? Fine-tuning!</p>
+</section>
+<section id="round-1-supervised-fine-tuning-sft" class="level2">
+<h2 class="anchored" data-anchor-id="round-1-supervised-fine-tuning-sft">Round 1: Supervised Fine-Tuning (SFT)</h2>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay,
+  author = {{Chris von Csefalvay}},
+  title = {Fine-Tuning {FunctionGemma} for {SQL}},
+  url = {https://chrisvoncsefalvay.com/posts/babys-first-function-caller/finetuning-for-sql.html},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. n.d. <span>“Fine-Tuning FunctionGemma for
+SQL.”</span> <a href="https://chrisvoncsefalvay.com/posts/babys-first-function-caller/finetuning-for-sql.html">https://chrisvoncsefalvay.com/posts/babys-first-function-caller/finetuning-for-sql.html</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="disclaimer">Disclaimer</a></li>
+</ol>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

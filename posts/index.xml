@@ -10,7 +10,2787 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Mon, 15 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 25 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The post-training instrument cluster – Part I</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hey, I’m writing a book about this!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m actually writing a book about this stuff. It turns out there isn’t a lot of literature on how to do post-training at the level too big for single-GPU laptop-sized hobby projects and requiring enterprise reliability on one hand, but not quite at the scale of multi-team distributed post-training you’d get in foundation labs. That’s a problem, because a lot of the current value in fine-tuning applications comes exactly out of that large, crucial market. I am in the last phases of putting together the manuscript for <em>The Frontier Playbook</em>, a set of curated tactics and techniques for real world operationalisation of LLMs. <a href="https://aifrontierplaybook.substack.com">Sign up for updates here</a>.</p>
+</div>
+</div>
+<p>Jimmy Doolittle, later famous for leading the daring Doolittle Raid on Tokyo in 1942, was a pioneering aviator in the 1920s and 30s. One of his key contributions to aviation was the first of what at the time was called “blind” flight – what we would refer to as IFR (Instrument Flight Rules) flight today. Doolittle demonstrated that with the right set of instruments, a pilot could safely navigate and land an aircraft without any external visual references. A few years later, instrument flying became increasingly standardised, and in the late 1930s, the main instruments and their arrangement into the “basic T” layout of six key instruments – affectionately referred to as the six-pack – was formalised. To this day, virtually all aircraft have the same instrument cluster in the same order, and every pilot is trained to interpret them. Together, they create a fairly comprehensive picture of the aircraft’s state and environment.</p>
+<p>You should aspire to have the same for your LLM post-training.</p>
+<p>Unfortunately, that doesn’t come without some effort. Even though really good tools exist for monitoring fine-tuning runs, what you get out of the box is often quite lacklustre. When you fire up a fine-tuning run and open your Weights &amp; Biases dashboard, you’re greeted with the same three faithful companions: training loss, validation loss and gradient norm. They’re like the speedometer, fuel gauge and temperature warning light of the machine learning world – essential, certainly, but hardly sufficient for understanding what’s actually happening under the bonnet. Nobody would fly a commercial airliner with three instruments, and nobody should run a fine-tuning job of any seriousness with just loss curves and a gradient norm.</p>
+<p>More important than what you see is knowing how to read those instruments. As you monitor a post-training job, regardless of whether it’s SFT, DPO, GRPO, even something more exotic, you’re largely after the same information: is the model learning what you want it to learn, is the optimisation stable, are there any silent failure modes creeping in, and when should I stop? Knowing how to read the instruments properly means you’ll know a lot about the model while it’s still in the oven, so to speak, and you can catch issues early. This is useful for the ML hobbyist, but indispensable for the enterprise practitioner. At that scale, a solid training run can cost north of five figures – not foundation lab training cost scale (it is estimated that a single training run of a modern foundation model is easily in the realm of nine figures), but enough that wasting runs is eventually going to attract management attention.<sup>1</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I’m being my usual flippant self here, but there’s a very real economic, environmental and social cost to wasted compute. We owe it to the world and to future generations to make sure we make every watt of compute count. One can disagree about the ethics of the money and energy and CO2 emissions that are devoted to training LLMs – it is rather harder to argue that wasting those resources is in any way justifiable.</p></div></div><p>The purpose of this post – the first in a series of three – is twofold: to explain what a comprehensive post-training instrument cluster looks like for the easiest ‘base case’ (plain vanilla SFT) and provide you with the code to implement it yourself on one hand, and learning how to interpret them on the other.</p>
+<section id="the-case-for-comprehensive-monitoring" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-case-for-comprehensive-monitoring">The case for comprehensive monitoring</h2>
+<p>Before we dive into the instruments themselves, it’s worth asking: why bother? The loss is going down, the model is learning, what more do you need?</p>
+<p>The answer, as with most things in machine learning, is that the happy path is easy and the failure modes are numerous. A decreasing loss curve can mask catastrophic forgetting. A stable gradient norm can coexist with attention collapse. A model can achieve excellent validation loss while generating nonsense. Worse, many of these failure modes are silent until you actually deploy the model and discover, often at significant cost, that something went wrong twenty hours into a forty-hour training run.<sup>2</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;I’ve seen production fine-tuning runs where the model appeared to be learning beautifully right up until generation quality fell off a cliff. The loss was still decreasing. The gradient norm was textbook perfect. The only hint that something was wrong was a subtle shift in the attention entropy that nobody was monitoring.</p></div><div id="fn3"><p><sup>3</sup>&nbsp;Even better, good monitoring can often prevent failures from happening in the first place. Catching a loss spike or a gradient explosion early can save hours of wasted compute and frustration. Monitoring logs can – indeed, should! – act as release gates at worst, meaning you might well avoid the ‘mortem’ part altogether.</p></div></div><p>Enterprise fine-tuning adds another dimension of complexity. You’re not just training a model, you’re accountable for training a model. When a stakeholder asks why a particular run failed, ‘the loss looked fine but the model doesn’t work’ is not an acceptable answer. Comprehensive monitoring provides the forensic trail that turns post-mortems from guesswork into analysis.<sup>3</sup></p>
+</section>
+<section id="instrument-1-the-loss-landscape" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-1-the-loss-landscape">Instrument 1: the loss landscape</h2>
+<p>Let’s start with the obvious: loss. But we’re going to look at it properly.</p>
+<p>The default wandb setup gives you <code>train/loss</code> and <code>eval/loss</code> as single scalar values. This is necessary but insufficient. What you actually want is a richer picture of the loss landscape:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
+</div></div><div id="44baedf2" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Enhanced loss logging callback</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> transformers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> TrainerCallback</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> collections <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> deque</span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> LossLandscapeCallback(TrainerCallback):</span>
+<span id="cb1-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Track loss statistics beyond simple averages."""</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, window_size: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>):</span>
+<span id="cb1-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.window_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> window_size</span>
+<span id="cb1-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb1-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_losses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb1-12"></span>
+<span id="cb1-13">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_log(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb1-14">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> logs <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb1-15">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb1-16"></span>
+<span id="cb1-17">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"loss"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb1-18">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses.append(logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"loss"</span>])</span>
+<span id="cb1-19"></span>
+<span id="cb1-20">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:</span>
+<span id="cb1-21">                losses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses)</span>
+<span id="cb1-22">                logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"train/loss_variance"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.var(losses)</span>
+<span id="cb1-23">                logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"train/loss_trend"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.polyfit(</span>
+<span id="cb1-24">                    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(losses)), losses, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb1-25">                )[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb1-26"></span>
+<span id="cb1-27">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Detect loss spikes</span></span>
+<span id="cb1-28">                recent <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> losses[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:]</span>
+<span id="cb1-29">                older <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> losses[:<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(losses) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> losses</span>
+<span id="cb1-30">                logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"train/loss_spike_ratio"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb1-31">                    np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>(recent) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> np.mean(older)</span>
+<span id="cb1-32">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> older <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span></span>
+<span id="cb1-33">                )</span></code></pre></div></div>
+</details>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Loss variance increasing</strong>: The optimisation is becoming unstable. Consider reducing learning rate.</li>
+<li><strong>Loss trend flattening while absolute loss is still high</strong>: You’ve hit a plateau. Either the learning rate is too low, or you’ve exhausted what this architecture can learn from this data.</li>
+<li><strong>Loss spike ratio &gt; 2.0</strong>: Something dramatic happened. Check for data corruption, gradient explosion or memory issues.</li>
+<li><strong>Eval loss diverging from train loss</strong>: The classic overfitting signal, but in LoRA training this can also indicate that your adapter rank is too high for your dataset size.</li>
+</ul>
+<div id="cell-fig-loss-diagnostics" class="cell" data-fig-height="8" data-fig-width="10" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-loss-diagnostics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loss-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-loss-diagnostics-output-1.png" width="952" height="759" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loss-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training looks like.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Sometimes, such visual guides note the existence of a pattern they call a ‘stuck loss curve’. This is essentially a perfectly fine ‘done’ loss curve (i.e.&nbsp;flat loss) with very high variance. It <em>is</em> pathological, but it’s just a special case of increasing variance, and in my view, shouldn’t be a category of its own.</p>
+</div></div></section>
+<section id="instrument-2-gradient-histograms" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-2-gradient-histograms">Instrument 2: gradient histograms</h2>
+<p>A single gradient norm scalar tells you almost nothing. What you actually want is the <em>distribution</em> of gradients across your parameters. Weights &amp; Biases can log histograms natively, and you should take advantage of this wherever possible, but it’s important you understand what to look for.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Gradient histograms are one of the most underused diagnostic tools in deep learning. A single glance at the distribution shape tells you more than a hundred scalar metrics. The problem is, they take a lot of experience to interpret. WandB has done the world a massive service with making them pop out of the box by default if you configure it mostly the right way, but knowing what to look for is another matter entirely. There are relatively few good heuristics for what good and bad gradient distributions look like, and I’ve seen more disagreement among perfectly competent practitioners on this topic than almost any other.</p>
+</div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="9ce50290" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Parameter-wise gradient histogram logging</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> GradientHistogramCallback(TrainerCallback):</span>
+<span id="cb2-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Log parameter-wise gradient histograms to wandb."""</span></span>
+<span id="cb2-3"></span>
+<span id="cb2-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, log_every_n_steps: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>):</span>
+<span id="cb2-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> log_every_n_steps</span>
+<span id="cb2-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb2-7"></span>
+<span id="cb2-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_pre_optimizer_step(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb2-9">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Capture gradients before optimizer.step() clears them."""</span></span>
+<span id="cb2-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-11">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb2-12">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb2-13">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> model <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb2-14">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb2-15"></span>
+<span id="cb2-16">        <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> wandb</span>
+<span id="cb2-17"></span>
+<span id="cb2-18">        histograms <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb2-19">        stats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb2-20"></span>
+<span id="cb2-21">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> name, param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.named_parameters():</span>
+<span id="cb2-22">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> param.grad <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb2-23">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">continue</span></span>
+<span id="cb2-24"></span>
+<span id="cb2-25">            grad <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> param.grad.detach().flatten().cpu().numpy()</span>
+<span id="cb2-26">            short_name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>._simplify_name(name)</span>
+<span id="cb2-27"></span>
+<span id="cb2-28">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Log histogram to wandb</span></span>
+<span id="cb2-29">            histograms[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"gradients/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>short_name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> wandb.Histogram(grad)</span>
+<span id="cb2-30"></span>
+<span id="cb2-31">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Also log summary statistics</span></span>
+<span id="cb2-32">            stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"grad_stats/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>short_name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/mean"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(np.mean(grad))</span>
+<span id="cb2-33">            stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"grad_stats/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>short_name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/std"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(np.std(grad))</span>
+<span id="cb2-34">            stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"grad_stats/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>short_name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/max"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>(np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>(grad)))</span>
+<span id="cb2-35">            stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"grad_stats/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>short_name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/sparsity"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(</span>
+<span id="cb2-36">                np.mean(np.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">abs</span>(grad) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-8</span>)</span>
+<span id="cb2-37">            )</span>
+<span id="cb2-38"></span>
+<span id="cb2-39">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> wandb.run <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb2-40">            wandb.log({<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>histograms, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>stats})</span>
+<span id="cb2-41"></span>
+<span id="cb2-42">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> _simplify_name(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, name: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>:</span>
+<span id="cb2-43">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Simplify parameter name for readable logging."""</span></span>
+<span id="cb2-44">        parts <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"."</span>)</span>
+<span id="cb2-45">        simplified <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb2-46">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> p <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> parts:</span>
+<span id="cb2-47">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> p.isdigit():</span>
+<span id="cb2-48">                simplified.append(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"L</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb2-49">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">elif</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lora"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> p.lower():</span>
+<span id="cb2-50">                simplified.append(p.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>))</span>
+<span id="cb2-51">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">elif</span> p <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> (<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"q_proj"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"k_proj"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"v_proj"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"o_proj"</span>):</span>
+<span id="cb2-52">                simplified.append(p.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_proj"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>))</span>
+<span id="cb2-53">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_"</span>.join(simplified) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> simplified <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> name[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>:]</span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-gradient-histograms" class="cell" data-fig-height="10" data-fig-width="10" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div id="fig-gradient-histograms" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gradient-histograms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-gradient-histograms-output-1.png" width="874" height="841" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gradient-histograms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, gradient values on y-axis, density as colour.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Distribution collapsing to a spike at zero</strong>: Vanishing gradients. Your model has stopped learning, often because of dying ReLUs, excessive regularisation or a learning rate that’s far too low.</li>
+<li><strong>Fat tails extending far from zero</strong>: Exploding gradients. Even if the mean looks fine, occasional extreme values will destabilise training. Gradient clipping can help, but investigate the root cause.</li>
+<li><strong>Different layers having wildly different spreads</strong>: Layer imbalance. Early layers dominating late layers (or vice versa) indicates poor initialisation or the need for layer-wise learning rate scaling.</li>
+<li><strong>Bimodal or multimodal distributions</strong>: Often indicates that different parameter groups (e.g.&nbsp;attention vs MLP, or LoRA A vs B matrices) are learning at very different rates. Not always bad, but worth investigating.</li>
+</ul>
+</section>
+<section id="instrument-3-learning-rate-dynamics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-3-learning-rate-dynamics">Instrument 3: learning rate dynamics</h2>
+<p>The learning rate schedule is decided before training, so why monitor it? Because what matters isn’t what you <em>planned</em> but what <em>actually happened</em>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
+</div></div><div id="2440c4c1" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Learning rate monitoring with phase detection</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> LearningRateMonitor(TrainerCallback):</span>
+<span id="cb3-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Track effective learning rate and detect phase transitions."""</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb3-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.lr_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb3-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"warmup"</span></span>
+<span id="cb3-7"></span>
+<span id="cb3-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_step_end(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb3-9">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Get current learning rate from optimizer</span></span>
+<span id="cb3-10">        lr <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> state.learning_rate <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">hasattr</span>(state, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"learning_rate"</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb3-11"></span>
+<span id="cb3-12">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> lr <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb3-13">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.lr_history.append(lr)</span>
+<span id="cb3-14"></span>
+<span id="cb3-15">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Detect phase transitions</span></span>
+<span id="cb3-16">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.lr_history) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:</span>
+<span id="cb3-17">                recent <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.lr_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:]</span>
+<span id="cb3-18">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">all</span>(recent[i] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> recent[i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(recent)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)):</span>
+<span id="cb3-19">                    new_phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"decay"</span></span>
+<span id="cb3-20">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">elif</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">all</span>(recent[i] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> recent[i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(recent)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)):</span>
+<span id="cb3-21">                    new_phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"warmup"</span></span>
+<span id="cb3-22">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb3-23">                    new_phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"peak"</span></span>
+<span id="cb3-24"></span>
+<span id="cb3-25">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> new_phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.phase:</span>
+<span id="cb3-26">                    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"LR phase transition: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>phase<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> -&gt; </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>new_phase<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb3-27">                    <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.phase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
+</details>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Warmup too short</strong>: If your loss is unstable in the first few hundred steps, you probably needed more warmup.</li>
+<li><strong>Peak learning rate never reached</strong>: This happens with some schedulers when total steps are miscalculated. The training never operates at full learning rate.</li>
+<li><strong>Learning rate effectively zero before training ends</strong>: Overly aggressive decay. Your final epochs are wasted.</li>
+</ul>
+</section>
+<section id="instrument-4-attention-entropy" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-4-attention-entropy">Instrument 4: attention entropy</h2>
+<p>This is where we leave the standard metrics behind. Yes, histograms are art, loss landscapes are science, but attention entropy is where we begin to get into chef’s kiss territory.</p>
+<p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
+<p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
+<p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
+<div id="7969ce91" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Attention entropy monitoring</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> torch</span>
+<span id="cb4-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> torch.nn.functional <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> F</span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> AttentionEntropyCallback(TrainerCallback):</span>
+<span id="cb4-5">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor attention pattern entropy during training."""</span></span>
+<span id="cb4-6"></span>
+<span id="cb4-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, log_every_n_steps: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, num_heads_to_sample: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>):</span>
+<span id="cb4-8">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> log_every_n_steps</span>
+<span id="cb4-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.num_heads_to_sample <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> num_heads_to_sample</span>
+<span id="cb4-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb4-11"></span>
+<span id="cb4-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> compute_entropy(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, attn_weights: torch.Tensor) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>:</span>
+<span id="cb4-13">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Compute entropy of attention distribution."""</span></span>
+<span id="cb4-14">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># attn_weights: [batch, heads, seq, seq]</span></span>
+<span id="cb4-15">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Normalise to valid probability distribution</span></span>
+<span id="cb4-16">        attn_probs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> F.softmax(attn_weights, dim<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-17"></span>
+<span id="cb4-18">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compute entropy: -sum(p * log(p))</span></span>
+<span id="cb4-19">        entropy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>torch.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>(</span>
+<span id="cb4-20">            attn_probs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> torch.log(attn_probs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-10</span>), dim<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb4-21">        )</span>
+<span id="cb4-22"></span>
+<span id="cb4-23">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> entropy.mean().item()</span>
+<span id="cb4-24"></span>
+<span id="cb4-25">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_step_end(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb4-26">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb4-27">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb4-28">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb4-29"></span>
+<span id="cb4-30">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Hook to capture attention weights during forward pass</span></span>
+<span id="cb4-31">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Implementation depends on model architecture</span></span>
+<span id="cb4-32">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This is a simplified example</span></span>
+<span id="cb4-33"></span>
+<span id="cb4-34">        entropy_stats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb4-35">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"attention/mean_entropy"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>._get_mean_entropy(model),</span>
+<span id="cb4-36">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"attention/entropy_variance"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>._get_entropy_variance(model),</span>
+<span id="cb4-37">        }</span>
+<span id="cb4-38"></span>
+<span id="cb4-39">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Log metrics</span></span>
+<span id="cb4-40">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">hasattr</span>(state, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_history"</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> state.log_history:</span>
+<span id="cb4-41">            state.log_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].update(entropy_stats)</span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-attention-entropy" class="cell" data-fig-height="8" data-fig-width="10" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-attention-entropy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-attention-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-attention-entropy-output-1.png" width="951" height="759" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-attention-entropy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-head variance (dashed) reveal different pathologies.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Attention entropy collapsing towards zero</strong>: The model is attending to single tokens almost exclusively. This is often a sign of attention sink formation or degenerate patterns.</li>
+<li><strong>Attention entropy increasing unboundedly</strong>: The model is spreading attention uniformly – essentially not learning to focus. This can indicate that your task doesn’t require sequence understanding, or that something is wrong with positional encoding.</li>
+<li><strong>Sudden entropy changes mid-training</strong>: Phase transitions in what the model is learning. Not necessarily bad, but worth investigating. <em>When</em> exactly this is okay depends to a great extent on your task – and the answer may often enough be “never”. I see this a lot when we’re fine-tuning time series type transformers for semi-periodic signals. It’s okay for the model to have some attention entropy to see various scales of periodicities, but not essentially for it to blow up unboundedly.</li>
+</ul>
+</section>
+<section id="instrument-5-generation-quality-samples" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
+<p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
+<div id="96bcc155" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Periodic generation sampling</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> GenerationSamplerCallback(TrainerCallback):</span>
+<span id="cb5-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Generate samples periodically during training."""</span></span>
+<span id="cb5-3"></span>
+<span id="cb5-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb5-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>,</span>
+<span id="cb5-6">        tokenizer,</span>
+<span id="cb5-7">        eval_prompts: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>],</span>
+<span id="cb5-8">        log_every_n_steps: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>,</span>
+<span id="cb5-9">        max_new_tokens: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>,</span>
+<span id="cb5-10">    ):</span>
+<span id="cb5-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokenizer <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tokenizer</span>
+<span id="cb5-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_prompts <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> eval_prompts</span>
+<span id="cb5-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> log_every_n_steps</span>
+<span id="cb5-14">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.max_new_tokens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> max_new_tokens</span>
+<span id="cb5-15">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb5-16">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.generation_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-17"></span>
+<span id="cb5-18">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_step_end(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb5-19">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb5-20">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb5-21">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb5-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> model <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb5-23">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb5-24"></span>
+<span id="cb5-25">        model.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">eval</span>()</span>
+<span id="cb5-26">        samples <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb5-27"></span>
+<span id="cb5-28">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> prompt <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_prompts[:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]:  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sample first 3 prompts</span></span>
+<span id="cb5-29">            inputs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokenizer(</span>
+<span id="cb5-30">                prompt,</span>
+<span id="cb5-31">                return_tensors<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pt"</span></span>
+<span id="cb5-32">            ).to(model.device)</span>
+<span id="cb5-33"></span>
+<span id="cb5-34">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> torch.no_grad():</span>
+<span id="cb5-35">                outputs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.generate(</span>
+<span id="cb5-36">                    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>inputs,</span>
+<span id="cb5-37">                    max_new_tokens<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.max_new_tokens,</span>
+<span id="cb5-38">                    temperature<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>,</span>
+<span id="cb5-39">                    do_sample<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb5-40">                    pad_token_id<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokenizer.pad_token_id,</span>
+<span id="cb5-41">                )</span>
+<span id="cb5-42"></span>
+<span id="cb5-43">            generated <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokenizer.decode(</span>
+<span id="cb5-44">                outputs[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>][inputs.input_ids.shape[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]:],</span>
+<span id="cb5-45">                skip_special_tokens<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span>
+<span id="cb5-46">            )</span>
+<span id="cb5-47">            samples.append({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"prompt"</span>: prompt, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"generation"</span>: generated})</span>
+<span id="cb5-48"></span>
+<span id="cb5-49">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.generation_history.append({</span>
+<span id="cb5-50">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"step"</span>: <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count,</span>
+<span id="cb5-51">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"samples"</span>: samples</span>
+<span id="cb5-52">        })</span>
+<span id="cb5-53"></span>
+<span id="cb5-54">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Log to wandb as table</span></span>
+<span id="cb5-55">        <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> wandb</span>
+<span id="cb5-56">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> wandb.run <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb5-57">            table <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> wandb.Table(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"step"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"prompt"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"generation"</span>])</span>
+<span id="cb5-58">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> sample <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> samples:</span>
+<span id="cb5-59">                table.add_data(</span>
+<span id="cb5-60">                    <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count,</span>
+<span id="cb5-61">                    sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"prompt"</span>][:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>],</span>
+<span id="cb5-62">                    sample[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"generation"</span>][:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>]</span>
+<span id="cb5-63">                )</span>
+<span id="cb5-64">            wandb.log({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"generation_samples"</span>: table})</span>
+<span id="cb5-65"></span>
+<span id="cb5-66">        model.train()</span></code></pre></div></div>
+</details>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Repetition loops</strong>: The model gets stuck repeating phrases. Often indicates a temperature or sampling problem, but can also signal training issues.</li>
+<li><strong>Hallucination of training data</strong>: The model regurgitates training examples verbatim. You’re overfitting.</li>
+<li><strong>Format drift</strong>: The model’s output format changes during training. If you’re fine-tuning for a specific format, monitor for deviations.</li>
+<li><strong>Coherence deterioration</strong>: Early generations are coherent, later ones are not. Catastrophic forgetting in progress.</li>
+</ul>
+</section>
+<section id="instrument-6-lora-adapter-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-6-lora-adapter-diagnostics">Instrument 6: LoRA adapter diagnostics</h2>
+<p>When training LoRAs, it’s crucial to monitor the behaviour of the adapter weights themselves. Their norms, effective ranks and relative changes can reveal whether the adapters are learning effectively or diverging. In particular, they are a crucial health check on our assumption about rank.</p>
+<p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
+<p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
+<p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
+<div id="560fb4b7" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>LoRA-specific monitoring</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> LoRADiagnosticsCallback(TrainerCallback):</span>
+<span id="cb6-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor LoRA adapter-specific metrics."""</span></span>
+<span id="cb6-3"></span>
+<span id="cb6-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, log_every_n_steps: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>):</span>
+<span id="cb6-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> log_every_n_steps</span>
+<span id="cb6-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb6-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb6-8"></span>
+<span id="cb6-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_step_end(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb6-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb6-11">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb6-12">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb6-13">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> model <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb6-14">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb6-15"></span>
+<span id="cb6-16">        lora_stats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb6-17"></span>
+<span id="cb6-18">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> name, param <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> model.named_parameters():</span>
+<span id="cb6-19">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lora_"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> name.lower():</span>
+<span id="cb6-20">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">continue</span></span>
+<span id="cb6-21"></span>
+<span id="cb6-22">            weight <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> param.detach()</span>
+<span id="cb6-23"></span>
+<span id="cb6-24">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Basic statistics</span></span>
+<span id="cb6-25">            norm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> weight.norm().item()</span>
+<span id="cb6-26">            lora_stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"lora/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/norm"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> norm</span>
+<span id="cb6-27"></span>
+<span id="cb6-28">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Effective rank (for lora_A and lora_B)</span></span>
+<span id="cb6-29">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(weight.shape) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>:</span>
+<span id="cb6-30">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb6-31">                    s <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.linalg.svdvals(weight.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>())</span>
+<span id="cb6-32">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Effective rank: how many singular values matter</span></span>
+<span id="cb6-33">                    s_normalized <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> s <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> s.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb6-34">                    entropy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>torch.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>(</span>
+<span id="cb6-35">                        s_normalized <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> torch.log(s_normalized <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-10</span>)</span>
+<span id="cb6-36">                    )</span>
+<span id="cb6-37">                    effective_rank <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> torch.exp(entropy).item()</span>
+<span id="cb6-38">                    lora_stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"lora/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/effective_rank"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> effective_rank</span>
+<span id="cb6-39">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span>:</span>
+<span id="cb6-40">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">pass</span></span>
+<span id="cb6-41"></span>
+<span id="cb6-42">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Track relative change from initialisation</span></span>
+<span id="cb6-43">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb6-44">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb6-45">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> name <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">not</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms:</span>
+<span id="cb6-46">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms[name] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> norm</span>
+<span id="cb6-47">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb6-48">                relative_change <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (norm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms[name]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (</span>
+<span id="cb6-49">                    <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.initial_norms[name] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-10</span></span>
+<span id="cb6-50">                )</span>
+<span id="cb6-51">                lora_stats[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"lora/</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/relative_change"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> relative_change</span>
+<span id="cb6-52"></span>
+<span id="cb6-53">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Aggregate metrics</span></span>
+<span id="cb6-54">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> lora_stats:</span>
+<span id="cb6-55">            norms <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [v <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> k, v <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> lora_stats.items() <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/norm"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> k]</span>
+<span id="cb6-56">            lora_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lora/mean_norm"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.mean(norms)</span>
+<span id="cb6-57">            lora_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lora/norm_variance"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.var(norms)</span>
+<span id="cb6-58"></span>
+<span id="cb6-59">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">hasattr</span>(state, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_history"</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> state.log_history:</span>
+<span id="cb6-60">            state.log_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].update(lora_stats)</span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-lora-diagnostics" class="cell" data-fig-height="9" data-fig-width="10" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-lora-diagnostics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lora-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-lora-diagnostics-output-1.png" width="952" height="855" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lora-diagnostics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health (top row), singular value spectra reveal rank utilisation (bottom row).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Adapter norms exploding</strong>: The LoRA weights are growing too large. Either your learning rate is too high, or there’s a mismatch between your LoRA rank and the task complexity.</li>
+<li><strong>Effective rank much lower than configured rank</strong>: You’ve over-specified. Consider reducing the LoRA rank to save memory and potentially improve generalisation.</li>
+<li><strong>Effective rank at maximum</strong>: Your rank might be too low. The adapter is using all its capacity.</li>
+<li><strong>Large variance in norms across layers</strong>: Some layers are learning much more than others. This is often fine, but extreme variance can indicate problems.</li>
+</ul>
+</section>
+<section id="instrument-7-compute-efficiency" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-7-compute-efficiency">Instrument 7: compute efficiency</h2>
+<p>Training efficiency metrics are often overlooked in research contexts but are critical for production training.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
+</div></div><div id="f3c0e6e6" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Compute efficiency monitoring</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> time</span>
+<span id="cb7-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> psutil</span>
+<span id="cb7-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> GPUtil</span>
+<span id="cb7-4"></span>
+<span id="cb7-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> ComputeEfficiencyCallback(TrainerCallback):</span>
+<span id="cb7-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor training throughput and resource utilisation."""</span></span>
+<span id="cb7-7"></span>
+<span id="cb7-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, log_every_n_steps: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>):</span>
+<span id="cb7-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> log_every_n_steps</span>
+<span id="cb7-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb7-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb7-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_tokens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb7-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokens_per_step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb7-14"></span>
+<span id="cb7-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_train_begin(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb7-16">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb7-17"></span>
+<span id="cb7-18">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_step_end(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb7-19">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb7-20">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.step_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb7-21">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb7-22"></span>
+<span id="cb7-23">        current_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> time.time()</span>
+<span id="cb7-24">        elapsed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> current_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_time <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_time <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span></span>
+<span id="cb7-25"></span>
+<span id="cb7-26">        efficiency_stats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb7-27"></span>
+<span id="cb7-28">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Throughput</span></span>
+<span id="cb7-29">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokens_per_step:</span>
+<span id="cb7-30">            tokens_processed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.tokens_per_step <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps</span>
+<span id="cb7-31">            efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/tokens_per_second"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tokens_processed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> elapsed</span>
+<span id="cb7-32">            efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/steps_per_second"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.log_every_n_steps <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> elapsed</span>
+<span id="cb7-33"></span>
+<span id="cb7-34">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># GPU utilisation</span></span>
+<span id="cb7-35">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">try</span>:</span>
+<span id="cb7-36">            gpus <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> GPUtil.getGPUs()</span>
+<span id="cb7-37">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> gpus:</span>
+<span id="cb7-38">                gpu <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gpus[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb7-39">                efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/gpu_utilisation"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gpu.load <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb7-40">                efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/gpu_memory_used_gb"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gpu.memoryUsed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span></span>
+<span id="cb7-41">                efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/gpu_memory_pct"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb7-42">                    gpu.memoryUsed <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> gpu.memoryTotal <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb7-43">                )</span>
+<span id="cb7-44">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">except</span>:</span>
+<span id="cb7-45">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">pass</span></span>
+<span id="cb7-46"></span>
+<span id="cb7-47">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># CPU and system memory</span></span>
+<span id="cb7-48">        efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/cpu_percent"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> psutil.cpu_percent()</span>
+<span id="cb7-49">        memory <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> psutil.virtual_memory()</span>
+<span id="cb7-50">        efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/ram_used_gb"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> memory.used <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1024</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb7-51">        efficiency_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"efficiency/ram_percent"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> memory.percent</span>
+<span id="cb7-52"></span>
+<span id="cb7-53">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">hasattr</span>(state, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_history"</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> state.log_history:</span>
+<span id="cb7-54">            state.log_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].update(efficiency_stats)</span>
+<span id="cb7-55"></span>
+<span id="cb7-56">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.last_time <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> current_time</span></code></pre></div></div>
+</details>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>GPU utilisation below 80%</strong>: You’re bottlenecked somewhere else (data loading, CPU preprocessing). Increase <code>dataloader_num_workers</code> or enable <code>pin_memory</code>.</li>
+<li><strong>Tokens per second declining over time</strong>: Memory fragmentation or garbage collection pressure. Consider periodic garbage collection calls.</li>
+<li><strong>GPU memory usage climbing</strong>: Memory leak, often from gradient accumulation bugs or improper tensor handling in callbacks.</li>
+<li><strong>Sudden throughput drops</strong>: I/O problems, often when the training hits a slow region of the data (e.g., longer sequences).</li>
+</ul>
+</section>
+<section id="instrument-8-convergence-detection" class="level2">
+<h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
+<p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
+<div id="d99647e8" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Early stopping with convergence detection</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> ConvergenceDetector(TrainerCallback):</span>
+<span id="cb8-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Detect convergence and potential overfitting."""</span></span>
+<span id="cb8-3"></span>
+<span id="cb8-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb8-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>,</span>
+<span id="cb8-6">        patience: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,</span>
+<span id="cb8-7">        min_delta: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>,</span>
+<span id="cb8-8">        divergence_threshold: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>,</span>
+<span id="cb8-9">    ):</span>
+<span id="cb8-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.patience <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> patience</span>
+<span id="cb8-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.min_delta <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> min_delta</span>
+<span id="cb8-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.divergence_threshold <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> divergence_threshold</span>
+<span id="cb8-13"></span>
+<span id="cb8-14">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.best_eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'inf'</span>)</span>
+<span id="cb8-15">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs_without_improvement <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb8-16">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb8-17">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_losses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb8-18"></span>
+<span id="cb8-19">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_evaluate(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, metrics<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb8-20">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> metrics <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb8-21">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb8-22"></span>
+<span id="cb8-23">        eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> metrics.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"eval_loss"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'inf'</span>))</span>
+<span id="cb8-24">        train_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> metrics.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"train_loss"</span>, state.log_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"loss"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span>
+<span id="cb8-25"></span>
+<span id="cb8-26">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses.append(train_loss)</span>
+<span id="cb8-27">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_losses.append(eval_loss)</span>
+<span id="cb8-28"></span>
+<span id="cb8-29">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Log convergence metrics</span></span>
+<span id="cb8-30">        convergence_stats <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {}</span>
+<span id="cb8-31"></span>
+<span id="cb8-32">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Check for improvement</span></span>
+<span id="cb8-33">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.best_eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.min_delta:</span>
+<span id="cb8-34">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.best_eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> eval_loss</span>
+<span id="cb8-35">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs_without_improvement <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb8-36">            convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/improving"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb8-37">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb8-38">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs_without_improvement <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb8-39">            convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/improving"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb8-40"></span>
+<span id="cb8-41">        convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/patience_remaining"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (</span>
+<span id="cb8-42">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.patience <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs_without_improvement</span>
+<span id="cb8-43">        )</span>
+<span id="cb8-44"></span>
+<span id="cb8-45">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Check for overfitting (eval loss diverging from train loss)</span></span>
+<span id="cb8-46">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_losses) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:</span>
+<span id="cb8-47">            gap <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> eval_loss <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> train_loss</span>
+<span id="cb8-48">            prev_gap <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.eval_losses[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.train_losses[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]</span>
+<span id="cb8-49">            gap_increase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gap <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> prev_gap</span>
+<span id="cb8-50"></span>
+<span id="cb8-51">            convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/train_eval_gap"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gap</span>
+<span id="cb8-52">            convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/gap_velocity"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gap_increase</span>
+<span id="cb8-53"></span>
+<span id="cb8-54">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> gap_increase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.divergence_threshold:</span>
+<span id="cb8-55">                convergence_stats[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"convergence/overfitting_warning"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb8-56">                <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"WARNING: Potential overfitting detected. Gap increase: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>gap_increase<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb8-57"></span>
+<span id="cb8-58">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Log metrics</span></span>
+<span id="cb8-59">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">hasattr</span>(state, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_history"</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">and</span> state.log_history:</span>
+<span id="cb8-60">            state.log_history[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>].update(convergence_stats)</span>
+<span id="cb8-61"></span>
+<span id="cb8-62">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Trigger early stopping</span></span>
+<span id="cb8-63">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.epochs_without_improvement <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.patience:</span>
+<span id="cb8-64">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Early stopping triggered after </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>patience<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> evaluations without improvement"</span>)</span>
+<span id="cb8-65">            control.should_training_stop <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span></span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-convergence-detection" class="cell" data-fig-height="8" data-fig-width="10" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div id="fig-convergence-detection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-convergence-detection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-convergence-detection-output-1.png" width="952" height="759" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convergence-detection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should have stopped earlier).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Train-eval gap increasing</strong>: Classic overfitting. Stop training or increase regularisation.</li>
+<li><strong>Both losses plateauing</strong>: You’ve reached the model’s capacity on this task. More training won’t help.</li>
+<li><strong>Eval loss increasing while train loss decreases</strong>: Severe overfitting. You should have stopped earlier.</li>
+<li><strong>Oscillating eval loss</strong>: Learning rate too high for the current phase of training.</li>
+</ul>
+</section>
+<section id="putting-it-all-together" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>The eight instruments we’ve covered form a complete picture of your training run:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 33%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Instrument</th>
+<th>What it tells you</th>
+<th>Failure mode it catches</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Loss landscape</td>
+<td>Optimisation progress</td>
+<td>Instability, plateaus</td>
+</tr>
+<tr class="even">
+<td>Gradient health</td>
+<td>Learning signal quality</td>
+<td>Vanishing/exploding gradients</td>
+</tr>
+<tr class="odd">
+<td>Learning rate</td>
+<td>Schedule execution</td>
+<td>Misconfigured schedules</td>
+</tr>
+<tr class="even">
+<td>Attention entropy</td>
+<td>Model focus patterns</td>
+<td>Attention collapse, degeneration</td>
+</tr>
+<tr class="odd">
+<td>Generation samples</td>
+<td>Output quality</td>
+<td>Qualitative failures</td>
+</tr>
+<tr class="even">
+<td>LoRA diagnostics</td>
+<td>Adapter behaviour</td>
+<td>Rank mismatch, weight explosion</td>
+</tr>
+<tr class="odd">
+<td>Compute efficiency</td>
+<td>Resource utilisation</td>
+<td>Bottlenecks, memory leaks</td>
+</tr>
+<tr class="even">
+<td>Convergence detection</td>
+<td>When to stop</td>
+<td>Overfitting, wasted compute</td>
+</tr>
+</tbody>
+</table>
+<p>In a production setting, I recommend implementing all eight and setting up alerts for the key failure modes. A good heuristic: if any of these metrics deviate by more than two standard deviations from their moving average, that warrants investigation.<sup>5</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;This is crude but effective. More sophisticated anomaly detection is possible but often unnecessary for catching the failures that actually occur in practice.</p></div></div></section>
+<section id="the-wandb-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
+<p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
+<div id="67a745b1" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Complete training configuration with all monitors</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> transformers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> TrainingArguments, Trainer</span>
+<span id="cb9-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> trl <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> SFTTrainer</span>
+<span id="cb9-3"></span>
+<span id="cb9-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> create_monitored_trainer(</span>
+<span id="cb9-5">    model,</span>
+<span id="cb9-6">    tokenizer,</span>
+<span id="cb9-7">    train_dataset,</span>
+<span id="cb9-8">    eval_dataset,</span>
+<span id="cb9-9">    output_dir: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"./output"</span>,</span>
+<span id="cb9-10">    eval_prompts: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb9-11">) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> SFTTrainer:</span>
+<span id="cb9-12">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Create a fully instrumented SFT trainer."""</span></span>
+<span id="cb9-13"></span>
+<span id="cb9-14">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Training arguments with comprehensive logging</span></span>
+<span id="cb9-15">    training_args <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> TrainingArguments(</span>
+<span id="cb9-16">        output_dir<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>output_dir,</span>
+<span id="cb9-17">        num_train_epochs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,</span>
+<span id="cb9-18">        per_device_train_batch_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,</span>
+<span id="cb9-19">        gradient_accumulation_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,</span>
+<span id="cb9-20">        learning_rate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2e-4</span>,</span>
+<span id="cb9-21">        lr_scheduler_type<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cosine"</span>,</span>
+<span id="cb9-22">        warmup_ratio<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>,</span>
+<span id="cb9-23"></span>
+<span id="cb9-24">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Logging configuration</span></span>
+<span id="cb9-25">        logging_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>,</span>
+<span id="cb9-26">        logging_first_step<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb9-27">        report_to<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wandb"</span>,</span>
+<span id="cb9-28"></span>
+<span id="cb9-29">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Evaluation</span></span>
+<span id="cb9-30">        eval_strategy<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"steps"</span>,</span>
+<span id="cb9-31">        eval_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>,</span>
+<span id="cb9-32">        save_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>,</span>
+<span id="cb9-33"></span>
+<span id="cb9-34">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Performance</span></span>
+<span id="cb9-35">        bf16<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb9-36">        dataloader_num_workers<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,</span>
+<span id="cb9-37">        dataloader_pin_memory<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>,</span>
+<span id="cb9-38">    )</span>
+<span id="cb9-39"></span>
+<span id="cb9-40">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Assemble callbacks</span></span>
+<span id="cb9-41">    callbacks <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb9-42">        LossLandscapeCallback(window_size<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>),</span>
+<span id="cb9-43">        GradientHealthCallback(log_every_n_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>),</span>
+<span id="cb9-44">        LearningRateMonitor(),</span>
+<span id="cb9-45">        AttentionEntropyCallback(log_every_n_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>),</span>
+<span id="cb9-46">        LoRADiagnosticsCallback(log_every_n_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>),</span>
+<span id="cb9-47">        ComputeEfficiencyCallback(log_every_n_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>),</span>
+<span id="cb9-48">        ConvergenceDetector(patience<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, min_delta<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.001</span>),</span>
+<span id="cb9-49">    ]</span>
+<span id="cb9-50"></span>
+<span id="cb9-51">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Add generation sampler if eval prompts provided</span></span>
+<span id="cb9-52">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> eval_prompts:</span>
+<span id="cb9-53">        callbacks.append(</span>
+<span id="cb9-54">            GenerationSamplerCallback(</span>
+<span id="cb9-55">                tokenizer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>tokenizer,</span>
+<span id="cb9-56">                eval_prompts<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>eval_prompts,</span>
+<span id="cb9-57">                log_every_n_steps<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">500</span>,</span>
+<span id="cb9-58">            )</span>
+<span id="cb9-59">        )</span>
+<span id="cb9-60"></span>
+<span id="cb9-61">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span> SFTTrainer(</span>
+<span id="cb9-62">        model<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>model,</span>
+<span id="cb9-63">        tokenizer<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>tokenizer,</span>
+<span id="cb9-64">        train_dataset<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>train_dataset,</span>
+<span id="cb9-65">        eval_dataset<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>eval_dataset,</span>
+<span id="cb9-66">        args<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>training_args,</span>
+<span id="cb9-67">        callbacks<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>callbacks,</span>
+<span id="cb9-68">    )</span></code></pre></div></div>
+</details>
+</div>
+</section>
+<section id="reading-the-dashboard" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="reading-the-dashboard">Reading the dashboard</h2>
+<p>Knowing what to log is only half the battle. The other half is knowing what you’re looking at.</p>
+<p>I recommend organising your wandb dashboard into four panels:</p>
+<ol type="1">
+<li><strong>Primary metrics</strong>: Train loss, eval loss, learning rate. The overview.</li>
+<li><strong>Health indicators</strong>: Gradient norm, attention entropy, convergence status. The vital signs.</li>
+<li><strong>Efficiency metrics</strong>: Tokens/sec, GPU utilisation, memory. The resource gauge.</li>
+<li><strong>Deep diagnostics</strong>: Per-layer gradients, LoRA norms, generation samples. The detailed view.</li>
+</ol>
+<p>Start each monitoring session by glancing at panels 1 and 2. Only dive into 3 and 4 when something looks off.</p>
+<p>The most common failure patterns I see in practice:</p>
+<ul>
+<li><strong>Silent overfitting</strong>: Loss looks great, but generation quality is degrading. Always check the samples.</li>
+<li><strong>Efficiency death spiral</strong>: Throughput drops, memory climbs, eventually OOM. Often caused by a memory leak in a custom callback.</li>
+<li><strong>Attention collapse</strong>: Happens gradually, then suddenly. The attention entropy instrument catches this before it becomes catastrophic.</li>
+<li><strong>Gradient starvation in later layers</strong>: Early layers learn, later layers don’t. Per-layer gradient monitoring reveals this immediately.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>These patterns often require monitoring multiple indicators simultaneously. No single metric tells the whole story.</p>
+<p>A beloved example of mine is GPU memory vs utilisation. It’s somewhat shocking how many otherwise competent engineers look at these in isolation. GPU utilisation going down is not necessarily a good sign. If memory usage is climbing and is approaching the top 10-15%, GPU utilisation and/or power draw going down is a three-alarm fire and a sign of impending OOM/collapse.</p>
+</div></div><div id="cell-fig-failure-patterns" class="cell" data-fig-height="10" data-fig-width="11" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div id="fig-failure-patterns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-failure-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index_files/figure-html/fig-failure-patterns-output-1.png" width="1052" height="951" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-failure-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Common failure patterns in practice: each requires monitoring multiple indicators simultaneously.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
+<p>This instrument cluster is designed for supervised fine-tuning of LoRA adapters – the most common post-training scenario. But the story doesn’t end here.</p>
+<p>In the next post, we’ll extend this framework to preference optimisation methods like DPO and GRPO. These introduce new failure modes: reward hacking, KL divergence explosion and the subtle art of balancing preference learning against capability preservation. The instrument cluster will need to grow.</p>
+<p>The third post will tackle specialised training for function calling, where the metrics of success are not just loss curves but format compliance, execution accuracy and the reliability that production systems demand.</p>
+<p>For now, the homework is straightforward: instrument your next fine-tuning run with all eight monitors. Watch what happens. Learn to read the dashboard. And when something goes wrong – as it inevitably will – you’ll have the forensic data to understand why.</p>
+<p>Happy post-training!</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {The Post-Training Instrument Cluster -\/- {Part} {I}},
+  date = {2025-12-25},
+  url = {https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
+-- Part I.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>LLMs</category>
+  <category>fine-tuning</category>
+  <category>MLOps</category>
+  <guid>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/</guid>
+  <pubDate>Thu, 25 Dec 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/failure_patterns.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Dorkestration</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -284,16 +3064,16 @@ font-style: inherit;">- </span>Report best configuration and provide config file
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
   author = {{Chris von Csefalvay}},
   title = {Dorkestration},
   date = {2025-12-15},
   url = {https://chrisvoncsefalvay.com/posts/dorkestration/},
+  doi = {10.59350/ddcq4-4na09},
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> December 15,
-2025. <a href="https://chrisvoncsefalvay.com/posts/dorkestration/">https://chrisvoncsefalvay.com/posts/dorkestration/</a>.
+Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> <a href="https://doi.org/10.59350/ddcq4-4na09">https://doi.org/10.59350/ddcq4-4na09</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>agentic AI</category>
@@ -3889,7 +6669,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-10221"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-10221").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-84554"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-84554").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -3987,7 +6767,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-41198"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-41198").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-69165"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-69165").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -4399,79 +7179,6 @@ Chris von Csefalvay. 2025. <span>“After Agents.”</span> <a href="https://chr
   <guid>https://chrisvoncsefalvay.com/posts/after-agents/</guid>
   <pubDate>Sat, 04 Jan 2025 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/after-agents/header.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Five unconventional predictions</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/five-wild-guesses/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>As I sit here at year’s end, I’m reminded of the ancient Swedish tradition of årsgång - the ritual winter walk taken on New Year’s Eve to divine the fortunes of the coming year. The practice required one to walk alone in complete silence, visiting places of significance while remaining carefully alert to any signs or omens.<sup>1</sup> While I may be rather ill-equipped for mystical midnight wanderings, I’ve spent enough time observing the enterprise AI space to develop my own form of augury.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I gather from time to time, certain mind-altering substances were involved.</p></div><div id="fn2"><p><sup>2</sup>&nbsp;Note that I did not come up with the idea of agentic AI – in fact, a good part of what I believe is that there’s much less novelty to agentic AI than some would like to pretend. Rather, my point was that this more mature framework of agents interacting with agents will dominate over simple human-machine interactions.</p></div></div><p><a href="http://localhost:5836/posts/team-of-rivals/">In 2023, I predicted the rise of agentic systems</a>, when chatbots were still seen as the dominant form of LLM usage.<sup>2</sup> What at the time felt like a wild-ass guess is now almost received wisdom. And thus, I will throw my customary conservatism and restraint to the wind and in the spirit of årsgång, let me share five predictions for 2025.</p>
-<section id="ai-governance-gets-productised" class="level2">
-<h2 class="anchored" data-anchor-id="ai-governance-gets-productised">AI governance gets productised</h2>
-<p>A few months ago, I shared a drink with an acquaintance whose work is in the Responsible AI field. It was pretty obvious he needed that drink a whole lot more than I needed my Diet Coke.</p>
-<p>“Nobody wants or needs us,” he bemoaned.</p>
-<p>“What are you talking about? Everybody is talking about Responsible AI and AI governance.” I was puzzled.</p>
-<p>“No, I meant <em>us</em>,” he pointed at himself. “They want the ideas, the manuals, the guidelines… just not the people. They want governance as a service.”</p>
-<p>Thinking back to several conversations I had this past year, I could see his point. There is plenty of interest in AI governance and Responsible AI, especially in the regulated sectors, where I spend most of my working (waking?) hours. This is unsurprising – even more in those sectors than any others, the success of GenAI initiatives hinges on regulatory tolerability to a fairly significant extent. But I hear much more enthusiasm for neatly packaged, productised, almost SaaS-like governance products than for Responsible AI as a function.</p>
-<p>And so, while everyone’s been politely nodding along to principles and frameworks for most of 2024, the conversations all seemed to end with the same question – “great, can I have this on a SaaS model?”. What’s emerging is a clear pattern: organizations want Responsible AI practices, but they want them delivered as a service. This is at least partly due to buyers’ perceptions that much of those practices sound lofty and abstract, when their main concern is keeping the board and the regulators happy. You can’t feed a starving belly with high-minded principles.</p>
-<p>We’re already seeing this in cloud providers are starting to package governance features, the rise of tools to facilitate this, and most tellingly, in how procurement departments are writing RFPs that specifically ask for such services in product-ish or service-ish terms – documents, procedures, TTPs and as-a-services. This shift signals the operationalisation of AI governance as it matures from theoretical frameworks to practical, subscription-based implementations. Because let’s face it: nothing says “we take ethics seriously” quite like a monthly fee.</p>
-<p>My bet is that by the time the new regulatory flora and fauna of AI that is slowly emerging comes to bear its first fruits (say, late 2025-early 2027), we’ll have entire platforms dedicated to automated governance, continuous monitoring and “RAI middleware” that sits between models and applications. The real winners will be those who can package the complex requirements of Responsible AI into digestible, subscription-based services that make compliance and governance feel as natural as running a CI/CD pipeline. And, of course, we’ll get a new buzzword out of it. I’ll go and grab the domains for “AIGovOps” after this, but I’m sure someone will come up with something even more cringe-worthy.</p>
-</section>
-<section id="small-is-beautiful-at-the-very-least-when-it-comes-to-language-models" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="small-is-beautiful-at-the-very-least-when-it-comes-to-language-models">Small is beautiful (at the very least when it comes to language models)</h2>
-<p>In a <a href="https://arxiv.org/abs/2402.10951">paper I published earlier in 2024</a>, I hijacked my audience for a few paragraphs’ worth of musings about the ethical, environmental, pragmatic and financial cases for small language models. At this time, one must recall, fine-tuning GPT models became feasible and, as it happens with AI hype, turned instantly into a status symbol. You know an industry has jumped the shark when you buy a night light, and it comes with a companion app with its own fine-tuned GPT. Just no.</p>
-<p>Fortunately, the arc of AI development has largely bent the other way – towards small language models (which I believe is the correct direction). Turns out not every task needs a model that’s read all of Wikipedia and can write Shakespearean sonnets about your cat. Instead, we’re seeing enterprises discover that they can develop small domain-specific models for even very specific sets of terminologies, with better results than the large generalist models, which can then be relegated to act as dispatchers over these specialists. LLMs will be the general practitioners, while SLMs will increasingly take the specialist’s role.</p>
-<p>It’s perhaps worth noting at this juncture that in AI, quantity has a quality all of its own. I’m somewhat reminded of a realisation that came to me this year when putting together a training plan. I hold multiple adaptive world records in a fairly esoteric sport called the SkiErg,<sup>3</sup> at distances ranging from 100m (the shortest distance eligible for a record) to marathons and half-marathons (the longest record-eligible distances). My heart is mostly with longer distances, so I had to put quite a bit of thought into figuring out how to train for shorter, explosive sprints. A 100m sprint is not just a ‘shorter 2k’. You need to approach it as a distance of its own, with its own challenges and merits. I was amused to see the same in SLMs – these aren’t pared-down LLMs. Successful SLMs are created as SLMs to begin with, not as reduced afterthoughts of larger models.<sup>4</sup> And so, just like I had to create a completely new training plan for sprint distances, SLM developers have to keep in mind that they’re not building LLMs writ small, but a different type of model with different desiderata.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Think of it as an indoor rower rotated by 90 degrees around its coronal plane, replicating not the ‘draw’ of rowing but the ‘pull’ of… something, I guess, having to do with skiing? <a href="https://www.concept2.com/ergs/skierg">Here’s a video.</a></p></div><div id="fn4"><p><sup>4</sup>&nbsp;That approach and attitude may be appropriate for quantisation, however, which is an entirely different story.</p></div></div><p>I expect we’ll see a proliferation of specialised SLMs in 2025, each trained on narrow domains but designed to work in concert. The art will be in the orchestration – how to route queries to the right specialist model, how to combine their outputs and how to maintain this constellation of smaller models efficiently. This parallels the evolution of microservices in software architecture, and we’re about to rediscover all the same lessons about service discovery, orchestration, and system design, but this time with AI models. The emergence of “ModelOps” is inevitable, and the best we can hope for is that we haven’t forgotten too much from last time.</p>
-</section>
-<section id="plot-twist-the-new-ai-kingmakers" class="level2">
-<h2 class="anchored" data-anchor-id="plot-twist-the-new-ai-kingmakers">Plot twist: the new AI kingmakers</h2>
-<p>Here’s a plot twist for 2025: your next AI project will likely live or die based on a decision made by some actuary who’s never written a line of code in their life. The insurance industry – that most conservative of institutions – may well become the de facto regulator of enterprise AI deployment. We’re already seeing the early signs in how cyber insurance policies are evolving to cover AI incidents, and how underwriters are starting to ask increasingly sophisticated questions about model governance and deployment practices. <a href="https://www.munichre.com/en/solutions/for-industry-clients/insure-ai/ai-self.html">Munich Re now offers AI insurance not only for commercial providers but also, essentially, in-house AI work</a>, and apparently, <a href="https://www.computerweekly.com/news/366586014/Munich-Re-sees-strong-growth-in-AI-insurance">business is booming</a>. Meanwhile, other insurers remain rather less sanguine. <a href="https://assets.lloyds.com/media/439566f8-e042-4f98-83e5-b430d358f297/Lloyds_Futureset_GenAI_Transforming_the_cyber_landscape.pdf">Lloyd’s commissioned a report last March</a> that is noticeably less upbeat. At least they didn’t compare it to asbestos.</p>
-<p>But AI insurance is coming, and it may well become the kingmaker of AI solutions. This will particularly affect the startup ecosystem, who often do not have the funds to pursue certification before pitching to clients. Alas, the cost of enterprise executives’ comfort that is bought by the availability of an insurance and indemnity policy is that market access will be rather less feasible for those who cannot obtain such insurance – who, paradoxically enough, are the ones who would need it most.</p>
-<p>And since that leaves insurers with a ‘shadow governance’ function, I can well imagine the insurance industry creating <em>de facto</em> standards for AI governance faster than any standards body or government regulator could dream of. And let’s be honest – the actuaries will probably do a better job than most regulators could anyway.</p>
-</section>
-<section id="cross-estate-ai-xeai-is-the-future" class="level2">
-<h2 class="anchored" data-anchor-id="cross-estate-ai-xeai-is-the-future">Cross Estate AI (XEAI) is the future</h2>
-<p>Agentic AI was an interesting development, but to me, that’s primarily about the <em>how</em>. The really interesting story is of the <em>what</em> – that is, of what we can do with agents that we couldn’t do without them. And by far one of the most interesting such applications is what I call Cross Estate AI (XEAI). In XEAI, information crosses boundaries between enterprises as AI agents from different places are composed together to build an agentic structure. Think of API calling, but for AI agents – and with way more sophistication. A company’s agentic model may reach out to multiple other companies that offer their own agents, and collaborate with them. We are now relatively comfortable with notions like our AI agents calling an external API – after all, REST API calling has been around for a long, long time. But my company’s AI agent ‘calling up’ a specialised AI agent from another company to, say, engage in a discussion to refine the wording in a regulatory submission is something that enterprise stakeholders might need some time to get their head around.</p>
-<p>The technical challenges here are fascinating – we need dynamic trust scoring, cryptographic proofs of model lineage and secure compute enclaves. But the real challenge is the social architecture: a very complex dance of trust, verification and governance that will have to be mediated. We’re essentially speed-running the development of diplomatic protocols that took human societies centuries to develop. And just like real diplomacy, it’s all about managing relationships between different systems with different organizational cultures and governance models.</p>
-<p>GenAI does not yet have a <em>lingua franca</em> akin to REST to allow systems to talk to each other, least of all one that allows not just a query-response format to be conveyed but also various conventions on trust and governance to be exchanged. The real potential of agentic AI lies in how various agents can interact and together create emergent structures that are ultimately more than their parts. Function calling and an AI agent being able to look up something on Google are neat, but not really anything spectacular that a simple RPA actor or a 10-line Python script starting with <code>import requests</code> couldn’t do just as well. To paraphrase Kipling: the strength of the agent is the ecosystem. The big challenge, then, is to figure out how we can allow such ecosystems to exist across the boundaries of corporate networks.</p>
-</section>
-<section id="model-metabolomics-takes-over" class="level2">
-<h2 class="anchored" data-anchor-id="model-metabolomics-takes-over">Model metabolomics takes over</h2>
-<p>Energy efficiency is about to become the dominant factor in AI deployment economics. We’re not just talking about cost savings – we’re talking about a fundamental shift in how we think about AI system design. Just as biological systems optimize for metabolic efficiency rather than raw performance, we’re about to see AI architecture undergo a similar evolution.</p>
-<p>This shift will upend the current obsession with inference speed and model size. Organizations will start optimising models for what I call “computational metabolomics” – the total energy cost of getting useful work done. We’ll see the emergence of new architectures that might be slower in raw terms but dramatically more efficient in their use of resources.</p>
-<p>The really controversial part? Many organizations will opt for slower but more energy-efficient approaches, fundamentally challenging the industry’s obsession with real-time everything. I expect to see in 2025 more and more architectures that prioritize efficiency over speed, and a new set of metrics focused on energy consumption per useful output. The hype cycles of 2023-24 were all about who could build the biggest model - 2025 will be about who can build the most efficient one. Especially with the rise of SLMs, we’re slowly approaching the point where increasing the parameter size of generalist LLMs is going to yield any useful business benefits, or get developers any more free drinks. Such diminishing returns are, of course, part and parcel of every evolving system, and while it will be conceptualised as the beginning of a new AI winter by the usual suspects (it is not!), this is a good thing. For as we now have slowly reached a model size we’re comfortable with, we can start on making it more metabolically efficient. This is, of course, not limited to language models – in fact, this development has been going on in the computer vision world, where a good deal of processing occurs on edge devices, for a long time. Much of the lacking enthusiasm for wholesale replacement of computer vision models with vision-language models like LLaVA, CogVLM or DeepSeek boils down to the simple economics of the matter: the vast majority of computer vision challenges, in practice, can be solved quite well with a 30-year-old algorithm that can be implemented in fifty lines of C. The same, incidentally, is true for LLMs. I wince when I see GPT-based approaches to problems that a bag-of-words classifier can solve with comparable accuracy for essentially no cost and in a fraction of time. And once the power of cool wears off, I expect a renaissance of many of those solutions.</p>
-<hr>
-<p>As I complete this digital årsgång, what strikes me most is how 2025 looks to be the year when enterprise AI grows up. The trends all point toward practicality over pizzazz: smaller models over larger ones, efficiency over raw power, productized governance over philosophical frameworks, and insurance actuaries over innovation evangelists. Perhaps that’s not as exciting as the breathless predictions of AI singularities and digital transformations that dominated 2023, and maybe closer to the relatively sober atmosphere of 2024. But then again, maybe that’s exactly the point – real progress tends to be more about making things work than making headlines. And personally, I find that far more interesting.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2024,
-  author = {{Chris von Csefalvay}},
-  title = {Five Unconventional Predictions},
-  date = {2024-12-31},
-  url = {https://chrisvoncsefalvay.com/posts/five-wild-guesses/},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2024" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2024. <span>“Five Unconventional
-Predictions.”</span> <a href="https://chrisvoncsefalvay.com/posts/five-wild-guesses/">https://chrisvoncsefalvay.com/posts/five-wild-guesses/</a>.
-</div></div></section></div> ]]></description>
-  <category>LLMs</category>
-  <category>AI</category>
-  <category>tech predictions</category>
-  <guid>https://chrisvoncsefalvay.com/posts/five-wild-guesses/</guid>
-  <pubDate>Tue, 31 Dec 2024 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/five-wild-guesses/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
