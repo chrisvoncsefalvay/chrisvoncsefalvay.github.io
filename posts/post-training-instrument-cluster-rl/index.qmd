@@ -1,0 +1,1243 @@
+---
+categories:
+- AI
+- LLMs
+- LLMOps
+- post-training
+- reinforcement learning
+- RLHF
+date: 2025-12-28
+description: Monitoring reward curves, KL divergence, and policy health when training with DPO, PPO, and GRPO.
+google-scholar: true
+image: rl_failure_patterns.png
+title: The post-training instrument cluster -- Part II
+bibliography: references.bib
+format:
+  html:
+    code-overflow: wrap
+    include-in-header:
+    - text: "<style>\nimg, .cell-output-display img {\n  max-width: 100%;\n  height: auto;\n}\n</style>\n"
+notebook-links: global
+---
+
+::: {.callout-tip}
+## Hey, I'm writing a book about this!
+
+I'm actually writing a book about this stuff. It turns out there isn't a lot of literature on how to do post-training at the level too big for single-GPU laptop-sized hobby projects and requiring enterprise reliability on one hand, but not quite at the scale of multi-team distributed post-training you'd get in foundation labs. That's a problem, because a lot of the current value in fine-tuning applications comes exactly out of that large, crucial market. I am in the last phases of putting together the manuscript for _The Frontier Playbook_, a set of curated tactics and techniques for real world operationalisation of LLMs. [Sign up for updates here](https://aifrontierplaybook.substack.com).
+
+:::
+
+::: {.callout-tip}
+## This is Part II of a series
+
+This post builds on [Part I](../post-training-instrument-cluster/index.qmd), which covered the eight instruments for supervised fine-tuning. If you haven't read that yet, I recommend starting there -- the instruments in this post assume familiarity with the basics of loss landscape monitoring, gradient health and the general philosophy of comprehensive training instrumentation.
+
+:::
+
+In Part I, we built an instrument cluster for supervised fine-tuning: eight monitors that together paint a comprehensive picture of what's happening during a LoRA training run. But as I hinted at the end of that post, the story doesn't end with SFT.
+
+The moment you move from supervised fine-tuning to reinforcement learning from human feedback (RLHF) or its variants -- Direct Preference Optimization (DPO), Group Relative Policy Optimization (GRPO), Proximal Policy Optimization (PPO) and so on -- you enter a different regime altogether. The failure modes multiply. The metrics become more subtle. And the consequences of getting it wrong become considerably more expensive.^[I'm being restrained here. In my experience, a failed RL run is typically 3-5x more expensive than a failed SFT run, not just in compute cost but in human time spent diagnosing what went wrong. The failure modes are less obvious, the feedback loops are longer and the pathologies can be quite subtle until they suddenly aren't.]
+
+The fundamental shift is philosophical: in SFT, we're teaching the model to imitate. In RL, we're teaching it to *optimise*. And optimisation, as anyone who has spent time with reward systems (or golden retrievers) knows, is a double-edged sword. The model will find a way to maximise the reward -- the question is whether that way aligns with what we actually wanted.
+
+This post introduces four additional instruments for your post-training dashboard, specifically designed for preference optimisation and reinforcement learning methods. Together with the eight from Part I, they form a twelve-instrument cluster that should catch most of the pathologies you'll encounter in production RL training.
+
+
+## The RL monitoring problem
+
+Before we dive into the instruments, it's worth understanding why RL training is harder to monitor than SFT.
+
+In supervised fine-tuning, the objective is clear: minimise the cross-entropy loss between the model's predictions and the training labels. The loss curve tells you almost everything you need to know about whether learning is happening. Yes, there are subtle failure modes (as we covered in Part I), but the basic diagnostic picture is straightforward.
+
+::: {.column-margin}
+The reward model is itself a trained system with its own failure modes. We're optimising against a proxy, not the true objective. This, by the way, is the source of most RL pathologies.
+:::
+
+In RL, we're optimising against a *reward signal* -- typically produced by a reward model trained on human preferences, or in the case of DPO, implicitly derived from preference pairs. This introduces several complications:
+
+1. **The reward is a proxy**: The reward model is our best guess at what humans want, not what they actually want. Optimising too hard against this proxy leads to reward hacking -- the model exploiting quirks in the reward model rather than genuinely improving [@gao2023scaling].
+2. **The policy can drift**: Unlike SFT, where the model stays close to its initialisation, RL can push the model relatively far from its starting point. This drift can destroy capabilities that the base model had. RL can legitimately break your base model's back.
+3. **The optimisation landscape is non-stationary**: As the policy changes, the distribution of data it generates changes, which in turn changes the effective reward landscape.
+4. **Multiple objectives are in tension**: We want high reward *and* low divergence from the reference policy *and* preserved capabilities *and* no degenerate behaviours. These can conflict.
+
+The instruments in this post are designed to catch failures in each of these dimensions.
+
+
+## Instrument 9: reward dynamics
+
+The reward curve is to RL what the loss curve is to SFT -- the primary indicator of whether learning is happening. But unlike loss, reward requires considerably more nuance to interpret correctly.
+
+The TRL library, for example, logs several reward-related metrics by default, but understanding what they mean -- and what healthy versus pathological patterns look like -- requires some unpacking.
+
+::: {.column-margin}
+For DPO, the implicit reward for a response is typically $\beta (\log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x))$, rather than a chosen-vs-rejected ratio. The `rewards/margins` metric tracks the difference between chosen and rejected rewards, which should increase during training.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Enhanced reward monitoring callback"
+from transformers import TrainerCallback
+import numpy as np
+from collections import deque
+
+class RewardDynamicsCallback(TrainerCallback):
+    """Track reward statistics beyond simple averages."""
+
+    def __init__(self, window_size: int = 100):
+        self.window_size = window_size
+        self.reward_history = deque(maxlen=window_size)
+        self.margin_history = deque(maxlen=window_size)
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs is None:
+            return
+
+        # Track reward metrics (names vary by trainer)
+        reward_keys = [
+            "rewards/chosen", "rewards/rejected", "rewards/margins",
+            "objective/scores", "objective/rlhf_reward"
+        ]
+
+        for key in reward_keys:
+            if key in logs:
+                value = logs[key]
+
+                if "margin" in key or "chosen" in key:
+                    self.reward_history.append(value)
+
+                    if len(self.reward_history) >= 10:
+                        rewards = list(self.reward_history)
+
+                        # Trend analysis
+                        logs[f"{key}_trend"] = np.polyfit(
+                            range(len(rewards)), rewards, 1
+                        )[0]
+
+                        # Variance tracking (early warning for instability)
+                        logs[f"{key}_variance"] = np.var(rewards)
+
+                        # Saturation detection
+                        recent = rewards[-20:] if len(rewards) >= 20 else rewards
+                        logs[f"{key}_saturation"] = 1.0 - np.std(recent) / (np.std(rewards) + 1e-8)
+```
+
+For **DPO**, the key metrics are:
+
+- `rewards/chosen`: The implicit reward for chosen responses (higher is better)
+- `rewards/rejected`: The implicit reward for rejected responses (lower is better)
+- `rewards/margins`: The difference between chosen and rejected (should increase)
+- `rewards/accuracies`: How often the model prefers chosen over rejected (should approach 1.0)
+
+```{python}
+#| label: fig-dpo-metrics-relationship
+#| fig-cap: "The relationship between DPO reward metrics: chosen and rejected rewards define the margin, which determines accuracy through the sigmoid function."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+import warnings
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+warnings.filterwarnings('ignore')
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+# Colours (matching the existing style)
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+chosen_green = '#2a9d8f'
+rejected_red = '#c44e52'
+margin_purple = '#7b68a8'
+accuracy_blue = '#4878a8'
+
+fig = plt.figure(figsize=(10, 6))
+
+# Create a grid: left panel for bar diagram, right panel for sigmoid
+gs = fig.add_gridspec(1, 2, width_ratios=[1.2, 1], wspace=0.35)
+
+# --- Left panel: Bar diagram showing chosen, rejected, margin ---
+ax1 = fig.add_subplot(gs[0])
+
+# Example values
+r_chosen = 1.8
+r_rejected = -0.6
+margin = r_chosen - r_rejected
+
+# Draw the reward scale (vertical axis)
+ax1.set_xlim(-0.5, 3.5)
+ax1.set_ylim(-1.5, 3.0)
+
+# Draw bars
+bar_width = 0.6
+
+# Rejected bar (below zero)
+rejected_bar = Rectangle((0.5 - bar_width/2, r_rejected), bar_width, -r_rejected,
+                          facecolor=rejected_red, edgecolor='none', alpha=0.8)
+ax1.add_patch(rejected_bar)
+
+# Chosen bar (above zero)
+chosen_bar = Rectangle((0.5 - bar_width/2, 0), bar_width, r_chosen,
+                        facecolor=chosen_green, edgecolor='none', alpha=0.8)
+ax1.add_patch(chosen_bar)
+
+# Margin bracket on the right
+bracket_x = 1.3
+ax1.annotate('', xy=(bracket_x, r_chosen), xytext=(bracket_x, r_rejected),
+             arrowprops=dict(arrowstyle='<->', color=margin_purple, lw=1.5,
+                            shrinkA=0, shrinkB=0))
+ax1.text(bracket_x + 0.15, (r_chosen + r_rejected) / 2, f'margin\n= {margin:.1f}',
+         fontsize=9, color=margin_purple, va='center', ha='left', fontweight='bold')
+
+# Labels for bars
+ax1.text(0.5, r_chosen + 0.15, f'chosen\n{r_chosen:.1f}', ha='center', va='bottom',
+         fontsize=9, color=chosen_green, fontweight='bold')
+ax1.text(0.5, r_rejected - 0.15, f'rejected\n{r_rejected:.1f}', ha='center', va='top',
+         fontsize=9, color=rejected_red, fontweight='bold')
+
+# Zero line
+ax1.axhline(0, color=light_grey, linewidth=0.8, linestyle='--', zorder=0)
+ax1.text(-0.35, 0, '0', fontsize=8, color=light_grey, va='center', ha='right')
+
+# Arrow showing the goal
+ax1.annotate('', xy=(2.3, 2.5), xytext=(2.3, 1.5),
+             arrowprops=dict(arrowstyle='->', color=chosen_green, lw=1.2))
+ax1.text(2.45, 2.0, 'Goal: push\nchosen up', fontsize=8, color=chosen_green, va='center')
+
+ax1.annotate('', xy=(2.3, -1.2), xytext=(2.3, -0.2),
+             arrowprops=dict(arrowstyle='->', color=rejected_red, lw=1.2))
+ax1.text(2.45, -0.7, 'Goal: push\nrejected down', fontsize=8, color=rejected_red, va='center')
+
+ax1.set_ylabel('Implicit reward', fontsize=9)
+ax1.set_xticks([])
+ax1.spines['bottom'].set_visible(False)
+ax1.set_title('Reward values', fontsize=10, fontweight='normal', loc='left')
+
+
+# --- Right panel: Sigmoid showing margin -> accuracy relationship ---
+ax2 = fig.add_subplot(gs[1])
+
+# Sigmoid function (scaled by beta, typically beta ~ 0.1)
+beta = 0.5  # For visualisation purposes
+margins = np.linspace(-4, 4, 200)
+accuracies = 1 / (1 + np.exp(-beta * margins))
+
+ax2.plot(margins, accuracies, color=accuracy_blue, linewidth=1.5)
+
+# Fill regions
+ax2.fill_between(margins[margins < 0], accuracies[margins < 0], alpha=0.1, color=rejected_red)
+ax2.fill_between(margins[margins >= 0], accuracies[margins >= 0], alpha=0.1, color=chosen_green)
+
+# Mark the example point
+example_accuracy = 1 / (1 + np.exp(-beta * margin))
+ax2.plot(margin, example_accuracy, 'o', color=margin_purple, markersize=8, zorder=5)
+ax2.plot([margin, margin], [0, example_accuracy], '--', color=margin_purple, linewidth=0.8, alpha=0.7)
+ax2.plot([margins[0], margin], [example_accuracy, example_accuracy], '--', color=margin_purple, linewidth=0.8, alpha=0.7)
+
+# Annotations
+ax2.annotate(f'margin = {margin:.1f}', xy=(margin, 0.02), fontsize=8,
+             color=margin_purple, ha='center', va='bottom')
+ax2.annotate(f'accuracy = {example_accuracy:.2f}', xy=(margins[0] + 0.3, example_accuracy),
+             fontsize=8, color=accuracy_blue, ha='left', va='center')
+
+# Reference lines
+ax2.axhline(0.5, color=light_grey, linewidth=0.5, linestyle=':', alpha=0.7)
+ax2.axhline(1.0, color=light_grey, linewidth=0.5, linestyle=':', alpha=0.7)
+ax2.axvline(0, color=light_grey, linewidth=0.5, linestyle=':', alpha=0.7)
+
+# Labels for regions
+ax2.text(-2.5, 0.32, 'Model prefers\nrejected', fontsize=8, color=rejected_red, ha='center', alpha=0.8)
+ax2.text(2.5, 0.68, 'Model prefers\nchosen', fontsize=8, color=chosen_green, ha='center', alpha=0.8)
+
+# Axis labels
+ax2.set_xlabel('Margin (chosen - rejected)', fontsize=9)
+ax2.set_ylabel('Accuracy (P(prefer chosen))', fontsize=9)
+ax2.set_xlim(-4, 4)
+ax2.set_ylim(0, 1.05)
+ax2.set_title('Margin determines accuracy', fontsize=10, fontweight='normal', loc='left')
+
+# Add formula annotation
+ax2.text(0.5, 0.12, r'$\mathrm{accuracy} = \sigma(\beta \cdot \mathrm{margin})$',
+         fontsize=9, color=grey, ha='center', transform=ax2.transAxes,
+         bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor=light_grey, alpha=0.9))
+
+plt.tight_layout()
+plt.savefig('dpo_metrics_relationship.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+The margin is simply the difference between the chosen and rejected rewards; the preference probability is the sigmoid of that margin (scaled by beta).^[This follows from the Bradley-Terry model underlying DPO. The model assumes the probability of preferring response A over B is $\sigma(r_A - r_B)$, where $r$ is the implicit reward. DPO's loss function directly optimises this probability, so the accuracy metric -- how often the model assigns higher probability to the chosen response -- naturally follows a sigmoid relationship with the reward margin.] The logged accuracy is the empirical fraction of pairs where the chosen reward exceeds the rejected reward, so it tracks the sigmoid in expectation. As training progresses, we want the margin to increase -- either by pushing the chosen reward up, the rejected reward down, or both. A larger margin means higher accuracy, which means the model more reliably prefers the chosen response over the rejected one.
+
+For **PPO**, the key metrics are:
+
+- `objective/scores`: The raw reward from the reward model
+- `objective/rlhf_reward`: The effective RLHF reward (`scores + non_score_reward`)
+- `objective/non_score_reward`: The KL penalty contribution (negative, computed as `-kl_coef * kl`)
+- `objective/kl`: The mean KL divergence between current and reference policy
+
+For **GRPO**, the metrics follow a different naming convention:
+
+- `reward`: The overall average reward after applying reward weights
+- `reward_std`: The standard deviation of rewards (per-group or batch-level, depending on `scale_rewards`)
+- `kl`: The average KL divergence (logged only if `beta > 0`)
+- `entropy`: Average entropy of token predictions across completions
+- `clip_ratio/region_mean`: The fraction of token probabilities clipped within the trust region
+- `clip_ratio/low_mean` and `clip_ratio/high_mean`: Mean clipping on lower and upper bounds
+
+```{python}
+#| label: fig-reward-dynamics
+#| fig-cap: "Reward dynamics diagnostics: healthy learning vs common pathologies in DPO."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 8
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.subplots_adjust(hspace=0.35, wspace=0.3)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+chosen_green = '#2a9d8f'
+rejected_red = '#c44e52'
+
+# --- Panel A: Healthy DPO reward margin ---
+ax = axes[0, 0]
+
+# Chosen reward increases, rejected decreases, margin grows
+chosen = 0.5 + 1.5 * (1 - np.exp(-steps / 150)) + np.random.normal(0, 0.08, len(steps))
+rejected = -0.3 - 1.2 * (1 - np.exp(-steps / 180)) + np.random.normal(0, 0.1, len(steps))
+margin = chosen - rejected
+
+ax.plot(steps, chosen, color=chosen_green, linewidth=0.9, label='Chosen reward')
+ax.plot(steps, rejected, color=rejected_red, linewidth=0.9, label='Rejected reward')
+ax.fill_between(steps, rejected, chosen, alpha=0.1, color=grey)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Implicit reward', fontsize=9)
+ax.set_title('A. Healthy: margin increasing steadily', fontsize=10, fontweight='normal', loc='left')
+ax.legend(frameon=False, fontsize=8, loc='upper left')
+ax.axhline(0, color=light_grey, linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_ylim(-3, 3)
+
+# --- Panel B: Reward saturation (margin plateaus early) ---
+ax = axes[0, 1]
+
+# Quick initial separation, then plateau
+chosen_sat = 0.5 + 1.0 * (1 - np.exp(-steps / 40)) + np.random.normal(0, 0.06, len(steps))
+rejected_sat = -0.3 - 0.8 * (1 - np.exp(-steps / 50)) + np.random.normal(0, 0.08, len(steps))
+
+ax.plot(steps, chosen_sat, color=chosen_green, linewidth=0.9, label='Chosen reward')
+ax.plot(steps, rejected_sat, color=rejected_red, linewidth=0.9, label='Rejected reward')
+ax.fill_between(steps, rejected_sat, chosen_sat, alpha=0.1, color=grey)
+
+# Shade the saturated region
+ax.axvspan(150, 500, alpha=0.08, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Implicit reward', fontsize=9)
+ax.set_title('B. Saturation: early plateau, wasted compute', fontsize=10, fontweight='normal', loc='left')
+ax.legend(frameon=False, fontsize=8, loc='upper left')
+ax.axhline(0, color=light_grey, linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_ylim(-3, 3)
+ax.annotate('No further\nlearning', xy=(350, 0.3), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Reward hacking (chosen keeps climbing unrealistically) ---
+ax = axes[1, 0]
+
+# Chosen reward grows without bound, rejected stays flat-ish
+chosen_hack = 0.5 + 2.5 * (steps / 500) ** 1.5 + np.random.normal(0, 0.1, len(steps))
+rejected_hack = -0.3 - 0.5 * (1 - np.exp(-steps / 200)) + np.random.normal(0, 0.1, len(steps))
+
+ax.plot(steps, chosen_hack, color=problem_red, linewidth=0.9, label='Chosen reward')
+ax.plot(steps, rejected_hack, color=rejected_red, linewidth=0.9, alpha=0.6, label='Rejected reward')
+
+# Danger zone
+ax.axhspan(2.5, 4.5, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Implicit reward', fontsize=9)
+ax.set_title('C. Reward hacking: unbounded growth', fontsize=10, fontweight='normal', loc='left')
+ax.legend(frameon=False, fontsize=8, loc='upper left')
+ax.axhline(0, color=light_grey, linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_ylim(-3, 4.5)
+ax.annotate('Suspicious:\ntoo good to be true', xy=(400, 3.8), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel D: Reward collapse (both converge) ---
+ax = axes[1, 1]
+
+# Both rewards converge to similar values
+convergence_point = 300
+chosen_collapse = np.zeros(len(steps))
+rejected_collapse = np.zeros(len(steps))
+
+# Before collapse
+chosen_collapse[:convergence_point] = 0.5 + 1.0 * (1 - np.exp(-steps[:convergence_point] / 100))
+rejected_collapse[:convergence_point] = -0.3 - 0.6 * (1 - np.exp(-steps[:convergence_point] / 120))
+
+# Collapse phase
+t = np.arange(len(steps) - convergence_point)
+collapse_target = 0.3
+chosen_collapse[convergence_point:] = chosen_collapse[convergence_point-1] - (chosen_collapse[convergence_point-1] - collapse_target) * (1 - np.exp(-t / 50))
+rejected_collapse[convergence_point:] = rejected_collapse[convergence_point-1] + (collapse_target - rejected_collapse[convergence_point-1]) * (1 - np.exp(-t / 60))
+
+chosen_collapse += np.random.normal(0, 0.06, len(steps))
+rejected_collapse += np.random.normal(0, 0.08, len(steps))
+
+ax.plot(steps, chosen_collapse, color=chosen_green, linewidth=0.9, label='Chosen reward')
+ax.plot(steps, rejected_collapse, color=rejected_red, linewidth=0.9, label='Rejected reward')
+
+ax.axvspan(convergence_point, 500, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Implicit reward', fontsize=9)
+ax.set_title('D. Collapse: margin shrinking', fontsize=10, fontweight='normal', loc='left')
+ax.legend(frameon=False, fontsize=8, loc='upper left')
+ax.axhline(0, color=light_grey, linewidth=0.5, linestyle='--', alpha=0.5)
+ax.set_ylim(-3, 3)
+ax.annotate('Model losing\npreference signal', xy=(400, 1.0), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('reward_dynamics.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Margin not increasing**: If `rewards/margins` plateaus early, your model has stopped learning from the preference data. Either the learning rate is too low, or you've exhausted the signal in your dataset. As a general rule, people overestimate just how much signal _is_ in a given preference dataset.
+- **Unbounded reward growth**: If chosen rewards keep climbing without limit, you're likely seeing reward hacking. The model is exploiting the reward function rather than genuinely improving. Check your KL divergence -- it's probably too high.
+- **Rewards converging**: If chosen and rejected rewards approach each other, the model is losing its ability to distinguish preferences. This can indicate catastrophic forgetting or a learning rate that's too high.
+- **High reward variance**: Unstable rewards suggest unstable optimisation. Consider reducing the learning rate or increasing the KL penalty.
+
+
+## Instrument 10: KL divergence health
+
+The KL divergence between your training policy and the reference policy is perhaps the single most important diagnostic for RL training. It measures how far your model has drifted from its starting point -- and managing this drift is the central challenge of preference optimisation.
+
+::: {.column-margin}
+The reference policy is typically the SFT model you started with. In DPO, this is implicit in the loss function. In PPO, you maintain an explicit reference model and compute KL divergence at each step.
+:::
+
+The mathematics are straightforward. For a policy $\pi_\theta$ and reference policy $\pi_{\text{ref}}$, the KL divergence is:
+
+$$D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}}) = \mathbb{E}_{x \sim \pi_\theta}\left[\log \frac{\pi_\theta(x)}{\pi_{\text{ref}}(x)}\right]$$
+
+In practice, we estimate this over batches of generated text, summing the per-token log probability differences. The TRL library uses the Schulman approximator for efficiency [@schulman2020kl].
+
+The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed -- a phenomenon called "catastrophic Goodhart" [@chen2024catastrophic]. The practical implication: don't rely solely on KL to prevent overoptimisation. Monitor the other instruments too.
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "KL divergence monitoring callback"
+class KLDivergenceCallback(TrainerCallback):
+    """Monitor KL divergence and detect drift pathologies."""
+
+    def __init__(self, window_size: int = 50, drift_threshold: float = 0.5):
+        self.window_size = window_size
+        self.drift_threshold = drift_threshold
+        self.kl_history = deque(maxlen=window_size)
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs is None:
+            return
+
+        # KL metrics (names vary by trainer)
+        kl_keys = ["objective/kl", "kl", "kl_divergence", "policy/approxkl_avg"]
+
+        for key in kl_keys:
+            if key in logs:
+                kl = logs[key]
+                self.kl_history.append(kl)
+
+                if len(self.kl_history) >= 10:
+                    kl_values = list(self.kl_history)
+
+                    # Trend: is KL growing?
+                    logs["kl/trend"] = np.polyfit(
+                        range(len(kl_values)), kl_values, 1
+                    )[0]
+
+                    # Acceleration: is growth accelerating?
+                    if len(kl_values) >= 20:
+                        first_half = kl_values[:len(kl_values)//2]
+                        second_half = kl_values[len(kl_values)//2:]
+                        logs["kl/acceleration"] = np.mean(second_half) - np.mean(first_half)
+
+                    # Warning flag for runaway KL
+                    if kl > self.drift_threshold:
+                        logs["kl/drift_warning"] = 1
+                        print(f"WARNING: KL divergence ({kl:.4f}) exceeds threshold ({self.drift_threshold})")
+```
+
+```{python}
+#| label: fig-kl-divergence
+#| fig-cap: "KL divergence patterns: the art of managing policy drift in preference optimisation."
+#| echo: false
+#| fig-width: 6
+#| fig-height: 10
+
+import warnings
+import numpy as np
+import matplotlib.pyplot as plt
+
+warnings.filterwarnings('ignore')
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(4, 1, figsize=(6, 10))
+fig.subplots_adjust(hspace=0.45)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+warning_orange = '#e69f00'
+
+# --- Panel A: Healthy KL (sharp initial rise, then slow convergence) ---
+ax = axes[0]
+
+# Sharp initial ascent, then slow logarithmic convergence
+kl_healthy = 0.12 * (1 - np.exp(-steps / 30)) + 0.02 * np.log1p(steps / 100)
+kl_healthy += np.random.normal(0, 0.004, len(steps))
+kl_healthy = np.clip(kl_healthy, 0, 0.25)
+
+ax.plot(steps, kl_healthy, color=healthy_teal, linewidth=0.9)
+ax.axhline(0.15, color=light_grey, linewidth=0.8, linestyle='--', alpha=0.7)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('KL divergence', fontsize=9)
+ax.set_title('A. Healthy: sharp rise, then stabilises', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.25)
+ax.annotate('Stable operating range', xy=(380, 0.17), fontsize=8, color=healthy_teal, ha='center')
+
+# --- Panel B: KL explosion (runaway drift) ---
+ax = axes[1]
+
+# Exponential growth
+kl_explode = 0.02 * np.exp(steps / 150) + np.random.normal(0, 0.01, len(steps))
+kl_explode = np.clip(kl_explode, 0, 1.5)
+
+ax.plot(steps, kl_explode, color=problem_red, linewidth=0.9)
+
+# Danger zones
+ax.axhspan(0.3, 0.6, alpha=0.1, color=warning_orange)
+ax.axhspan(0.6, 1.5, alpha=0.15, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('KL divergence', fontsize=9)
+ax.set_title('B. Explosion: runaway policy drift', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 1.2)
+ax.annotate('Warning', xy=(300, 0.45), fontsize=8, color=warning_orange, ha='center')
+ax.annotate('Critical', xy=(420, 0.85), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: KL too constrained (essentially no learning) ---
+ax = axes[2]
+
+# Flat, near-zero KL
+kl_constrained = 0.005 + 0.003 * np.sin(steps / 50) + np.random.normal(0, 0.001, len(steps))
+kl_constrained = np.clip(kl_constrained, 0.001, 0.02)
+
+ax.plot(steps, kl_constrained, color=grey, linewidth=0.9)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('KL divergence', fontsize=9)
+ax.set_title('C. Constrained: beta too high, no learning', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.025)
+ax.annotate('Policy barely moving from reference', xy=(250, 0.018), fontsize=8, color=grey, ha='center')
+
+# --- Panel D: KL oscillation (noisy, not sinusoidal) ---
+ax = axes[3]
+
+# Noisy KL with slight upward trend - realistic oscillation is just noise
+base_kl = 0.08 + 0.04 * (steps / 500)
+# High-frequency noise rather than sinusoidal oscillation
+noise = np.random.normal(0, 0.015, len(steps))
+# Add some autocorrelation to make it look more realistic
+from scipy.ndimage import gaussian_filter1d
+noise_smooth = gaussian_filter1d(noise, sigma=3)
+kl_oscillate = base_kl + noise_smooth * (1 + 0.5 * steps / 500)
+kl_oscillate = np.clip(kl_oscillate, 0.02, 0.2)
+
+ax.plot(steps, kl_oscillate, color=problem_red, linewidth=0.9)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('KL divergence', fontsize=9)
+ax.set_title('D. Noisy: unstable optimisation', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.2)
+ax.annotate('Excessive variance', xy=(380, 0.16), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('kl_divergence.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **KL growing without bound**: Runaway policy drift. Your model is moving too far from the reference. Increase the KL penalty (beta) or reduce the learning rate. In PPO, check that the clipping is working.
+- **KL near zero throughout training**: Your KL penalty (beta) is too high. The model is barely updating. Reduce beta to allow more policy drift.
+- **KL noisy with high variance**: Unstable optimisation. The learning rate is probably too high for your current KL penalty setting.
+- **KL suddenly spiking**: Often indicates a batch of data that the model handles very differently from the reference. Investigate that batch.
+
+A useful heuristic for PPO: the `val/ratio` metric (ratio of current to old policy probabilities) should stay close to 1.0. If it regularly exceeds 2.0 or drops below 0.5, the policy updates are too aggressive [@huang2024n].
+
+
+## Instrument 11: policy ratio and clip fraction
+
+For PPO and GRPO (but not DPO), the clipping mechanism is central to training stability. PPO's "proximal" nature comes from clipping the policy ratio to prevent too-large updates.
+
+The policy ratio is defined as:
+
+$$r_t(\theta) = \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)}$$
+
+PPO clips this ratio to the range $[1 - \epsilon, 1 + \epsilon]$ (typically $\epsilon = 0.2$), ensuring that the policy doesn't change too drastically in a single update. The `clip_fraction` metric tells you how often this clipping is triggered.
+
+::: {.column-margin}
+GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt [@shao2024deepseekmath]. The monitoring principles are the same.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Policy ratio monitoring"
+class PolicyRatioCallback(TrainerCallback):
+    """Monitor policy ratio and clipping behaviour in PPO/GRPO."""
+
+    def __init__(self, target_clip_fraction: float = 0.15):
+        self.target_clip_fraction = target_clip_fraction
+        self.clip_history = deque(maxlen=100)
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs is None:
+            return
+
+        # Ratio metrics
+        if "val/ratio" in logs:
+            ratio = logs["val/ratio"]
+            ratio_var = logs.get("val/ratio_var", 0)
+
+            # Flag extreme ratios
+            if ratio > 2.0 or ratio < 0.5:
+                logs["policy/ratio_warning"] = 1
+                print(f"WARNING: Extreme policy ratio: {ratio:.3f}")
+
+        # Clip fraction analysis
+        clip_keys = ["policy/clipfrac_avg", "clip_ratio/low", "clip_ratio/high"]
+        for key in clip_keys:
+            if key in logs:
+                clip_frac = logs[key]
+                self.clip_history.append(clip_frac)
+
+                # Too much clipping = updates too aggressive
+                if clip_frac > 0.3:
+                    logs["policy/clipping_warning"] = 1
+
+                # No clipping = updates might be too small
+                if clip_frac < 0.01:
+                    logs["policy/underclipping_warning"] = 1
+```
+
+```{python}
+#| label: fig-clip-fraction
+#| fig-cap: "Policy ratio and clip fraction diagnostics for PPO/GRPO training."
+#| echo: false
+#| fig-width: 10
+#| fig-height: 8
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.subplots_adjust(hspace=0.35, wspace=0.3)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+warning_orange = '#e69f00'
+
+# --- Panel A: Healthy policy ratio (stays near 1.0) ---
+ax = axes[0, 0]
+
+ratio_healthy = 1.0 + 0.1 * np.sin(steps / 30) + np.random.normal(0, 0.05, len(steps))
+ratio_healthy = np.clip(ratio_healthy, 0.7, 1.4)
+
+ax.plot(steps, ratio_healthy, color=healthy_teal, linewidth=0.9)
+ax.axhline(1.0, color=grey, linewidth=0.8, linestyle='--')
+ax.axhspan(0.8, 1.2, alpha=0.1, color=healthy_teal)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Policy ratio', fontsize=9)
+ax.set_title('A. Healthy: ratio stays near 1.0', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0.4, 1.8)
+ax.annotate('Target range', xy=(400, 1.15), fontsize=8, color=healthy_teal, ha='center')
+
+# --- Panel B: Ratio drifting (policy changes too aggressive) ---
+ax = axes[0, 1]
+
+ratio_drift = 1.0 + 0.4 * (steps / 500) ** 1.2 + np.random.normal(0, 0.08, len(steps))
+ratio_drift += 0.15 * np.sin(steps / 25) * (steps / 500)
+ratio_drift = np.clip(ratio_drift, 0.5, 2.5)
+
+ax.plot(steps, ratio_drift, color=problem_red, linewidth=0.9)
+ax.axhline(1.0, color=grey, linewidth=0.8, linestyle='--')
+ax.axhspan(1.5, 2.5, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Policy ratio', fontsize=9)
+ax.set_title('B. Drifting: updates too aggressive', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0.4, 2.2)
+ax.annotate('Ratio > 1.5:\nreduce LR', xy=(400, 1.7), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Healthy clip fraction (moderate clipping) ---
+ax = axes[1, 0]
+
+clip_healthy = 0.12 + 0.05 * np.sin(steps / 40) + np.random.normal(0, 0.02, len(steps))
+clip_healthy = np.clip(clip_healthy, 0.02, 0.25)
+
+ax.plot(steps, clip_healthy, color=healthy_teal, linewidth=0.9)
+ax.axhspan(0.05, 0.20, alpha=0.1, color=healthy_teal)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Clip fraction', fontsize=9)
+ax.set_title('C. Healthy clipping: 5-20% is typical', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.5)
+ax.annotate('Healthy\nrange', xy=(400, 0.12), fontsize=8, color=healthy_teal, ha='center')
+
+# --- Panel D: Excessive clipping (learning too aggressive) ---
+ax = axes[1, 1]
+
+clip_excessive = 0.15 + 0.25 * (1 - np.exp(-steps / 100)) + np.random.normal(0, 0.03, len(steps))
+clip_excessive = np.clip(clip_excessive, 0.1, 0.6)
+
+ax.plot(steps, clip_excessive, color=problem_red, linewidth=0.9)
+ax.axhspan(0.3, 0.6, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Clip fraction', fontsize=9)
+ax.set_title('D. Excessive clipping: updates being truncated', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 0.6)
+ax.annotate('> 30%:\nLR too high', xy=(400, 0.48), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('clip_fraction.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Policy ratio far from 1.0**: The ratio should hover around 1.0 with small fluctuations. Values consistently above 1.5 or below 0.7 indicate that consecutive policy updates are too drastic. Reduce the learning rate.
+- **Clip fraction too high (> 30%)**: Most of your updates are being clipped. The learning rate is too high relative to your epsilon. Either reduce learning rate or increase epsilon (carefully).
+- **Clip fraction too low (< 1%)**: Almost no clipping is happening. Either your learning rate is very conservative, or something else is wrong.
+- **Clip fraction growing over time**: The optimisation is becoming increasingly aggressive. This often precedes a KL explosion.
+
+
+## Instrument 12: generation length dynamics
+
+The final instrument is deceptively simple but catches some of the most common RL failures: tracking how long your model's responses are. Generation length is one of the earliest indicators of reward hacking, and changes in length distribution often precede more obvious failures by hundreds of steps.
+
+::: {.column-margin}
+Length-based reward hacking is so common that many practitioners now add explicit length penalties or normalisation to their reward functions. The TRL library's `missing_eos_penalty` parameter exists specifically to combat length collapse.
+:::
+
+Why does length matter so much? Because length is one of the easiest things for a model to optimise. If longer responses tend to score slightly higher (perhaps because they're more detailed, or because the reward model has a subtle length bias), the model will learn to be verbose. Conversely, if the model discovers that short, safe responses avoid negative rewards, it will collapse to terse outputs.
+
+The key metrics to track (in GRPO/PPO) are:
+
+- `completions/mean_length`: Average token count across generations
+- `completions/mean_terminated_length`: Average length of completions that end with EOS
+- `completions/min_length` and `completions/max_length`: The range of lengths
+- `completions/clipped_ratio`: How often generations hit the maximum length limit
+
+::: {.column-margin}
+The distinction between `mean_length` and `mean_terminated_length` is subtle but diagnostic. The former counts all completions including those truncated at `max_length`; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation -- the model is generating responses that exceed the length limit before naturally concluding.
+:::
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Generation length monitoring callback"
+class GenerationLengthCallback(TrainerCallback):
+    """Monitor generation length dynamics for reward hacking detection."""
+
+    def __init__(self, baseline_length: float = None, window_size: int = 50):
+        self.baseline_length = baseline_length
+        self.window_size = window_size
+        self.length_history = deque(maxlen=window_size)
+
+    def on_log(self, args, state, control, logs=None, **kwargs):
+        if logs is None:
+            return
+
+        length_keys = ["completions/mean_length", "response_length", "gen_len"]
+
+        for key in length_keys:
+            if key in logs:
+                length = logs[key]
+                self.length_history.append(length)
+
+                if len(self.length_history) >= 10:
+                    lengths = list(self.length_history)
+
+                    # Trend detection
+                    logs["length/trend"] = np.polyfit(range(len(lengths)), lengths, 1)[0]
+
+                    # Variance (low variance = mode collapse)
+                    logs["length/variance"] = np.var(lengths)
+
+                    # Compare to baseline if available
+                    if self.baseline_length:
+                        ratio = np.mean(lengths) / self.baseline_length
+                        logs["length/baseline_ratio"] = ratio
+
+                        if ratio < 0.5:
+                            print(f"WARNING: Length collapsed to {ratio:.1%} of baseline")
+                        elif ratio > 2.0:
+                            print(f"WARNING: Length exploded to {ratio:.1%} of baseline")
+```
+
+```{python}
+#| label: fig-generation-length
+#| fig-cap: "Generation length dynamics: healthy stability vs common pathologies."
+#| echo: false
+#| fig-width: 6
+#| fig-height: 10
+
+import warnings
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.ndimage import gaussian_filter1d
+
+warnings.filterwarnings('ignore')
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+steps = np.arange(0, 500, 1)
+
+fig, axes = plt.subplots(4, 1, figsize=(6, 10))
+fig.subplots_adjust(hspace=0.45)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+warning_orange = '#e69f00'
+
+baseline_length = 150  # tokens
+
+# --- Panel A: Healthy length (stable around baseline) ---
+ax = axes[0]
+
+length_healthy = baseline_length + 20 * np.sin(steps / 80) + np.random.normal(0, 15, len(steps))
+length_healthy = np.clip(length_healthy, 80, 220)
+
+ax.plot(steps, length_healthy, color=healthy_teal, linewidth=0.9)
+ax.axhline(baseline_length, color=light_grey, linewidth=0.8, linestyle='--', alpha=0.7)
+ax.fill_between(steps, baseline_length * 0.7, baseline_length * 1.3, alpha=0.1, color=healthy_teal)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean length (tokens)', fontsize=9)
+ax.set_title('A. Healthy: stable around baseline', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(50, 250)
+ax.annotate('Normal variance', xy=(380, 180), fontsize=8, color=healthy_teal, ha='center')
+
+# --- Panel B: Length explosion (verbosity reward hacking) ---
+ax = axes[1]
+
+length_explode = baseline_length + 150 * (1 - np.exp(-steps / 150)) + np.random.normal(0, 10, len(steps))
+length_explode = np.clip(length_explode, 100, 350)
+
+ax.plot(steps, length_explode, color=problem_red, linewidth=0.9)
+ax.axhline(baseline_length, color=light_grey, linewidth=0.8, linestyle='--', alpha=0.7)
+ax.axhspan(250, 400, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean length (tokens)', fontsize=9)
+ax.set_title('B. Explosion: verbosity hacking', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(50, 350)
+ax.annotate('Model learned\n"longer = better"', xy=(380, 280), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Length collapse (brevity/safety hacking) ---
+ax = axes[2]
+
+# Chaotic collapse: irregular drops with noisy baseline
+base_collapse = baseline_length - 80 * (1 - np.exp(-steps / 200))
+# Add autocorrelated noise for realism
+noise = np.random.normal(0, 12, len(steps))
+noise_smooth = gaussian_filter1d(noise, sigma=4)
+# Add occasional sharp drops (model finding new "safe" shortcuts)
+for drop_point in [80, 180, 290, 350]:
+    drop_mask = steps > drop_point
+    base_collapse[drop_mask] -= 8 * np.exp(-(steps[drop_mask] - drop_point) / 30)
+length_collapse = base_collapse + noise_smooth
+length_collapse = np.clip(length_collapse, 30, 160)
+
+ax.plot(steps, length_collapse, color=problem_red, linewidth=0.9)
+ax.axhline(baseline_length, color=light_grey, linewidth=0.8, linestyle='--', alpha=0.7)
+ax.axhspan(0, 60, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean length (tokens)', fontsize=9)
+ax.set_title('C. Collapse: brevity hacking', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(0, 200)
+ax.annotate('Model learned\n"short = safe"', xy=(380, 60), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel D: Length variance collapse (mode collapse) ---
+ax = axes[3]
+
+# Start with normal variance, then collapse to near-constant
+length_mode_collapse = np.zeros(len(steps))
+for i in range(len(steps)):
+    variance = max(3, 20 * (1 - i / 400))
+    length_mode_collapse[i] = baseline_length + np.random.normal(0, variance)
+length_mode_collapse = np.clip(length_mode_collapse, 100, 200)
+
+ax.plot(steps, length_mode_collapse, color=warning_orange, linewidth=0.9)
+ax.axhline(baseline_length, color=light_grey, linewidth=0.8, linestyle='--', alpha=0.7)
+
+# Show the variance collapse visually
+ax.fill_between(steps[:100], length_mode_collapse[:100] - 15, length_mode_collapse[:100] + 15,
+                alpha=0.2, color=healthy_teal)
+ax.fill_between(steps[400:], length_mode_collapse[400:] - 3, length_mode_collapse[400:] + 3,
+                alpha=0.2, color=warning_orange)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Mean length (tokens)', fontsize=9)
+ax.set_title('D. Mode collapse: variance disappearing', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(100, 200)
+ax.annotate('Healthy variance', xy=(50, 175), fontsize=8, color=healthy_teal, ha='center')
+ax.annotate('All outputs\nnearly identical', xy=(450, 160), fontsize=8, color=warning_orange, ha='center')
+
+plt.tight_layout()
+plt.savefig('generation_length.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+**What to watch for:**
+
+- **Length steadily increasing**: The model is learning that verbosity is rewarded. This is often a sign that your reward model has a length bias. Consider adding length normalisation or a brevity penalty.
+- **Length steadily decreasing**: The model is learning that short responses are safer. This often happens when the reward model penalises certain content -- the model learns to say less to avoid penalties. Check your reward distribution.
+- **Length variance collapsing**: Even if mean length stays stable, collapsing variance indicates mode collapse. The model is converging to a single "template" response style. Increase temperature or add entropy bonuses.
+- **High clipped ratio**: If `completions/clipped_ratio` is high (> 20%), many responses are hitting the maximum length limit. Either increase `max_completion_length` or investigate why the model wants to generate such long responses.
+
+A useful baseline: measure your SFT model's generation length distribution before RL training begins. Any significant deviation (> 30% change in mean or > 50% change in variance) during RL deserves investigation.
+
+
+## Putting it all together
+
+The four RL instruments we've covered complement the eight from Part I:
+
+| Instrument | What it tells you | Failure mode it catches |
+|------------|-------------------|-------------------------|
+| Reward dynamics | Preference learning progress | Reward hacking, saturation, collapse |
+| KL divergence | Policy drift from reference | Overoptimisation, capability loss |
+| Clip fraction | Update magnitude | Unstable optimisation |
+| Generation length | Output distribution health | Length hacking, mode collapse |
+
+Together with the SFT instruments, you now have a twelve-gauge dashboard for monitoring any post-training run.^[Not to be confused with an equally potent firearm of the same specification, _twelve_ here quantifies rather than specifies.]
+
+For production RL training, I recommend the following dashboard layout:
+
+1. **Primary RL metrics**: Reward margin, KL divergence, RLHF reward. The overview.
+2. **Policy health**: Clip fraction, policy ratio, policy entropy. The vital signs.
+3. **Value function**: Value loss, value clipping. (PPO only.)
+4. **Fundamentals**: Loss, gradients, attention entropy. Don't forget these still matter!
+
+
+## The failure pattern gallery
+
+Let me conclude with a visual summary of the most common RL training failures I encounter in practice. Each of these can be caught by monitoring the right combination of instruments. In RL, "wtf even" is a valid diagnostic category: it's rare for one thing to go wrong in neat isolation. Rather, what you get is a picture of multiple interacting failures that create a tableau of pathology.
+
+```{python}
+#| label: fig-rl-failure-patterns
+#| fig-cap: "Common RL training failures: each requires monitoring multiple instruments simultaneously."
+#| echo: false
+#| fig-width: 11
+#| fig-height: 10
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.size': 9,
+    'axes.linewidth': 0.5,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'xtick.major.width': 0.5,
+    'ytick.major.width': 0.5,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': False,
+})
+
+np.random.seed(42)
+
+fig, axes = plt.subplots(2, 2, figsize=(11, 10))
+fig.subplots_adjust(hspace=0.4, wspace=0.35)
+
+# Colours
+grey = '#4a4a4a'
+light_grey = '#a0a0a0'
+problem_red = '#c44e52'
+healthy_teal = '#2a9d8f'
+warning_orange = '#e69f00'
+metric_blue = '#4878a8'
+
+steps = np.arange(0, 500, 1)
+
+# --- Panel A: Reward hacking (reward up, KL explodes, true quality drops) ---
+ax = axes[0, 0]
+ax2 = ax.twinx()
+
+# Proxy reward keeps climbing
+proxy_reward = 0.5 + 2.0 * (steps / 500) ** 1.3 + np.random.normal(0, 0.1, len(steps))
+
+# KL divergence explodes
+kl = 0.05 * np.exp(steps / 200) + np.random.normal(0, 0.02, len(steps))
+kl = np.clip(kl, 0, 1.5)
+
+# True quality (hidden, inferred from evals) drops
+quality_steps = np.arange(0, 500, 50)
+true_quality = np.zeros(len(quality_steps))
+true_quality[:4] = [0.5, 0.65, 0.72, 0.75]
+true_quality[4:] = 0.75 - 0.08 * np.arange(len(quality_steps) - 4) ** 1.1
+true_quality += np.random.normal(0, 0.03, len(quality_steps))
+
+ax.plot(steps, proxy_reward, color=healthy_teal, linewidth=0.9, label='Proxy reward')
+ax.plot(quality_steps, true_quality, color=problem_red, linewidth=1.2, marker='s', markersize=4, label='True quality')
+ax2.plot(steps, kl, color=warning_orange, linewidth=0.9, linestyle='--', label='KL divergence')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Reward / Quality', fontsize=9, color=grey)
+ax2.set_ylabel('KL divergence', fontsize=9, color=warning_orange)
+ax.set_title('A. Reward hacking: proxy ↑ but true quality ↓', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.5, 3.0)
+ax2.set_ylim(0, 1.5)
+ax.tick_params(axis='y', colors=grey)
+ax2.tick_params(axis='y', colors=warning_orange)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=7, loc='upper left')
+
+ax.annotate('"But the reward\nkeeps going up!"', xy=(380, 2.2), fontsize=8, color=grey, ha='center')
+
+# --- Panel B: Mode collapse (reward variance collapses, entropy drops) ---
+ax = axes[0, 1]
+ax2 = ax.twinx()
+
+# Reward mean increases but variance collapses
+reward_mean = 0.5 + 1.0 * (1 - np.exp(-steps / 100)) + np.random.normal(0, 0.05, len(steps))
+
+# Compute rolling variance that decreases
+reward_var = np.zeros(len(steps))
+for i in range(len(steps)):
+    progress = i / len(steps)
+    reward_var[i] = 0.15 * (1 - progress ** 0.5) + 0.02 + np.random.normal(0, 0.01)
+reward_var = np.clip(reward_var, 0.01, 0.2)
+
+# Policy entropy drops
+policy_entropy = 3.5 - 2.5 * (1 - np.exp(-steps / 150)) + np.random.normal(0, 0.08, len(steps))
+policy_entropy = np.clip(policy_entropy, 0.5, 4.0)
+
+ax.plot(steps, reward_mean, color=healthy_teal, linewidth=0.9, label='Reward mean')
+ax.fill_between(steps, reward_mean - reward_var, reward_mean + reward_var, alpha=0.2, color=healthy_teal)
+ax2.plot(steps, policy_entropy, color=problem_red, linewidth=0.9, label='Policy entropy')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Reward', fontsize=9, color=healthy_teal)
+ax2.set_ylabel('Policy entropy', fontsize=9, color=problem_red)
+ax.set_title('B. Mode collapse: diversity lost', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.5, 2.5)
+ax2.set_ylim(0, 4.5)
+ax.tick_params(axis='y', colors=healthy_teal)
+ax2.tick_params(axis='y', colors=problem_red)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+# Danger zone for entropy
+ax2.axhspan(0, 1.5, alpha=0.1, color=problem_red)
+
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=7, loc='upper left')
+
+ax.annotate('Variance\ncollapsing', xy=(350, 0.3), fontsize=8, color=grey, ha='center')
+ax2.annotate('Entropy\ntoo low', xy=(400, 1.0), fontsize=8, color=problem_red, ha='center')
+
+# --- Panel C: Unstable optimisation (oscillating everything) ---
+ax = axes[1, 0]
+
+# Create three oscillating metrics
+reward_osc = 1.0 + 0.5 * np.sin(steps / 15) * (1 + steps / 500) + np.random.normal(0, 0.1, len(steps))
+kl_osc = 0.1 + 0.08 * np.sin(steps / 18 + 1) * (1 + steps / 400) + np.random.normal(0, 0.02, len(steps))
+kl_osc = np.clip(kl_osc, 0.01, 0.5)
+clip_osc = 0.15 + 0.1 * np.sin(steps / 12 + 2) * (1 + steps / 600) + np.random.normal(0, 0.02, len(steps))
+clip_osc = np.clip(clip_osc, 0.02, 0.4)
+
+ax.plot(steps, reward_osc, color=healthy_teal, linewidth=0.8, alpha=0.8, label='Reward')
+ax.plot(steps, kl_osc * 5, color=warning_orange, linewidth=0.8, alpha=0.8, label='KL × 5')
+ax.plot(steps, clip_osc * 5, color=metric_blue, linewidth=0.8, alpha=0.8, label='Clip frac × 5')
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('Normalised metrics', fontsize=9)
+ax.set_title('C. Unstable: everything oscillating', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.5, 3.0)
+ax.legend(frameon=False, fontsize=7, loc='upper right')
+
+ax.annotate('Reduce learning rate\nor increase beta', xy=(350, 2.5), fontsize=8, color=grey, ha='center')
+
+# --- Panel D: Catastrophic forgetting (reward up, base capabilities down) ---
+ax = axes[1, 1]
+ax2 = ax.twinx()
+
+# Reward increases
+reward_forget = 0.3 + 1.5 * (1 - np.exp(-steps / 120)) + np.random.normal(0, 0.08, len(steps))
+
+# Base capability (e.g., perplexity on general text) degrades
+base_cap_steps = np.arange(0, 500, 25)
+base_capability = np.zeros(len(base_cap_steps))
+base_capability[:4] = [1.0, 1.0, 0.98, 0.95]
+base_capability[4:] = 0.95 - 0.03 * np.arange(len(base_cap_steps) - 4) ** 1.2
+base_capability += np.random.normal(0, 0.02, len(base_cap_steps))
+base_capability = np.clip(base_capability, 0.3, 1.1)
+
+ax.plot(steps, reward_forget, color=healthy_teal, linewidth=0.9, label='RL reward')
+ax2.plot(base_cap_steps, base_capability, color=problem_red, linewidth=1.2, marker='o', markersize=3, label='Base capability')
+
+ax2.axhspan(0, 0.6, alpha=0.1, color=problem_red)
+
+ax.set_xlabel('Step', fontsize=9)
+ax.set_ylabel('RL reward', fontsize=9, color=healthy_teal)
+ax2.set_ylabel('Base capability', fontsize=9, color=problem_red)
+ax.set_title('D. Catastrophic forgetting: specialisation kills generality', fontsize=10, fontweight='normal', loc='left')
+ax.set_ylim(-0.5, 2.5)
+ax2.set_ylim(0, 1.2)
+ax.tick_params(axis='y', colors=healthy_teal)
+ax2.tick_params(axis='y', colors=problem_red)
+ax2.spines['right'].set_visible(True)
+ax2.spines['right'].set_linewidth(0.5)
+
+lines1, labels1 = ax.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax.legend(lines1 + lines2, labels1 + labels2, frameon=False, fontsize=7, loc='upper left')
+
+ax2.annotate('General capabilities\ndegrading', xy=(280, 0.4), fontsize=8, color=problem_red, ha='center')
+
+plt.tight_layout()
+plt.savefig('rl_failure_patterns.png', dpi=150, bbox_inches='tight', facecolor='white')
+plt.show()
+```
+
+
+## Practical recommendations
+
+If you take away nothing else from this post, remember these heuristics:
+
+1. **Never trust the reward alone**. Always cross-reference with KL divergence and generation quality samples. Reward hacking is the default failure mode.
+
+2. **Set up alerts for KL divergence thresholds**. In my experience, KL > 0.5 is a warning and KL > 1.0 is a stop sign. Your thresholds may vary, but have thresholds.
+
+3. **Log generation samples throughout training**. This catches qualitative failures that no metric will show you. Schedule periodic human evaluation if you can.
+
+4. **For PPO, keep an eye on the ratio and clip fraction**. If the ratio regularly exceeds 1.5 or clip fraction exceeds 30%, reduce your learning rate.
+
+5. **Don't forget the basic instruments**. Gradient health, attention entropy and the other fundamentals still matter.
+
+In the next post, we'll tackle the third domain: function calling and tool use, where the metrics of success involve not just natural language quality but format compliance, execution accuracy and production reliability. We've devoted relatively little attention to the outcome in general so far -- perplexity, for example, is a metric that I haven't commented on a lot. Mainly, that's because people who swear by it cannot be convinced otherwise and people who don't already use it don't care. Function calling, on the other hand, is a different animal. There, we have those magical 'verifiable rewards', so we have no excuse not to be rather assiduous about identifying very clear outcome metrics rather than the more procedural statistical metrics that have occupied our attention so far.
+
+Until then, happy training!
