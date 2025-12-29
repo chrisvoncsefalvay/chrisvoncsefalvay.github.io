@@ -10,7 +10,1243 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is a computational epidemiologist/data scientist working at the intersection of AI, epidemiology and public health.</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Thu, 25 Dec 2025 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 28 Dec 2025 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The post-training instrument cluster – Part II</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hey, I’m writing a book about this!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’m actually writing a book about this stuff. It turns out there isn’t a lot of literature on how to do post-training at the level too big for single-GPU laptop-sized hobby projects and requiring enterprise reliability on one hand, but not quite at the scale of multi-team distributed post-training you’d get in foundation labs. That’s a problem, because a lot of the current value in fine-tuning applications comes exactly out of that large, crucial market. I am in the last phases of putting together the manuscript for <em>The Frontier Playbook</em>, a set of curated tactics and techniques for real world operationalisation of LLMs. <a href="https://aifrontierplaybook.substack.com">Sign up for updates here</a>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>This is Part II of a series
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This post builds on <a href="../../posts/post-training-instrument-cluster/index.html">Part I</a>, which covered the eight instruments for supervised fine-tuning. If you haven’t read that yet, I recommend starting there – the instruments in this post assume familiarity with the basics of loss landscape monitoring, gradient health and the general philosophy of comprehensive training instrumentation.</p>
+</div>
+</div>
+<p>In Part I, we built an instrument cluster for supervised fine-tuning: eight monitors that together paint a comprehensive picture of what’s happening during a LoRA training run. But as I hinted at the end of that post, the story doesn’t end with SFT.</p>
+<p>The moment you move from supervised fine-tuning to reinforcement learning from human feedback (RLHF) or its variants – Direct Preference Optimization (DPO), Group Relative Policy Optimization (GRPO), Proximal Policy Optimization (PPO) and so on – you enter a different regime altogether. The failure modes multiply. The metrics become more subtle. And the consequences of getting it wrong become considerably more expensive.<sup>1</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I’m being restrained here. In my experience, a failed RL run is typically 3-5x more expensive than a failed SFT run, not just in compute cost but in human time spent diagnosing what went wrong. The failure modes are less obvious, the feedback loops are longer and the pathologies can be quite subtle until they suddenly aren’t.</p></div></div><p>The fundamental shift is philosophical: in SFT, we’re teaching the model to imitate. In RL, we’re teaching it to <em>optimise</em>. And optimisation, as anyone who has spent time with reward systems (or golden retrievers) knows, is a double-edged sword. The model will find a way to maximise the reward – the question is whether that way aligns with what we actually wanted.</p>
+<p>This post introduces four additional instruments for your post-training dashboard, specifically designed for preference optimisation and reinforcement learning methods. Together with the eight from Part I, they form a twelve-instrument cluster that should catch most of the pathologies you’ll encounter in production RL training.</p>
+<section id="the-rl-monitoring-problem" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-rl-monitoring-problem">The RL monitoring problem</h2>
+<p>Before we dive into the instruments, it’s worth understanding why RL training is harder to monitor than SFT.</p>
+<p>In supervised fine-tuning, the objective is clear: minimise the cross-entropy loss between the model’s predictions and the training labels. The loss curve tells you almost everything you need to know about whether learning is happening. Yes, there are subtle failure modes (as we covered in Part I), but the basic diagnostic picture is straightforward.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The reward model is itself a trained system with its own failure modes. We’re optimising against a proxy, not the true objective. This, by the way, is the source of most RL pathologies.</p>
+</div></div><p>In RL, we’re optimising against a <em>reward signal</em> – typically produced by a reward model trained on human preferences, or in the case of DPO, implicitly derived from preference pairs. This introduces several complications:</p>
+<ol type="1">
+<li><strong>The reward is a proxy</strong>: The reward model is our best guess at what humans want, not what they actually want. Optimising too hard against this proxy leads to reward hacking – the model exploiting quirks in the reward model rather than genuinely improving <span class="citation" data-cites="gao2023scaling">(Gao, Schulman, and Hilton 2023)</span>.</li>
+<li><strong>The policy can drift</strong>: Unlike SFT, where the model stays close to its initialisation, RL can push the model relatively far from its starting point. This drift can destroy capabilities that the base model had. RL can legitimately break your base model’s back.</li>
+<li><strong>The optimisation landscape is non-stationary</strong>: As the policy changes, the distribution of data it generates changes, which in turn changes the effective reward landscape.</li>
+<li><strong>Multiple objectives are in tension</strong>: We want high reward <em>and</em> low divergence from the reference policy <em>and</em> preserved capabilities <em>and</em> no degenerate behaviours. These can conflict.</li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="ref-gao2023scaling" class="csl-entry">
+Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Reward Model Overoptimization’</span>. <em>Proceedings of the 40th International Conference on Machine Learning</em>. <a href="https://proceedings.mlr.press/v202/gao23h.html">https://proceedings.mlr.press/v202/gao23h.html</a>.
+</div></div><p>The instruments in this post are designed to catch failures in each of these dimensions.</p>
+</section>
+<section id="instrument-9-reward-dynamics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-9-reward-dynamics">Instrument 9: reward dynamics</h2>
+<p>The reward curve is to RL what the loss curve is to SFT – the primary indicator of whether learning is happening. But unlike loss, reward requires considerably more nuance to interpret correctly.</p>
+<p>The TRL library, for example, logs several reward-related metrics by default, but understanding what they mean – and what healthy versus pathological patterns look like – requires some unpacking.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>For DPO, the implicit reward for a response is typically <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20(%5Clog%20%5Cpi_%5Ctheta(y%20%5Cmid%20x)%20-%20%5Clog%20%5Cpi_%7B%5Ctext%7Bref%7D%7D(y%20%5Cmid%20x))">, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
+</div></div><div id="065d373a" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Enhanced reward monitoring callback</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> transformers <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> TrainerCallback</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> collections <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> deque</span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> RewardDynamicsCallback(TrainerCallback):</span>
+<span id="cb1-6">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Track reward statistics beyond simple averages."""</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, window_size: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>):</span>
+<span id="cb1-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.window_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> window_size</span>
+<span id="cb1-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.reward_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb1-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.margin_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb1-12"></span>
+<span id="cb1-13">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_log(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb1-14">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> logs <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb1-15">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb1-16"></span>
+<span id="cb1-17">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Track reward metrics (names vary by trainer)</span></span>
+<span id="cb1-18">        reward_keys <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb1-19">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rewards/chosen"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rewards/rejected"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rewards/margins"</span>,</span>
+<span id="cb1-20">            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"objective/scores"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"objective/rlhf_reward"</span></span>
+<span id="cb1-21">        ]</span>
+<span id="cb1-22"></span>
+<span id="cb1-23">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> reward_keys:</span>
+<span id="cb1-24">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb1-25">                value <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs[key]</span>
+<span id="cb1-26"></span>
+<span id="cb1-27">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"margin"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">or</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"chosen"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> key:</span>
+<span id="cb1-28">                    <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.reward_history.append(value)</span>
+<span id="cb1-29"></span>
+<span id="cb1-30">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.reward_history) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:</span>
+<span id="cb1-31">                        rewards <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.reward_history)</span>
+<span id="cb1-32"></span>
+<span id="cb1-33">                        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Trend analysis</span></span>
+<span id="cb1-34">                        logs[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">_trend"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.polyfit(</span>
+<span id="cb1-35">                            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(rewards)), rewards, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb1-36">                        )[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb1-37"></span>
+<span id="cb1-38">                        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Variance tracking (early warning for instability)</span></span>
+<span id="cb1-39">                        logs[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">_variance"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.var(rewards)</span>
+<span id="cb1-40"></span>
+<span id="cb1-41">                        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Saturation detection</span></span>
+<span id="cb1-42">                        recent <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> rewards[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>:] <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(rewards) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> rewards</span>
+<span id="cb1-43">                        logs[<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">_saturation"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> np.std(recent) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> (np.std(rewards) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-8</span>)</span></code></pre></div></div>
+</details>
+</div>
+<p>For <strong>DPO</strong>, the key metrics are:</p>
+<ul>
+<li><code>rewards/chosen</code>: The implicit reward for chosen responses (higher is better)</li>
+<li><code>rewards/rejected</code>: The implicit reward for rejected responses (lower is better)</li>
+<li><code>rewards/margins</code>: The difference between chosen and rejected (should increase)</li>
+<li><code>rewards/accuracies</code>: How often the model prefers chosen over rejected (should approach 1.0)</li>
+</ul>
+<div id="cell-fig-dpo-metrics-relationship" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div id="fig-dpo-metrics-relationship" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dpo-metrics-relationship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-dpo-metrics-relationship-output-1.png" width="822" height="519" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dpo-metrics-relationship-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The relationship between DPO reward metrics: chosen and rejected rewards define the margin, which determines accuracy through the sigmoid function.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The margin is simply the difference between the chosen and rejected rewards; the preference probability is the sigmoid of that margin (scaled by beta).<sup>2</sup> The logged accuracy is the empirical fraction of pairs where the chosen reward exceeds the rejected reward, so it tracks the sigmoid in expectation. As training progresses, we want the margin to increase – either by pushing the chosen reward up, the rejected reward down, or both. A larger margin means higher accuracy, which means the model more reliably prefers the chosen response over the rejected one.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;This follows from the Bradley-Terry model underlying DPO. The model assumes the probability of preferring response A over B is <img src="https://latex.codecogs.com/png.latex?%5Csigma(r_A%20-%20r_B)">, where <img src="https://latex.codecogs.com/png.latex?r"> is the implicit reward. DPO’s loss function directly optimises this probability, so the accuracy metric – how often the model assigns higher probability to the chosen response – naturally follows a sigmoid relationship with the reward margin.</p></div></div><p>For <strong>PPO</strong>, the key metrics are:</p>
+<ul>
+<li><code>objective/scores</code>: The raw reward from the reward model</li>
+<li><code>objective/rlhf_reward</code>: The effective RLHF reward (<code>scores + non_score_reward</code>)</li>
+<li><code>objective/non_score_reward</code>: The KL penalty contribution (negative, computed as <code>-kl_coef * kl</code>)</li>
+<li><code>objective/kl</code>: The mean KL divergence between current and reference policy</li>
+</ul>
+<p>For <strong>GRPO</strong>, the metrics follow a different naming convention:</p>
+<ul>
+<li><code>reward</code>: The overall average reward after applying reward weights</li>
+<li><code>reward_std</code>: The standard deviation of rewards (per-group or batch-level, depending on <code>scale_rewards</code>)</li>
+<li><code>kl</code>: The average KL divergence (logged only if <code>beta &gt; 0</code>)</li>
+<li><code>entropy</code>: Average entropy of token predictions across completions</li>
+<li><code>clip_ratio/region_mean</code>: The fraction of token probabilities clipped within the trust region</li>
+<li><code>clip_ratio/low_mean</code> and <code>clip_ratio/high_mean</code>: Mean clipping on lower and upper bounds</li>
+</ul>
+<div id="cell-fig-reward-dynamics" class="cell" data-fig-height="8" data-fig-width="10" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div id="fig-reward-dynamics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reward-dynamics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-reward-dynamics-output-1.png" width="952" height="759" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reward-dynamics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Reward dynamics diagnostics: healthy learning vs common pathologies in DPO.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Margin not increasing</strong>: If <code>rewards/margins</code> plateaus early, your model has stopped learning from the preference data. Either the learning rate is too low, or you’ve exhausted the signal in your dataset. As a general rule, people overestimate just how much signal <em>is</em> in a given preference dataset.</li>
+<li><strong>Unbounded reward growth</strong>: If chosen rewards keep climbing without limit, you’re likely seeing reward hacking. The model is exploiting the reward function rather than genuinely improving. Check your KL divergence – it’s probably too high.</li>
+<li><strong>Rewards converging</strong>: If chosen and rejected rewards approach each other, the model is losing its ability to distinguish preferences. This can indicate catastrophic forgetting or a learning rate that’s too high.</li>
+<li><strong>High reward variance</strong>: Unstable rewards suggest unstable optimisation. Consider reducing the learning rate or increasing the KL penalty.</li>
+</ul>
+</section>
+<section id="instrument-10-kl-divergence-health" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-10-kl-divergence-health">Instrument 10: KL divergence health</h2>
+<p>The KL divergence between your training policy and the reference policy is perhaps the single most important diagnostic for RL training. It measures how far your model has drifted from its starting point – and managing this drift is the central challenge of preference optimisation.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The reference policy is typically the SFT model you started with. In DPO, this is implicit in the loss function. In PPO, you maintain an explicit reference model and compute KL divergence at each step.</p>
+</div></div><p>The mathematics are straightforward. For a policy <img src="https://latex.codecogs.com/png.latex?%5Cpi_%5Ctheta"> and reference policy <img src="https://latex.codecogs.com/png.latex?%5Cpi_%7B%5Ctext%7Bref%7D%7D">, the KL divergence is:</p>
+<p><img src="https://latex.codecogs.com/png.latex?D_%7B%5Ctext%7BKL%7D%7D(%5Cpi_%5Ctheta%20%5C%7C%20%5Cpi_%7B%5Ctext%7Bref%7D%7D)%20=%20%5Cmathbb%7BE%7D_%7Bx%20%5Csim%20%5Cpi_%5Ctheta%7D%5Cleft%5B%5Clog%20%5Cfrac%7B%5Cpi_%5Ctheta(x)%7D%7B%5Cpi_%7B%5Ctext%7Bref%7D%7D(x)%7D%5Cright%5D"></p>
+<p>In practice, we estimate this over batches of generated text, summing the per-token log probability differences. The TRL library uses the Schulman approximator for efficiency <span class="citation" data-cites="schulman2020kl">(Schulman 2020)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-schulman2020kl" class="csl-entry">
+Schulman, John. 2020. <span>‘Approximating <span>KL</span> Divergence’</span>. <a href="http://joschu.net/blog/kl-approx.html">http://joschu.net/blog/kl-approx.html</a>.
+</div><div id="ref-chen2024catastrophic" class="csl-entry">
+Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. In <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
+</div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen, He, and Kifer 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
+<div id="549c3f07" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>KL divergence monitoring callback</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> KLDivergenceCallback(TrainerCallback):</span>
+<span id="cb2-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor KL divergence and detect drift pathologies."""</span></span>
+<span id="cb2-3"></span>
+<span id="cb2-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, window_size: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>, drift_threshold: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>):</span>
+<span id="cb2-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.window_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> window_size</span>
+<span id="cb2-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.drift_threshold <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> drift_threshold</span>
+<span id="cb2-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.kl_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb2-8"></span>
+<span id="cb2-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_log(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb2-10">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> logs <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb2-11">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb2-12"></span>
+<span id="cb2-13">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># KL metrics (names vary by trainer)</span></span>
+<span id="cb2-14">        kl_keys <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"objective/kl"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kl"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kl_divergence"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"policy/approxkl_avg"</span>]</span>
+<span id="cb2-15"></span>
+<span id="cb2-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> kl_keys:</span>
+<span id="cb2-17">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb2-18">                kl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs[key]</span>
+<span id="cb2-19">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.kl_history.append(kl)</span>
+<span id="cb2-20"></span>
+<span id="cb2-21">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.kl_history) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:</span>
+<span id="cb2-22">                    kl_values <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.kl_history)</span>
+<span id="cb2-23"></span>
+<span id="cb2-24">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Trend: is KL growing?</span></span>
+<span id="cb2-25">                    logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kl/trend"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.polyfit(</span>
+<span id="cb2-26">                        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(kl_values)), kl_values, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-27">                    )[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb2-28"></span>
+<span id="cb2-29">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Acceleration: is growth accelerating?</span></span>
+<span id="cb2-30">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(kl_values) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>:</span>
+<span id="cb2-31">                        first_half <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> kl_values[:<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(kl_values)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]</span>
+<span id="cb2-32">                        second_half <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> kl_values[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(kl_values)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>:]</span>
+<span id="cb2-33">                        logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kl/acceleration"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.mean(second_half) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> np.mean(first_half)</span>
+<span id="cb2-34"></span>
+<span id="cb2-35">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Warning flag for runaway KL</span></span>
+<span id="cb2-36">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> kl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.drift_threshold:</span>
+<span id="cb2-37">                        logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kl/drift_warning"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-38">                        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"WARNING: KL divergence (</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>kl<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">) exceeds threshold (</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>drift_threshold<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)"</span>)</span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-kl-divergence" class="cell" data-fig-height="10" data-fig-width="6" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-kl-divergence" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kl-divergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-kl-divergence-output-1.png" width="568" height="951" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kl-divergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: KL divergence patterns: the art of managing policy drift in preference optimisation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>KL growing without bound</strong>: Runaway policy drift. Your model is moving too far from the reference. Increase the KL penalty (beta) or reduce the learning rate. In PPO, check that the clipping is working.</li>
+<li><strong>KL near zero throughout training</strong>: Your KL penalty (beta) is too high. The model is barely updating. Reduce beta to allow more policy drift.</li>
+<li><strong>KL noisy with high variance</strong>: Unstable optimisation. The learning rate is probably too high for your current KL penalty setting.</li>
+<li><strong>KL suddenly spiking</strong>: Often indicates a batch of data that the model handles very differently from the reference. Investigate that batch.</li>
+</ul>
+<p>A useful heuristic for PPO: the <code>val/ratio</code> metric (ratio of current to old policy probabilities) should stay close to 1.0. If it regularly exceeds 2.0 or drops below 0.5, the policy updates are too aggressive <span class="citation" data-cites="huang2024n">(Huang et al. 2024)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-huang2024n" class="csl-entry">
+Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</span>+ Implementation Details of <span>RLHF</span> with <span>PPO</span>: A Case Study on <span>TL;DR</span> Summarization’</span>. <em>arXiv Preprint arXiv:2403.17031</em>. <a href="https://huggingface.co/papers/2403.17031">https://huggingface.co/papers/2403.17031</a>.
+</div></div></section>
+<section id="instrument-11-policy-ratio-and-clip-fraction" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-11-policy-ratio-and-clip-fraction">Instrument 11: policy ratio and clip fraction</h2>
+<p>For PPO and GRPO (but not DPO), the clipping mechanism is central to training stability. PPO’s “proximal” nature comes from clipping the policy ratio to prevent too-large updates.</p>
+<p>The policy ratio is defined as:</p>
+<p><img src="https://latex.codecogs.com/png.latex?r_t(%5Ctheta)%20=%20%5Cfrac%7B%5Cpi_%5Ctheta(a_t%20%7C%20s_t)%7D%7B%5Cpi_%7B%5Ctheta_%7B%5Ctext%7Bold%7D%7D%7D(a_t%20%7C%20s_t)%7D"></p>
+<p>PPO clips this ratio to the range <img src="https://latex.codecogs.com/png.latex?%5B1%20-%20%5Cepsilon,%201%20+%20%5Cepsilon%5D"> (typically <img src="https://latex.codecogs.com/png.latex?%5Cepsilon%20=%200.2">), ensuring that the policy doesn’t change too drastically in a single update. The <code>clip_fraction</code> metric tells you how often this clipping is triggered.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>. The monitoring principles are the same.</p>
+<div id="ref-shao2024deepseekmath" class="csl-entry">
+Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
+</div></div></div><div id="e249bdb5" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Policy ratio monitoring</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> PolicyRatioCallback(TrainerCallback):</span>
+<span id="cb3-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor policy ratio and clipping behaviour in PPO/GRPO."""</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, target_clip_fraction: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.15</span>):</span>
+<span id="cb3-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.target_clip_fraction <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> target_clip_fraction</span>
+<span id="cb3-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.clip_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>)</span>
+<span id="cb3-7"></span>
+<span id="cb3-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_log(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb3-9">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> logs <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb3-10">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb3-11"></span>
+<span id="cb3-12">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Ratio metrics</span></span>
+<span id="cb3-13">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"val/ratio"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb3-14">            ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"val/ratio"</span>]</span>
+<span id="cb3-15">            ratio_var <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs.get(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"val/ratio_var"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb3-16"></span>
+<span id="cb3-17">            <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Flag extreme ratios</span></span>
+<span id="cb3-18">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.0</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">or</span> ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>:</span>
+<span id="cb3-19">                logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"policy/ratio_warning"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-20">                <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"WARNING: Extreme policy ratio: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>ratio<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.3f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb3-21"></span>
+<span id="cb3-22">        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Clip fraction analysis</span></span>
+<span id="cb3-23">        clip_keys <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"policy/clipfrac_avg"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clip_ratio/low"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clip_ratio/high"</span>]</span>
+<span id="cb3-24">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> clip_keys:</span>
+<span id="cb3-25">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb3-26">                clip_frac <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs[key]</span>
+<span id="cb3-27">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.clip_history.append(clip_frac)</span>
+<span id="cb3-28"></span>
+<span id="cb3-29">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Too much clipping = updates too aggressive</span></span>
+<span id="cb3-30">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> clip_frac <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>:</span>
+<span id="cb3-31">                    logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"policy/clipping_warning"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-32"></span>
+<span id="cb3-33">                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># No clipping = updates might be too small</span></span>
+<span id="cb3-34">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> clip_frac <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.01</span>:</span>
+<span id="cb3-35">                    logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"policy/underclipping_warning"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-clip-fraction" class="cell" data-fig-height="8" data-fig-width="10" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-clip-fraction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-clip-fraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-clip-fraction-output-1.png" width="952" height="759" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-clip-fraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Policy ratio far from 1.0</strong>: The ratio should hover around 1.0 with small fluctuations. Values consistently above 1.5 or below 0.7 indicate that consecutive policy updates are too drastic. Reduce the learning rate.</li>
+<li><strong>Clip fraction too high (&gt; 30%)</strong>: Most of your updates are being clipped. The learning rate is too high relative to your epsilon. Either reduce learning rate or increase epsilon (carefully).</li>
+<li><strong>Clip fraction too low (&lt; 1%)</strong>: Almost no clipping is happening. Either your learning rate is very conservative, or something else is wrong.</li>
+<li><strong>Clip fraction growing over time</strong>: The optimisation is becoming increasingly aggressive. This often precedes a KL explosion.</li>
+</ul>
+</section>
+<section id="instrument-12-generation-length-dynamics" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="instrument-12-generation-length-dynamics">Instrument 12: generation length dynamics</h2>
+<p>The final instrument is deceptively simple but catches some of the most common RL failures: tracking how long your model’s responses are. Generation length is one of the earliest indicators of reward hacking, and changes in length distribution often precede more obvious failures by hundreds of steps.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>Length-based reward hacking is so common that many practitioners now add explicit length penalties or normalisation to their reward functions. The TRL library’s <code>missing_eos_penalty</code> parameter exists specifically to combat length collapse.</p>
+</div></div><p>Why does length matter so much? Because length is one of the easiest things for a model to optimise. If longer responses tend to score slightly higher (perhaps because they’re more detailed, or because the reward model has a subtle length bias), the model will learn to be verbose. Conversely, if the model discovers that short, safe responses avoid negative rewards, it will collapse to terse outputs.</p>
+<p>The key metrics to track (in GRPO/PPO) are:</p>
+<ul>
+<li><code>completions/mean_length</code>: Average token count across generations</li>
+<li><code>completions/mean_terminated_length</code>: Average length of completions that end with EOS</li>
+<li><code>completions/min_length</code> and <code>completions/max_length</code>: The range of lengths</li>
+<li><code>completions/clipped_ratio</code>: How often generations hit the maximum length limit</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
+</div></div><div id="d1a3ce39" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Generation length monitoring callback</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">class</span> GenerationLengthCallback(TrainerCallback):</span>
+<span id="cb4-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">"""Monitor generation length dynamics for reward hacking detection."""</span></span>
+<span id="cb4-3"></span>
+<span id="cb4-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, baseline_length: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, window_size: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>):</span>
+<span id="cb4-5">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.baseline_length <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> baseline_length</span>
+<span id="cb4-6">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.window_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> window_size</span>
+<span id="cb4-7">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.length_history <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> deque(maxlen<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>window_size)</span>
+<span id="cb4-8"></span>
+<span id="cb4-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> on_log(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, args, state, control, logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">**</span>kwargs):</span>
+<span id="cb4-10">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> logs <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">is</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>:</span>
+<span id="cb4-11">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span></span>
+<span id="cb4-12"></span>
+<span id="cb4-13">        length_keys <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"completions/mean_length"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"response_length"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gen_len"</span>]</span>
+<span id="cb4-14"></span>
+<span id="cb4-15">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> length_keys:</span>
+<span id="cb4-16">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> logs:</span>
+<span id="cb4-17">                length <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> logs[key]</span>
+<span id="cb4-18">                <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.length_history.append(length)</span>
+<span id="cb4-19"></span>
+<span id="cb4-20">                <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.length_history) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>:</span>
+<span id="cb4-21">                    lengths <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.length_history)</span>
+<span id="cb4-22"></span>
+<span id="cb4-23">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Trend detection</span></span>
+<span id="cb4-24">                    logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"length/trend"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.polyfit(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(lengths)), lengths, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb4-25"></span>
+<span id="cb4-26">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Variance (low variance = mode collapse)</span></span>
+<span id="cb4-27">                    logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"length/variance"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.var(lengths)</span>
+<span id="cb4-28"></span>
+<span id="cb4-29">                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Compare to baseline if available</span></span>
+<span id="cb4-30">                    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.baseline_length:</span>
+<span id="cb4-31">                        ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.mean(lengths) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.baseline_length</span>
+<span id="cb4-32">                        logs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"length/baseline_ratio"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ratio</span>
+<span id="cb4-33"></span>
+<span id="cb4-34">                        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>:</span>
+<span id="cb4-35">                            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"WARNING: Length collapsed to </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>ratio<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.1%}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> of baseline"</span>)</span>
+<span id="cb4-36">                        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">elif</span> ratio <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.0</span>:</span>
+<span id="cb4-37">                            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"WARNING: Length exploded to </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>ratio<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.1%}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> of baseline"</span>)</span></code></pre></div></div>
+</details>
+</div>
+<div id="cell-fig-generation-length" class="cell" data-fig-height="10" data-fig-width="6" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-generation-length" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-generation-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-generation-length-output-1.png" width="568" height="951" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-generation-length-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Generation length dynamics: healthy stability vs common pathologies.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What to watch for:</strong></p>
+<ul>
+<li><strong>Length steadily increasing</strong>: The model is learning that verbosity is rewarded. This is often a sign that your reward model has a length bias. Consider adding length normalisation or a brevity penalty.</li>
+<li><strong>Length steadily decreasing</strong>: The model is learning that short responses are safer. This often happens when the reward model penalises certain content – the model learns to say less to avoid penalties. Check your reward distribution.</li>
+<li><strong>Length variance collapsing</strong>: Even if mean length stays stable, collapsing variance indicates mode collapse. The model is converging to a single “template” response style. Increase temperature or add entropy bonuses.</li>
+<li><strong>High clipped ratio</strong>: If <code>completions/clipped_ratio</code> is high (&gt; 20%), many responses are hitting the maximum length limit. Either increase <code>max_completion_length</code> or investigate why the model wants to generate such long responses.</li>
+</ul>
+<p>A useful baseline: measure your SFT model’s generation length distribution before RL training begins. Any significant deviation (&gt; 30% change in mean or &gt; 50% change in variance) during RL deserves investigation.</p>
+</section>
+<section id="putting-it-all-together" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting it all together</h2>
+<p>The four RL instruments we’ve covered complement the eight from Part I:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 33%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Instrument</th>
+<th>What it tells you</th>
+<th>Failure mode it catches</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reward dynamics</td>
+<td>Preference learning progress</td>
+<td>Reward hacking, saturation, collapse</td>
+</tr>
+<tr class="even">
+<td>KL divergence</td>
+<td>Policy drift from reference</td>
+<td>Overoptimisation, capability loss</td>
+</tr>
+<tr class="odd">
+<td>Clip fraction</td>
+<td>Update magnitude</td>
+<td>Unstable optimisation</td>
+</tr>
+<tr class="even">
+<td>Generation length</td>
+<td>Output distribution health</td>
+<td>Length hacking, mode collapse</td>
+</tr>
+</tbody>
+</table>
+<p>Together with the SFT instruments, you now have a twelve-gauge dashboard for monitoring any post-training run.<sup>3</sup></p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Not to be confused with an equally potent firearm of the same specification, <em>twelve</em> here quantifies rather than specifies.</p></div></div><p>For production RL training, I recommend the following dashboard layout:</p>
+<ol type="1">
+<li><strong>Primary RL metrics</strong>: Reward margin, KL divergence, RLHF reward. The overview.</li>
+<li><strong>Policy health</strong>: Clip fraction, policy ratio, policy entropy. The vital signs.</li>
+<li><strong>Value function</strong>: Value loss, value clipping. (PPO only.)</li>
+<li><strong>Fundamentals</strong>: Loss, gradients, attention entropy. Don’t forget these still matter!</li>
+</ol>
+</section>
+<section id="the-failure-pattern-gallery" class="level2">
+<h2 class="anchored" data-anchor-id="the-failure-pattern-gallery">The failure pattern gallery</h2>
+<p>Let me conclude with a visual summary of the most common RL training failures I encounter in practice. Each of these can be caught by monitoring the right combination of instruments. In RL, “wtf even” is a valid diagnostic category: it’s rare for one thing to go wrong in neat isolation. Rather, what you get is a picture of multiple interacting failures that create a tableau of pathology.</p>
+<div id="cell-fig-rl-failure-patterns" class="cell" data-fig-height="10" data-fig-width="11" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-rl-failure-patterns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rl-failure-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index_files/figure-html/fig-rl-failure-patterns-output-1.png" width="1047" height="951" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rl-failure-patterns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Common RL training failures: each requires monitoring multiple instruments simultaneously.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="practical-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="practical-recommendations">Practical recommendations</h2>
+<p>If you take away nothing else from this post, remember these heuristics:</p>
+<ol type="1">
+<li><p><strong>Never trust the reward alone</strong>. Always cross-reference with KL divergence and generation quality samples. Reward hacking is the default failure mode.</p></li>
+<li><p><strong>Set up alerts for KL divergence thresholds</strong>. In my experience, KL &gt; 0.5 is a warning and KL &gt; 1.0 is a stop sign. Your thresholds may vary, but have thresholds.</p></li>
+<li><p><strong>Log generation samples throughout training</strong>. This catches qualitative failures that no metric will show you. Schedule periodic human evaluation if you can.</p></li>
+<li><p><strong>For PPO, keep an eye on the ratio and clip fraction</strong>. If the ratio regularly exceeds 1.5 or clip fraction exceeds 30%, reduce your learning rate.</p></li>
+<li><p><strong>Don’t forget the basic instruments</strong>. Gradient health, attention entropy and the other fundamentals still matter.</p></li>
+</ol>
+<p>In the next post, we’ll tackle the third domain: function calling and tool use, where the metrics of success involve not just natural language quality but format compliance, execution accuracy and production reliability. We’ve devoted relatively little attention to the outcome in general so far – perplexity, for example, is a metric that I haven’t commented on a lot. Mainly, that’s because people who swear by it cannot be convinced otherwise and people who don’t already use it don’t care. Function calling, on the other hand, is a different animal. There, we have those magical ‘verifiable rewards’, so we have no excuse not to be rather assiduous about identifying very clear outcome metrics rather than the more procedural statistical metrics that have occupied our attention so far.</p>
+<p>Until then, happy training!</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
+  author = {{Chris von Csefalvay}},
+  title = {The Post-Training Instrument Cluster -\/- {Part} {II}},
+  date = {2025-12-28},
+  url = {https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
+-- Part II.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>LLMs</category>
+  <category>LLMOps</category>
+  <category>post-training</category>
+  <category>reinforcement learning</category>
+  <category>RLHF</category>
+  <guid>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/</guid>
+  <pubDate>Sun, 28 Dec 2025 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/rl_failure_patterns.png" medium="image" type="image/png" height="131" width="144"/>
+</item>
 <item>
   <title>The post-training instrument cluster – Part I</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -51,7 +1287,7 @@
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="d9b85db8" class="cell" data-execution_count="1">
+</div></div><div id="15b28f94" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -278,7 +1514,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="ada9fa74" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="c8df9f4f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -635,7 +1871,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="d858bf90" class="cell" data-execution_count="5">
+</div></div><div id="0a739116" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -855,7 +2091,7 @@ font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
 <p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
 <p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="152f2155" class="cell" data-execution_count="6">
+<div id="0c3f8278" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
@@ -1076,7 +2312,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="772e71b1" class="cell" data-execution_count="8">
+<div id="e0396424" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -1373,7 +2609,7 @@ font-style: inherit;">"generation_samples"</span>: table})</span>
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="2f86fd2e" class="cell" data-execution_count="9">
+<div id="6b94dc8f" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
@@ -1739,7 +2975,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="e1954ea6" class="cell" data-execution_count="11">
+</div></div><div id="fb9c81d1" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
@@ -2040,7 +3276,7 @@ font-style: inherit;">=</span> current_time</span></code></pre></div></div>
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="b1a2f03b" class="cell" data-execution_count="12">
+<div id="b96e57f6" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
@@ -2488,7 +3724,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="42c3e8c6" class="cell" data-execution_count="14">
+<div id="0867b9cb" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
@@ -6818,7 +8054,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-21787"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-21787").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-34609"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-34609").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -6916,7 +8152,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-38965"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-38965").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-64947"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-64947").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -7174,80 +8410,6 @@ Chris von Csefalvay. 2025. <span>“Seatbelts and Straitjackets.”</span>
   <guid>https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/</guid>
   <pubDate>Sat, 25 Jan 2025 00:00:00 GMT</pubDate>
   <media:content url="https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/header.webp" medium="image" type="image/webp"/>
-</item>
-<item>
-  <title>Deja Vu, All Over Again.</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>The Department for Science, Innovation and Technology has just dropped its long-awaited <a href="https://assets.publishing.service.gov.uk/media/67851771f0528401055d2329/ai_opportunities_action_plan.pdf">AI Opportunities Action Plan</a>, a 50-page vision of how the UK government plans to guide us into an AI-powered future. The document, adorned with the obligatory glowing circuit board imagery that seems to be mandatory for any government AI publication, promises to transform Britain into an “AI superpower.” As someone who’s spent their career at the intersection of computational science and public policy, I can’t help but feel a familiar sense of déjà vu. We’ve been here before – just with different technology and different buzzwords.</p>
-<section id="the-ghost-of-centralisation-past" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-ghost-of-centralisation-past">The Ghost of Centralisation Past</h2>
-<p>Ah, government AI initiatives. Like watching your uncle try to explain TikTok at Christmas dinner – enthusiastic, well-meaning, but somehow missing the point entirely. The UK’s new AI Opportunities Action Plan, released this week with characteristic governmental fanfare, was supposed to inspire and plot the course for the UK’s ship on the stormy seas of AI. But really, it rather brings to mind that most delicious of historical failures: Project Cybersyn.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/D-W7mk4UcAA42hm.png" class="img-fluid figure-img"></p>
-<figcaption>Swivel chairs!</figcaption>
-</figure>
-</div>
-</div><div id="fn1"><p><sup>1</sup>&nbsp;One of history’s great tragedies is that the winds of change often sweep away lessons before they can fail to their fullest extent. The Allende regime’s fall sadly also brought with it the destruction of Cybersyn before its complete failure would come to be in full evidence.</p></div></div><p>For those who actually have a life and don’t regularly spend their evenings reading about Cold War technological follies, Cybersyn was Salvador Allende’s attempt to run Chile’s economy through the dark arts of the hype of the day – cybernetics –, a network of telex machines and a room that looked like the love child of Star Trek and Austin Powers. It had swivel chairs. It had buttons. It had everything except, well, actual functionality.<sup>1</sup> It was an example of what happens when you have a sensible idea (networking) in pursuit of a dubious goal (central planning) executed on the back of governmental fiat. Back then, the buzzword was ‘cybernetics’, and it was supposed to usher in an era of truly scientific central planning. We would soon all be waving goodbye to the inefficiencies of market economies thanks to… telexes. And big screens.</p>
-<p>This pattern of centrally-planned technological innovation has repeated itself throughout history - from the Soviet Union’s OGAS project<sup>2</sup> to Japan’s Fifth Generation Computer Project. These initiatives share a common thread: they all failed spectacularly despite massive government backing. Innovation, like my attempts at Provençal cuisine, tends to work best when it’s organic and bottom-up, not when it’s directed from above by committee. You can’t will creativity or innovation into existence. Least of all can you do so by governmental fiat.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://www.youtube.com/@Asianometry">asianometry</a> on YouTube has a <a href="https://www.youtube.com/watch?v=cLOD5f-q0as">wonderful video</a> on this.</p></div></div></section>
-<section id="too-little-too-late-too-bureaucratic" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="too-little-too-late-too-bureaucratic">Too little, too late, too bureaucratic</h2>
-<p>Fast forward to 2025, and we’re treated to Matt Clifford’s vision of how the UK government can shepherd us into an AI-powered future. The plan isn’t wrong, per se – it’s just adorably optimistic about the ability of government to direct technological evolution, or the beneficial effect of government getting involved in innovation. It’s like trying to herd cats, if the cats were quantum computers and the herders were Whitehall civil servants still struggling with Excel.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<hr>
-<p><strong>Recipe</strong>: Coq au vin</p>
-<ul>
-<li>1 whole chicken, cut into pieces</li>
-<li>750mL decent red wine</li>
-<li>200g lardons</li>
-<li>Pearl onions… lots of them. Two dozen or so.</li>
-<li>500g mushrooms</li>
-<li>2 carrots</li>
-<li>Fresh thyme</li>
-<li>Bay leaves</li>
-</ul>
-<p>Dunk the chicken in the wine and let rest overnight (patience is the name of the game). On the day, brown the lardons slowly in a Dutch oven. Remove, and reserve the fat. Brown the chicken pieces in the fat – avoid crowding your Dutch oven, work in batches if you have to. Sautee the vegetables, and return everything to the Dutch oven, including the chicken – and the wine. Cover and simmer on low-medium heat for 90 minutes. Thicken to taste with a beurre manié. Serve with a thick slab of a hearty, crusty bread.</p>
-<hr>
-</div></div><p>Let’s be real: The UK is already painfully late to this party. While we’re planning to plan about planning our AI infrastructure, OpenAI and Anthropic are training models that make GPT-4 look like a pocket calculator. The plan acknowledges we’re “the third largest AI market in the world” – which sounds impressive until you realize that in absolute terms, Britain’s contribution compared to the front runners (US and PRC) barely amounts to a rounding error.</p>
-<p>The focus on government-directed innovation is particularly eyebrow-raising. The plan calls for establishing ‘AI Growth Zones’, expanding compute infrastructure and creating a new unit called UK Sovereign AI (because if you do not create more bureaucracy, you clearly aren’t doing this government thing well).<sup>3</sup> All potentially good stuff in theory, but premised on the notion that the government can effectively pick winners and shape the development of arguably the most dynamic technology since electricity. And, of course, the notion of ‘growth zones’ might strike one as rather odd considering that most of the work we do gets done in the cloud. I don’t need to be in a ‘growth zone’ to do my job. The extremely delocalised nature of software and AI development makes these echoes from the era of industrial parks and logistical efficiencies sound anachronistic at best, smacking of a misunderstanding of AI in practice at worst.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Interestingly, <a href="https://uksovereign.ai">uksovereign.ai</a> leads you to <a href="https://mindfoundry.ai">Mind Foundry</a>, a spin-out of my alma mater that seems to mainly cater for the defence industry.</p></div></div></section>
-<section id="just-stay-out-of-the-way" class="level2">
-<h2 class="anchored" data-anchor-id="just-stay-out-of-the-way">Just stay out of the way</h2>
-<p>That said, there are some genuinely promising elements. The commitment to building AI infrastructure and expanding compute capacity is crucial - though one wonders if we might have thought about this back when compute was actually available to purchase. The focus on AI safety and ethics is also commendable, even if it feels a bit like installing guardrails after the car has already left the garage.</p>
-<p>What’s missing is an acknowledgment that the most successful government interventions in technology have historically been indirect - creating the conditions for innovation rather than trying to micromanage it. DARPA gave us the internet by funding basic research and then getting out of the way. The UK’s own success stories - from ARM to DeepMind - emerged from an ecosystem that encouraged experimentation and risk-taking, not from government planning.</p>
-<p>As someone who has spent time in both academia and industry, who has seen how innovation actually happens in the trenches of AI research, I can’t help but feel we’re missing the forest for the bureaucratically-approved, committee-selected trees. The UK has world-class AI talent, outstanding universities and a vibrant startup scene. What it needs isn’t more government steering – it needs the government to focus on removing obstacles and then getting out of the way. But hey, at least we’re not building a room full of swivel chairs. Though given some of the proposals in this plan, I wouldn’t rule it out for AI Action Plan 2.0.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
-  author = {{Chris von Csefalvay}},
-  title = {Deja {Vu,} {All} {Over} {Again.}},
-  date = {2025-01-16},
-  url = {https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Deja Vu, All Over Again.”</span> <a href="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/">https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>governance</category>
-  <guid>https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/</guid>
-  <pubDate>Thu, 16 Jan 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
