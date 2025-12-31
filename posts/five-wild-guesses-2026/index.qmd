@@ -1,0 +1,122 @@
+---
+categories:
+- LLMs
+- AI
+- tech predictions
+date: 2025-12-31
+description: "The bubble everyone's watching for isn't the one that's coming."
+google-scholar: true
+image: header.png
+title: Five wild guesses for 2026
+bibliography: references.bib
+---
+
+There's an old parable about a drunk searching for his keys under a streetlamp. A passerby stops to help, and after some fruitless searching asks, "Are you sure you lost them here?" The drunk replies, "No, I lost them in the alley. But the light's better here."
+
+I think about this story a lot when I read AI predictions. [Last year, I made five predictions for 2025](../five-wild-guesses/index.qmd), and they held up reasonably well.^[The productisation of AI governance happened faster than even I expected. The insurance industry is still figuring out its role, but the actuarial interest is undeniable.] This year, the crystal ball feels murkier, and maybe a little darker.
+
+Everyone is looking for an AI bubble. And in a sense, they're right to look -- something is unsustainable, something will give. But I'm increasingly convinced that the bubble hunters are searching under the streetlamp. The crisis they're watching for — the valuation crash, the hype cycle deflation, the "AI winter" — is not the crisis that's coming, but the result of looking at what's most measurable, a McNamara fallacy of supreme proportions. The real bubble is quieter, more insidious and almost entirely ignored: we are depleting finite human resources faster than any compute buildout can compensate.
+
+And so, in my view, the most important AI developments of 2026 won't be about what AI can do. They'll be about what *we* must change — how we think, how we interact, how we organise, and how we understand what these systems even are.
+
+Here are my five guesses. None of them are about model capabilities.
+
+
+## The pace we cannot keep
+
+There's a reason military doctrine distinguishes between the *tempo* of operations and the *speed* of individual actions. You can have blazingly fast units that nonetheless lose wars because they outrun their supply lines, their communications, their ability to coordinate. The German Blitzkrieg worked not because the tanks were fastest, but because the entire system — infantry, air support, logistics, command — could maintain coherent tempo together.^[The later failures on the Eastern Front were, in part, failures of exactly this coherence. Speed without synchronisation is just chaos with velocity.]
+
+We are building AI agents that can operate at extraordinary speed. What we have not solved — what we have barely begun to think about — is the tempo problem. Agents can draft, iterate, execute and evaluate faster than any human can meaningfully supervise. And yet, for any task that matters, a human must remain in the loop. Not because regulations demand it (though they do), but because the unique contribution humans make — judgement, context, accountability — cannot yet be delegated.
+
+This creates an odd inversion. The bottleneck is no longer the machine. It's us.
+
+Vibe coders realised this pretty early, encountering a sort of fatigue that sounded an awful lot like mental overwhelm to me. Even I've noticed it in my own work this year: I am restructuring how I think. Not consciously at first, but unmistakably. I batch decisions differently. I've developed heuristics for when to trust AI output (simple heuristic: more or less never) and when to inspect it. I find myself pre-formatting my intentions in ways that minimise back-and-forth.^[This is not prompt engineering but something closer to cognitive ergonomics — reshaping one's own mental workflow to mesh with a non-human collaborator.] I am, in some small way, becoming more machine-compatible.
+
+This is, I suspect, the cognitive prelude to something larger. In 2026, we'll see this adaptation become conscious and widespread. People will talk openly about "agent-compatible thinking". There will be courses, frameworks, perhaps even certifications.^[And inevitably, a LinkedIn influencer will brand it "AgileThink 2.0" or something equally ghastly.] And somewhere, quietly, someone will start asking whether the adaptation should run the other way — whether we might need to enhance human cognition, chemically or otherwise, to be more biocompatible with the systems we've built.
+
+That conversation is coming. 2026 may be when it begins.
+
+
+## Beyond the dialogue
+
+The word "dialogue" comes from the Greek *dialogos* — a conversation between two. Not three, not many. Two. Almost everything we've built in conversational AI assumes the dyadic frame. One human, one model. A prompt, a response. Even the terminology betrays us: we speak of "chat", of "assistants", of "conversations" — all implicitly two-party structures. The entire architecture of modern LLM interaction is built around this assumption, from context windows to RLHF to the very notion of "alignment."
+
+But real human collaboration is rarely dyadic. Meetings have multiple participants. Decisions emerge from group deliberation. The most interesting intellectual work happens in seminars, not tutorials. And the social dynamics of a three-person conversation are fundamentally different from a two-person one — any parent who has watched playground friendships knows this.^[The mathematician Alfréd Rényi once remarked that a mathematician is a machine for turning coffee into theorems. He neglected to mention — as Paul Erdős was fond of recounting — that the best theorems usually emerged from *conversations* over that coffee, and rarely with just one other person.]
+
+We do not yet know how to build AI systems that can participate meaningfully in polyadic conversation. The problems are legion: turn-taking, attention management, theory of mind about multiple interlocutors, maintaining coherent context across divergent threads, knowing when to speak and when to listen. Multi-agent frameworks attempt this from one direction — multiple AI agents coordinating — but the harder problem is mixed groups: two humans and an agent, or a team with an AI participant, or a board meeting with a non-human advisor.
+
+I suspect 2026 will see the first serious attempts to crack this. Not solutions, but recognitions: papers naming the problem (the field is extremely niche -- there are fewer than a dozen major papers dealing with the overall problem of it all), frameworks attempting to address it, products that fail instructively. The dyadic assumption will start to feel like what it is — a limitation we backed into, not a design choice we made.
+
+When we solve this — and eventually we will — AI stops being a tool you *use* and becomes a participant you *include*. That is a category shift with implications we've barely begun to think through.
+
+
+## The last fixed screen
+
+Every interface you have ever used was a compromise. Not between you and the machine, but between you and every other user who might encounter the same software. The button is *there* because it had to be *somewhere*, and designers made a choice that would be tolerable for most people most of the time. Your preferences, your workflows, your particular way of thinking — these were never the point. You adapted to the interface. The interface did not adapt to you.
+
+We have naturalised this so completely that we barely notice it. But consider how strange it is: the same spreadsheet layout for the accountant and the clinical scientist, the same email client for the executive and the intern, the same dashboard for the expert and the novice. We call this "consistency" and treat it as a virtue.^[And it was a virtue, once, when the alternative was chaos. But virtues have contexts, and contexts change.]
+
+Generative AI dissolves this compromise. If a model can understand what you're trying to accomplish, it can construct an interface suited to exactly that task, for exactly your preferences, in exactly this moment. The interface becomes ephemeral — not a fixed artifact but a generated surface, conjured on demand and discarded when done. This is not a minor evolution in UX but the end of UI determinism as we've known it.
+
+The implications cascade. Design systems become less about specifying interfaces and more about specifying *constraints* on generated interfaces. Accessibility transforms from retrofitting fixed layouts to declaring capabilities and letting the system adapt. Documentation becomes nearly impossible — how do you write a manual for a screen that exists only once?^[The enterprise software industry will have a collective aneurysm. I look forward to it. But just as UIs can be on-the-fly, so can documentation.] And debugging becomes archaeological: reconstructing what the user saw at the moment something went wrong.
+
+In 2026, we'll see the first serious experiments with ephemeral UI. They will be partial, tentative, probably somewhat broken. But they will demonstrate something important: you don't interact with interfaces. You interact with *data*. Everything else is — was always — just an abstraction. And abstractions, it turns out, can be adaptive.
+
+
+## What we're actually running out of
+
+If you want to know where a bubble is, don't look at what's abundant. Look at what's scarce.
+
+The popular narrative says we're running out of... what, exactly? Investor patience? Reasonable valuations? Adult supervision? These are the scarcities the bubble-watchers monitor. But they're looking under the streetlamp again.
+
+Here's what we're actually running out of: talent. And data.
+
+Let me start with the harder one — harder for me personally. This has been a year of too many farewells. I have watched colleagues burn out, leave the field, leave the *industry*, leave more than that. The pace is not sustainable. The always-on, always-shipping, always-pivoting tempo that frontier AI demands is chewing through the few thousand people in the world who can actually do this work, a resource that is nowhere near renewable. You can always build more GPUs, raise another round or find another senator to awkwardly pose next to you as you break ground on another multi-gigawatt data centre. But you cannot mint senior ML researchers, manufacture institutional knowledge or shortcut the decade it takes to develop the intuition that distinguishes good research from promising-looking noise.
+
+No foundation lab wants to talk about this. But I've seen the faces. I've had the conversations, the ones that don't make it into the proceedings or the news articles. There are endless news about nine-figure pay packages and very little about the fact that people are _leaving_ those jobs. As always, journalism managed to miss the wood for the trees. The talent crisis is real, it's accelerating, and 2026 will be the year it becomes undeniable.^[And if you're running a lab, a startup or even a larger company: look out for your people. Regardless of what you pay them, it's small change compared to what it will cost to replace them on an increasingly tight market.]
+
+The data crisis is, if anything, more fundamental. I keep going on about this like those crazy street preachers you would see on a street corner, except my version of the end times talks a lot about tokens, scaling laws and South American rodents. LLMs, or at least the paradigm we have for their pre-training, obey certain laws the way a marble obeys the laws of gravity rolling down a slope. To train a model of a given size optimally, you need a proportional amount of high-quality data [@Hoffmann2022Chinchilla]. And we, as a species, do not produce quality information fast enough. We have already strip-mined the public web. We are negotiating access to private archives, licensed corpora, proprietary datasets. But the math doesn't lie: pre-training at scale, as we've known it, is approaching exhaustion.
+
+This is why the future belongs to smaller, focal models with intelligent routing. Not because small is philosophically superior, but because the Chinchilla constraint gives us a choice: grow our models or maintain quality.^[And by quality, I also include resilience. One offshoot of these scaling laws is that as we need to reduce our quality standards, our vulnerability to intentional contamination of the data supply chain increases vastly.] We cannot do both indefinitely. The era of monolithic giants may already be ending — not with a bang, but with a quiet recognition that we've run out of food to feed them.
+
+
+## The retrieval delusion
+
+A Searchlight Institute survey from August 2025 asked Americans what they thought happened when they queried tools like ChatGPT [@SearchlightAI2025]. Forty-five percent said the tool "looks up an exact answer in a database." Another twenty-one percent believed it "follows a script of prewritten responses."^[The survey, conducted by Tavern Research with 2,301 American adults, buried this finding in a section titled "Dustbin" — noting it "didn't lead to a larger conclusion." I would respectfully submit that it *is* the conclusion.] Two-thirds of users, in other words, believe LLMs are either filing cabinets or chatbots circa 2015. Not generating. Not constructing. *Retrieving*.
+
+This is not a minor misconception. This is the original sin from which nearly every dysfunction in the LLM ecosystem flows.
+
+If you believe LLMs retrieve information, you use them as search engines. You ask factual questions and expect factual answers. You are confused when they "hallucinate" — because filing cabinets don't hallucinate. You optimise for short, snappy responses, because that's what search results look like. And the models, trained on human feedback, learn to provide exactly that: terse, confident, citation-shaped outputs that pattern-match to "retrieved information" whether or not the underlying content is sound.
+
+The result? LLMs are terrible at generating good prose — because we've trained them to generate query responses. They are unreliable as knowledge sources — because they were never knowledge sources. And worst of all, the retrieval delusion creates an incentive structure for poisoning the data supply chain: if people believe these systems retrieve rather than generate, then manipulating what gets "retrieved" becomes a vector for information warfare.^[This is already happening. SEO for AI (GEO or AEO) is a growth industry. The goal is not to inform the model but to manipulate its outputs.]
+
+But the retrieval delusion has a human-side corollary — what I think of as the assistance gap. We have not figured out how to work *with* these systems. Not because they're bad at collaboration, though they often are. But because most people have never managed anyone. They're newly minted kings of enormous kingdoms, with no idea of how to rule.
+
+Think about what LLMs require: clear intent, structured delegation, graceful error handling, iterative refinement. These are management skills. Most of us have never learned to command in a way that gets results. We have no training in delegation. We are, in effect, first-time managers with no onboarding, managing an employee whose capabilities we fundamentally misunderstand.
+
+2026 will be the year we start naming this gap. Not just on the AI side — how to build better assistants — but on the human side: how to become better at being assisted.
+
+
+## Three battles in the background
+
+These five predictions unfold against a backdrop of deeper tensions — three battles for the soul of AI that will shape which future we're predicting *for*.
+
+**The architecture wars.** Yann LeCun keeps insisting that LLMs are a dead end, that Joint Embedding Predictive Architectures (JEPA) and world models are the path forward [@LeCun2022JEPA].^[His argument, roughly: LLMs predict tokens, but intelligence requires predicting *states of the world*. Autoregressive text generation is a parlour trick, not a path to understanding. He is not wrong.] Others maintain that scale and emergent capabilities will carry transformer architectures wherever we need to go. This is not merely an academic dispute. It's a question of whether the billions poured into LLM infrastructure are investments or sunk costs. I confess I find the "superintelligence" framing that we seem to be resorting to rather tedious — but the underlying question matters: are we building toward something general, or optimising a local maximum?
+
+**The business model reckoning.** The SaaS LLM model — pay per token, API as product — worked when models were scarce and differentiated. But commoditisation is coming. Open-weight models are closing the gap and starting to look more or less the same.^[Anthropic remains the notable exception. Claude is still everyone's quirky uncle.] Inference costs are falling. If the moat was capability, and capability is converging, what exactly are customers paying for? The death of scaling, if it comes, is also the death of a particular business logic. What replaces it? Vertical integration? Specialised fine-tunes? Model-as-loss-leader for something else entirely? Nobody knows yet. But the current model won't survive contact with 2026's economics.
+
+**The locus of intelligence.** Here's a question that keeps me up at night: when an agentic system does something impressive, where does the intelligence *live*? In the model? In the scaffolding — the prompts, the tools, the orchestration logic? In the interplay between them? We tend to attribute capability to the model, but increasingly the clever work happens in the framework: the routing, the decomposition, the error recovery. Do we need better models, better agentic architectures, or both — and if both, should they be developed in isolation or in concert? This, too, is a very practical puzzle. A lot of players have made certain bets in one way or another, and this town is not going to be big enough for all the different visions even for simple problems like NL2SQL.
+
+These battles won't conclude in 2026. But they're the gravitational forces bending everything else. There's of course also geopolitics -- the story that wants to be the story (US v EU, a generally lukewarm conflict considering EU spending on AI is almost laughably small compared to the US), and the story that actually is (China). We've spent the last months of an undoubted American advantage earlier last year, and we may be in the last few months of a rapidly closing decision window when well-conceived initiatives like [the ATOM Project](https://atomproject.ai/) can still make a difference. For those intelligent or knowledgeable enough not to be taken in by the fashionable meme that AI is a 'scam', the realisation that this is one of the most consequential technologies of our time is inescapable. Someone will control it. I dislike that idea, but I'm enough of a realist to accept it. 2026 will be the year when we learn whether we have enough of a belief in things we claim to hold dear -- freedom, democracy, academic liberty, the right of the individual to self-determination and knowledge -- to actually defend them in practice.
+
+***
+
+As I was pulling my thoughts together for this post, what struck me was how few of these predictions were about AI itself. They're about us, in the end: our cognition, our interfaces, our institutions, our misconceptions. The most important variable in 2026 may not be what the models can do, but whether we can adapt quickly enough to work with what they already do. The story of AI is fundamentally a human story, not a technological one. Technology comes from the Greek word *techne* -- something made, something created. It's the product, not the producer. And so, we can't talk about AI the way we talk about the weather. We have to accept that its shortcomings and its glories both are products of our work, reflections of our choices. This is not always a pleasant thought, but the alternative is not only factually false to the point of delusion, it's also disempowering.
+
+The bubble everyone's watching for — the valuation crash, the hype collapse — may come or may not. I don't know. But the bubble I see is quieter and more certain: we are depleting reserves that infrastructure cannot replace. Talent burns out. Data runs dry. Conceptual confusion compounds. These are the scarcities that will shape what's possible.
+
+And yet. I've been in this field long enough to know that constraints breed creativity. The shift to smaller models is also an opportunity to build more thoughtfully. The human bottleneck is also an invitation to build systems that meet us where we are. The retrieval misconception, ultimately, is a reflection of just how far we have grown apart conceptually and linguistically, and we can always choose to bridge that gap.
+
+I don't know if these guesses will age well. Last year's held up better than I expected. These feel riskier. But the point of predicting the future was never certainty — it was being present to change. Walking alone in the dark, alert to signs.
+
+Here's to 2026. May we find our keys where we actually lost them.
