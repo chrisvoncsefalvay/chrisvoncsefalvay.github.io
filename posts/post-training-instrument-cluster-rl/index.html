@@ -379,7 +379,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <span class="math inline">\(\beta (\log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x))\)</span>, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="065d373a" class="cell" data-execution_count="1">
+</div></div><div id="1427311b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> TrainerCallback</span>
@@ -501,7 +501,7 @@ Schulman, John. 2020. <span>‘Approximating <span>KL</span> Divergence’</span
 </div><div id="ref-chen2024catastrophic" class="csl-entry" role="listitem">
 Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. In <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
 </div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(<a href="#ref-chen2024catastrophic" role="doc-biblioref">Chen, He, and Kifer 2024</a>)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="549c3f07" class="cell" data-execution_count="4">
+<div id="7c8674e9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KLDivergenceCallback(TrainerCallback):</span>
@@ -580,7 +580,7 @@ Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</spa
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(<a href="#ref-shao2024deepseekmath" role="doc-biblioref">Shao et al. 2024</a>)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry" role="listitem">
 Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="e249bdb5" class="cell" data-execution_count="6">
+</div></div></div><div id="aea79b9d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyRatioCallback(TrainerCallback):</span>
@@ -659,7 +659,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="d1a3ce39" class="cell" data-execution_count="8">
+</div></div><div id="3db0cd3b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GenerationLengthCallback(TrainerCallback):</span>

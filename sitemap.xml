@@ -2,250 +2,254 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://chrisvoncsefalvay.com/talks/prometheus-unbound/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.554Z</lastmod>
+    <lastmod>2025-12-31T15:41:52.433Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/teaching/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.555Z</lastmod>
+    <lastmod>2025-12-31T15:41:52.434Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/agentic-speciation/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.360Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.337Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/as-we-may-see/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.354Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.331Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/lair/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.351Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.328Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.347Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.324Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/quarto-project-scripts/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.343Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.320Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/babys-first-function-caller/finetuning-for-sql.html</loc>
-    <lastmod>2025-12-29T03:21:39.418Z</lastmod>
+    <lastmod>2025-12-31T15:41:52.286Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/programmatic-agentic-ai/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.336Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.313Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/mcp-mcpmark/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.332Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.309Z</lastmod>
   </url>
   <url>
-    <loc>https://chrisvoncsefalvay.com/posts/five-wild-guesses/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.328Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.325Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.321Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.318Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.314Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/choral-ai/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.310Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.306Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/moral-maps/moral-maps.html</loc>
-    <lastmod>2025-12-29T03:21:39.469Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/team-of-rivals/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.300Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/skierg-marathon/skierg-marathon.html</loc>
-    <lastmod>2025-12-29T03:21:39.541Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.293Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/dorkestration/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.290Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/biome-engineering/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.286Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.282Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/two-years-of-agents/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.280Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.512Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/post-training-scale/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.273Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/hype-slop-craft/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.267Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.405Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.405Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.404Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/disclaimer/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.400Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.405Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.404Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/academic-generative-ai/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.265Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.271Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/metadynamic-ai/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/95-percent-myth/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.278Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.263Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.284Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.288Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/after-agents/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.291Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/skierg-marathon/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.295Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/moral-maps/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.302Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/prompt-engineering/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.304Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/auto-doi/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.308Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/ai-girlfriends/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.312Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.316Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/tlon/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.319Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chrisvoncsefalvay.com/posts/soya/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.323Z</lastmod>
+    <loc>https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.306Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/context-engineering/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.327Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/soya/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/tlon/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.295Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/dwarf-fortress/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/ai-girlfriends/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.287Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/auto-doi/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.284Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/prompt-engineering/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.279Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/moral-maps/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.277Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/quora-answers/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.272Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/skierg-marathon/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.270Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/after-agents/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.266Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/five-non-data-science-books-for-data-scientists/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.262Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.259Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.238Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/95-percent-myth/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.253Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/metadynamic-ai/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.250Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.246Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/academic-generative-ai/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.240Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/euronews-covid/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.273Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/disclaimer/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.270Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.273Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/tech-for-good/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/media/fr-disinfectants/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/hype-slop-craft/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.242Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/post-training-scale/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.248Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/index.html</loc>
+    <lastmod>2025-12-31T15:41:52.384Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/two-years-of-agents/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.255Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.257Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/biome-engineering/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.260Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/dorkestration/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.264Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.268Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/skierg-marathon/skierg-marathon.html</loc>
+    <lastmod>2025-12-31T15:41:52.421Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/team-of-rivals/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/moral-maps/moral-maps.html</loc>
+    <lastmod>2025-12-31T15:41:52.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.281Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/choral-ai/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.286Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.289Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.293Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.297Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.301Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chrisvoncsefalvay.com/posts/five-wild-guesses/index.html</loc>
+    <lastmod>2025-12-31T15:42:39.304Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/llms-language/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.330Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.308Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/agentic-simulation/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.334Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.311Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.338Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.316Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/ai-human-interaction/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.341Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.318Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/paxlovid/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.345Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.322Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.348Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.326Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/agents-agora/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.352Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.330Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/index.html</loc>
-    <lastmod>2025-12-29T03:22:29.357Z</lastmod>
+    <lastmod>2025-12-31T15:42:39.335Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/papers/index.html</loc>
-    <lastmod>2025-12-29T03:22:28.218Z</lastmod>
+    <lastmod>2025-12-31T15:42:38.358Z</lastmod>
   </url>
   <url>
     <loc>https://chrisvoncsefalvay.com/talks/index.html</loc>
-    <lastmod>2025-12-29T03:21:39.551Z</lastmod>
+    <lastmod>2025-12-31T15:41:52.431Z</lastmod>
   </url>
 </urlset>
