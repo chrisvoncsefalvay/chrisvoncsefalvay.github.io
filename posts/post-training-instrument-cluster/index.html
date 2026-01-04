@@ -330,7 +330,7 @@ window.Quarto = {
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="a13e84f9" class="cell" data-execution_count="1">
+</div></div><div id="f14a3712" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> TrainerCallback</span>
@@ -402,7 +402,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <span class="math inline">\(\mathcal{L}\)</span> with respect to the weights <span class="math inline">\(W_1\)</span> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><span class="math display">\[\frac{\partial \mathcal{L}}{\partial W_1} = \frac{\partial \mathcal{L}}{\partial W_L} \cdot \prod_{\ell=2}^{L} \left( \phi'_\ell(z_\ell) \cdot W_\ell \right)\]</span></p>
 <p>where <span class="math inline">\(\phi'_\ell\)</span> is the derivative of the activation function at layer <span class="math inline">\(\ell\)</span> and <span class="math inline">\(z_\ell\)</span> is the pre-activation. The product structure is the culprit: if the spectral norm <span class="math inline">\(\|W_\ell\| &lt; 1\)</span> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <span class="math inline">\(\|W_\ell\| &gt; 1\)</span> and <span class="math inline">\(\|\phi'_\ell\| &gt; 1\)</span>, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <span class="math inline">\(z_\ell &lt; 0\)</span>, the derivative is exactly zero, causing entire gradient paths to die.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="c6a2662b" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="c5265a9e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GradientHistogramCallback(TrainerCallback):</span>
@@ -488,7 +488,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="2dd5fbc1" class="cell" data-execution_count="5">
+</div></div><div id="b72eaa47" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LearningRateMonitor(TrainerCallback):</span>
@@ -533,7 +533,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <span class="math inline">\(\boldsymbol{\alpha} = (\alpha_1, \alpha_2, \ldots, \alpha_n)\)</span> over a sequence of length <span class="math inline">\(n\)</span> (where <span class="math inline">\(\sum_i \alpha_i = 1\)</span> after softmax), the entropy is defined as:</p>
 <p><span class="math display">\[H(\boldsymbol{\alpha}) = -\sum_{i=1}^{n} \alpha_i \log \alpha_i\]</span></p>
 <p>The bounds are intuitive: <span class="math inline">\(H = 0\)</span> when all attention is focused on a single token (<span class="math inline">\(\alpha_j = 1\)</span> for some <span class="math inline">\(j\)</span>, all others zero), and <span class="math inline">\(H = \log n\)</span> when attention is uniformly distributed (<span class="math inline">\(\alpha_i = 1/n\)</span> for all <span class="math inline">\(i\)</span>). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="32695fb8" class="cell" data-execution_count="6">
+<div id="60fd34e3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -603,7 +603,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="e45f7173" class="cell" data-execution_count="8">
+<div id="11f3f626" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GenerationSamplerCallback(TrainerCallback):</span>
@@ -688,7 +688,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <span class="math inline">\(\sigma_1, \sigma_2, \ldots, \sigma_r\)</span>, we first normalise them to form a probability distribution: <span class="math display">\[p_i = \frac{\sigma_i}{\sum_{j=1}^{r} \sigma_j}\]</span></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="b0695bfd" class="cell" data-execution_count="9">
+<div id="aaf1d42c" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LoRADiagnosticsCallback(TrainerCallback):</span>
@@ -781,7 +781,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="f05d4aa0" class="cell" data-execution_count="11">
+</div></div><div id="b96c0752" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -853,7 +853,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="4535e381" class="cell" data-execution_count="12">
+<div id="ba82c107" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ConvergenceDetector(TrainerCallback):</span>
@@ -1009,7 +1009,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="8281d86b" class="cell" data-execution_count="14">
+<div id="39d168b2" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> TrainingArguments, Trainer</span>
