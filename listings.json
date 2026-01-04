@@ -1,5 +1,13 @@
 [
   {
+    "listing": "/media/index.html",
+    "items": [
+      "/media/tech-for-good/index.html",
+      "/media/fr-disinfectants/index.html",
+      "/media/euronews-covid/index.html"
+    ]
+  },
+  {
     "listing": "/posts/index.html",
     "items": [
       "/posts/five-wild-guesses-2026/index.html",
@@ -25,6 +33,7 @@
       "/posts/deepseek-seatbelts-and-straitjackets/index.html",
       "/posts/ai-opportunities-action-plan/index.html",
       "/posts/after-agents/index.html",
+      "/posts/post-training-instrument-cluster-grpo/index.html",
       "/posts/five-wild-guesses/index.html",
       "/posts/lair/index.html",
       "/posts/95-percent-myth/index.html",
@@ -51,14 +60,6 @@
       "/posts/mrna-gene-therapy/index.html",
       "/posts/ransomware-prisoners-dilemma/index.html",
       "/posts/julia-a-post-mortem/index.html"
-    ]
-  },
-  {
-    "listing": "/media/index.html",
-    "items": [
-      "/media/tech-for-good/index.html",
-      "/media/fr-disinfectants/index.html",
-      "/media/euronews-covid/index.html"
     ]
   },
   {
