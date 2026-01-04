@@ -4,7 +4,7 @@ categories:
 - AI
 - tech predictions
 date: 2025-12-31
-description: "The bubble everyone's watching for isn't the one that's coming."
+description: The bubble everyone's watching for isn't the one that's coming.
 google-scholar: true
 image: header.png
 title: Five wild guesses for 2026
