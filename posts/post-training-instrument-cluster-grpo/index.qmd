@@ -6,7 +6,7 @@ categories:
 - post-training
 - reinforcement learning
 - GRPO
-date: 2025-01-04
+date: 2026-01-04
 description: The part where you have to take all that you have learned and work hard to completely unlearn it. Here be dragons.
 google-scholar: true
 image: grpo_dashboard.png
