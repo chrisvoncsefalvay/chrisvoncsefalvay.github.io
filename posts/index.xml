@@ -135,7 +135,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs this as <code>reward_std</code> by default when using GRPOTrainer. If you’re using a custom implementation, you should compute and log this yourself – it’s that important.</p>
-</div></div><div id="8c1e6bcb" class="cell" data-execution_count="3">
+</div></div><div id="9a6a415a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reward standard deviation monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -353,7 +353,7 @@ font-style: inherit;">). Learning signal weak."</span>)</span></code></pre></div
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Composite rewards are increasingly common in GRPO training. A typical setup might combine format compliance (does the output match the expected structure?), correctness (is the answer right?), and style (is it appropriately concise?). Each component can behave differently during training, and almost always, models learn them one by one.</p>
-</div></div><div id="5b68839a" class="cell" data-execution_count="4">
+</div></div><div id="359e0ce7" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Partial reward decomposition monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -611,7 +611,7 @@ Figure&nbsp;3: Partial reward decomposition reveals dynamics hidden by aggregate
 <li><strong>Within-group length variance</strong>: Are completions for the same prompt similar lengths, or diverse?</li>
 <li><strong>Length-reward correlation</strong>: Is there a systematic relationship between completion length and reward?</li>
 </ul>
-<div id="e632de8d" class="cell" data-execution_count="6">
+<div id="914fd351" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>GRPO-specific completion length monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -896,7 +896,7 @@ Figure&nbsp;4: Completion length dynamics in GRPO: watch for bimodal distributio
 <section id="ratio-clipping" class="level4">
 <h4 class="anchored" data-anchor-id="ratio-clipping">Ratio clipping</h4>
 <p>The probability ratio <img src="https://latex.codecogs.com/png.latex?r_%7Bi,t%7D%20=%20%5Cfrac%7B%5Cpi_%5Ctheta(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D%7B%5Cpi_%7B%5Ctheta_%7B%5Ctext%7Bold%7D%7D%7D(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D"> measures how much more (or less) likely the current policy makes each token compared to the policy that generated the completion. Clipping constrains this ratio to <img src="https://latex.codecogs.com/png.latex?%5B1-%5Cepsilon,%201+%5Cepsilon%5D">.</p>
-<div id="8d8a215d" class="cell" data-execution_count="8">
+<div id="72d0fefa" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>GRPO clip ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -1198,7 +1198,7 @@ Figure&nbsp;5: Clip ratio asymmetry in GRPO: the balance between high and low cl
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs <code>entropy</code> as the mean entropy across tokens and completions. Some implementations also log <code>entropy_std</code>, which measures variation in entropy across tokens – useful for detecting whether the model is uniformly confident or has “confident” and “uncertain” regions.</p>
-</div></div><div id="12971a1b" class="cell" data-execution_count="10">
+</div></div><div id="b15ce4d5" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Policy entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -1673,7 +1673,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20(%5Clog%20%5Cpi_%5Ctheta(y%20%5Cmid%20x)%20-%20%5Clog%20%5Cpi_%7B%5Ctext%7Bref%7D%7D(y%20%5Cmid%20x))">, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="e0f415a5" class="cell" data-execution_count="1">
+</div></div><div id="d7ed48da" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -1998,7 +1998,7 @@ Schulman, John. 2020. <span>‘Approximating <span>KL</span> Divergence’</span
 </div><div id="ref-chen2024catastrophic" class="csl-entry">
 Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. In <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
 </div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen, He, and Kifer 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="c537a7d7" class="cell" data-execution_count="4">
+<div id="78f12158" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -2264,7 +2264,7 @@ Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</spa
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry">
 Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="ba1263b5" class="cell" data-execution_count="6">
+</div></div></div><div id="c530c339" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -2503,7 +2503,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="0ac3375d" class="cell" data-execution_count="8">
+</div></div><div id="842e4dcd" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -2885,7 +2885,7 @@ Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="f14a3712" class="cell" data-execution_count="1">
+</div></div><div id="345ed779" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -3112,7 +3112,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="c5265a9e" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="d4a3b674" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -3469,7 +3469,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="b72eaa47" class="cell" data-execution_count="5">
+</div></div><div id="9495f7a8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -3689,7 +3689,7 @@ font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
 <p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
 <p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="60fd34e3" class="cell" data-execution_count="6">
+<div id="f6fb71c1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
@@ -3910,7 +3910,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="11f3f626" class="cell" data-execution_count="8">
+<div id="276c7134" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -4207,7 +4207,7 @@ font-style: inherit;">"generation_samples"</span>: table})</span>
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="aaf1d42c" class="cell" data-execution_count="9">
+<div id="6fbac7da" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
@@ -4573,7 +4573,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="b96c0752" class="cell" data-execution_count="11">
+</div></div><div id="47f8a743" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
@@ -4874,7 +4874,7 @@ font-style: inherit;">=</span> current_time</span></code></pre></div></div>
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="ba82c107" class="cell" data-execution_count="12">
+<div id="f591d655" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
@@ -5322,7 +5322,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="39d168b2" class="cell" data-execution_count="14">
+<div id="0c16e536" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
@@ -9652,7 +9652,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-58415"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-58415").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-42242"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-42242").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -9750,7 +9750,7 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-54572"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-54572").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-30157"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-30157").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
