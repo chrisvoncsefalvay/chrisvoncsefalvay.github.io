@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Chris von Csefalvay">
-<meta name="dcterms.date" content="2025-12-20">
-<meta name="description" content="On the comfortable delusion of a unitary post-training discipline.">
+<meta name="dcterms.date" content="2026-01-08">
+<meta name="description" content="Where does intelligence live? Just about everything depends on the answer to that question.">
 
-<title>Post-training: three disciplines in a trenchcoat – Chris von Csefalvay</title>
+<title>The War for the Soul of AI – Chris von Csefalvay</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-a4d8066ab99c821fadc425098389dfee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/estate-carousel-1.0.0/estate-carousel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -83,25 +84,25 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
 
 
-<meta property="og:title" content="Post-training: three disciplines in a trenchcoat – Chris von Csefalvay">
-<meta property="og:description" content="On the comfortable delusion of a unitary post-training discipline.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/post-training-scale/header.png">
+<meta property="og:title" content="The War for the Soul of AI – Chris von Csefalvay">
+<meta property="og:description" content="Where does intelligence live? Just about everything depends on the answer to that question.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/header.png">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:width" content="1024">
-<meta name="twitter:title" content="Post-training: three disciplines in a trenchcoat – Chris von Csefalvay">
-<meta name="twitter:description" content="On the comfortable delusion of a unitary post-training discipline.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/post-training-scale/header.png">
-<meta name="twitter:image-height" content="1024">
-<meta name="twitter:image-width" content="1024">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:width" content="666">
+<meta name="twitter:title" content="The War for the Soul of AI – Chris von Csefalvay">
+<meta name="twitter:description" content="Where does intelligence live? Just about everything depends on the answer to that question.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/header.png">
+<meta name="twitter:image-height" content="1000">
+<meta name="twitter:image-width" content="666">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="Post-training: three disciplines in a trenchcoat">
+<meta name="citation_title" content="The War for the Soul of AI">
 <meta name="citation_author" content="Chris von Csefalvay">
-<meta name="citation_publication_date" content="2025-12-20">
-<meta name="citation_cover_date" content="2025-12-20">
-<meta name="citation_year" content="2025">
-<meta name="citation_online_date" content="2025-12-20">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/post-training-scale/">
+<meta name="citation_publication_date" content="2026-01-08">
+<meta name="citation_cover_date" content="2026-01-08">
+<meta name="citation_year" content="2026">
+<meta name="citation_online_date" content="2026-01-08">
+<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/">
 <meta name="citation_language" content="en-GB">
 </head>
 
@@ -170,10 +171,12 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#memscale-the-tyranny-of-vram" id="toc-memscale-the-tyranny-of-vram" class="nav-link active" data-scroll-target="#memscale-the-tyranny-of-vram">Memscale: The tyranny of VRAM</a></li>
-  <li><a href="#flopscale-the-discipline-of-unit-economics" id="toc-flopscale-the-discipline-of-unit-economics" class="nav-link" data-scroll-target="#flopscale-the-discipline-of-unit-economics">Flopscale: The discipline of unit economics</a></li>
-  <li><a href="#powerscale-the-infrastructure-of-nations" id="toc-powerscale-the-infrastructure-of-nations" class="nav-link" data-scroll-target="#powerscale-the-infrastructure-of-nations">Powerscale: The infrastructure of nations</a></li>
-  <li><a href="#the-diffusion-problem" id="toc-the-diffusion-problem" class="nav-link" data-scroll-target="#the-diffusion-problem">The diffusion problem</a></li>
+  <li><a href="#the-five-estates" id="toc-the-five-estates" class="nav-link active" data-scroll-target="#the-five-estates">The five estates</a>
+  <ul class="collapse">
+  <li><a href="#the-methodological-trap" id="toc-the-methodological-trap" class="nav-link" data-scroll-target="#the-methodological-trap">The methodological trap</a></li>
+  <li><a href="#the-investment-question" id="toc-the-investment-question" class="nav-link" data-scroll-target="#the-investment-question">The investment question</a></li>
+  <li><a href="#between-the-head-and-the-heart" id="toc-between-the-head-and-the-heart" class="nav-link" data-scroll-target="#between-the-head-and-the-heart">Between the head and the heart</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -182,17 +185,17 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Post-training: three disciplines in a trenchcoat</h1>
+<h1 class="title">The War for the Soul of AI</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">AI</div>
     <div class="quarto-category">LLMs</div>
-    <div class="quarto-category">post-training</div>
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">agentic AI</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    On the comfortable delusion of a unitary post-training discipline.
+    Where does intelligence live? Just about everything depends on the answer to that question.
   </div>
 </div>
 
@@ -209,7 +212,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">20 December 2025</p>
+      <p class="date">8 January 2026</p>
     </div>
   </div>
   
@@ -221,136 +224,177 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Hey, I’m writing a book about this!
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>I’m actually writing a book about this stuff. It turns out there isn’t a lot of literature on how to do post-training at the level too big for single-GPU laptop-sized hobby projects and requiring enterprise reliability on one hand, but not quite at the scale of multi-team distributed post-training you’d get in foundation labs. That’s a problem, because a lot of the current value in fine-tuning applications comes exactly out of that large, crucial market. I am in the last phases of putting together the manuscript for <em>The Frontier Playbook</em>, a set of curated tactics and techniques for real world operationalisation of LLMs. <a href="https://aifrontierplaybook.substack.com">Sign up for updates here</a>.</p>
-</div>
-</div>
-<p>There’s a comfortable fiction in AI that “post-training” names a coherent discipline. We speak of it as though the researcher fine-tuning Llama on a 3090 and the infrastructure team planning a 500MW RLHF run are engaged in the same enterprise at different magnitudes. And yes, in a very philosophical sense, they are. It’s just that that philosophical acuity reflects pretty much none of the parts of reality that matter. And that’s a problem for our allegedly unitary discipline.</p>
-<p>Pre-training never had to confront this problem. The barriers to entry were so astronomical that there was never any pretence of an on-ramp. You either had foundation lab resources or you didn’t, and if you didn’t, you weren’t doing pre-training. This hasn’t really shifted – the kind of pre-training/scaling needed to create true foundation models is limited to a vanishingly small part of the world (more people have been to outer space than have managed a capital foundation model). The conversation is contained, the community is small and everyone who needs to know what something means already knows it.</p>
-<p>Post-training is different. It is democratised, and will only become more so as efficient (esp.&nbsp;<em>memory</em>-efficient) methods proliferate. The barriers of entry have never been lower. At the moment, you can run toy examples of cutting edge techniques for free with the <a href="https://github.com/unsloth-ai/notebooks">Unsloth notebooks</a> on Google Colab. Consumer GPUs can, with some ingenuity, run fine-tuning experiments that would have been unthinkable a few years ago. The on-ramps are everywhere.</p>
-<p>But not to everything.</p>
-<p>Post-training is not one discipline. It is three,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> awkwardly sharing a name. The binding constraints, the core competencies, the failure modes differ qualitatively across regimes. Perhaps most poignantly, the governing constraints are so different, they do not share a continuum.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;At least. Arguably there’s token-scale, where users buy API access or other consumer products. There’s not a lot of what would merit being referred to as post-training there, though, so we shall omit mention.</p></div></div><div id="tbl-regimes" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: The three regimes of post-training, distinguished by their binding constraints.
-</figcaption>
-<div aria-describedby="tbl-regimes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: left;">Memscale</th>
-<th style="text-align: left;">Flopscale</th>
-<th style="text-align: left;">Powerscale</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>Binding constraint</strong></td>
-<td style="text-align: left;">VRAM</td>
-<td style="text-align: left;">Unit economics</td>
-<td style="text-align: left;">Energy</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Typical scale</strong></td>
-<td style="text-align: left;">1 GPU (16-80 GB)</td>
-<td style="text-align: left;">Dozens to hundreds of GPUs</td>
-<td style="text-align: left;">Several thousands of GPUs</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Team size</strong></td>
-<td style="text-align: left;">Solo</td>
-<td style="text-align: left;">Solo to small team of generalists</td>
-<td style="text-align: left;">Professionally project-managed teams for various stages</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Cost scale, order of magnitude $USD/run</strong></td>
-<td style="text-align: left;">$10-$100s</td>
-<td style="text-align: left;">$1,000s</td>
-<td style="text-align: left;">$1,000,000s</td>
-</tr>
-</tbody>
-</table>
-</div>
-</figure>
-</div>
-<p>There’s something magical about these three realms coexisting at all. Perhaps for the first time in history, our most advanced frontier technologies are also accessible to essentially anyone who can set up Hugging Face jobs or a Colab notebook. No matter how much these regimes differ, it’s remarkable that what little continuity exists, exists at all. But that continuity is quite thin. As someone who essentially lives and breathes post-training, I have seen all three of these first-hand, although I spend almost all my time towards the middle to top end of the flopscale regime. I’m a tolerated guest in powerscale land, and a weekend adventurer in memscale. All I can say is that I never had to talk to a power company about when I can throw the on-switch.</p>
-<section id="memscale-the-tyranny-of-vram" class="level3">
-<h3 class="anchored" data-anchor-id="memscale-the-tyranny-of-vram">Memscale: The tyranny of VRAM</h3>
-<p>At memscale, the fundamental question is: can I fit this into memory? This is the world of the single GPU, from a 3090 through an RTX 6000, perhaps stretching to a GB200 in a DGX Spark if you’re fortunate. The binding constraint is physical and absolute. Either the model, its gradients, its optimiser states and its activations fit, or they don’t. There is no negotiating with VRAM.</p>
-<p>The entire memscale toolkit exists to cope with this constraint. LoRA and its descendants (QLoRA, DoRA, the ever-expanding alphabet) represent a fundamental insight: if you cannot fit the whole thing, fit an efficient delta. Gradient checkpointing trades compute for memory. Quantisation compresses representations. Tools like Unsloth and Axolotl have packaged these techniques into something approaching accessibility for the sufficiently obsessed.</p>
-<p>But here’s what makes memscale genuinely different as a regime: scaling is lumpy. If you run out of memory, your options are to optimise harder or to acquire another GPU, assuming you still can in the current market. There is no smooth gradient of resources. You’re either within your envelope or you’re not, and if you’re not, you hit a wall that you can generally supervene at the cost of doubling your entire GPU investment. The memscale practitioner’s core competency is OOM avoidance. Everything else is secondary.</p>
-<p>This creates a particular kind of craft knowledge, somewhat akin to the art of the demoscene coder who could put entire animated demos into less than a modern social media avatar takes up in space. The memscale expert knows exactly which layers to freeze, which LoRA rank to choose for a given VRAM budget, how to schedule batch sizes against memory headroom, when to checkpoint and when to materialise. It is artisanal work, intimate and particular. And almost none of it transfers upward – which is why relatively few foundation lab researchers, never mind powerscale infrastructure teams, spend much time thinking about memscale techniques.</p>
-</section>
-<section id="flopscale-the-discipline-of-unit-economics" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="flopscale-the-discipline-of-unit-economics">Flopscale: The discipline of unit economics</h3>
-<p>At flopscale, memory ceases to be the binding constraint in any individual sense. You have a cluster. Perhaps dozens of GPUs, perhaps hundreds. You can shard, you can parallelise, you can distribute.</p>
-<p>What you cannot do is waste operations, because what you <em>also</em> have, typically, is a boss. This is firmly enterprise land, and enterprises care about ROI. Those TFLOPs your rack of H200s produce? They’re the <code>I</code> in that abbreviation, and you best be producing some <code>R</code> on them.</p>
-<p>The question then becomes not “can I fit it?” but “can I justify it?” The optimisation target shifts from memory efficiency to unit economics. The scarcest resource is not VRAM but organisational patience for uncertain outcomes.</p>
-<p>Scaling here is smoother than at memscale. You don’t hit walls; you encounter gradients of cost. Need more compute? Provision more nodes. The constraint is fiscal, not physical. But this smoothness is double-edged. At memscale, the walls enforce discipline. At flopscale, you have enough rope to hang yourself, and thus the flopscale practitioner is expected to bring a level of judgment about what to run when that memscale hobbyists don’t have to worry about by and large and powerscale teams… well, to most, it’s a rounding error.</p>
-<p>This is a rather critical realm, and yet, paradoxically, perhaps the most woefully underserved. There are clear risks and failure modes to flopscale work, and you are not going to be able to teach yourself how to run a model on a cluster of 64 H200s from weekend tinkering.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> You need to understand distributed systems, job scheduling, data pipeline reliability, cost monitoring, failure recovery and a host of other concerns that don’t arise at memscale. Yet there are precious few resources targeted at this regime specifically. Most of the literature is either memscale hobbyist-focused or powerscale foundation lab-focused (although at the moment, regrettably, the industry is going through its mediaeval guild phase, where the secrets of building cathedrals are jealously guarded and only passed on from master to apprentice after the latter has proven itself worthy). Flopscale is the neglected middle child of post-training – the realm where most real-world applications will be built, and yet the one with the thinnest knowledge base.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Please don’t take a HELOC to fund your first 120B full finetune on a bunch of A100s.</p></div><div class="">
+<p>When I was perhaps five, I asked my mom where the soul was. She told me it was between the head and the heart. Not being particularly good at metaphor, I took this rather more literally than she intended. I worked out that anatomically, this would place the soul somewhere around the left shoulder and upper chest region. For years afterwards, I took enormous care of that area. I favoured my left side in playground scraps. I slept on my right. I regarded with deep suspicion any sport that might involve impact to the clavicle.</p>
+<p>It sounds silly now, but at the time it made perfect sense. If you want to protect something, you need to know where it is. Localisation precedes preservation. Fast forward thirty-five years, and my professional community is engaged in a remarkably similar exercise. We are attempting to locate intelligence. Not the soul, of course, but something equally slippery: the capacity to reason, to act, to understand. And just as my mom’s answer was meant to gesture at something irreducible, our various answers to “where does intelligence live in AI systems?” reveal more about our assumptions than about intelligence itself.</p>
+<p>Except that this isn’t just a philosophical question. Because everything, right now, about AI, depends on the answer.</p>
+<p>Consider a problem like natural language to SQL. You describe what you want in plain English, the system produces a database query. It’s a clean, bounded task with clear success criteria. And yet the approaches to solving it diverge so dramatically that they imply entirely different theories of mind. Do you train a larger model? Do you create smarter agents? Inference-time tweak it?</p>
+<p>Each of these approaches works. Each has its champions, its conferences, its investment theses. And each implies that intelligence has a location: in weights, in composition, in context, in adaptation, in inference. We are all, in our way, trying to protect our left shoulders.</p>
 <hr>
-<p><strong>Recipe:</strong> Cassoulet (sort of)</p>
-<ul>
-<li>500g dried white beans, soaked overnight</li>
-<li>Duck confit (4 legs, or make your own if you have the week)</li>
-<li>400g Toulouse sausage</li>
-<li>200g salt pork or pancetta</li>
-<li>Onion, carrot, celery, garlic</li>
-<li>Tomato paste, bay leaves, thyme</li>
-<li>Good stock, ideally duck</li>
-</ul>
-<p>Brown meats separately. Build a soffritto. Layer everything in a Dutch oven with the beans. Add stock to cover. Bake at 150°C (that’s 300°F in freedom units) for three hours minimum, breaking the crust that forms and pushing it down every hour. The crust reforms. You break it again. This is the cassoulet ritual.</p>
-<p>Worth it? Depends on your objective function. ***</p>
-</div></div>
-<p>This is, I think, the hardest regime to operate in well. The memscale practitioner has constraints that enforce focus. The powerscale practitioner has resources that permit exploration. The flopscale practitioner has neither the discipline of poverty nor the freedom of abundance. They must construct their own discipline, and they must do so while delivering demonstrable business value.</p>
+<section id="the-five-estates" class="level1 page-columns page-full">
+<h1>The five estates</h1>
+<p>There’s a certain inevitability to how research communities crystallise around methodological commitments. We form tribes. We develop shibboleths. We attend different conferences and cite different papers and, if we’re being honest, regard the other tribes with a mixture of bafflement and mild contempt. The AI community is no different, and the current moment has produced what I think of as five estates, each with its own theory of where intelligence resides.</p>
+<p>There has been something of a meme about <a href="https://www.latent.space/p/agent-labs">‘agent labs’ versus ‘model labs’</a> floating around last year, courtesy of Shawn Wang of Latent Space. I think this captures some, but not all, of the current divisions. I like to think of them as five estates.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;The inspiration behind this is your usual White Wolf RPG (think <em>Mage: the Ascension</em> &amp;c.), because I had <em>that</em> kind of childhood. I may be the post-training world’s lone neckbeard, I just hide it very well.</p></div></div><div class="estate-carousel-wrapper">
+  <hr class="estate-carousel-border">
+  <div id="estate-carousel-1" class="carousel slide estate-carousel" data-bs-ride="false">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="false">
+  <div class="estate-item">
+    <div class="estate-card-container">
+      <div class="estate-card">
+        <img src="scalers.png" alt="The Scalers" class="estate-card-img">
+      </div>
+    </div>
+    <div class="estate-content">
+      <h3 class="estate-name anchored">The Scalers</h3>
+      <p class="estate-blurb">Intelligence emerges from scale. We are legion.</p>
+      <div class="estate-description"><p>Scalers believe that superintelligence emerges from scale. What
+scale? ‘Scale.’ To those firmly on Team Scale, that is both the variable
+and its maximum value, the journey and its destination. Deep down, after
+the right NeurIPS post-conference party, they will admit that they don’t
+really know when they’ll hit scale, only that they’ll know it because
+superintelligence will greet them on the other side. They are, in a
+sense, the true believers of AI. They have staked everything on the
+bitter lesson, and they will not be moved.</p></div>
+      <div class="estate-params"><span class="estate-param"><span class="estate-param-key">Strength:</span> <span class="estate-param-value">Infinite GPUs.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Weakness:</span> <span class="estate-param-value">Power bills.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Patron saint:</span> <span class="estate-param-value">St Altman of OAI.</span></span></div>
+    </div>
+  </div>
+</div><div class="carousel-item" data-bs-interval="false">
+  <div class="estate-item">
+    <div class="estate-card-container">
+      <div class="estate-card">
+        <img src="agents.png" alt="Team Agents" class="estate-card-img">
+      </div>
+    </div>
+    <div class="estate-content">
+      <h3 class="estate-name anchored">Team Agents</h3>
+      <p class="estate-blurb">A lot of dumb things, when well organised, can amount to quite a bit.</p>
+      <div class="estate-description"><p>Team Agents don’t care about the model. They once made a 280m
+parameter model run half their household, schedule their meetings, tidy
+their bedroom and walk their dog… all at once. Team Agents argue that a
+sufficiently large number of agents, well-prompted and
+well-orchestrated, will eventually get us… wherever we’re going. They
+approach this matter with the confidence of someone who has kind of been
+right at least once (and they have, viz.&nbsp;neural networks). You would
+typically worry about them, except they’re too busy giving orders to
+their fleet of minions.</p></div>
+      <div class="estate-params"><span class="estate-param"><span class="estate-param-key">Strength:</span> <span class="estate-param-value">An army of minions.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Weakness:</span> <span class="estate-param-value">Figuring out what to do with them.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Patron saint:</span> <span class="estate-param-value">Bl. Ralph Wiggum.</span></span></div>
+    </div>
+  </div>
+</div><div class="carousel-item" data-bs-interval="false">
+  <div class="estate-item">
+    <div class="estate-card-container">
+      <div class="estate-card">
+        <img src="posttraining.png" alt="The Post-Trainers" class="estate-card-img">
+      </div>
+    </div>
+    <div class="estate-content">
+      <h3 class="estate-name anchored">The Post-Trainers</h3>
+      <p class="estate-blurb">Fearfully and wonderfully made.</p>
+      <div class="estate-description"><p>There is remarkably little wrong with the post-training crowd, really
+(by comparison, anyway). They’re the nice guys of this war, and can
+occasionally be found trying to keep the peace. They’re not, really, in
+conflict with any other faction in earnest – yes, scale is needed to
+yield the foundation models they adapt, and agents benefit from specific
+fine-tuning, and so on. It’s just that they never felt at home in any of
+the other camps. And thank heavens for that, because this lot has
+arguably the greatest direct impact on the models people use.</p></div>
+      <div class="estate-params"><span class="estate-param"><span class="estate-param-key">Strength:</span> <span class="estate-param-value">Reinforcement learning. Enough said.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Weakness:</span> <span class="estate-param-value">The cost of actually doing it.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Patron saint:</span> <span class="estate-param-value">St. Jensen of Santa Clara.</span></span></div>
+    </div>
+  </div>
+</div><div class="carousel-item" data-bs-interval="false">
+  <div class="estate-item">
+    <div class="estate-card-container">
+      <div class="estate-card">
+        <img src="inferencetime.png" alt="The Inference Time Lords" class="estate-card-img">
+      </div>
+    </div>
+    <div class="estate-content">
+      <h3 class="estate-name anchored">The Inference Time Lords</h3>
+      <p class="estate-blurb">We'll figure it out when we get there.</p>
+      <div class="estate-description"><p>The inference-timers believe that intelligence happens at runtime.
+Given enough computation during inference, techniques such as
+chain-of-thought, tree search, and self-consistency can unlock
+capabilities that the base model cannot access directly. This is not,
+strictly speaking, wrong. Does it stand on an awful number of turtles
+all the way down, though? Yes, yes it does.</p></div>
+      <div class="estate-params"><span class="estate-param"><span class="estate-param-key">Strength:</span> <span class="estate-param-value">`/ultrathink`.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Weakness:</span> <span class="estate-param-value">The time it takes to Think Longer.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Patron saint:</span> <span class="estate-param-value">St. Remi of Monte Carlo.</span></span></div>
+    </div>
+  </div>
+</div><div class="carousel-item" data-bs-interval="false">
+  <div class="estate-item">
+    <div class="estate-card-container">
+      <div class="estate-card">
+        <img src="prompties.png" alt="The Prompties" class="estate-card-img">
+      </div>
+    </div>
+    <div class="estate-content">
+      <h3 class="estate-name anchored">The Prompties</h3>
+      <p class="estate-blurb">Let's think step by step.</p>
+      <div class="estate-description"><p>The Prompties are the folks who still remain convinced that the key
+to intelligence is somewhere in the context. Like Anglicanism, they are
+divided into the Low Church – who are basically what’s left of the old
+prompt engineering crowd – and the High Church, who have put a
+programmatic cloth over that proposition with tools like DSPy and
+agentic context engineering. They are, in a sense, the most optimistic
+of all the estates, believing that intelligence is just a clever
+arrangement of words away. They are also, perhaps, the most vulnerable
+to the coming paradigm shift.</p></div>
+      <div class="estate-params"><span class="estate-param"><span class="estate-param-key">Strength:</span> <span class="estate-param-value">We owe them for ReAct.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Weakness:</span> <span class="estate-param-value">Themselves.</span></span><span class="estate-param-sep"></span><span class="estate-param"><span class="estate-param-key">Patron saint:</span> <span class="estate-param-value">Whoever is trending on LinkedIn this week.</span></span></div>
+    </div>
+  </div>
+</div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#estate-carousel-1" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#estate-carousel-1" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <hr class="estate-carousel-border">
+</div>
+<p>Every paradigm war produces its refuseniks. Those who look at the factional battle lines and suspect the map itself is wrong. The heretical position is this: the question “where does intelligence live?” presupposes that intelligence is the kind of thing that lives somewhere. And this presupposition, seemingly innocent, shapes everything that follows. It determines what we study, what we measure, what we fund, what we recognise as progress.</p>
+<p>But what if intelligence isn’t a substance to be located? What if it’s more like a process, a pattern, a way of being?</p>
+<p>Consider the fist. When I clench my hand, a fist appears. Where does the fist live? In my fingers? In my palm? In the muscles of my forearm? The question is confused. The fist isn’t a thing with a location, but a configuration. When I open my hand, the fist doesn’t go somewhere else. It simply ceases.</p>
+<p>The heretics suspect intelligence is similar. I’m arguably the closest to this faction, and one of its blessings is that it allows me to see the good in all five estates. Because the fact is, they’re all a little right, even if they’re generally mostly wrong. Scalers have been proven right for a long enough time that they can’t be discounted, even if scale isn’t going to get us superintelligence. The agentic folks are right that composition can unlock capabilities that are either novel or have been foreclosed until now for all practical purposes. The post-trainers are right about, well, post-training. So are the inference-timers about inference time. And yes, context does matter and in-context learning is a cheap way to get an awful lot of mileage out of a model awfully fast (it’s just got nothing to do with learning, making it somewhat of a misnomer).</p>
+<p>None of them are wrong. They’re all describing real phenomena. But they’re feeling different parts of the elephant and mistaking their part for the whole. The elephant isn’t in any of those parts—the elephant is the elephant.</p>
+<section id="the-methodological-trap" class="level2">
+<h2 class="anchored" data-anchor-id="the-methodological-trap">The methodological trap</h2>
+<p>So far, this is just philosophy. Since this isn’t LessWrong, we’re going to try to connect this to actual reality. Turns out that this question has some very real consequences. If the heretics are right, then the factional war isn’t just a scientific disagreement. It’s a methodological trap. Each faction studies what its paradigm makes visible. But if intelligence is relational — if it emerges from the interaction of weights and context and composition and adaptation and inference — then each faction is optimising one term in a multi-term equation. They’re not wrong, but they’re incomplete. And their incompleteness is invisible to them because their paradigm doesn’t have vocabulary for what they’re missing.</p>
+<p>Sara Hooker calls this the “hardware lottery”: the observation that research directions are shaped by available tools, not just by scientific merit. We scaled because GPUs scaled. We studied training—which in this case mainly means pre—because training was the bottleneck we could measure. The factions aren’t purely empirical discoveries; they’re partly artefacts of what our instruments could see. This is the deepest sense in which paradigm matters. It’s not just that different factions have different theories. It’s that different theories make different phenomena visible. The Scalers will never discover what Team Agents are looking at, and vice versa, because their paradigms literally cannot represent each other’s objects of study. The heretical position is that we need to step outside all five paradigms to see the shape of the whole. But of course, “stepping outside all paradigms” is itself a paradigm, with its own blindspots and limitations. There’s no view from nowhere.</p>
 </section>
-<section id="powerscale-the-infrastructure-of-nations" class="level3">
-<h3 class="anchored" data-anchor-id="powerscale-the-infrastructure-of-nations">Powerscale: The infrastructure of nations</h3>
-<p>At powerscale, we measure not in gigabytes or teraflops but in gigawatts. The binding constraint is raw energy: what you can power, cool and sustain. This is foundation lab territory, the handful of organisations that can credibly discuss training runs straining national electrical infrastructure.</p>
-<p>I won’t dwell long here, partly because anyone who is habitually operating at this scale is already deeply familiar with the peculiarities of their narrow place in it. This is ‘big science’. I am reminded of Richard Rhodes’s description of the Manhattan Project as a massive industrial enterprise. Sure, I thought, I get the first part, but… industrial? We think of it as an achievement of science – right up until we realise that just keeping Hanford running took more people per shift than the entire project had physicists. And powerscale AI engineering is no different. For every AI researcher, there are fleets of infrastructure engineers, data centre ops, civil engineers, logistics coordinators and myriad others ensuring that the lights stay on and the gradients keep flowing. I have trained some absurdly large models, but I don’t routinely have to consider geopolitics or the national grid. Neither do powerscale practitioners, but they do have to deal with people who do.</p>
+<section id="the-investment-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-investment-question">The investment question</h2>
+<p>What there is a view from, on the other hand, is Sand Hill Road. Let me bring this down from philosophy to money, because money is where paradigms become consequential.</p>
+<p>The question “where does intelligence live?” sounds abstract, but it cashes out very concretely in how we allocate resources. If intelligence is in weights, fund training runs. If it’s in composition, fund orchestration platforms. If it’s in inference, fund reasoning infrastructure. If it’s in adaptation, fund efficient fine-tuning. If it’s in context, fund better prompting tools.</p>
+<p>The Stargate investment — $500 billion over four years — is a bet on the Scalers’ paradigm. It assumes that scale remains the primary driver of capability, that bigger models will be smarter models, that the bitter lesson continues to hold. This is not an unreasonable bet. The bitter lesson has been right before. But if the heretics are right, then Stargate is a bet on one term in a multi-term equation. The returns will be real but partial. You can scale indefinitely and still plateau if the other terms aren’t addressed. Intelligence isn’t a substance you can accumulate; it’s a process you have to orchestrate.</p>
+<p>The portfolio implications are significant. If intelligence is relational, you don’t want to go all-in on any single faction. You want exposure to scale and composition and inference and adaptation, not because you’re hedging your bets but because the phenomenon itself requires all of them.</p>
+<p>This is hard for investors to hear. Capital likes clean theses. “Scale is all you need” is a clean thesis. “Intelligence emerges from the complex interaction of multiple factors, none of which is sufficient on its own” is not a clean thesis. It’s true, but it doesn’t fit on a pitch deck.</p>
 </section>
-<section id="the-diffusion-problem" class="level3">
-<h3 class="anchored" data-anchor-id="the-diffusion-problem">The diffusion problem</h3>
-<p>This brings us to the crux of the matter. Techniques do diffuse across scales, but the diffusion is slow, uneven and often lossy. If there is such a thing as a post-training discipline, it is largely focused on solving the same vague problem in world so different that the solutions themselves need an effort to be feasibly translated, if at all possible to do so.</p>
-<p>Consider recent work like Khatri, Madaan et al.’s <a href="https://arxiv.org/abs/2510.13786">ScaleRL paper</a>. It would be hand-wavey to claim that such techniques apply only to the narrow powerscale slice. Clearly, insights about reinforcement learning at scale have downstream applicability. But the applicability is not automatic. The flopscale practitioner cannot simply import powerscale techniques wholesale. They must translate, adapt, figure out what survives the transition and what doesn’t.</p>
-<p>Tools like Unsloth accelerate this filtration significantly. They package techniques that originated in higher-resource environments into forms usable at memscale. This is genuine democratisation. But there will always be techniques that don’t translate, approaches that only make sense given certain resource assumptions, optimisations that are pointless below (or above) certain thresholds.</p>
-<p>If you work in post-training, your first task is to know which game you’re playing. The memscale practitioner who imports flopscale assumptions will waste time on approaches they cannot execute. The flopscale practitioner who ignores powerscale developments will miss techniques that could, with adaptation, provide advantage. The flopscale practitioner who imports memscale habits will under-utilise available resources.</p>
-<p>The hardest position, I think, is flopscale. You have enough resources to attempt almost anything but not enough to attempt everything. You face genuine choices about which techniques to adopt, which to adapt and which to ignore. You must show ROI while navigating a tactical landscape that wasn’t designed with your constraints in mind, and remain competitive with players who operate much larger resource envelopes for less focal problems – or know how to “get it right on a 3090” but are blissfully unaware of just how much that is not going to be acceptable in an actual enterprise deployment.</p>
-<p>This is not a solved problem. We lack good heuristics for technique translation across scales. We lack systematic understanding of what survives the transitions and what doesn’t. We lack, frankly, recognition that the problem exists.</p>
-<p>Perhaps the first step is simply to stop pretending that “post-training” names a unified discipline. It doesn’t. We have three disciplines awkwardly sharing a name, and the sooner we recognise this, the sooner we can develop the differentiated knowledge each regime demands while maintaining the channels to traffic insights between them.</p>
+<section id="between-the-head-and-the-heart" class="level2">
+<h2 class="anchored" data-anchor-id="between-the-head-and-the-heart">Between the head and the heart</h2>
+<p>So, I guess, it all goes back to my mom’s answer. The soul <em>is</em> between the head <em>and</em> the heart, not in either but in the dialogue between them.</p>
+<p>I’ve <a href="../biome-engineering/">written elsewhere about biome engineering</a>: the idea that we should design substrate conditions rather than individual agents, that we should create environments from which intelligent behaviour emerges rather than trying to program intelligence directly. I didn’t quite see until now how that connects to the localisation question. The biome engineer’s answer to “where does intelligence live?” is: wrong question. Intelligence doesn’t live anywhere. It happens. It’s an event, not an object. A process, not a substance. You don’t find it, you create the conditions for it and let it find itself.</p>
+<p>This is not mysticism, though it risks sounding like mysticism if I’m not careful. “Emergence” can be a thought-terminating cliché, a way of saying “it’s complicated” without doing the work to understand how. The failure mode of the heretical position is using fancy words as a substitute for actual explanation. But the genuine insight stands. When we ask “where does intelligence live?”, we’re importing assumptions that constrain our answers. We’re looking for a thing when we should be looking for a pattern. We’re trying to locate a substance when we should be studying a process.</p>
+<p>Maybe intelligence is, like the soul, not in any one given place, not in the weights or the prompts or the agents or the inference, but in the space between: not a <em>where</em>, but a <strong>how</strong>.</p>
 
 
 </section>
+</section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2026,
   author = {{Chris von Csefalvay}},
-  title = {Post-Training: Three Disciplines in a Trenchcoat},
-  date = {2025-12-20},
-  url = {https://chrisvoncsefalvay.com/posts/post-training-scale/},
+  title = {The {War} for the {Soul} of {AI}},
+  date = {2026-01-08},
+  url = {https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/},
   langid = {en-GB}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2025. <span>“Post-Training: Three Disciplines in a
-Trenchcoat.”</span> December 20, 2025. <a href="https://chrisvoncsefalvay.com/posts/post-training-scale/">https://chrisvoncsefalvay.com/posts/post-training-scale/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2026. <span>“The War for the Soul of AI.”</span> <a href="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/">https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
