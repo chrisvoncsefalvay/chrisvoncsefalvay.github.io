@@ -1,0 +1,101 @@
+---
+categories:
+- LLMs
+- AI
+- agentic AI
+date: 2026-01-08
+description: Where does intelligence live? Just about everything depends on the answer to that question.
+google-scholar: true
+image: header.png
+title: The War for the Soul of AI
+filters:
+- estate-carousel
+---
+
+
+When I was perhaps five, I asked my mom where the soul was. She told me it was between the head and the heart. Not being particularly good at metaphor, I took this rather more literally than she intended. I worked out that anatomically, this would place the soul somewhere around the left shoulder and upper chest region. For years afterwards, I took enormous care of that area. I favoured my left side in playground scraps. I slept on my right. I regarded with deep suspicion any sport that might involve impact to the clavicle.
+
+It sounds silly now, but at the time it made perfect sense. If you want to protect something, you need to know where it is. Localisation precedes preservation.
+Fast forward thirty-five years, and my professional community is engaged in a remarkably similar exercise. We are attempting to locate intelligence. Not the soul, of course, but something equally slippery: the capacity to reason, to act, to understand. And just as my mom's answer was meant to gesture at something irreducible, our various answers to "where does intelligence live in AI systems?" reveal more about our assumptions than about intelligence itself.
+
+Except that this isn't just a philosophical question. Because everything, right now, about AI, depends on the answer. 
+
+Consider a problem like natural language to SQL. You describe what you want in plain English, the system produces a database query. It's a clean, bounded task with clear success criteria. And yet the approaches to solving it diverge so dramatically that they imply entirely different theories of mind. Do you train a larger model? Do you create smarter agents? Inference-time tweak it?
+
+Each of these approaches works. Each has its champions, its conferences, its investment theses. And each implies that intelligence has a location: in weights, in composition, in context, in adaptation, in inference. We are all, in our way, trying to protect our left shoulders.
+
+---
+
+# The five estates
+
+There's a certain inevitability to how research communities crystallise around methodological commitments. We form tribes. We develop shibboleths. We attend different conferences and cite different papers and, if we're being honest, regard the other tribes with a mixture of bafflement and mild contempt. The AI community is no different, and the current moment has produced what I think of as five estates, each with its own theory of where intelligence resides.
+
+There has been something of a meme about ['agent labs' versus 'model labs'](https://www.latent.space/p/agent-labs) floating around last year, courtesy of Shawn Wang of Latent Space. I think this captures some, but not all, of the current divisions. I like to think of them as five estates.^[The inspiration behind this is your usual White Wolf RPG (think _Mage: the Ascension_ &c.), because I had _that_ kind of childhood. I may be the post-training world's lone neckbeard, I just hide it very well.]
+
+::: {.estate-carousel}
+
+::: {.estate name="The Scalers" blurb="Intelligence emerges from scale. We are legion." image="scalers.png" params="Strength: Infinite GPUs. | Weakness: Power bills. | Patron saint: St Altman of OAI."}
+Scalers believe that superintelligence emerges from scale. What scale? 'Scale.' To those firmly on Team Scale, that is both the variable and its maximum value, the journey and its destination. Deep down, after the right NeurIPS post-conference party, they will admit that they don't really know when they'll hit scale, only that they'll know it because superintelligence will greet them on the other side. They are, in a sense, the true believers of AI. They have staked everything on the bitter lesson, and they will not be moved.
+:::
+
+::: {.estate name="Team Agents" blurb="A lot of dumb things, when well organised, can amount to quite a bit." image="agents.png" params="Strength: An army of minions. | Weakness: Figuring out what to do with them. | Patron saint: Bl. Ralph Wiggum."}
+Team Agents don't care about the model. They once made a 280m parameter model run half their household, schedule their meetings, tidy their bedroom and walk their dog... all at once. Team Agents argue that a sufficiently large number of agents, well-prompted and well-orchestrated, will eventually get us... wherever we're going. They approach this matter with the confidence of someone who has kind of been right at least once (and they have, viz. neural networks). You would typically worry about them, except they're too busy giving orders to their fleet of minions.
+:::
+
+::: {.estate name="The Post-Trainers" blurb="Fearfully and wonderfully made." image="posttraining.png" params="Strength: Reinforcement learning. Enough said. | Weakness: The cost of actually doing it. | Patron saint: St. Jensen of Santa Clara."}
+There is remarkably little wrong with the post-training crowd, really (by comparison, anyway). They're the nice guys of this war, and can occasionally be found trying to keep the peace. They're not, really, in conflict with any other faction in earnest -- yes, scale is needed to yield the foundation models they adapt, and agents benefit from specific fine-tuning, and so on. It's just that they never felt at home in any of the other camps. And thank heavens for that, because this lot has arguably the greatest direct impact on the models people use.
+:::
+
+::: {.estate name="The Inference Time Lords" blurb="We'll figure it out when we get there." image="inferencetime.png" params="Strength: `/ultrathink`. | Weakness: The time it takes to Think Longer. | Patron saint: St. Remi of Monte Carlo."}
+The inference-timers believe that intelligence happens at runtime. Given enough computation during inference, techniques such as chain-of-thought, tree search, and self-consistency can unlock capabilities that the base model cannot access directly. This is not, strictly speaking, wrong. Does it stand on an awful number of turtles all the way down, though? Yes, yes it does.
+:::
+
+::: {.estate name="The Prompties" blurb="Let's think step by step." image="prompties.png" params="Strength: We owe them for ReAct. | Weakness: Themselves. | Patron saint: Whoever is trending on LinkedIn this week."}
+
+The Prompties are the folks who still remain convinced that the key to intelligence is somewhere in the context. Like Anglicanism, they are divided into the Low Church -- who are basically what's left of the old prompt engineering crowd -- and the High Church, who have put a programmatic cloth over that proposition with tools like DSPy and agentic context engineering. They are, in a sense, the most optimistic of all the estates, believing that intelligence is just a clever arrangement of words away. They are also, perhaps, the most vulnerable to the coming paradigm shift.
+:::
+
+:::
+
+
+Every paradigm war produces its refuseniks. Those who look at the factional battle lines and suspect the map itself is wrong. The heretical position is this: the question "where does intelligence live?" presupposes that intelligence is the kind of thing that lives somewhere. And this presupposition, seemingly innocent, shapes everything that follows. It determines what we study, what we measure, what we fund, what we recognise as progress.
+
+But what if intelligence isn't a substance to be located? What if it's more like a process, a pattern, a way of being?
+
+Consider the fist. When I clench my hand, a fist appears. Where does the fist live? In my fingers? In my palm? In the muscles of my forearm? The question is confused. The fist isn't a thing with a location, but a configuration. When I open my hand, the fist doesn't go somewhere else. It simply ceases.
+
+The heretics suspect intelligence is similar. I'm arguably the closest to this faction, and one of its blessings is that it allows me to see the good in all five estates. Because the fact is, they're all a little right, even if they're generally mostly wrong. Scalers have been proven right for a long enough time that they can't be discounted, even if scale isn't going to get us superintelligence. The agentic folks are right that composition can unlock capabilities that are either novel or have been foreclosed until now for all practical purposes. The post-trainers are right about, well, post-training. So are the inference-timers about inference time. And yes, context does matter and in-context learning is a cheap way to get an awful lot of mileage out of a model awfully fast (it's just got nothing to do with learning, making it somewhat of a misnomer).
+
+None of them are wrong. They're all describing real phenomena. But they're feeling different parts of the elephant and mistaking their part for the whole.
+The elephant isn't in any of those parts---the elephant is the elephant.
+
+
+## The methodological trap
+
+So far, this is just philosophy. Since this isn't LessWrong, we're going to try to connect this to actual reality. Turns out that this question has some very real consequences. If the heretics are right, then the factional war isn't just a scientific disagreement. It's a methodological trap. Each faction studies what its paradigm makes visible. But if intelligence is relational — if it emerges from the interaction of weights and context and composition and adaptation and inference — then each faction is optimising one term in a multi-term equation. They're not wrong, but they're incomplete. And their incompleteness is invisible to them because their paradigm doesn't have vocabulary for what they're missing.
+
+Sara Hooker calls this the "hardware lottery": the observation that research directions are shaped by available tools, not just by scientific merit. We scaled because GPUs scaled. We studied training---which in this case mainly means pre---because training was the bottleneck we could measure. The factions aren't purely empirical discoveries; they're partly artefacts of what our instruments could see. This is the deepest sense in which paradigm matters. It's not just that different factions have different theories. It's that different theories make different phenomena visible. The Scalers will never discover what Team Agents are looking at, and vice versa, because their paradigms literally cannot represent each other's objects of study. The heretical position is that we need to step outside all five paradigms to see the shape of the whole. But of course, "stepping outside all paradigms" is itself a paradigm, with its own blindspots and limitations. There's no view from nowhere.
+
+
+## The investment question
+
+What there is a view from, on the other hand, is Sand Hill Road. Let me bring this down from philosophy to money, because money is where paradigms become consequential.
+
+The question "where does intelligence live?" sounds abstract, but it cashes out very concretely in how we allocate resources. If intelligence is in weights, fund training runs. If it's in composition, fund orchestration platforms. If it's in inference, fund reasoning infrastructure. If it's in adaptation, fund efficient fine-tuning. If it's in context, fund better prompting tools.
+
+The Stargate investment — $500 billion over four years — is a bet on the Scalers' paradigm. It assumes that scale remains the primary driver of capability, that bigger models will be smarter models, that the bitter lesson continues to hold. This is not an unreasonable bet. The bitter lesson has been right before. But if the heretics are right, then Stargate is a bet on one term in a multi-term equation. The returns will be real but partial. You can scale indefinitely and still plateau if the other terms aren't addressed. Intelligence isn't a substance you can accumulate; it's a process you have to orchestrate.
+
+The portfolio implications are significant. If intelligence is relational, you don't want to go all-in on any single faction. You want exposure to scale and composition and inference and adaptation, not because you're hedging your bets but because the phenomenon itself requires all of them.
+
+This is hard for investors to hear. Capital likes clean theses. "Scale is all you need" is a clean thesis. "Intelligence emerges from the complex interaction of multiple factors, none of which is sufficient on its own" is not a clean thesis. It's true, but it doesn't fit on a pitch deck.
+
+
+## Between the head and the heart
+
+So, I guess, it all goes back to my mom's answer. The soul _is_ between the head _and_ the heart, not in either but in the dialogue between them.
+
+I've [written elsewhere about biome engineering](../biome-engineering/): the idea that we should design substrate conditions rather than individual agents, that we should create environments from which intelligent behaviour emerges rather than trying to program intelligence directly. I didn't quite see until now how that connects to the localisation question. The biome engineer's answer to "where does intelligence live?" is: wrong question. Intelligence doesn't live anywhere. It happens. It's an event, not an object. A process, not a substance. You don't find it, you create the conditions for it and let it find itself.
+
+This is not mysticism, though it risks sounding like mysticism if I'm not careful. "Emergence" can be a thought-terminating cliché, a way of saying "it's complicated" without doing the work to understand how. The failure mode of the heretical position is using fancy words as a substitute for actual explanation. But the genuine insight stands. When we ask "where does intelligence live?", we're importing assumptions that constrain our answers. We're looking for a thing when we should be looking for a pattern. We're trying to locate a substance when we should be studying a process.
+
+Maybe intelligence is, like the soul, not in any one given place, not in the weights or the prompts or the agents or the inference, but in the space between: not a _where_, but a **how**.

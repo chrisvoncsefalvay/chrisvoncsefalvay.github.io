@@ -1,0 +1,216 @@
+/* Estate Carousel Styles */
+
+/* Wrapper and borders */
+.estate-carousel-wrapper {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.estate-carousel-border {
+  border: none;
+  border-top: 2px solid #e0e0e0;
+  margin: 0;
+}
+
+/* Main carousel container */
+.estate-carousel {
+  position: relative;
+  padding: 2rem 3rem;
+  background: transparent;
+}
+
+.estate-carousel .carousel-inner {
+  overflow: visible;
+}
+
+/* Smooth slide transitions */
+.estate-carousel .carousel-item {
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+.estate-carousel .carousel-item-next,
+.estate-carousel .carousel-item-prev,
+.estate-carousel .carousel-item.active {
+  display: block;
+}
+
+/* Individual estate item layout - 1:3 ratio */
+.estate-item {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+  align-items: center;
+  height: 320px;
+  padding: 1rem 0;
+}
+
+/* Image card container */
+.estate-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* The angled card - standard trading card ratio 2.5:3.5 (5:7) */
+.estate-card {
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+  background: #fff;
+  border: 3px solid #d4d4d8;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 180px;
+  height: 252px; /* 180 * (7/5) = 252 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.estate-card:hover {
+  transform: rotate(-1deg) scale(1.08);
+}
+
+.estate-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.estate-card-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.estate-card-placeholder::after {
+  content: "?";
+  font-size: 3rem;
+  color: #a1a1aa;
+  font-weight: 300;
+}
+
+/* Content area */
+.estate-content {
+  padding: 1rem 0;
+}
+
+.estate-name {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #18181b;
+}
+
+.estate-blurb {
+  font-style: italic;
+  color: #71717a;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.estate-description {
+  color: #3f3f46;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.estate-description p {
+  margin: 0;
+}
+
+/* Parameters display */
+.estate-params {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.estate-param {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.estate-param-key {
+  font-weight: 600;
+  color: #52525b;
+}
+
+.estate-param-value {
+  color: #71717a;
+  margin-left: 0.25rem;
+}
+
+.estate-param-sep::after {
+  content: "|";
+  color: #d4d4d8;
+  margin: 0 0.25rem;
+}
+
+/* Carousel controls */
+.estate-carousel .carousel-control-prev,
+.estate-carousel .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f4f4f5;
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.estate-carousel .carousel-control-prev {
+  left: 0;
+}
+
+.estate-carousel .carousel-control-next {
+  right: 0;
+}
+
+.estate-carousel .carousel-control-prev:hover,
+.estate-carousel .carousel-control-next:hover {
+  background: #e4e4e7;
+}
+
+.estate-carousel .carousel-control-prev-icon,
+.estate-carousel .carousel-control-next-icon {
+  width: 16px;
+  height: 16px;
+  filter: invert(40%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .estate-item {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .estate-card-container {
+    order: -1;
+  }
+
+  .estate-card {
+    width: 140px;
+    height: 196px; /* 140 * (7/5) = 196 */
+  }
+
+  .estate-carousel {
+    padding: 1.5rem 2.5rem;
+  }
+
+  .estate-params {
+    justify-content: center;
+  }
+}
