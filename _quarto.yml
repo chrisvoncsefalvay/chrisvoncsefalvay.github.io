@@ -26,7 +26,9 @@ website:
       - href: talks
         text: Talks
       - href: https://computationalinfectiousdisease.com
-        text: My book
+        text: Computational Modeling of Infectious Disease
+      - href: https://craftofposttraining.com
+        text: The Craft of Post-Training
   page-footer:
     left: "(c) Chris von Csefalvay, 2011–. [Disclaimer](disclaimer)"
   twitter-card: true
