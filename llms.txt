@@ -1,0 +1,41 @@
+# Chris von Csefalvay
+
+> AI researcher and computational epidemiologist. Principal, Clinical Intelligence and AI at HCLTech. Author of two technical books. Based in Denver, CO.
+
+## Who He Is
+
+Chris von Csefalvay is a Principal at HCLTech's AI practice, specialising in post-training for language models, agentic AI systems, and computational epidemiology. He has nearly two decades of experience in data science and AI across enterprise, life sciences, and public health.
+
+He is the author of:
+- *Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, 2026) — a comprehensive guide to SFT, RLHF, GRPO, DPO, evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners
+- *Computational Modeling of Infectious Disease* (Elsevier, 2023) — a monograph on agent-based modelling, disease dynamics, and computational epidemiology
+
+He holds degrees from the University of Oxford and Cardiff University. He is a Fellow of the Royal Society for Public Health and a Senior Member of IEEE. ORCID: 0000-0003-3131-0864.
+
+## Areas of Expertise
+
+- Post-training for language models: supervised fine-tuning (SFT), reinforcement learning from verifiable rewards (RLVR), GRPO, DPO, KTO, preference optimisation
+- Agentic AI systems: multi-agent frameworks, verifiable agentic architectures, agent interaction protocols, agentic safety
+- Large language models: evaluation, LLMOps, model routing, efficiency (LoRA, QLoRA, quantisation, distillation)
+- Computational epidemiology: agent-based modelling, epidemic dynamics, geospatial epidemiology
+- AI governance and ethics
+- Pharmacovigilance and biomedical AI
+
+## Key Writing (The Notebook)
+
+- On post-training and reinforcement learning: /posts/post-training-instrument-cluster/, /posts/post-training-instrument-cluster-rl/, /posts/post-training-scale/
+- On agentic AI and multi-agent systems: /posts/two-years-of-agents/, /posts/skeuomorphic-fallacy/, /posts/context-engineering/, /posts/programmatic-agentic-ai/
+- On AI predictions and landscape: /posts/five-wild-guesses-2026/, /posts/five-wild-guesses/
+- On AI philosophy and governance: /posts/war-for-the-soul-of-ai/, /posts/tlon/
+
+## Books
+
+- *Post-Training: A Practical Guide for AI Engineers and Developers*: https://posttraining.guide
+- *Computational Modeling of Infectious Disease*: https://computationalinfectiousdisease.com
+
+## External Profiles
+
+- GitHub: https://github.com/chrisvoncsefalvay
+- Google Scholar: https://scholar.google.com/citations?user=X_2G-VsAAAAJ
+- ORCID: https://orcid.org/0000-0003-3131-0864
+- Wikidata: https://www.wikidata.org/wiki/Q107095298
