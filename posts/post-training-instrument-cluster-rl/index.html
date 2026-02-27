@@ -98,7 +98,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a4d8066ab99c821fadc425098389dfee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,7 +135,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '395640625', { 'anonymize_ip': true});
 </script>
-<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Chris von Csefalvay","jobTitle":"Director of Biomedical AI/ML","height":"74 inches","gender":"male","description":"Chris von Csefalvay is a computational epidemiologist and data scientist working at the intersection of AI/ML, computational dynamics and public health. He is the author of Computational Modeling of Infectious Disease and a number of research papers.","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/IMG_5986.jpeg","address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","postalCode":"80204","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":[{"@type":"Organization","name":"HCLTech"}],"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"TOPRA"},{"@type":"Organization","name":"IEEE"}],"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Chris von Csefalvay","givenName":"Chris","familyName":"von Csefalvay","jobTitle":"Principal, Clinical Intelligence and AI","description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the author of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press, 2026) and Computational Modeling of Infectious Disease (Elsevier, 2023).","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.png","sameAs":["https://orcid.org/0000-0003-3131-0864","https://scholar.google.com/citations?user=X_2G-VsAAAAJ","https://www.wikidata.org/wiki/Q107095298","https://hu.wikipedia.org/wiki/Chris_von_Csefalvay","https://github.com/chrisvoncsefalvay","https://twitter.com/epichrisis"],"address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":{"@type":"Organization","name":"HCLTech","url":"https://www.hcltech.com"},"birthDate":"1986-07-15","birthPlace":"Budapest, Hungary","nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}],"memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"IEEE"}],"knowsAbout":["post-training for language models","supervised fine-tuning","reinforcement learning from verifiable rewards","group relative policy optimization","agentic AI systems","multi-agent frameworks","large language models","LLM evaluation","computational epidemiology","AI alignment","LLMOps"],"author":[{"@type":"Book","name":"Post-Training: A Practical Guide for AI Engineers and Developers","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","datePublished":"2026"},{"@type":"Book","name":"Computational Modeling of Infectious Disease","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","datePublished":"2023"}]}</script>
 <style>
 img, .cell-output-display img {
   max-width: 100%;
@@ -251,8 +251,8 @@ window.Quarto = {
 <span class="menu-text">Computational Modeling of Infectious Disease</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://craftofposttraining.com"> 
-<span class="menu-text">The Craft of Post-Training</span></a>
+    <a class="nav-link" href="https://posttraining.guide"> 
+<span class="menu-text">Post-Training (book)</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -383,7 +383,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <span class="math inline">\(\beta (\log \pi_\theta(y \mid x) - \log \pi_{\text{ref}}(y \mid x))\)</span>, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="54d29c50" class="cell" data-execution_count="1">
+</div></div><div id="fe26e2fa" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> TrainerCallback</span>
@@ -505,7 +505,7 @@ Schulman, John. 2020. <span>‘Approximating <span>KL</span> Divergence’</span
 </div><div id="ref-chen2024catastrophic" class="csl-entry" role="listitem">
 Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. In <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
 </div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(<a href="#ref-chen2024catastrophic" role="doc-biblioref">Chen, He, and Kifer 2024</a>)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="bf259189" class="cell" data-execution_count="4">
+<div id="4a4392d9" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KLDivergenceCallback(TrainerCallback):</span>
@@ -584,7 +584,7 @@ Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</spa
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(<a href="#ref-shao2024deepseekmath" role="doc-biblioref">Shao et al. 2024</a>)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry" role="listitem">
 Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="4402be27" class="cell" data-execution_count="6">
+</div></div></div><div id="3441da4a" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PolicyRatioCallback(TrainerCallback):</span>
@@ -663,7 +663,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="10bea4b9" class="cell" data-execution_count="8">
+</div></div><div id="eaea39bc" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GenerationLengthCallback(TrainerCallback):</span>
