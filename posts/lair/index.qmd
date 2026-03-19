@@ -9,7 +9,7 @@ citation:
 date: 2024-01-06
 description: Language As Intermediate Representation - a new paradigm for transformation using multimodal LLMs
 google-scholar: true
-image: header.png
+image: header.webp
 title: LAIR - Language As Intermediate Representation
 ---
 
@@ -130,7 +130,7 @@ Here's the output:
 
 By the Emperor, that's some good stuff. Let's see what DALL-E makes of it:
 
-![Our output image.](img-eTqdxb5CYGT2vY5FqNkRJdva.png){#fig-output}
+![Our output image.](img-eTqdxb5CYGT2vY5FqNkRJdva.webp){#fig-output}
 
 It's interesting to note what remains and what has changed. In particular, the relationship of the figures to each other, both spatially and semantically, as well as their posture, their number (mostly!) and the general subject matter at a highly semanticised level was preserved. Instead of a laptop, they're looking at a big holographic sand table. Note that unlike in NST, we actually have control over what is preserved and what is not -- that's what our transformer prompt accomplishes. We've told it to change dress, for instance, but we haven't told it to make any changes to the overall relationship between the figures (note how a "collaborative atmosphere", for instance, was retained word for word).
 

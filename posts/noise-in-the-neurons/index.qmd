@@ -9,7 +9,7 @@ citation: true
 date: 2025-06-27
 description: Your language model isn't experiencing a cognitive defect. It's just wrong. 
 google-scholar: true
-image: header.png
+image: header.webp
 title: Just noise in the neurons
 --- 
 
@@ -55,7 +55,7 @@ LLMs lack consciousness or embodiment. They don’t have an inner mental state o
 When we get down to it, an LLM doesn't perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There's no tiny chess prodigy hiding inside this Mechanical Turk.
 
 ::: {.column-margin}
-![Wolfgang von Kempelen's Mechanical Turk -- or at least what his debunker, Joseph Friedrich Freiherr von Racknitz thought it looked like. He was wrong about the details, correct about the principle.](image.png)
+![Wolfgang von Kempelen's Mechanical Turk -- or at least what his debunker, Joseph Friedrich Freiherr von Racknitz thought it looked like. He was wrong about the details, correct about the principle.](image.webp)
 :::
 
 Calling an LLM’s fabrications hallucinations therefore amounts to a category error: it imports terminology from human cognition and neuropathology into a domain where it has nothing to do. The model isn’t seeing pink elephants. It’s just guessing a sequence of words, badly as it happens.

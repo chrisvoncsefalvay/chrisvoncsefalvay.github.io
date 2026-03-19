@@ -7,7 +7,7 @@ categories:
 - ecology
 date: 2025-11-23
 description: A differential ecology of AI, as she is done in late 2025.
-image: header.png
+image: header.webp
 title: The Hype, the Slop and the Craft
 ---
 

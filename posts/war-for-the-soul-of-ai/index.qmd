@@ -6,7 +6,7 @@ categories:
 date: 2026-01-08
 description: Where does intelligence live? Just about everything depends on the answer to that question.
 google-scholar: true
-image: header.png
+image: header.webp
 title: The War for the Soul of AI
 filters:
 - estate-carousel
@@ -34,23 +34,23 @@ There has been something of a meme about ['agent labs' versus 'model labs'](http
 
 ::: {.estate-carousel}
 
-::: {.estate name="The Scalers" blurb="Intelligence emerges from scale. We are legion." image="scalers.png" params="Strength: Infinite GPUs. | Weakness: Power bills. | Patron saint: St Altman of OAI."}
+::: {.estate name="The Scalers" blurb="Intelligence emerges from scale. We are legion." image="scalers.webp" params="Strength: Infinite GPUs. | Weakness: Power bills. | Patron saint: St Altman of OAI."}
 Scalers believe that superintelligence emerges from scale. What scale? 'Scale.' To those firmly on Team Scale, that is both the variable and its maximum value, the journey and its destination. Deep down, after the right NeurIPS post-conference party, they will admit that they don't really know when they'll hit scale, only that they'll know it because superintelligence will greet them on the other side. They are, in a sense, the true believers of AI. They have staked everything on the bitter lesson, and they will not be moved.
 :::
 
-::: {.estate name="Team Agents" blurb="A lot of dumb things, when well organised, can amount to quite a bit." image="agents.png" params="Strength: An army of minions. | Weakness: Figuring out what to do with them. | Patron saint: Bl. Ralph Wiggum."}
+::: {.estate name="Team Agents" blurb="A lot of dumb things, when well organised, can amount to quite a bit." image="agents.webp" params="Strength: An army of minions. | Weakness: Figuring out what to do with them. | Patron saint: Bl. Ralph Wiggum."}
 Team Agents don't care about the model. They once made a 280m parameter model run half their household, schedule their meetings, tidy their bedroom and walk their dog... all at once. Team Agents argue that a sufficiently large number of agents, well-prompted and well-orchestrated, will eventually get us... wherever we're going. They approach this matter with the confidence of someone who has kind of been right at least once (and they have, viz. neural networks). You would typically worry about them, except they're too busy giving orders to their fleet of minions.
 :::
 
-::: {.estate name="The Post-Trainers" blurb="Fearfully and wonderfully made." image="posttraining.png" params="Strength: Reinforcement learning. Enough said. | Weakness: The cost of actually doing it. | Patron saint: St. Jensen of Santa Clara."}
+::: {.estate name="The Post-Trainers" blurb="Fearfully and wonderfully made." image="posttraining.webp" params="Strength: Reinforcement learning. Enough said. | Weakness: The cost of actually doing it. | Patron saint: St. Jensen of Santa Clara."}
 There is remarkably little wrong with the post-training crowd, really (by comparison, anyway). They're the nice guys of this war, and can occasionally be found trying to keep the peace. They're not, really, in conflict with any other faction in earnest -- yes, scale is needed to yield the foundation models they adapt, and agents benefit from specific fine-tuning, and so on. It's just that they never felt at home in any of the other camps. And thank heavens for that, because this lot has arguably the greatest direct impact on the models people use.
 :::
 
-::: {.estate name="The Inference Time Lords" blurb="We'll figure it out when we get there." image="inferencetime.png" params="Strength: `/ultrathink`. | Weakness: The time it takes to Think Longer. | Patron saint: St. Remi of Monte Carlo."}
+::: {.estate name="The Inference Time Lords" blurb="We'll figure it out when we get there." image="inferencetime.webp" params="Strength: `/ultrathink`. | Weakness: The time it takes to Think Longer. | Patron saint: St. Remi of Monte Carlo."}
 The inference-timers believe that intelligence happens at runtime. Given enough computation during inference, techniques such as chain-of-thought, tree search, and self-consistency can unlock capabilities that the base model cannot access directly. This is not, strictly speaking, wrong. Does it stand on an awful number of turtles all the way down, though? Yes, yes it does.
 :::
 
-::: {.estate name="The Prompties" blurb="Let's think step by step." image="prompties.png" params="Strength: We owe them for ReAct. | Weakness: Themselves. | Patron saint: Whoever is trending on LinkedIn this week."}
+::: {.estate name="The Prompties" blurb="Let's think step by step." image="prompties.webp" params="Strength: We owe them for ReAct. | Weakness: Themselves. | Patron saint: Whoever is trending on LinkedIn this week."}
 
 The Prompties are the folks who still remain convinced that the key to intelligence is somewhere in the context. Like Anglicanism, they are divided into the Low Church -- who are basically what's left of the old prompt engineering crowd -- and the High Church, who have put a programmatic cloth over that proposition with tools like DSPy and agentic context engineering. They are, in a sense, the most optimistic of all the estates, believing that intelligence is just a clever arrangement of words away. They are also, perhaps, the most vulnerable to the coming paradigm shift.
 :::

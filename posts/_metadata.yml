@@ -20,3 +20,5 @@ citation:
   type: article
 reference-location: margin
 citation-location: margin
+filters:
+  - ../scripts/blogposting-schema.lua

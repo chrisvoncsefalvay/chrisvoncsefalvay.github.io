@@ -8,7 +8,7 @@ citation: true
 date: 2025-12-20
 description: On the comfortable delusion of a unitary post-training discipline.
 google-scholar: true
-image: header.png
+image: header.webp
 ---
 
 ::: {.callout-tip}
