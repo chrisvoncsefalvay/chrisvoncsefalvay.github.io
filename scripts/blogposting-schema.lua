@@ -11,6 +11,12 @@ local function escape_json_string(s)
   return s
 end
 
+local months = {
+  january = "01", february = "02", march = "03", april = "04",
+  may = "05", june = "06", july = "07", august = "08",
+  september = "09", october = "10", november = "11", december = "12"
+}
+
 local function format_date(d)
   if d == nil then return nil end
   local s = pandoc.utils.stringify(d)
@@ -18,7 +24,36 @@ local function format_date(d)
   if s:match("^%d%d%d%d%-%d%d%-%d%d") then
     return s:sub(1, 10)
   end
+  -- Parse "30 October 2023" or "6 July 2025"
+  local day, mon, year = s:match("^(%d+)%s+(%a+)%s+(%d%d%d%d)$")
+  if day and mon and year then
+    local m = months[mon:lower()]
+    if m then
+      return string.format("%s-%s-%02d", year, m, tonumber(day))
+    end
+  end
+  -- Parse "October 30, 2023"
+  local mon2, day2, year2 = s:match("^(%a+)%s+(%d+),?%s+(%d%d%d%d)$")
+  if mon2 and day2 and year2 then
+    local m = months[mon2:lower()]
+    if m then
+      return string.format("%s-%s-%02d", year2, m, tonumber(day2))
+    end
+  end
   return s
+end
+
+local function get_page_url(meta)
+  local site_url = meta['site-url'] and pandoc.utils.stringify(meta['site-url']) or nil
+  if not site_url then return nil end
+  site_url = site_url:gsub("/$", "")
+  local input_file = PANDOC_STATE.input_files[1]
+  if not input_file then return nil end
+  input_file = input_file:gsub("^%./", "")
+  local path = input_file:gsub("%.qmd$", ".html"):gsub("%.md$", ".html")
+  path = path:gsub("index%.html$", "")
+  if not path:match("^/") then path = "/" .. path end
+  return site_url .. path
 end
 
 function Meta(meta)
@@ -31,6 +66,7 @@ function Meta(meta)
   local date = format_date(meta.date)
   local description = meta.description and pandoc.utils.stringify(meta.description) or ""
   local image = meta.image and pandoc.utils.stringify(meta.image) or nil
+  local page_url = get_page_url(meta)
 
   -- Build categories/keywords array
   local keywords = {}
@@ -40,12 +76,16 @@ function Meta(meta)
     end
   end
 
-  -- Build the image URL
+  -- Build the image URL (make fully qualified if relative)
   local image_url = ""
   if image then
-    -- For relative image paths, we can't know the full URL at build time
-    -- but we provide what we can
-    image_url = escape_json_string(image)
+    if image:match("^https?://") then
+      image_url = escape_json_string(image)
+    elseif page_url then
+      image_url = escape_json_string(page_url .. image)
+    else
+      image_url = escape_json_string(image)
+    end
   end
 
   -- Extract DOI if present
@@ -92,7 +132,8 @@ function Meta(meta)
   end
 
   json = json .. ',"inLanguage":"en"'
-  json = json .. ',"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com"}'
+  local entity_url = page_url or "https://chrisvoncsefalvay.com"
+  json = json .. ',"mainEntityOfPage":{"@type":"WebPage","@id":"' .. escape_json_string(entity_url) .. '"}'
 
   -- Add speakable specification
   json = json .. ',"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}'

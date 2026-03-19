@@ -40,6 +40,8 @@ website:
 
 format:
   html:
+    filters:
+      - scripts/canonical-og-url.lua
     theme:
       - cosmo
       - custom.scss
