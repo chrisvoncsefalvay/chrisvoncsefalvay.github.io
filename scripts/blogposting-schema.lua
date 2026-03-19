@@ -99,9 +99,18 @@ function Meta(meta)
 
   json = json .. '}'
 
-  -- Inject into the HTML head using Quarto's API
+  -- Inject into the HTML head via Pandoc's header-includes
   local script = '<script type="application/ld+json">' .. json .. '</script>'
-  quarto.doc.include_text("in-header", script)
+
+  local header_includes = meta['header-includes']
+  if header_includes == nil then
+    header_includes = pandoc.MetaList({})
+  elseif header_includes.t ~= "MetaList" then
+    header_includes = pandoc.MetaList({header_includes})
+  end
+
+  header_includes:insert(pandoc.MetaBlocks({pandoc.RawBlock('html', script)}))
+  meta['header-includes'] = header_includes
 
   return meta
 end
