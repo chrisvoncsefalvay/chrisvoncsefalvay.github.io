@@ -2,7 +2,7 @@
 title: Dorkestration
 description: Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.
 date: 2025-12-15
-image: header.png
+image: header.webp
 categories:
 - AI
 - agentic AI

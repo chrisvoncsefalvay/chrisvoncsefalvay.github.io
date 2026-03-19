@@ -6,7 +6,7 @@ categories:
 date: 2025-12-31
 description: The bubble everyone's watching for isn't the one that's coming.
 google-scholar: true
-image: header.png
+image: header.webp
 title: Five wild guesses for 2026
 bibliography: references.bib
 ---
