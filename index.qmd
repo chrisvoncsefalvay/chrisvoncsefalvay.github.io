@@ -1,5 +1,6 @@
 ---
 title: "Chris von Csefalvay"
+description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier)."
 about:
     template: trestles
     links:

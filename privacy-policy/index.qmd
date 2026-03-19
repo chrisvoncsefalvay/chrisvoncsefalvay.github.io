@@ -1,0 +1,54 @@
+---
+title: "Privacy Policy"
+description: "Privacy policy for chrisvoncsefalvay.com — what data is collected, how it is used, and your rights as a visitor."
+comments: false
+---
+
+*Last updated: 19 March 2026*
+
+This privacy policy explains what data is collected when you visit chrisvoncsefalvay.com and how it is used.
+
+## Hosting
+
+This site is hosted on [GitHub Pages](https://pages.github.com/). GitHub may collect technical information such as your IP address, browser type, and referring page as part of its standard server operations. See [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) for details.
+
+## Analytics
+
+This site uses [Google Analytics](https://analytics.google.com/) to understand how visitors interact with the content. Google Analytics collects:
+
+- Pages visited and time spent on each page
+- Referring website or search engine
+- General geographic location (country/region level)
+- Browser type and device category
+
+Google Analytics uses cookies to distinguish unique visitors. No personally identifiable information is collected through analytics. You can opt out of Google Analytics by installing the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
+
+## Cookies
+
+This site does not set any first-party cookies. The only cookies used are those set by Google Analytics (prefixed `_ga`), which are used to distinguish unique visitors and throttle request rates.
+
+## Data I do not collect
+
+This site does not:
+
+- Collect any personally identifiable information (PII)
+- Have user accounts, login forms, or registration
+- Use contact forms or collect email addresses through the site
+- Sell, share, or transfer any visitor data to third parties
+- Use advertising or remarketing services
+
+## Third-party links
+
+This site contains links to external websites. I am not responsible for the privacy practices or content of those sites. I encourage you to review the privacy policies of any external site you visit.
+
+## International visitors
+
+This site is operated from the United States. If you are visiting from the European Economic Area or other regions with data protection laws, please be aware that your information may be transferred to and processed in the United States. By using this site, you acknowledge this transfer. I do not knowingly collect or process personal data that would be subject to GDPR, as no PII is collected.
+
+## Contact
+
+If you have questions about this privacy policy, you can reach me at [chris@chrisvoncsefalvay.com](mailto:chris@chrisvoncsefalvay.com).
+
+## Changes to this policy
+
+I may update this privacy policy from time to time. Changes will be reflected by the "last updated" date at the top of this page.

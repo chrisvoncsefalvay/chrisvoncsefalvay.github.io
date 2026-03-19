@@ -1,0 +1,37 @@
+---
+title: "Corrections Policy"
+description: "Editorial and corrections policy for chrisvoncsefalvay.com — how errors are handled, corrections are noted, and accuracy is maintained."
+comments: false
+---
+
+*Last updated: 19 March 2026*
+
+I am committed to accuracy in everything I publish on this site. This page describes how I handle errors, corrections, and updates.
+
+## Corrections
+
+If a factual error is identified in a published post or page, I will correct it and note the correction. For material errors — those that affect the meaning or conclusions of a piece — a correction notice will be added to the post indicating what was changed and when.
+
+Minor corrections (typos, broken links, formatting) are made without separate notice.
+
+## Updates and revisions
+
+Posts may be updated after initial publication to reflect new information, add context, or improve clarity. Substantive updates are noted via the post's last-modified date where applicable.
+
+## Opinion and analysis
+
+Much of the content on this site represents my personal opinion, analysis, or commentary. I aim to clearly distinguish between factual claims and opinion. My [disclaimer](/disclaimer/) applies to all content on this site.
+
+## Reporting errors
+
+If you believe you have found a factual error in any content on this site, please contact me at [chris@chrisvoncsefalvay.com](mailto:chris@chrisvoncsefalvay.com) with:
+
+- A link to the page containing the error
+- A description of the error
+- If possible, a reference or source for the correct information
+
+I take error reports seriously and will review and respond to them promptly.
+
+## Scope
+
+This policy applies to all content published on chrisvoncsefalvay.com. It does not apply to content on external sites that I may link to.
