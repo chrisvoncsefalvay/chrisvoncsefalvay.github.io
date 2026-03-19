@@ -33,7 +33,7 @@ website:
       - href: https://nostarch.com/post-training
         text: Post-Training (Early Access)
   page-footer:
-    left: "(c) Chris von Csefalvay, 2011–. [Disclaimer](disclaimer)"
+    left: "(c) Chris von Csefalvay, 2011–. [Disclaimer](/disclaimer/) · [Privacy](/privacy-policy/) · [Corrections](/corrections/)"
   twitter-card: true
   open-graph: true
   google-analytics: "395640625"
