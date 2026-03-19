@@ -99,22 +99,9 @@ function Meta(meta)
 
   json = json .. '}'
 
-  -- Inject as a header include
+  -- Inject into the HTML head using Quarto's API
   local script = '<script type="application/ld+json">' .. json .. '</script>'
-
-  if not meta['include-in-header'] then
-    meta['include-in-header'] = pandoc.MetaList({})
-  end
-
-  -- Ensure it's a list
-  if meta['include-in-header'].t ~= "MetaList" then
-    local existing = meta['include-in-header']
-    meta['include-in-header'] = pandoc.MetaList({existing})
-  end
-
-  table.insert(meta['include-in-header'], pandoc.MetaBlocks({
-    pandoc.RawBlock('html', script)
-  }))
+  quarto.doc.include_text("in-header", script)
 
   return meta
 end
