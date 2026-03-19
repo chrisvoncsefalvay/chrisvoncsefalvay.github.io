@@ -35,11 +35,74 @@
     "text": "Recording\nTo be updated once the recording is available."
   },
   {
-    "objectID": "papers/index.html",
-    "href": "papers/index.html",
-    "title": "Papers",
+    "objectID": "privacy-policy/index.html",
+    "href": "privacy-policy/index.html",
+    "title": "Privacy Policy",
     "section": "",
-    "text": "Books\n\nvon Csefalvay C (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4.\nvon Csefalvay C, Nam D T, Melis A, Halonen M, Edison S, Kozdon J, Kwong T, Glaser F, Frid Y, Szarnyas G, Crusius K, de Oliveira Castro PR, Hassler G, Clark AR, Visser M (2021). Learn Julia the Hard Way. https://doi.org/10.5281/zenodo.4556324\n\n\n\n\n2024\n\nvon Csefalvay C (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. arXiv 2402.10951.\n\n\n\n2023\n\nMogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, von Csefalvay C, Mukamati D (2023). Juvenile polyposis syndrome: A case report. Clinical Case Reports 2023;11:e6798. doi:10.1002/ccr3.6798\n\n\n\n2022\n\nMutua V, Henry B, von Csefalvay C, Cheruiyot I, Vikse J, Lippi G, Bundi B, Mong’are N (2022). Tocilizumab in addition to standard of care in the management of COVID-19: A meta-analysis of RCTs. Acta Bio Medica: Atenei Parmensis 2022;93. doi:10.23750/abm.v93i1.12208\nBundi B, Mutua V, Cheruiyot I, Munguti J, von Csefalvay C, Nurani K, Ogeng’o J (2022). The Unusual High Origin Radial Artery in a Black Kenyan Population: A Cadaveric Study. Ethiopian Journal of Health Sciences 2022;32. doi:10.4314/ejhs.v32i2.25\nMunguti J, Mutua V, Cheruiyot I, von Csefalvay C, Opare-Addo P, Kiko N, Wanjiru R (2022). Tuberculous polyserositis in endemic areas with an emphasis on empiric therapy: A case report. Medicine: Case Reports and Study Protocols 2022;3:e0221. doi:10.1097/MD9.0000000000000221\n\n\n\n2021\n\nvon Csefalvay C (2021). VAERS data reveals no increased risk of neuroautoimmune adverse events from COVID-19 vaccines. medRxiv. doi:10.1101/2021.06.13.21258851.\nvon Csefalvay C (2021). Early evidence for the safety of certain COVID-19 vaccines using empirical Bayesian modeling from VAERS. medRxiv. doi:10.1101/2021.06.10.21258589.\nvon Csefalvay C (2021). A case-control study of autoimmune AEFIs following COVID-19 vaccination reported to VAERS. medRxiv. doi:10.1101/2021.07.06.21260074.\nvon Csefalvay C (2021). Anaphylactic events in mRNA vaccines: a reporting case-control study. medRxiv. doi:10.1101/2021.07.19.21260714.\nMutua V, Mong’are N, Bundi B, von Csefalvay C, Oriko D, Kitunguu P (2021). Sudden bilateral lower limb paralysis with dural ectasia in Neurofibromatosis type 1: A case report. Medicine: Case Reports and Study Protocols 2021;2:e0165. doi:10.1097/MD9.0000000000000165\nMpekethu N, Mongare N, Mutua V, Wangari M, von Csefalvay C, Ojuka D (2021). Knowledge and attitudes of undergraduate medical students in Kenya towards solid organ donation and transplantation: Are Africa’s future clinicians prepared?. African Journal of Nephrology 2021;24:89–94. doi:10.21804/24-1-4843\n\n\n\n2020\n\nvon Csefalvay C, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. Zenodo 2020. doi:10.5281/zenodo.3782871\nFoldi T, von Csefalvay C, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. Big Data and Cognitive Computing 2020;4:32. doi:10.3390/bdcc4040032\nvon Csefalvay C (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. arXiv 2007.13734.\nvon Csefalvay C (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. arXiv 2008.00559.\n\n\n\n2019\n\nvon Csefalvay C (2019). Novel quantitative indicators of digital ophthalmoscopy image quality. arXiv 1903.02695.\n\n\n\n2015\n\nvon Csefalvay C (2015). Ecological metrics of diversity in understanding social media. arXiv 1501.07621.\n\n\n\n2009\n\nvon Csefalvay C (2009). On Good Intentions and Poor Outcomes: A Critical Retrospective on Chester v Afshar. UC Dublin L. Rev. 2009;9:46.\n\n\n\n2007\n\nvon Csefalvay C (2007). Taunts, Chapati Pans and the Case of the Reasonable Glue-Sniffer: An Examination of the Normative Test in Provocation after Smith and Holley. Cambridge Student Law 2007:45–52. doi:10.2139/ssrn.1334048\n\n\n\n\nData sets\nFoldi, T., von Csefalvay, C., Pigler, P., Wash, W., Zempleni, B., Rodrigues, J., Kapronczay, M., Huber, Sz. & Gergely, B. (2022). Starschema COVID-19 consolidated data set. 27 March 2023. \nvon Csefalvay, C. (2019). 2019 Samoa measles outbreak data set. 06 December 2019. Zenodo. \nvon Csefalvay, C.. (2019). CODRAS: COnsolidated Diabetic Retinopathy Assessment Set. Zenodo. []"
+    "text": "Last updated: 19 March 2026\nThis privacy policy explains what data is collected when you visit chrisvoncsefalvay.com and how it is used."
+  },
+  {
+    "objectID": "privacy-policy/index.html#hosting",
+    "href": "privacy-policy/index.html#hosting",
+    "title": "Privacy Policy",
+    "section": "Hosting",
+    "text": "Hosting\nThis site is hosted on GitHub Pages. GitHub may collect technical information such as your IP address, browser type, and referring page as part of its standard server operations. See GitHub’s privacy statement for details."
+  },
+  {
+    "objectID": "privacy-policy/index.html#analytics",
+    "href": "privacy-policy/index.html#analytics",
+    "title": "Privacy Policy",
+    "section": "Analytics",
+    "text": "Analytics\nThis site uses Google Analytics to understand how visitors interact with the content. Google Analytics collects:\n\nPages visited and time spent on each page\nReferring website or search engine\nGeneral geographic location (country/region level)\nBrowser type and device category\n\nGoogle Analytics uses cookies to distinguish unique visitors. No personally identifiable information is collected through analytics. You can opt out of Google Analytics by installing the Google Analytics Opt-out Browser Add-on."
+  },
+  {
+    "objectID": "privacy-policy/index.html#cookies",
+    "href": "privacy-policy/index.html#cookies",
+    "title": "Privacy Policy",
+    "section": "Cookies",
+    "text": "Cookies\nThis site does not set any first-party cookies. The only cookies used are those set by Google Analytics (prefixed _ga), which are used to distinguish unique visitors and throttle request rates."
+  },
+  {
+    "objectID": "privacy-policy/index.html#data-i-do-not-collect",
+    "href": "privacy-policy/index.html#data-i-do-not-collect",
+    "title": "Privacy Policy",
+    "section": "Data I do not collect",
+    "text": "Data I do not collect\nThis site does not:\n\nCollect any personally identifiable information (PII)\nHave user accounts, login forms, or registration\nUse contact forms or collect email addresses through the site\nSell, share, or transfer any visitor data to third parties\nUse advertising or remarketing services"
+  },
+  {
+    "objectID": "privacy-policy/index.html#third-party-links",
+    "href": "privacy-policy/index.html#third-party-links",
+    "title": "Privacy Policy",
+    "section": "Third-party links",
+    "text": "Third-party links\nThis site contains links to external websites. I am not responsible for the privacy practices or content of those sites. I encourage you to review the privacy policies of any external site you visit."
+  },
+  {
+    "objectID": "privacy-policy/index.html#international-visitors",
+    "href": "privacy-policy/index.html#international-visitors",
+    "title": "Privacy Policy",
+    "section": "International visitors",
+    "text": "International visitors\nThis site is operated from the United States. If you are visiting from the European Economic Area or other regions with data protection laws, please be aware that your information may be transferred to and processed in the United States. By using this site, you acknowledge this transfer. I do not knowingly collect or process personal data that would be subject to GDPR, as no PII is collected."
+  },
+  {
+    "objectID": "privacy-policy/index.html#contact",
+    "href": "privacy-policy/index.html#contact",
+    "title": "Privacy Policy",
+    "section": "Contact",
+    "text": "Contact\nIf you have questions about this privacy policy, you can reach me at chris@chrisvoncsefalvay.com."
+  },
+  {
+    "objectID": "privacy-policy/index.html#changes-to-this-policy",
+    "href": "privacy-policy/index.html#changes-to-this-policy",
+    "title": "Privacy Policy",
+    "section": "Changes to this policy",
+    "text": "Changes to this policy\nI may update this privacy policy from time to time. Changes will be reflected by the “last updated” date at the top of this page."
+  },
+  {
+    "objectID": "teaching/index.html",
+    "href": "teaching/index.html",
+    "title": "Teaching",
+    "section": "",
+    "text": "I am a visiting thesis supervisor for students on the data science track of the mathematics programme at the Budapest University of Technology and Economics. If you’re intending to write your thesis on a topic related to my research interests, you’re probably in the right place.\n\nProcedural aspects\nEach year, the department publishes a list of thesis topics. You can find the list for the current academic year. If you’re interested in one of the topics, you should contact the supervisor listed for that topic. If you’re interested in one of my topics, you should contact me.\nAs I am not full-time faculty, you will need to find an internal supervisor as well. The department has been very supportive of my students in the past, so this should not be a problem.\nWhile not a strict requirement, I would be very grateful if students aspiring to work with me could please make themselves known a few months before start of term. This will allow me to plan my time better, and to make sure that I can give you the attention you deserve.\n\n\nExpectations\nYou will generally be expected to create quality research-backed work based on the topic you choose. This means that you will need to read and understand the relevant literature, and you will need to be able to implement the algorithms you study. You will also need to be able to evaluate your work, and to compare it to existing methods. In short, you will need:\n\na good lit review,\na well-identified research gap,\na decent treatment of the latter, and\nall of this done in a sound, scientific and reproducible manner.\n\nThe expectation is that you will do the bulk of the work over a period of 6 months, and that you will be able to write up your results in a thesis of 40-60 pages. You will also be expected to present your work at a thesis defence.\nStudents may, at present, write their theses in English or in Hungarian. I have no preference for either, but I do expect that you will be able to write well in whichever language you choose. The lingua franca of data science, at the moment, is English, so if you’re planning to work in the field, you should probably be able to write in English. If you’re looking for employment abroad, a thesis in English will carry you a long way.\n\n\nTopics\nPast topics have included agent-based models of infectious diseases, disproportionality analyses of vaccination, computer vision on Synthetic Aperature Radar images for forest cover detection, and much more.\nEvery year I offer four topics for no more than two places. Of these, three tend to come from the biomedical domain, and at least one has some computer vision aspect. The topics are usually related to my research interests, and are usually related to my key research interests.\n\n\nTechnology\nAs far as I’m concerned, you can write your thesis using whatever widely used software you prefer. Obviously, writing your models in an esoteric language like Befunge or Malbolge will not endear you to the faculty, but within reason, you’re fine. Python by far is the most popular choice among my students.\nRemember that whatever topic you pick, you’re responsible for doing the work. This means that you will have to figure out how to cover costs of computation if these are non-trivial. The faculty may be able to help, as could I, but you should not expect this. This is particularly relevant for LLM related topics or where there are data access costs."
   },
   {
     "objectID": "posts/llms-language/index.html",
@@ -695,9 +758,9 @@
   {
     "objectID": "disclaimer/index.html",
     "href": "disclaimer/index.html",
-    "title": "Chris von Csefalvay",
+    "title": "Disclaimer",
     "section": "",
-    "text": "Opinions expressed on this Site are the author’s own in his personal capacity. They do not reflect the views of the United States Government, the Commonwealth of Virginia, HCL America Inc. or of any organisation, company or board he is associated with."
+    "text": "Opinions expressed on this site are the author’s own in his personal capacity. They do not reflect the views of any organisation, company, or board he is associated with, including any current or former employer.\nThe content on this site is provided for informational purposes only and does not constitute professional advice. While I make reasonable efforts to ensure accuracy, I make no warranties or representations regarding the completeness, accuracy, or reliability of any information presented here.\nUse of any information on this site is at your own risk. I accept no liability for any loss or damage arising from reliance on the content of this site."
   },
   {
     "objectID": "posts/index.html",
@@ -1834,11 +1897,53 @@
     "text": "What next may come\nWhat we need are digital agoras – spaces where AI agents can discover capabilities, share information, and coordinate without needing this human intermediacy. That’s not because human oversight is bad, but because true agency requires the ability to discover and evaluate information independently. MCP and A2A represent tentative steps in this direction, but they still ultimately rely on humans wiring up the connections. The promise of agentic AI is that this would no longer be needed, that agents could exercise a kind of Auftragstaktik mindset of inferring these needs from some sort of reaching-out and finding adequate resources the way buyers find merchants in the marketplace. There’s, then, nothing ‘wrong’ with context engineering per se. What would however be a mistake is to consider it a destination, rather than a transitional phase. Every talk on context engineering, every new ‘supertool’, every clever prompting technique is progress – that we shouldn’t, however, let become procrastination.\nWhen context engineering becomes unnecessary, we’ll know our agents have finally grown up. The path forward isn’t through better context engineering, but through making it obsolete. Digital agoras, agent discovery protocols, emergent coordination mechanisms: these aren’t nice-to-haves, they are the sine qua nons for genuine AI agency. Every moment we spend perfecting context engineering is a moment we’re not spending on building the infrastructure that would make it unnecessary.\nAt the end of the day, context engineering is our confession, written in code and infrastructure, that we haven’t yet achieved what we claimed. It illuminates the partial success of agents: success, because agentic AI is tremendously powerful, but partially so, because it needs us to coordinate for them. So while context engineering will tide us over for a while the way prompt engineering has done for its hour, we shouldn’t forget that it’s a band-aid, no more. We should welcome context engineering… while awaiting the day we can finally retire it.\n\nNote: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc. My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. Click here for a full disclaimer."
   },
   {
-    "objectID": "teaching/index.html",
-    "href": "teaching/index.html",
-    "title": "Teaching",
+    "objectID": "corrections/index.html",
+    "href": "corrections/index.html",
+    "title": "Corrections Policy",
     "section": "",
-    "text": "I am a visiting thesis supervisor for students on the data science track of the mathematics programme at the Budapest University of Technology and Economics. If you’re intending to write your thesis on a topic related to my research interests, you’re probably in the right place.\n\nProcedural aspects\nEach year, the department publishes a list of thesis topics. You can find the list for the current academic year. If you’re interested in one of the topics, you should contact the supervisor listed for that topic. If you’re interested in one of my topics, you should contact me.\nAs I am not full-time faculty, you will need to find an internal supervisor as well. The department has been very supportive of my students in the past, so this should not be a problem.\nWhile not a strict requirement, I would be very grateful if students aspiring to work with me could please make themselves known a few months before start of term. This will allow me to plan my time better, and to make sure that I can give you the attention you deserve.\n\n\nExpectations\nYou will generally be expected to create quality research-backed work based on the topic you choose. This means that you will need to read and understand the relevant literature, and you will need to be able to implement the algorithms you study. You will also need to be able to evaluate your work, and to compare it to existing methods. In short, you will need:\n\na good lit review,\na well-identified research gap,\na decent treatment of the latter, and\nall of this done in a sound, scientific and reproducible manner.\n\nThe expectation is that you will do the bulk of the work over a period of 6 months, and that you will be able to write up your results in a thesis of 40-60 pages. You will also be expected to present your work at a thesis defence.\nStudents may, at present, write their theses in English or in Hungarian. I have no preference for either, but I do expect that you will be able to write well in whichever language you choose. The lingua franca of data science, at the moment, is English, so if you’re planning to work in the field, you should probably be able to write in English. If you’re looking for employment abroad, a thesis in English will carry you a long way.\n\n\nTopics\nPast topics have included agent-based models of infectious diseases, disproportionality analyses of vaccination, computer vision on Synthetic Aperature Radar images for forest cover detection, and much more.\nEvery year I offer four topics for no more than two places. Of these, three tend to come from the biomedical domain, and at least one has some computer vision aspect. The topics are usually related to my research interests, and are usually related to my key research interests.\n\n\nTechnology\nAs far as I’m concerned, you can write your thesis using whatever widely used software you prefer. Obviously, writing your models in an esoteric language like Befunge or Malbolge will not endear you to the faculty, but within reason, you’re fine. Python by far is the most popular choice among my students.\nRemember that whatever topic you pick, you’re responsible for doing the work. This means that you will have to figure out how to cover costs of computation if these are non-trivial. The faculty may be able to help, as could I, but you should not expect this. This is particularly relevant for LLM related topics or where there are data access costs."
+    "text": "Last updated: 19 March 2026\nI am committed to accuracy in everything I publish on this site. This page describes how I handle errors, corrections, and updates."
+  },
+  {
+    "objectID": "corrections/index.html#corrections",
+    "href": "corrections/index.html#corrections",
+    "title": "Corrections Policy",
+    "section": "Corrections",
+    "text": "Corrections\nIf a factual error is identified in a published post or page, I will correct it and note the correction. For material errors — those that affect the meaning or conclusions of a piece — a correction notice will be added to the post indicating what was changed and when.\nMinor corrections (typos, broken links, formatting) are made without separate notice."
+  },
+  {
+    "objectID": "corrections/index.html#updates-and-revisions",
+    "href": "corrections/index.html#updates-and-revisions",
+    "title": "Corrections Policy",
+    "section": "Updates and revisions",
+    "text": "Updates and revisions\nPosts may be updated after initial publication to reflect new information, add context, or improve clarity. Substantive updates are noted via the post’s last-modified date where applicable."
+  },
+  {
+    "objectID": "corrections/index.html#opinion-and-analysis",
+    "href": "corrections/index.html#opinion-and-analysis",
+    "title": "Corrections Policy",
+    "section": "Opinion and analysis",
+    "text": "Opinion and analysis\nMuch of the content on this site represents my personal opinion, analysis, or commentary. I aim to clearly distinguish between factual claims and opinion. My disclaimer applies to all content on this site."
+  },
+  {
+    "objectID": "corrections/index.html#reporting-errors",
+    "href": "corrections/index.html#reporting-errors",
+    "title": "Corrections Policy",
+    "section": "Reporting errors",
+    "text": "Reporting errors\nIf you believe you have found a factual error in any content on this site, please contact me at chris@chrisvoncsefalvay.com with:\n\nA link to the page containing the error\nA description of the error\nIf possible, a reference or source for the correct information\n\nI take error reports seriously and will review and respond to them promptly."
+  },
+  {
+    "objectID": "corrections/index.html#scope",
+    "href": "corrections/index.html#scope",
+    "title": "Corrections Policy",
+    "section": "Scope",
+    "text": "Scope\nThis policy applies to all content published on chrisvoncsefalvay.com. It does not apply to content on external sites that I may link to."
+  },
+  {
+    "objectID": "papers/index.html",
+    "href": "papers/index.html",
+    "title": "Papers",
+    "section": "",
+    "text": "Books\n\nvon Csefalvay C (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4.\nvon Csefalvay C, Nam D T, Melis A, Halonen M, Edison S, Kozdon J, Kwong T, Glaser F, Frid Y, Szarnyas G, Crusius K, de Oliveira Castro PR, Hassler G, Clark AR, Visser M (2021). Learn Julia the Hard Way. https://doi.org/10.5281/zenodo.4556324\n\n\n\n\n2024\n\nvon Csefalvay C (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. arXiv 2402.10951.\n\n\n\n2023\n\nMogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, von Csefalvay C, Mukamati D (2023). Juvenile polyposis syndrome: A case report. Clinical Case Reports 2023;11:e6798. doi:10.1002/ccr3.6798\n\n\n\n2022\n\nMutua V, Henry B, von Csefalvay C, Cheruiyot I, Vikse J, Lippi G, Bundi B, Mong’are N (2022). Tocilizumab in addition to standard of care in the management of COVID-19: A meta-analysis of RCTs. Acta Bio Medica: Atenei Parmensis 2022;93. doi:10.23750/abm.v93i1.12208\nBundi B, Mutua V, Cheruiyot I, Munguti J, von Csefalvay C, Nurani K, Ogeng’o J (2022). The Unusual High Origin Radial Artery in a Black Kenyan Population: A Cadaveric Study. Ethiopian Journal of Health Sciences 2022;32. doi:10.4314/ejhs.v32i2.25\nMunguti J, Mutua V, Cheruiyot I, von Csefalvay C, Opare-Addo P, Kiko N, Wanjiru R (2022). Tuberculous polyserositis in endemic areas with an emphasis on empiric therapy: A case report. Medicine: Case Reports and Study Protocols 2022;3:e0221. doi:10.1097/MD9.0000000000000221\n\n\n\n2021\n\nvon Csefalvay C (2021). VAERS data reveals no increased risk of neuroautoimmune adverse events from COVID-19 vaccines. medRxiv. doi:10.1101/2021.06.13.21258851.\nvon Csefalvay C (2021). Early evidence for the safety of certain COVID-19 vaccines using empirical Bayesian modeling from VAERS. medRxiv. doi:10.1101/2021.06.10.21258589.\nvon Csefalvay C (2021). A case-control study of autoimmune AEFIs following COVID-19 vaccination reported to VAERS. medRxiv. doi:10.1101/2021.07.06.21260074.\nvon Csefalvay C (2021). Anaphylactic events in mRNA vaccines: a reporting case-control study. medRxiv. doi:10.1101/2021.07.19.21260714.\nMutua V, Mong’are N, Bundi B, von Csefalvay C, Oriko D, Kitunguu P (2021). Sudden bilateral lower limb paralysis with dural ectasia in Neurofibromatosis type 1: A case report. Medicine: Case Reports and Study Protocols 2021;2:e0165. doi:10.1097/MD9.0000000000000165\nMpekethu N, Mongare N, Mutua V, Wangari M, von Csefalvay C, Ojuka D (2021). Knowledge and attitudes of undergraduate medical students in Kenya towards solid organ donation and transplantation: Are Africa’s future clinicians prepared?. African Journal of Nephrology 2021;24:89–94. doi:10.21804/24-1-4843\n\n\n\n2020\n\nvon Csefalvay C, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. Zenodo 2020. doi:10.5281/zenodo.3782871\nFoldi T, von Csefalvay C, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. Big Data and Cognitive Computing 2020;4:32. doi:10.3390/bdcc4040032\nvon Csefalvay C (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. arXiv 2007.13734.\nvon Csefalvay C (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. arXiv 2008.00559.\n\n\n\n2019\n\nvon Csefalvay C (2019). Novel quantitative indicators of digital ophthalmoscopy image quality. arXiv 1903.02695.\n\n\n\n2015\n\nvon Csefalvay C (2015). Ecological metrics of diversity in understanding social media. arXiv 1501.07621.\n\n\n\n2009\n\nvon Csefalvay C (2009). On Good Intentions and Poor Outcomes: A Critical Retrospective on Chester v Afshar. UC Dublin L. Rev. 2009;9:46.\n\n\n\n2007\n\nvon Csefalvay C (2007). Taunts, Chapati Pans and the Case of the Reasonable Glue-Sniffer: An Examination of the Normative Test in Provocation after Smith and Holley. Cambridge Student Law 2007:45–52. doi:10.2139/ssrn.1334048\n\n\n\n\nData sets\nFoldi, T., von Csefalvay, C., Pigler, P., Wash, W., Zempleni, B., Rodrigues, J., Kapronczay, M., Huber, Sz. & Gergely, B. (2022). Starschema COVID-19 consolidated data set. 27 March 2023. \nvon Csefalvay, C. (2019). 2019 Samoa measles outbreak data set. 06 December 2019. Zenodo. \nvon Csefalvay, C.. (2019). CODRAS: COnsolidated Diabetic Retinopathy Assessment Set. Zenodo. []"
   },
   {
     "objectID": "talks/index.html",
