@@ -6,7 +6,7 @@
 
 Chris von Csefalvay is a Principal at HCLTech's AI practice, where he leads work on post-training for large language models, agentic AI systems, and applied AI in life sciences. He has nearly two decades of experience spanning enterprise AI, computational epidemiology, and public health informatics.
 
-Before joining HCLTech, Chris held roles in data science and AI leadership across the pharmaceutical, defence, and technology sectors. He holds degrees from the University of Oxford (where he studied at Pembroke College) and Cardiff University. He is a Fellow of the Royal Society for Public Health (FRSPH) and a Senior Member of IEEE.
+Before joining HCLTech, Chris held roles in data science and AI leadership across the pharmaceutical, industrial, and technology sectors. He holds degrees from the University of Oxford (where he studied at University College and Merton College) and Cardiff University. He is a Fellow of the Royal Society for Public Health (FRSPH) and a Senior Member of IEEE.
 
 Chris is based in Denver, Colorado. He was born in Budapest, Hungary, and holds both British and Hungarian nationality.
 
