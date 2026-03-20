@@ -4,15 +4,21 @@ title: Papers
 
 # Books
 
+- **von Csefalvay C** (2026). Post-Training: A Practical Guide for AI Engineers and Developers. San Francisco: No Starch Press. [https://nostarch.com/post-training](https://nostarch.com/post-training).
+  A comprehensive guide to post-training techniques for large language models, covering supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners.
+
 - **von Csefalvay C** (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. [https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4](https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4).
+  A monograph on computational approaches to understanding infectious disease dynamics, covering agent-based modelling, compartmental models, network epidemiology, and geospatial analysis, with practical Python implementations throughout.
 
 - **von Csefalvay C**, Nam D T, Melis A, Halonen M, Edison S, Kozdon J, Kwong T, Glaser F, Frid Y, Szarnyas G, Crusius K, de Oliveira Castro PR, Hassler G, Clark AR, Visser M (2021). Learn Julia the Hard Way. [https://doi.org/10.5281/zenodo.4556324](https://doi.org/10.5281/zenodo.4556324)
+  An open-source introduction to the Julia programming language, emphasising a hands-on, exercise-driven approach to learning scientific computing and data analysis.
 
 <!-- references -->
 
 # 2024
 
 - **von Csefalvay C** (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. _arXiv_ [2402.10951](https://arxiv.org/abs/2402.10951).
+  Introduces DAEDRA, a transformer-based language model fine-tuned on VAERS reports to predict patient outcomes from adverse event narratives, demonstrating the potential of LLMs for pharmacovigilance signal detection.
 
 # 2023
 
@@ -44,9 +50,11 @@ title: Papers
 
 - **von Csefalvay C**, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. _Zenodo_ 2020. doi:[10.5281/zenodo.3782871](https://doi.org/10.5281/zenodo.3782871)
 
-- Foldi T, **von Csefalvay C**, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. _Big Data and Cognitive Computing_ 2020;**4**:32. doi:[10.3390/bdcc4040032](https://doi.org/10.3390/bdcc4040032)
+- Foldi T, **von Csefalvay C**, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. _Big Data and Cognitive Computing_ 2020;**4**:32. doi:[10.3390/bdcc4040032](https://doi.org/10.3390/bdcc4040032).
+  Presents Jampi, a distributed matrix multiplication framework exploiting Apache Spark's barrier execution mode for efficient large-scale linear algebra operations.
 
 - **von Csefalvay C** (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. _arXiv_ [2007.13734](https://arxiv.org/abs/2007.13734).
+  Models social distancing compliance during the COVID-19 pandemic as a differential game, analysing the Nash equilibrium dynamics of individual vs. collective epidemic mitigation strategies.
 
 - **von Csefalvay C** (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. _arXiv_ [2008.00559](https://arxiv.org/abs/2008.00559).
 

@@ -43,12 +43,23 @@ local function format_date(d)
   return s
 end
 
+local SITE_URL = "https://chrisvoncsefalvay.com"
+
 local function get_page_url(meta)
-  local site_url = meta['site-url'] and pandoc.utils.stringify(meta['site-url']) or nil
-  if not site_url then return nil end
+  -- Try to get site-url from Quarto's website config
+  local site_url = nil
+  if meta.website and type(meta.website) == "table" and meta.website['site-url'] then
+    site_url = pandoc.utils.stringify(meta.website['site-url'])
+  elseif meta['site-url'] then
+    site_url = pandoc.utils.stringify(meta['site-url'])
+  end
+  if not site_url then
+    site_url = SITE_URL
+  end
   site_url = site_url:gsub("/$", "")
+
   local input_file = PANDOC_STATE.input_files[1]
-  if not input_file then return nil end
+  if not input_file then return site_url end
   input_file = input_file:gsub("^%./", "")
   local path = input_file:gsub("%.qmd$", ".html"):gsub("%.md$", ".html")
   path = path:gsub("index%.html$", "")
@@ -82,7 +93,9 @@ function Meta(meta)
     if image:match("^https?://") then
       image_url = escape_json_string(image)
     elseif page_url then
-      image_url = escape_json_string(page_url .. image)
+      -- Ensure no double slash when joining
+      local base = page_url:gsub("/$", "")
+      image_url = escape_json_string(base .. "/" .. image:gsub("^/", ""))
     else
       image_url = escape_json_string(image)
     end
@@ -99,19 +112,17 @@ function Meta(meta)
   -- Build JSON-LD
   local json = '{"@context":"https://schema.org"'
   json = json .. ',"@type":"BlogPosting"'
+  json = json .. ',"@id":"' .. escape_json_string(page_url) .. '#article"'
   json = json .. ',"headline":"' .. escape_json_string(title) .. '"'
   json = json .. ',"description":"' .. escape_json_string(description) .. '"'
+  json = json .. ',"url":"' .. escape_json_string(page_url) .. '"'
 
   if date then
     json = json .. ',"datePublished":"' .. escape_json_string(date) .. '"'
     json = json .. ',"dateModified":"' .. escape_json_string(date) .. '"'
   end
 
-  json = json .. ',"author":{"@type":"Person"'
-  json = json .. ',"name":"Chris von Csefalvay"'
-  json = json .. ',"url":"https://chrisvoncsefalvay.com"'
-  json = json .. ',"sameAs":["https://orcid.org/0000-0003-3131-0864","https://scholar.google.com/citations?user=X_2G-VsAAAAJ","https://github.com/chrisvoncsefalvay","https://www.linkedin.com/in/chrisvoncsefalvay/"]'
-  json = json .. '}'
+  json = json .. ',"author":{"@id":"https://chrisvoncsefalvay.com/#person"}'
 
   json = json .. ',"publisher":{"@type":"Person"'
   json = json .. ',"name":"Chris von Csefalvay"'
@@ -128,12 +139,12 @@ function Meta(meta)
   end
 
   if doi then
-    json = json .. ',"sameAs":"https://doi.org/' .. escape_json_string(doi) .. '"'
+    json = json .. ',"sameAs":["https://doi.org/' .. escape_json_string(doi) .. '"]'
   end
 
   json = json .. ',"inLanguage":"en"'
-  local entity_url = page_url or "https://chrisvoncsefalvay.com"
-  json = json .. ',"mainEntityOfPage":{"@type":"WebPage","@id":"' .. escape_json_string(entity_url) .. '"}'
+  json = json .. ',"isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"}'
+  json = json .. ',"mainEntityOfPage":{"@type":"WebPage","@id":"' .. escape_json_string(page_url) .. '"}'
 
   -- Add speakable specification
   json = json .. ',"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}'
