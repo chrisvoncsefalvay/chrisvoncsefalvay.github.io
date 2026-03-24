@@ -9,7 +9,7 @@
 <link>https://chrisvoncsefalvay.com/posts/</link>
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press).</description>
-<generator>quarto-1.8.27</generator>
+<generator>quarto-1.9.36</generator>
 <lastBuildDate>Thu, 08 Jan 2026 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The War for the Soul of AI</title>
@@ -190,7 +190,8 @@ to the coming paradigm shift.</p></div>
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2026. <span>“The War for the Soul of AI.”</span> <a href="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/">https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/</a>.
+Chris von Csefalvay. 2026. <span>“The War for the Soul of AI.”</span>
+Preprint, January 8. <a href="https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/">https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -241,7 +242,7 @@ Chris von Csefalvay. 2026. <span>“The War for the Soul of AI.”</span> <a hre
 <h2 class="anchored" data-anchor-id="the-grpo-paradigm-shift">The GRPO paradigm shift</h2>
 <p>GRPO, developed by DeepSeek and described in the DeepSeekMath paper <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>, takes a fundamentally different approach to policy optimisation than its predecessors. Where PPO maintains a separate value function to estimate advantages, GRPO computes advantages <em>relative to a group of completions for the same prompt</em>. This seemingly minor architectural choice has profound implications for monitoring.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-shao2024deepseekmath" class="csl-entry">
-Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>.
+Shao, Zhihong, Peiyi Wang, Qihao Zhu, et al. 2024. <span>‘DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>.
 </div><div class="">
 <p>The key insight behind GRPO is that you don’t need a value function if you can compare multiple completions directly. By generating several responses to each prompt and computing advantages relative to the group mean, GRPO sidesteps the value function entirely – and with it, many of the training instabilities that plague PPO.</p>
 </div></div>
@@ -323,7 +324,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs this as <code>reward_std</code> by default when using GRPOTrainer. If you’re using a custom implementation, you should compute and log this yourself – it’s that important.</p>
-</div></div><div id="27eeb580" class="cell" data-execution_count="3">
+</div></div><div id="19270384" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reward standard deviation monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -541,7 +542,7 @@ font-style: inherit;">). Learning signal weak."</span>)</span></code></pre></div
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Composite rewards are increasingly common in GRPO training. A typical setup might combine format compliance (does the output match the expected structure?), correctness (is the answer right?), and style (is it appropriately concise?). Each component can behave differently during training, and almost always, models learn them one by one.</p>
-</div></div><div id="adc45a04" class="cell" data-execution_count="4">
+</div></div><div id="948750d4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Partial reward decomposition monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -799,7 +800,7 @@ Figure&nbsp;3: Partial reward decomposition reveals dynamics hidden by aggregate
 <li><strong>Within-group length variance</strong>: Are completions for the same prompt similar lengths, or diverse?</li>
 <li><strong>Length-reward correlation</strong>: Is there a systematic relationship between completion length and reward?</li>
 </ul>
-<div id="bb9b2afa" class="cell" data-execution_count="6">
+<div id="7912a0d8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>GRPO-specific completion length monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -1084,7 +1085,7 @@ Figure&nbsp;4: Completion length dynamics in GRPO: watch for bimodal distributio
 <section id="ratio-clipping" class="level4">
 <h4 class="anchored" data-anchor-id="ratio-clipping">Ratio clipping</h4>
 <p>The probability ratio <img src="https://latex.codecogs.com/png.latex?r_%7Bi,t%7D%20=%20%5Cfrac%7B%5Cpi_%5Ctheta(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D%7B%5Cpi_%7B%5Ctheta_%7B%5Ctext%7Bold%7D%7D%7D(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D"> measures how much more (or less) likely the current policy makes each token compared to the policy that generated the completion. Clipping constrains this ratio to <img src="https://latex.codecogs.com/png.latex?%5B1-%5Cepsilon,%201+%5Cepsilon%5D">.</p>
-<div id="feb050fb" class="cell" data-execution_count="8">
+<div id="54c147ea" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>GRPO clip ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -1386,7 +1387,7 @@ Figure&nbsp;5: Clip ratio asymmetry in GRPO: the balance between high and low cl
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs <code>entropy</code> as the mean entropy across tokens and completions. Some implementations also log <code>entropy_std</code>, which measures variation in entropy across tokens – useful for detecting whether the model is uniformly confident or has “confident” and “uncertain” regions.</p>
-</div></div><div id="8d5047b4" class="cell" data-execution_count="10">
+</div></div><div id="d73b3441" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Policy entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -1684,7 +1685,7 @@ Figure&nbsp;6: A complete GRPO monitoring dashboard: reward std is primary, loss
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2026. <span>“The Post-Training Instrument Cluster
--- Part III.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/</a>.
+-- Part III.”</span> Preprint, January 4. <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
@@ -1743,15 +1744,15 @@ Chris von Csefalvay. 2026. <span>“The Post-Training Instrument Cluster
 <p>Let me start with the harder one — harder for me personally. This has been a year of too many farewells. I have watched colleagues burn out, leave the field, leave the <em>industry</em>, leave more than that. The pace is not sustainable. The always-on, always-shipping, always-pivoting tempo that frontier AI demands is chewing through the few thousand people in the world who can actually do this work, a resource that is nowhere near renewable. You can always build more GPUs, raise another round or find another senator to awkwardly pose next to you as you break ground on another multi-gigawatt data centre. But you cannot mint senior ML researchers, manufacture institutional knowledge or shortcut the decade it takes to develop the intuition that distinguishes good research from promising-looking noise.</p>
 <p>No foundation lab wants to talk about this. But I’ve seen the faces. I’ve had the conversations, the ones that don’t make it into the proceedings or the news articles. There are endless news about nine-figure pay packages and very little about the fact that people are <em>leaving</em> those jobs. As always, journalism managed to miss the wood for the trees. The talent crisis is real, it’s accelerating, and 2026 will be the year it becomes undeniable.<sup>8</sup></p>
 <div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>&nbsp;And if you’re running a lab, a startup or even a larger company: look out for your people. Regardless of what you pay them, it’s small change compared to what it will cost to replace them on an increasingly tight market.</p></div><div id="ref-Hoffmann2022Chinchilla" class="csl-entry">
-Hoffmann, Jordan, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, et al. 2022. <span>‘Training Compute-Optimal Large Language Models’</span>. <em>arXiv Preprint arXiv:2203.15556</em>.
-</div></div><p>The data crisis is, if anything, more fundamental. I keep going on about this like those crazy street preachers you would see on a street corner, except my version of the end times talks a lot about tokens, scaling laws and South American rodents. LLMs, or at least the paradigm we have for their pre-training, obey certain laws the way a marble obeys the laws of gravity rolling down a slope. To train a model of a given size optimally, you need a proportional amount of high-quality data <span class="citation" data-cites="Hoffmann2022Chinchilla">(Hoffmann et al. 2022)</span>. And we, as a species, do not produce quality information fast enough. We have already strip-mined the public web. We are negotiating access to private archives, licensed corpora, proprietary datasets. But the math doesn’t lie: pre-training at scale, as we’ve known it, is approaching exhaustion.</p>
+<span class="nocase">Hoffmann, Jordan, Sebastian Borgeaud, Arthur Mensch, et al.</span> 2022. <span>‘Training Compute-Optimal Large Language Models’</span>. <em>arXiv Preprint arXiv:2203.15556</em>.
+</div></div><p>The data crisis is, if anything, more fundamental. I keep going on about this like those crazy street preachers you would see on a street corner, except my version of the end times talks a lot about tokens, scaling laws and South American rodents. LLMs, or at least the paradigm we have for their pre-training, obey certain laws the way a marble obeys the laws of gravity rolling down a slope. To train a model of a given size optimally, you need a proportional amount of high-quality data <span class="citation" data-cites="Hoffmann2022Chinchilla">(<span class="nocase">Hoffmann et al.</span> 2022)</span>. And we, as a species, do not produce quality information fast enough. We have already strip-mined the public web. We are negotiating access to private archives, licensed corpora, proprietary datasets. But the math doesn’t lie: pre-training at scale, as we’ve known it, is approaching exhaustion.</p>
 <p>This is why the future belongs to smaller, focal models with intelligent routing. Not because small is philosophically superior, but because the Chinchilla constraint gives us a choice: grow our models or maintain quality.<sup>9</sup> We cannot do both indefinitely. The era of monolithic giants may already be ending — not with a bang, but with a quiet recognition that we’ve run out of food to feed them.</p>
 <div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;And by quality, I also include resilience. One offshoot of these scaling laws is that as we need to reduce our quality standards, our vulnerability to intentional contamination of the data supply chain increases vastly.</p></div></div></section>
 <section id="the-retrieval-delusion" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="the-retrieval-delusion">The retrieval delusion</h2>
 <p>A Searchlight Institute survey from August 2025 asked Americans what they thought happened when they queried tools like ChatGPT <span class="citation" data-cites="SearchlightAI2025">(Searchlight Institute 2025)</span>. Forty-five percent said the tool “looks up an exact answer in a database.” Another twenty-one percent believed it “follows a script of prewritten responses.”<sup>10</sup> Two-thirds of users, in other words, believe LLMs are either filing cabinets or chatbots circa 2015. Not generating. Not constructing. <em>Retrieving</em>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-SearchlightAI2025" class="csl-entry">
-Searchlight Institute. 2025. <span>‘Americans Have Mixed Views of AI and an Appetite for Regulation’</span>. <a href="https://www.searchlightinstitute.org/research/americans-have-mixed-views-of-ai-and-an-appetite-for-regulation/" class="uri">https://www.searchlightinstitute.org/research/americans-have-mixed-views-of-ai-and-an-appetite-for-regulation/</a>.
+Searchlight Institute. 2025. <em>Americans Have Mixed Views of AI and an Appetite for Regulation</em>. <a href="https://www.searchlightinstitute.org/research/americans-have-mixed-views-of-ai-and-an-appetite-for-regulation/" class="uri">Https://www.searchlightinstitute.org/research/americans-have-mixed-views-of-ai-and-an-appetite-for-regulation/</a>.
 </div><div id="fn10"><p><sup>10</sup>&nbsp;The survey, conducted by Tavern Research with 2,301 American adults, buried this finding in a section titled “Dustbin” — noting it “didn’t lead to a larger conclusion.” I would respectfully submit that it <em>is</em> the conclusion.</p></div></div><p>This is not a minor misconception. This is the original sin from which nearly every dysfunction in the LLM ecosystem flows.</p>
 <p>If you believe LLMs retrieve information, you use them as search engines. You ask factual questions and expect factual answers. You are confused when they “hallucinate” — because filing cabinets don’t hallucinate. You optimise for short, snappy responses, because that’s what search results look like. And the models, trained on human feedback, learn to provide exactly that: terse, confident, citation-shaped outputs that pattern-match to “retrieved information” whether or not the underlying content is sound.</p>
 <p>The result? LLMs are terrible at generating good prose — because we’ve trained them to generate query responses. They are unreliable as knowledge sources — because they were never knowledge sources. And worst of all, the retrieval delusion creates an incentive structure for poisoning the data supply chain: if people believe these systems retrieve rather than generate, then manipulating what gets “retrieved” becomes a vector for information warfare.<sup>11</sup></p>
@@ -1764,7 +1765,7 @@ Searchlight Institute. 2025. <span>‘Americans Have Mixed Views of AI and an Ap
 <p>These five predictions unfold against a backdrop of deeper tensions — three battles for the soul of AI that will shape which future we’re predicting <em>for</em>.</p>
 <p><strong>The architecture wars.</strong> Yann LeCun keeps insisting that LLMs are a dead end, that Joint Embedding Predictive Architectures (JEPA) and world models are the path forward <span class="citation" data-cites="LeCun2022JEPA">(LeCun 2022)</span>.<sup>12</sup> Others maintain that scale and emergent capabilities will carry transformer architectures wherever we need to go. This is not merely an academic dispute. It’s a question of whether the billions poured into LLM infrastructure are investments or sunk costs. I confess I find the “superintelligence” framing that we seem to be resorting to rather tedious — but the underlying question matters: are we building toward something general, or optimising a local maximum?</p>
 <div class="no-row-height column-margin column-container"><div id="ref-LeCun2022JEPA" class="csl-entry">
-LeCun, Yann. 2022. <span>‘A Path Towards Autonomous Machine Intelligence’</span>. <a href="https://openreview.net/pdf?id=BZ5a1r-kVsf" class="uri">https://openreview.net/pdf?id=BZ5a1r-kVsf</a>.
+LeCun, Yann. 2022. <em>A Path Towards Autonomous Machine Intelligence</em>. <a href="https://openreview.net/pdf?id=BZ5a1r-kVsf" class="uri">Https://openreview.net/pdf?id=BZ5a1r-kVsf</a>.
 </div><div id="fn12"><p><sup>12</sup>&nbsp;His argument, roughly: LLMs predict tokens, but intelligence requires predicting <em>states of the world</em>. Autoregressive text generation is a parlour trick, not a path to understanding. He is not wrong.</p></div><div id="fn13"><p><sup>13</sup>&nbsp;Anthropic remains the notable exception. Claude is still everyone’s quirky uncle.</p></div></div><p><strong>The business model reckoning.</strong> The SaaS LLM model — pay per token, API as product — worked when models were scarce and differentiated. But commoditisation is coming. Open-weight models are closing the gap and starting to look more or less the same.<sup>13</sup> Inference costs are falling. If the moat was capability, and capability is converging, what exactly are customers paying for? The death of scaling, if it comes, is also the death of a particular business logic. What replaces it? Vertical integration? Specialised fine-tunes? Model-as-loss-leader for something else entirely? Nobody knows yet. But the current model won’t survive contact with 2026’s economics.</p>
 <p><strong>The locus of intelligence.</strong> Here’s a question that keeps me up at night: when an agentic system does something impressive, where does the intelligence <em>live</em>? In the model? In the scaffolding — the prompts, the tools, the orchestration logic? In the interplay between them? We tend to attribute capability to the model, but increasingly the clever work happens in the framework: the routing, the decomposition, the error recovery. Do we need better models, better agentic architectures, or both — and if both, should they be developed in isolation or in concert? This, too, is a very practical puzzle. A lot of players have made certain bets in one way or another, and this town is not going to be big enough for all the different visions even for simple problems like NL2SQL.</p>
 <p>These battles won’t conclude in 2026. But they’re the gravitational forces bending everything else. There’s of course also geopolitics – the story that wants to be the story (US v EU, a generally lukewarm conflict considering EU spending on AI is almost laughably small compared to the US), and the story that actually is (China). We’ve spent the last months of an undoubted American advantage earlier last year, and we may be in the last few months of a rapidly closing decision window when well-conceived initiatives like <a href="https://atomproject.ai/">the ATOM Project</a> can still make a difference. For those intelligent or knowledgeable enough not to be taken in by the fashionable meme that AI is a ‘scam’, the realisation that this is one of the most consequential technologies of our time is inescapable. Someone will control it. I dislike that idea, but I’m enough of a realist to accept it. 2026 will be the year when we learn whether we have enough of a belief in things we claim to hold dear – freedom, democracy, academic liberty, the right of the individual to self-determination and knowledge – to actually defend them in practice.</p>
@@ -1788,7 +1789,8 @@ LeCun, Yann. 2022. <span>‘A Path Towards Autonomous Machine Intelligence’</s
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Five Wild Guesses for 2026.”</span> <a href="https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/">https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/</a>.
+Chris von Csefalvay. 2025. <span>“Five Wild Guesses for 2026.”</span>
+Preprint, December 31. <a href="https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/">https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -1845,7 +1847,7 @@ Chris von Csefalvay. 2025. <span>“Five Wild Guesses for 2026.”</span> <a hre
 <p>The reward model is itself a trained system with its own failure modes. We’re optimising against a proxy, not the true objective. This, by the way, is the source of most RL pathologies.</p>
 </div></div><p>In RL, we’re optimising against a <em>reward signal</em> – typically produced by a reward model trained on human preferences, or in the case of DPO, implicitly derived from preference pairs. This introduces several complications:</p>
 <ol type="1">
-<li><strong>The reward is a proxy</strong>: The reward model is our best guess at what humans want, not what they actually want. Optimising too hard against this proxy leads to reward hacking – the model exploiting quirks in the reward model rather than genuinely improving <span class="citation" data-cites="gao2023scaling">(Gao, Schulman, and Hilton 2023)</span>.</li>
+<li><strong>The reward is a proxy</strong>: The reward model is our best guess at what humans want, not what they actually want. Optimising too hard against this proxy leads to reward hacking – the model exploiting quirks in the reward model rather than genuinely improving <span class="citation" data-cites="gao2023scaling">(Gao et al. 2023)</span>.</li>
 <li><strong>The policy can drift</strong>: Unlike SFT, where the model stays close to its initialisation, RL can push the model relatively far from its starting point. This drift can destroy capabilities that the base model had. RL can legitimately break your base model’s back.</li>
 <li><strong>The optimisation landscape is non-stationary</strong>: As the policy changes, the distribution of data it generates changes, which in turn changes the effective reward landscape.</li>
 <li><strong>Multiple objectives are in tension</strong>: We want high reward <em>and</em> low divergence from the reference policy <em>and</em> preserved capabilities <em>and</em> no degenerate behaviours. These can conflict.</li>
@@ -1861,7 +1863,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20(%5Clog%20%5Cpi_%5Ctheta(y%20%5Cmid%20x)%20-%20%5Clog%20%5Cpi_%7B%5Ctext%7Bref%7D%7D(y%20%5Cmid%20x))">, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="ca151e6f" class="cell" data-execution_count="1">
+</div></div><div id="b7db9f75" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -2182,11 +2184,11 @@ Figure&nbsp;2: Reward dynamics diagnostics: healthy learning vs common pathologi
 <p><img src="https://latex.codecogs.com/png.latex?D_%7B%5Ctext%7BKL%7D%7D(%5Cpi_%5Ctheta%20%5C%7C%20%5Cpi_%7B%5Ctext%7Bref%7D%7D)%20=%20%5Cmathbb%7BE%7D_%7Bx%20%5Csim%20%5Cpi_%5Ctheta%7D%5Cleft%5B%5Clog%20%5Cfrac%7B%5Cpi_%5Ctheta(x)%7D%7B%5Cpi_%7B%5Ctext%7Bref%7D%7D(x)%7D%5Cright%5D"></p>
 <p>In practice, we estimate this over batches of generated text, summing the per-token log probability differences. The TRL library uses the Schulman approximator for efficiency <span class="citation" data-cites="schulman2020kl">(Schulman 2020)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-schulman2020kl" class="csl-entry">
-Schulman, John. 2020. <span>‘Approximating <span>KL</span> Divergence’</span>. <a href="http://joschu.net/blog/kl-approx.html">http://joschu.net/blog/kl-approx.html</a>.
+Schulman, John. 2020. <em>Approximating <span>KL</span> Divergence</em>. <a href="http://joschu.net/blog/kl-approx.html">http://joschu.net/blog/kl-approx.html</a>.
 </div><div id="ref-chen2024catastrophic" class="csl-entry">
-Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. In <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
-</div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen, He, and Kifer 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="e7675fb7" class="cell" data-execution_count="4">
+Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
+</div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen et al. 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
+<div id="b5326e64" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -2437,9 +2439,9 @@ Figure&nbsp;3: KL divergence patterns: the art of managing policy drift in prefe
 <li><strong>KL noisy with high variance</strong>: Unstable optimisation. The learning rate is probably too high for your current KL penalty setting.</li>
 <li><strong>KL suddenly spiking</strong>: Often indicates a batch of data that the model handles very differently from the reference. Investigate that batch.</li>
 </ul>
-<p>A useful heuristic for PPO: the <code>val/ratio</code> metric (ratio of current to old policy probabilities) should stay close to 1.0. If it regularly exceeds 2.0 or drops below 0.5, the policy updates are too aggressive <span class="citation" data-cites="huang2024n">(Huang et al. 2024)</span>.</p>
+<p>A useful heuristic for PPO: the <code>val/ratio</code> metric (ratio of current to old policy probabilities) should stay close to 1.0. If it regularly exceeds 2.0 or drops below 0.5, the policy updates are too aggressive <span class="citation" data-cites="huang2024n">(<span class="nocase">Huang et al.</span> 2024)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-huang2024n" class="csl-entry">
-Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</span>+ Implementation Details of <span>RLHF</span> with <span>PPO</span>: A Case Study on <span>TL;DR</span> Summarization’</span>. <em>arXiv Preprint arXiv:2403.17031</em>. <a href="https://huggingface.co/papers/2403.17031">https://huggingface.co/papers/2403.17031</a>.
+<span class="nocase">Huang, Shengyi, Michael Liu, Qinyi Zhong, et al.</span> 2024. <span>‘The <span>N</span>+ Implementation Details of <span>RLHF</span> with <span>PPO</span>: A Case Study on <span>TL;DR</span> Summarization’</span>. <em>arXiv Preprint arXiv:2403.17031</em>. <a href="https://huggingface.co/papers/2403.17031">https://huggingface.co/papers/2403.17031</a>.
 </div></div></section>
 <section id="instrument-11-policy-ratio-and-clip-fraction" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="instrument-11-policy-ratio-and-clip-fraction">Instrument 11: policy ratio and clip fraction</h2>
@@ -2451,8 +2453,8 @@ Huang, Shengyi, Michael Liu, Qinyi Zhong, et al. 2024. <span>‘The <span>N</spa
 <div class="no-row-height column-margin column-container"><div class="">
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry">
-Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="a26b955a" class="cell" data-execution_count="6">
+Shao, Zhihong, Peiyi Wang, Qihao Zhu, et al. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
+</div></div></div><div id="10b897b8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -2691,7 +2693,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="f39916ad" class="cell" data-execution_count="8">
+</div></div><div id="ca3de733" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -3021,7 +3023,7 @@ Figure&nbsp;6: Common RL training failures: each requires monitoring multiple in
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
--- Part II.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/</a>.
+-- Part II.”</span> Preprint, December 28. <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
@@ -3073,7 +3075,7 @@ Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="92d807a8" class="cell" data-execution_count="1">
+</div></div><div id="0332ad88" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -3300,7 +3302,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="1d75d043" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="97ba2e8c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -3657,7 +3659,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="495dd618" class="cell" data-execution_count="5">
+</div></div><div id="ff61bc75" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -3877,7 +3879,7 @@ font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
 <p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
 <p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="a7632573" class="cell" data-execution_count="6">
+<div id="e7e52c4d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
@@ -4098,7 +4100,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="e25a9e3e" class="cell" data-execution_count="8">
+<div id="cfebe062" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -4395,7 +4397,7 @@ font-style: inherit;">"generation_samples"</span>: table})</span>
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="1730240c" class="cell" data-execution_count="9">
+<div id="9effa1c8" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
@@ -4761,7 +4763,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="fd20e970" class="cell" data-execution_count="11">
+</div></div><div id="3f7149d7" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
@@ -5062,7 +5064,7 @@ font-style: inherit;">=</span> current_time</span></code></pre></div></div>
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="630ddd6a" class="cell" data-execution_count="12">
+<div id="b13974e9" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
@@ -5510,7 +5512,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="37e684e3" class="cell" data-execution_count="14">
+<div id="c38c49e3" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
@@ -5803,7 +5805,7 @@ Figure&nbsp;6: Common failure patterns in practice: each requires monitoring mul
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
--- Part I.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/</a>.
+-- Part I.”</span> Preprint, December 25. <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
@@ -5953,7 +5955,7 @@ Table&nbsp;1: The three regimes of post-training, distinguished by their binding
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“Post-Training: Three Disciplines in a
-Trenchcoat.”</span> December 20, 2025. <a href="https://chrisvoncsefalvay.com/posts/post-training-scale/">https://chrisvoncsefalvay.com/posts/post-training-scale/</a>.
+Trenchcoat.”</span> December 20. <a href="https://chrisvoncsefalvay.com/posts/post-training-scale/">https://chrisvoncsefalvay.com/posts/post-training-scale/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
@@ -6244,7 +6246,8 @@ font-style: inherit;">- </span>Report best configuration and provide config file
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> <a href="https://doi.org/10.59350/ddcq4-4na09">https://doi.org/10.59350/ddcq4-4na09</a>.
+Chris von Csefalvay. 2025. <span>“Dorkestration.”</span> Preprint,
+December 15. <a href="https://doi.org/10.59350/ddcq4-4na09">https://doi.org/10.59350/ddcq4-4na09</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>agentic AI</category>
@@ -8770,7 +8773,7 @@ font-style: inherit;">;</span></span>
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The Hype, the Slop and the
-Craft.”</span> <a href="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">https://chrisvoncsefalvay.com/posts/hype-slop-craft/</a>.
+Craft.”</span> Preprint, November 23. <a href="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">https://chrisvoncsefalvay.com/posts/hype-slop-craft/</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -8804,9 +8807,9 @@ Note
 </div>
 <p>The Latin verb <em>agere</em> means “to do, to act, to drive forward”. From it we get not only “agent” but also “action”, “actor”, and curiously enough, “agile”. The Romans understood what we seem to have forgotten: that agency is fundamentally about motion, about transformation, about the capacity to change the world. I’ve been thinking about this a lot lately as I mark roughly two years since I sat in a Berkeley coffee shop, overcaffeinated and sleep-deprived, trying to articulate what would come after chatbots. It was late October 2023, my book on computational epidemiology – with a whole chapter devoted to agents<sup>1</sup> – had been published earlier that year, and I was looking at an unfolding crisis as the initial hype around language models began to fade and the bandaid patch of <a href="../../posts/prompt-engineering/index.html">prompt engineering</a> quickly showed it wasn’t going anywhere. Earlier that year, I spent a blissful few days driving across the country with Oliver, my golden retriever, moving ourselves from Northern Virginia to Denver, and in order to procrastinate away having to unpack boxes, I went on to devote most of the summer to injecting LLMs into agent-based simulations of public health. The connection seemed obvious: these models needed the same kind of connectionistic compositionality that made agent-based models and neural networks powerful – big structures of relatively trivial parts rather than desperate chases after ever-larger monoliths – and they needed to encounter the world, to learn from interaction the way a child learns from play.</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;My editor will kill me, but I have to admit: I <em>do</em> have a favourite chapter, and it <em>is</em> the one about agents. In no other place do you get Dwarf Fortress and STDs within a few pages of each other.</p></div><div id="ref-Yao2022ReAct" class="csl-entry">
-Yao, Shunyu, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. 2023. <span>‘ReAct: Synergizing Reasoning and Acting in Language Models’</span>. <em>arXiv Preprint arXiv:2210.03629</em>. <a href="https://doi.org/10.48550/arXiv.2210.03629">https://doi.org/10.48550/arXiv.2210.03629</a>.
+Yao, Shunyu, Jeffrey Zhao, Dian Yu, et al. 2023. <span>‘ReAct: Synergizing Reasoning and Acting in Language Models’</span>. <em>arXiv Preprint arXiv:2210.03629</em>, ahead of print. <a href="https://doi.org/10.48550/arXiv.2210.03629">https://doi.org/10.48550/arXiv.2210.03629</a>.
 </div><div id="ref-Wei2022ChainOfThought" class="csl-entry">
-Wei, Jason, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed Chi, Quoc Le, and Denny Zhou. 2022. <span>‘Chain-of-Thought Prompting Elicits Reasoning in Large Language Models’</span>. <a href="https://doi.org/10.48550/arXiv.2201.11903">https://doi.org/10.48550/arXiv.2201.11903</a>.
+Wei, Jason, Xuezhi Wang, Dale Schuurmans, et al. 2022. <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em>. <a href="https://doi.org/10.48550/arXiv.2201.11903">https://doi.org/10.48550/arXiv.2201.11903</a>.
 </div><div id="fn2"><p><sup>2</sup>&nbsp;One day, the lot of us need to have dinner and/or a Highlander style battle.</p></div></div><p>The idea that language models could <em>do</em> things was, in those late days of 2023, still relatively novel. Tool use was of course more or less established, but far from mainstream, where the focus was on <a href="../../posts/prompt-engineering/index.html">coaxing the right words out of LLMs</a>. A key step was Shunyu Yao’s brilliant ReAct paper <span class="citation" data-cites="Yao2022ReAct">(Yao et al. 2023)</span>, which presented the first proper reconciliation of action and language generation. This put his work beyond other papers that primarily focused on ways of prompting, such as <span class="citation" data-cites="Wei2022ChainOfThought">Wei et al. (2022)</span> on Chain of Thought prompting, even though the latter did lay the groundwork for task decomposition, a key feature of agentic AI. <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng</a>’s blog is perhaps the first proper early summary of what an agent properly so called would comprise, and I think that when the history of all of this is written someday, it will show she fully deserves to be considered one of the parents of the agentic idea. Finally, <a href="https://blog.langchain.com/agents-round/">Harrison Chase</a>’s post and <a href="../../posts/team-of-rivals/index.html">mine</a> were among the earliest on conceptualising the kind of more expansive notion of agents that I think are the proper domain of the subject.<sup>2</sup></p>
 <p>This idea was picked up by an incredible community of builders, hackers, developers and popularisers, who took and turned it into the global phenomenon it has become. Companies are deploying agent orchestration platforms, VCs are writing nine-figure cheques for “agentic” startups and every consultancy worth its salt now has an agentic AI practice. Agentic AI has also come at the right time to save us from the spectre of an AI winter as moats around simple LLM wrappers were collapsing and prompt engineering came up short. It changed the tone of the discourse that once dismissed LLMs as stochastic parrots,<sup>3</sup> and the birth of agentic multimodality has enhanced that. In just a year, it’s become a household name and a boardroom buzzword. In short, agentic AI has been wildly successful.</p>
 <div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;“Call me when your parrot can buy plane tickets”, I once quipped on a call. A friend turned this into a t-shirt I wear with pride to this day.</p></div></div><p>And that raises the uncomfortable question I’ve been wrestling with: what if it had been <em>too</em> successful too fast? What if agentic AI has become a victim of its own success?</p>
@@ -8839,13 +8842,13 @@ Wei, Jason, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, 
 <p><strong>But more than fear, I have hope.</strong></p>
 <p>Because while the agentic revolution may be over, the journey hasn’t even begun in earnest. This is at best the end of the beginning. There are big questions to be tackled. Deep Agents, multi-agent coordination <span class="citation" data-cites="Becker2025MALLM">(Becker et al. 2025)</span>, model-native agents/agent-native models, the tricky issues that surround agentic alignment esp.&nbsp;in view of evaluation awareness, embodied agents <span class="citation" data-cites="Fu2025ROSBag">(Fu et al. 2025)</span> and the way we secure and authenticate agents are just a few of them. World simulation agents, which to a great degree <a href="../../posts/agentic-simulation/index.html">implement the notion I have been advocating for here</a>, are seeing increased use in the social sciences <span class="citation" data-cites="Srinivasan2025Democracy">(Srinivasan and Patapati 2025)</span> but also, closer to my principal domain of work, in clinical simulation <span class="citation" data-cites="Schmidgall2024AgentClinic">(Schmidgall et al. 2024)</span>. And of course that’s all on top of the the challenges we’re facing on the wider social issues that I’ve touched on above.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Becker2025MALLM" class="csl-entry">
-Becker, Jonas, Lars Benedikt Kaesberg, Niklas Bauer, Jan Philip Wahle, Terry Ruas, and Bela Gipp. 2025. <span>‘MALLM: Multi-Agent Large Language Models Framework’</span>. <a href="https://doi.org/10.48550/arXiv.2509.11656">https://doi.org/10.48550/arXiv.2509.11656</a>.
+Becker, Jonas, Lars Benedikt Kaesberg, Niklas Bauer, Jan Philip Wahle, Terry Ruas, and Bela Gipp. 2025. <em>MALLM: Multi-Agent Large Language Models Framework</em>. <a href="https://doi.org/10.48550/arXiv.2509.11656">https://doi.org/10.48550/arXiv.2509.11656</a>.
 </div><div id="ref-Fu2025ROSBag" class="csl-entry">
-Fu, Lei, Sahar Salimpour, Leonardo Militano, Harry Edelman, Jorge Peña Queralta, and Giovanni Toffetti. 2025. <span>‘ROSBag MCP Server: Analyzing Robot Data with LLMs for Agentic Embodied AI Applications’</span>. <a href="https://doi.org/10.48550/arXiv.2511.03497">https://doi.org/10.48550/arXiv.2511.03497</a>.
+Fu, Lei, Sahar Salimpour, Leonardo Militano, Harry Edelman, Jorge Peña Queralta, and Giovanni Toffetti. 2025. <em>ROSBag MCP Server: Analyzing Robot Data with LLMs for Agentic Embodied AI Applications</em>. <a href="https://doi.org/10.48550/arXiv.2511.03497">https://doi.org/10.48550/arXiv.2511.03497</a>.
 </div><div id="ref-Srinivasan2025Democracy" class="csl-entry">
-Srinivasan, Trisanth, and Santosh Patapati. 2025. <span>‘Democracy-in-Silico: Institutional Design as Alignment in AI-Governed Polities’</span>. <a href="https://doi.org/10.48550/arXiv.2508.19562">https://doi.org/10.48550/arXiv.2508.19562</a>.
+Srinivasan, Trisanth, and Santosh Patapati. 2025. <em>Democracy-in-Silico: Institutional Design as Alignment in AI-Governed Polities</em>. <a href="https://doi.org/10.48550/arXiv.2508.19562">https://doi.org/10.48550/arXiv.2508.19562</a>.
 </div><div id="ref-Schmidgall2024AgentClinic" class="csl-entry">
-Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and Michael Moor. 2024. <span>‘AgentClinic: A Multimodal Agent Benchmark to Evaluate AI in Simulated Clinical Environments’</span>. <a href="https://doi.org/10.48550/arXiv.2405.07960">https://doi.org/10.48550/arXiv.2405.07960</a>.
+Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and Michael Moor. 2024. <em>AgentClinic: A Multimodal Agent Benchmark to Evaluate AI in Simulated Clinical Environments</em>. <a href="https://doi.org/10.48550/arXiv.2405.07960">https://doi.org/10.48550/arXiv.2405.07960</a>.
 </div></div><p>The promise remains. Systems of agents, properly conceived, could exhibit the kind of emergent intelligence that no individual model can achieve: learn, adapt, task-decompose, recompose. Realising this potential requires moving beyond the current boxes-and-arrows paradigm to something more fluid, more evolutionary, more genuinely agentic. Even it doesn’t come with the comfort of being able to draw it on a whiteboard.</p>
 <p>The challenge of the road ahead is not primarily technical. No new models, no new GPUs, no new architectures are coming to save us. The issues are on a cognitive, linguistic and social plane, and so must the solutions be. For all my worries, for all my misgivings about terminology, I do believe that the best is yet to come. But I also know that we’re not promised those outcomes. When we set sail on this journey, we did so without the guarantee that there will be land at the end of it. That we have found safe harbour and profitable shores is occasion to be grateful – and carry on.</p>
 
@@ -8864,7 +8867,7 @@ Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“What I Talk about When I Talk about
-Agentic AI.”</span> <a href="https://doi.org/10.59350/ddeyn-whz59">https://doi.org/10.59350/ddeyn-whz59</a>.
+Agentic AI.”</span> Preprint, November 1. <a href="https://doi.org/10.59350/ddeyn-whz59">https://doi.org/10.59350/ddeyn-whz59</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -9033,7 +9036,8 @@ Agentic AI.”</span> <a href="https://doi.org/10.59350/ddeyn-whz59">https://doi
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> <a href="https://doi.org/10.59350/c8085-dj650">https://doi.org/10.59350/c8085-dj650</a>.
+Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> Preprint, October
+25. <a href="https://doi.org/10.59350/c8085-dj650">https://doi.org/10.59350/c8085-dj650</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -9148,7 +9152,7 @@ Chris von Csefalvay. 2025. <span>“Deep Kimchi.”</span> <a href="https://doi.
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“SOYA - the Only Benchmark That
-Matters.”</span> <a href="https://doi.org/10.59350/xqf22-csp59">https://doi.org/10.59350/xqf22-csp59</a>.
+Matters.”</span> Preprint, October 19. <a href="https://doi.org/10.59350/xqf22-csp59">https://doi.org/10.59350/xqf22-csp59</a>.
 </div></div></section></div> ]]></description>
   <category>LLMs</category>
   <category>AI</category>
@@ -9232,7 +9236,7 @@ Matters.”</span> <a href="https://doi.org/10.59350/xqf22-csp59">https://doi.or
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“Biome
-Engineering.”</span> <a href="https://chrisvoncsefalvay.com/posts/biome-engineering/">https://chrisvoncsefalvay.com/posts/biome-engineering/</a>.
+Engineering.”</span> Preprint, October 11. <a href="https://chrisvoncsefalvay.com/posts/biome-engineering/">https://chrisvoncsefalvay.com/posts/biome-engineering/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>Agentic AI</category>
@@ -9341,7 +9345,8 @@ Engineering.”</span> <a href="https://chrisvoncsefalvay.com/posts/biome-engine
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“From Agents to the Chorus.”</span> <a href="https://chrisvoncsefalvay.com/posts/choral-ai/">https://chrisvoncsefalvay.com/posts/choral-ai/</a>.
+Chris von Csefalvay. 2025. <span>“From Agents to the Chorus.”</span>
+Preprint, October 4. <a href="https://chrisvoncsefalvay.com/posts/choral-ai/">https://chrisvoncsefalvay.com/posts/choral-ai/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>Agentic AI</category>
@@ -9426,7 +9431,7 @@ Chris von Csefalvay. 2025. <span>“From Agents to the Chorus.”</span> <a href
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“A Slow Walk
-Out of Dikika Cave.”</span> <a href="https://chrisvoncsefalvay.com/posts/mcp-mcpmark/">https://chrisvoncsefalvay.com/posts/mcp-mcpmark/</a>.
+Out of Dikika Cave.”</span> Preprint, October 1. <a href="https://chrisvoncsefalvay.com/posts/mcp-mcpmark/">https://chrisvoncsefalvay.com/posts/mcp-mcpmark/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>Agentic AI</category>
@@ -9519,7 +9524,7 @@ Out of Dikika Cave.”</span> <a href="https://chrisvoncsefalvay.com/posts/mcp-m
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay, and Chris von Csefalvay. 2025. <span>“Love in the
-Time of Algorithms.”</span> <a href="https://chrisvoncsefalvay.com/posts/ai-girlfriends/">https://chrisvoncsefalvay.com/posts/ai-girlfriends/</a>.
+Time of Algorithms.”</span> Preprint, September 20. <a href="https://chrisvoncsefalvay.com/posts/ai-girlfriends/">https://chrisvoncsefalvay.com/posts/ai-girlfriends/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>Society</category>
@@ -9605,7 +9610,7 @@ Time of Algorithms.”</span> <a href="https://chrisvoncsefalvay.com/posts/ai-gi
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The End of Isotropy and the Rise of
-Metadynamic AI.”</span> <a href="https://doi.org/10.59350/p9zjx-y5b62">https://doi.org/10.59350/p9zjx-y5b62</a>.
+Metadynamic AI.”</span> Preprint, August 10. <a href="https://doi.org/10.59350/p9zjx-y5b62">https://doi.org/10.59350/p9zjx-y5b62</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>GPT-5</category>
@@ -9676,7 +9681,8 @@ Metadynamic AI.”</span> <a href="https://doi.org/10.59350/p9zjx-y5b62">https:/
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“A Little Less Conversation: Why We
-Need to Move from Prompting to Programming.”</span> <a href="https://doi.org/10.59350/f6wf4-0md94">https://doi.org/10.59350/f6wf4-0md94</a>.
+Need to Move from Prompting to Programming.”</span> Preprint, July 26.
+<a href="https://doi.org/10.59350/f6wf4-0md94">https://doi.org/10.59350/f6wf4-0md94</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>
@@ -9734,7 +9740,7 @@ Need to Move from Prompting to Programming.”</span> <a href="https://doi.org/1
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“Between the Motion and the
-Act.”</span> <a href="https://doi.org/10.59350/q3yj4-wah32">https://doi.org/10.59350/q3yj4-wah32</a>.
+Act.”</span> Preprint, July 20. <a href="https://doi.org/10.59350/q3yj4-wah32">https://doi.org/10.59350/q3yj4-wah32</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>philosophy</category>
@@ -9822,7 +9828,7 @@ Act.”</span> <a href="https://doi.org/10.59350/q3yj4-wah32">https://doi.org/10
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
 Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
-13, 2025. <a href="https://chrisvoncsefalvay.com/posts/tlon/">https://chrisvoncsefalvay.com/posts/tlon/</a>.
+13. <a href="https://chrisvoncsefalvay.com/posts/tlon/">https://chrisvoncsefalvay.com/posts/tlon/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>philosophy</category>
@@ -9840,53 +9846,7 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-34442"></div><script>tweet=<!DOCTYPE html>
-<html lang="en" class="icecream">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X / Error</title>
-    <meta name="version" content="1">
-    <link href="https://abs.twimg.com/favicons/twitter.3.ico" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="https://abs.twimg.com/errors/fullscreen_errors-047ca1475a6efac7c9c89a9ff92b7a20.css">
-  </head>
-  <body dir="auto">
-    <div class="top">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1519 200">
-        <defs/>
-        <path d="M708 103l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9368 9368 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h11l10-6 6 3 9-1 4-1 1 1 1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a38 38 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-        <path d="M-36 193l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9328 9328 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h9a6 6 0 002 0l10-6 6 3 9-1 4-1a6 6 0 001 1l1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a37 37 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-      </svg>
-    </div>
-    <div class="container">
-      <div class="content">
-        <a href="https://twitter.com" title="X logo">
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="x-logo"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>
-        </a>
-        <h1 id="header">This page is down</h1>
-        <p id="description">I scream. You scream. We all scream... for us to fix this page. We’ll stop making jokes and get things up and running soon.</p>
-
-          <a id="button_retry" href="" class="button">Retry</a>
-
-      </div>
-      <img id="image" src="https://abs.twimg.com/errors/ErrorState_Down.png" alt="Ice cream with rainbow sprinkles in a cone spilled on the floor.">
-      <div class="footer">
-        <ul>
-          <li><a href="https://twitter.com/" id="footer_home">Home</a></li>
-          <li><a href="https://status.twitterstat.us/" id="footer_status">Status</a></li>
-          <li><a href="https://twitter.com/tos" id="footer_tos">Terms of Service</a></li>
-          <li><a href="https://twitter.com/privacy" id="footer_privacy">Privacy Policy</a></li>
-          <li><a href="https://support.twitter.com/articles/20170514" id="footer_cookie">Cookie Policy</a></li>
-          <li><a href="https://legal.twitter.com/imprint" id="footer_imprint">Imprint</a></li>
-          <li><a href="https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html" id="footer_ads">Ads info</a></li>
-          <li dir="ltr">&copy; X Corp. <span id="copyright-year">&emsp;&emsp;&emsp;&emsp;</span></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-  <script src="https://abs.twimg.com/errors/503-1bdb612dcc463cd3f216f7c1d3a3c74d.js"></script>
-
-;document.getElementById("tweet-34442").innerHTML = tweet["html"];<p></p>
+<p></p><div id="tweet-71949"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-71949").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -9936,7 +9896,8 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
   langid = {en-GB}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
+Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span>
+Preprint, July 6. <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>LLMs</category>

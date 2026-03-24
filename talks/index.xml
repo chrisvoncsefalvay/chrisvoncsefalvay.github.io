@@ -9,7 +9,7 @@
 <link>https://chrisvoncsefalvay.com/talks/</link>
 <atom:link href="https://chrisvoncsefalvay.com/talks/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press).</description>
-<generator>quarto-1.8.27</generator>
+<generator>quarto-1.9.36</generator>
 <lastBuildDate>Wed, 10 Jan 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Prometheus Unbound - The Potential and Risks of Large Language Models in Public Health</title>
@@ -42,7 +42,7 @@
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-2024" class="csl-entry quarto-appendix-citeas">
 <span>“Prometheus Unbound - The Potential and Risks of Large Language
-Models in Public Health.”</span> 2024. January 10, 2024. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound/">https://chrisvoncsefalvay.com/talks/prometheus-unbound/</a>.
+Models in Public Health.”</span> 2024. January 10. <a href="https://chrisvoncsefalvay.com/talks/prometheus-unbound/">https://chrisvoncsefalvay.com/talks/prometheus-unbound/</a>.
 </div></div></section></div> ]]></description>
   <category>AI</category>
   <category>public health</category>

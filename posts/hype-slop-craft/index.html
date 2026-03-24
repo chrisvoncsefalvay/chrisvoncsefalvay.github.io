@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>The Hype, the Slop and the Craft – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -62,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,10 +139,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input9c6c884b6cf84a45.html#article","headline":"The Hype, the Slop and the Craft","description":"A differential ecology of AI, as she is done in late 2025.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input9c6c884b6cf84a45.html","datePublished":"2025-11-23","dateModified":"2025-11-23","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input9c6c884b6cf84a45.html/header.webp","keywords":["LLMs","AI","tech predictions","ecology"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input9c6c884b6cf84a45.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/hype-slop-craft/#article","headline":"The Hype, the Slop and the Craft","description":"A differential ecology of AI, as she is done in late 2025.","url":"https://chrisvoncsefalvay.com/posts/hype-slop-craft/","datePublished":"2025-11-23","dateModified":"2025-11-23","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/hype-slop-craft/header.webp","keywords":["LLMs","AI","tech predictions","ecology"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/hype-slop-craft/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -177,6 +187,8 @@ window.Quarto = {
 <meta name="twitter:title" content="The Hype, the Slop and the Craft – Chris von Csefalvay">
 <meta name="twitter:description" content="A differential ecology of AI, as she is done in late 2025.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/hype-slop-craft/header.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -200,6 +212,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -662,7 +678,7 @@ Grime, J. Philip. 1977. <span>‘Evidence for the Existence of Three Primary Str
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2025. <span>“The Hype, the Slop and the
-Craft.”</span> <a href="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">https://chrisvoncsefalvay.com/posts/hype-slop-craft/</a>.
+Craft.”</span> Preprint, November 23. <a href="https://chrisvoncsefalvay.com/posts/hype-slop-craft/">https://chrisvoncsefalvay.com/posts/hype-slop-craft/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuZDMgPSByZXF1aXJlKFwiZDNAN1wiKVxudGVybmFyeSA9IHJlcXVpcmUoXCJkMy10ZXJuYXJ5QDNcIilcblxubGFiRGF0YSA9IFtcbiAgeyBuYW1lOiBcIkNsdWVseVwiLCByOiAwLjg1LCBjOiAwLjEwLCBzOiAwLjA1LCB0eXBlOiBcImh5cGVcIiwgbmF0dXJlOiBcInByb2R1Y3RcIiB9LFxuICB7IG5hbWU6IFwiTG92YWJsZVwiLCByOiAwLjUsIGM6IDAuMjAsIHM6IDAuNywgdHlwZTogXCJzbG9wXCIsIG5hdHVyZTogXCJwcm9kdWN0XCIgfSxcbiAgeyBuYW1lOiBcIkFudGhyb3BpY1wiLCByOiAwLjEwLCBjOiAwLjgwLCBzOiAwLjEwLCB0eXBlOiBcImNyYWZ0XCIsIG5hdHVyZTogXCJtYWpvclwiIH0sXG4gIHsgbmFtZTogXCJPcGVuQUlcIiwgcjogMC4zMCwgYzogMC40NSwgczogMC4yNSwgdHlwZTogXCJtaXhlZFwiLCBuYXR1cmU6IFwibWFqb3JcIiB9LCAgICB7IG5hbWU6IFwieEFJXCIsIHI6IDAuNzAsIGM6IDAuNDUsIHM6IDAuMjUsIHR5cGU6IFwiaHlwZVwiLCBuYXR1cmU6IFwibWFqb3JcIiB9LFxuICB7IG5hbWU6IFwiRkFJUlwiLCByOiAwLjI1LCBjOiAwLjg1LCBzOiAwLjIwLCB0eXBlOiBcImNyYWZ0XCIsIG5hdHVyZTogXCJmb3VuZGF0aW9uXCIgfSxcbiAgeyBuYW1lOiBcIkRlZXBNaW5kXCIsIHI6IDAuMTUsIGM6IDAuNTUsIHM6IDAuNDAsIHR5cGU6IFwiY3JhZnRcIiwgbmF0dXJlOiBcImZvdW5kYXRpb25cIiB9LFxuICB7IG5hbWU6IFwiRmFjZUFwcFwiLCByOiAwLjEsIGM6IDAuMSwgczogMC44LCB0eXBlOiBcInNsb3BcIiwgbmF0dXJlOiBcInByb2R1Y3RcIiB9LFxuICB7IG5hbWU6IFwiU3BpY3lDaGF0XCIsIHI6IDAuMDUsIGM6IDAuMSwgczogMC45NSwgdHlwZTogXCJzbG9wXCIsIG5hdHVyZTogXCJwcm9kdWN0XCIgfSxcbiAgeyBuYW1lOiBcIlwiLCByOiAwLjA1LCBjOiAwLjEsIHM6IDAuOTUsIHR5cGU6IFwic2xvcFwiLCBuYXR1cmU6IFwicHJvZHVjdFwiIH0sXG5dXG5cbmNvbG91cnMgPSAoe1xuICBoeXBlOiBcIiNlNjM5NDZcIixcbiAgc2xvcDogXCIjNDU3YjlkXCIsXG4gIGNyYWZ0OiBcIiMyYTlkOGZcIixcbiAgbWl4ZWQ6IFwiIzZjNzU3ZFwiXG59KVxuXG4vLyBTaGFwZSBnZW5lcmF0b3JzIGZvciBkaWZmZXJlbnQgbmF0dXJlIHR5cGVzXG5zaGFwZUdlbiA9ICh7XG4gIGZvdW5kYXRpb246IGQzLnN5bWJvbCgpLnR5cGUoZDMuc3ltYm9sQ2lyY2xlKS5zaXplKDIwMCksXG4gIG1ham9yOiBkMy5zeW1ib2woKS50eXBlKGQzLnN5bWJvbFNxdWFyZSkuc2l6ZSgxODApLFxuICBwcm9kdWN0OiBkMy5zeW1ib2woKS50eXBlKGQzLnN5bWJvbFRyaWFuZ2xlKS5zaXplKDIwMClcbn0pXG5cbndpZHRoID0gNTUwXG5oZWlnaHQgPSA0ODBcbnJhZGl1cyA9IDE2MFxuXG5iYXJ5ID0gdGVybmFyeS5iYXJ5Y2VudHJpYygpXG4gIC5hKGQgPT4gZC5yKVxuICAuYihkID0+IGQuYylcbiAgLmMoZCA9PiBkLnMpXG5cbnBsb3QgPSB0ZXJuYXJ5LnRlcm5hcnlQbG90KGJhcnkpXG4gIC5yYWRpdXMocmFkaXVzKVxuICAubGFiZWxzKFtcIlwiLCBcIlwiLCBcIlwiXSlcblxuY2hhcnQgPSB7XG4gIGNvbnN0IHN2ZyA9IGQzLmNyZWF0ZShcInN2Z1wiKVxuICAgIC5hdHRyKFwidmlld0JveFwiLCBbLXdpZHRoLzIsIC1oZWlnaHQvMiArIDUwLCB3aWR0aCwgaGVpZ2h0XSlcbiAgICAuYXR0cihcIndpZHRoXCIsIHdpZHRoKVxuICAgIC5hdHRyKFwiaGVpZ2h0XCIsIGhlaWdodClcbiAgICAuc3R5bGUoXCJmb250LWZhbWlseVwiLCBcInN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgc2Fucy1zZXJpZlwiKTtcblxuICBjb25zdCBnID0gc3ZnLmFwcGVuZChcImdcIik7XG5cbiAgLy8gRHJhdyB0aGUgdHJpYW5nbGVcbiAgZy5hcHBlbmQoXCJwYXRoXCIpXG4gICAgLmF0dHIoXCJkXCIsIHBsb3QudHJpYW5nbGUoKSlcbiAgICAuYXR0cihcImZpbGxcIiwgXCIjZjhmOWZhXCIpXG4gICAgLmF0dHIoXCJzdHJva2VcIiwgXCIjMzQzYTQwXCIpXG4gICAgLmF0dHIoXCJzdHJva2Utd2lkdGhcIiwgMik7XG5cbiAgLy8gRHJhdyBncmlkIGxpbmVzXG4gIGNvbnN0IGdyaWRMaW5lcyA9IHBsb3QuZ3JpZExpbmVzKDUpO1xuICBncmlkTGluZXMuZm9yRWFjaChheGlzTGluZXMgPT4ge1xuICAgIGcuc2VsZWN0QWxsKG51bGwpXG4gICAgICAuZGF0YShheGlzTGluZXMpXG4gICAgICAuam9pbihcInBhdGhcIilcbiAgICAgIC5hdHRyKFwiZFwiLCBkID0+IGQzLmxpbmUoKShkKSlcbiAgICAgIC5hdHRyKFwiZmlsbFwiLCBcIm5vbmVcIilcbiAgICAgIC5hdHRyKFwic3Ryb2tlXCIsIFwiI2RlZTJlNlwiKVxuICAgICAgLmF0dHIoXCJzdHJva2Utd2lkdGhcIiwgMC41KTtcbiAgfSk7XG5cbiAgLy8gRHJhdyBkYXRhIHBvaW50cyB3aXRoIHNoYXBlcyBiYXNlZCBvbiBuYXR1cmVcbiAgY29uc3QgcG9pbnRzID0gZy5zZWxlY3RBbGwoXCIucG9pbnRcIilcbiAgICAuZGF0YShsYWJEYXRhKVxuICAgIC5qb2luKFwiZ1wiKVxuICAgIC5hdHRyKFwiY2xhc3NcIiwgXCJwb2ludFwiKVxuICAgIC5hdHRyKFwidHJhbnNmb3JtXCIsIGQgPT4ge1xuICAgICAgY29uc3QgW3gsIHldID0gcGxvdChkKTtcbiAgICAgIHJldHVybiBgdHJhbnNsYXRlKCR7eH0sICR7eX0pYDtcbiAgICB9KTtcblxuICBwb2ludHMuYXBwZW5kKFwicGF0aFwiKVxuICAgIC5hdHRyKFwiZFwiLCBkID0+IHNoYXBlR2VuW2QubmF0dXJlXSgpKVxuICAgIC5hdHRyKFwiZmlsbFwiLCBkID0+IGNvbG91cnNbZC50eXBlXSlcbiAgICAuYXR0cihcInN0cm9rZVwiLCBcIiNmZmZcIilcbiAgICAuYXR0cihcInN0cm9rZS13aWR0aFwiLCAyKVxuICAgIC5hdHRyKFwib3BhY2l0eVwiLCAwLjkpO1xuXG4gIHBvaW50cy5hcHBlbmQoXCJ0ZXh0XCIpXG4gICAgLmF0dHIoXCJ4XCIsIDEyKVxuICAgIC5hdHRyKFwieVwiLCA0KVxuICAgIC5hdHRyKFwiZm9udC1zaXplXCIsIFwiMTBweFwiKVxuICAgIC5hdHRyKFwiZmlsbFwiLCBcIiMzNDNhNDBcIilcbiAgICAudGV4dChkID0+IGQubmFtZSk7XG5cbiAgLy8gQ29tcHV0ZSB2ZXJ0aWNlcyBmb3IgY29ybmVyIGxhYmVsc1xuICBjb25zdCB2ZXJ0aWNlcyA9IFtcbiAgICBbMCwgLXJhZGl1c10sXG4gICAgW3JhZGl1cyAqIE1hdGguY29zKE1hdGguUEkvNiksIHJhZGl1cyAqIE1hdGguc2luKE1hdGguUEkvNildLFxuICAgIFstcmFkaXVzICogTWF0aC5jb3MoTWF0aC5QSS82KSwgcmFkaXVzICogTWF0aC5zaW4oTWF0aC5QSS82KV1cbiAgXTtcblxuICBjb25zdCBjb3JuZXJMYWJlbHMgPSBbXG4gICAgeyBwb3M6IHZlcnRpY2VzWzBdLCBsYWJlbDogXCJIeXBlXCIsIG9mZnNldDogWzAsIC0xOF0gfSxcbiAgICB7IHBvczogdmVydGljZXNbMV0sIGxhYmVsOiBcIlNsb3BcIiwgb2Zmc2V0OiBbMTgsIDEwXSB9LFxuICAgIHsgcG9zOiB2ZXJ0aWNlc1syXSwgbGFiZWw6IFwiQ3JhZnRcIiwgb2Zmc2V0OiBbLTE4LCAxMF0gfVxuICBdO1xuXG4gIGcuc2VsZWN0QWxsKFwiLmNvcm5lci1sYWJlbFwiKVxuICAgIC5kYXRhKGNvcm5lckxhYmVscylcbiAgICAuam9pbihcInRleHRcIilcbiAgICAuYXR0cihcImNsYXNzXCIsIFwiY29ybmVyLWxhYmVsXCIpXG4gICAgLmF0dHIoXCJ4XCIsIGQgPT4gZC5wb3NbMF0gKyBkLm9mZnNldFswXSlcbiAgICAuYXR0cihcInlcIiwgZCA9PiBkLnBvc1sxXSArIGQub2Zmc2V0WzFdKVxuICAgIC5hdHRyKFwidGV4dC1hbmNob3JcIiwgXCJtaWRkbGVcIilcbiAgICAuYXR0cihcImZvbnQtc2l6ZVwiLCBcIjExcHhcIilcbiAgICAuYXR0cihcImZvbnQtc3R5bGVcIiwgXCJpdGFsaWNcIilcbiAgICAuYXR0cihcImZpbGxcIiwgXCIjNmM3NTdkXCIpXG4gICAgLnRleHQoZCA9PiBkLmxhYmVsKTtcblxuICAvLyBIb3Jpem9udGFsIGxlZ2VuZCAtIFN0cmF0ZWd5IChjb2xvdXJzKVxuICBjb25zdCBzdHJhdGVneUxlZ2VuZCA9IFtcbiAgICB7IHR5cGU6IFwiaHlwZVwiLCBsYWJlbDogXCJIeXBlXCIgfSxcbiAgICB7IHR5cGU6IFwic2xvcFwiLCBsYWJlbDogXCJTbG9wXCIgfSxcbiAgICB7IHR5cGU6IFwiY3JhZnRcIiwgbGFiZWw6IFwiQ3JhZnRcIiB9LFxuICAgIHsgdHlwZTogXCJtaXhlZFwiLCBsYWJlbDogXCJNaXhlZFwiIH1cbiAgXTtcblxuICBjb25zdCBsZWdlbmRZID0gaGVpZ2h0LzIgLSA1NTtcbiAgY29uc3Qgc3RyYXRlZ3lHID0gc3ZnLmFwcGVuZChcImdcIilcbiAgICAuYXR0cihcInRyYW5zZm9ybVwiLCBgdHJhbnNsYXRlKCR7LXdpZHRoLzIgKyAyNX0sICR7bGVnZW5kWX0pYCk7XG5cbiAgc3RyYXRlZ3lHLmFwcGVuZChcInRleHRcIilcbiAgICAuYXR0cihcInhcIiwgMClcbiAgICAuYXR0cihcInlcIiwgMClcbiAgICAuYXR0cihcImZvbnQtc2l6ZVwiLCBcIjEwcHhcIilcbiAgICAuYXR0cihcImZvbnQtd2VpZ2h0XCIsIFwiNjAwXCIpXG4gICAgLmF0dHIoXCJmaWxsXCIsIFwiIzQ5NTA1N1wiKVxuICAgIC50ZXh0KFwiU3RyYXRlZ3k6XCIpO1xuXG4gIGNvbnN0IHN0cmF0SXRlbXMgPSBzdHJhdGVneUcuc2VsZWN0QWxsKFwiLnN0cmF0LWl0ZW1cIilcbiAgICAuZGF0YShzdHJhdGVneUxlZ2VuZClcbiAgICAuam9pbihcImdcIilcbiAgICAuYXR0cihcImNsYXNzXCIsIFwic3RyYXQtaXRlbVwiKVxuICAgIC5hdHRyKFwidHJhbnNmb3JtXCIsIChkLCBpKSA9PiBgdHJhbnNsYXRlKCR7NTUgKyBpICogNjV9LCAtNClgKTtcblxuICBzdHJhdEl0ZW1zLmFwcGVuZChcImNpcmNsZVwiKVxuICAgIC5hdHRyKFwiclwiLCA1KVxuICAgIC5hdHRyKFwiZmlsbFwiLCBkID0+IGNvbG91cnNbZC50eXBlXSk7XG5cbiAgc3RyYXRJdGVtcy5hcHBlbmQoXCJ0ZXh0XCIpXG4gICAgLmF0dHIoXCJ4XCIsIDEwKVxuICAgIC5hdHRyKFwieVwiLCA0KVxuICAgIC5hdHRyKFwiZm9udC1zaXplXCIsIFwiMTBweFwiKVxuICAgIC5hdHRyKFwiZmlsbFwiLCBcIiMzNDNhNDBcIilcbiAgICAudGV4dChkID0+IGQubGFiZWwpO1xuXG4gIC8vIEhvcml6b250YWwgbGVnZW5kIC0gTmF0dXJlIChzaGFwZXMpXG4gIGNvbnN0IG5hdHVyZUxlZ2VuZCA9IFtcbiAgICB7IG5hdHVyZTogXCJmb3VuZGF0aW9uXCIsIGxhYmVsOiBcIkZvdW5kYXRpb24gbGFic1wiIH0sXG4gICAgeyBuYXR1cmU6IFwibWFqb3JcIiwgbGFiZWw6IFwiTW9kZWwgbWFqb3JzXCIgfSxcbiAgICB7IG5hdHVyZTogXCJwcm9kdWN0XCIsIGxhYmVsOiBcIlByb2R1Y3QgZmlybXNcIiB9XG4gIF07XG5cbiAgY29uc3QgbmF0dXJlRyA9IHN2Zy5hcHBlbmQoXCJnXCIpXG4gICAgLmF0dHIoXCJ0cmFuc2Zvcm1cIiwgYHRyYW5zbGF0ZSgkey13aWR0aC8yICsgMjV9LCAke2xlZ2VuZFkgKyAxOH0pYCk7XG5cbiAgbmF0dXJlRy5hcHBlbmQoXCJ0ZXh0XCIpXG4gICAgLmF0dHIoXCJ4XCIsIDApXG4gICAgLmF0dHIoXCJ5XCIsIDApXG4gICAgLmF0dHIoXCJmb250LXNpemVcIiwgXCIxMHB4XCIpXG4gICAgLmF0dHIoXCJmb250LXdlaWdodFwiLCBcIjYwMFwiKVxuICAgIC5hdHRyKFwiZmlsbFwiLCBcIiM0OTUwNTdcIilcbiAgICAudGV4dChcIk5hdHVyZTpcIik7XG5cbiAgY29uc3QgbmF0dXJlSXRlbXMgPSBuYXR1cmVHLnNlbGVjdEFsbChcIi5uYXR1cmUtaXRlbVwiKVxuICAgIC5kYXRhKG5hdHVyZUxlZ2VuZClcbiAgICAuam9pbihcImdcIilcbiAgICAuYXR0cihcImNsYXNzXCIsIFwibmF0dXJlLWl0ZW1cIilcbiAgICAuYXR0cihcInRyYW5zZm9ybVwiLCAoZCwgaSkgPT4gYHRyYW5zbGF0ZSgkezU1ICsgaSAqIDExMH0sIC00KWApO1xuXG4gIG5hdHVyZUl0ZW1zLmFwcGVuZChcInBhdGhcIilcbiAgICAuYXR0cihcImRcIiwgZCA9PiBkMy5zeW1ib2woKS50eXBlKFxuICAgICAgZC5uYXR1cmUgPT09IFwiZm91bmRhdGlvblwiID8gZDMuc3ltYm9sQ2lyY2xlIDpcbiAgICAgIGQubmF0dXJlID09PSBcIm1ham9yXCIgPyBkMy5zeW1ib2xTcXVhcmUgOiBkMy5zeW1ib2xUcmlhbmdsZVxuICAgICkuc2l6ZSg3MCkoKSlcbiAgICAuYXR0cihcImZpbGxcIiwgXCIjNmM3NTdkXCIpO1xuXG4gIG5hdHVyZUl0ZW1zLmFwcGVuZChcInRleHRcIilcbiAgICAuYXR0cihcInhcIiwgMTApXG4gICAgLmF0dHIoXCJ5XCIsIDQpXG4gICAgLmF0dHIoXCJmb250LXNpemVcIiwgXCIxMHB4XCIpXG4gICAgLmF0dHIoXCJmaWxsXCIsIFwiIzM0M2E0MFwiKVxuICAgIC50ZXh0KGQgPT4gZC5sYWJlbCk7XG5cbiAgcmV0dXJuIHN2Zy5ub2RlKCk7XG59XG4ifV19

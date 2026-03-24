@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>Beyond Broca – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -27,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,10 +103,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputcb3e6e77ed9c18c8.html#article","headline":"Beyond Broca","description":"What if we’ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputcb3e6e77ed9c18c8.html","datePublished":"2023-10-15","dateModified":"2023-10-15","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"keywords":["AI","LLMs","philosophy","language"],"sameAs":["https://doi.org/10.59350/vynvf-0k137"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputcb3e6e77ed9c18c8.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/llms-language/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/llms-language/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/llms-language/#article","headline":"Beyond Broca","description":"What if we’ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?","url":"https://chrisvoncsefalvay.com/posts/llms-language/","datePublished":"2023-10-15","dateModified":"2023-10-15","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"keywords":["AI","LLMs","philosophy","language"],"sameAs":["https://doi.org/10.59350/vynvf-0k137"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/llms-language/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -141,6 +151,8 @@ window.Quarto = {
 <meta name="twitter:title" content="Beyond Broca – Chris von Csefalvay">
 <meta name="twitter:description" content="What if we’ve got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/llms-language/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="Beyond Broca">
 <meta name="citation_author" content="Chris von Csefalvay">
@@ -187,6 +199,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -303,7 +319,7 @@ Ross, Don. 2019. <span>‘Consciousness, Language, and the Possibility of Non-Hu
 </section>
 <section id="the-medium-is-the-message" class="level1 page-columns page-full">
 <h1>The medium is the message</h1>
-<p>JARVIS. Siri. Alexa. WOPR. The AIs of fiction and our every-days have one thing in common: they use language as the presentation layer. This is deceptive, because neither of these systems are, well, particularly smart. Compared to models that can, say, quantitatively infer the activity of a small molecule drug from its structure <span class="citation" data-cites="karpov2020transformer zhong2023developing guntuboina2023peptidebert">(QSAR models, on which see <a href="#ref-karpov2020transformer" role="doc-biblioref">Karpov, Godin, and Tetko 2020</a>; and also see <a href="#ref-zhong2023developing" role="doc-biblioref">Zhong and Guan 2023</a>; <a href="#ref-guntuboina2023peptidebert" role="doc-biblioref">Guntuboina et al. 2023</a>)</span>, Siri is pretty pathetic. However, it has something QSAR models and other very impressive applications of machine learning don’t: the human presentation layer, i.e.&nbsp;language.</p>
+<p>JARVIS. Siri. Alexa. WOPR. The AIs of fiction and our every-days have one thing in common: they use language as the presentation layer. This is deceptive, because neither of these systems are, well, particularly smart. Compared to models that can, say, quantitatively infer the activity of a small molecule drug from its structure <span class="citation" data-cites="karpov2020transformer zhong2023developing guntuboina2023peptidebert">(QSAR models, on which see <a href="#ref-karpov2020transformer" role="doc-biblioref">Karpov et al. 2020</a>; and also see <a href="#ref-zhong2023developing" role="doc-biblioref">Zhong and Guan 2023</a>; <a href="#ref-guntuboina2023peptidebert" role="doc-biblioref">Guntuboina et al. 2023</a>)</span>, Siri is pretty pathetic. However, it has something QSAR models and other very impressive applications of machine learning don’t: the human presentation layer, i.e.&nbsp;language.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-karpov2020transformer" class="csl-entry" role="listitem">
 Karpov, Pavel, Guillaume Godin, and Igor V Tetko. 2020. <span>‘Transformer-CNN: Swiss Knife for QSAR Modeling and Interpretation’</span>. <em>Journal of Cheminformatics</em> 12 (1): 1–12.
 </div><div id="ref-zhong2023developing" class="csl-entry" role="listitem">
@@ -311,8 +327,8 @@ Zhong, Shifa, and Xiaohong Guan. 2023. <span>‘Developing Quantitative Structur
 </div><div id="ref-guntuboina2023peptidebert" class="csl-entry" role="listitem">
 Guntuboina, Chakradhar, Adrita Das, Parisa Mollaei, Seongwon Kim, and Amir Barati Farimani. 2023. <span>‘PeptideBERT: A Language Model Based on Transformers for Peptide Property Prediction’</span>. <em>arXiv Preprint arXiv:2309.03099</em>.
 </div><div id="ref-endicott2006properties" class="csl-entry" role="listitem">
-Endicott, Timothy, Joshua Getzler, and Edwin Peel. 2006. <span>‘Properties of Law: Essays in Honour of Jim Harris’</span>.
-</div></div><p>How we treat a system seems to be conditional on how it talks to us. In that sense, the medium is profoundly how we treat the message. To use the terminology of J.W. Harris’s writings on human rights, we associate the ‘right’ to be considered to be intrinsically connected to being capable of engaging in human ’discourse <span class="citation" data-cites="endicott2006properties">(see <a href="#ref-endicott2006properties" role="doc-biblioref">Endicott, Getzler, and Peel 2006</a>)</span>. And that, of course, means language.</p>
+Endicott, Timothy, Joshua Getzler, and Edwin Peel. 2006. <em>Properties of Law: Essays in Honour of Jim Harris</em>.
+</div></div><p>How we treat a system seems to be conditional on how it talks to us. In that sense, the medium is profoundly how we treat the message. To use the terminology of J.W. Harris’s writings on human rights, we associate the ‘right’ to be considered to be intrinsically connected to being capable of engaging in human ’discourse <span class="citation" data-cites="endicott2006properties">(see <a href="#ref-endicott2006properties" role="doc-biblioref">Endicott et al. 2006</a>)</span>. And that, of course, means language.</p>
 <p>This is not overly surprising, either. Our understanding of language has been that of a watershed moment in evolution. Humans became what they are when they learned to use language. Tool use is great, but tool use only makes <em>a human</em> at best. What makes <em>humans</em>, plural, is language. This is intrinsically connected, of course, to society. Language is not an arbitrarily selected activity, nor is it really necessarily the kind of evolutionary game changer that tool use is. Rather, it is the tool, the <em>sine qua non</em>, the cornerstone and the absolutely fundamental instrument of social interaction. Language creates society. Society recognises human individuals and gives that recognition a meaning. The fact that I am a human being, and recognised as such (I hope), has a meaning that is different from me recognising that my dog is an individual of the species <em>Canis lupus familiaris</em>, because it does not merely acknowledge me as being of a certain species, but also of being of a certain kind of agent capable not only of having rights but also of speaking for them. Language is how all that happens <span class="citation" data-cites="budwig2000language browning2023personhood">(e.g. <a href="#ref-budwig2000language" role="doc-biblioref">Budwig 2000</a>; but see <a href="#ref-browning2023personhood" role="doc-biblioref">Browning 2023</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-budwig2000language" class="csl-entry" role="listitem">
 Budwig, Nancy. 2000. <span>‘Language, Practices and the Construction of Personhood’</span>. <em>Theory &amp; Psychology</em> 10 (6): 769–86.
@@ -322,17 +338,17 @@ Browning, Jacob. 2023. <span>‘Personhood and AI: Why Large Language Models Don
 <section id="the-language-of-intelligence-or-vice-versa" class="level1 page-columns page-full">
 <h1>The language of intelligence (or vice versa)</h1>
 <p>What, then, if we got one of the most important things about humanity, and human intelligence, dreadfully wrong altogether? What if language is not a <em>product</em> of intelligence (as we understand it in the human context) but rather a necessary instrument thereof?</p>
-<p>The evolution of something as crucial as language remains shrouded in a perplexing mystery to this date. What we know is that at some point, about 50-100,000 years ago, <em>something</em> happened that gave rise to language. We don’t quite know what it was, or how it specifically transpired. Indeed, despite advances in our understanding of cognitive neuroscience, we haven’t found evidence of the ‘language faculty’ proposed by <span class="citation" data-cites="hauser2002faculty jackendoff2005nature">Hauser, Chomsky, and Fitch (<a href="#ref-hauser2002faculty" role="doc-biblioref">2002</a>; but see the criticisms by <a href="#ref-jackendoff2005nature" role="doc-biblioref">Jackendoff and Pinker 2005</a>)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The genetics of language production – which centres around FOXP2 these days <span class="citation" data-cites="enard2002molecular enard2011foxp2">(see <a href="#ref-enard2002molecular" role="doc-biblioref">Enard et al. 2002</a>; <a href="#ref-enard2011foxp2" role="doc-biblioref">Enard 2011</a>)</span> – hasn’t gotten us a lot further, and there are way too many edge cases (<em>dissociations</em>, as the term in evolutionary neuroscience goes), where either there is a significant intellectual deficit despite preserved language ability (Williams syndrome being the textbook example of this, <em>viz.</em> <span class="citation" data-cites="bellugi2013dissociation">Bellugi et al. (<a href="#ref-bellugi2013dissociation" role="doc-biblioref">2013</a>)</span>) or the inverse (e.g.&nbsp;Developmental Verbal Dyspraxia, where there is impairment to language production but not to overall intellect, <em>viz.</em> <span class="citation" data-cites="vargha2005foxp2">Vargha-Khadem et al. (<a href="#ref-vargha2005foxp2" role="doc-biblioref">2005</a>)</span>) to be able to confidently make this connection on an individual level.</p>
+<p>The evolution of something as crucial as language remains shrouded in a perplexing mystery to this date. What we know is that at some point, about 50-100,000 years ago, <em>something</em> happened that gave rise to language. We don’t quite know what it was, or how it specifically transpired. Indeed, despite advances in our understanding of cognitive neuroscience, we haven’t found evidence of the ‘language faculty’ proposed by <span class="citation" data-cites="hauser2002faculty jackendoff2005nature">Hauser et al. (<a href="#ref-hauser2002faculty" role="doc-biblioref">2002</a>; but see the criticisms by <a href="#ref-jackendoff2005nature" role="doc-biblioref">Jackendoff and Pinker 2005</a>)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The genetics of language production – which centres around FOXP2 these days <span class="citation" data-cites="enard2002molecular enard2011foxp2">(see <a href="#ref-enard2002molecular" role="doc-biblioref">Enard et al. 2002</a>; <a href="#ref-enard2011foxp2" role="doc-biblioref">Enard 2011</a>)</span> – hasn’t gotten us a lot further, and there are way too many edge cases (<em>dissociations</em>, as the term in evolutionary neuroscience goes), where either there is a significant intellectual deficit despite preserved language ability (Williams syndrome being the textbook example of this, <em>viz.</em> <span class="citation" data-cites="bellugi2013dissociation">Bellugi et al. (<a href="#ref-bellugi2013dissociation" role="doc-biblioref">2013</a>)</span>) or the inverse (e.g.&nbsp;Developmental Verbal Dyspraxia, where there is impairment to language production but not to overall intellect, <em>viz.</em> <span class="citation" data-cites="vargha2005foxp2">Vargha-Khadem et al. (<a href="#ref-vargha2005foxp2" role="doc-biblioref">2005</a>)</span>) to be able to confidently make this connection on an individual level.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-hauser2002faculty" class="csl-entry" role="listitem">
 Hauser, Marc D, Noam Chomsky, and W Tecumseh Fitch. 2002. <span>‘The Faculty of Language: What Is It, Who Has It, and How Did It Evolve?’</span> <em>Science</em> 298 (5598): 1569–79.
 </div><div id="ref-jackendoff2005nature" class="csl-entry" role="listitem">
 Jackendoff, Ray, and Steven Pinker. 2005. <span>‘The Nature of the Language Faculty and Its Implications for Evolution of Language (Reply to Fitch, Hauser, and Chomsky)’</span>. <em>Cognition</em> 97 (2): 211–25.
 </div><div id="fn3"><p><sup>3</sup>&nbsp;not to be confused with the brain areas responsible for speech, which perplexingly are part, but not the whole, of the language faculty</p></div><div id="ref-enard2002molecular" class="csl-entry" role="listitem">
-Enard, Wolfgang, Molly Przeworski, Simon E Fisher, Cecilia SL Lai, Victor Wiebe, Takashi Kitano, Anthony P Monaco, and Svante Pääbo. 2002. <span>‘Molecular Evolution of FOXP2, a Gene Involved in Speech and Language’</span>. <em>Nature</em> 418 (6900): 869–72.
+Enard, Wolfgang, Molly Przeworski, Simon E Fisher, et al. 2002. <span>‘Molecular Evolution of FOXP2, a Gene Involved in Speech and Language’</span>. <em>Nature</em> 418 (6900): 869–72.
 </div><div id="ref-enard2011foxp2" class="csl-entry" role="listitem">
 Enard, Wolfgang. 2011. <span>‘FOXP2 and the Role of Cortico-Basal Ganglia Circuits in Speech and Language Evolution’</span>. <em>Current Opinion in Neurobiology</em> 21 (3): 415–24.
 </div><div id="ref-bellugi2013dissociation" class="csl-entry" role="listitem">
-Bellugi, Ursula, Shelly Marks, Amy Bihrle, and Helene Sabo. 2013. <span>‘Dissociation Between Language and Cognitive Functions in Williams Syndrome’</span>. In <em>Language Development in Exceptional Circumstances</em>, 177–89. Psychology Press.
+Bellugi, Ursula, Shelly Marks, Amy Bihrle, and Helene Sabo. 2013. <span>‘Dissociation Between Language and Cognitive Functions in Williams Syndrome’</span>. In <em>Language Development in Exceptional Circumstances</em>. Psychology Press.
 </div><div id="ref-vargha2005foxp2" class="csl-entry" role="listitem">
 Vargha-Khadem, Faraneh, David G Gadian, Andrew Copp, and Mortimer Mishkin. 2005. <span>‘FOXP2 and the Neuroanatomy of Speech and Language’</span>. <em>Nature Reviews Neuroscience</em> 6 (2): 131–38.
 </div></div><p>On the other hand, on a broader level, it is hard to discount the relationship. What is more complex is the direction of this relationship. There are, really, three possible scenarios:</p>
@@ -365,7 +381,8 @@ Floridi, Luciano. 2023. <span>‘AI as Agency Without Intelligence: On ChatGPT, 
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> <a href="https://doi.org/10.59350/vynvf-0k137">https://doi.org/10.59350/vynvf-0k137</a>.
+Chris von Csefalvay. 2023. <span>“Beyond Broca.”</span> Preprint,
+October 15. <a href="https://doi.org/10.59350/vynvf-0k137">https://doi.org/10.59350/vynvf-0k137</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

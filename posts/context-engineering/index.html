@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>The Snowmobile Symptom – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -35,15 +38,14 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,7 +84,16 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input6790c11415ed1756.html#article","headline":"The Snowmobile Symptom","description":"AI’s latest buzzword is more confession than innovation.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input6790c11415ed1756.html","datePublished":"2025-07-06","dateModified":"2025-07-06","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input6790c11415ed1756.html/header.webp","keywords":["AI","LLMs","context engineering"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input6790c11415ed1756.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/context-engineering/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/context-engineering/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/context-engineering/#article","headline":"The Snowmobile Symptom","description":"AI’s latest buzzword is more confession than innovation.","url":"https://chrisvoncsefalvay.com/posts/context-engineering/","datePublished":"2025-07-06","dateModified":"2025-07-06","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/context-engineering/header.webp","keywords":["AI","LLMs","context engineering"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/context-engineering/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
 
 <meta property="og:title" content="The Snowmobile Symptom – Chris von Csefalvay">
@@ -92,6 +103,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="twitter:title" content="The Snowmobile Symptom – Chris von Csefalvay">
 <meta name="twitter:description" content="AI’s latest buzzword is more confession than innovation.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/context-engineering/header.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="The Snowmobile Symptom">
 <meta name="citation_author" content="Chris von Csefalvay">
@@ -123,6 +136,10 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -220,53 +237,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 
 
 <p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-34442"></div><script>tweet=<!DOCTYPE html>
-<html lang="en" class="icecream">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X / Error</title>
-    <meta name="version" content="1">
-    <link href="https://abs.twimg.com/favicons/twitter.3.ico" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="https://abs.twimg.com/errors/fullscreen_errors-047ca1475a6efac7c9c89a9ff92b7a20.css">
-  </head>
-  <body dir="auto">
-    <div class="top">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1519 200">
-        <defs/>
-        <path d="M708 103l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9368 9368 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h11l10-6 6 3 9-1 4-1 1 1 1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a38 38 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-        <path d="M-36 193l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9328 9328 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h9a6 6 0 002 0l10-6 6 3 9-1 4-1a6 6 0 001 1l1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a37 37 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-      </svg>
-    </div>
-    <div class="container">
-      <div class="content">
-        <a href="https://twitter.com" title="X logo">
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="x-logo"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>
-        </a>
-        <h1 id="header">This page is down</h1>
-        <p id="description">I scream. You scream. We all scream... for us to fix this page. We’ll stop making jokes and get things up and running soon.</p>
-
-          <a id="button_retry" href="" class="button">Retry</a>
-
-      </div>
-      <img id="image" src="https://abs.twimg.com/errors/ErrorState_Down.png" alt="Ice cream with rainbow sprinkles in a cone spilled on the floor.">
-      <div class="footer">
-        <ul>
-          <li><a href="https://twitter.com/" id="footer_home">Home</a></li>
-          <li><a href="https://status.twitterstat.us/" id="footer_status">Status</a></li>
-          <li><a href="https://twitter.com/tos" id="footer_tos">Terms of Service</a></li>
-          <li><a href="https://twitter.com/privacy" id="footer_privacy">Privacy Policy</a></li>
-          <li><a href="https://support.twitter.com/articles/20170514" id="footer_cookie">Cookie Policy</a></li>
-          <li><a href="https://legal.twitter.com/imprint" id="footer_imprint">Imprint</a></li>
-          <li><a href="https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html" id="footer_ads">Ads info</a></li>
-          <li dir="ltr">&copy; X Corp. <span id="copyright-year">&emsp;&emsp;&emsp;&emsp;</span></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-  <script src="https://abs.twimg.com/errors/503-1bdb612dcc463cd3f216f7c1d3a3c74d.js"></script>
-
-;document.getElementById("tweet-34442").innerHTML = tweet["html"];<p></p>
+<p></p><div id="tweet-71949"></div><script>tweet={"url":"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/twitter.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/twitter.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-71949").innerHTML = tweet["html"];</script><p></p>
 <p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
 <p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
 <section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
@@ -316,7 +287,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span> <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
+Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span>
+Preprint, July 6. <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

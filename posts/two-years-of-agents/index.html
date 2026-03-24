@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>What I talk about when I talk about agentic AI – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -27,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +103,16 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputd6d6ebc147f52d41.html#article","headline":"What I talk about when I talk about agentic AI","description":"Two years on from helping to articulate a concept that changed everything, some thoughts on where we are, where we’re going and the things we lost along the way.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputd6d6ebc147f52d41.html","datePublished":"2025-11-01","dateModified":"2025-11-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputd6d6ebc147f52d41.html/header.webp","keywords":["LLMs","AI","agentic AI","personal"],"sameAs":["https://doi.org/10.59350/ddeyn-whz59"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputd6d6ebc147f52d41.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/two-years-of-agents/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/two-years-of-agents/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/two-years-of-agents/#article","headline":"What I talk about when I talk about agentic AI","description":"Two years on from helping to articulate a concept that changed everything, some thoughts on where we are, where we’re going and the things we lost along the way.","url":"https://chrisvoncsefalvay.com/posts/two-years-of-agents/","datePublished":"2025-11-01","dateModified":"2025-11-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/two-years-of-agents/header.webp","keywords":["LLMs","AI","agentic AI","personal"],"sameAs":["https://doi.org/10.59350/ddeyn-whz59"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/two-years-of-agents/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
 
 <meta property="og:title" content="What I talk about when I talk about agentic AI – Chris von Csefalvay">
@@ -112,6 +122,8 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <meta name="twitter:title" content="What I talk about when I talk about agentic AI – Chris von Csefalvay">
 <meta name="twitter:description" content="Two years on from helping to articulate a concept that changed everything, some thoughts on where we are, where we’re going and the things we lost along the way.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/two-years-of-agents/header.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="What I talk about when I talk about agentic AI">
 <meta name="citation_author" content="Chris von Csefalvay">
@@ -150,6 +162,10 @@ gtag('config', '395640625', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -262,9 +278,9 @@ Note
 </div>
 <p>The Latin verb <em>agere</em> means “to do, to act, to drive forward”. From it we get not only “agent” but also “action”, “actor”, and curiously enough, “agile”. The Romans understood what we seem to have forgotten: that agency is fundamentally about motion, about transformation, about the capacity to change the world. I’ve been thinking about this a lot lately as I mark roughly two years since I sat in a Berkeley coffee shop, overcaffeinated and sleep-deprived, trying to articulate what would come after chatbots. It was late October 2023, my book on computational epidemiology – with a whole chapter devoted to agents<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> – had been published earlier that year, and I was looking at an unfolding crisis as the initial hype around language models began to fade and the bandaid patch of <a href="../../posts/prompt-engineering/index.html">prompt engineering</a> quickly showed it wasn’t going anywhere. Earlier that year, I spent a blissful few days driving across the country with Oliver, my golden retriever, moving ourselves from Northern Virginia to Denver, and in order to procrastinate away having to unpack boxes, I went on to devote most of the summer to injecting LLMs into agent-based simulations of public health. The connection seemed obvious: these models needed the same kind of connectionistic compositionality that made agent-based models and neural networks powerful – big structures of relatively trivial parts rather than desperate chases after ever-larger monoliths – and they needed to encounter the world, to learn from interaction the way a child learns from play.</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;My editor will kill me, but I have to admit: I <em>do</em> have a favourite chapter, and it <em>is</em> the one about agents. In no other place do you get Dwarf Fortress and STDs within a few pages of each other.</p></div><div id="ref-Yao2022ReAct" class="csl-entry" role="listitem">
-Yao, Shunyu, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. 2023. <span>‘ReAct: Synergizing Reasoning and Acting in Language Models’</span>. <em>arXiv Preprint arXiv:2210.03629</em>. <a href="https://doi.org/10.48550/arXiv.2210.03629">https://doi.org/10.48550/arXiv.2210.03629</a>.
+Yao, Shunyu, Jeffrey Zhao, Dian Yu, et al. 2023. <span>‘ReAct: Synergizing Reasoning and Acting in Language Models’</span>. <em>arXiv Preprint arXiv:2210.03629</em>, ahead of print. <a href="https://doi.org/10.48550/arXiv.2210.03629">https://doi.org/10.48550/arXiv.2210.03629</a>.
 </div><div id="ref-Wei2022ChainOfThought" class="csl-entry" role="listitem">
-Wei, Jason, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed Chi, Quoc Le, and Denny Zhou. 2022. <span>‘Chain-of-Thought Prompting Elicits Reasoning in Large Language Models’</span>. <a href="https://doi.org/10.48550/arXiv.2201.11903">https://doi.org/10.48550/arXiv.2201.11903</a>.
+Wei, Jason, Xuezhi Wang, Dale Schuurmans, et al. 2022. <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em>. <a href="https://doi.org/10.48550/arXiv.2201.11903">https://doi.org/10.48550/arXiv.2201.11903</a>.
 </div><div id="fn2"><p><sup>2</sup>&nbsp;One day, the lot of us need to have dinner and/or a Highlander style battle.</p></div></div><p>The idea that language models could <em>do</em> things was, in those late days of 2023, still relatively novel. Tool use was of course more or less established, but far from mainstream, where the focus was on <a href="../../posts/prompt-engineering/index.html">coaxing the right words out of LLMs</a>. A key step was Shunyu Yao’s brilliant ReAct paper <span class="citation" data-cites="Yao2022ReAct">(<a href="#ref-Yao2022ReAct" role="doc-biblioref">Yao et al. 2023</a>)</span>, which presented the first proper reconciliation of action and language generation. This put his work beyond other papers that primarily focused on ways of prompting, such as <span class="citation" data-cites="Wei2022ChainOfThought">Wei et al. (<a href="#ref-Wei2022ChainOfThought" role="doc-biblioref">2022</a>)</span> on Chain of Thought prompting, even though the latter did lay the groundwork for task decomposition, a key feature of agentic AI. <a href="https://lilianweng.github.io/posts/2023-06-23-agent/">Lilian Weng</a>’s blog is perhaps the first proper early summary of what an agent properly so called would comprise, and I think that when the history of all of this is written someday, it will show she fully deserves to be considered one of the parents of the agentic idea. Finally, <a href="https://blog.langchain.com/agents-round/">Harrison Chase</a>’s post and <a href="../../posts/team-of-rivals/index.html">mine</a> were among the earliest on conceptualising the kind of more expansive notion of agents that I think are the proper domain of the subject.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>This idea was picked up by an incredible community of builders, hackers, developers and popularisers, who took and turned it into the global phenomenon it has become. Companies are deploying agent orchestration platforms, VCs are writing nine-figure cheques for “agentic” startups and every consultancy worth its salt now has an agentic AI practice. Agentic AI has also come at the right time to save us from the spectre of an AI winter as moats around simple LLM wrappers were collapsing and prompt engineering came up short. It changed the tone of the discourse that once dismissed LLMs as stochastic parrots,<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and the birth of agentic multimodality has enhanced that. In just a year, it’s become a household name and a boardroom buzzword. In short, agentic AI has been wildly successful.</p>
 <div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;“Call me when your parrot can buy plane tickets”, I once quipped on a call. A friend turned this into a t-shirt I wear with pride to this day.</p></div></div><p>And that raises the uncomfortable question I’ve been wrestling with: what if it had been <em>too</em> successful too fast? What if agentic AI has become a victim of its own success?</p>
@@ -297,13 +313,13 @@ Wei, Jason, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, 
 <p><strong>But more than fear, I have hope.</strong></p>
 <p>Because while the agentic revolution may be over, the journey hasn’t even begun in earnest. This is at best the end of the beginning. There are big questions to be tackled. Deep Agents, multi-agent coordination <span class="citation" data-cites="Becker2025MALLM">(<a href="#ref-Becker2025MALLM" role="doc-biblioref">Becker et al. 2025</a>)</span>, model-native agents/agent-native models, the tricky issues that surround agentic alignment esp.&nbsp;in view of evaluation awareness, embodied agents <span class="citation" data-cites="Fu2025ROSBag">(<a href="#ref-Fu2025ROSBag" role="doc-biblioref">Fu et al. 2025</a>)</span> and the way we secure and authenticate agents are just a few of them. World simulation agents, which to a great degree <a href="../../posts/agentic-simulation/index.html">implement the notion I have been advocating for here</a>, are seeing increased use in the social sciences <span class="citation" data-cites="Srinivasan2025Democracy">(<a href="#ref-Srinivasan2025Democracy" role="doc-biblioref">Srinivasan and Patapati 2025</a>)</span> but also, closer to my principal domain of work, in clinical simulation <span class="citation" data-cites="Schmidgall2024AgentClinic">(<a href="#ref-Schmidgall2024AgentClinic" role="doc-biblioref">Schmidgall et al. 2024</a>)</span>. And of course that’s all on top of the the challenges we’re facing on the wider social issues that I’ve touched on above.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Becker2025MALLM" class="csl-entry" role="listitem">
-Becker, Jonas, Lars Benedikt Kaesberg, Niklas Bauer, Jan Philip Wahle, Terry Ruas, and Bela Gipp. 2025. <span>‘MALLM: Multi-Agent Large Language Models Framework’</span>. <a href="https://doi.org/10.48550/arXiv.2509.11656">https://doi.org/10.48550/arXiv.2509.11656</a>.
+Becker, Jonas, Lars Benedikt Kaesberg, Niklas Bauer, Jan Philip Wahle, Terry Ruas, and Bela Gipp. 2025. <em>MALLM: Multi-Agent Large Language Models Framework</em>. <a href="https://doi.org/10.48550/arXiv.2509.11656">https://doi.org/10.48550/arXiv.2509.11656</a>.
 </div><div id="ref-Fu2025ROSBag" class="csl-entry" role="listitem">
-Fu, Lei, Sahar Salimpour, Leonardo Militano, Harry Edelman, Jorge Peña Queralta, and Giovanni Toffetti. 2025. <span>‘ROSBag MCP Server: Analyzing Robot Data with LLMs for Agentic Embodied AI Applications’</span>. <a href="https://doi.org/10.48550/arXiv.2511.03497">https://doi.org/10.48550/arXiv.2511.03497</a>.
+Fu, Lei, Sahar Salimpour, Leonardo Militano, Harry Edelman, Jorge Peña Queralta, and Giovanni Toffetti. 2025. <em>ROSBag MCP Server: Analyzing Robot Data with LLMs for Agentic Embodied AI Applications</em>. <a href="https://doi.org/10.48550/arXiv.2511.03497">https://doi.org/10.48550/arXiv.2511.03497</a>.
 </div><div id="ref-Srinivasan2025Democracy" class="csl-entry" role="listitem">
-Srinivasan, Trisanth, and Santosh Patapati. 2025. <span>‘Democracy-in-Silico: Institutional Design as Alignment in AI-Governed Polities’</span>. <a href="https://doi.org/10.48550/arXiv.2508.19562">https://doi.org/10.48550/arXiv.2508.19562</a>.
+Srinivasan, Trisanth, and Santosh Patapati. 2025. <em>Democracy-in-Silico: Institutional Design as Alignment in AI-Governed Polities</em>. <a href="https://doi.org/10.48550/arXiv.2508.19562">https://doi.org/10.48550/arXiv.2508.19562</a>.
 </div><div id="ref-Schmidgall2024AgentClinic" class="csl-entry" role="listitem">
-Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and Michael Moor. 2024. <span>‘AgentClinic: A Multimodal Agent Benchmark to Evaluate AI in Simulated Clinical Environments’</span>. <a href="https://doi.org/10.48550/arXiv.2405.07960">https://doi.org/10.48550/arXiv.2405.07960</a>.
+Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and Michael Moor. 2024. <em>AgentClinic: A Multimodal Agent Benchmark to Evaluate AI in Simulated Clinical Environments</em>. <a href="https://doi.org/10.48550/arXiv.2405.07960">https://doi.org/10.48550/arXiv.2405.07960</a>.
 </div></div><p>The promise remains. Systems of agents, properly conceived, could exhibit the kind of emergent intelligence that no individual model can achieve: learn, adapt, task-decompose, recompose. Realising this potential requires moving beyond the current boxes-and-arrows paradigm to something more fluid, more evolutionary, more genuinely agentic. Even it doesn’t come with the comfort of being able to draw it on a whiteboard.</p>
 <p>The challenge of the road ahead is not primarily technical. No new models, no new GPUs, no new architectures are coming to save us. The issues are on a cognitive, linguistic and social plane, and so must the solutions be. For all my worries, for all my misgivings about terminology, I do believe that the best is yet to come. But I also know that we’re not promised those outcomes. When we set sail on this journey, we did so without the guarantee that there will be land at the end of it. That we have found safe harbour and profitable shores is occasion to be grateful – and carry on.</p>
 
@@ -322,7 +338,7 @@ Schmidgall, Samuel, Rojin Ziaei, Carl Harris, Eduardo Reis, Jeffrey Jopling, and
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2025. <span>“What I Talk about When I Talk about
-Agentic AI.”</span> <a href="https://doi.org/10.59350/ddeyn-whz59">https://doi.org/10.59350/ddeyn-whz59</a>.
+Agentic AI.”</span> Preprint, November 1. <a href="https://doi.org/10.59350/ddeyn-whz59">https://doi.org/10.59350/ddeyn-whz59</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

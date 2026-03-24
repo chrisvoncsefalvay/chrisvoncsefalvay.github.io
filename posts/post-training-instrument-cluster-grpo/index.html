@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>The post-training instrument cluster – Part III – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -62,7 +65,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -136,16 +137,25 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://chrisvoncsefalvay.com/#person","name":"Chris von Csefalvay","givenName":"Chris","familyName":"von Csefalvay","jobTitle":"Principal, AI Practice","description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the author of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press, 2026) and Computational Modeling of Infectious Disease (Elsevier, 2023).","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp","sameAs":["https://orcid.org/0000-0003-3131-0864","https://scholar.google.com/citations?user=X_2G-VsAAAAJ","https://www.wikidata.org/wiki/Q107095298","https://hu.wikipedia.org/wiki/Chris_von_Csefalvay","https://github.com/chrisvoncsefalvay","https://twitter.com/epichrisis","https://www.linkedin.com/in/chrisvoncsefalvay/","https://www.instagram.com/chrisvoncsefalvay/","https://viaf.org/viaf/7190162669581955500004","https://isni.org/isni/0000000502655729","https://www.webofscience.com/wos/author/record/IZD-6900-2023","https://osf.io/awhgj","https://en.wikiquote.org/wiki/Chris_von_Csefalvay","https://www.researchgate.net/profile/Chris-Von-Csefalvay","https://www.crunchbase.com/person/chris-von-csefalvay","https://dblp.org/pid/157/8137.html","https://www.goodreads.com/author/show/15108248.Chris_von_Csefalvay","https://golden.com/wiki/Chris_von_Csefalvay-BY88G48","https://oxford.academia.edu/ChrisVonCsefalvay","https://medium.com/@chrisvcsefalvay","https://commons.wikimedia.org/wiki/Category:Chris_von_Csefalvay","https://sciprofiles.com/profile/1163482"],"address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":{"@type":"Organization","@id":"https://www.hcltech.com/#organization","name":"HCLTech","url":"https://www.hcltech.com","sameAs":"https://en.wikipedia.org/wiki/HCLTech"},"birthDate":"1986-07-15","birthPlace":{"@type":"Place","name":"Budapest","address":{"@type":"PostalAddress","addressCountry":"HU"}},"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}],"memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"IEEE"}],"knowsAbout":["post-training for language models","supervised fine-tuning","reinforcement learning from verifiable rewards","group relative policy optimization","agentic AI systems","multi-agent frameworks","large language models","LLM evaluation","computational epidemiology","AI alignment","LLMOps"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Certified in Public Health (CPH)","credentialCategory":"Professional Certification","recognizedBy":{"@type":"Organization","name":"National Board of Public Health Examiners","url":"https://www.nbphe.org"}},{"@type":"EducationalOccupationalCredential","name":"Fellow of the Royal Society for Public Health (FRSPH)","credentialCategory":"Fellowship","recognizedBy":{"@type":"Organization","name":"Royal Society for Public Health","url":"https://www.rsph.org.uk","sameAs":"https://en.wikipedia.org/wiki/Royal_Society_for_Public_Health"}},{"@type":"EducationalOccupationalCredential","name":"IEEE Senior Member","credentialCategory":"Professional Membership","recognizedBy":{"@type":"Organization","name":"IEEE","url":"https://www.ieee.org","sameAs":"https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers"}}],"hasOccupation":{"@type":"Occupation","name":"AI Researcher and Computational Epidemiologist","occupationalCategory":"15-2051.00","skills":["Machine Learning","Natural Language Processing","Epidemiological Modeling","Reinforcement Learning","Large Language Models"]},"award":"Martin Wronker Prize, University of Oxford"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script><style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><style>
 img, .cell-output-display img {
   max-width: 100%;
   height: auto;
 }
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input5c5be4fcbee34a42.html#article","headline":"The post-training instrument cluster – Part III","description":"The part where you have to take all that you have learned and work hard to completely unlearn it. Here be dragons.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input5c5be4fcbee34a42.html","datePublished":"2026-01-04","dateModified":"2026-01-04","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input5c5be4fcbee34a42.html/grpo_dashboard.png","keywords":["AI","LLMs","LLMOps","post-training","reinforcement learning","GRPO"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input5c5be4fcbee34a42.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+</style><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/#article","headline":"The post-training instrument cluster – Part III","description":"The part where you have to take all that you have learned and work hard to completely unlearn it. Here be dragons.","url":"https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/","datePublished":"2026-01-04","dateModified":"2026-01-04","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/grpo_dashboard.png","keywords":["AI","LLMs","LLMOps","post-training","reinforcement learning","GRPO"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -183,6 +193,8 @@ window.Quarto = {
 <meta name="twitter:title" content="The post-training instrument cluster – Part III – Chris von Csefalvay">
 <meta name="twitter:description" content="The part where you have to take all that you have learned and work hard to completely unlearn it. Here be dragons.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/grpo_dashboard.png">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:image-height" content="1268">
 <meta name="twitter:image-width" content="1386">
 <meta name="twitter:card" content="summary_large_image">
@@ -217,6 +229,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -359,7 +375,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="the-grpo-paradigm-shift">The GRPO paradigm shift</h2>
 <p>GRPO, developed by DeepSeek and described in the DeepSeekMath paper <span class="citation" data-cites="shao2024deepseekmath">(<a href="#ref-shao2024deepseekmath" role="doc-biblioref">Shao et al. 2024</a>)</span>, takes a fundamentally different approach to policy optimisation than its predecessors. Where PPO maintains a separate value function to estimate advantages, GRPO computes advantages <em>relative to a group of completions for the same prompt</em>. This seemingly minor architectural choice has profound implications for monitoring.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-shao2024deepseekmath" class="csl-entry" role="listitem">
-Shao, Zhihong, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Mingchuan Zhang, Y. K. Li, Y. Wu, and Daya Guo. 2024. <span>‘DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>.
+Shao, Zhihong, Peiyi Wang, Qihao Zhu, et al. 2024. <span>‘DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>.
 </div><div class="">
 <p>The key insight behind GRPO is that you don’t need a value function if you can compare multiple completions directly. By generating several responses to each prompt and computing advantages relative to the group mean, GRPO sidesteps the value function entirely – and with it, many of the training instabilities that plague PPO.</p>
 </div></div>
@@ -442,7 +458,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs this as <code>reward_std</code> by default when using GRPOTrainer. If you’re using a custom implementation, you should compute and log this yourself – it’s that important.</p>
-</div></div><div id="27eeb580" class="cell" data-execution_count="3">
+</div></div><div id="19270384" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reward standard deviation monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> TrainerCallback</span>
@@ -496,7 +512,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Composite rewards are increasingly common in GRPO training. A typical setup might combine format compliance (does the output match the expected structure?), correctness (is the answer right?), and style (is it appropriately concise?). Each component can behave differently during training, and almost always, models learn them one by one.</p>
-</div></div><div id="adc45a04" class="cell" data-execution_count="4">
+</div></div><div id="948750d4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Partial reward decomposition monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PartialRewardCallback(TrainerCallback):</span>
@@ -572,7 +588,7 @@ Figure&nbsp;3: Partial reward decomposition reveals dynamics hidden by aggregate
 <li><strong>Within-group length variance</strong>: Are completions for the same prompt similar lengths, or diverse?</li>
 <li><strong>Length-reward correlation</strong>: Is there a systematic relationship between completion length and reward?</li>
 </ul>
-<div id="bb9b2afa" class="cell" data-execution_count="6">
+<div id="7912a0d8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>GRPO-specific completion length monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GRPOLengthCallback(TrainerCallback):</span>
@@ -672,7 +688,7 @@ Figure&nbsp;4: Completion length dynamics in GRPO: watch for bimodal distributio
 <section id="ratio-clipping" class="level4">
 <h4 class="anchored" data-anchor-id="ratio-clipping">Ratio clipping</h4>
 <p>The probability ratio <span class="math inline">\(r_{i,t} = \frac{\pi_\theta(o_{i,t} | q, o_{i,&lt;t})}{\pi_{\theta_{\text{old}}}(o_{i,t} | q, o_{i,&lt;t})}\)</span> measures how much more (or less) likely the current policy makes each token compared to the policy that generated the completion. Clipping constrains this ratio to <span class="math inline">\([1-\epsilon, 1+\epsilon]\)</span>.</p>
-<div id="feb050fb" class="cell" data-execution_count="8">
+<div id="54c147ea" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>GRPO clip ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GRPOClipRatioCallback(TrainerCallback):</span>
@@ -766,7 +782,7 @@ Figure&nbsp;5: Clip ratio asymmetry in GRPO: the balance between high and low cl
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs <code>entropy</code> as the mean entropy across tokens and completions. Some implementations also log <code>entropy_std</code>, which measures variation in entropy across tokens – useful for detecting whether the model is uniformly confident or has “confident” and “uncertain” regions.</p>
-</div></div><div id="8d5047b4" class="cell" data-execution_count="10">
+</div></div><div id="d73b3441" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Policy entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> EntropyCallback(TrainerCallback):</span>
@@ -899,7 +915,7 @@ Figure&nbsp;6: A complete GRPO monitoring dashboard: reward std is primary, loss
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2026. <span>“The Post-Training Instrument Cluster
--- Part III.”</span> <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/</a>.
+-- Part III.”</span> Preprint, January 4. <a href="https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/">https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

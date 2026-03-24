@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>Just noise in the neurons – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -27,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,10 +103,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputb0ce66e880c26cf2.html#article","headline":"Just noise in the neurons","description":"Your language model isn’t experiencing a cognitive defect. It’s just wrong.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputb0ce66e880c26cf2.html","datePublished":"2025-06-27","dateModified":"2025-06-27","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputb0ce66e880c26cf2.html/header.webp","keywords":["AI","agents","neuroscience","philosophy"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-inputb0ce66e880c26cf2.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/#article","headline":"Just noise in the neurons","description":"Your language model isn’t experiencing a cognitive defect. It’s just wrong.","url":"https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/","datePublished":"2025-06-27","dateModified":"2025-06-27","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/header.webp","keywords":["AI","agents","neuroscience","philosophy"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -141,6 +151,8 @@ window.Quarto = {
 <meta name="twitter:title" content="Just noise in the neurons – Chris von Csefalvay">
 <meta name="twitter:description" content="Your language model isn’t experiencing a cognitive defect. It’s just wrong.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/header.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="Just noise in the neurons">
 <meta name="citation_author" content="Chris von Csefalvay">
@@ -174,6 +186,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -287,7 +303,7 @@ window.Quarto = {
 <p>I am, of course, aware that I am risking perhaps justified derision for being ‘hung up on semantics’, but semantics matters. Semantics are our human handles on notions, often abstract ones. Just as an unwieldy or ill-placed handle will make lifting a box unduly onerous, bad semantics makes manipulating those cognitive constructs difficult, impossible or error-prone. Which is why I continue to be willing to spill ink on our unhelpful tendency to rely on neuropathological metaphors for the mistakes of generative AI.</p>
 <p>These models have a notorious habit of producing false yet plausible-sounding information. It is a property so inherent in stochastic generativity that the terminology of hallucinations itself comes not from LLMs, where the expression became ubiquitous, but in fact – best I can tell – from a paper by Baker and Kanade on superresolution (upscaling) of faces <span class="citation" data-cites="840616">(see <a href="#ref-840616" role="doc-biblioref">Baker and Kanade 2000</a>)</span>. Neuroscientists and psychologists often ask where hallucinations come from – Baker and Kanade appear to ask where the pixels generated in upscaling come from, and conclude that they must originate in a sort of hallucination.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="no-row-height column-margin column-container"><div id="ref-840616" class="csl-entry" role="listitem">
-Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>Proceedings Fourth IEEE International Conference on Automatic Face and Gesture Recognition (Cat. No. PR00580)</em>, 83–88. <a href="https://doi.org/10.1109/AFGR.2000.840616">https://doi.org/10.1109/AFGR.2000.840616</a>.
+Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. <em>Proceedings Fourth IEEE International Conference on Automatic Face and Gesture Recognition (Cat. No. PR00580)</em>, 83–88. <a href="https://doi.org/10.1109/AFGR.2000.840616">https://doi.org/10.1109/AFGR.2000.840616</a>.
 </div><div id="fn1"><p><sup>1</sup>&nbsp;Why did it take so long to ask the question? Your typical upscaling algorithm also generates new pixels, but these are essentially deterministic functions of the input pixels. The simplest of these, of course, is interpolation, where every new pixel is a deterministically obtained function of the originating information. Say, for bicubic interpolation over the unit square, <span class="math display">\[ f(x,y) = \sum_{i=0}^3 \sum_{j=0}^3 a_{ij} x^i y^j \]</span> where the <span class="math inline">\(a_{ij}\)</span> is the matrix of coefficients of the interpolating polynomial. This becomes all rather different once we are no longer dealing with essentially squishing the outputs through a deterministic interpolation but through a stochastically applied learned function.</p></div></div><p>I see three principal problems with the metaphor of neuropathology, specifically that of hallucinations, in AI.</p>
 <ul>
 <li>It’s a category error. LLMs have no perception, embodiment or conscious experience. They cannot have an abnormal perceptive-conscious experience because they are incapable of having that type of experience in the first place.</li>
@@ -298,56 +314,10 @@ Baker, S., and T. Kanade. 2000. <span>‘Hallucinating Faces’</span>. In <em>P
 <h2 class="anchored" data-anchor-id="the-category-error-of-hallucination">The category error of hallucination</h2>
 <p>Primarily, we consider hallucination to be an abnormal perceptive-conscious experience arising from a defect in perception (such as phosphenes), consciousness (being high as balls), processing (e.g.&nbsp;Anton’s blindness) or a combination. The core element in most definitions seems to boil down to conscious perception of things that just aren’t there. There are, all things considered, two major flavours of hallucination. The first category is what I shall refer to, for lack of a better term, as <em>additive</em>: there is an influence that results in an experience or sensation that supervenes the normal – take drugs, see things. The second category is perhaps more interesting, because it is the one that is most often discussed in the context of AI. This is the category of <em>substitutive</em> hallucinations, where the hallucination is a substitution for the normal experience that is almost forced by the brain’s insistence on gestalt and reification. Something is missing, and the brain ‘fills in the gaps’. This is, essentially, arguably not a qualitatively abnormal experience but a quantitatively excessive manifestation of our brain’s normal reification tendencies. Even if we only see the front third or so of a car poking out from behind a building, we understand that in all likelihood there’s more to it than we cannot see, and our mind’s eye can imagine fairly well what else is there (indeed, most people will guess relatively accurately where the rest of the vehicle ends). The phenomena that are discussed as substitutive hallucinations stretch this to an extreme. Perhaps the most extreme yet most fascinating example is Anton-Babinski syndrome <span class="citation" data-cites="Forde_Wallesch_2003">(see <a href="#ref-Forde_Wallesch_2003" role="doc-biblioref">Forde and Wallesch 2003</a>)</span>, where a fully fledged visual perceptual world is created in the presence of profound (typically cortical) blindness.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Forde_Wallesch_2003" class="csl-entry" role="listitem">
-Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>, 23. Psychology Press.
+Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for Blindness”</span>: A Psychological Review of Anton’s Syndrome’</span>. In <em>Classic Cases in Neuropsychology, Volume II</em>. Psychology Press.
 </div></div><p>But, of course, that’s not really an accurate description of what’s transpiring when an LLM makes up some fascinating facts about a subject that it knows nothing about. Calling that a hallucination implies the AI has something analogous to senses and/or an internal world of experience, which happens to be defective. This is fundamentally misleading. Large language models do not perceive the world at all – they have no eyes to see, no ears to hear and no mental states to experience as a result, had they those perceptions in the first place. If a hallucination is seeing something that isn’t there, these models exist in a space in which there isn’t a “there” to mistakenly sense. When an LLM produces an unfounded statement, it isn’t experiencing some complex neurocognitive phenomenon. Not, anyway, does it experience anything that is more complex, mystical or creative than a regression model deviating from a correct answer or a classifier returning an incorrect classifications. We actually have a word for those circumstances. It’s called <em>being wrong</em>, and is about as mysterious as dish soap.</p>
 <p>LLMs lack consciousness or embodiment. They don’t have an inner mental state or subjective awareness that could be led astray. Emily Bender, with whom I agree about once every decade or so, is entirely correct on this point:</p>
-<p></p><div id="tweet-83293"></div><script>tweet=<!DOCTYPE html>
-<html lang="en" class="icecream">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X / Error</title>
-    <meta name="version" content="1">
-    <link href="https://abs.twimg.com/favicons/twitter.3.ico" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="https://abs.twimg.com/errors/fullscreen_errors-047ca1475a6efac7c9c89a9ff92b7a20.css">
-  </head>
-  <body dir="auto">
-    <div class="top">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1519 200">
-        <defs/>
-        <path d="M708 103l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9368 9368 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h11l10-6 6 3 9-1 4-1 1 1 1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a38 38 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-        <path d="M-36 193l9-5 13 1 2-2 5 1h8l1-1 42-5h7l7 3v1l12-2a9328 9328 0 0129-6l2-5 12 1 6-2 3 1 2 1v-2l13-2v1l4 2 7-1h1l17-3 1 2 4-1 18-7 3-1 4-1h9l13-1 1-4 3-2 13 1v2l22-2 10-3h6l10 5 16-5 15-3 2-1 8-4 6-2 12-1 7-2 8 5 7 1 22-9h7l5-1v-1l25-3 1 2 5 2v1h11l2 1 8-4h3l-1 1h9a6 6 0 002 0l10-6 6 3 9-1 4-1a6 6 0 001 1l1-2 6-1 1-1 10-2h2l7-5v1h4l3-1c11 0 23 2 34-3 2-2 7 0 10 0l12 1 4 1 9 2 12-1 11-3 11 1h4l10-6 17 1 2 1c9 2 19-3 22-11l1-1 9 1 15-5c3-1 9 4 9-5 5 0 5 3 5 7l2 3 4-1 4-2 9-4 3-3h3l8-4 6-3 26 2 7-4h18l7 1c10 3 13-6 17-12l8 4 3-1 14-3 15-2a37 37 0 01-5-1l-8-4 7-8 8-4-10-136-922 71 16 205z"/>
-      </svg>
-    </div>
-    <div class="container">
-      <div class="content">
-        <a href="https://twitter.com" title="X logo">
-          <svg viewBox="0 0 24 24" aria-hidden="true" class="x-logo"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>
-        </a>
-        <h1 id="header">This page is down</h1>
-        <p id="description">I scream. You scream. We all scream... for us to fix this page. We’ll stop making jokes and get things up and running soon.</p>
-
-          <a id="button_retry" href="" class="button">Retry</a>
-
-      </div>
-      <img id="image" src="https://abs.twimg.com/errors/ErrorState_Down.png" alt="Ice cream with rainbow sprinkles in a cone spilled on the floor.">
-      <div class="footer">
-        <ul>
-          <li><a href="https://twitter.com/" id="footer_home">Home</a></li>
-          <li><a href="https://status.twitterstat.us/" id="footer_status">Status</a></li>
-          <li><a href="https://twitter.com/tos" id="footer_tos">Terms of Service</a></li>
-          <li><a href="https://twitter.com/privacy" id="footer_privacy">Privacy Policy</a></li>
-          <li><a href="https://support.twitter.com/articles/20170514" id="footer_cookie">Cookie Policy</a></li>
-          <li><a href="https://legal.twitter.com/imprint" id="footer_imprint">Imprint</a></li>
-          <li><a href="https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html" id="footer_ads">Ads info</a></li>
-          <li dir="ltr">&copy; X Corp. <span id="copyright-year">&emsp;&emsp;&emsp;&emsp;</span></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-  <script src="https://abs.twimg.com/errors/503-1bdb612dcc463cd3f216f7c1d3a3c74d.js"></script>
-
-;document.getElementById("tweet-83293").innerHTML = tweet["html"];<p></p>
+<p></p><div id="tweet-93555"></div><script>tweet={"url":"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472","author_name":"@emilymbender.bsky.social","author_url":"https:\/\/twitter.com\/emilymbender","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAnd let&#39;s reflect for a moment on how they phrased their disclaimer, shall we? &quot;Hallucinate&quot; is a terrible word choice here, suggesting as it does that the language model has *experiences* and *perceives things*. \u003Cbr\u003E\u003Cbr\u003E&gt;&gt; \u003Ca href=\"https:\/\/t.co\/oIgCZYOnSM\"\u003Epic.twitter.com\/oIgCZYOnSM\u003C\/a\u003E\u003C\/p\u003E&mdash; @emilymbender.bsky.social (@emilymbender) \u003Ca href=\"https:\/\/twitter.com\/emilymbender\/status\/1592992842976489472?ref_src=twsrc%5Etfw\"\u003ENovember 16, 2022\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-93555").innerHTML = tweet["html"];</script><p></p>
 <p>When we get down to it, an LLM doesn’t perceive or experience. It infers, specifically it infers a token sequence that is a relatively good sampled approximation of autoregressive conditional probabilities of tokens. Or, put in a simpler way, it puts tokens next to each other to minimise a loss function defined in relation to a learned conditional probability of each token w.r.t the sequence of the aforegoing tokens. There’s no tiny chess prodigy hiding inside this Mechanical Turk.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -396,7 +366,7 @@ Forde, Emer M. E., and Claus-W. Wallesch. 2003. <span>‘<span>“Mind-Blind for
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas" role="listitem">
 Chris von Csefalvay. 2025. <span>“Just Noise in the Neurons.”</span>
-June 27, 2025. <a href="https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/">https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/</a>.
+June 27. <a href="https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/">https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

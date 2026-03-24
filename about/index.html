@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Chris von Csefalvay">
-<meta name="dcterms.date" content="2021-11-09">
-<meta name="description" content="Reflections on some definitional issues.">
+<meta name="description" content="Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech.">
 
-<title>Why the COVID-19 vaccines are not gene therapy – Chris von Csefalvay</title>
+<title>About Chris von Csefalvay – Chris von Csefalvay</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,23 +27,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dea667461a5c81afc9ba75ce94cd63f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -90,31 +88,22 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <link rel="me" href="https://orcid.org/0000-0003-3131-0864">
 <link rel="me" href="https://twitter.com/epichrisis">
 <link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
-<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/">
-<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/">
-<meta property="og:type" content="article">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/#article","headline":"Why the COVID-19 vaccines are not gene therapy","description":"Reflections on some definitional issues.","url":"https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/","datePublished":"2021-11-09","dateModified":"2021-11-09","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg","keywords":["public health","vaccines"],"sameAs":["https://doi.org/10.59350/s2xc9-mwp25"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ">
+<link rel="canonical" href="https://chrisvoncsefalvay.com/about/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/about/">
+<meta property="og:type" content="website">
 
 
-<meta property="og:title" content="Why the COVID-19 vaccines are not gene therapy – Chris von Csefalvay">
-<meta property="og:description" content="Reflections on some definitional issues.">
-<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg">
+<meta property="og:title" content="About Chris von Csefalvay – Chris von Csefalvay">
+<meta property="og:description" content="Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp">
 <meta property="og:site_name" content="Chris von Csefalvay">
-<meta name="twitter:title" content="Why the COVID-19 vaccines are not gene therapy – Chris von Csefalvay">
-<meta name="twitter:description" content="Reflections on some definitional issues.">
-<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/gettyimages-1666317109-1.jpg">
+<meta name="twitter:title" content="About Chris von Csefalvay – Chris von Csefalvay">
+<meta name="twitter:description" content="Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp">
 <meta name="twitter:creator" content="@epichrisis">
 <meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="citation_title" content="Why the COVID-19 vaccines are not gene therapy">
-<meta name="citation_author" content="Chris von Csefalvay">
-<meta name="citation_publication_date" content="2021-11-09">
-<meta name="citation_cover_date" content="2021-11-09">
-<meta name="citation_year" content="2021">
-<meta name="citation_online_date" content="2021-11-09">
-<meta name="citation_fulltext_html_url" content="https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/">
-<meta name="citation_doi" content="10.59350/s2xc9-mwp25">
-<meta name="citation_language" content="en-GB">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -124,7 +113,7 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Chris von Csefalvay</span>
     </a>
   </div>
@@ -135,31 +124,31 @@ gtag('config', '395640625', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about"> 
+    <a class="nav-link" href="../about"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../papers"> 
+    <a class="nav-link" href="../papers"> 
 <span class="menu-text">Papers</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching"> 
+    <a class="nav-link" href="../teaching"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../media"> 
+    <a class="nav-link" href="../media"> 
 <span class="menu-text">Media</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts"> 
+    <a class="nav-link" href="../posts"> 
 <span class="menu-text">The Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../talks"> 
+    <a class="nav-link" href="../talks"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
@@ -186,46 +175,35 @@ gtag('config', '395640625', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-gene-therapies-work" id="toc-how-gene-therapies-work" class="nav-link active" data-scroll-target="#how-gene-therapies-work">How gene therapies work</a></li>
-  <li><a href="#how-mrna-vaccines-work" id="toc-how-mrna-vaccines-work" class="nav-link" data-scroll-target="#how-mrna-vaccines-work">How mRNA vaccines work</a></li>
-  <li><a href="#why-mrna-vaccines-are-not-gene-therapy" id="toc-why-mrna-vaccines-are-not-gene-therapy" class="nav-link" data-scroll-target="#why-mrna-vaccines-are-not-gene-therapy">Why mRNA vaccines are not gene therapy</a></li>
+  <li><a href="#books" id="toc-books" class="nav-link active" data-scroll-target="#books">Books</a></li>
+  <li><a href="#research" id="toc-research" class="nav-link" data-scroll-target="#research">Research</a></li>
+  <li><a href="#education-and-credentials" id="toc-education-and-credentials" class="nav-link" data-scroll-target="#education-and-credentials">Education and credentials</a></li>
+  <li><a href="#professional-affiliations" id="toc-professional-affiliations" class="nav-link" data-scroll-target="#professional-affiliations">Professional affiliations</a></li>
+  <li><a href="#teaching-and-service" id="toc-teaching-and-service" class="nav-link" data-scroll-target="#teaching-and-service">Teaching and service</a></li>
+  <li><a href="#media-and-public-engagement" id="toc-media-and-public-engagement" class="nav-link" data-scroll-target="#media-and-public-engagement">Media and public engagement</a></li>
+  <li><a href="#personal" id="toc-personal" class="nav-link" data-scroll-target="#personal">Personal</a></li>
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why the COVID-19 vaccines are not gene therapy</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">public health</div>
-    <div class="quarto-category">vaccines</div>
-  </div>
-  </div>
+<h1 class="title">About Chris von Csefalvay</h1>
+</div>
 
 <div>
   <div class="description">
-    <p>Reflections on some definitional issues.</p>
+    Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech.
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">9 November 2021</p>
-    </div>
-  </div>
   
     
   </div>
@@ -235,44 +213,59 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 </header>
 
 
-<p>There might be valid concerns about the mRNA vaccines. Then there are the clearly insane ones, such as the claims that it involves the injection of a microchip. The argument that mRNA vaccines are a form of ‘gene therapy’ are somewhere in the middle, and that makes responding to it somewhat difficult.</p>
-<p>The origin of this claim is pretty self-evident: since the ‘payload’ of the mRNA vaccine is, well, as the name suggests, mRNA,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> it involves pushing genetic material into the recipient. That sounds rather gene therapy-y, does it not?</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Sort of. Strictly speaking, this is not entirely true: mRNA vaccines actually have three mRNA bases — C, G and A — and a fourth base, m1Ψ. This is a molecule called N1-methylpseudouridine, and it replaces U in the mRNA. It is ‘read’ and interpreted as U, but is vastly less immunogenic.</p></div></div><p>These folks certainly think so:</p>
-<p>Except the devil’s in the details. And the details are pretty unambiguous: mRNA vaccines are nowhere near a ‘gene therapy’.</p>
-<section id="how-gene-therapies-work" class="level1">
-<h1>How gene therapies work</h1>
-<p>Let’s start by looking at a typical gene therapy: Zolgensma aka onasemnogene abeparvovec (say that three times quickly). This is an in vivo gene therapy, meaning that all the action takes place in the patient. It is given to very young children (under the age of 24 months) who have a certain mutation in the SMN1 gene, which leads to Type I spinal muscular atrophy. Onasemnogene abeparvovec is a modified adeno-associated virus 9 (AAV-9) that infects cells and gets them to produce ‘correct’ SMN1. This, then, alleviates their symptoms.</p>
-<p>The key part to note is that a viral platform is used for a reason: viruses know how to enter nuclei and get them to produce to their instructions. They do so by providing what is called a nuclear localisation signal (NLS), a sequence that allows proteins to be shuttled inside the nucleus, across the nuclear membrane, typically by way of a protein called importin, one of the karyopherins. The vast majority of gene therapies leverage viral NLSs, because they’re pretty much free gifts from viral evolution. They work, and they’re widely used.</p>
-<p>Gene therapy admittedly has some kinks that still need to be ironed out. Some things only seem to work well when using an ex vivo approach. An example for the latter are the CAR-T treatments, where the patient’s blood is drawn, T cells are isolated and then transfected with a viral vector. Currently, this approach works much better outside the patient (hence ex vivo) than inside them, largely because T cells make up such a small part of all cells in the body.</p>
+<p>Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at <a href="https://www.hcltech.com/">HCLTech</a>, where he advises the world’s leading life sciences, medical devices and pharma companies on leveraging AI to improve their products and serve their customers better.</p>
+<section id="books" class="level2">
+<h2 class="anchored" data-anchor-id="books">Books</h2>
+<p>Chris is the author of two books:</p>
+<ul>
+<li><a href="https://nostarch.com/post-training"><strong>Post-Training: A Practical Guide for AI Engineers and Developers</strong></a> (No Starch Press, 2026) – a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.</li>
+<li><a href="https://computationalinfectiousdisease.com"><strong>Computational Modeling of Infectious Disease</strong></a> (Elsevier, 2023) – a hands-on guide to computational epidemiology using Python, covering agent-based models, network epidemiology, and geospatial analysis.</li>
+</ul>
 </section>
-<section id="how-mrna-vaccines-work" class="level1 page-columns page-full">
-<h1>How mRNA vaccines work</h1>
-<p>mRNA vaccines work in a much simpler way. It is, in many ways, a shortcut to the entire nuclear entry problem. If all you want is to make some proteins, you can skip the part about entering the nucleus and just, well, pretend to be the nucleus. Here’s how that roughly works.</p>
-<p>DNA is the stable, long-term ‘hard’ storage of cells. It’s slow and unwieldy, but relatively resilient. RNA is the volatile storage medium: small, quick and of a limited lifespan. During a process called translation, DNA is translated, eventually, into mRNA.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> mRNA then heads for the ribosomes like a sort of work order, which the ribosomes fulfil by making the protein it describes. This is a quick and dirty description of the central dogma of molecular biology, of course.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;More specifically: it is translated into pre-mRNA, which is then spliced to get mRNA.</p></div></div><p>Because mRNA vaccines only need to make relatively simple proteins (compared to having to make a whole virus), they can simply go directly to the ribosomes: no need to get involved in that whole mess about nuclear entry. The tradeoff, of course, is that mRNA is quite rapidly degraded. For applications like Zolgensma, where we want cells to keep producing SMN1 for a prolonged period, the extra effort to effect nuclear entry makes sense. For mRNA vaccines, on the other hand, all we really need is a ‘spill’ of proteins that approximate some of the shapes of the Spike protein from SARS-CoV-2. That’s enough to elicit an immune reaction, create antibodies and memory lymphocytes and with that, the whole infrastructure of humoral and cellular immunity.</p>
-<p>Or, by way of analogy: you receive other vaccines as a one-time shot, rather than as a lifelong intravenous infusion, right? Immunity doesn’t need sustained exposure — the immune system is pretty quick at catching on. For the very same reason, there’s no need to permanently express the Spike-like protein the way there is a need to keep expressing SMN1 in the Zolgensma example.</p>
+<section id="research" class="level2">
+<h2 class="anchored" data-anchor-id="research">Research</h2>
+<p>His research interests span post-training for language models, agentic AI systems, computational epidemiology, and public health informatics. He has published in peer-reviewed journals including <em>Acta Biomedica</em>, <em>Big Data and Cognitive Computing</em>, and <em>Frontiers in Medicine</em>, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence <a href="https://oeis.org/A344856">A344856</a> (Jellyfish Heart numbers).</p>
 </section>
-<section id="why-mrna-vaccines-are-not-gene-therapy" class="level1">
-<h1>Why mRNA vaccines are not gene therapy</h1>
-<p>This is hardly a differentiation without distinction. Gene therapy is, well, serious business. Almost 22 years ago, a young man named Jesse Gelsinger died from what we would today call a Multisystem Inflammatory Syndrome (MIS) following an adenovirus-vectored treatment for X-linked ornithine transcarbamylase deficiency, an inborn defect of metabolism. Modern gene therapies are still in many ways in their infancy, requiring close supervision and, often, extensive pre-treatment. They might be ready for prime time, but they certainly aren’t at the ‘all audiences’ stage just yet. And that’s ok — the first antibiotics were equally quite iffy from today’s perspective, and I am absolutely sure that within 25 years, the most frequent genetic disorders that gene therapy can fix — such as certain muscular dystrophies, cystic fibrosis or sickle cell anaemia — will be considered treatable with gene therapies. For now, however, gene therapies are complex treatments that demand experienced medical teams.</p>
-<p>Fortunately, that is not the case for the COVID-19 mRNA vaccines. These vaccines are not only remarkably safe (I have written about their neurological safety, safety vs autoimmune disorders, overall safety and safety vs anaphylactic events, and there’s a summary of these findings here) but also operate in a way entirely distinct from gene therapies. They do not enter the nucleus, they do not effect lasting changes (in fact, that’s one of the reasons why mRNA approaches for the gene therapy of chronic diseases have so far been less than successful) and they do just what it says on the tin: produce Spike-like proteins to elicit an immune response.</p>
+<section id="education-and-credentials" class="level2">
+<h2 class="anchored" data-anchor-id="education-and-credentials">Education and credentials</h2>
+<p>Chris attended the <a href="https://www.ox.ac.uk/">University of Oxford</a> (Merton College) for both his undergraduate and graduate studies, and holds degrees from <a href="https://www.cardiff.ac.uk/">Cardiff University</a> and Robert Gordon University Aberdeen, with further studies at the University of Leiden. He is <a href="https://cph.nbphe.org/employer_letter/19626">board certified in public health</a> (CPH), a Fellow of the <a href="https://www.rsph.org.uk/">Royal Society for Public Health</a> (FRSPH), and an IEEE Senior Member. He received the Martin Wronker Prize at the University of Oxford.</p>
+</section>
+<section id="professional-affiliations" class="level2">
+<h2 class="anchored" data-anchor-id="professional-affiliations">Professional affiliations</h2>
+<ul>
+<li><a href="https://ieee.org">IEEE</a> – Senior Member</li>
+<li><a href="https://www.rsph.org.uk/">Royal Society for Public Health</a> – Fellow</li>
+<li><a href="https://www.apha.org/">American Public Health Association</a> – Member</li>
+<li><a href="https://www.theorsociety.com/">The OR Society</a> – Member</li>
+<li><a href="https://www.topra.org/">TOPRA</a> – Registered Member</li>
+</ul>
+</section>
+<section id="teaching-and-service" class="level2">
+<h2 class="anchored" data-anchor-id="teaching-and-service">Teaching and service</h2>
+<p>Chris is a visiting thesis supervisor for students on the data science track of the mathematics programme at the <a href="https://www.bme.hu/?language=en">Budapest University of Technology and Economics</a>. He serves as a reviewer for <a href="https://joss.theoj.org/papers/reviewed_by/@chrisvoncsefalvay">JOSS</a>, <a href="https://loop.frontiersin.org/people/1398311/editorial">Frontiers in Immunology</a> and <a href="https://loop.frontiersin.org/people/1398311/editorial">Frontiers in Medicine</a>, and is a member of the Rocky Mountain MRC of Denver and Colorado’s radiation response MRC.</p>
+</section>
+<section id="media-and-public-engagement" class="level2">
+<h2 class="anchored" data-anchor-id="media-and-public-engagement">Media and public engagement</h2>
+<p>Chris’s work has been featured in the <a href="https://www.weforum.org/">World Economic Forum Technology Convergence Report 2025</a>, <a href="https://www.spectator.co.uk/writer/chris-von-csefalvay">The Spectator</a>, and <a href="https://www.city-journal.org/article/open-season">City Journal</a>. He has appeared on the <a href="https://www.techforgood.net/podcasts/series-two-chris-von-csefalvay">Tech For Good podcast</a> and other media outlets. He writes regularly on AI, post-training, and computational epidemiology on his <a href="https://chrisvoncsefalvay.com/posts/">blog</a>.</p>
+</section>
+<section id="personal" class="level2">
+<h2 class="anchored" data-anchor-id="personal">Personal</h2>
+<p>Born in Budapest, Hungary, Chris lives in Denver, Colorado. He is an adaptive multisport athlete, competing in wheelchair rugby, adaptive rowing (category PR1), and the SkiErg (category SIT2), where he holds multiple world records. He lives with <a href="https://en.wikipedia.org/wiki/Neuromyelitis_optica">neuromyelitis optica</a> since 2015.</p>
+</section>
+<section id="contact" class="level2">
+<h2 class="anchored" data-anchor-id="contact">Contact</h2>
+<ul>
+<li>Email: <a href="mailto:chris+website@chrisvoncsefalvay.com">chris+website@chrisvoncsefalvay.com</a></li>
+<li>LinkedIn: <a href="https://www.linkedin.com/in/chrisvoncsefalvay/">chrisvoncsefalvay</a></li>
+<li>GitHub: <a href="https://github.com/chrisvoncsefalvay">chrisvoncsefalvay</a></li>
+<li>ORCID: <a href="https://orcid.org/0000-0003-3131-0864">0000-0003-3131-0864</a></li>
+<li>Google Scholar: <a href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ">X_2G-VsAAAAJ</a></li>
+</ul>
 
 
 </section>
 
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2021,
-  author = {{Chris von Csefalvay}},
-  title = {Why the {COVID-19} Vaccines Are Not Gene Therapy},
-  date = {2021-11-09},
-  url = {https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/},
-  doi = {10.59350/s2xc9-mwp25},
-  langid = {en-GB}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2021" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2021. <span>“Why the COVID-19 Vaccines Are Not Gene
-Therapy.”</span> Preprint, November 9. <a href="https://doi.org/10.59350/s2xc9-mwp25">https://doi.org/10.59350/s2xc9-mwp25</a>.
-</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -678,7 +671,7 @@ Therapy.”</span> Preprint, November 9. <a href="https://doi.org/10.59350/s2xc9
   <div class="nav-footer">
     <div class="nav-footer-left">
 <ol start="3" type="a">
-<li>Chris von Csefalvay, 2011–. <a href="../../disclaimer/">Disclaimer</a> · <a href="../../privacy-policy/">Privacy</a> · <a href="../../corrections/">Corrections</a></li>
+<li>Chris von Csefalvay, 2011–. <a href="../disclaimer/">Disclaimer</a> · <a href="../privacy-policy/">Privacy</a> · <a href="../corrections/">Corrections</a></li>
 </ol>
 </div>   
     <div class="nav-footer-center">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,6 +12,9 @@
 
 <title>The 95% myth – Chris von Csefalvay</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -27,7 +30,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-630cfb1d927d546346e0fe3d209b39c0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5953a0bc1725dd9f764f5e3935907ab0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,10 +106,19 @@ gtag('config', '395640625', { 'anonymize_ip': true});
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input790e84d5382d447b.html#article","headline":"The 95% myth","description":"How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.","url":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input790e84d5382d447b.html","datePublished":"2023-12-27","dateModified":"2023-12-27","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input790e84d5382d447b.html/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp","keywords":["fitness","science","bad science"],"sameAs":["https://doi.org/10.59350/xmf8m-t1d22"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/tmp/quarto-sessionca5a0f47f25e6c19/403119112321a588/quarto-input790e84d5382d447b.html"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/95-percent-myth/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/95-percent-myth/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/95-percent-myth/#article","headline":"The 95% myth","description":"How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.","url":"https://chrisvoncsefalvay.com/posts/95-percent-myth/","datePublished":"2023-12-27","dateModified":"2023-12-27","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/95-percent-myth/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp","keywords":["fitness","science","bad science"],"sameAs":["https://doi.org/10.59350/xmf8m-t1d22"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/95-percent-myth/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -144,6 +154,8 @@ window.Quarto = {
 <meta name="twitter:title" content="The 95% myth – Chris von Csefalvay">
 <meta name="twitter:description" content="How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.">
 <meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/95-percent-myth/93e3df55-79ec-44b0-87c1-03bbca32ee46.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="The 95% myth">
 <meta name="citation_author" content="Chris von Csefalvay">
@@ -184,6 +196,10 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../papers"> 
@@ -353,14 +369,14 @@ Wright, T. G., B. Dawson, G. Jalleh, and K. J. Guelfi. 2013. <span>‘Program Co
 <div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>&nbsp;Which are generally transitory. It’s probably worth pointing out at this point again that the diets examined in the SMH paper included dexedrine, thyroid supplementation without much proper monitoring and 900kcal low calorie diets. It’s perhaps not unreasonable to assume that these aren’t on the safer side. Their risks do not compare to those of a properly monitored modern diet aimed at a few hundred kcals of deficit.</p></div><div id="ref-thomas2014weight" class="csl-entry" role="listitem">
 Thomas, J Graham, Dale S Bond, Suzanne Phelan, James O Hill, and Rena R Wing. 2014. <span>‘Weight-Loss Maintenance for 10 Years in the National Weight Control Registry’</span>. <em>American Journal of Preventive Medicine</em> 46 (1): 17–23.
 </div><div id="ref-kraschnewski2010long" class="csl-entry" role="listitem">
-Kraschnewski, JL, Jarol Boan, Joseph Esposito, Nancy E Sherwood, Erik B Lehman, Donna K Kephart, and Christopher N Sciamanna. 2010. <span>‘Long-Term Weight Loss Maintenance in the United States’</span>. <em>International Journal of Obesity</em> 34 (11): 1644–54.
+Kraschnewski, JL, Jarol Boan, Joseph Esposito, et al. 2010. <span>‘Long-Term Weight Loss Maintenance in the United States’</span>. <em>International Journal of Obesity</em> 34 (11): 1644–54.
 </div><div id="ref-perri2008extended" class="csl-entry" role="listitem">
-Perri, Michael G, Marian C Limacher, Patricia E Durning, David M Janicke, Lesley D Lutes, Linda B Bobroff, Martha Sue Dale, Michael J Daniels, Tiffany A Radcliff, and A Daniel Martin. 2008. <span>‘Extended-Care Programs for Weight Management in Rural Communities: The Treatment of Obesity in Underserved Rural Settings (TOURS) Randomized Trial’</span>. <em>Archives of Internal Medicine</em> 168 (21): 2347–54.
+Perri, Michael G, Marian C Limacher, Patricia E Durning, et al. 2008. <span>‘Extended-Care Programs for Weight Management in Rural Communities: The Treatment of Obesity in Underserved Rural Settings (TOURS) Randomized Trial’</span>. <em>Archives of Internal Medicine</em> 168 (21): 2347–54.
 </div><div id="ref-10.1016/j.amjmed.2012.10.010" class="csl-entry" role="listitem">
-Unick, J., D. Beavers, D. Bond, J. Clark, J. Jakicic, A. Kitabchi, W. Knowler, T. Wadden, L. Wagenknecht, and R. Wing. 2013. <span>‘The Long-Term Effectiveness of a Lifestyle Intervention in Severely Obese Individuals’</span>. <em>The American Journal of Medicine</em> 126: 236–242.e2. <a href="https://doi.org/10.1016/j.amjmed.2012.10.010">https://doi.org/10.1016/j.amjmed.2012.10.010</a>.
+Unick, J., D. Beavers, D. Bond, et al. 2013. <span>‘The Long-Term Effectiveness of a Lifestyle Intervention in Severely Obese Individuals’</span>. <em>The American Journal of Medicine</em> 126: 236–242.e2. <a href="https://doi.org/10.1016/j.amjmed.2012.10.010">https://doi.org/10.1016/j.amjmed.2012.10.010</a>.
 </div><div id="ref-diabetes200910" class="csl-entry" role="listitem">
-Group, Diabetes Prevention Program Research et al. 2009. <span>‘10-Year Follow-up of Diabetes Incidence and Weight Loss in the Diabetes Prevention Program Outcomes Study’</span>. <em>The Lancet</em> 374 (9702): 1677–86.
-</div></div><p>Thus, we know that especially when used as part of a comprehensive treatment plan, diets are effective. <span class="citation" data-cites="thomas2014weight">Thomas et al. (<a href="#ref-thomas2014weight" role="doc-biblioref">2014</a>)</span>, reporting on the National Weight Control Registry study (<span class="math inline">\(N =\)</span> 2,886), found that 88.4% of participants maintained a weight loss of at least 10% of their initial body weight for at least 5 years and 86.6% still maintained a 10% weight loss at 10 years. The retrospective study based on NHANES by <span class="citation" data-cites="kraschnewski2010long">Kraschnewski et al. (<a href="#ref-kraschnewski2010long" role="doc-biblioref">2010</a>)</span> is even more encouraging: not only did they find that more than one in six overweight adults have lost and maintained a 10% weight loss for over a year, they also found that over a third (36.6%) of those who lost at least 5% of their body weight were able to maintain this – note that this is entirely retrospective, i.e.&nbsp;no specific intervention was administered to these individuals. A smaller study by <span class="citation" data-cites="perri2008extended">Perri et al. (<a href="#ref-perri2008extended" role="doc-biblioref">2008</a>)</span> found that following a 10.0kg mean weight loss over a 6-month treatment period, weight regain ranged from 1.2 to 3.7 kg (extended-care <em>vs.</em> education control), resulting in a sustained weight loss of 6.3 to 8.8 kg – nothing to sneer at, especially considering that this was specifically in an underserved rural setting. It turns out that when we look at studies that have been performed in the last 20 years, we find that the 95% figure is not only wrong, but the exact opposite of the truth. Sustained weight loss is the rule, not the exception, especially in the context of a comprehensive treatment plan, and few studies bear out the idea that those that lose weight will regain <em>more</em> than what was lost. Even where weight is regained, there are often lasting benefits. <span class="citation" data-cites="10.1016/j.amjmed.2012.10.010">Unick et al. (<a href="#ref-10.1016/j.amjmed.2012.10.010" role="doc-biblioref">2013</a>)</span> examined 5,145 individuals with Type 2 diabetes and a 4-year follow-up, and found that not only did they still have on average a 4% or so weight loss after 4 years but also significant improvements in their HbA1c, blood pressure and lipid profile. We also know, from <span class="citation" data-cites="diabetes200910">Group et al. (<a href="#ref-diabetes200910" role="doc-biblioref">2009</a>)</span>, that weight loss itself may prove protective against Type 2 diabetes even if some of the cohort regains the lost weight.</p>
+<span class="nocase">Group, Diabetes Prevention Program Research et al.</span> 2009. <span>‘10-Year Follow-up of Diabetes Incidence and Weight Loss in the Diabetes Prevention Program Outcomes Study’</span>. <em>The Lancet</em> 374 (9702): 1677–86.
+</div></div><p>Thus, we know that especially when used as part of a comprehensive treatment plan, diets are effective. <span class="citation" data-cites="thomas2014weight">Thomas et al. (<a href="#ref-thomas2014weight" role="doc-biblioref">2014</a>)</span>, reporting on the National Weight Control Registry study (<span class="math inline">\(N =\)</span> 2,886), found that 88.4% of participants maintained a weight loss of at least 10% of their initial body weight for at least 5 years and 86.6% still maintained a 10% weight loss at 10 years. The retrospective study based on NHANES by <span class="citation" data-cites="kraschnewski2010long">Kraschnewski et al. (<a href="#ref-kraschnewski2010long" role="doc-biblioref">2010</a>)</span> is even more encouraging: not only did they find that more than one in six overweight adults have lost and maintained a 10% weight loss for over a year, they also found that over a third (36.6%) of those who lost at least 5% of their body weight were able to maintain this – note that this is entirely retrospective, i.e.&nbsp;no specific intervention was administered to these individuals. A smaller study by <span class="citation" data-cites="perri2008extended">Perri et al. (<a href="#ref-perri2008extended" role="doc-biblioref">2008</a>)</span> found that following a 10.0kg mean weight loss over a 6-month treatment period, weight regain ranged from 1.2 to 3.7 kg (extended-care <em>vs.</em> education control), resulting in a sustained weight loss of 6.3 to 8.8 kg – nothing to sneer at, especially considering that this was specifically in an underserved rural setting. It turns out that when we look at studies that have been performed in the last 20 years, we find that the 95% figure is not only wrong, but the exact opposite of the truth. Sustained weight loss is the rule, not the exception, especially in the context of a comprehensive treatment plan, and few studies bear out the idea that those that lose weight will regain <em>more</em> than what was lost. Even where weight is regained, there are often lasting benefits. <span class="citation" data-cites="10.1016/j.amjmed.2012.10.010">Unick et al. (<a href="#ref-10.1016/j.amjmed.2012.10.010" role="doc-biblioref">2013</a>)</span> examined 5,145 individuals with Type 2 diabetes and a 4-year follow-up, and found that not only did they still have on average a 4% or so weight loss after 4 years but also significant improvements in their HbA1c, blood pressure and lipid profile. We also know, from <span class="citation" data-cites="diabetes200910"><span class="nocase">Group et al.</span> (<a href="#ref-diabetes200910" role="doc-biblioref">2009</a>)</span>, that weight loss itself may prove protective against Type 2 diabetes even if some of the cohort regains the lost weight.</p>
 <p>So, we know the 95% figure is wrong. Why, then, does it persist? I think there are two reasons for this. One is that it’s a convenient excuse for people who don’t want to put in the work. The other is that it’s a convenient excuse for people who want to sell you something. The former is a matter of personal responsibility, and I’m not going to tell anyone how to live their lives. The latter, however, is a matter of public health, which is being actively harmed by a motley assortment of ignorami, grifters and – worst of all – the occasional medical professional who has not done their research and/or slept through their biostats classes who all repeat uncritically the 95% myth (while politely eliding any mention of its dubious parentage). Social media has responded to harmful medical misinformation during the COVID-19 pandemic with the zeal of the Spanish Inquisition on steroids. It is, then, rather incongruent that the same platforms are happy to let the 95% myth run rampant, despite the fact that it is demonstrably false and demonstrably harmful.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></p>
 
 
@@ -377,7 +393,8 @@ Group, Diabetes Prevention Program Research et al. 2009. <span>‘10-Year Follow
   langid = {en-GB}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Chris von Csefalvay. 2023. <span>“The 95% Myth.”</span> <a href="https://doi.org/10.59350/xmf8m-t1d22">https://doi.org/10.59350/xmf8m-t1d22</a>.
+Chris von Csefalvay. 2023. <span>“The 95% Myth.”</span> Preprint,
+December 27. <a href="https://doi.org/10.59350/xmf8m-t1d22">https://doi.org/10.59350/xmf8m-t1d22</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
