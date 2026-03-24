@@ -19,6 +19,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: about
+        text: About
       - href: papers
         text: Papers
       - href: teaching
@@ -35,7 +37,9 @@ website:
         text: Post-Training (Early Access)
   page-footer:
     left: "(c) Chris von Csefalvay, 2011–. [Disclaimer](/disclaimer/) · [Privacy](/privacy-policy/) · [Corrections](/corrections/)"
-  twitter-card: true
+  twitter-card:
+    site: "@epichrisis"
+    creator: "@epichrisis"
   open-graph: true
   google-analytics: "395640625"
 
@@ -59,7 +63,10 @@ format:
         <script type='application/ld+json'>{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"Post-Training: A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/post-training","datePublished":"2026-01-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
         <script type='application/ld+json'>{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
         <script type='application/ld+json'>{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
-
-
-
-
+        <meta name="author" content="Chris von Csefalvay">
+        <link rel="me" href="https://github.com/chrisvoncsefalvay">
+        <link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+        <link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+        <link rel="me" href="https://twitter.com/epichrisis">
+        <link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+        <link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ">

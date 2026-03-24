@@ -1,0 +1,51 @@
+---
+title: "About Chris von Csefalvay"
+description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech."
+image: /img/portrait_2x3midres.webp
+comments: false
+---
+
+Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at [HCLTech](https://www.hcltech.com/), where he advises the world's leading life sciences, medical devices and pharma companies on leveraging AI to improve their products and serve their customers better.
+
+## Books
+
+Chris is the author of two books:
+
+- [**Post-Training: A Practical Guide for AI Engineers and Developers**](https://nostarch.com/post-training) (No Starch Press, 2026) -- a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.
+- [**Computational Modeling of Infectious Disease**](https://computationalinfectiousdisease.com) (Elsevier, 2023) -- a hands-on guide to computational epidemiology using Python, covering agent-based models, network epidemiology, and geospatial analysis.
+
+## Research
+
+His research interests span post-training for language models, agentic AI systems, computational epidemiology, and public health informatics. He has published in peer-reviewed journals including *Acta Biomedica*, *Big Data and Cognitive Computing*, and *Frontiers in Medicine*, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence [A344856](https://oeis.org/A344856) (Jellyfish Heart numbers).
+
+## Education and credentials
+
+Chris attended the [University of Oxford](https://www.ox.ac.uk/) (Merton College) for both his undergraduate and graduate studies, and holds degrees from [Cardiff University](https://www.cardiff.ac.uk/) and Robert Gordon University Aberdeen, with further studies at the University of Leiden. He is [board certified in public health](https://cph.nbphe.org/employer_letter/19626) (CPH), a Fellow of the [Royal Society for Public Health](https://www.rsph.org.uk/) (FRSPH), and an IEEE Senior Member. He received the Martin Wronker Prize at the University of Oxford.
+
+## Professional affiliations
+
+- [IEEE](https://ieee.org) -- Senior Member
+- [Royal Society for Public Health](https://www.rsph.org.uk/) -- Fellow
+- [American Public Health Association](https://www.apha.org/) -- Member
+- [The OR Society](https://www.theorsociety.com/) -- Member
+- [TOPRA](https://www.topra.org/) -- Registered Member
+
+## Teaching and service
+
+Chris is a visiting thesis supervisor for students on the data science track of the mathematics programme at the [Budapest University of Technology and Economics](https://www.bme.hu/?language=en). He serves as a reviewer for [JOSS](https://joss.theoj.org/papers/reviewed_by/@chrisvoncsefalvay), [Frontiers in Immunology](https://loop.frontiersin.org/people/1398311/editorial) and [Frontiers in Medicine](https://loop.frontiersin.org/people/1398311/editorial), and is a member of the Rocky Mountain MRC of Denver and Colorado's radiation response MRC.
+
+## Media and public engagement
+
+Chris's work has been featured in the [World Economic Forum Technology Convergence Report 2025](https://www.weforum.org/), [The Spectator](https://www.spectator.co.uk/writer/chris-von-csefalvay), and [City Journal](https://www.city-journal.org/article/open-season). He has appeared on the [Tech For Good podcast](https://www.techforgood.net/podcasts/series-two-chris-von-csefalvay) and other media outlets. He writes regularly on AI, post-training, and computational epidemiology on his [blog](https://chrisvoncsefalvay.com/posts/).
+
+## Personal
+
+Born in Budapest, Hungary, Chris lives in Denver, Colorado. He is an adaptive multisport athlete, competing in wheelchair rugby, adaptive rowing (category PR1), and the SkiErg (category SIT2), where he holds multiple world records. He lives with [neuromyelitis optica](https://en.wikipedia.org/wiki/Neuromyelitis_optica) since 2015.
+
+## Contact
+
+- Email: [chris+website@chrisvoncsefalvay.com](mailto:chris+website@chrisvoncsefalvay.com)
+- LinkedIn: [chrisvoncsefalvay](https://www.linkedin.com/in/chrisvoncsefalvay/)
+- GitHub: [chrisvoncsefalvay](https://github.com/chrisvoncsefalvay)
+- ORCID: [0000-0003-3131-0864](https://orcid.org/0000-0003-3131-0864)
+- Google Scholar: [X_2G-VsAAAAJ](https://scholar.google.com/citations?user=X_2G-VsAAAAJ)
