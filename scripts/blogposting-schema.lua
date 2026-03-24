@@ -58,11 +58,40 @@ local function get_page_url(meta)
   end
   site_url = site_url:gsub("/$", "")
 
-  local input_file = PANDOC_STATE.input_files[1]
+  -- Get the real source file path (not Quarto's temp path)
+  local input_file = nil
+  local project_dir = nil
+
+  if quarto and quarto.doc and quarto.doc.input_file then
+    input_file = quarto.doc.input_file
+  end
+  if quarto and quarto.project and quarto.project.directory then
+    project_dir = quarto.project.directory
+  end
+
+  -- Fall back to PANDOC_STATE.input_files
+  if not input_file then
+    input_file = PANDOC_STATE.input_files and PANDOC_STATE.input_files[1]
+  end
+
   if not input_file then return site_url end
+
+  -- Make path relative to project directory
+  if project_dir then
+    project_dir = project_dir:gsub("/$", "")
+    local escaped = project_dir:gsub("([%.%+%-%*%?%[%]%^%$%(%)%%])", "%%%1")
+    input_file = input_file:gsub("^" .. escaped .. "/?", "")
+  end
+
+  -- Reject temp paths (Quarto renders via /tmp/quarto-session...)
+  if input_file:match("quarto%-session") or input_file:match("quarto%-input") then
+    return site_url
+  end
+
   input_file = input_file:gsub("^%./", "")
-  local path = input_file:gsub("%.qmd$", ".html"):gsub("%.md$", ".html")
-  path = path:gsub("index%.html$", "")
+  local path = input_file:gsub("%.qmd$", "/"):gsub("%.md$", "/")
+  path = path:gsub("index/$", "")
+  if path == "" then path = "/" end
   if not path:match("^/") then path = "/" .. path end
   return site_url .. path
 end
