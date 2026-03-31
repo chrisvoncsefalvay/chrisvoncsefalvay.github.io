@@ -2,6 +2,7 @@
 title: From agents to the Chorus
 description: The coming evolution from agentic AI to persistent, volitional systems
 date: '2025-10-04'
+image: header.webp
 categories:
 - AI
 - Agentic AI
