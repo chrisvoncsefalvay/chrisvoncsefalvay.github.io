@@ -1,17 +1,17 @@
 ---
 title: "About Chris von Csefalvay"
-description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at HCLTech."
+description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence."
 image: /img/portrait_2x3midres.webp
 comments: false
 ---
 
-Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is the Principal for Clinical Intelligence and AI at [HCLTech](https://www.hcltech.com/), where he advises the world's leading life sciences, medical devices and pharma companies on leveraging AI to improve their products and serve their customers better.
+Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at [HCLTech](https://www.hcltech.com/)'s AI Practice, leading post-training research and clinical intelligence.
 
 ## Books
 
 Chris is the author of two books:
 
-- [**Post-Training: A Practical Guide for AI Engineers and Developers**](https://nostarch.com/post-training) (No Starch Press, 2026) -- a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.
+- [**The Craft of Post-Training: A Practical Guide for AI Engineers and Developers**](https://nostarch.com/craft-of-post-training) (No Starch Press, available July 2026) -- a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.
 - [**Computational Modeling of Infectious Disease**](https://computationalinfectiousdisease.com) (Elsevier, 2023) -- a hands-on guide to computational epidemiology using Python, covering agent-based models, network epidemiology, and geospatial analysis.
 
 ## Research
