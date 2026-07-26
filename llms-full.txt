@@ -1,10 +1,10 @@
 # Chris von Csefalvay — Full Profile
 
-> AI researcher and computational epidemiologist. Principal, AI Practice at HCLTech. Author of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, CO.
+> AI researcher and computational epidemiologist. Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. Author of The Craft of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, CO.
 
 ## Biography
 
-Chris von Csefalvay is a Principal at HCLTech's AI practice, where he leads work on post-training for large language models, agentic AI systems, and applied AI in life sciences. He has nearly two decades of experience spanning enterprise AI, computational epidemiology, and public health informatics.
+Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. His work spans post-training for large language models, agentic AI systems, and applied AI in life sciences, backed by nearly two decades of experience across enterprise AI, computational epidemiology, and public health informatics.
 
 Before joining HCLTech, Chris held roles in data science and AI leadership across the pharmaceutical, industrial, and technology sectors. He holds degrees from the University of Oxford (where he studied at University College and Merton College) and Cardiff University. He is a Fellow of the Royal Society for Public Health (FRSPH) and a Senior Member of IEEE.
 
@@ -50,12 +50,12 @@ Chris's earlier career focused on computational approaches to infectious disease
 
 ## Books
 
-### Post-Training: A Practical Guide for AI Engineers and Developers
-- Publisher: No Starch Press (2026)
+### The Craft of Post-Training: A Practical Guide for AI Engineers and Developers
+- Publisher: No Starch Press (available July 2026)
 - ISBN: 9781718505209
 - Pages: 416
 - Website: https://posttraining.guide
-- Purchase: https://nostarch.com/post-training
+- Purchase: https://nostarch.com/craft-of-post-training
 
 A comprehensive guide to post-training techniques for large language models. Covers supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation. Written for AI engineers and developers who need practical, hands-on guidance for adapting language models to real-world tasks in enterprise settings.
 

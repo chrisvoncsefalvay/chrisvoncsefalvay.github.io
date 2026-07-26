@@ -4,7 +4,7 @@ title: Papers
 
 # Books
 
-- **von Csefalvay C** (2026). Post-Training: A Practical Guide for AI Engineers and Developers. San Francisco: No Starch Press. [https://nostarch.com/post-training](https://nostarch.com/post-training).
+- **von Csefalvay C** (2026). The Craft of Post-Training: A Practical Guide for AI Engineers and Developers. San Francisco: No Starch Press. [https://nostarch.com/craft-of-post-training](https://nostarch.com/craft-of-post-training).
   A comprehensive guide to post-training techniques for large language models, covering supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners.
 
 - **von Csefalvay C** (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. [https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4](https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4).
