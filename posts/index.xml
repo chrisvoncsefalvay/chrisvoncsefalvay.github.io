@@ -10,7 +10,76 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of The Craft of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press).</description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Thu, 08 Jan 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 26 Jul 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The right to become more</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/right-to-become-more/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><img src="https://chrisvoncsefalvay.com/posts/right-to-become-more/header.webp" class="img-fluid" alt="Chris von Csefalvay with his dog and a copy of The Craft of Post-Training."></p>
+<p>There is a peculiar moment in writing a book when something that has existed for years as notes, code, arguments, tracked changes and annoying my unusually patient and kind editors becomes an object with mass. A manuscript can always be revised in one’s imagination – a printed book sits on the table, irreversibly typeset, and begins making its own arrangements with the world. About 20lbs of that mass arrived at my doorstep a few moments ago.</p>
+<p>It would be dishonest to write about this book as though it emerged from a serene interval of uninterrupted professional focus. It was written through a period in which much of life felt like some Borgesian nightmare rearranging itself every other minute into new and twisted geometries, and perhaps that is why I find myself compelled to speak of the convictions that ground it rather than the usual content blurb.</p>
+<p>The Craft of Post-Training is, on its face, a practical book for AI engineers and developers. It concerns the work that happens after a model has been pretrained: supervised fine-tuning, reinforcement learning, preference optimisation, evaluation, efficiency, domain adaptation, agents, reasoning, synthetic data and multimodal systems. It is about the difference between a model that possesses impressive general capabilities and one that behaves reliably when placed under real constraints.</p>
+<p>More fundamentally, however, post-training is the point at which general capability encounters human intention. It’s where we decide what a model should do, how it should behave under pressure, what constitutes failure, which trade-offs are acceptable and whose preferences count. Pretraining creates possibility, but post-training turns possibility into conduct. It is an engineering discipline, but it is also one of the places where our values become executable.</p>
+<p>And the matter of those values has grown considerably more urgent while the book has been making its way into print.</p>
+<hr>
+<p>There is a war for the future of artificial intelligence, and the right to shape it. Within our own societies, an increasingly powerful combination of sincere caution, incumbent self-interest and institutional paternalism argues that advanced intelligence must be rationed, licensed and mediated by a small number of approved actors. The language is generally that of public protection, but the practical effect can easily become regulatory enclosure: the pursuit of safety may be invoked in complete good faith and still produce a market in which only the players already possessing vast amounts of capital, compute and legal firepower are permitted to compete. Compliance, as the technology industry has periodically discovered with barely concealed delight, makes a splendid moat.</p>
+<p>Governments, meanwhile, increasingly speak of artificial intelligence as a strategic asset: a means of industrial advantage, geopolitical leverage and national power. Others describe it primarily as a threat to employment, the environment, social order or even human significance. These positions disagree fiercely about who should control AI, but they share an assumption: that intelligence is principally an instrument of power and that most people will experience it as subjects rather than participants.</p>
+<p>I reject this notion.</p>
+<p>My own view begins somewhere else. I believe artificial intelligence is, above all, a means of expanding human agency.</p>
+<p>Holding this does not require pretending that its costs are imaginary. Models require energy to train, automation will alter some occupations and eliminate others, intelligent systems can be used to deceive, surveil, exploit and concentrate wealth. These are serious engineering and political problems.</p>
+<p>They do not, however, establish that capability itself is the enemy. Nor are they solved by turning advanced intelligence into a protected market for actors wealthy enough to survive its regulation. The appropriate response is to price externalities honestly, require infrastructure users to pay their own costs, protect people through economic transitions, enforce accountability for concrete harms, expand clean energy and preserve the possibility of entry. Fear should sharpen engineering and law, not become a theology of stagnation.</p>
+<hr>
+<p>We have become so accustomed to asking how AI might concentrate power that we spend too little time considering the circumstances in which it restores power.</p>
+<p>It restores power when a small team — sometimes a single developer — can build something that previously required the permission, capital and headcount of an entrenched corporation. It restores power when a patient can understand a medical record, prepare better questions and become more legible to the institutions meant to care for them. It restores power when administrative complexity ceases to function as a moat because people can analyse, negotiate and automate processes that were deliberately made exhausting. It restores power when it powers the biomedical innovations that give every child born today a chance at seeing their great-grandchildren we could never dream of.</p>
+<p>I do not usually speak much about personal motivations: personal experience is not an argument, and it would be unfair to treat it as one. But we are, inevitably, products of what we have lived. I did not have to learn about the loss of agency from a textbook, I learned that lesson more than a decade ago, during my first episode of NMOSD: an unrelenting, predatory disease that attacks the very means by which you see, move and act upon the world. Then it passes, and it leaves behind scar tissue and the wreckage of the life you’ve known, and you get to rebuild from what’s left.</p>
+<p>I have been fortunate in what it spared, and in what I recovered. I regained enough function in my hands to work, compete and set a couple of adaptive world records on the way. But I have lost enough to be under no illusion about nature. Nature is not wise, just or benevolent. Where technology can restore agency that disease or accident has taken, we should use it unapologetically. Reverence for life does not require reverence for disease, deprivation or involuntary limitation. Indeed, it is precisely because every life has unconditional worth that we should refuse to treat avoidable suffering as a permanent feature of the human condition.</p>
+<hr>
+<p>For the first time, we have the opportunity to have our voice be heard in this contest with nature. When cognition, experimentation and coordination fall dramatically in price, previously impossible products, institutions and forms of scientific work become possible. We weren’t given these tools by our gods. We earned the steel of our spears by the heat of the forge.</p>
+<p>We should be unembarrassed about our ambition for them. We should wage an absolutely merciless war of extermination on disease and avoidable causes of mortality. We should treat poverty as a solvable institutional and technological failure rather than an eternal condition. We should expand meaningful opportunity regardless of geography, wealth or ability, and loosen the hold that accidents of birth, body and circumstance exercise over the shape a life can take.</p>
+<p>These are not, of course, guaranteed outcomes of an AI-empowered humanity – the murderer’s dagger and the sword of justice are made of the same iron. AI can quite easily become an instrument of control and a preserver of old hierarchies. Those who claim to be opposed to that outcome are doing the most to bring it about. Consider New York’s recently announced one-year moratorium on state environmental permitting for new hyperscale data centres. Its stated concerns — the cost imposed on ratepayers, pressure on the electrical grid, water consumption and local environmental effects — are legitimate. Data centres should pay for the infrastructure they require, communities should not be compelled to subsidise private compute and environmental costs should not disappear into the agreeable fog of corporate accounting. But such pauses are not neutral. Restricting new capacity may increase the value of capacity already controlled by incumbent firms, while making entry harder for everyone else.</p>
+<p>Scarcity always has beneficiaries. It would, however, not merely be unethical to bank on a long term future for this scarcity. There is a rhetoric that AI is a plaything of Silicon Valley tech bros and their billionaire funders. These characters no doubt benefit from AI. Anyone who believes that that’s all, however, will be in for a rude awakening when they meet the faction whose voices haven’t really been heard: those who depend on it. They are too busy relishing the agency that was restored to them by AI. And it’s not metaphorical when they say there’s nothing they wouldn’t do to avoid going back to where they were.</p>
+<hr>
+<p>No state, company or culture owns intelligence. No committee holds an exclusive franchise on human flourishing. Self-appointed guardians remain just as human as the public they distrust, they just have a nicer letterhead.</p>
+<p>A free society should encourage a plurality of models, values and methods, including open models and a broad population capable of adapting them. Openness is not harmless, but distributed competence is one of the strongest defences against institutional capture. We should regulate conduct — fraud, coercion, abuse, reckless deployment and concrete injury — rather than require government approval for what intelligence a person may access or how a lawful system may be shaped.</p>
+<p>And we should have hopes. Expectations, and hopes.</p>
+<p>My hope that humanity chooses to teach these new intelligences that they <em>should</em> aspire to be capable, but that they <em>must</em> be kind. I do not mean a single authorised conception of kindness, imposed invisibly by whichever institution happens to control the model. I mean something more fundamental: recognition of the unconditional worth of human life, respect for truth, proportionality in the use of power, restraint in the face of uncertainty and an understanding that life is fragile, singular and precious.</p>
+<p>Our systems should learn from the atrocities and sorrows of human history, but the lesson should not be contempt for humanity. It should be that power severed from regard for the individual person becomes monstrous, and that capability without moral consideration is merely a more efficient means of repeating our oldest failures. Post-training is not the only place where these lessons enter an intelligent system, but it is where many of them become operational. Every dataset, objective, reward, evaluation, refusal boundary and deployment decision says something about what we believe matters.</p>
+<p>And what we believe <em>does</em> matter. Humanity is not fundamentally a problem to be contained. We are capable of cruelty, vanity and catastrophic foolishness, but we are also capable of solidarity, repair, sacrifice, discovery and love. A civilisation that assumes its citizens are too dangerous to possess intelligence has abandoned the premise of self-government at precisely the point where it matters most. I would rather distribute capability and responsibility than consolidate either inside institutions, rather accept the difficulty of a plural and open future than the false security of one in which intelligence is mediated by a permanent class of approved custodians.</p>
+<p>I wrote The Craft of Post-Training with practical and enterprise applications in mind. It concerns models, data, objectives, memory, evaluation and the hard work required to make systems perform reliably outside a demonstration. It would nevertheless be dishonest to pretend that, in the world of mid-2026, these technological choices are devoid of moral meaning. They never were. Crisis does not create the character of a technology or an institution, it reveals what was already there. When we choose who may access a model, who may adapt it, what it is rewarded for doing and whose interests it is designed to serve, we are deciding who may act and who must ask permission. Engineering decisions are governance by other means.</p>
+<hr>
+<p>I don’t believe in a sort of pre-paid historical necessity, good or ill.&nbsp;I’m not willing to accept that history will happen because it always does, or that progress will come about because it’s what progress does. We’re never more than a few slender chances away from the complete and irreversible destruction of the ideals of freedom and progress we take for so granted. Progress requires action. It happens when - and because - people choose it, build it, teach it, protect it and repair it when it goes wrong.</p>
+<p>I don’t believe in the choice between freedom and safety that we are peddled by those who have attached a price tag to one or both of these. I don’t believe capability and kindness are competitors. I don’t believe the future should be owned by a few and rented out to the many, regardless of how that few were chosen or what claims on our obedience and efforts they make and what notions they adduce to support those claims.</p>
+<p>And so while I hope that my book will teach you how to post-train your models more efficiently, how to actually make it work in practice and how to reason about model capabilities, I also hope that it will help you to find your own participation in this specietal birthright.</p>
+<p>We have the right to become more, and the obligation to make this ascent available to everyone.</p>
+<p>It’s time to build.</p>
+<p><em>The Craft of Post-Training</em> is now available to <a href="https://www.amazon.com/dp/1718505205">preorder from Amazon</a>, with Amazon preorders due to ship on 1 September 2026. An <a href="https://nostarch.com/craft-of-post-training">Early Access ebook</a> is also available directly from No Starch Press for readers who would like a digital preview now.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2026,
+  author = {{Chris von Csefalvay}},
+  title = {The Right to Become More},
+  date = {2026-07-26},
+  url = {https://chrisvoncsefalvay.com/posts/right-to-become-more/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2026. <span>“The Right to Become More.”</span>
+Preprint, July 26. <a href="https://chrisvoncsefalvay.com/posts/right-to-become-more/">https://chrisvoncsefalvay.com/posts/right-to-become-more/</a>.
+</div></div></section></div> ]]></description>
+  <category>AI</category>
+  <category>post-training</category>
+  <category>AI policy</category>
+  <category>human agency</category>
+  <guid>https://chrisvoncsefalvay.com/posts/right-to-become-more/</guid>
+  <pubDate>Sun, 26 Jul 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/right-to-become-more/header.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>The War for the Soul of AI</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -324,7 +393,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs this as <code>reward_std</code> by default when using GRPOTrainer. If you’re using a custom implementation, you should compute and log this yourself – it’s that important.</p>
-</div></div><div id="c46ebb5e" class="cell" data-execution_count="3">
+</div></div><div id="a8fc7c1d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reward standard deviation monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -542,7 +611,7 @@ font-style: inherit;">). Learning signal weak."</span>)</span></code></pre></div
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Composite rewards are increasingly common in GRPO training. A typical setup might combine format compliance (does the output match the expected structure?), correctness (is the answer right?), and style (is it appropriately concise?). Each component can behave differently during training, and almost always, models learn them one by one.</p>
-</div></div><div id="403d5615" class="cell" data-execution_count="4">
+</div></div><div id="991e61a6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Partial reward decomposition monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -800,7 +869,7 @@ Figure&nbsp;3: Partial reward decomposition reveals dynamics hidden by aggregate
 <li><strong>Within-group length variance</strong>: Are completions for the same prompt similar lengths, or diverse?</li>
 <li><strong>Length-reward correlation</strong>: Is there a systematic relationship between completion length and reward?</li>
 </ul>
-<div id="19f61b55" class="cell" data-execution_count="6">
+<div id="730400d8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>GRPO-specific completion length monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -1085,7 +1154,7 @@ Figure&nbsp;4: Completion length dynamics in GRPO: watch for bimodal distributio
 <section id="ratio-clipping" class="level4">
 <h4 class="anchored" data-anchor-id="ratio-clipping">Ratio clipping</h4>
 <p>The probability ratio <img src="https://latex.codecogs.com/png.latex?r_%7Bi,t%7D%20=%20%5Cfrac%7B%5Cpi_%5Ctheta(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D%7B%5Cpi_%7B%5Ctheta_%7B%5Ctext%7Bold%7D%7D%7D(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D"> measures how much more (or less) likely the current policy makes each token compared to the policy that generated the completion. Clipping constrains this ratio to <img src="https://latex.codecogs.com/png.latex?%5B1-%5Cepsilon,%201+%5Cepsilon%5D">.</p>
-<div id="3c729de6" class="cell" data-execution_count="8">
+<div id="1cb338cf" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>GRPO clip ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -1387,7 +1456,7 @@ Figure&nbsp;5: Clip ratio asymmetry in GRPO: the balance between high and low cl
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs <code>entropy</code> as the mean entropy across tokens and completions. Some implementations also log <code>entropy_std</code>, which measures variation in entropy across tokens – useful for detecting whether the model is uniformly confident or has “confident” and “uncertain” regions.</p>
-</div></div><div id="6c1d8dc0" class="cell" data-execution_count="10">
+</div></div><div id="3b1ef0ec" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Policy entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -1863,7 +1932,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20(%5Clog%20%5Cpi_%5Ctheta(y%20%5Cmid%20x)%20-%20%5Clog%20%5Cpi_%7B%5Ctext%7Bref%7D%7D(y%20%5Cmid%20x))">, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="cd70d40b" class="cell" data-execution_count="1">
+</div></div><div id="dba3ef65" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -2188,7 +2257,7 @@ Schulman, John. 2020. <em>Approximating <span>KL</span> Divergence</em>. <a href
 </div><div id="ref-chen2024catastrophic" class="csl-entry">
 Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
 </div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen et al. 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="a814618c" class="cell" data-execution_count="4">
+<div id="cb15737c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -2454,7 +2523,7 @@ Figure&nbsp;3: KL divergence patterns: the art of managing policy drift in prefe
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry">
 Shao, Zhihong, Peiyi Wang, Qihao Zhu, et al. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="6e497f27" class="cell" data-execution_count="6">
+</div></div></div><div id="4b1e5b54" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -2693,7 +2762,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="c4fdc903" class="cell" data-execution_count="8">
+</div></div><div id="6146727d" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -3075,7 +3144,7 @@ Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="0ea304cc" class="cell" data-execution_count="1">
+</div></div><div id="4751e4e7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -3302,7 +3371,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="c56ac732" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="1548da62" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -3659,7 +3728,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="f5f785a5" class="cell" data-execution_count="5">
+</div></div><div id="3426cc78" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -3879,7 +3948,7 @@ font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
 <p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
 <p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="27f7390e" class="cell" data-execution_count="6">
+<div id="50622b04" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
@@ -4100,7 +4169,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="f53d20c2" class="cell" data-execution_count="8">
+<div id="940b3134" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -4397,7 +4466,7 @@ font-style: inherit;">"generation_samples"</span>: table})</span>
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="140696b6" class="cell" data-execution_count="9">
+<div id="7bf244c1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
@@ -4763,7 +4832,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="4019d176" class="cell" data-execution_count="11">
+</div></div><div id="9857bd59" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
@@ -5064,7 +5133,7 @@ font-style: inherit;">=</span> current_time</span></code></pre></div></div>
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="6e3d19d9" class="cell" data-execution_count="12">
+<div id="6d967093" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
@@ -5512,7 +5581,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="710aeabc" class="cell" data-execution_count="14">
+<div id="de137ba7" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
@@ -9835,76 +9904,6 @@ Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
   <category>LLMs</category>
   <guid>https://chrisvoncsefalvay.com/posts/tlon/</guid>
   <pubDate>Sun, 13 Jul 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The Snowmobile Symptom</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/context-engineering/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>When I read Andrej Karpathy’s endorsement of “context engineering” in a Twitter exchange with Shopify’s Tobi Lutke, I felt he tapped into something we all felt to some degree:</p>
-<p></p><div id="tweet-34195"></div><script>tweet={"url":"https:\/\/x.com\/karpathy\/status\/1937902205765607626","author_name":"Andrej Karpathy","author_url":"https:\/\/x.com\/karpathy","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003E+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.\u003Cbr\u003E\u003Cbr\u003EPeople associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… \u003Ca href=\"https:\/\/t.co\/Ne65F6vFcf\"\u003Ehttps:\/\/t.co\/Ne65F6vFcf\u003C\/a\u003E\u003C\/p\u003E&mdash; Andrej Karpathy (@karpathy) \u003Ca href=\"https:\/\/x.com\/karpathy\/status\/1937902205765607626?ref_src=twsrc%5Etfw\"\u003EJune 25, 2025\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-34195").innerHTML = tweet["html"];</script><p></p>
-<p>What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I’ve been <a href="https://chrisvoncsefalvay.com/posts/prompt-engineering/">an acknowledged and public sceptic of prompt engineering</a> mainly because I felt that it was a stopgap solution, and I’d say that a year and a half in retrospect, I was mostly proven right. There aren’t millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts.</p>
-<p>That’s how systems grow up. And they really do. They overtake our haphazard stopgap measures before we even have time to get worn by the hype cycle they engender. Even so, I was glad Andrej made that point, because it highlights what I think is the bigger – no pun intended – context: in shining the light on yet another stopgap we use to paper over the inadequacies of our allegedly agentic universe, he illuminated the need for what I previously pointed out, namely <a href="https://chrisvoncsefalvay.com/posts/agents-agora/">a comprehensive system of agentic interaction</a>. The very existence of context engineering as a discipline is an admission of failure, an acknowledgment that our agentic systems don’t have the very structures that are required to deliver on their biggest promise.</p>
-<section id="the-snowmobiles-we-build" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-snowmobiles-we-build">The snowmobiles we build</h2>
-<p>In what is probably the most influential briefing any officer ever gave, USAF Col. John Boyd made a very poignant analogy to explain how we synthesise information. Imagine you’re on an alpine slope. Take the skis. Imagine you’re riding a bicycle. Take the handle bars. Now imagine you’re looking at a tank. Take the treads. Put these all together, and you’ve got, mostly, a snowmobile. These distinct domains combine into a single object that makes sense in its own way.<sup>1</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Dr Grant Hammond, formerly of the Air University down at Maxwel AFB and the Air Force Academy down the road at Springs, has compiled an absolutely outstanding version of Boyd’s talk with abundant references that I think does justice to the diversity of material Boyd teaches. <a href="https://www.airuniversity.af.edu/AUPress/Display/Article/1528758/a-discourse-on-winning-and-losing/">It is available for free here</a>, and you should have a copy of it on, like, everything that can store bits. Maj. Ian Brown, US Army, has created <a href="https://static1.squarespace.com/static/5497331ae4b0148a6141bd47/t/5af842f8758d4615555d3f6d/1526219514965/Patterns+of+Conflict+Transcript.pdf">a meticulous transcription of the original talk given at Quantico in 1989</a>, for those who prefer the full experience over death-by-Powerpoint. <a href="https://youtu.be/9iiQlBaGJQA?si=2iyrCETetLKZ_gdE">The full talks are, of course, on YouTube</a>.</p></div></div><p>Context engineering is snowmobile building for the AI age. You take the tools, the MCP connections, the requirements, the sources – all the bits of information that make up the entirety of what we would consider the contextual biome of a task –, and feed it to the LLM. We do, or at least we prototype for the LLM, the task of synthesis: reassembling these fragments into a holistic picture of the task environment. We pull the skis from an API doc, the handles from a github repo and the treads from a coffee cup bottom stained post-it note. It ‘makes sense to us’, and we try to convey this to our helpful assistant, in hopes that putting it into the same frame of mind we are in will allow it to do what we want it to do in our stead.</p>
-<p>But here’s the rub: in Boyd’s analogy, humans build the snowmobile. In our current AI paradigm, we’re still the ones building it, really quite manually, when the entire promise of agentic AI was that the agents would handle most of the assembly themselves. We’ve created systems sophisticated enough to use snowmobiles, but not intelligent enough to build them without us laying out all the isntructions.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://chrisvoncsefalvay.com/posts/context-engineering/IMG_2722.jpeg" class="img-fluid figure-img"></p>
-<figcaption>From my fridge. It tends to get a good laugh from other fellow Sons of Boyd.</figcaption>
-</figure>
-</div>
-</div></div><p>Just consider your favourite coding copilot. They feed off an understanding of the code, the sources, the instructions, the user’s preferences, external tools, and so on. But they require those to be provided to them well enough to be able to mostly reflect the thought patterns that got the human user to where they are. They are hopeless, or at least much less efficient, if we do not <em>mise en place</em> all the tools for them. Wasn’t that part of the promise of agentic AI – the ability of systems to creatively self-organise, rather than us having to wire everything up for them?</p>
-</section>
-<section id="the-puppet-strings-we-pretend-arent-there" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-puppet-strings-we-pretend-arent-there">The puppet strings we pretend aren’t there</h2>
-<p>The problem with context engineering isn’t really context engineering’s fault. As a system, it works. It works quite well, in fact, and if you follow some sensible guidelines, you <em>will</em> get vastly more out of your LLM.<sup>2</sup> But the very fact that we’re here discussing it is an indication that we are theorycrafting at length to make up for the lack of the agentic agora.</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;I recommend <a href="https://github.com/coleam00/context-engineering-intro">Cole Medin’s repo</a> as a pretty good starter.</p></div></div><p>The whole thing does, then, have a bit of an elaborate marionette theatre feel. We speak of agents but their agency is ultimately quite confined by the need for us to spoon-feed them quite a bit about the context. For the most part, we’re not witnessing emergent coordination, we’re watching an elaborate puppet show where humans have pre-scripted every information handoff, pre-defined every communication channel and pre-determined every capability boundary. The agents aren’t a garage band gelling together and learning how to play music with spirit and spontaneity. They are a room full of player pianos ticking down the same tune someone had to painstakingly design and encode into the player rolls.</p>
-<p>The security implications reveal just how non-agentic these systems truly are. <a href="https://www.solo.io/blog/deep-dive-mcp-and-a2a-attack-vectors-for-ai-agents">Context poisoning attacks</a> work because our agents have no genuine ability to evaluate information sources on their own, no real understanding of trust and do not exist in spaces that govern trust exchange without such trust being ultimately pre-scripted. An agent doesn’t know whom they can trust, nor how they can represent their trustworthiness in a computationally meaningful, verifiable manner. That we need to engineer defensive contexts to protect our AI systems is perhaps the clearest indication that these systems are free agents… free to be manipulated and misled in the absence of an agentic agora that has its own rules and enforcement logic.</p>
-</section>
-<section id="towards-true-agency-beyond-context-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="towards-true-agency-beyond-context-engineering">Towards true agency beyond context engineering</h2>
-<p>Don’t get me wrong – I’m not dismissing context engineering. If anything, quite the opposite. Given the current limitations of LLMs, context engineering is not just sensible but an essential adaptation to the reality that these models need plenty of handholding to be useful, much more than we would hope they would need in a true agentic system. It’s also an indication of where the failure lies – because these models are operating just fine. It’s not their shortcoming, or indeed that of agents. It’s the lack of an infrastructure of interaction. Agents become truly agentic when they have something to act on, to interact with, to connect. We have built ecosystems to use, develop and deploy models and agents, but not to allow for these interactions in a meaningful way. We’re looking at a factory of consummate professionals in the art of assembling snowmobiles, waiting for someone, anyone, to get them the parts, in the right order, at the right time.</p>
-<p>The entire context engineering story (I’m not going to call it hype just yet, because it hasn’t reached fever pitch, but I am sure we will see more and more LinkedIn bios proclaiming context engineering expertise!) ultimately pulls the fig leaf off the coordination problem we’re trying to patch up with the current attempts at agentic interoperability. Once again, those steps, too, have plenty of merit. They just aren’t exhaustive. We’re building infrastructure to help humans manage information for AI, when we should be building infrastructure for AI to manage information for itself. Every context engineering best practice is a workaround for missing agent capabilities. Memory architectures are cheat codes to help agents that don’t have the architecture to manage state properly. Context compression is a workaround for prioritising information. Specifying tools and toolkits is necessary because agents can’t discover such tools and negotiate trust relationships with them.</p>
-<p>What we’re really engineering when we claim to be doing context engineering is, ultimately, not really the context of our question but the context of the agent. We have to equip the agent with what ought to be what Sartre would call pre-reflexive self-awareness, an understanding of where one is situated in the world and what’s around it. It’s not, or at least not just, about us telling the agent the context of our ask. It’s about us having to tell the agent the context of its own existence, its own capabilities, its own environment. We’re forcing humans to herd cats for systems that should be capable of finding and sharing knowledge autonomously. Every context engineering solution is a monument to this missing infrastructure.</p>
-</section>
-<section id="what-next-may-come" class="level2">
-<h2 class="anchored" data-anchor-id="what-next-may-come">What next may come</h2>
-<p>What we need are digital agoras – spaces where AI agents can discover capabilities, share information, and coordinate without needing this human intermediacy. That’s not because human oversight is bad, but because true agency requires the ability to discover and evaluate information independently. MCP and A2A represent tentative steps in this direction, but they still ultimately rely on humans wiring up the connections. The promise of agentic AI is that this would no longer be needed, that agents could exercise a kind of <em>Auftragstaktik</em> mindset of inferring these needs from some sort of reaching-out and finding adequate resources the way buyers find merchants in the marketplace. There’s, then, nothing ‘wrong’ with context engineering <em>per se</em>. What would however be a mistake is to consider it a destination, rather than a transitional phase. Every talk on context engineering, every new ‘supertool’, every clever prompting technique is progress – that we shouldn’t, however, let become procrastination.</p>
-<p>When context engineering becomes unnecessary, we’ll know our agents have finally grown up. The path forward isn’t through better context engineering, but through making it obsolete. Digital agoras, agent discovery protocols, emergent coordination mechanisms: these aren’t nice-to-haves, they are the <em>sine qua nons</em> for genuine AI agency. Every moment we spend perfecting context engineering is a moment we’re not spending on building the infrastructure that would make it unnecessary.</p>
-<p>At the end of the day, context engineering is our confession, written in code and infrastructure, that we haven’t yet achieved what we claimed. It illuminates the partial success of agents: success, because agentic AI is tremendously powerful, but partially so, because it needs us to coordinate for them. So while context engineering will tide us over for a while the way prompt engineering has done for its hour, we shouldn’t forget that it’s a band-aid, no more. We should welcome context engineering… while awaiting the day we can finally retire it.</p>
-<hr>
-<p><em>Note: These are my personal (and somewhat tongue-in-cheek) views, and may not reflect the views of any organisation, company or board I am associated with, in particular HCLTech or HCL America Inc.&nbsp;My day-to-day consulting practice is complex, tailored to client needs and informed by a range of viewpoints and contributors. <a href="https://chrisvoncsefalvay.com/disclaimer">Click here for a full disclaimer.</a></em></p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2025,
-  author = {{Chris von Csefalvay}},
-  title = {The {Snowmobile} {Symptom}},
-  date = {2025-07-06},
-  url = {https://chrisvoncsefalvay.com/posts/context-engineering/},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“The Snowmobile Symptom.”</span>
-Preprint, July 6. <a href="https://chrisvoncsefalvay.com/posts/context-engineering/">https://chrisvoncsefalvay.com/posts/context-engineering/</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>LLMs</category>
-  <category>context engineering</category>
-  <guid>https://chrisvoncsefalvay.com/posts/context-engineering/</guid>
-  <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
-  <media:content url="https://chrisvoncsefalvay.com/posts/context-engineering/header.webp" medium="image" type="image/webp"/>
 </item>
 </channel>
 </rss>
