@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris von Csefalvay">
+<meta name="dcterms.date" content="2026-08-04">
+<meta name="description" content="There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.">
+
+<title>The view from Skeleton Coast – Chris von Csefalvay</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0f4343b4b986d92a71824fdd03db795c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=395640625"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '395640625', { 'anonymize_ip': true});
+</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://chrisvoncsefalvay.com/#person","name":"Chris von Csefalvay","givenName":"Chris","familyName":"von Csefalvay","jobTitle":"Principal","description":"Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. He is an AI researcher and computational epidemiologist and the author of The Craft of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press, July 2026) and Computational Modeling of Infectious Disease (Elsevier, 2023).","url":"https://chrisvoncsefalvay.com","image":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp","sameAs":["https://orcid.org/0000-0003-3131-0864","https://scholar.google.com/citations?user=X_2G-VsAAAAJ","https://www.wikidata.org/wiki/Q107095298","https://hu.wikipedia.org/wiki/Chris_von_Csefalvay","https://github.com/chrisvoncsefalvay","https://twitter.com/epichrisis","https://www.linkedin.com/in/chrisvoncsefalvay/","https://www.instagram.com/chrisvoncsefalvay/","https://viaf.org/viaf/7190162669581955500004","https://isni.org/isni/0000000502655729","https://www.webofscience.com/wos/author/record/IZD-6900-2023","https://osf.io/awhgj","https://en.wikiquote.org/wiki/Chris_von_Csefalvay","https://www.researchgate.net/profile/Chris-Von-Csefalvay","https://www.crunchbase.com/person/chris-von-csefalvay","https://dblp.org/pid/157/8137.html","https://www.goodreads.com/author/show/15108248.Chris_von_Csefalvay","https://golden.com/wiki/Chris_von_Csefalvay-BY88G48","https://oxford.academia.edu/ChrisVonCsefalvay","https://medium.com/@chrisvcsefalvay","https://commons.wikimedia.org/wiki/Category:Chris_von_Csefalvay","https://sciprofiles.com/profile/1163482"],"address":{"@type":"PostalAddress","addressLocality":"Denver","addressRegion":"CO","addressCountry":"United States"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Oxford","sameAs":"https://en.wikipedia.org/wiki/University_of_Oxford"},{"@type":"CollegeOrUniversity","name":"Cardiff University","sameAs":"https://en.wikipedia.org/wiki/Cardiff_University"}],"worksFor":{"@type":"Organization","@id":"https://www.hcltech.com/#organization","name":"HCLTech","url":"https://www.hcltech.com","sameAs":"https://en.wikipedia.org/wiki/HCLTech"},"birthDate":"1986-07-15","birthPlace":{"@type":"Place","name":"Budapest","address":{"@type":"PostalAddress","addressCountry":"HU"}},"nationality":[{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Hungary"}],"memberOf":[{"@type":"Organization","name":"Royal Society for Public Health"},{"@type":"Organization","name":"IEEE"}],"knowsAbout":["post-training for language models","supervised fine-tuning","reinforcement learning from verifiable rewards","group relative policy optimization","agentic AI systems","multi-agent frameworks","large language models","LLM evaluation","computational epidemiology","AI alignment","LLMOps"],"hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Certified in Public Health (CPH)","credentialCategory":"Professional Certification","recognizedBy":{"@type":"Organization","name":"National Board of Public Health Examiners","url":"https://www.nbphe.org"}},{"@type":"EducationalOccupationalCredential","name":"Fellow of the Royal Society for Public Health (FRSPH)","credentialCategory":"Fellowship","recognizedBy":{"@type":"Organization","name":"Royal Society for Public Health","url":"https://www.rsph.org.uk","sameAs":"https://en.wikipedia.org/wiki/Royal_Society_for_Public_Health"}},{"@type":"EducationalOccupationalCredential","name":"IEEE Senior Member","credentialCategory":"Professional Membership","recognizedBy":{"@type":"Organization","name":"IEEE","url":"https://www.ieee.org","sameAs":"https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers"}}],"hasOccupation":{"@type":"Occupation","name":"AI Researcher and Computational Epidemiologist","occupationalCategory":"15-2051.00","skills":["Machine Learning","Natural Language Processing","Epidemiological Modeling","Reinforcement Learning","Large Language Models"]},"award":"Martin Wronker Prize, University of Oxford"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-post-training","name":"The Craft of Post-Training","alternativeHeadline":"A Practical Guide for AI Engineers and Developers","isbn":"9781718505209","numberOfPages":416,"bookFormat":"https://schema.org/Paperback","inLanguage":"en","publisher":{"@type":"Organization","name":"No Starch Press"},"url":"https://posttraining.guide","sameAs":"https://nostarch.com/craft-of-post-training","datePublished":"2026","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","@id":"https://chrisvoncsefalvay.com/#book-cmid","name":"Computational Modeling of Infectious Disease","isbn":"9780323953894","inLanguage":"en","publisher":{"@type":"Organization","name":"Elsevier"},"url":"https://computationalinfectiousdisease.com","sameAs":"https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4","datePublished":"2023-06-01","author":{"@id":"https://chrisvoncsefalvay.com/#person"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://chrisvoncsefalvay.com/#website","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"description":"Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards.","inLanguage":"en"}</script>
+<meta name="author" content="Chris von Csefalvay">
+<link rel="me" href="https://github.com/chrisvoncsefalvay">
+<link rel="me" href="https://www.linkedin.com/in/chrisvoncsefalvay/">
+<link rel="me" href="https://orcid.org/0000-0003-3131-0864">
+<link rel="me" href="https://twitter.com/epichrisis">
+<link rel="me" href="https://www.wikidata.org/wiki/Q107095298">
+<link rel="me" href="https://scholar.google.com/citations?user=X_2G-VsAAAAJ"><link rel="canonical" href="https://chrisvoncsefalvay.com/posts/skeleton-coast/">
+<meta property="og:url" content="https://chrisvoncsefalvay.com/posts/skeleton-coast/">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://chrisvoncsefalvay.com/posts/skeleton-coast/#article","headline":"The view from Skeleton Coast","description":"There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.","url":"https://chrisvoncsefalvay.com/posts/skeleton-coast/","datePublished":"2026-08-04","dateModified":"2026-08-04","author":{"@id":"https://chrisvoncsefalvay.com/#person"},"publisher":{"@type":"Person","name":"Chris von Csefalvay","url":"https://chrisvoncsefalvay.com","image":{"@type":"ImageObject","url":"https://chrisvoncsefalvay.com/img/portrait_2x3midres.webp"}},"image":"https://chrisvoncsefalvay.com/posts/skeleton-coast/header.webp","keywords":["physical AI","data","robotics"],"inLanguage":"en","isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://chrisvoncsefalvay.com/posts/skeleton-coast/"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["article h1",".description","article > section > p:first-of-type"]}}</script>
+
+
+<meta property="og:title" content="The view from Skeleton Coast – Chris von Csefalvay">
+<meta property="og:description" content="There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.">
+<meta property="og:image" content="https://chrisvoncsefalvay.com/posts/skeleton-coast/header.webp">
+<meta property="og:site_name" content="Chris von Csefalvay">
+<meta name="twitter:title" content="The view from Skeleton Coast – Chris von Csefalvay">
+<meta name="twitter:description" content="There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.">
+<meta name="twitter:image" content="https://chrisvoncsefalvay.com/posts/skeleton-coast/header.webp">
+<meta name="twitter:creator" content="@epichrisis">
+<meta name="twitter:site" content="@epichrisis">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Chris von Csefalvay</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../papers"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../media"> 
+<span class="menu-text">Media</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts"> 
+<span class="menu-text">The Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks"> 
+<span class="menu-text">Talks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://computationalinfectiousdisease.com"> 
+<span class="menu-text">Computational Modeling of Infectious Disease</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://nostarch.com/craft-of-post-training"> 
+<span class="menu-text">The Craft of Post-Training</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-land-god-made-in-anger" id="toc-the-land-god-made-in-anger" class="nav-link active" data-scroll-target="#the-land-god-made-in-anger">The land God made in anger</a></li>
+  <li><a href="#the-ocean-and-the-desert" id="toc-the-ocean-and-the-desert" class="nav-link" data-scroll-target="#the-ocean-and-the-desert">The ocean and the desert</a></li>
+  <li><a href="#why-the-desert-is-there" id="toc-why-the-desert-is-there" class="nav-link" data-scroll-target="#why-the-desert-is-there">Why the desert is there</a></li>
+  <li><a href="#three-answers-to-matties-question" id="toc-three-answers-to-matties-question" class="nav-link" data-scroll-target="#three-answers-to-matties-question">Three answers to Mattie’s question</a>
+  <ul class="collapse">
+  <li><a href="#one-almost-nobody-can-tell-you-what-the-data-is-for" id="toc-one-almost-nobody-can-tell-you-what-the-data-is-for" class="nav-link" data-scroll-target="#one-almost-nobody-can-tell-you-what-the-data-is-for">One: almost nobody can tell you what the data is for</a></li>
+  <li><a href="#two-access-is-not-craft" id="toc-two-access-is-not-craft" class="nav-link" data-scroll-target="#two-access-is-not-craft">Two: access is not craft</a></li>
+  <li><a href="#three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway" id="toc-three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway" class="nav-link" data-scroll-target="#three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway">Three: you are not paying for hours, you are paying for surprise (or you should be, anyway)</a></li>
+  </ul></li>
+  <li><a href="#two-claims-one-bearing" id="toc-two-claims-one-bearing" class="nav-link" data-scroll-target="#two-claims-one-bearing">Two claims, one bearing</a></li>
+  <li><a href="#we-needed-a-degolyer-instead-we-got-dad-joiners." id="toc-we-needed-a-degolyer-instead-we-got-dad-joiners." class="nav-link" data-scroll-target="#we-needed-a-degolyer-instead-we-got-dad-joiners.">We needed a DeGolyer; instead, we got Dad Joiners.</a></li>
+  <li><a href="#where-to-drill" id="toc-where-to-drill" class="nav-link" data-scroll-target="#where-to-drill">Where to drill</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The view from Skeleton Coast</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">physical AI</div>
+    <div class="quarto-category">data</div>
+    <div class="quarto-category">robotics</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Chris von Csefalvay <a href="mailto:chris@chrisvoncsefalvay.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-3131-0864" class="quarto-title-author-orcid" aria-label="ORCID profile for Chris von Csefalvay"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 August 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="header.webp" class="img-fluid" alt="A rusted shipwreck lies in foaming Atlantic surf where the ocean meets the dunes of Namibia's Skeleton Coast."></p>
+<p>Egocentric video for robot training now exists at a scale that is genuinely hard to hold in your head, and I have spent this week thinking about everything that is not in it.</p>
+<p>Two things prompted that. <a href="https://x.com/Scav/status/2083670860012069022">Mattie Fairchild</a> asked, more or less, what your actual differentiator is in a market where everybody is selling the same commodity. And we are releasing CERES tomorrow, which is our answer to a closely related question, so I have been obliged to work out what I actually think.</p>
+<p></p><div id="tweet-29806"></div><script>tweet={"url":"https:\/\/x.com\/Scav\/status\/2083670860012069022","author_name":"Mattie Fairchild","author_url":"https:\/\/x.com\/Scav","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EI’m trying to figure out how I feel about the data wildcatting boom. I get pitched weekly by founders who glued webcams to helmets, or recorded data from their family-owned factory, or for yet another remote teleop service. None are differentiated. Essentially already a commodity…\u003C\/p\u003E&mdash; Mattie Fairchild (@Scav) \u003Ca href=\"https:\/\/x.com\/Scav\/status\/2083670860012069022?ref_src=twsrc%5Etfw\"\u003EAugust 1, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-29806").innerHTML = tweet["html"];</script><p></p>
+<p>What I think is this: the differentiator is not volume but knowing which part of the map is empty, why it is empty and what it would be worth to fill it. Almost nobody selling training data today can answer any of those three questions. This is a massive problem and, for anyone paying attention, an equally massive opportunity.</p>
+<p>So I’d like to start by telling you about the land God made in anger.</p>
+<section id="the-land-god-made-in-anger" class="level2">
+<h2 class="anchored" data-anchor-id="the-land-god-made-in-anger">The land God made in anger</h2>
+<p>A long time ago, I had some time to myself and ended up visiting the northern stretch of Namibia’s shore. To this day, the Skeleton Coast, as it is rather poetically called, remains the strangest landscape I have ever been to.</p>
+<p>The Namib, the oldest desert on earth, simply runs out of dunes and falls into the South Atlantic. The Benguela Current comes up cold from the south and clashes with the very much not cold sand of the Namib, and you get a coastline mostly shrouded in fog all morning. The San of the interior, who knew hardship when they saw it and were not sentimental about landscape, called it <em>the place God made in anger</em>. The name on the map today comes from John Henry Marsh, who in 1944 published his account of the wreck of the <em>MV Dunedin Star</em> under the title <em>Skeleton Coast</em>. The bones on the beach are whale and seal, left over from the whaling years, mingling with hulls, some of them now sitting hundreds of metres inland, because the dunes moved on and left them behind.</p>
+<p>What stays with you, though, is the topology.</p>
+<p>In a single field of view you have more water than you could use in a hundred lifetimes and not one drop of it is any good to you. Sailors who made it ashore alive did not drown but died of thirst, in sight of the Atlantic. Tantalus, standing chin-deep in a pool that withdrew whenever he bent to drink, would’ve recognised the arrangement immediately.</p>
+<p>Anyway, that’s your microcosm of egocentric data.</p>
+</section>
+<section id="the-ocean-and-the-desert" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-ocean-and-the-desert">The ocean and the desert</h2>
+<p>First, the ocean: it is real and it is getting bigger at a rate that is genuinely difficult to hold in your head. Ego4D anchored the field with several thousand hours. EPIC-KITCHENS gave us a hundred hours in forty-five kitchens, narrated by the participants themselves. EgoDex added 829 hours with per-frame 3D hand poses. EgoVerse, a collaboration across Georgia Tech, Stanford, UCSD, ETH, MIT, Meta and others, released 1,362 hours across 1,965 tasks and 2,087 demonstrators. And then Build AI went from ten thousand hours in November to a hundred thousand in December to something like a million by April. Five months. It is, to the best of my knowledge, the fastest dataset scaling anyone has ever done.</p>
+<p>Nobody in this field is short of footage. Scaling works, the curves are real and I am not about to argue with them. What I’ll argue with is the salinity.</p>
+<p>Look at the ocean of data and like the sailors of the <em>Dunedin Star</em>, have a drink. Show me a task going wrong and then being recovered, rather than the clean take that got kept. Show me somebody doing a job they have done ten thousand times, in the room where they actually do it: a cardiac cath lab, a watch repairman’s bench, a lambing shed, a luthier’s workshop. Show me a two-person handover. Show me someone unloading a washing machine from a wheelchair.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Show me the same task in bad light, in a confined space, with the object half-occluded by the thing next to it. Show me anything performed with a constrained end effector, gloved or one-handed or through a tool. Show me an object that is not a mug.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;This is going to be easier now that we actually have this dataset.</p></div></div><p>The answer, near enough, is nothing. A million hours on one side, a desert on the other, and the tide line running right between them.</p>
+</section>
+<section id="why-the-desert-is-there" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-desert-is-there">Why the desert is there</h2>
+<p>It would be comfortable to conclude that the empty regions are empty because they are hard to reach. Mostly, though, they are not. They are empty because three filters sit between the world and the corpus, none having anything to do with what a policy needs to learn.</p>
+<p>The first is recruitment. You collect from whomever will wear a rig for the going rate, which selects for availability rather than expertise, and it selects hard.</p>
+<p>The second is staging. You collect what fits on a table, in a room you can book, under lights you control, in a session that ends on time. Anything outdoors, wet, nocturnal, cramped, expensive to set up or awkward to reset falls out of the frame before anybody makes a decision about it.</p>
+<p>The third is the sneaky one, and it is adjudication. You collect what you can score. A dish that ends up in the rack has a legible success criterion, so it survives; a task whose success is a matter of judgement, or whose failure is partial, or only meaningful across a 20-minute horizon with interruptions in it, quietly does not get commissioned. Which means the evaluation apparatus is authoring the data distribution, upstream and invisibly. We built the benchmarks first and then, without ever deciding to, went and collected the world the benchmarks could see. We benchmaxxed our reality into oblivion.</p>
+<p>Put the three together and the shape of the corpus becomes explicable. It is not a sample of how tasks are performed but a reflection of what tasks are easy to film. And because the collection process is now industrialised, we are producing that particular bias faster, more cheaply and more consistently than anyone has ever produced a bias before.</p>
+<p>The diversity numbers do not save you here, incidentally, because the diversity is superficial. Two thousand demonstrators across two hundred scenes sounds like broad coverage right up to the point where you notice that all two thousand were recruited through the same filter, staged under the same constraints and scored against the same criteria. You have varied the surface and held the structure constant. That is the opposite of what you wanted.</p>
+</section>
+<section id="three-answers-to-matties-question" class="level2">
+<h2 class="anchored" data-anchor-id="three-answers-to-matties-question">Three answers to Mattie’s question</h2>
+<p>So, back to Mattie’s question. Here are three answers, in ascending order of how uncomfortable they are.</p>
+<section id="one-almost-nobody-can-tell-you-what-the-data-is-for" class="level3">
+<h3 class="anchored" data-anchor-id="one-almost-nobody-can-tell-you-what-the-data-is-for">One: almost nobody can tell you what the data is for</h3>
+<p>Sampling without a stated objective is not data collection. It is accumulation. If you cannot articulate the downstream training objective, you cannot define a sampling frame, and if you cannot define a sampling frame then whatever bias your collection process happens to have is now permanently baked into somebody’s policy. This is not an advanced insight. It is week one of any decent experimental design course.</p>
+<p>The tell is the unit of account: everyone quotes hours, but hours is a measure of cost, not information. Statisticians settled this in 1936 (and the industry has been relearning it ever since) when the <em>Literary Digest</em> mailed out something like ten million ballots, got back two and a half million responses – the largest sample anybody ever assembled to date – and confidently predicted a Landon presidency. Gallup, working with a far smaller sample and a sampling frame he had actually thought about, called it for Roosevelt. Size did not save the <em>Digest</em>: its frame was drawn from telephone directories and car registrations in the middle of the Depression, so what it measured, with enormous statistical power, was the opinion of people who owned cars. The <em>Digest</em>’s approach was so misguided, putting an afterburner behind a rudder set the wrong way merely got it to crash faster.</p>
+<p>The EgoVerse authors say much the same thing rather more politely, and they have the experiments to back it: policy performance improves with more human data, but effective scaling depends on the alignment between the human data and the robot learning objective. That sentence is the whole argument: alignment is a property of the sampling frame, not of the pile.</p>
+<p>Underneath all this sits a literacy problem the industry is not discussing honestly. A great many data vendors have never trained a policy, have no working model of what an action space is, could not tell you whether their capture preserves the quantities a learning algorithm actually consumes and have never had to explain why a beautifully shot successful demonstration with no visible failure and no recovery is of limited use. A dataset is an answer to a question. If you cannot state the question, you have not built a dataset, you have built a pile.</p>
+</section>
+<section id="two-access-is-not-craft" class="level3">
+<h3 class="anchored" data-anchor-id="two-access-is-not-craft">Two: access is not craft</h3>
+<p>The second differentiator is capture discipline, and this is the one where I have skin in the game, because it’s why we built <a href="https://ceres.wtf">CERES</a>.</p>
+<p>For $250, a length of duck tape and some spare time, you can strap a GoPro to a helmet, roam around for six hours and come home with something that certainly looks like training data. It has frames in it. It is large. You can put it in a bucket. It is extraordinarily easy to convince yourself you have done science, in the way that pointing a telescope at the sky feels like astronomy. Something is definitely being recorded, but the thing that makes science science was never the instrument. It was, and always will be, the protocol.</p>
+<p>So ask what a psychophysicist would want to know before believing a single frame of your capture. Was there a protocol, written down before collection began? Was the instruction script delivered verbatim, or did the operator paraphrase and thereby quietly change the task? Were conditions counterbalanced? Were the inclusion and exclusion criteria fixed before anyone looked at the data, so that dropping a session is a decision rather than a temptation? Is there a calibration record? Is there an honest log of everything that went wrong, which is usually the most valuable file in the entire capture?</p>
+<p>None of this is exotic. Experimental psychology has been doing it since Wundt opened the Leipzig laboratory in 1879, and it spent the 2010s learning, expensively and in public, what happens when you stop. It is a solved problem, in another building, down a different corridor, and the robot data industry has simply not walked over there yet.</p>
+<blockquote class="blockquote">
+<p>CERES is our attempt to walk over there and bring some of it back. It turns a Quest headset and a browser into a directed capture appliance with two roles rather than one. A capture director defines the protocol, watches quality live and reviews takes while they are still fresh; the demonstrator gets task-by-task cues in the headset. Tasks carry explicit cues, repetition counts, reset windows and cycles, so a run is a designed schedule rather than a vibe. Video, audio, head pose and hand joints share a single recorder clock. Missing observations are recorded as missing rather than quietly interpolated away, which matters far more than it sounds like it does. The director can watch hand velocity, surface normals and centre-of-mass traces while the take is running, so a bad take gets caught at the point where it can still be redone rather than three weeks later. If the director drops off the network the headset keeps recording locally, because protocols that assume perfect infrastructure are protocols for conference demonstrations rather than for fieldwork. What comes out the other end is a LeRobot v3 dataset. There is a solo mode, for those of us who capture alone in the kitchen with a golden retriever supervising.</p>
+<p>I want to be honest about the scope of this. CERES will not fix the industry. It was never going to. What it does is remove the excuse: if you want to capture properly, the tooling now exists, it is free and it runs in a browser.</p>
+</blockquote>
+</section>
+<section id="three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway" class="level3">
+<h3 class="anchored" data-anchor-id="three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway">Three: you are not paying for hours, you are paying for surprise (or you should be, anyway)</h3>
+<p>Scaling curves describe the average behaviour of undifferentiated hours, and averages are exactly the wrong instrument for the situation we are in. We have watched, repeatedly, a few hours of precisely the right data move a model that ten thousand more hours of the same thing had left sitting exactly where it was – not because small data is magic, but because the small set contained the specific thing that was missing. The second thousand hours of somebody loading a dishwasher carries almost no information the first thousand did not. One hour of the same task performed under a constraint the corpus has never seen carries a great deal. Information theory has been telling us this since 1948, and we keep buying by the litre anyway.</p>
+</section>
+</section>
+<section id="two-claims-one-bearing" class="level2">
+<h2 class="anchored" data-anchor-id="two-claims-one-bearing">Two claims, one bearing</h2>
+<p>I have kept something out of the argument so far, deliberately, and I would now like to put it back.</p>
+<p>Everything above is a prudential case. The corpus is a map of collection convenience and we are mistaking it for a map of the world; that is bad engineering and it will cost money. I made it that way because the other case, the one I actually feel, is easy to discount as sentiment dressed up as analysis, and I did not want to hand anyone that exit.</p>
+<p>Here is the other case. I have seen tens of thousands of hours of egocentric video of tasks I do very differently, because I work somewhat differently. Among others, since a slight disagreement between my immune system and my spinal cord, I don’t have much useful wrist or finger flexion, so I grab things differently. The word for that is tenodesis, which is a neat little biomechanics trick: you drop your fingers around an object, then extend (flick upwards) your wrist. This causes the tendons to run out of slack and create a mechanically stable grasp around the object. I’m also in a slightly different position (seated) with different motion constraints (exclusivity of forward locomotion and manipulation). People like me are probably going to be the greatest beneficiaries of domestic assistive robotics, yet we’re nowhere in the training set.</p>
+<p>The part I keep turning over is that nobody decided this: there was no meeting at which the field considered atypical bodies and declined. The three filters simply did their work: we were not in the recruitment pool, our kitchens do not stage well (mine <em>a fortiori</em> so), and our technique scores badly against rubrics written for a body that is not ours. An absence produced by procedure rather than intent is worse than a hostile decision, because there is no argument to win and nobody to have it with. We are building the demonstration set out of the users who need the product least and calling the result scale.</p>
+<p>What is, however, most marvellous is that this blindness isn’t just moral and doesn’t just hurt people of different abilities. It is, actually, remarkably counterproductive – so much so that this alone should make you think about the selection logic inherent in how data makes itself into our data supply chains.</p>
+<p>Look at the geometry. A standing adult’s egocentric camera sits somewhere around 1.6 to 1.8 metres. Mine sits at about 1.2m. Look at where the head camera sits on essentially any mobile manipulator you can buy today, and you will find it between roughly one metre and one and a half. We have spent real ingenuity on viewpoint augmentation and retargeting to close a gap that a seated demonstrator does not have in the first place.</p>
+<p>Look at the hand. A tenodesis grasp has one (technically 0.5) degree of freedom, no independent digit control and no in-hand manipulation worth the name. Mechanically, that is a parallel jaw gripper with a person attached. Meanwhile, most of the corpus is five-fingered hands performing manoeuvres a gripper cannot copy, which means a great deal of it is teaching a policy techniques it will never be able to execute. Anyone who has manipulated under a hard effector constraint for years, whether through injury or gloves or tools or tongs, has developed an entire repertoire of compensation: pre-positioning objects against a fixture before closing on them, recruiting gravity and friction rather than force closure, bracing bimanually, choosing approach vectors that make the grasp geometrically possible at all. These all are worked solutions to problems robot learning is currently deriving from first principles – badly.</p>
+<p>Or consider, if you will, base placement. From a chair, you cannot take half a step. You solve a reach by deciding where the base goes first, approaching from the side that works, bracing against the table edge, sequencing so you never have to reposition halfway through. That is loco-manipulation, planned explicitly, several seconds ahead. Able-bodied demonstrators solve the same problem by shuffling their feet without noticing they did it, which is unfortunately the one solution the robot cannot copy.</p>
+<p>The moral pull and the engineering pull point at the same coordinates.</p>
+</section>
+<section id="we-needed-a-degolyer-instead-we-got-dad-joiners." class="level2">
+<h2 class="anchored" data-anchor-id="we-needed-a-degolyer-instead-we-got-dad-joiners.">We needed a DeGolyer; instead, we got Dad Joiners.</h2>
+<p>Columbus Marion Joiner was seventy years old, quoted Shakespeare, and drilled the Daisy Bradford No.&nbsp;3 in October 1930 on the strength of a prospectus written by his partner Doc Lloyd, a self-taught geologist and former medicine show operator, declaring the site the apex of the apex, a situation not found anywhere else. Nearly every claim in that document was wrong. One was not: there was oil under it, more oil than under anywhere else in the lower forty-eight.</p>
+<p>Joiner had by then sold interests in the well amounting to, uh, <em>rather more than a hundred percent</em> of it. He spent the aftermath of the largest discovery in American oil in a Dallas courtroom with his holdings in receivership, and sold out to H. L. Hunt for about $1.3 million, which was more money than he had ever seen and a rounding error against what the field went on to produce. Everyone else drilled at once. Crude went from $1.10 a barrel in 1930 to ten cents in 1931, and in some accounts a nickel. In August 1931, the governor sent the National Guard into the field, because an entire industry had proved unable to stop itself destroying the price of its own product.</p>
+<p>If that reminds you of the data market, you’re not alone, and Mattie’s comments may prove prescient: a geologically illiterate prospectus over a real find, the same interest sold several times over, a price collapse driven not by any failure of demand but by undisciplined abundance. If your product is hours, your product is heading for ten cents a barrel, and it may already be there.</p>
+<p>But then that’s not fair on wildcatters, for there also was the other kind. Everette Lee DeGolyer located Potrero del Llano No.&nbsp;4 in the Mexican Golden Lane while still an undergraduate, which is about as pure a wildcatting result as exists, and then spent the rest of his career turning exploration from intuition into measurement. He put the torsion balance and then the reflection seismograph to work finding structures underground, built the firm that industrialised applied geophysics, and ended up as senior partner of the house whose signature certified whether a company’s stated reserves were actually there. Somebody had to be the person who said how much oil is really down the hole. He took the job.</p>
+<p>The data industry has no DeGolyer, and the reason is not mysterious. The role consists almost entirely of evals, acceptance rubrics, provenance chains, dataset cards, published drop rates and the willingness to tell a paying customer their corpus is mostly seawater. Nobody gets a term sheet for that. We have no shortage of Joiners. Some of them have found something real, which is precisely what makes the next part avoidable rather than inevitable.</p>
+</section>
+<section id="where-to-drill" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="where-to-drill">Where to drill</h2>
+<p>So, wildcatters. The point of wildcatting was always to drill where the established operators were not sure there was anything. Do that. Specifically:</p>
+<ul>
+<li><strong>Failure and recovery.</strong> Almost nobody records it, because it looks like bad data and it scores badly. It is the most valuable thing on this list.</li>
+<li><strong>Atypical bodies and atypical technique.</strong> Seated reach envelopes. Constrained grasps.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> One-handed methods. Tremor. Closer to the target morphology than the mainstream corpus is, and almost entirely absent from it.</li>
+<li><strong>Expert hands in expert rooms.</strong> Wet labs, clean rooms, BSL-4 suites (in full Racal suits, obviously!), dairy parlours, field agronomy, the workshop of the world’s last insert-profession-here. Anywhere a task is performed by somebody who took years to learn it, in the place they actually perform it.</li>
+<li><strong>Improvisation and workaround.</strong> Achieving a goal by a route the object was not designed for. Precisely the capability generalist policies lack, and one currently discarded as noise.</li>
+<li><strong>Degraded and awkward conditions.</strong> Bad light, confined spaces, occlusion, clutter, wet, cold, outdoors, at night. Everything that falls out of the frame because it is inconvenient to stage.</li>
+<li><strong>The long tail of objects</strong>, rather than the twelfth variant of a mug.</li>
+<li><strong>Long horizons and interruption.</strong> Tasks that take twenty minutes, get put down halfway through and resumed. Nobody commissions them because nobody can score them.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;We’re already on it, but we could always use more.</p></div></div><p>Point a wildcatter at a proven field and you get a commodity supplier with a two-year horizon. Point one at unproven ground and you may well get the reason this field has a next decade. Their public function, whether or not any of them would put it that way, is to stop us training the same model on the same hours until the whole enterprise quietly runs out of new information.</p>
+<hr>
+<p>There’s a beetle in the Namib, <em>Onymacris unguicularis</em>. In the morning, it climbs onto a dune ridge, stands on its head into the wind and lets condensation run down its back into its mouth. This is called fog-basking, and it has been observed up in the northern Skeleton Coast dunes. A few metres up, the <em>Welwitschia</em> is doing the same trick with two leaves and no rain to speak of, and it lives for a thousand years. Neither of them drinks the ocean, neither of them could. The ocean was never the resource, the fog is.</p>
+<p>Every ship lost on that coast was lost to the fog. Everything that lives there lives on it. The same fog – all the difference lies in what you’re prepared to do with it.</p>
+<hr>
+<p>CERES is live now at <a href="https://ceres.wtf">ceres.wtf</a>, with a formal release going up on GitHub tomorrow. It’s free, it’s open, and it’s meant to be used, broken and argued with. I would very much rather hear that it is wrong than that it is fine.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2026,
+  author = {{Chris von Csefalvay}},
+  title = {The View from {Skeleton} {Coast}},
+  date = {2026-08-04},
+  url = {https://chrisvoncsefalvay.com/posts/skeleton-coast/},
+  langid = {en-GB}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Chris von Csefalvay. 2026. <span>“The View from Skeleton Coast.”</span>
+Preprint, August 4. <a href="https://chrisvoncsefalvay.com/posts/skeleton-coast/">https://chrisvoncsefalvay.com/posts/skeleton-coast/</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/chrisvoncsefalvay\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<ol start="3" type="a">
+<li>Chris von Csefalvay, 2011–. <a href="../../disclaimer/">Disclaimer</a> · <a href="../../privacy-policy/">Privacy</a> · <a href="../../corrections/">Corrections</a></li>
+</ol>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

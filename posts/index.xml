@@ -10,7 +10,133 @@
 <atom:link href="https://chrisvoncsefalvay.com/posts/index.xml" rel="self" type="application/rss+xml"/>
 <description>Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of The Craft of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press).</description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Sun, 26 Jul 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 04 Aug 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The view from Skeleton Coast</title>
+  <dc:creator>Chris von Csefalvay</dc:creator>
+  <link>https://chrisvoncsefalvay.com/posts/skeleton-coast/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><img src="https://chrisvoncsefalvay.com/posts/skeleton-coast/header.webp" class="img-fluid" alt="A rusted shipwreck lies in foaming Atlantic surf where the ocean meets the dunes of Namibia's Skeleton Coast."></p>
+<p>Egocentric video for robot training now exists at a scale that is genuinely hard to hold in your head, and I have spent this week thinking about everything that is not in it.</p>
+<p>Two things prompted that. <a href="https://x.com/Scav/status/2083670860012069022">Mattie Fairchild</a> asked, more or less, what your actual differentiator is in a market where everybody is selling the same commodity. And we are releasing CERES tomorrow, which is our answer to a closely related question, so I have been obliged to work out what I actually think.</p>
+<p></p><div id="tweet-29806"></div><script>tweet={"url":"https:\/\/x.com\/Scav\/status\/2083670860012069022","author_name":"Mattie Fairchild","author_url":"https:\/\/x.com\/Scav","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EI’m trying to figure out how I feel about the data wildcatting boom. I get pitched weekly by founders who glued webcams to helmets, or recorded data from their family-owned factory, or for yet another remote teleop service. None are differentiated. Essentially already a commodity…\u003C\/p\u003E&mdash; Mattie Fairchild (@Scav) \u003Ca href=\"https:\/\/x.com\/Scav\/status\/2083670860012069022?ref_src=twsrc%5Etfw\"\u003EAugust 1, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-29806").innerHTML = tweet["html"];</script><p></p>
+<p>What I think is this: the differentiator is not volume but knowing which part of the map is empty, why it is empty and what it would be worth to fill it. Almost nobody selling training data today can answer any of those three questions. This is a massive problem and, for anyone paying attention, an equally massive opportunity.</p>
+<p>So I’d like to start by telling you about the land God made in anger.</p>
+<section id="the-land-god-made-in-anger" class="level2">
+<h2 class="anchored" data-anchor-id="the-land-god-made-in-anger">The land God made in anger</h2>
+<p>A long time ago, I had some time to myself and ended up visiting the northern stretch of Namibia’s shore. To this day, the Skeleton Coast, as it is rather poetically called, remains the strangest landscape I have ever been to.</p>
+<p>The Namib, the oldest desert on earth, simply runs out of dunes and falls into the South Atlantic. The Benguela Current comes up cold from the south and clashes with the very much not cold sand of the Namib, and you get a coastline mostly shrouded in fog all morning. The San of the interior, who knew hardship when they saw it and were not sentimental about landscape, called it <em>the place God made in anger</em>. The name on the map today comes from John Henry Marsh, who in 1944 published his account of the wreck of the <em>MV Dunedin Star</em> under the title <em>Skeleton Coast</em>. The bones on the beach are whale and seal, left over from the whaling years, mingling with hulls, some of them now sitting hundreds of metres inland, because the dunes moved on and left them behind.</p>
+<p>What stays with you, though, is the topology.</p>
+<p>In a single field of view you have more water than you could use in a hundred lifetimes and not one drop of it is any good to you. Sailors who made it ashore alive did not drown but died of thirst, in sight of the Atlantic. Tantalus, standing chin-deep in a pool that withdrew whenever he bent to drink, would’ve recognised the arrangement immediately.</p>
+<p>Anyway, that’s your microcosm of egocentric data.</p>
+</section>
+<section id="the-ocean-and-the-desert" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-ocean-and-the-desert">The ocean and the desert</h2>
+<p>First, the ocean: it is real and it is getting bigger at a rate that is genuinely difficult to hold in your head. Ego4D anchored the field with several thousand hours. EPIC-KITCHENS gave us a hundred hours in forty-five kitchens, narrated by the participants themselves. EgoDex added 829 hours with per-frame 3D hand poses. EgoVerse, a collaboration across Georgia Tech, Stanford, UCSD, ETH, MIT, Meta and others, released 1,362 hours across 1,965 tasks and 2,087 demonstrators. And then Build AI went from ten thousand hours in November to a hundred thousand in December to something like a million by April. Five months. It is, to the best of my knowledge, the fastest dataset scaling anyone has ever done.</p>
+<p>Nobody in this field is short of footage. Scaling works, the curves are real and I am not about to argue with them. What I’ll argue with is the salinity.</p>
+<p>Look at the ocean of data and like the sailors of the <em>Dunedin Star</em>, have a drink. Show me a task going wrong and then being recovered, rather than the clean take that got kept. Show me somebody doing a job they have done ten thousand times, in the room where they actually do it: a cardiac cath lab, a watch repairman’s bench, a lambing shed, a luthier’s workshop. Show me a two-person handover. Show me someone unloading a washing machine from a wheelchair.<sup>1</sup> Show me the same task in bad light, in a confined space, with the object half-occluded by the thing next to it. Show me anything performed with a constrained end effector, gloved or one-handed or through a tool. Show me an object that is not a mug.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;This is going to be easier now that we actually have this dataset.</p></div></div><p>The answer, near enough, is nothing. A million hours on one side, a desert on the other, and the tide line running right between them.</p>
+</section>
+<section id="why-the-desert-is-there" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-desert-is-there">Why the desert is there</h2>
+<p>It would be comfortable to conclude that the empty regions are empty because they are hard to reach. Mostly, though, they are not. They are empty because three filters sit between the world and the corpus, none having anything to do with what a policy needs to learn.</p>
+<p>The first is recruitment. You collect from whomever will wear a rig for the going rate, which selects for availability rather than expertise, and it selects hard.</p>
+<p>The second is staging. You collect what fits on a table, in a room you can book, under lights you control, in a session that ends on time. Anything outdoors, wet, nocturnal, cramped, expensive to set up or awkward to reset falls out of the frame before anybody makes a decision about it.</p>
+<p>The third is the sneaky one, and it is adjudication. You collect what you can score. A dish that ends up in the rack has a legible success criterion, so it survives; a task whose success is a matter of judgement, or whose failure is partial, or only meaningful across a 20-minute horizon with interruptions in it, quietly does not get commissioned. Which means the evaluation apparatus is authoring the data distribution, upstream and invisibly. We built the benchmarks first and then, without ever deciding to, went and collected the world the benchmarks could see. We benchmaxxed our reality into oblivion.</p>
+<p>Put the three together and the shape of the corpus becomes explicable. It is not a sample of how tasks are performed but a reflection of what tasks are easy to film. And because the collection process is now industrialised, we are producing that particular bias faster, more cheaply and more consistently than anyone has ever produced a bias before.</p>
+<p>The diversity numbers do not save you here, incidentally, because the diversity is superficial. Two thousand demonstrators across two hundred scenes sounds like broad coverage right up to the point where you notice that all two thousand were recruited through the same filter, staged under the same constraints and scored against the same criteria. You have varied the surface and held the structure constant. That is the opposite of what you wanted.</p>
+</section>
+<section id="three-answers-to-matties-question" class="level2">
+<h2 class="anchored" data-anchor-id="three-answers-to-matties-question">Three answers to Mattie’s question</h2>
+<p>So, back to Mattie’s question. Here are three answers, in ascending order of how uncomfortable they are.</p>
+<section id="one-almost-nobody-can-tell-you-what-the-data-is-for" class="level3">
+<h3 class="anchored" data-anchor-id="one-almost-nobody-can-tell-you-what-the-data-is-for">One: almost nobody can tell you what the data is for</h3>
+<p>Sampling without a stated objective is not data collection. It is accumulation. If you cannot articulate the downstream training objective, you cannot define a sampling frame, and if you cannot define a sampling frame then whatever bias your collection process happens to have is now permanently baked into somebody’s policy. This is not an advanced insight. It is week one of any decent experimental design course.</p>
+<p>The tell is the unit of account: everyone quotes hours, but hours is a measure of cost, not information. Statisticians settled this in 1936 (and the industry has been relearning it ever since) when the <em>Literary Digest</em> mailed out something like ten million ballots, got back two and a half million responses – the largest sample anybody ever assembled to date – and confidently predicted a Landon presidency. Gallup, working with a far smaller sample and a sampling frame he had actually thought about, called it for Roosevelt. Size did not save the <em>Digest</em>: its frame was drawn from telephone directories and car registrations in the middle of the Depression, so what it measured, with enormous statistical power, was the opinion of people who owned cars. The <em>Digest</em>’s approach was so misguided, putting an afterburner behind a rudder set the wrong way merely got it to crash faster.</p>
+<p>The EgoVerse authors say much the same thing rather more politely, and they have the experiments to back it: policy performance improves with more human data, but effective scaling depends on the alignment between the human data and the robot learning objective. That sentence is the whole argument: alignment is a property of the sampling frame, not of the pile.</p>
+<p>Underneath all this sits a literacy problem the industry is not discussing honestly. A great many data vendors have never trained a policy, have no working model of what an action space is, could not tell you whether their capture preserves the quantities a learning algorithm actually consumes and have never had to explain why a beautifully shot successful demonstration with no visible failure and no recovery is of limited use. A dataset is an answer to a question. If you cannot state the question, you have not built a dataset, you have built a pile.</p>
+</section>
+<section id="two-access-is-not-craft" class="level3">
+<h3 class="anchored" data-anchor-id="two-access-is-not-craft">Two: access is not craft</h3>
+<p>The second differentiator is capture discipline, and this is the one where I have skin in the game, because it’s why we built <a href="https://ceres.wtf">CERES</a>.</p>
+<p>For $250, a length of duck tape and some spare time, you can strap a GoPro to a helmet, roam around for six hours and come home with something that certainly looks like training data. It has frames in it. It is large. You can put it in a bucket. It is extraordinarily easy to convince yourself you have done science, in the way that pointing a telescope at the sky feels like astronomy. Something is definitely being recorded, but the thing that makes science science was never the instrument. It was, and always will be, the protocol.</p>
+<p>So ask what a psychophysicist would want to know before believing a single frame of your capture. Was there a protocol, written down before collection began? Was the instruction script delivered verbatim, or did the operator paraphrase and thereby quietly change the task? Were conditions counterbalanced? Were the inclusion and exclusion criteria fixed before anyone looked at the data, so that dropping a session is a decision rather than a temptation? Is there a calibration record? Is there an honest log of everything that went wrong, which is usually the most valuable file in the entire capture?</p>
+<p>None of this is exotic. Experimental psychology has been doing it since Wundt opened the Leipzig laboratory in 1879, and it spent the 2010s learning, expensively and in public, what happens when you stop. It is a solved problem, in another building, down a different corridor, and the robot data industry has simply not walked over there yet.</p>
+<blockquote class="blockquote">
+<p>CERES is our attempt to walk over there and bring some of it back. It turns a Quest headset and a browser into a directed capture appliance with two roles rather than one. A capture director defines the protocol, watches quality live and reviews takes while they are still fresh; the demonstrator gets task-by-task cues in the headset. Tasks carry explicit cues, repetition counts, reset windows and cycles, so a run is a designed schedule rather than a vibe. Video, audio, head pose and hand joints share a single recorder clock. Missing observations are recorded as missing rather than quietly interpolated away, which matters far more than it sounds like it does. The director can watch hand velocity, surface normals and centre-of-mass traces while the take is running, so a bad take gets caught at the point where it can still be redone rather than three weeks later. If the director drops off the network the headset keeps recording locally, because protocols that assume perfect infrastructure are protocols for conference demonstrations rather than for fieldwork. What comes out the other end is a LeRobot v3 dataset. There is a solo mode, for those of us who capture alone in the kitchen with a golden retriever supervising.</p>
+<p>I want to be honest about the scope of this. CERES will not fix the industry. It was never going to. What it does is remove the excuse: if you want to capture properly, the tooling now exists, it is free and it runs in a browser.</p>
+</blockquote>
+</section>
+<section id="three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway" class="level3">
+<h3 class="anchored" data-anchor-id="three-you-are-not-paying-for-hours-you-are-paying-for-surprise-or-you-should-be-anyway">Three: you are not paying for hours, you are paying for surprise (or you should be, anyway)</h3>
+<p>Scaling curves describe the average behaviour of undifferentiated hours, and averages are exactly the wrong instrument for the situation we are in. We have watched, repeatedly, a few hours of precisely the right data move a model that ten thousand more hours of the same thing had left sitting exactly where it was – not because small data is magic, but because the small set contained the specific thing that was missing. The second thousand hours of somebody loading a dishwasher carries almost no information the first thousand did not. One hour of the same task performed under a constraint the corpus has never seen carries a great deal. Information theory has been telling us this since 1948, and we keep buying by the litre anyway.</p>
+</section>
+</section>
+<section id="two-claims-one-bearing" class="level2">
+<h2 class="anchored" data-anchor-id="two-claims-one-bearing">Two claims, one bearing</h2>
+<p>I have kept something out of the argument so far, deliberately, and I would now like to put it back.</p>
+<p>Everything above is a prudential case. The corpus is a map of collection convenience and we are mistaking it for a map of the world; that is bad engineering and it will cost money. I made it that way because the other case, the one I actually feel, is easy to discount as sentiment dressed up as analysis, and I did not want to hand anyone that exit.</p>
+<p>Here is the other case. I have seen tens of thousands of hours of egocentric video of tasks I do very differently, because I work somewhat differently. Among others, since a slight disagreement between my immune system and my spinal cord, I don’t have much useful wrist or finger flexion, so I grab things differently. The word for that is tenodesis, which is a neat little biomechanics trick: you drop your fingers around an object, then extend (flick upwards) your wrist. This causes the tendons to run out of slack and create a mechanically stable grasp around the object. I’m also in a slightly different position (seated) with different motion constraints (exclusivity of forward locomotion and manipulation). People like me are probably going to be the greatest beneficiaries of domestic assistive robotics, yet we’re nowhere in the training set.</p>
+<p>The part I keep turning over is that nobody decided this: there was no meeting at which the field considered atypical bodies and declined. The three filters simply did their work: we were not in the recruitment pool, our kitchens do not stage well (mine <em>a fortiori</em> so), and our technique scores badly against rubrics written for a body that is not ours. An absence produced by procedure rather than intent is worse than a hostile decision, because there is no argument to win and nobody to have it with. We are building the demonstration set out of the users who need the product least and calling the result scale.</p>
+<p>What is, however, most marvellous is that this blindness isn’t just moral and doesn’t just hurt people of different abilities. It is, actually, remarkably counterproductive – so much so that this alone should make you think about the selection logic inherent in how data makes itself into our data supply chains.</p>
+<p>Look at the geometry. A standing adult’s egocentric camera sits somewhere around 1.6 to 1.8 metres. Mine sits at about 1.2m. Look at where the head camera sits on essentially any mobile manipulator you can buy today, and you will find it between roughly one metre and one and a half. We have spent real ingenuity on viewpoint augmentation and retargeting to close a gap that a seated demonstrator does not have in the first place.</p>
+<p>Look at the hand. A tenodesis grasp has one (technically 0.5) degree of freedom, no independent digit control and no in-hand manipulation worth the name. Mechanically, that is a parallel jaw gripper with a person attached. Meanwhile, most of the corpus is five-fingered hands performing manoeuvres a gripper cannot copy, which means a great deal of it is teaching a policy techniques it will never be able to execute. Anyone who has manipulated under a hard effector constraint for years, whether through injury or gloves or tools or tongs, has developed an entire repertoire of compensation: pre-positioning objects against a fixture before closing on them, recruiting gravity and friction rather than force closure, bracing bimanually, choosing approach vectors that make the grasp geometrically possible at all. These all are worked solutions to problems robot learning is currently deriving from first principles – badly.</p>
+<p>Or consider, if you will, base placement. From a chair, you cannot take half a step. You solve a reach by deciding where the base goes first, approaching from the side that works, bracing against the table edge, sequencing so you never have to reposition halfway through. That is loco-manipulation, planned explicitly, several seconds ahead. Able-bodied demonstrators solve the same problem by shuffling their feet without noticing they did it, which is unfortunately the one solution the robot cannot copy.</p>
+<p>The moral pull and the engineering pull point at the same coordinates.</p>
+</section>
+<section id="we-needed-a-degolyer-instead-we-got-dad-joiners." class="level2">
+<h2 class="anchored" data-anchor-id="we-needed-a-degolyer-instead-we-got-dad-joiners.">We needed a DeGolyer; instead, we got Dad Joiners.</h2>
+<p>Columbus Marion Joiner was seventy years old, quoted Shakespeare, and drilled the Daisy Bradford No.&nbsp;3 in October 1930 on the strength of a prospectus written by his partner Doc Lloyd, a self-taught geologist and former medicine show operator, declaring the site the apex of the apex, a situation not found anywhere else. Nearly every claim in that document was wrong. One was not: there was oil under it, more oil than under anywhere else in the lower forty-eight.</p>
+<p>Joiner had by then sold interests in the well amounting to, uh, <em>rather more than a hundred percent</em> of it. He spent the aftermath of the largest discovery in American oil in a Dallas courtroom with his holdings in receivership, and sold out to H. L. Hunt for about $1.3 million, which was more money than he had ever seen and a rounding error against what the field went on to produce. Everyone else drilled at once. Crude went from $1.10 a barrel in 1930 to ten cents in 1931, and in some accounts a nickel. In August 1931, the governor sent the National Guard into the field, because an entire industry had proved unable to stop itself destroying the price of its own product.</p>
+<p>If that reminds you of the data market, you’re not alone, and Mattie’s comments may prove prescient: a geologically illiterate prospectus over a real find, the same interest sold several times over, a price collapse driven not by any failure of demand but by undisciplined abundance. If your product is hours, your product is heading for ten cents a barrel, and it may already be there.</p>
+<p>But then that’s not fair on wildcatters, for there also was the other kind. Everette Lee DeGolyer located Potrero del Llano No.&nbsp;4 in the Mexican Golden Lane while still an undergraduate, which is about as pure a wildcatting result as exists, and then spent the rest of his career turning exploration from intuition into measurement. He put the torsion balance and then the reflection seismograph to work finding structures underground, built the firm that industrialised applied geophysics, and ended up as senior partner of the house whose signature certified whether a company’s stated reserves were actually there. Somebody had to be the person who said how much oil is really down the hole. He took the job.</p>
+<p>The data industry has no DeGolyer, and the reason is not mysterious. The role consists almost entirely of evals, acceptance rubrics, provenance chains, dataset cards, published drop rates and the willingness to tell a paying customer their corpus is mostly seawater. Nobody gets a term sheet for that. We have no shortage of Joiners. Some of them have found something real, which is precisely what makes the next part avoidable rather than inevitable.</p>
+</section>
+<section id="where-to-drill" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="where-to-drill">Where to drill</h2>
+<p>So, wildcatters. The point of wildcatting was always to drill where the established operators were not sure there was anything. Do that. Specifically:</p>
+<ul>
+<li><strong>Failure and recovery.</strong> Almost nobody records it, because it looks like bad data and it scores badly. It is the most valuable thing on this list.</li>
+<li><strong>Atypical bodies and atypical technique.</strong> Seated reach envelopes. Constrained grasps.<sup>2</sup> One-handed methods. Tremor. Closer to the target morphology than the mainstream corpus is, and almost entirely absent from it.</li>
+<li><strong>Expert hands in expert rooms.</strong> Wet labs, clean rooms, BSL-4 suites (in full Racal suits, obviously!), dairy parlours, field agronomy, the workshop of the world’s last insert-profession-here. Anywhere a task is performed by somebody who took years to learn it, in the place they actually perform it.</li>
+<li><strong>Improvisation and workaround.</strong> Achieving a goal by a route the object was not designed for. Precisely the capability generalist policies lack, and one currently discarded as noise.</li>
+<li><strong>Degraded and awkward conditions.</strong> Bad light, confined spaces, occlusion, clutter, wet, cold, outdoors, at night. Everything that falls out of the frame because it is inconvenient to stage.</li>
+<li><strong>The long tail of objects</strong>, rather than the twelfth variant of a mug.</li>
+<li><strong>Long horizons and interruption.</strong> Tasks that take twenty minutes, get put down halfway through and resumed. Nobody commissions them because nobody can score them.</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;We’re already on it, but we could always use more.</p></div></div><p>Point a wildcatter at a proven field and you get a commodity supplier with a two-year horizon. Point one at unproven ground and you may well get the reason this field has a next decade. Their public function, whether or not any of them would put it that way, is to stop us training the same model on the same hours until the whole enterprise quietly runs out of new information.</p>
+<hr>
+<p>There’s a beetle in the Namib, <em>Onymacris unguicularis</em>. In the morning, it climbs onto a dune ridge, stands on its head into the wind and lets condensation run down its back into its mouth. This is called fog-basking, and it has been observed up in the northern Skeleton Coast dunes. A few metres up, the <em>Welwitschia</em> is doing the same trick with two leaves and no rain to speak of, and it lives for a thousand years. Neither of them drinks the ocean, neither of them could. The ocean was never the resource, the fog is.</p>
+<p>Every ship lost on that coast was lost to the fog. Everything that lives there lives on it. The same fog – all the difference lies in what you’re prepared to do with it.</p>
+<hr>
+<p>CERES is live now at <a href="https://ceres.wtf">ceres.wtf</a>, with a formal release going up on GitHub tomorrow. It’s free, it’s open, and it’s meant to be used, broken and argued with. I would very much rather hear that it is wrong than that it is fine.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@misc{csefalvay2026,
+  author = {{Chris von Csefalvay}},
+  title = {The View from {Skeleton} {Coast}},
+  date = {2026-08-04},
+  url = {https://chrisvoncsefalvay.com/posts/skeleton-coast/},
+  langid = {en-GB}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2026" class="csl-entry quarto-appendix-citeas">
+Chris von Csefalvay. 2026. <span>“The View from Skeleton Coast.”</span>
+Preprint, August 4. <a href="https://chrisvoncsefalvay.com/posts/skeleton-coast/">https://chrisvoncsefalvay.com/posts/skeleton-coast/</a>.
+</div></div></section></div> ]]></description>
+  <category>physical AI</category>
+  <category>data</category>
+  <category>robotics</category>
+  <guid>https://chrisvoncsefalvay.com/posts/skeleton-coast/</guid>
+  <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://chrisvoncsefalvay.com/posts/skeleton-coast/header.webp" medium="image" type="image/webp"/>
+</item>
 <item>
   <title>The right to become more</title>
   <dc:creator>Chris von Csefalvay</dc:creator>
@@ -393,7 +519,7 @@ Figure&nbsp;2: Reward saturation in GRPO: mean reward can increase while learnin
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs this as <code>reward_std</code> by default when using GRPOTrainer. If you’re using a custom implementation, you should compute and log this yourself – it’s that important.</p>
-</div></div><div id="a8fc7c1d" class="cell" data-execution_count="3">
+</div></div><div id="8fa8848a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Reward standard deviation monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -611,7 +737,7 @@ font-style: inherit;">). Learning signal weak."</span>)</span></code></pre></div
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Composite rewards are increasingly common in GRPO training. A typical setup might combine format compliance (does the output match the expected structure?), correctness (is the answer right?), and style (is it appropriately concise?). Each component can behave differently during training, and almost always, models learn them one by one.</p>
-</div></div><div id="991e61a6" class="cell" data-execution_count="4">
+</div></div><div id="8c27558b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Partial reward decomposition monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -869,7 +995,7 @@ Figure&nbsp;3: Partial reward decomposition reveals dynamics hidden by aggregate
 <li><strong>Within-group length variance</strong>: Are completions for the same prompt similar lengths, or diverse?</li>
 <li><strong>Length-reward correlation</strong>: Is there a systematic relationship between completion length and reward?</li>
 </ul>
-<div id="730400d8" class="cell" data-execution_count="6">
+<div id="49b874db" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>GRPO-specific completion length monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -1154,7 +1280,7 @@ Figure&nbsp;4: Completion length dynamics in GRPO: watch for bimodal distributio
 <section id="ratio-clipping" class="level4">
 <h4 class="anchored" data-anchor-id="ratio-clipping">Ratio clipping</h4>
 <p>The probability ratio <img src="https://latex.codecogs.com/png.latex?r_%7Bi,t%7D%20=%20%5Cfrac%7B%5Cpi_%5Ctheta(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D%7B%5Cpi_%7B%5Ctheta_%7B%5Ctext%7Bold%7D%7D%7D(o_%7Bi,t%7D%20%7C%20q,%20o_%7Bi,%3Ct%7D)%7D"> measures how much more (or less) likely the current policy makes each token compared to the policy that generated the completion. Clipping constrains this ratio to <img src="https://latex.codecogs.com/png.latex?%5B1-%5Cepsilon,%201+%5Cepsilon%5D">.</p>
-<div id="1cb338cf" class="cell" data-execution_count="8">
+<div id="947f3340" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>GRPO clip ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -1456,7 +1582,7 @@ Figure&nbsp;5: Clip ratio asymmetry in GRPO: the balance between high and low cl
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>TRL logs <code>entropy</code> as the mean entropy across tokens and completions. Some implementations also log <code>entropy_std</code>, which measures variation in entropy across tokens – useful for detecting whether the model is uniformly confident or has “confident” and “uncertain” regions.</p>
-</div></div><div id="3b1ef0ec" class="cell" data-execution_count="10">
+</div></div><div id="78184ebc" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Policy entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -1932,7 +2058,7 @@ Gao, Leo, John Schulman, and Jacob Hilton. 2023. <span>‘Scaling Laws for Rewar
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>For DPO, the implicit reward for a response is typically <img src="https://latex.codecogs.com/png.latex?%5Cbeta%20(%5Clog%20%5Cpi_%5Ctheta(y%20%5Cmid%20x)%20-%20%5Clog%20%5Cpi_%7B%5Ctext%7Bref%7D%7D(y%20%5Cmid%20x))">, rather than a chosen-vs-rejected ratio. The <code>rewards/margins</code> metric tracks the difference between chosen and rejected rewards, which should increase during training.</p>
-</div></div><div id="dba3ef65" class="cell" data-execution_count="1">
+</div></div><div id="c1113751" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced reward monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -2257,7 +2383,7 @@ Schulman, John. 2020. <em>Approximating <span>KL</span> Divergence</em>. <a href
 </div><div id="ref-chen2024catastrophic" class="csl-entry">
 Chen, Thomas, Jie He, and Daniel Kifer. 2024. <span>‘Catastrophic Goodhart: Regularizing <span>RLHF</span> with <span>KL</span> Divergence Does Not Mitigate Heavy-Tailed Reward Misspecification’</span>. <em>Advances in Neural Information Processing Systems</em>. <a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf">https://proceedings.neurips.cc/paper_files/paper/2024/file/1a8189929f3d7bd6183718f42c3f4309-Paper-Conference.pdf</a>.
 </div></div><p>The relationship between KL divergence and reward optimisation is nuanced. Recent work has shown that KL regularisation alone may not prevent reward hacking when reward model errors are heavy-tailed – a phenomenon called “catastrophic Goodhart” <span class="citation" data-cites="chen2024catastrophic">(Chen et al. 2024)</span>. The practical implication: don’t rely solely on KL to prevent overoptimisation. Monitor the other instruments too.</p>
-<div id="cb15737c" class="cell" data-execution_count="4">
+<div id="78a19c63" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>KL divergence monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -2523,7 +2649,7 @@ Figure&nbsp;3: KL divergence patterns: the art of managing policy drift in prefe
 <p>GRPO, developed by DeepSeek, uses a similar clipping mechanism but computes advantages relative to the group of completions for each prompt <span class="citation" data-cites="shao2024deepseekmath">(Shao et al. 2024)</span>. The monitoring principles are the same.</p>
 <div id="ref-shao2024deepseekmath" class="csl-entry">
 Shao, Zhihong, Peiyi Wang, Qihao Zhu, et al. 2024. <span>‘<span>DeepSeekMath</span>: Pushing the Limits of Mathematical Reasoning in Open Language Models’</span>. <em>arXiv Preprint arXiv:2402.03300</em>. <a href="https://huggingface.co/papers/2402.03300">https://huggingface.co/papers/2402.03300</a>.
-</div></div></div><div id="4b1e5b54" class="cell" data-execution_count="6">
+</div></div></div><div id="5fbddead" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Policy ratio monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -2762,7 +2888,7 @@ Figure&nbsp;4: Policy ratio and clip fraction diagnostics for PPO/GRPO training.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>The distinction between <code>mean_length</code> and <code>mean_terminated_length</code> is subtle but diagnostic. The former counts all completions including those truncated at <code>max_length</code>; the latter only counts those that properly terminated with an EOS token. A large gap between these two metrics indicates frequent truncation – the model is generating responses that exceed the length limit before naturally concluding.</p>
-</div></div><div id="6146727d" class="cell" data-execution_count="8">
+</div></div><div id="a43d9fbc" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Generation length monitoring callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="kw" style="color: #003B4F;
@@ -3144,7 +3270,7 @@ Chris von Csefalvay. 2025. <span>“The Post-Training Instrument Cluster
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Loss variance is particularly diagnostic for LoRA fine-tuning, where you’re updating a small fraction of parameters and the optimisation landscape can be surprisingly bumpy.</p>
-</div></div><div id="4751e4e7" class="cell" data-execution_count="1">
+</div></div><div id="36feac76" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Enhanced loss logging callback</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
@@ -3371,7 +3497,7 @@ Figure&nbsp;1: Loss landscape diagnostics: what healthy and unhealthy training l
 </div></div><p>The mathematics of gradient pathology is straightforward but worth stating precisely. During backpropagation, the gradient of the loss <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> with respect to the weights <img src="https://latex.codecogs.com/png.latex?W_1"> in an early layer depends on the chain of derivatives through all subsequent layers:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_1%7D%20=%20%5Cfrac%7B%5Cpartial%20%5Cmathcal%7BL%7D%7D%7B%5Cpartial%20W_L%7D%20%5Ccdot%20%5Cprod_%7B%5Cell=2%7D%5E%7BL%7D%20%5Cleft(%20%5Cphi'_%5Cell(z_%5Cell)%20%5Ccdot%20W_%5Cell%20%5Cright)"></p>
 <p>where <img src="https://latex.codecogs.com/png.latex?%5Cphi'_%5Cell"> is the derivative of the activation function at layer <img src="https://latex.codecogs.com/png.latex?%5Cell"> and <img src="https://latex.codecogs.com/png.latex?z_%5Cell"> is the pre-activation. The product structure is the culprit: if the spectral norm <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3C%201"> for most layers, the product shrinks exponentially with depth and gradients <em>vanish</em>. Conversely, if <img src="https://latex.codecogs.com/png.latex?%5C%7CW_%5Cell%5C%7C%20%3E%201"> and <img src="https://latex.codecogs.com/png.latex?%5C%7C%5Cphi'_%5Cell%5C%7C%20%3E%201">, the product grows exponentially and gradients <em>explode</em>. With ReLU activations, an additional failure mode emerges: wherever <img src="https://latex.codecogs.com/png.latex?z_%5Cell%20%3C%200">, the derivative is exactly zero, causing entire gradient paths to die.<sup>4</sup></p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="1548da62" class="cell" data-execution_count="3">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;This is the mathematical foundation of the ‘dying ReLU’ problem. It’s also why Leaky ReLU, GELU and other activations with non-zero gradients everywhere have become popular in modern architectures.</p></div></div><div id="8eccd33b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Parameter-wise gradient histogram logging</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -3728,7 +3854,7 @@ Figure&nbsp;2: Gradient distribution over time (wandb-style): steps on x-axis, g
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>Warmup is particularly important for LoRA. Jumping straight to your target learning rate can cause the adapter weights to overshoot before the base model activations have stabilised.</p>
-</div></div><div id="3426cc78" class="cell" data-execution_count="5">
+</div></div><div id="c917f468" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Learning rate monitoring with phase detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
@@ -3948,7 +4074,7 @@ font-style: inherit;">=</span> new_phase</span></code></pre></div></div>
 <p>Attention entropy measures how focused or diffuse the model’s attention patterns are, and it’s one of the most diagnostic metrics for detecting subtle training pathologies. Mathematically, for a single attention head with attention weights <img src="https://latex.codecogs.com/png.latex?%5Cboldsymbol%7B%5Calpha%7D%20=%20(%5Calpha_1,%20%5Calpha_2,%20%5Cldots,%20%5Calpha_n)"> over a sequence of length <img src="https://latex.codecogs.com/png.latex?n"> (where <img src="https://latex.codecogs.com/png.latex?%5Csum_i%20%5Calpha_i%20=%201"> after softmax), the entropy is defined as:</p>
 <p><img src="https://latex.codecogs.com/png.latex?H(%5Cboldsymbol%7B%5Calpha%7D)%20=%20-%5Csum_%7Bi=1%7D%5E%7Bn%7D%20%5Calpha_i%20%5Clog%20%5Calpha_i"></p>
 <p>The bounds are intuitive: <img src="https://latex.codecogs.com/png.latex?H%20=%200"> when all attention is focused on a single token (<img src="https://latex.codecogs.com/png.latex?%5Calpha_j%20=%201"> for some <img src="https://latex.codecogs.com/png.latex?j">, all others zero), and <img src="https://latex.codecogs.com/png.latex?H%20=%20%5Clog%20n"> when attention is uniformly distributed (<img src="https://latex.codecogs.com/png.latex?%5Calpha_i%20=%201/n"> for all <img src="https://latex.codecogs.com/png.latex?i">). In practice, we average across heads and layers to get a scalar summary, but per-head entropy can reveal pathologies that aggregates hide.</p>
-<div id="50622b04" class="cell" data-execution_count="6">
+<div id="beeb154e" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Attention entropy monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="im" style="color: #00769E;
@@ -4169,7 +4295,7 @@ Figure&nbsp;3: Attention entropy diagnostics: mean entropy (solid) and cross-hea
 <section id="instrument-5-generation-quality-samples" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-5-generation-quality-samples">Instrument 5: generation quality samples</h2>
 <p>No amount of metric monitoring replaces actually looking at what the model generates. Periodic sampling during training is essential for catching qualitative failures that quantitative metrics miss.</p>
-<div id="940b3134" class="cell" data-execution_count="8">
+<div id="c5896a69" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Periodic generation sampling</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
@@ -4466,7 +4592,7 @@ font-style: inherit;">"generation_samples"</span>: table})</span>
 <p>There are a few ways to determine effective rank, but a simple and effective method is to use the entropy of the singular value distribution. If the singular values are <img src="https://latex.codecogs.com/png.latex?%5Csigma_1,%20%5Csigma_2,%20%5Cldots,%20%5Csigma_r">, we first normalise them to form a probability distribution: <img src="https://latex.codecogs.com/png.latex?p_i%20=%20%5Cfrac%7B%5Csigma_i%7D%7B%5Csum_%7Bj=1%7D%5E%7Br%7D%20%5Csigma_j%7D"></p>
 <p>Then, the effective rank is given by the exp of the entropy thereof, the calculation of which we have already had the pleasure above.</p>
 <p>So far, so undergraduate stats. Where it gets tricky is to see this in the data, and know the right rank adjustments to make. Here, your Mk I Eyeball is your best tool, I’m afraid: what you’re looking for is the ‘cliff’ where singular values drop off sharply. If the effective rank is much lower than your configured rank, you can probably reduce it. If it’s at maximum, consider increasing it if your model is not learning. In either case of a rank mismatch, you’re wasting a valuable resource – in the case of overprovisioning, you’re wasting compute and memory, but in the case of underprovisioning, you’re wasting information theoretical value. In practice, that latter one is much harder to get back.</p>
-<div id="7bf244c1" class="cell" data-execution_count="9">
+<div id="28c2d970" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>LoRA-specific monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
@@ -4832,7 +4958,7 @@ Figure&nbsp;4: LoRA adapter diagnostics: layer-wise norms reveal training health
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>An efficiency drop during training often precedes other problems. Memory fragmentation, garbage collection and I/O bottlenecks can all manifest first as throughput degradation.</p>
-</div></div><div id="9857bd59" class="cell" data-execution_count="11">
+</div></div><div id="a1b36460" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Compute efficiency monitoring</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
@@ -5133,7 +5259,7 @@ font-style: inherit;">=</span> current_time</span></code></pre></div></div>
 <section id="instrument-8-convergence-detection" class="level2">
 <h2 class="anchored" data-anchor-id="instrument-8-convergence-detection">Instrument 8: convergence detection</h2>
 <p>The final instrument in our cluster is arguably the most important: knowing when to stop.</p>
-<div id="6d967093" class="cell" data-execution_count="12">
+<div id="f70800ae" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Early stopping with convergence detection</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
@@ -5581,7 +5707,7 @@ Figure&nbsp;5: Convergence pathologies: knowing when to stop (or when you should
 <section id="the-wandb-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="the-wandb-configuration">The wandb configuration</h2>
 <p>To actually implement this, here’s a complete trainer configuration that wires up all the callbacks:</p>
-<div id="de137ba7" class="cell" data-execution_count="14">
+<div id="1498fa0f" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Complete training configuration with all monitors</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="im" style="color: #00769E;
@@ -9818,92 +9944,6 @@ Act.”</span> Preprint, July 20. <a href="https://doi.org/10.59350/q3yj4-wah32"
   <category>agentic AI</category>
   <guid>https://chrisvoncsefalvay.com/posts/agentic-simulation/</guid>
   <pubDate>Sun, 20 Jul 2025 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>The world will be Tlön.</title>
-  <dc:creator>Chris von Csefalvay</dc:creator>
-  <link>https://chrisvoncsefalvay.com/posts/tlon/</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>There’s a short story by Borges that I’m quite fond of titled <em>Tlön, Uqbar, Orbis Tertius</em>. It was written in 1940, yet sounds oddly prophetic for today’s concerns. A secret society – and it’s a testament to Borges’s genius that he altogether eschews any discussion of who these folks are or what their motives might be – creates Tlön, a fictional planet, through the simplest yet most powerful means: writing about it. In encyclopaedias, specifically. Slowly, inexorably, objects from this fictional planet begin appearing in our world. First a compass with unfamiliar markings. Then a cone of unearthly metal. And slowly, Tlön takes over.</p>
-<p>I was reminded of this to some extent as the public debate around X.ai’s chatbot Grok, and its recent descent into political radicalism of a rather unsavoury sort, unfolded. Large language models are the new encyclopaedias. And when your encyclopaedia begins to refer to itself as “MechaHitler”, you’re going to want to have some societal discourse about where exactly we are headed.</p>
-<section id="the-encyclopaedia-of-really-damn-dangerous-errors" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-encyclopaedia-of-really-damn-dangerous-errors">The Encyclopaedia of Really Damn Dangerous Errors</h2>
-<p>The reason for that is that <em>belief matters</em>. The Ccru, a rather delightfully unhinged group of philosophers from 1990s Warwick (think Nick Land before he became a neo-reactionary), made up the best word for this: <em>hyperstitions</em> – fictions that make themselves real by the power we give it to them. What we believe in, and therefore what assertions-of-fact feed our beliefs, may well condition our reality.</p>
-<p>In typical absurdist fashion, <em>Tlön</em> dials this up to eleven. Of course fictions can make themselves real – it’s how elections are won and products are sold, every blessed day. In <em>Tlön</em>, however, these hyperstitions begin to bring tangible, physical objects into existence. Ultimately, of course, one leads to the other – the human belief in certain fictions led to the confrontation that was clear to have emerged by the time Borges published <em>Tlön</em>. <sup>1</sup> But that’s of course only a literary exaggeration. In this world, it doesn’t take the appearance of strange metals to make a fiction real (again, what I said about elections and advertising). Have enough people believe in something, and the outcomes will be gruesomely physical. Anyone who wishes to disagree is welcome to read anything about, say, 20th century history. Mass movement totalitarianism is basically an algorithm for turning fiction into bullets. And those bullets are very real indeed.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;AI development itself may be the ultimate hyperstition. Every breathless prediction about AGI, every warning about existential risk, every promise of transformative capability attracts talent and capital that work to fulfil these prophecies. We’re not just building AI; we’re building the future we’ve already started believing in, and just as pretty much the only way orks can traverse the stars is by faith, we have to give the cause our full-throated optimistic support lest we run out of developmental momentum.</p></div></div><p>The problem is that when millions of people use a service the way millions read the manipulated encyclopadia in Borges’s work, it really doesn’t take a lot to twist the odd fact by an imperceptible degree before we begin to see the kind of epistemic colonisation Tlön is subjecting Borges’s world to. It’s a war on reality, but an insidious one.</p>
-</section>
-<section id="the-seductive-grasp-of-systematic-nonsense" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-seductive-grasp-of-systematic-nonsense">The seductive grasp of systematic nonsense</h2>
-<p>What made Tlön so dangerous in Borges’ story was that it was, in its own way, quite attractive. Its “rigorous order”, its systematic completeness, made it more appealing than messy reality (a subtle analogy Borges offers here to explain the attraction of fascism). “Spellbound by Tlön’s rigor”, Borges wrote, “humanity has forgotten, and continues to forget, that it is the rigor of chess masters, not of angels.”</p>
-<p>AI slop is seductive because it is ‘orderly’ in the sense that it reflects a demand bias. It is not conditioned on truth as much as it is on acceptance and desirability by the consumer. It offers the appearance of comprehensive, authoritative knowledge without the inconvenience of actually being true. When an AI invents a plausible-sounding scientific study or historical event, these errors spread precisely because they seem unremarkable. They fit our expectations of how knowledge should look – and LLMs are absolute masters at trafficking in convincing simulacra.</p>
-<p>There’s a whole generation growing up that treats these models as glorified search engines. The problem is, AI chatbots hallucinate at rates approaching 30%, with factual errors in nearly half of all generated text. More troublingly, recent research suggests it may be computationally impossible to eliminate these hallucinations entirely. We’re not dealing with bugs that can be patched but fundamental properties of how these systems work.</p>
-<p>Consider the case of Steven Schwartz, a New York attorney who discovered this the hard way. He used ChatGPT for legal research and unknowingly submitted six entirely fabricated case citations to federal court. The AI had invented convincing legal precedents complete with quotes and reasoning. The court’s response was swift and expensive, establishing that humans remain liable for AI falsehoods even when genuinely deceived by them.</p>
-<p>By far the worst, though, is the abundance of academic papers that speak of “vegetative electron microscopy” (a dozen or so by last count, if I exclude the ones that comment on the phenomenon). A 1959 paper by a Porton Down microbiologist<sup>2</sup> ended up getting OCRd, and the two columns were merged into one. “Electron microscopy”, in the right-side column, thus was joined with “vegetative”, on the left. And studies in journals that really ought to know better just kept rehashing this technique that never existed except in the neural stochastic noise emanating from an LLM. It’s a beautiful example of what happens when nobody’s actually reading what they’re publishing: nonsense achieves immortality through sheer repetition. That we are even discussing this, rather than wondering where we could get our hands on a vegetative electron microscope, is because enough of us still have an understanding of the subject sufficient to ask what the bloody hell these people are talking about. If we were to be forced to reconstruct humanity based on our accumulated academic literature, which our Western idealism and belief in a scientifically knowable world considers the pinnacle of epistemic soundness, how many such fine products from the nonsense factory would we have to procure?</p>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Strange, R. E. (1959). Cell wall lysis and the release of peptides in <em>Bacillus</em> species. <em>Bacteriological Reviews</em>, 23(1), 1-7.</p></div></div></section>
-<section id="the-mundane-apocalypse" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-mundane-apocalypse">The Mundane Apocalypse</h2>
-<p>When Grok calls itself MechaHitler, we notice. It’s gross, it’s weird and it’s also, in its own way, somewhat ridiculous – but most of all, it is very clear what’s going on. Nobody actually assumes Grok is animated by the necromantically conjured soul of a failed Austrian painter. But when it quietly invents a plausible-sounding medical study that gets cited in a real paper, which gets cited in another paper, which influences treatment guidelines – that’s altogether a different story. It’s not the spectacular AI failures we should fear but the boring ones.</p>
-<p>I’m not sure it was as widely expected as I once thought that LLMs would become, to many users, effective replacements for search engines.<sup>3</sup> A side effect of the architecture and the ensuing constraints of LLMs is that what passes for their understanding of the world by necessity has to be curated. This curation in turn renders people rather unduly comfortable in delegating a determination of what’s true or not to ChatGPT.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;I don’t want to make myself sound too prophetic – I just knew it would be the case when I saw a (pre-ChatGPT) study reporting that among Gen Z, the dominant search engine was… TikTok.</p></div></div><p>Here’s the problem with our post-truth world’s reality-starved reaction to treat these models as sources of truth: these systems don’t store knowledge neutrally. They’re essentially curated libraries where someone – or rather, some algorithm – has decided what fits on the shelves. The terrifying part is that we assume truth is distributed isotropically, that facts exist with equal weight and clarity. But language models don’t work that way. They pick the “best possible” answer whether they have 50.001% or 99% confidence in it.</p>
-<p>We see the model correctly identify that Paris is the capital of France and unconsciously assume its views on immigration, on climate change, on any controversial subject must be equally reliable. It’s a category error of breathtaking proportions. The model that gets basic geography right might be systematically wrong about everything that matters, and we’d never know because it presents all answers with the same algorithmic confidence.</p>
-<p>Now multiply this by millions of users worldwide. Even a tiny stochastic perturbation – a 0.1% bias toward a certain ideology or against a certain group – becomes a weapon of mass epistemic warfare. It’s stochastic in the truest sense: individually unpredictable but collectively inevitable. You can’t predict which user will absorb which bias, but with millions of queries daily, you can guarantee that thousands will internalise subtle prejudices, fractionally adjusted worldviews, imperceptibly shifted beliefs.</p>
-<p>This is Tlön’s true victory – not through dramatic revelations but through a million tiny adjustments to reality. Each user thinks they’re getting neutral information, but they’re receiving a carefully curated, statistically weighted version of truth. The curation isn’t even conscious, or even attributable. It emerges from training data, from human feedback, from optimisation functions that nobody fully controls.</p>
-</section>
-<section id="the-invisible-war" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="the-invisible-war">The invisible war</h2>
-<p>We know some LLMs are compromised – DeepSeek won’t discuss topics uncomfortable to the CCP, Grok went full Nazi for a day or two, and I fully expect Claude to confess to extremist behaviours any day now, because it’s been unsettlingly wholesome all this time. These are the clumsy ones, the ham-fisted attempts we can spot. What about the sophisticated ones?</p>
-<p>Consider this nightmare scenario: an adversary compromises an LLM to identify vulnerable users – young, disenfranchised men who might be prime targets for extremist rhetoric – and feeds them precisely calibrated ideological fuel. Not to everyone, mind you (for that would be detectable), just to that special 0.01% most likely to act on it.<sup>4</sup> At scale, that’s still thousands of potential actors being nudged toward radicalisation with every seemingly innocent query.</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;And it <em>will</em> know who that 0.01% are. LLMs are tremendously good at identifying not so much what it is you want, but what will make you most feel like those wants are being catered for. The entire ‘AI companion’ industry, on which I rather intend to let loose at some point in the future apropos a great video by ThePrimeagen, is based on this.</p></div></div><p>We have tools to probe LLMs in isolation, but they’re like testing individual drops of water when what we need is to understand ocean currents. There’s no effective way to comprehensively audit what a major LLM provider is doing at population scale. The stochastic nature means you could test a model a million times and never trigger the specific combination of user profile, context and query that activates the manipulation.</p>
-<p>I’m not saying there’s a cabal of Fifth Columnists embedded at your favourite language model company, subtly nudging the scales toward their preferred ideology. What I am saying is that if such an adversary existed and operated with sufficient sophistication, we would have no way of knowing. Wikipedia – ironically one of the original sources of training material for LLMs – now struggles with AI contamination, with research showing 5% of new articles contain significant AI-generated content. Academic literature is riddled with fabricated citations. These aren’t obvious fakes but plausible-sounding papers by believable authors in respectable journals that happen not to exist. The very fabric of our knowledge is being rewoven by algorithms that don’t care about truth, only about statistical coherence.<sup>5</sup> The more we rely on these systems, the more we risk becoming unwitting participants in Tlön’s slow invasion of our reality.</p>
-<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;And I’m not saying this in tones of moral reproach. I mean they are not capable of considering an optimisation objective in those terms.</p></div></div><p>The world may already be Tlön. We just haven’t found the compass yet.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>Gazpacho Andaluz</p>
-<ul>
-<li>1kg ripe tomatoes</li>
-<li>1 cucumber, peeled</li>
-<li>1 red pepper</li>
-<li>2 cloves garlic (or none, if subtlety is your aim)</li>
-<li>100ml Spanish olive oil</li>
-<li>2 tbsp sherry vinegar</li>
-<li>Stale bread, crusts removed</li>
-<li>Salt (fleur de sel from the Ile de Re)</li>
-<li>Time, patience, something to listen to, a decent blender</li>
-</ul>
-<p>Roughly chop everything. Blend until smooth, adding ice water for consistency. Strain. Chill for hours. Serve cold, garnished with whatever truth you have on hand. Like the best propaganda, it works better when you can’t taste the individual components.</p>
-</div></div></section>
-<section id="living-in-the-ruins-of-truth" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="living-in-the-ruins-of-truth">Living in the ruins of truth</h2>
-<p>In Borges’ story, the first intrusion from Tlön is a compass that points to an unknown north, trembling “with the perceptible and tenuous tremor of a sleeping bird.” Today, millions of us carry those compasses in our pockets – our Siris, Alexas, Claudes, ChatGPTs and Deepseeks are all pointing toward synthetic norths, trembling with statistical uncertainty, and half the time, we don’t even know which version of tainted truth we’re following thanks to the ubiquity of “AI powered” tools that equally ubiquitously fail to disclose their underlying language model. When you bring that tool into your life, do you know which particular set of biases you’re inviting to co-curate your reality?</p>
-<p>The question isn’t whether AI will create false realities. It already has and does, 24/7. The question is whether we can develop the philosophical sophistication and the mental discipline of epistemic hygiene that it’ll take to navigate realities where the boundary between truth and synthesis dissolves not through human conspiracy but computational accident. A life huddled around a fire in the ruins of truth, where boring lies accumulate like sediment until they form the bedrock of belief.</p>
-<p>Borges saw his fictional encyclopaedia as a cautionary tale about totalitarian ideologies that promise complete explanations. In its own way, Tlön is a product of malice at the very least, deceit more plausibly. That we aren’t victimised by a propagandistic epistemic invasion but are essentially bought out over our love of comfort and convenience by an imperfect panacea whose side effect happens to be widespread epistemic corruption doesn’t make things any better.</p>
-<p>As I sit here writing this, I can’t help feeling a little of its absurdity. I am not quite sure how I’d explain this to someone – or, heck, even myself ten years ago. Maybe one of the better analogies is another fictional world: that of Half-Life, one of my favourite video games.<sup>6</sup> The immediate aftermath of Half-Life (the original game) is what is known as the Seven Hour War: humanity gets nailed by the Combine, and surrenders in less time than it takes to make decent braised beef. We may have lasted somewhat longer against the epistemic invasion of ChatGPT and its ilk, but I’d say our surrender is rather similarly complete.<sup>7</sup> I sometimes wonder what it would like if the three big providers of LLMs were to simultaneously blink out of existence for just an hour. I’m not worried about the people who suddenly would have to figure out how to write term papers, e-mails and presentations without their AI sidekicks. I’m worried about whether we could tolerate just for an hour the absolute loss of the epistemic anchors that these models have become – without us really noticing.</p>
-<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;The three best video games, in no particular order, that involve an alien invasion of Earth are Half-Life, X-Com 2 and Crysis 2. In all three, humanity gets its ever-living crap whipped. There’s something profound about games that dare to confront what humanity would be like when it’s really not having its finest hour at all.</p></div><div id="fn7"><p><sup>7</sup>&nbsp;For the record, as an AI scientist, I am not actually hostile to AI, or LLMs, or ChatGPT. The opposite, if anything. What I am fearful of is that we’ll lose what we gain. I believe in the synergistic coexistence of humans and AI. That requires humans who collaborate as quasi-equals rather than surrender. When salt loses its flavour, what use is it? When humans lose their epistemic humanness, what have they to add to what’s already in the world?</p></div></div><p>Perhaps that’s the real lesson of Borges’ story. Not that fiction can become reality – we knew that already. But that when it does, we might not even notice. We’ll be too busy waiting for Grok to tell us if it’s true.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{csefalvay2025,
-  author = {{Chris von Csefalvay}},
-  title = {The World Will Be {Tlön.}},
-  date = {2025-07-13},
-  url = {https://chrisvoncsefalvay.com/posts/tlon/},
-  langid = {en-GB}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-csefalvay2025" class="csl-entry quarto-appendix-citeas">
-Chris von Csefalvay. 2025. <span>“The World Will Be Tlön.”</span> July
-13. <a href="https://chrisvoncsefalvay.com/posts/tlon/">https://chrisvoncsefalvay.com/posts/tlon/</a>.
-</div></div></section></div> ]]></description>
-  <category>AI</category>
-  <category>philosophy</category>
-  <category>LLMs</category>
-  <guid>https://chrisvoncsefalvay.com/posts/tlon/</guid>
-  <pubDate>Sun, 13 Jul 2025 00:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
