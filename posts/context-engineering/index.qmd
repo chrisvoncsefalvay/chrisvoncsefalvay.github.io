@@ -12,7 +12,13 @@ title: The Snowmobile Symptom
 
 When I read Andrej Karpathy's endorsement of "context engineering" in a Twitter exchange with Shopify's Tobi Lutke, I felt he tapped into something we all felt to some degree:
 
-{{< tweet karpathy 1937902205765607626 >}}
+```{=html}
+<blockquote class="twitter-tweet" data-dnt="true" align="center">
+  <p lang="en" dir="ltr">+1 for &quot;context engineering&quot; over &quot;prompt engineering&quot;.<br><br>People associate prompts with short task descriptions you&#39;d give an LLM in your day-to-day use. When in every industrial-strength LLM app, context engineering is the delicate art and science of filling the context window… <a href="https://t.co/Ne65F6vFcf">https://t.co/Ne65F6vFcf</a></p>
+  &mdash; Andrej Karpathy (@karpathy) <a href="https://x.com/karpathy/status/1937902205765607626?ref_src=twsrc%5Etfw">June 25, 2025</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+```
 
 What Andrej is saying, and advocating, makes perfect sense. And yet, it also made me feel rather uneasy. I've been [an acknowledged and public sceptic of prompt engineering](https://chrisvoncsefalvay.com/posts/prompt-engineering/) mainly because I felt that it was a stopgap solution, and I'd say that a year and a half in retrospect, I was mostly proven right. There aren't millions of prompt engineers raking in fat cheques across the Valley. What we have is smarter LLMs that need a lot less prompt engineering and are much more capable of inferring our desires from our malformed prompts. 
  
