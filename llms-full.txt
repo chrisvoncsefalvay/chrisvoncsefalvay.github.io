@@ -1,12 +1,12 @@
-# Chris von Csefalvay — Full Profile
+# Chris von Csefalvay — full profile
 
-> AI researcher and computational epidemiologist. Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. Author of The Craft of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, CO.
+> AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards. Principal at HCLTech's AI Practice. Author of The Craft of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, Colorado.
 
 ## Biography
 
-Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. His work spans post-training for large language models, agentic AI systems, and applied AI in life sciences, backed by nearly two decades of experience across enterprise AI, computational epidemiology, and public health informatics.
+Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards (RLVR). He is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. In this role, he advises organisations in life sciences, medical devices and pharmaceuticals on applications of AI.
 
-Before joining HCLTech, Chris held roles in data science and AI leadership across the pharmaceutical, industrial, and technology sectors. He holds degrees from the University of Oxford (where he studied at University College and Merton College) and Cardiff University. He is a Fellow of the Royal Society for Public Health (FRSPH) and a Senior Member of IEEE.
+He attended the University of Oxford for his undergraduate and graduate studies. He also holds degrees from Cardiff University and Robert Gordon University Aberdeen, and studied at Leiden University under the Erasmus programme. He is Certified in Public Health (CPH), a Fellow of the Royal Society for Public Health (FRSPH) and an IEEE Senior Member.
 
 Chris is based in Denver, Colorado. He was born in Budapest, Hungary, and holds both British and Hungarian nationality.
 
@@ -15,201 +15,199 @@ Wikidata: Q107095298
 ISNI: 0000000502655729
 VIAF: 7190162669581955500004
 
-## Expertise
+## Research interests
 
-### Post-training for language models
-Chris specialises in post-training — the process of adapting pre-trained language models for specific tasks and behaviours. His expertise covers the full post-training pipeline:
-- Supervised fine-tuning (SFT): curating instruction datasets, training strategies, loss functions
-- Reinforcement learning from human feedback (RLHF) and from verifiable rewards (RLVR)
-- Group Relative Policy Optimization (GRPO) and Direct Preference Optimization (DPO)
-- Parameter-efficient fine-tuning: LoRA, QLoRA, quantisation, distillation
-- Evaluation discipline: benchmark design, contamination detection, human evaluation protocols
-- Domain adaptation for enterprise and regulated industries
-
-### Agentic AI systems
-Chris works extensively on agentic AI — systems where language models act autonomously to accomplish goals:
-- Multi-agent frameworks and orchestration patterns
-- Verifiable agentic architectures and safety constraints
-- Agent interaction protocols and tool use
-- Context engineering and memory management for agents
-- Agent evaluation and benchmarking (MCPMark)
-
-### Computational epidemiology
-Chris's earlier career focused on computational approaches to infectious disease:
-- Agent-based modelling of epidemic dynamics
-- Compartmental models (SIR, SEIR) and network epidemiology
-- Geospatial analysis of disease spread
-- Pharmacovigilance and vaccine safety signal detection
-- COVID-19 epidemiology (social distancing dynamics, vaccine safety analysis)
-
-### Additional areas
-- AI governance, ethics, and alignment
-- LLMOps and model deployment at scale
-- Biomedical AI and clinical NLP
-- Data science leadership and team building
+- Post-training for language models, including supervised fine-tuning, RLHF, RLVR, DPO, GRPO, evaluation, quantisation and domain adaptation
+- Verifiable agentic systems, multi-agent frameworks and large agentic networks, orchestration, emergence, small language models and self-healing agentic architectures
+- Computational epidemiology, including agent-based modelling, disease-avoidant behaviour, epidemic dynamics over dynamic networks and geospatial modelling
+- Pharmacovigilance, including VAERS, passive reporting and language-model analysis of complex report sets
+- Computational dynamics of complex, infectious-disease and social systems
+- Evidence-based public health policy, ethics, law, quality and systems improvement
 
 ## Books
 
 ### The Craft of Post-Training: A Practical Guide for AI Engineers and Developers
-- Publisher: No Starch Press (available July 2026)
+
+- Publisher: No Starch Press (July 2026)
 - ISBN: 9781718505209
 - Pages: 416
 - Website: https://posttraining.guide
 - Purchase: https://nostarch.com/craft-of-post-training
 
-A comprehensive guide to post-training techniques for large language models. Covers supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation. Written for AI engineers and developers who need practical, hands-on guidance for adapting language models to real-world tasks in enterprise settings.
+A practical guide to post-training language models, covering supervised fine-tuning, RLHF, DPO, KTO and GRPO; domain adaptation; quantisation; agentic-model training; and deployment-focused evaluation.
 
-### Computational Modeling of Infectious Disease
+### Computational Modeling of Infectious Disease: With Applications in Python
+
 - Publisher: Elsevier (2023)
 - ISBN: 9780323953894
 - Website: https://computationalinfectiousdisease.com
 - Purchase: https://shop.elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4
 
-A monograph on computational approaches to understanding infectious disease dynamics. Covers agent-based modelling, compartmental models, network epidemiology, and geospatial analysis, with practical Python implementations throughout. Aimed at epidemiologists, public health professionals, and data scientists working in health.
+An illustrated guide and quick reference to infectious-disease analysis, from compartmental and time-series models to geospatial and agent-based models, with extensive Python examples.
+
+## Open-source work
 
 ### Learn Julia the Hard Way
-- Publisher: Zenodo (2021)
-- DOI: 10.5281/zenodo.4556324
 
-An open-source, community-authored introduction to the Julia programming language, emphasising a hands-on, exercise-driven approach to learning scientific computing and data analysis.
+- Release: v0.85
+- Archive: Zenodo (2021)
+- DOI: https://doi.org/10.5281/zenodo.4556324
 
-## Selected Publications
+An open-source introduction to Julia by Chris von Csefalvay and contributors, using a hands-on, exercise-driven approach to scientific computing and data analysis.
+
+## Selected publications
 
 ### AI and language models
-- von Csefalvay C (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. arXiv 2402.10951. https://arxiv.org/abs/2402.10951
-  Introduces DAEDRA, a transformer-based language model fine-tuned on VAERS reports to predict patient outcomes from adverse event narratives, demonstrating the potential of LLMs for pharmacovigilance signal detection.
 
-### Epidemiology and public health
+- von Csefalvay C (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. arXiv 2402.10951. https://arxiv.org/abs/2402.10951
+  DAEDRA is a domain-specific language model trained to identify regulatory-relevant outcomes — mortality, emergency-department attendance and hospitalisation — in adverse-event reports collected through passive reporting.
+
+### Health and public health
+
 - Mogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, von Csefalvay C, Mukamati D (2023). Juvenile polyposis syndrome: A case report. Clinical Case Reports 11:e6798. doi:10.1002/ccr3.6798
 - Mutua V, Henry B, von Csefalvay C, et al. (2022). Tocilizumab in addition to standard of care in the management of COVID-19: A meta-analysis of RCTs. Acta Bio Medica 93. doi:10.23750/abm.v93i1.12208
 - von Csefalvay C (2021). VAERS data reveals no increased risk of neuroautoimmune adverse events from COVID-19 vaccines. medRxiv. doi:10.1101/2021.06.13.21258851
 - von Csefalvay C (2021). Early evidence for the safety of certain COVID-19 vaccines using empirical Bayesian modeling from VAERS. medRxiv. doi:10.1101/2021.06.10.21258589
 - von Csefalvay C (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. arXiv 2007.13734. https://arxiv.org/abs/2007.13734
 - von Csefalvay C, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. Zenodo. doi:10.5281/zenodo.3782871
+
+### Data science
+
 - Foldi T, von Csefalvay C, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. Big Data and Cognitive Computing 4:32. doi:10.3390/bdcc4040032
 
 ### Full publication list
+
 https://chrisvoncsefalvay.com/papers/
 
-## Blog Posts (The Notebook)
+## Blog posts (The Notebook)
 
 ### Post-training and reinforcement learning
-- The post-training instrument cluster, Part I: SFT and evaluation — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/
-  An introduction to supervised fine-tuning and evaluation as the foundational elements of the post-training pipeline.
-- The post-training instrument cluster, Part II: reinforcement learning — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/
-  Explores reinforcement learning from human feedback (RLHF) and reinforcement learning from verifiable rewards (RLVR) as post-training techniques.
-- The post-training instrument cluster, Part III: GRPO — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/
-  A deep dive into Group Relative Policy Optimization and its role in modern post-training.
+
+- The post-training instrument cluster — Part I — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster/
+  Beyond loss curves — what you should actually be watching when fine-tuning LLMs.
+- The post-training instrument cluster — Part II — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-rl/
+  Monitoring reward curves, KL divergence, and policy health when training with DPO, PPO, and GRPO.
+- The post-training instrument cluster — Part III — https://chrisvoncsefalvay.com/posts/post-training-instrument-cluster-grpo/
+  The part where you have to take all that you have learned and work hard to completely unlearn it. Here be dragons.
 - Post-training: three disciplines in a trenchcoat — https://chrisvoncsefalvay.com/posts/post-training-scale/
-  Argues that post-training is really three distinct disciplines (alignment, capability, and safety) that have been conflated.
-- Seatbelts and straitjackets: DeepSeek and AI safety — https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/
-  Examines the tension between safety constraints and model capability in the context of DeepSeek.
+  On the comfortable delusion of a unitary post-training discipline.
+- The right to become more — https://chrisvoncsefalvay.com/posts/right-to-become-more/
+  On post-training, human agency and the right to shape our technological future.
+- Seatbelts and straitjackets — https://chrisvoncsefalvay.com/posts/deepseek-seatbelts-and-straitjackets/
+  What happens when a despotic regime turns alignment into control, open source into propaganda and guardrails into straitjackets.
 
 ### Agentic AI and multi-agent systems
+
 - What I talk about when I talk about agentic AI — https://chrisvoncsefalvay.com/posts/two-years-of-agents/
-  A reflection on two years of working with agentic AI systems and what the term really means.
-- The skeuomorphic fallacy in agent design — https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/
-  Why designing AI agents to mimic human workflows is a fundamental design error.
-- The Snowmobile Symptom: context engineering — https://chrisvoncsefalvay.com/posts/context-engineering/
-  On the emerging discipline of context engineering for language model applications.
-- Why we need to move from prompting to programming — https://chrisvoncsefalvay.com/posts/programmatic-agentic-ai/
-  Argues for a shift from prompt-based to programmatic approaches in building agentic AI systems.
-- After agents: what comes next — https://chrisvoncsefalvay.com/posts/after-agents/
-  Speculates on the post-agent paradigm in AI systems.
-- After agents, part 2: Agents and the Agora — https://chrisvoncsefalvay.com/posts/agents-agora/
-  Continues the exploration of post-agent architectures with a focus on collective intelligence.
-- Teams of Rivals: multi-agent coordination — https://chrisvoncsefalvay.com/posts/team-of-rivals/
-  Explores coordination patterns in multi-agent systems drawing parallels from political science.
+  Two years on from helping to articulate a concept that changed everything, some thoughts on where we are, where we're going and the things we lost along the way.
+- The skeuomorphic fallacy — https://chrisvoncsefalvay.com/posts/skeuomorphic-fallacy/
+  What something is isn't the same as what it uses to manifest that being. Also, robot CEOs are nonsense.
+- The Snowmobile Symptom — https://chrisvoncsefalvay.com/posts/context-engineering/
+  AI's latest buzzword is more confession than innovation.
+- A little less conversation: why we need to move from prompting to programming — https://chrisvoncsefalvay.com/posts/programmatic-agentic-ai/
+  Prompting is fine if you want to have a conversation. Building stuff, however, requires us to learn to program LLMs. Sorry, vibe coders.
+- After agents — https://chrisvoncsefalvay.com/posts/after-agents/
+  2024 was the year of agents. 2025 will be about figuring out how we orchestrate their interactions. Welcome to the year of ecosystems.
+- After agents, part 2 — Agents and the Agora — https://chrisvoncsefalvay.com/posts/agents-agora/
+  Why agents are the least interesting part of agentic AI.
+- Teams of Rivals — https://chrisvoncsefalvay.com/posts/team-of-rivals/
+  Finally, some discussion on LLM connectionism, and what LLMs could usefully become.
 - From agents to the Chorus — https://chrisvoncsefalvay.com/posts/choral-ai/
-  On choral AI as an alternative to single-agent architectures.
-- Dorkestration: agent orchestration patterns — https://chrisvoncsefalvay.com/posts/dorkestration/
-  A practical guide to orchestrating multi-agent systems.
-- A slow walk out of Dikika Cave: MCP and MCPMark — https://chrisvoncsefalvay.com/posts/mcp-mcpmark/
-  On the Model Context Protocol and benchmarking tool use in agents.
-- Between the motion and the act: agentic simulation — https://chrisvoncsefalvay.com/posts/agentic-simulation/
-  On using simulation to test and validate agentic AI systems.
-- Deep kimchi: agentic speciation — https://chrisvoncsefalvay.com/posts/agentic-speciation/
-  Explores the diversification and specialisation of agent types.
+  The coming evolution from agentic AI to persistent, volitional systems.
+- Dorkestration — https://chrisvoncsefalvay.com/posts/dorkestration/
+  Why everybody missed the point about tool use in agentic AI, and how a handful of primitives can orchestrate your entire ML workflow.
+- A slow walk out of Dikika Cave — https://chrisvoncsefalvay.com/posts/mcp-mcpmark/
+  MCP is great. The models, however, just didn't show up.
+- Between the motion and the act — https://chrisvoncsefalvay.com/posts/agentic-simulation/
+  What if agents can do more than act?
+- Deep kimchi — https://chrisvoncsefalvay.com/posts/agentic-speciation/
+  You're probably doing agentic AI wrong, and I wish this were clickbait. Here's why agentic AI is in deep kimchi, and how to get out of it.
 
 ### AI philosophy, governance and predictions
+
 - The War for the Soul of AI — https://chrisvoncsefalvay.com/posts/war-for-the-soul-of-ai/
-  On the ideological battle over the future direction of AI development.
-- The world will be Tlön — https://chrisvoncsefalvay.com/posts/tlon/
-  A Borges-inspired meditation on AI's potential to reshape reality.
+  Where does intelligence live? Just about everything depends on the answer to that question.
+- The world will be Tlön. — https://chrisvoncsefalvay.com/posts/tlon/
+  In which we attend the funeral of any semblance of an epistemically coherent world.
 - Five wild guesses for 2026 — https://chrisvoncsefalvay.com/posts/five-wild-guesses-2026/
-  Predictions for the AI landscape in 2026.
+  The bubble everyone's watching for isn't the one that's coming.
 - Five unconventional predictions — https://chrisvoncsefalvay.com/posts/five-wild-guesses/
-  Earlier set of contrarian predictions about AI development.
+  Or, the GenAI årsgång, 2025 edition.
 - The Moral Pulse of the Machine — https://chrisvoncsefalvay.com/posts/moral-maps/
-  On machine ethics and moral reasoning in AI systems.
-- Deja Vu, All Over Again: AI policy — https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/
-  A critique of government AI policy frameworks.
+  On bedtime stories, and what making machines tell them tells us about their moral make-up.
+- Deja Vu, All Over Again. — https://chrisvoncsefalvay.com/posts/ai-opportunities-action-plan/
+  The UK now has an AI Action Plan. The problem is, innovation does not grow from plans.
 - The Hype, the Slop and the Craft — https://chrisvoncsefalvay.com/posts/hype-slop-craft/
-  On distinguishing genuine AI capability from hype and low-quality output.
+  A differential ecology of AI, as she is done in late 2025.
 
 ### LLMs: language, hallucinations and evaluation
-- Beyond Broca: LLMs and language — https://chrisvoncsefalvay.com/posts/llms-language/
-  On what LLMs reveal about the nature of language processing.
-- Asemantic induction of hallucinations in LLMs — https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/
-  A study of how meaningless inputs can systematically induce hallucinations in language models.
+
+- Beyond Broca — https://chrisvoncsefalvay.com/posts/llms-language/
+  What if we've got one of the most important things in our understanding of who we are, and what makes us intelligent, utterly wrong?
+- Asemantic Induction of Hallucinations in LLMs — https://chrisvoncsefalvay.com/posts/asemantic-induction-of-hallucinations/
+  Large language models (LLMs) struggle with asemantic information: the more we stray outside the confines of language, the worse it gets. Here's how we'll use this for fun and profit.
 - The knowledge dividend of large language models — https://chrisvoncsefalvay.com/posts/knowledge-dividend-of-llms/
-  On how LLMs create economic value through knowledge accessibility.
-- SOYA: the only benchmark that matters — https://chrisvoncsefalvay.com/posts/soya/
-  A satirical take on AI benchmarking culture.
+  Crosspost from the work blog: a pragmatic perspective on the knowledge dividend in large language models (and what it may, or may not, mean for knowledge in models, and what this can do for you).
+- SOYA — the only benchmark that matters — https://chrisvoncsefalvay.com/posts/soya/
+  All benchmarks are wrong — and if you want some that are useful, you might need to build your own.
 - Prompt Engineering: The Art of Yesterday — https://chrisvoncsefalvay.com/posts/prompt-engineering/
-  On why prompt engineering is a transitional discipline that will be superseded.
+  Why prompt engineering has been obsolete before it even took off.
 - Just noise in the neurons — https://chrisvoncsefalvay.com/posts/noise-in-the-neurons/
-  On noise, signal, and meaning in neural network representations.
-- LAIR: Language As Intermediate Representation — https://chrisvoncsefalvay.com/posts/lair/
-  Proposes language as an intermediate representation layer for AI systems.
+  Your language model isn't experiencing a cognitive defect. It's just wrong.
+- LAIR — Language As Intermediate Representation — https://chrisvoncsefalvay.com/posts/lair/
+  Language As Intermediate Representation — a new paradigm for transformation using multimodal LLMs.
 - The Lyre of Hephaestus — https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/
-  On AI creativity and the nature of artistic production by machines.
+  AI, art, language, and what makes us truly what we are.
 - The end of isotropy and the rise of metadynamic AI — https://chrisvoncsefalvay.com/posts/metadynamic-ai/
-  On directional evolution in AI systems moving beyond isotropic capability growth.
-- The hardest AI problem you've never heard of — https://chrisvoncsefalvay.com/posts/dwarf-fortress/
-  Uses Dwarf Fortress to illustrate fundamental challenges in AI reasoning.
+  GPT-5 has changed the story in ways few seem to have considered. For better or worse: we're all architects now. Welcome to the post-isotropy age and metadynamic AI.
+- The hardest AI problem you've never heard of. — https://chrisvoncsefalvay.com/posts/dwarf-fortress/
+  Dwarves. Elephants. AI. Let the games begin.
 - Stochastic parrots, cap and gown edition — https://chrisvoncsefalvay.com/posts/academic-generative-ai/
-  On the use (and misuse) of generative AI in academic settings.
+  Academic AI is a hot mess. Here's why.
 
 ### Epidemiology and public health
+
 - Data for the next pandemic — https://chrisvoncsefalvay.com/posts/data-for-the-next-pandemic/
-  On building data infrastructure for pandemic preparedness.
+  If there's one thing that emerged with any clarity from COVID-19, it's that where data played a decisive role in guiding policy interventions, outcomes were better. We need better data for the next pandemic.
 - Why the COVID-19 vaccines are not gene therapy — https://chrisvoncsefalvay.com/posts/mrna-gene-therapy/
-  A scientific rebuttal to the claim that mRNA vaccines constitute gene therapy.
-- Peace, love, Paxlovid and Pfizermectin — https://chrisvoncsefalvay.com/posts/paxlovid/
-  On the science and politics of COVID-19 therapeutics.
+  Reflections on some definitional issues.
+- Peace, love, Paxlovid and 'Pfizermectin' — https://chrisvoncsefalvay.com/posts/paxlovid/
+  Debunking a remarkably popular and persistent misconception about the relationship between Paxlovid and ivermectin.
 - The 95% myth — https://chrisvoncsefalvay.com/posts/95-percent-myth/
-  Debunking misconceptions about vaccine efficacy statistics.
+  How a study from 1959 on 100 patients created one of the most enduring myths about human weight and nutrition.
 
 ### Other topics
+
 - Love in the Time of Algorithms — https://chrisvoncsefalvay.com/posts/ai-girlfriends/
-  On AI companionship and the social implications of emotional AI.
-- What I learned from getting bodied by a robot — https://chrisvoncsefalvay.com/posts/ai-human-interaction/
-  A personal account of physical human-robot interaction.
+  Exploring the phenomenon of AI-powered companions and their societal implications.
+- What I learned from getting bodied by a robot. — https://chrisvoncsefalvay.com/posts/ai-human-interaction/
+  I'm fine, the robot's fine, society on the other hand has some questions to tackle.
 - Biome engineering — https://chrisvoncsefalvay.com/posts/biome-engineering/
-  On the engineering of biological systems and microbiomes.
+  Giving agents space, for fun and profit.
+- The view from Skeleton Coast — https://chrisvoncsefalvay.com/posts/skeleton-coast/
+  There is an ocean of egocentric data and a desert next to it, and almost nobody selling either can tell you what it is for.
 - Ransomware attacks as n-person prisoner's dilemmas — https://chrisvoncsefalvay.com/posts/ransomware-prisoners-dilemma/
-  Game-theoretic analysis of ransomware payment dynamics.
+  A game theoretical perspective on ransomware attacks as n-person prisoner's dilemmas, and why forced cooperation isn't the answer.
 - As we may see: the world after dashboards — https://chrisvoncsefalvay.com/posts/as-we-may-see/
-  On the future of data visualisation beyond traditional dashboards.
-- Julia: a post-mortem — https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/
-  A retrospective on the Julia programming language's trajectory.
+  Dashboards are over — if you want it.
+- Julia: A post-mortem — https://chrisvoncsefalvay.com/posts/julia-a-post-mortem/
+  Why I no longer believe my favourite programming language will save the world.
 - A different shade of grey — https://chrisvoncsefalvay.com/posts/a-different-shade-of-grey/
-  On nuance and ambiguity in AI decision-making.
-- SkiErg marathon: how to do it entirely the wrong way — https://chrisvoncsefalvay.com/posts/skierg-marathon/
-  A humorous personal account of completing a SkiErg marathon.
+  A response to Urbina _et al._ (2022) and the unreasonable spectre of AI coming up with chemical warfare agents (as if we didn't already have enough of them).
+- How to do a SkiErg marathon entirely the wrong way (but still finish) — https://chrisvoncsefalvay.com/posts/skierg-marathon/
+  How to eat the wrong way, rest the wrong way (i.e. not), half-ass all relevant parts of preparation for a marathon and still finish with an okay time.
 - Quarto project scripts are awesomeness — https://chrisvoncsefalvay.com/posts/quarto-project-scripts/
-  A tutorial on using pre-render scripts in Quarto static sites.
+  Project scripts help you integrate just about every possible hare-brained scheme into your Quarto rendering pipeline. Go on, build that page from that YAML file. You know you want to.
 - Auto-DOI for Quarto posts via Rogue Scholar — https://chrisvoncsefalvay.com/posts/auto-doi/
-  How to automatically assign DOIs to blog posts using Rogue Scholar.
+  Oh, that's mint. We can finally use Rogue Scholar to mint DOIs for Quarto posts and append them automagically.
 
 ## Teaching
 
-Visiting thesis supervisor for students on the data science track of the mathematics programme at the Budapest University of Technology and Economics. Supervises theses on topics related to AI, machine learning, and computational epidemiology.
+Chris is a visiting thesis supervisor for students on the data science track of the mathematics programme at the Budapest University of Technology and Economics. Past topics include agent-based infectious-disease models, vaccination disproportionality analysis and computer vision using synthetic-aperture radar imagery for forest-cover detection.
 
 Details: https://chrisvoncsefalvay.com/teaching/
 
-## External Profiles
+## External profiles
 
 - Website: https://chrisvoncsefalvay.com
 - GitHub: https://github.com/chrisvoncsefalvay
