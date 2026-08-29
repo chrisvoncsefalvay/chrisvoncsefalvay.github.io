@@ -60,7 +60,7 @@
     "href": "index.html#key-research-interests",
     "title": "Chris von Csefalvay",
     "section": "Key research interests",
-    "text": "Key research interests\n\nAI: verifiable agentic systems, signature embedding, complex autonomy/large agentic networks, emergence, SLMs, self-healing agrntic architectures\nComputational epidemiology: agent-based modelling, disease-avoidant behaviours, epidemics over dynamic networks, geospatial computational epidemiology – all primarily in the context of infectious diseases\nPharmacovigilance: VAERS, passive reporting, text mining of large complex report sets using LLMs\nComputational dynamics: computational dynamics of complex systems, computational dynamics of infectious diseases, computational dynamics of social systems\nPublic health: evidence-based public health policy, public health ethics, public health law, quality and systems improvement in public health"
+    "text": "Key research interests\n\nAI: verifiable agentic systems, signature embedding, complex autonomy/large agentic networks, emergence, SLMs, self-healing agentic architectures\nComputational epidemiology: agent-based modelling, disease-avoidant behaviours, epidemics over dynamic networks, geospatial computational epidemiology – all primarily in the context of infectious diseases\nPharmacovigilance: VAERS, passive reporting, text mining of large complex report sets using LLMs\nComputational dynamics: computational dynamics of complex systems, computational dynamics of infectious diseases, computational dynamics of social systems\nPublic health: evidence-based public health policy, public health ethics, public health law, quality and systems improvement in public health"
   },
   {
     "objectID": "index.html#teaching",
@@ -2011,63 +2011,63 @@
   {
     "objectID": "about/index.html",
     "href": "about/index.html",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "",
     "text": "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at HCLTech’s AI Practice, leading post-training research and clinical intelligence."
   },
   {
     "objectID": "about/index.html#books",
     "href": "about/index.html#books",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Books",
     "text": "Books\nChris is the author of two books:\n\nThe Craft of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press, available July 2026) – a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.\nComputational Modeling of Infectious Disease (Elsevier, 2023) – a hands-on guide to computational epidemiology using Python, covering agent-based models, network epidemiology, and geospatial analysis."
   },
   {
     "objectID": "about/index.html#research",
     "href": "about/index.html#research",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Research",
     "text": "Research\nHis research interests span post-training for language models, agentic AI systems, computational epidemiology, and public health informatics. He has published in peer-reviewed journals including Acta Biomedica, Big Data and Cognitive Computing, and Frontiers in Medicine, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence A344856 (Jellyfish Heart numbers)."
   },
   {
     "objectID": "about/index.html#education-and-credentials",
     "href": "about/index.html#education-and-credentials",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Education and credentials",
     "text": "Education and credentials\nChris attended the University of Oxford (Merton College) for both his undergraduate and graduate studies, and holds degrees from Cardiff University and Robert Gordon University Aberdeen, with further studies at the University of Leiden. He is board certified in public health (CPH), a Fellow of the Royal Society for Public Health (FRSPH), and an IEEE Senior Member. He received the Martin Wronker Prize at the University of Oxford."
   },
   {
     "objectID": "about/index.html#professional-affiliations",
     "href": "about/index.html#professional-affiliations",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Professional affiliations",
     "text": "Professional affiliations\n\nIEEE – Senior Member\nRoyal Society for Public Health – Fellow\nAmerican Public Health Association – Member\nThe OR Society – Member\nTOPRA – Registered Member"
   },
   {
     "objectID": "about/index.html#teaching-and-service",
     "href": "about/index.html#teaching-and-service",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Teaching and service",
     "text": "Teaching and service\nChris is a visiting thesis supervisor for students on the data science track of the mathematics programme at the Budapest University of Technology and Economics. He serves as a reviewer for JOSS, Frontiers in Immunology and Frontiers in Medicine, and is a member of the Rocky Mountain MRC of Denver and Colorado’s radiation response MRC."
   },
   {
     "objectID": "about/index.html#media-and-public-engagement",
     "href": "about/index.html#media-and-public-engagement",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Media and public engagement",
     "text": "Media and public engagement\nChris’s work has been featured in the World Economic Forum Technology Convergence Report 2025, The Spectator, and City Journal. He has appeared on the Tech For Good podcast and other media outlets. He writes regularly on AI, post-training, and computational epidemiology on his blog."
   },
   {
     "objectID": "about/index.html#personal",
     "href": "about/index.html#personal",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Personal",
     "text": "Personal\nBorn in Budapest, Hungary, Chris lives in Denver, Colorado. He is an adaptive multisport athlete, competing in wheelchair rugby, adaptive rowing (category PR1), and the SkiErg (category SIT2), where he holds multiple world records. He lives with neuromyelitis optica since 2015."
   },
   {
     "objectID": "about/index.html#contact",
     "href": "about/index.html#contact",
-    "title": "About Chris von Csefalvay",
+    "title": "About",
     "section": "Contact",
     "text": "Contact\n\nEmail: chris+website@chrisvoncsefalvay.com\nLinkedIn: chrisvoncsefalvay\nGitHub: chrisvoncsefalvay\nORCID: 0000-0003-3131-0864\nGoogle Scholar: X_2G-VsAAAAJ"
   },
