@@ -1,8 +1,11 @@
 ---
-title: "About Chris von Csefalvay"
-description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence."
+title: "About"
+description: "Chris von Csefalvay is an AI researcher and computational epidemiologist. He leads post-training research and clinical intelligence at HCLTech."
 image: /img/portrait_2x3midres.webp
 comments: false
+header-includes:
+  - |
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","@id":"https://chrisvoncsefalvay.com/about/#profile-page","url":"https://chrisvoncsefalvay.com/about/","name":"About Chris von Csefalvay","mainEntity":{"@type":"Person","@id":"https://chrisvoncsefalvay.com/#person","name":"Chris von Csefalvay"},"isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"}}</script>
 ---
 
 Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at [HCLTech](https://www.hcltech.com/)'s AI Practice, leading post-training research and clinical intelligence.

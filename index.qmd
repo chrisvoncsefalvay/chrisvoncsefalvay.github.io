@@ -1,6 +1,6 @@
 ---
 title: "Chris von Csefalvay"
-description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of The Craft of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier)."
+description: "Chris von Csefalvay researches language-model post-training, agentic AI, reinforcement learning from verifiable rewards and computational epidemiology."
 about:
     template: trestles
     links:
@@ -50,7 +50,7 @@ You can find a [list of my publications here](papers). My work on COVID-19 has b
 
 ## Key research interests
 
-* **AI**: verifiable agentic systems, signature embedding, complex autonomy/large agentic networks, emergence, SLMs, self-healing agrntic architectures
+* **AI**: verifiable agentic systems, signature embedding, complex autonomy/large agentic networks, emergence, SLMs, self-healing agentic architectures
 * **Computational epidemiology**: agent-based modelling, disease-avoidant behaviours, epidemics over dynamic networks, geospatial computational epidemiology -- all primarily in the context of infectious diseases
 * **Pharmacovigilance**: VAERS, passive reporting, text mining of large complex report sets using LLMs
 * **Computational dynamics**: computational dynamics of complex systems, computational dynamics of infectious diseases, computational dynamics of social systems

@@ -7,6 +7,7 @@ project:
     # - scripts/pre_canonicalise_tags.py
   post-render:
     - scripts/post_canonicalise_sitemap.py
+    - scripts/post_validate_metadata.py
 resources:
   - CNAME
   - llms.txt
@@ -16,7 +17,7 @@ resources:
 website:
   site-url: "https://chrisvoncsefalvay.com"
   title: "Chris von Csefalvay"
-  description: "Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards. Author of The Craft of Post-Training: A Practical Guide for AI Engineers and Developers (No Starch Press)."
+  description: "Chris von Csefalvay researches language-model post-training, agentic AI, reinforcement learning from verifiable rewards and computational epidemiology."
   navbar:
     left:
       - href: index.qmd

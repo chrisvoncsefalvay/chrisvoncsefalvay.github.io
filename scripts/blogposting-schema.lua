@@ -89,8 +89,11 @@ local function get_page_url(meta)
   end
 
   input_file = input_file:gsub("^%./", "")
-  local path = input_file:gsub("%.qmd$", "/"):gsub("%.md$", "/")
+  local path = input_file:gsub("%.qmd$", "/")
+  path = path:gsub("%.md$", "/")
+  path = path:gsub("%.ipynb$", ".html")
   path = path:gsub("index/$", "")
+  path = path:gsub("index%.html$", "")
   if path == "" then path = "/" end
   if not path:match("^/") then path = "/" .. path end
   return site_url .. path
@@ -104,6 +107,7 @@ function Meta(meta)
 
   local title = pandoc.utils.stringify(meta.title)
   local date = format_date(meta.date)
+  local date_modified = format_date(meta['date-modified']) or date
   local description = meta.description and pandoc.utils.stringify(meta.description) or ""
   local image = meta.image and pandoc.utils.stringify(meta.image) or nil
   local page_url = get_page_url(meta)
@@ -148,7 +152,10 @@ function Meta(meta)
 
   if date then
     json = json .. ',"datePublished":"' .. escape_json_string(date) .. '"'
-    json = json .. ',"dateModified":"' .. escape_json_string(date) .. '"'
+  end
+
+  if date_modified then
+    json = json .. ',"dateModified":"' .. escape_json_string(date_modified) .. '"'
   end
 
   json = json .. ',"author":{"@id":"https://chrisvoncsefalvay.com/#person"}'

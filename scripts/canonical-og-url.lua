@@ -48,8 +48,11 @@ local function get_page_path()
 
   -- Clean up and convert to URL path
   input_file = input_file:gsub("^%./", "")
-  local path = input_file:gsub("%.qmd$", "/"):gsub("%.md$", "/")
+  local path = input_file:gsub("%.qmd$", "/")
+  path = path:gsub("%.md$", "/")
+  path = path:gsub("%.ipynb$", ".html")
   path = path:gsub("index/$", "")
+  path = path:gsub("index%.html$", "")
   if path == "" then path = "/" end
   if not path:match("^/") then path = "/" .. path end
 
