@@ -22,7 +22,7 @@ In a recent paper that has attracted the interest of popular media as well, Fabi
 
 I agree with the conclusion, but for rather different reasons.
 
-# Background
+## Background
 
 Computational chemistry is the branch of computational science that focuses on applications in the chemical field. This includes pharmacology and rational drug design (RDD) in particular. The purpose of RDD is to generate drug candidates that show favourable indicators of effectiveness (such as high binding affinity to a target protein) along with indicators of biological suitability (such as no or low interference with other proteins, low toxicity and no inhibition of metabolic ‘bottlenecks’ like CYP3A4). The latter part is typically handled by a toxicity model.
 
@@ -30,7 +30,7 @@ Rather simply put, a toxicity model infers the structural associations (the chem
 
 Nothing about the above is controversial. In fact, Urbina’s paper is an example of ‘trivial genius’: just about anyone who has ever done computational chemistry in the pharmacological/drug design space knows that any algorithm that is intended to optimise towards lower toxicity can be inverted to optimise towards higher toxicity, and the same models used to create effective enzyme inhibitors to treat cancer, depression, schizophrenia, allergies or autoimmune disease can be repurposed in a few hours and about $100 in AWS credits to something that will generate potent acetylcholinesterase inhibitors (AChEIs). Notably, this is not to say that all research aimed at acetylcholinesterase inhibition is aimed at creating a chemical warfare agent. AChEIs are used in a clinical context, e.g. for myasthenia gravis. They are, however, also the archetypal “nerve agent”. Which leads me to my second point of agreement with Urbina et al.: the tools of computational pharmacology and RDD are — and have been, for a long time! — open to misuse.
 
-# The reverse of the medal
+## The reverse of the medal
 
 On the other hand, the likelihood of an AI-generated chemical agent ever posing a threat beyond the theoretical is very, very low. There are a few reasons for that, and they’re inherent partly in computational chemistry, partly in weapons design.
 
@@ -40,7 +40,7 @@ The bigger problem is the weapons design part. To avoid a late-night visit from 
 
 Finally, there is no real need for novel chemical agents, at least not in the nerve agent category. Not only does using a known agent provide plausible deniability, there is also no real need to create anything more lethal than VX. Even relatively old chemical agents, such as mustard agents, are effective enough. A novel chemical structure may not guarantee that the agent escapes chemical detection, and functional antidotes are going to be just as effective against novel agents. To an atropine/pralidoxime NAAK autoinjector’s efficacy, it makes no difference whether the acetylcholinesterase inhibition comes from sarin, VX, Tetram or inadvertent exposure to organophosphate pesticides. Arguably, this becomes somewhat more complex with other agents, where the biological targets — and hence the antidotes — are more specific. Nevertheless, it is hard to conceive of anyone possessed of a burning rationale to start creating novel chemical agents.
 
-# A lighter shade of grey
+## A lighter shade of grey
 
 I commend the authors for discussing the moral aspects of this exercise. It is rather uncomfortable to write about the use of artificial intelligence to create tools whose predominant use would be to extinguish human lives (although, as noted, many of these compounds can, and often do, have a medicinal use).
 

@@ -1,8 +1,9 @@
 ---
 title: Papers
+description: "Books, research papers and datasets by Chris von Csefalvay in AI, computational epidemiology and data science."
 ---
 
-# Books
+## Books
 
 - **von Csefalvay C** (2026). The Craft of Post-Training: A Practical Guide for AI Engineers and Developers. San Francisco: No Starch Press. [https://nostarch.com/craft-of-post-training](https://nostarch.com/craft-of-post-training).
   A comprehensive guide to post-training techniques for large language models, covering supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners.
@@ -15,16 +16,16 @@ title: Papers
 
 <!-- references -->
 
-# 2024
+## 2024
 
 - **von Csefalvay C** (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. _arXiv_ [2402.10951](https://arxiv.org/abs/2402.10951).
   Introduces DAEDRA, a transformer-based language model fine-tuned on VAERS reports to predict patient outcomes from adverse event narratives, demonstrating the potential of LLMs for pharmacovigilance signal detection.
 
-# 2023
+## 2023
 
 - Mogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, **von Csefalvay C**, Mukamati D (2023). Juvenile polyposis syndrome: A case report. _Clinical Case Reports_ 2023;**11**:e6798. doi:[10.1002/ccr3.6798](https://doi.org/10.1002/ccr3.6798)
 
-# 2022
+## 2022
 
 - Mutua V, Henry B, **von Csefalvay C**, Cheruiyot I, Vikse J, Lippi G, Bundi B, Mong’are N (2022). Tocilizumab in addition to standard of care in the management of COVID-19: A meta-analysis of RCTs. _Acta Bio Medica: Atenei Parmensis_ 2022;**93**. doi:[10.23750/abm.v93i1.12208](https://doi.org/10.23750/abm.v93i1.12208)
 
@@ -32,7 +33,7 @@ title: Papers
 
 - Munguti J, Mutua V, Cheruiyot I, **von Csefalvay C**, Opare-Addo P, Kiko N, Wanjiru R (2022). Tuberculous polyserositis in endemic areas with an emphasis on empiric therapy: A case report. _Medicine: Case Reports and Study Protocols_ 2022;**3**:e0221. doi:[10.1097/MD9.0000000000000221](https://doi.org/10.1097/MD9.0000000000000221)
 
-# 2021
+## 2021
 
 - **von Csefalvay C** (2021). VAERS data reveals no increased risk of neuroautoimmune adverse events from COVID-19 vaccines. _medRxiv_. doi:[10.1101/2021.06.13.21258851](https://doi.org/10.1101/2021.06.13.21258851).
 
@@ -46,7 +47,7 @@ title: Papers
 
 - Mpekethu N, Mongare N, Mutua V, Wangari M, **von Csefalvay C**, Ojuka D (2021). Knowledge and attitudes of undergraduate medical students in Kenya towards solid organ donation and transplantation: Are Africa’s future clinicians prepared?. _African Journal of Nephrology_ 2021;**24**:89--94. doi:[10.21804/24-1-4843](https://doi.org/10.21804/24-1-4843)
 
-# 2020
+## 2020
 
 - **von Csefalvay C**, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. _Zenodo_ 2020. doi:[10.5281/zenodo.3782871](https://doi.org/10.5281/zenodo.3782871)
 
@@ -58,19 +59,19 @@ title: Papers
 
 - **von Csefalvay C** (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. _arXiv_ [2008.00559](https://arxiv.org/abs/2008.00559).
 
-# 2019
+## 2019
 
 - **von Csefalvay C** (2019). Novel quantitative indicators of digital ophthalmoscopy image quality. _arXiv_ [1903.02695](https://arxiv.org/abs/1903.02695).
 
-# 2015
+## 2015
 
 - **von Csefalvay C** (2015). Ecological metrics of diversity in understanding social media. _arXiv_ [1501.07621](https://arxiv.org/abs/1501.07621).
 
-# 2009
+## 2009
 
 - **von Csefalvay C** (2009). On Good Intentions and Poor Outcomes: A Critical Retrospective on Chester v Afshar. _UC Dublin L. Rev._ 2009;**9**:46.
 
-# 2007
+## 2007
 
 - **von Csefalvay C** (2007). Taunts, Chapati Pans and the Case of the Reasonable Glue-Sniffer: An Examination of the Normative Test in Provocation after Smith and Holley. _Cambridge Student Law_ 2007:45--52. doi:[10.2139/ssrn.1334048](https://doi.org/10.2139/ssrn.1334048)
 
@@ -78,7 +79,7 @@ title: Papers
 
 
 
-# Data sets
+## Data sets
 
 Foldi, T., **von Csefalvay, C.**, Pigler, P., Wash, W., Zempleni, B., Rodrigues, J., Kapronczay, M., Huber, Sz. & Gergely, B. (2022). Starschema COVID-19 consolidated data set. 27 March 2023. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7774003.svg)](https://doi.org/10.5281/zenodo.7774003)
 

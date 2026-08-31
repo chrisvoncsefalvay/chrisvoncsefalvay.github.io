@@ -10,6 +10,6 @@ listing:
   type: default
 page-layout: full
 title: The Notebook
+description: "Essays and notes by Chris von Csefalvay on AI, public health, technology, history and the odd side road."
 title-block-bannerrR: false
 ---
-

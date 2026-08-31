@@ -44,7 +44,7 @@ The commentary on this nonsense is, if anything, worse than the nonsense itself.
 Let's instead talk about skeuomorphy.
 
 
-# Skeuowhat?
+## Skeuowhat?
 
 A skeuomorph is a kind of design element that is no longer necessary for the function of the object, but is retained for aesthetic reasons. For example, your iPhone's Notes app used to use some visual elements from physical note pads (such as the 'legal pad yellow' background) for a pretty long time, even though it was not in any sense necessary. Skeuomorphs are a way to acclimate our somewhat sluggish human brains to a changing world.
 
@@ -59,7 +59,7 @@ Harris makes this point, and [my old law school professor Tim Endicott gives a w
 :::
 
 
-# Where skeuomorphy becomes a fallacy
+## Where skeuomorphy becomes a fallacy
 
 The problem is, of course, that as noted above, _the interface is not the substance_. The reality is that Mika is no more human than my bedside lamp. The only reason why nobody has appointed my bedside lamp a CEO is, of course, that it does not pretend to look and speak like a human. But if we look at what it means to be a legal subject -- be it a citizen (_viz._ Sophia) or a corporate officer (_viz._ Mika) --, it becomes abundantly clear that there's much more to that than being able to _pretend_ to look and speak like a human. It is to be able to _be_ a human. And that is something that Mika, Sophia and all the other 'AI' and 'robot' nonsense out there is not.
 
@@ -74,7 +74,7 @@ Which is a problem, because appointing someone CEO isn't a publicity stunt. The 
 This isn't just a fine point about corporate law by a recovering legal philosopher. This is what happens when we lapse in our understanding of what it means to be human, and begin to accord human rights and responsibilities to non-human things. We're cognitively geared to associate language with personhood, so this is not a particularly surprising lapse of reason. We're humans, and that's why our response to a speaking robot becoming CEO is "oh, that's innovative" as opposed to "let's consider if some people might need to spend some time away from their favourite hallucinogens and/or the general population". If a company appointed my bedside lamp as a corporate officer, we'd be much more likely to consider that a sign that the latest office party went a little overly generous on the acid. But because we're cognitively geared to consider language a uniquely human trait, we're much more likely to be tempted to consider this some Valley quirkiness as opposed to frank insanity.
 
 
-# Why so serious?
+## Why so serious?
 
 It's a legitimate question: why are you so bothered by this nonsense? It's just a PR stunt, after all. And you're right: it is just a PR stunt. But it is a PR stunt that is part of a larger pattern of nonsense that is being peddled by the likes of Hanson Robotics and others. And it's damaging.
 

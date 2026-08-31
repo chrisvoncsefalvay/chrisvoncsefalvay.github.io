@@ -18,7 +18,7 @@ I used to be on Quora. I'm not anymore. But I used to be. And I wrote some answe
 
 
 
-# AI
+## AI
 
 ## If I wrote an AI and trained it to score 200 on a standardized IQ test, what could a human of 100 IQ still do better?
 
@@ -34,7 +34,7 @@ I used to be on Quora. I'm not anymore. But I used to be. And I wrote some answe
 
 [Read the full answer here.](https://www.quora.com/Will-true-AI-come-before-the-ability-to-completely-simulate-a-human-brain-Is-there-a-difference/answer/Chris-von-Csefalvay-3)
 
-# Epidemiology
+## Epidemiology
 
 ## Why is it important to be concerned with the health of other nations when it comes to global health issues?
 
@@ -106,7 +106,7 @@ I have a fervent dislike for the 'patient zero' term, both in colloquial usage a
 
 [Read the full answer here.](https://www.quora.com/Is-the-T-virus-in-Resident-Evil-a-fictional-virus-or-is-there-an-actual-disease-that-resembles-it/answer/Chris-von-Csefalvay-3)
 
-# Languages
+## Languages
 
 ## If a person is fluent in multiple languages, what is the language of their thoughts?
 
@@ -144,7 +144,7 @@ I have a fervent dislike for the 'patient zero' term, both in colloquial usage a
 
 [Read the full answer here.](https://www.quora.com/If-you-had-the-ability-to-speak-any-language-fluently-which-one-would-you-choose-and-why/answer/Chris-von-Csefalvay-3)
 
-# Law
+## Law
 
 ## Are law firms allowed to charge as if they were doctors, despite the fact that it requires far less training and skill set than medicine does? What can be done about this issue?
 
@@ -214,7 +214,7 @@ I do love me some sovcits.
 
 [Read the full answer here.](https://www.quora.com/Having-diplomatic-status-is-sovereignty-but-it%E2%80%99s-nearly-impossible-to-obtain-so-being-a-sovereign-citizen-does-exist-if-you-can-obtain-diplomatic-immunity/answer/Chris-von-Csefalvay-3)
 
-# Mathematics
+## Mathematics
 
 ## As a math major or mathematician, what makes you roll your eyes every time you hear it?
 
@@ -232,7 +232,7 @@ I do love me some sovcits.
 
 [Read the full answer here.](https://www.quora.com/Do-mathematicians-use-advanced-terminology/answer/Chris-von-Csefalvay-3)
 
-# Medicine and physiology
+## Medicine and physiology
 
 ## What is the scariest disease in the world (other than rabies)?
 
@@ -289,7 +289,7 @@ I do love me some sovcits.
 
 [Read the full answer here.](https://www.quora.com/What-would-happen-to-your-body-if-you-re-exposed-to-10-times-the-magnetic-power-30T-of-an-MRI-scanner/answer/Chris-von-Csefalvay-3)
 
-# Nuclear weapons
+## Nuclear weapons
 
 ## How did the scientists of the Manhattan project know it would work?
 
@@ -330,7 +330,7 @@ I do love me some sovcits.
 
 [Read the full answer here.](https://www.quora.com/Could-you-build-a-nuclear-weapon-off-from-an-information-online/answer/Chris-von-Csefalvay-3)
 
-# Oxford
+## Oxford
 
 ## How clever do you have to be to get a first at Oxford?
 
@@ -372,7 +372,7 @@ I do love me some sovcits.
 
 [Read the full answer here.](https://www.quora.com/Do-students-at-Oxford-and-Cambridge-universities-have-fun-If-so-what-kind-of-things-do-they-do-to-entertain-themselves-on-campus/answer/Chris-von-Csefalvay-3)
 
-# Personal life and experiences
+## Personal life and experiences
 
 ## People with IQs below 83 are unemployable in western society, according to Jordan Peterson. Even people with IQs between 85-100 are mostly confined to low paying jobs (less than 2x the minimum wage). Why is this issue ignored by society?
 

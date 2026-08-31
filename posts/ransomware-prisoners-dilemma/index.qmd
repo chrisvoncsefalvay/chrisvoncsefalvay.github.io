@@ -22,7 +22,7 @@ If you are one of the farmers, you have a very clear dominant strategy: get anot
 
 The problem is, if all participants $F_{1...6}$ pursue this individually dominant strategy, the sum of their outcomes will be inferior. Every player choosing the dominant strategy results in a worse outcome than it would if they had not chosen the dominant strategy. This phenomenon is sometimes referred to as the ‘tragedy of the commons’, but is in fact a simple result of an n-player prisoner’s dilemma.
 
-# Raising the stakes
+## Raising the stakes
 
 Let’s raise the stakes a little. Kidnappings happen because a significant fraction of people pay ransoms. The law on this is a little weird, and this reflects the general unease with which we regard the issue.[^2] We might agree that paying ransoms is a bad idea as a matter of principle, while also feeling rather disinclined to sacrifice a loved one on the altar of that principle. Personally, I know very few people who genuinely would not pay a ransom they had the means to pay for the release of a loved one – even if as an abstract principle, they agree that paying ransoms is a bad idea. A lifetime ago, when I studied (and later taught) moral and political philosophy at Oxford, these questions were popular dilemmas to make students think about consequentialism. Now, they are questions that affect every-day lives. Just earlier this week, much of the Eastern seaboard experienced gas shortages due to a ransomware attack on the Colonial Pipeline – over here in Northern Virginia, most gas stations were out of supply yesterday and expect to have fuel no sooner than early next week.
 
@@ -34,7 +34,7 @@ And that leads us to the ethical problem of ransomware, in particular paying the
 [^3]: Kidnapping, I am told, is expensive, and has to be funded in advance, with no guarantee that it will yield a payout at the end. The more complicated the operation, the greater the risk. The advent of the paseo milionario or ‘express kidnapping’ indicates that there is clearly a much reduced appetite for the risk involved with kidnapping. It is then no wonder that ransomware, which lacks many of the expensive and/or gory parts of kidnapping, is so much more favoured.
 
 
-# Possible solutions
+## Possible solutions
 
 The consequence of low-cost extortion (express kidnapping, ransomware &c.) is to move the deficient equilibrium point to the far right, meaning that an unrealistically large percentage of the population must commit to cooperate before kidnappers start to see their business model break down. This is, ultimately, the problem known to economists as free-riding. There are, overall, two major solutions to it, none of them good.
 
@@ -43,7 +43,7 @@ Voluntary cooperation. In voluntary cooperation, the payoff matrix is unaffected
 It’s important to note at this stage that it is perfectly consistent to argue against forced cooperation and in favour of voluntary cooperation––that is, holding the opinion that nobody should pay ransoms but the government should not criminalise paying ransoms is not an inconsistent public policy position.
 
 
-# The problem with forced cooperation
+## The problem with forced cooperation
 
 Let’s face it – I’m an optimist, but even I’m not optimistic enough to think people will voluntarily cooperate to the extent required by the extremely low cost of ransomware attacks. The example of kidnappings, where ransoms are almost always paid (even where this is strictly speaking illegal), shows that such cooperation is unlikely to arise voluntarily.
 
@@ -53,7 +53,7 @@ The answer to that, many would argue, lies in enforcing cooperation by altering 
 
 Regrettably, this argument is several kinds of wrong and at least two kinds of immoral. It is wrong because the sad ubiquity of ransomware attacks and their relatively private-synallagmatic nature (unlike kidnappings, which are widely publicised) means that enforcing such legislation would be quite difficult in practice. It is also wrong because the impact of “civil fines or misdemeanor charges” is far from clear. Short of exorbitant fines (which would face legal challenges for a range of reasons), these costs would just be factored into the ‘cost of doing business’ the way many companies already accept various unsavoury practices that are part and parcel of economic activity in some parts of the world. And it is fundamentally wrong in failing to understand the logic behind ransomware. The reason why ransomware makes sense is because data may be unique and irreplaceable (it shouldn’t be, and having well-designed IT policies with TTPs that encourage data replication and encryption are the most effective tools against ransomware attacks, but that’s a different story). Compared to the consequences of losing years of research, experiencing months of service interruption or leaking the medical records of thousands of patients, any fine the government can levy pales in comparison. You cannot fine a complex problem out of existence – and fines are in any case economically flawed deterrents, reducing the available funds for compliance. Fines work to reduce the economic profitability or viability of a course of action – they do not work in preventing the circumstances from arising that open up the choices including that course of action.
 
-# A better model of state action
+## A better model of state action
 
 If, thus, the coercive model of state action in response to ransomware is a ubiquitous failure, the question is what role the state can play in this matter. The alternative model that I support is one of cooperation rather than coercion. In the cooperative model, state actors assist enterprises within their territory in changing the payoff matrix by increasing the costs of successful ransomware attacks. Ransomware works because it’s so cost-efficient: even if only one in a thousand victims pay up, the monies paid out are sufficient for a generous profit. Up until here, I’m in agreement with the coercive model––the only way to eliminate ransomware is to make it economically less viable. The difference is how that is accomplished.
 

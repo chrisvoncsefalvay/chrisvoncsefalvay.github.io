@@ -20,7 +20,7 @@ If you're here for the DOI matching script, the link is [here](https://github.co
 
 What Quarto also does, however, is something super awesome: project scripts!
 
-# Project whats?
+## Project whats?
 
 A project script in Quarto is, basically, [a piece of Python, Lua, R or Typescript code that is executed at some point during rendering](https://quarto.org/docs/projects/scripts.html). This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file -- which is among others what I'm using it for. Essentially any programmatic function can be implemented in a project script.
 
@@ -49,7 +49,7 @@ project:
 
 This declares the scripts `scripts/pre_create_papers_file.py` and `scripts/pre_check_skierg_records.py` as pre-render scripts. You can also declare post-render scripts, with the `post-render` key.
 
-# A (poorly) worked example: generating a publication list
+## A (poorly) worked example: generating a publication list
 
 On my website, I use Quarto project scripts to maintain a [list of my papers](papers). This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.^[I know there's a canonically better solution that uses pandoc and Lua. I don't care. This works for me, and I don't have to learn Lua.]
 
@@ -82,7 +82,7 @@ We load a BibTeX file (`load_bibtex_file()`), parse it, use a function to determ
 
 The result is a list of publications that is automatically generated from a BibTeX file, and is always up to date (as up to date as the BibTeX file, anyway). I don't have to manually update it... sort of.
 
-# Wait, automagically updated?
+## Wait, automagically updated?
 
 The second half of what makes project scripts awesome is that they integrate with the rendering process. If the rendering process in turn integrates with some CI that watches for changes, then you can have a website that is automatically updated whenever you push a change to the repository. This is what I do with my website: I have a GitHub action that watches for changes to the `main` branch, and if it detects a change, it runs the rendering process and pushes the result to the `gh-pages` branch. This means that if I were to change the BibTeX file, it would trigger a re-render, and the list of publications would be automatically updated.
 
@@ -108,7 +108,7 @@ One thing to keep in mind when writing your script is the context from which it 
 One caveat: rendering with pre- and post-render project scripts may be relatively expensive in terms of time. My silly SkiErg world record script adds a good 20-25 seconds of processing time to each rendering run -- not a lot, but it does stack up eventually. The [documentation](https://quarto.org/docs/projects/scripts.html) helpfully discloses that Quarto provides an environment variable, `QUARTO_PROJECT_RENDER_ALL`, which is set to `1` if it's a full render. It may make sense to do a more manual caching here.
 
 
-# Things you can do with project scripts
+## Things you can do with project scripts
 
 Seriously, the possibilities of what you can do with project scripts are pretty much endless. I have a project script that [checks the world records list on the official SkiErg website and makes sure my index page lists my accurate records](https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_check_skierg_records.py). This is completely silly, but it's also a great example of how you can use project scripts to automate just about everything:
 

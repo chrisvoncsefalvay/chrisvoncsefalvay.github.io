@@ -26,7 +26,7 @@ Each of these approaches works. Each has its champions, its conferences, its inv
 
 ---
 
-# The five estates
+## The five estates
 
 There's a certain inevitability to how research communities crystallise around methodological commitments. We form tribes. We develop shibboleths. We attend different conferences and cite different papers and, if we're being honest, regard the other tribes with a mixture of bafflement and mild contempt. The AI community is no different, and the current moment has produced what I think of as five estates, each with its own theory of where intelligence resides.
 

@@ -31,7 +31,7 @@ In the first four entries ([1](../llms-language) [2](../lyre-of-hephaestus) [3](
 
 What I see as the most successful potential model of using LLMs is as a pack of semi-autonomous decision-makers with their own role, competing in a connectionistic, hierarchical model where each layer feeds into the next that performs some adjudicative or aggregative function. Structured this way, LLMs could become teams of rivals, analogous to the teams of rivals in the real world that we rely on to answer hard questions. For what that would look like, we might need to look at a story of my own. This story begins on the morning of 01 December 1948 on Somerton Beach, near Adelaide, Australia.
 
-# Tamam shud
+## Tamam shud
 
 On that fateful morning, the body of a middle aged man was found, slumped against the seawall at Somerton Beach, dead of causes that were far from clear. Neither was his identity, as he did not carry identification (quite unusual at the time, so close after wartime, when identification was still mandatory), nor could his identity be ascertained by other means. It was, in fact, clear that he went some lengths to conceal his identity, having even removed the manufacturers' tags from his clothes. The autopsy performed by the police pathologist only compounded the mystery by identifying multiple potential causes, each of which would have been sufficient to bring about the unknown man's demise. The mystery kept compounding when a scrap from Omar Khayyam's _Rubaiyat_ was found in his pocket. It read _tamam shud_, which roughly translates to "it is finished". Investigators traced this copy of the _Rubaiyat_ to a copy belonging to a young lady whose identity wouldn't be revealed until after her death in the 1990s, and whose involvement remains unclear. What appeared to be an acrostic cypher was also found in his notes. And so began a three-quarter-century mystery that has captivated many, including the author of these lines. 
 
@@ -86,7 +86,7 @@ The case of the Somerton Man is particularly illustrative of this: there were di
 These three features are what make human processes of truth-finding work. Truth-finding is the work of a team of rivals, with often orthogonally opposed interests but ultimately in the same enterprise of discerning truth. And this is what LLMs could be: teams of rivals, each with their own magisterium, each with their own role, each with their own motivations and interests, but ultimately working towards the same goal.
 
 
-# Dueling LLMs
+## Dueling LLMs
 
 Let's assume that we're faced with something simpler than a 75-year-old Cold War mystery. Say, we're interested in something this simple: we want to make a cheesecake that is tasty, low-calorie, easy to make in no more than an hour and does not require any special ingredients. We could use a single LLM to do this:
 
@@ -170,7 +170,7 @@ I've skimmed this point on [my post about prompt engineering](../prompt-engineer
 :::
 
 
-# Into the wild
+## Into the wild
 
 Something that more complex architectures are capable of that a single question-answering LLM won't is to be able to deal with the real world. The real world is messy, and it exists beyond the confines of code. I trust that we've all overcome our instinctual fear that AI models interacting with the physical world seem to engender these days. I think we can safely conclude that Skynet won't emerge from letting an LLM agent use Google. If we grant that, then we can move towards the next step: the tool-using LLM.
 
@@ -183,7 +183,7 @@ At some point a little under 4 million years ago, in what is today Ethiopia, a p
 Tool use is not just about learning, though. It's also about the utility of these models to us. The ubiquitous "knowledge cutoff" message encountered with LLMs is an indication of what happens if LLMs are stagnant: they become reflections of the past, echoes of what they were taught rather than actual interacting entities. If we want them to live in the present, we need to teach them to interact with the present.
 
 
-# Team building
+## Team building
 
 The main task, then, for AI developers is going to be one of building these teams of rivals. This process, if other connectionist systems (looking at you, neural networks) is anything to go by, will require a lot less human effort than we'd think. There's no reason why LLMs themselves can't take some of the role in constructing these teams the way the structure of deep learning effectively builds its own filters and feature extractors from its own 'experience'. The equivalent of structuring deep learning models' architectures by determining layer types and their connections is borne out in how we build these virtual teams of rival LLMs.
 
@@ -280,7 +280,7 @@ flowchart TD
 As @fig-cheesecake-agent illustrates, this is not a simple one-directional approach. If an LLM 'lives in the world', it does not merely put out information, but also ingests information from it. For instance, if the 'winning' recipe calls for, say, grated lemon peel, but none can be had for love or money, the LLM needs to be able to adapt to that. This is where the 'judgment aggregator' comes in: it can take in the information that a particular ingredient is not available, and feed that back into the system and adapt. LLMs can learn from feedback, and respond to the substance of feedback, rather than merely its fact(ual existence). This sets them apart from other ML models. And to me, this is what truly charts the course of their future.
 
 
-# Conclusion
+## Conclusion
 
 This is the fifth and final post in a five-part sequence on what LLMs aren't, and what they are, and what they could become, as the state of the art stands in late 2023. Beyond the anxiety and the abundant misunderstandings that have dominated discourse, there is something old and something new at play at the same time. That's the kind of fault line where interesting things happen. 
 

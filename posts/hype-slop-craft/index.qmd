@@ -11,7 +11,7 @@ image: header.webp
 title: The Hype, the Slop and the Craft
 ---
 
-# Hype, slop, craft: the evolutionary ecology of AI
+## Hype, slop, craft: the evolutionary ecology of AI
 
 There's a patch of ground near Chernobyl that botanists call Рудий ліс, the Red Forest. In the immediate aftermath of the 1986 disaster,^[The one at Chornobyl, not my birth. Which happens to fall on the same year.] the radiation killed mostly everything, turning the pine trees a rust-red colour before they died. That's poetic, but hardly unexpected -- not even Polesian pines can withstand a firehose of low enriched uranium decay products. What happened next, though, was instructive: the first plants to return weren't the mighty pines or the hardy oaks, but the weeds. Dandelions, mostly, and some rather aggressive species of grass. They grew quickly, flowered fast, scattered their seeds and died, leaving behind just enough organic matter for the next wave. Within a decade, saplings had started to appear. Within two, you had something approximating a young forest.
 

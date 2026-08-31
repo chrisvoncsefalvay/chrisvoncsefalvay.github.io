@@ -21,7 +21,7 @@ Fast forward to 2020: Julia is currently on the 34th position (narrowly missing 
 
 Something has clearly gone wrong. While Julia is not dead, and there are some very committed developers who expand the ecosystem, it is clear that the initial promise of Julia is unlikely to be realised. Instead of becoming the language, it will become just another language. Here are my thoughts why that’s the case.
 
-# It’s hard to dislodge an incumbent
+## It’s hard to dislodge an incumbent
 
 Programming languages compete not just for users but also for people who develop it, evangelise it, advocate for it. Almost all major modern programming languages are openly developed, if not for the core language, then definitely for the ecosystem surrounding it (about which more later). Languages depend on public engagement, and the public wants to back a winner – as much psychologically as they do not want to spend their weekends writing code for free for a language that will be forgotten before TikTok memes go the way of Vine.[^1]
 
@@ -30,7 +30,7 @@ In the field for languages to work with data – from data science through machi
 All in all, this makes it shockingly difficult to dislodge an incumbent. It’s a self-reinforcing process: new developers, given a choice, will gravitate towards the language that comes with ‘batteries included’. Few languages have as strong an ecosystem as Python – anything that’s ever been calculated has probably been implemented somewhere in Python. Consequently, the contenders will have fewer people to catch up to the incumbent. And on and on it goes.
 
 
-# Ecosystems
+## Ecosystems
 
 In the heroic age of computing, when Fortran was still young enough to not have to worry about putting money into its Roth IRA, people expected to write most of their code, or at worst copy/paste it. In 2020, using packages is as ubiquitous as using functions. Nobody wants to reimplement the Laplace distribution for the n-th time. Consequently, a lot of what we do as programmers depends on the package ecosystem. Knowing Python is not enough to write good Python for a real-world application. In fact, it’s not necessary to know the internals of Python in any depth compared to how well one is expected to know the guts of Pandas or NumPy. As a data scientist, you can safely get by without understanding how Python does `async` – but you better know the difference between a `PyArrayIterObject` and a `PyArrayMultiIterObject`.[^5]
 
@@ -39,7 +39,7 @@ Ecosystems are self-perpetuating (see previous section). Bigger ecosystems, subj
 Python has one of the best data science ecosystems, if not the best. It has sufficient organisation (largely via NumFocus and to a lesser extent, Anaconda) to overcome mundane issues like, say, funding, but open enough to be still enjoyable for people who hate bureaucracy.[^6] It’s a tall order for any language, no matter how good, to beat this advantage. Which leads us to my next point.
 
 
-# Cui bono?
+## Cui bono?
 
 Lucius Cassius, who was consul of Rome in the 2nd century B.C. and a notorious hard-ass as a judge, was known to ask who would benefit from a particular crime when looking for the culprit. Dollars to donuts, the people who benefit from a crime tend to be statistically the most likely to have had a hand in it. It’s an equally good principle, when considering the viability of a programming language, to ask whom it benefits.
 
@@ -52,14 +52,14 @@ Julia has a lot of great features – I love the homoiconicity related features,
 In the end, this is the key point for me. The problem with Julia wasn’t that it wasn’t good. The problem was that it wasn’t good enough to make itself worthwhile in the face of Python &c.
 
 
-# Coda
+## Coda
 
 These days, most of my work is in Python, with a smattering of bash scripts. I continue to follow Julia, but my laptop is probably at least half a year (if not more) out of date. I have poured a lot of time and energy into learning, understanding and popularising Julia, but I don’t see it living up to its initial promise anymore. There are some important, groundbreaking things being done with Python, largely in the machine learning field, and Julia did not make it past the fringes of that field.
 
 Nevertheless, it is an important object lesson to anyone embarking on a new idea in software development. It’s hard to beat an incumbent, and even harder to do so without having a large target user community you can capture with a compelling use case. In the end, code doesn’t make software – people and communities do. And for Julia, that – or rather, the lack thereof – has made all the difference.
 
 
-# Edited To Add…
+## Edited To Add…
 
 A few hours after this went up, I got hackernews’d, and my poor one vCPU machine running this site died a sad death. On the upside, it’s back up again with some additional beef, and there are [some great comments on the Hacker News article](https://news.ycombinator.com/item?id=26384133). Let me respond to a few here.
 

@@ -16,7 +16,7 @@ title: Peace, love, Paxlovid and 'Pfizermectin'
 
 As the new Omicron variant of concern of COVID-19 emerged over Thanksgiving week (of all times!), attention has been turning to Paxlovid (PF-07321332). If, like me, you torment yourself by perusing conspiracy theories, you might have heard it referred to as Pfizermectin. Behind that is the idea that the “COVID pill” Paxlovid is, basically, a re-packaging of ivermectin, a disproven treatment for COVID-19. [@popp2021ivermectin]
 
-# The Pfizermectin Gambit
+## The Pfizermectin Gambit
 
 The Pfizermectin argument rests on the fact that Paxlovid, an oral treatment for COVID-19 (colloquially known as a “Covid pill”) is a protease inhibitor, and so is ivermectin. Consequently, so the reasoning goes, ivermectin is just as good — except it is no longer an economically viable drug, vis-a-vis Paxlovid. So, it is claimed, ivermectin was repackaged, and now sold at a premium.
 
@@ -26,7 +26,7 @@ So suggests, for instance, paleo-libertarian Lew Rockwell:
 
 The problem is… Paxlovid is not ivermectin. It is not even similar, and the difference is crucially important to why Paxlovid is likely to be an effective medication, and ivermectin won’t.
 
-# What's different about Paxlovid
+## What's different about Paxlovid
 
 As always, there’s a kernel of truth in the overall lie. It is true that both Paxlovid and ivermectin are inhibitors of the 3-chymotrypsin like protease (3CLPro). 3CLPro is the principal protease of coronaviruses. It belongs to a wider class called mixed-nucleophile proteases superfamily A. Their main function is to find peptide bonds in proteins between glutamine on one hand and serine, glycine or alanine on the other.
 
@@ -39,7 +39,7 @@ This ‘molecular scissor’ in coronaviruses is 3CLPro, and as such, it’s cle
 However, that’s actually bad news — because 50 µM is, actually, a lot. And therein lies the problem.
 
 
-# The (pharmaco)kinetic difference
+## The (pharmaco)kinetic difference
 
 The problem with ivermectin is very simple. In order for an enzyme inhibitor to be effective, it needs to reach a concentration where it inhibits the target enzyme enough to make a dent in the underlying process. The standard metric for this is known as $IC_{50}$ — the concentration of the inhibitor required to inhibit enzyme activity by 50%. This value for ivermectin is somewhere in the realm of tens of µM for 3CLPro.
 
@@ -52,7 +52,7 @@ The alleged ‘Pfizermectin’ achieves this efficacy at a nanomolar level – a
 This is not by accident, by the way. Paxlovid is the product of rational drug design, using computer models to identify a small molecule drug that is not only effective against an enzyme target but also has favourable pharmacokinetics. Far from merely ‘repackaging’ ivermectin, as the Pfizermectin theory alleges, this is an entirely new drug. It is structurally novel, and bears little resemblance, if any, to ivermectin. It was designed from the ground up to be orally effective, and be so at doses that are safe.
 
 
-# Conclusion
+## Conclusion
 
 In the end, action happens in vivo — in real, living beings. Ivermectin might be a workable drug in vitro, where the model does not have to account for the inconvenience of actually keeping the host organism alive and breathing. To many of us who have looked at the maths of it, it has been clear that with the inhibitory concentrations required by ivermectin, it is never going to transition from the bench to bedside. Ivermectin does have a mechanism that counteracts SARS-CoV-2, the virus responsible for COVID-19. It’s just that it is way too weak to be of any practical use.
 

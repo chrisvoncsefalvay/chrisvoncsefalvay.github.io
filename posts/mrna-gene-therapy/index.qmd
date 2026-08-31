@@ -24,7 +24,7 @@ These folks certainly think so:
 
 Except the devil’s in the details. And the details are pretty unambiguous: mRNA vaccines are nowhere near a ‘gene therapy’.
 
-# How gene therapies work
+## How gene therapies work
 
 Let’s start by looking at a typical gene therapy: Zolgensma aka onasemnogene abeparvovec (say that three times quickly). This is an in vivo gene therapy, meaning that all the action takes place in the patient. It is given to very young children (under the age of 24 months) who have a certain mutation in the SMN1 gene, which leads to Type I spinal muscular atrophy. Onasemnogene abeparvovec is a modified adeno-associated virus 9 (AAV-9) that infects cells and gets them to produce ‘correct’ SMN1. This, then, alleviates their symptoms.
 
@@ -32,7 +32,7 @@ The key part to note is that a viral platform is used for a reason: viruses know
 
 Gene therapy admittedly has some kinks that still need to be ironed out. Some things only seem to work well when using an ex vivo approach. An example for the latter are the CAR-T treatments, where the patient’s blood is drawn, T cells are isolated and then transfected with a viral vector. Currently, this approach works much better outside the patient (hence ex vivo) than inside them, largely because T cells make up such a small part of all cells in the body.
 
-# How mRNA vaccines work
+## How mRNA vaccines work
 
 mRNA vaccines work in a much simpler way. It is, in many ways, a shortcut to the entire nuclear entry problem. If all you want is to make some proteins, you can skip the part about entering the nucleus and just, well, pretend to be the nucleus. Here’s how that roughly works.
 
@@ -42,7 +42,7 @@ Because mRNA vaccines only need to make relatively simple proteins (compared to 
 
 Or, by way of analogy: you receive other vaccines as a one-time shot, rather than as a lifelong intravenous infusion, right? Immunity doesn’t need sustained exposure — the immune system is pretty quick at catching on. For the very same reason, there’s no need to permanently express the Spike-like protein the way there is a need to keep expressing SMN1 in the Zolgensma example.
 
-# Why mRNA vaccines are not gene therapy
+## Why mRNA vaccines are not gene therapy
 
 This is hardly a differentiation without distinction. Gene therapy is, well, serious business. Almost 22 years ago, a young man named Jesse Gelsinger died from what we would today call a Multisystem Inflammatory Syndrome (MIS) following an adenovirus-vectored treatment for X-linked ornithine transcarbamylase deficiency, an inborn defect of metabolism. Modern gene therapies are still in many ways in their infancy, requiring close supervision and, often, extensive pre-treatment. They might be ready for prime time, but they certainly aren’t at the ‘all audiences’ stage just yet. And that’s ok — the first antibiotics were equally quite iffy from today’s perspective, and I am absolutely sure that within 25 years, the most frequent genetic disorders that gene therapy can fix — such as certain muscular dystrophies, cystic fibrosis or sickle cell anaemia — will be considered treatable with gene therapies. For now, however, gene therapies are complex treatments that demand experienced medical teams.
 

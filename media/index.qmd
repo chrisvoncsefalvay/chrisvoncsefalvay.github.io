@@ -1,5 +1,6 @@
 ---
 title: "In the media"
+description: "Selected interviews, podcasts and media appearances by Chris von Csefalvay on AI, public health and computational science."
 listing:
     contents: .
     sort: date desc

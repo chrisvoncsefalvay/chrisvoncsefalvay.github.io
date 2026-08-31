@@ -1,5 +1,6 @@
 ---
 title: "Talks and presentations"
+description: "Talks and presentations by Chris von Csefalvay on AI, public health, language models and computational science."
 listing:
     contents: .
     sort: date desc

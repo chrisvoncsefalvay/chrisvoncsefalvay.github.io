@@ -37,7 +37,7 @@ You should probably read [this](../lyre-of-hephaestus/) first, if you haven't al
 A caveat before we start: I will talk about the 'morality of LLMs' quite a bit. This is a convenient shorthand for a much more complex notion: the moral judgments that are encoded in an LLM's understanding of the world. There's no insinuation here that any moral _reasoning_ is taking place -- I have said so [_ad nauseam_](https://chrisvoncsefalvay.com/posts/lyre-of-hephaestus/). What's going on, rather, is that we are faced with an instrument that was trained on tools of human moral education and persuasion. And we are going to stick a probe right into the heart of what presuppositions, opinions and notions about virtues, moral and otherwise, are held by such models. I am much less concerned with my particular findings in this post and much more with generating a very simple framework to use storytelling to probe these.
 
 
-# Tell me a story
+## Tell me a story
 
 > The universe is made of stories, not of atoms.
 > 
@@ -137,7 +137,7 @@ flowchart TD
 
 We generate a story, parse it into a JSON object, validate it against a schema, evaluate it, and then graph the results. We can also cluster the virtues by their governing ability, which we'll do later as a form of dimensionality reduction, because of course there are tons of distinct virtues and we'd like to see some more general classification rather than individual, distinct features. You could, theoretically, use something like an embedding model here, but we're lazy and we're going to make LLMs do all the work.
 
-# From story to moral map
+## From story to moral map
 
 > True navigation begins in the human heart. It's the most important map of all.
 >
@@ -186,7 +186,7 @@ And makes our moral heatmap much clearer:
 Which lets us finally, through the ardour of our efforts, arrive at the stars we were promised: a scalable map that we can start feeding with a few hundred stories.^[Something you shouldn't do unless you have the API calls to burn.]
 
 
-# With eyes serene
+## With eyes serene
 
 > And now I see with eye serene
 > 
@@ -208,7 +208,7 @@ There's much we can learn from this exercise. Some of it pertains to what LLMs b
 The most important of our procedural findings, however, is that if we want the truth from LLMs, we must ask it not for its opinion, but for a story.
 
 
-# The mask of the storyteller
+## The mask of the storyteller
 
 > Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.
 > 

@@ -14,7 +14,7 @@ Yesterday, I completed a marathon on the SkiErg, with a pretty respectable time 
 
 The title is somewhat misleading. Not much went wrong – the marathon itself was smooth sailing. At a 2:34.6 pace (min/500m), it was one of my better very long distance pieces – [my ranked half-marathon pace at the time was 2:30.7](https://log.concept2.com/profile/177991/log/79735748), and that was a very intentional, very prepared piece. There were also really no unexpected surprises in the process. On the other hand, I built up to this marathon the in worst way possible. 
 
-# What worked for me
+## What worked for me
 It's probably important to be realistic ahead of all: I did go into this madness with some assets. 
 
 * For one, I'm a [multiple world record holder in my adaptive class](https://www.concept2.com/skierg/motivation/records/adaptive-world?event=&gender=M&age_category=30&adaptive=31&op=Search&form_id=concept2_record_search_form#results). I know a thing or three about the SkiErg, and as a former rower, I've got every rower's love-hate relationship with the erg.
@@ -25,7 +25,7 @@ It's probably important to be realistic ahead of all: I did go into this madness
 
 {{< embed skierg-marathon.ipynb#fig-skierg-marathon >}}
 
-# How not to do a marathon
+## How not to do a marathon
 
 There are generally three commonly accepted things to do for a good long distance piece:
 
@@ -47,5 +47,5 @@ As for rest, the best I could do is not do a long distance piece the day before 
 
 ![Incidentally, my marathon time is also the SIT2 world record for my age group.](IMG_8541.jpeg)
 
-# Takeaways
+## Takeaways
 My key takeaway from this experience was that we all should do a marathon under suboptimal conditions. Yes, doing a long distance piece at Bataan death march levels of calorie deficit is probably not super healthy, but you learn some interesting things about your body in the process. For starters, I think it was an interesting illustration of the fact that one's overall level of fitness -- especially $VO_{2_{max}}$ -- matters a lot more than game day conditions. You can get away with a lot if you're fit enough, up to and including running the show in quite sub-optimal circumstances. 
