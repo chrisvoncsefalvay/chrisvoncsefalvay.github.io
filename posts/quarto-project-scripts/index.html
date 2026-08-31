@@ -294,8 +294,8 @@ Tip
 </div>
 <p><a href="https://quarto.org">Quarto</a> is a great tool for reproducible research. It is also a great tool for building websites. After about a decade of Wordpress-based websites, I’ve moved to Quarto primarily for two reasons. First, most of my content is largely static. I don’t quite need the full power of a CMS, and the performance cost of dynamic generation I didn’t need was quite steep (the economic cost was nothing special, but I’m a cheapskate). Second, I wanted to be able to write in Markdown and integrate better with notebooks. Quarto lets me do both of these.</p>
 <p>What Quarto also does, however, is something super awesome: project scripts!</p>
-<section id="project-whats" class="level1">
-<h1>Project whats?</h1>
+<section id="project-whats" class="level2">
+<h2 class="anchored" data-anchor-id="project-whats">Project whats?</h2>
 <p>A project script in Quarto is, basically, <a href="https://quarto.org/docs/projects/scripts.html">a piece of Python, Lua, R or Typescript code that is executed at some point during rendering</a>. This is super useful, because it allows you to do things like, say, automatically generate a list of publications from a BibTeX file – which is among others what I’m using it for. Essentially any programmatic function can be implemented in a project script.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -327,8 +327,8 @@ Figure&nbsp;1: Rendering pipeline in Quarto with pre- and post-render scripts.
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> scripts/pre_check_skierg_records.py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This declares the scripts <code>scripts/pre_create_papers_file.py</code> and <code>scripts/pre_check_skierg_records.py</code> as pre-render scripts. You can also declare post-render scripts, with the <code>post-render</code> key.</p>
 </section>
-<section id="a-poorly-worked-example-generating-a-publication-list" class="level1 page-columns page-full">
-<h1>A (poorly) worked example: generating a publication list</h1>
+<section id="a-poorly-worked-example-generating-a-publication-list" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="a-poorly-worked-example-generating-a-publication-list">A (poorly) worked example: generating a publication list</h2>
 <p>On my website, I use Quarto project scripts to maintain a <a href="papers">list of my papers</a>. This list is generated from a BibTeX file, which makes it a little more convenient to maintain my publications, and somewhat future-proofed in case I want a different format.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I know there’s a canonically better solution that uses pandoc and Lua. I don’t care. This works for me, and I don’t have to learn Lua.</p></div></div><p>You can see the full project script <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_create_papers_file.py">here</a>, but here’s the gist of it:</p>
 <div class="cell" data-layout-align="center">
@@ -367,8 +367,8 @@ Figure&nbsp;2: My super clumsy pre-render script to build my bibliography.
 <p>We load a BibTeX file (<code>load_bibtex_file()</code>), parse it, use a function to determine whether we’re rendering a book or an article entry (I don’ have any other types of publications, but if I did, I’d add them here), and dispatch rendering to the appropriate function (<code>render_article_as_nlm()</code> for articles, <code>render_book_as_nlm()</code> for books). We sort the entries into a Markdown format with years separated by level 1 headings (<code>generate_list_by_year()</code>) and finally write it into the <code>papers/index.qmd</code> file (<code>write_into_file()</code>). There’s some minor magic going on behind the scenes, such as capturing my name and setting it in bold (which is a bit of a convention in academic lists of publications), but that’s the gist of it.</p>
 <p>The result is a list of publications that is automatically generated from a BibTeX file, and is always up to date (as up to date as the BibTeX file, anyway). I don’t have to manually update it… sort of.</p>
 </section>
-<section id="wait-automagically-updated" class="level1 page-columns page-full">
-<h1>Wait, automagically updated?</h1>
+<section id="wait-automagically-updated" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="wait-automagically-updated">Wait, automagically updated?</h2>
 <p>The second half of what makes project scripts awesome is that they integrate with the rendering process. If the rendering process in turn integrates with some CI that watches for changes, then you can have a website that is automatically updated whenever you push a change to the repository. This is what I do with my website: I have a GitHub action that watches for changes to the <code>main</code> branch, and if it detects a change, it runs the rendering process and pushes the result to the <code>gh-pages</code> branch. This means that if I were to change the BibTeX file, it would trigger a re-render, and the list of publications would be automatically updated.</p>
 <p>There are some tricks to keep in mind here. Most importantly, because this requires some custom Python packages, I had to slightly amend my Github publishing workflow:</p>
 <div class="cell" data-layout-align="center">
@@ -398,8 +398,8 @@ Figure&nbsp;3: Integrating the pre-render script into the Github Actions CI/CD f
 <p>One thing to keep in mind when writing your script is the context from which it will be executed. In particular, if you’re using a CI/CD pipeline, you will need to make sure that the script can find the files it needs. In my case, I had to explicitly specify the path to the BibTeX file, as well as the path to the output file. This is because the script is executed from the root of the repository, but the BibTeX file is in the <code>papers</code> directory, and the output file is in the <code>papers</code> directory, too. Testing locally for deployment in CI/CD is notoriously hellish, but with a little bit of elbow grease,<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> you can get it to work.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;And by ‘a little bit’, I mean absolute tons of it.</p></div></div><p>One caveat: rendering with pre- and post-render project scripts may be relatively expensive in terms of time. My silly SkiErg world record script adds a good 20-25 seconds of processing time to each rendering run – not a lot, but it does stack up eventually. The <a href="https://quarto.org/docs/projects/scripts.html">documentation</a> helpfully discloses that Quarto provides an environment variable, <code>QUARTO_PROJECT_RENDER_ALL</code>, which is set to <code>1</code> if it’s a full render. It may make sense to do a more manual caching here.</p>
 </section>
-<section id="things-you-can-do-with-project-scripts" class="level1">
-<h1>Things you can do with project scripts</h1>
+<section id="things-you-can-do-with-project-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="things-you-can-do-with-project-scripts">Things you can do with project scripts</h2>
 <p>Seriously, the possibilities of what you can do with project scripts are pretty much endless. I have a project script that <a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_check_skierg_records.py">checks the world records list on the official SkiErg website and makes sure my index page lists my accurate records</a>. This is completely silly, but it’s also a great example of how you can use project scripts to automate just about everything:</p>
 <ul>
 <li><a href="https://github.com/chrisvoncsefalvay/chrisvoncsefalvay.github.io/blob/main/scripts/pre_doi_from_rogue_scholar.py">A script I built</a> pulls DOIs minted by <a href="https://rogue-scholar.org">Rogue Scholar</a> and appends them to posts.</li>
