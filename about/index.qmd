@@ -14,7 +14,7 @@ Chris von Csefalvay is an AI researcher and computational epidemiologist special
 
 Chris is the author of two books:
 
-- [**The Craft of Post-Training: A Practical Guide for AI Engineers and Developers**](https://nostarch.com/craft-of-post-training) (No Starch Press, available July 2026) -- a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.
+- [**The Craft of Post-Training: A Practical Guide for AI Engineers and Developers**](https://nostarch.com/craft-of-post-training) (No Starch Press, published 2026; now shipping on [Amazon](https://www.amazon.com/dp/1718505205)) -- a comprehensive guide to post-training techniques for large language models, including supervised fine-tuning, RLHF, DPO, and reinforcement learning from verifiable rewards.
 - [**Computational Modeling of Infectious Disease**](https://computationalinfectiousdisease.com) (Elsevier, 2023) -- a hands-on guide to computational epidemiology using Python, covering agent-based models, network epidemiology, and geospatial analysis.
 
 ## Research
