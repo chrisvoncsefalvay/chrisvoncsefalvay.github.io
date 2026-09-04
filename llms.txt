@@ -7,7 +7,7 @@
 Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. He specialises in post-training for language models, agentic AI systems, and computational epidemiology, with nearly two decades of experience in data science and AI across enterprise, life sciences, and public health.
 
 He is the author of:
-- *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, available July 2026) — a comprehensive guide to SFT, RLHF, GRPO, DPO, evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners
+- *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, 2026) — a comprehensive guide to SFT, RLHF, GRPO, DPO, evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners
 - *Computational Modeling of Infectious Disease* (Elsevier, 2023) — a monograph on agent-based modelling, disease dynamics, and computational epidemiology
 
 He holds degrees from the University of Oxford and Cardiff University. He is a Fellow of the Royal Society for Public Health and a Senior Member of IEEE. ORCID: 0000-0003-3131-0864.
@@ -82,7 +82,7 @@ He holds degrees from the University of Oxford and Cardiff University. He is a F
 
 ## Publications
 
-- *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, available July 2026): https://posttraining.guide
+- *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, 2026): https://posttraining.guide
 - *Computational Modeling of Infectious Disease* (Elsevier, 2023): https://computationalinfectiousdisease.com
 - DAEDRA: A language model for predicting outcomes in pharmacovigilance (2024): https://arxiv.org/abs/2402.10951
 - Full publication list: https://chrisvoncsefalvay.com/papers/
