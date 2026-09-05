@@ -21,6 +21,8 @@ Chris is the author of two books:
 
 His research interests span post-training for language models, agentic AI systems, computational epidemiology, and public health informatics. He has published in peer-reviewed journals including *Acta Biomedica*, *Big Data and Cognitive Computing*, and *Frontiers in Medicine*, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence [A344856](https://oeis.org/A344856) (Jellyfish Heart numbers).
 
+His work also extends to physical AI and robotics simulation. With Tamás Földi, he is a principal investigator of the [Asset Factory Blueprint](https://hcltech-robotics.github.io/asset-factory-blueprint/), an open-source reference implementation from HCLTech's Robotics Intelligence CoE for turning photographs, scans and CAD into reproducible OpenUSD assets and reinforcement learning environments.
+
 ## Education and credentials
 
 Chris attended the [University of Oxford](https://www.ox.ac.uk/) (Merton College) for both his undergraduate and graduate studies, and holds degrees from [Cardiff University](https://www.cardiff.ac.uk/) and Robert Gordon University Aberdeen, with further studies at the University of Leiden. He is [board certified in public health](https://cph.nbphe.org/employer_letter/19626) (CPH), a Fellow of the [Royal Society for Public Health](https://www.rsph.org.uk/) (FRSPH), and an IEEE Senior Member. He received the Martin Wronker Prize at the University of Oxford.
