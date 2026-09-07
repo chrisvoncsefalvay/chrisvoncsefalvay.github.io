@@ -1,6 +1,7 @@
 ---
 title: "Corrections Policy"
 description: "Editorial and corrections policy for chrisvoncsefalvay.com — how errors are handled, corrections are noted, and accuracy is maintained."
+image: "/img/portrait_2x3midres.webp"
 comments: false
 ---
 

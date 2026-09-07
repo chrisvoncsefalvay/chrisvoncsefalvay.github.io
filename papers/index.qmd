@@ -1,6 +1,7 @@
 ---
 title: Papers
 description: "Books, research papers and datasets by Chris von Csefalvay in AI, computational epidemiology and data science."
+image: "/img/portrait_2x3midres.webp"
 ---
 
 ## Books
@@ -51,11 +52,11 @@ description: "Books, research papers and datasets by Chris von Csefalvay in AI, 
 
 - **von Csefalvay C**, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. _Zenodo_ 2020. doi:[10.5281/zenodo.3782871](https://doi.org/10.5281/zenodo.3782871)
 
-- Foldi T, **von Csefalvay C**, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. _Big Data and Cognitive Computing_ 2020;**4**:32. doi:[10.3390/bdcc4040032](https://doi.org/10.3390/bdcc4040032).
+- Foldi T, **von Csefalvay C**, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. _Big Data and Cognitive Computing_ 2020;**4**:32. doi:[10.3390/bdcc4040032](https://doi.org/10.3390/bdcc4040032)
   Presents Jampi, a distributed matrix multiplication framework exploiting Apache Spark's barrier execution mode for efficient large-scale linear algebra operations.
 
 - **von Csefalvay C** (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. _arXiv_ [2007.13734](https://arxiv.org/abs/2007.13734).
-  Models social distancing compliance during the COVID-19 pandemic as a differential game, analysing the Nash equilibrium dynamics of individual vs. collective epidemic mitigation strategies.
+  Models social distancing compliance during the COVID-19 pandemic as a differential game, analysing the Nash equilibrium dynamics of individual versus collective epidemic mitigation strategies.
 
 - **von Csefalvay C** (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. _arXiv_ [2008.00559](https://arxiv.org/abs/2008.00559).
 

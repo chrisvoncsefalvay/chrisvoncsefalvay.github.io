@@ -1,6 +1,7 @@
 ---
 title: Biome engineering
 description: Giving agents space, for fun and profit.
+image: "/img/portrait_2x3midres.webp"
 author: Chris von Csefalvay
 date: '2025-10-11'
 categories:

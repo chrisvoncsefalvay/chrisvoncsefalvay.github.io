@@ -93,9 +93,13 @@ def generate_list_by_year(entries_by_year: dict) -> str:
     """Generates a Markdown list of publications by year."""
     md = ""
     for year, entries in sorted(entries_by_year.items(), reverse=True):
-        md += f"# {year}\n\n"
+        md += f"## {year}\n\n"
         for entry in entries:
-            md += f"- {render_as_nlm(entry)}\n\n"
+            md += f"- {render_as_nlm(entry)}\n"
+            summary = entry.get("summary")
+            if summary:
+                md += f"  {summary}\n"
+            md += "\n"
 
     # determine number of years and entries
     years = len(entries_by_year)

@@ -1,6 +1,7 @@
 ---
 title: "Privacy Policy"
 description: "Privacy policy for chrisvoncsefalvay.com — what data is collected, how it is used, and your rights as a visitor."
+image: "/img/portrait_2x3midres.webp"
 comments: false
 ---
 

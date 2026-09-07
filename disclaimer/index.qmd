@@ -1,6 +1,7 @@
 ---
 title: "Disclaimer"
 description: "Legal disclaimer for chrisvoncsefalvay.com — opinions expressed are the author's own and do not reflect the views of any affiliated organisation."
+image: "/img/portrait_2x3midres.webp"
 comments: false
 ---
 

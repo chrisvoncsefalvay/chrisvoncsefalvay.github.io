@@ -14,6 +14,17 @@ ABOUT_DESCRIPTION = (
     "Chris von Csefalvay is an AI researcher and computational epidemiologist. "
     "He leads post-training research and clinical intelligence at HCLTech."
 )
+SOCIAL_IMAGE = "/img/portrait_2x3midres.webp"
+SOCIAL_IMAGE_PAGES = (
+    "posts/ai-girlfriends/index.qmd",
+    "posts/mcp-mcpmark/index.qmd",
+    "posts/biome-engineering/index.qmd",
+    "privacy-policy/index.qmd",
+    "disclaimer/index.qmd",
+    "papers/index.qmd",
+    "teaching/index.qmd",
+    "corrections/index.qmd",
+)
 
 
 def front_matter(relative_path: str) -> str:
@@ -55,6 +66,22 @@ class PresentationMetadataTests(unittest.TestCase):
     def test_homepage_contains_no_agentic_typo(self) -> None:
         homepage = (PROJECT_ROOT / "index.qmd").read_text(encoding="utf-8")
         self.assertNotIn("agrntic", homepage.lower())
+
+    def test_pages_missing_social_images_use_the_verified_portrait(self) -> None:
+        for page in SOCIAL_IMAGE_PAGES:
+            with self.subTest(page=page):
+                self.assertEqual(quoted_field(front_matter(page), "image"), SOCIAL_IMAGE)
+
+    def test_publication_years_are_second_level_headings(self) -> None:
+        generator = (PROJECT_ROOT / "scripts/pre_create_papers_file.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('md += f"## {year}\\n\\n"', generator)
+        self.assertIn('summary = entry.get("summary")', generator)
+        bibliography = (PROJECT_ROOT / "papers/bibliography.bib").read_text(
+            encoding="utf-8"
+        )
+        self.assertEqual(bibliography.count("summary={"), 3)
 
 
 class ProfilePageSchemaTests(unittest.TestCase):

@@ -1,6 +1,7 @@
 ---
 title: "Teaching"
 description: "Thesis supervision, expectations and research topics for data science students working with Chris von Csefalvay."
+image: "/img/portrait_2x3midres.webp"
 ---
 
 I am a visiting thesis supervisor for students on the data science track of the mathematics programme at the [Budapest University of Technology and Economics](https://www.bme.hu/?language=en). If you're intending to write your thesis on a topic related to my research interests, you're probably in the right place.

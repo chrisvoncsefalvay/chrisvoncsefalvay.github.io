@@ -1,6 +1,7 @@
 ---
 title: Love in the Time of Algorithms
 description: Exploring the phenomenon of AI-powered companions and their societal implications.
+image: "/img/portrait_2x3midres.webp"
 author: Chris von Csefalvay
 date: '2025-09-20'
 categories:

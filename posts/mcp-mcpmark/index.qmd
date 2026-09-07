@@ -1,6 +1,7 @@
 ---
 title: A slow walk out of Dikika Cave
 description: MCP is great. The models, however, just didn't show up.
+image: "/img/portrait_2x3midres.webp"
 author: Chris von Csefalvay
 date: '2025-10-01'
 categories:
