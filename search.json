@@ -1533,6 +1533,69 @@
     "text": "von Csefalvay C (2026). The Craft of Post-Training: A Practical Guide for AI Engineers and Developers. San Francisco: No Starch Press. https://nostarch.com/craft-of-post-training. A comprehensive guide to post-training techniques for large language models, covering supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), group relative policy optimization (GRPO), direct preference optimization (DPO), evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners.\nvon Csefalvay C (2023). Computational Modeling of Infectious Disease: With applications in Python. Amsterdam: Elsevier. https://elsevier.com/books/computational-modeling-of-infectious-disease/von-csefalvay/978-0-323-95389-4. A monograph on computational approaches to understanding infectious disease dynamics, covering agent-based modelling, compartmental models, network epidemiology, and geospatial analysis, with practical Python implementations throughout.\nvon Csefalvay C, Nam D T, Melis A, Halonen M, Edison S, Kozdon J, Kwong T, Glaser F, Frid Y, Szarnyas G, Crusius K, de Oliveira Castro PR, Hassler G, Clark AR, Visser M (2021). Learn Julia the Hard Way. https://doi.org/10.5281/zenodo.4556324 An open-source introduction to the Julia programming language, emphasising a hands-on, exercise-driven approach to learning scientific computing and data analysis."
   },
   {
+    "objectID": "papers/index.html#section",
+    "href": "papers/index.html#section",
+    "title": "Papers",
+    "section": "2024",
+    "text": "2024\n\nvon Csefalvay C (2024). DAEDRA: A language model for predicting outcomes in passive pharmacovigilance reporting. arXiv 2402.10951. Introduces DAEDRA, a transformer-based language model fine-tuned on VAERS reports to predict patient outcomes from adverse event narratives, demonstrating the potential of LLMs for pharmacovigilance signal detection."
+  },
+  {
+    "objectID": "papers/index.html#section-1",
+    "href": "papers/index.html#section-1",
+    "title": "Papers",
+    "section": "2023",
+    "text": "2023\n\nMogere E, Mwaura E, Waithaka M, Mutua V, Mugao M, von Csefalvay C, Mukamati D (2023). Juvenile polyposis syndrome: A case report. Clinical Case Reports 2023;11:e6798. doi:10.1002/ccr3.6798"
+  },
+  {
+    "objectID": "papers/index.html#section-2",
+    "href": "papers/index.html#section-2",
+    "title": "Papers",
+    "section": "2022",
+    "text": "2022\n\nMutua V, Henry B, von Csefalvay C, Cheruiyot I, Vikse J, Lippi G, Bundi B, Mong’are N (2022). Tocilizumab in addition to standard of care in the management of COVID-19: A meta-analysis of RCTs. Acta Bio Medica: Atenei Parmensis 2022;93. doi:10.23750/abm.v93i1.12208\nBundi B, Mutua V, Cheruiyot I, Munguti J, von Csefalvay C, Nurani K, Ogeng’o J (2022). The Unusual High Origin Radial Artery in a Black Kenyan Population: A Cadaveric Study. Ethiopian Journal of Health Sciences 2022;32. doi:10.4314/ejhs.v32i2.25\nMunguti J, Mutua V, Cheruiyot I, von Csefalvay C, Opare-Addo P, Kiko N, Wanjiru R (2022). Tuberculous polyserositis in endemic areas with an emphasis on empiric therapy: A case report. Medicine: Case Reports and Study Protocols 2022;3:e0221. doi:10.1097/MD9.0000000000000221"
+  },
+  {
+    "objectID": "papers/index.html#section-3",
+    "href": "papers/index.html#section-3",
+    "title": "Papers",
+    "section": "2021",
+    "text": "2021\n\nvon Csefalvay C (2021). VAERS data reveals no increased risk of neuroautoimmune adverse events from COVID-19 vaccines. medRxiv. doi:10.1101/2021.06.13.21258851.\nvon Csefalvay C (2021). Early evidence for the safety of certain COVID-19 vaccines using empirical Bayesian modeling from VAERS. medRxiv. doi:10.1101/2021.06.10.21258589.\nvon Csefalvay C (2021). A case-control study of autoimmune AEFIs following COVID-19 vaccination reported to VAERS. medRxiv. doi:10.1101/2021.07.06.21260074.\nvon Csefalvay C (2021). Anaphylactic events in mRNA vaccines: a reporting case-control study. medRxiv. doi:10.1101/2021.07.19.21260714.\nMutua V, Mong’are N, Bundi B, von Csefalvay C, Oriko D, Kitunguu P (2021). Sudden bilateral lower limb paralysis with dural ectasia in Neurofibromatosis type 1: A case report. Medicine: Case Reports and Study Protocols 2021;2:e0165. doi:10.1097/MD9.0000000000000165\nMpekethu N, Mongare N, Mutua V, Wangari M, von Csefalvay C, Ojuka D (2021). Knowledge and attitudes of undergraduate medical students in Kenya towards solid organ donation and transplantation: Are Africa’s future clinicians prepared?. African Journal of Nephrology 2021;24:89–94. doi:10.21804/24-1-4843"
+  },
+  {
+    "objectID": "papers/index.html#section-4",
+    "href": "papers/index.html#section-4",
+    "title": "Papers",
+    "section": "2020",
+    "text": "2020\n\nvon Csefalvay C, Foldi T (2020). PAWS: Towards a globally integrated outbreak surveillance system for public health. Zenodo 2020. doi:10.5281/zenodo.3782871\nFoldi T, von Csefalvay C, Perez N (2020). Jampi: Efficient matrix multiplication in Spark using barrier execution mode. Big Data and Cognitive Computing 2020;4:32. doi:10.3390/bdcc4040032 Presents Jampi, a distributed matrix multiplication framework exploiting Apache Spark’s barrier execution mode for efficient large-scale linear algebra operations.\nvon Csefalvay C (2020). Statistical dynamics of social distancing in SARS-CoV-2 as a differential game. arXiv 2007.13734. Models social distancing compliance during the COVID-19 pandemic as a differential game, analysing the Nash equilibrium dynamics of individual versus collective epidemic mitigation strategies.\nvon Csefalvay C (2020). Vector quantisation and partitioning of COVID-19 temporal dynamics in the United States. arXiv 2008.00559."
+  },
+  {
+    "objectID": "papers/index.html#section-5",
+    "href": "papers/index.html#section-5",
+    "title": "Papers",
+    "section": "2019",
+    "text": "2019\n\nvon Csefalvay C (2019). Novel quantitative indicators of digital ophthalmoscopy image quality. arXiv 1903.02695."
+  },
+  {
+    "objectID": "papers/index.html#section-6",
+    "href": "papers/index.html#section-6",
+    "title": "Papers",
+    "section": "2015",
+    "text": "2015\n\nvon Csefalvay C (2015). Ecological metrics of diversity in understanding social media. arXiv 1501.07621."
+  },
+  {
+    "objectID": "papers/index.html#section-7",
+    "href": "papers/index.html#section-7",
+    "title": "Papers",
+    "section": "2009",
+    "text": "2009\n\nvon Csefalvay C (2009). On Good Intentions and Poor Outcomes: A Critical Retrospective on Chester v Afshar. UC Dublin L. Rev. 2009;9:46."
+  },
+  {
+    "objectID": "papers/index.html#section-8",
+    "href": "papers/index.html#section-8",
+    "title": "Papers",
+    "section": "2007",
+    "text": "2007\n\nvon Csefalvay C (2007). Taunts, Chapati Pans and the Case of the Reasonable Glue-Sniffer: An Examination of the Normative Test in Provocation after Smith and Holley. Cambridge Student Law 2007:45–52. doi:10.2139/ssrn.1334048"
+  },
+  {
     "objectID": "papers/index.html#data-sets",
     "href": "papers/index.html#data-sets",
     "title": "Papers",
