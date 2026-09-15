@@ -1,6 +1,6 @@
 # Chris von Csefalvay — full profile
 
-> AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards. Principal at HCLTech's AI Practice. Author of The Craft of Post-Training (No Starch Press) and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, Colorado.
+> AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards. Principal at HCLTech's AI Practice. Author of The Craft of Post-Training (No Starch Press), Differentiable Photon Transport, Volume I: Foundations and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, Colorado.
 
 ## Biography
 
@@ -35,6 +35,13 @@ VIAF: 7190162669581955500004
 - Purchase: https://nostarch.com/craft-of-post-training
 
 A practical guide to post-training language models, covering supervised fine-tuning, RLHF, DPO, KTO and GRPO; domain adaptation; quantisation; agentic-model training; and deployment-focused evaluation.
+
+### Differentiable Photon Transport, Volume I: Foundations
+
+- Release: v1.0.0 (2026)
+- Website: https://photontransport.com
+
+An illustrated, executable introduction to differentiable X-ray image formation, transport gradients and inverse imaging problems, built step by step around a differentiable C-arm.
 
 ### Computational Modeling of Infectious Disease: With Applications in Python
 

@@ -1,6 +1,6 @@
 # Chris von Csefalvay
 
-> AI researcher and computational epidemiologist. Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. Author of two technical books. Based in Denver, CO.
+> AI researcher and computational epidemiologist. Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. Author of three technical books. Based in Denver, CO.
 
 ## Who He Is
 
@@ -8,6 +8,7 @@ Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-traini
 
 He is the author of:
 - *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, 2026) — a comprehensive guide to SFT, RLHF, GRPO, DPO, evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners
+- *Differentiable Photon Transport, Volume I: Foundations* (2026) — an illustrated, executable introduction to differentiable X-ray image formation, transport gradients, and inverse imaging problems
 - *Computational Modeling of Infectious Disease* (Elsevier, 2023) — a monograph on agent-based modelling, disease dynamics, and computational epidemiology
 
 He holds degrees from the University of Oxford and Cardiff University. He is a Fellow of the Royal Society for Public Health and a Senior Member of IEEE. ORCID: 0000-0003-3131-0864.
