@@ -4,6 +4,6 @@ matplotlib
 seaborn
 pandas
 scikit-learn
-bibtexparser
+bibtexparser<2
 beautifulsoup4
 requests
