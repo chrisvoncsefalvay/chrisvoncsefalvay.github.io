@@ -13,6 +13,7 @@ resources:
   - llms.txt
   - llms-full.txt
   - robots.txt
+  - synairg/index.html
 
 website:
   site-url: "https://chrisvoncsefalvay.com"
