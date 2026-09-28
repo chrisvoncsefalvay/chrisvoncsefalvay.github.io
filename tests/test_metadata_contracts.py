@@ -7,13 +7,10 @@ import unittest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 HOMEPAGE_DESCRIPTION = (
-    "Chris von Csefalvay researches language-model post-training, agentic AI, "
-    "reinforcement learning from verifiable rewards and computational epidemiology."
+    "Chris von Csefalvay, Distinguished Engineer at HCLTech: sensing and reasoning "
+    "for embodied AI, world models, post-training and robotic surgery."
 )
-ABOUT_DESCRIPTION = (
-    "Chris von Csefalvay is an AI researcher and computational epidemiologist. "
-    "He leads post-training research and clinical intelligence at HCLTech."
-)
+ABOUT_DESCRIPTION = HOMEPAGE_DESCRIPTION
 SOCIAL_IMAGE = "/img/portrait_2x3midres.webp"
 SOCIAL_IMAGE_PAGES = (
     "posts/ai-girlfriends/index.qmd",
@@ -53,7 +50,7 @@ class PresentationMetadataTests(unittest.TestCase):
         self.assertEqual(homepage, HOMEPAGE_DESCRIPTION)
         self.assertEqual(about, ABOUT_DESCRIPTION)
         self.assertEqual(fallback, homepage)
-        self.assertNotEqual(homepage, about)
+        self.assertEqual(homepage, about)
         self.assertLessEqual(len(homepage), 160)
         self.assertLessEqual(len(about), 160)
 

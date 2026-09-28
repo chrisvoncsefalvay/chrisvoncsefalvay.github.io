@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Chris von Csefalvay is an AI researcher and computational epidemiologist. He leads post-training research and clinical intelligence at HCLTech."
+description: "Chris von Csefalvay, Distinguished Engineer at HCLTech: sensing and reasoning for embodied AI, world models, post-training and robotic surgery."
 image: /img/portrait_2x3midres.webp
 comments: false
 header-includes:
@@ -8,7 +8,7 @@ header-includes:
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","@id":"https://chrisvoncsefalvay.com/about/#profile-page","url":"https://chrisvoncsefalvay.com/about/","name":"About Chris von Csefalvay","mainEntity":{"@type":"Person","@id":"https://chrisvoncsefalvay.com/#person","name":"Chris von Csefalvay"},"isPartOf":{"@id":"https://chrisvoncsefalvay.com/#website"}}</script>
 ---
 
-Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems, and reinforcement learning from verifiable rewards (RLVR). He is a Principal at [HCLTech](https://www.hcltech.com/)'s AI Practice, leading post-training research and clinical intelligence.
+Chris von Csefalvay is a Distinguished Engineer in HCLTech’s Robotics Intelligence CoE, specialising in sensing and reasoning for embodied AI. His work brings together machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action, particularly in robotic surgery and other high-stakes domains.
 
 ## Books
 
@@ -20,9 +20,9 @@ Chris is the author of three books:
 
 ## Research
 
-His research interests span post-training for language models, agentic AI systems, computational epidemiology, and public health informatics. He has published in peer-reviewed journals including *Acta Biomedica*, *Big Data and Cognitive Computing*, and *Frontiers in Medicine*, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence [A344856](https://oeis.org/A344856) (Jellyfish Heart numbers).
+His research centres on sensing and reasoning for embodied AI, machine perception, world models and post-training, with a particular focus on robotic surgery and other high-stakes domains. His wider interests include agentic AI systems, computational epidemiology and public health informatics. He has published in peer-reviewed journals including *Acta Biomedica*, *Big Data and Cognitive Computing*, and *Frontiers in Medicine*, and his work has been cited in 39 English Wikipedia articles. He is a credited contributor to OEIS sequence [A344856](https://oeis.org/A344856) (Jellyfish Heart numbers).
 
-His work also extends to physical AI and robotics simulation. With Tamás Földi, he is a principal investigator of the [Asset Factory Blueprint](https://hcltech-robotics.github.io/asset-factory-blueprint/), an open-source reference implementation from HCLTech's Robotics Intelligence CoE for turning photographs, scans and CAD into reproducible OpenUSD assets and reinforcement learning environments.
+His work also spans robotics simulation and reinforcement learning. With Tamás Földi, he is a principal investigator of the [Asset Factory Blueprint](https://hcltech-robotics.github.io/asset-factory-blueprint/), an open-source reference implementation from HCLTech's Robotics Intelligence CoE for turning photographs, scans and CAD into reproducible OpenUSD assets and reinforcement learning environments.
 
 ## Education and credentials
 
