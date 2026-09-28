@@ -1,10 +1,10 @@
 # Chris von Csefalvay
 
-> AI researcher and computational epidemiologist. Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. Author of three technical books. Based in Denver, CO.
+> Chris von Csefalvay is a Distinguished Engineer in HCLTech’s Robotics Intelligence CoE, specialising in sensing and reasoning for embodied AI. His work brings together machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action, particularly in robotic surgery and other high-stakes domains.
 
 ## Who He Is
 
-Chris von Csefalvay is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. He specialises in post-training for language models, agentic AI systems, and computational epidemiology, with nearly two decades of experience in data science and AI across enterprise, life sciences, and public health.
+Chris von Csefalvay is a Distinguished Engineer in HCLTech’s Robotics Intelligence CoE, specialising in sensing and reasoning for embodied AI. His work brings together machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action, particularly in robotic surgery and other high-stakes domains.
 
 He is the author of:
 - *The Craft of Post-Training: A Practical Guide for AI Engineers and Developers* (No Starch Press, 2026) — a comprehensive guide to SFT, RLHF, GRPO, DPO, evaluation discipline, LoRA/QLoRA, and domain adaptation for enterprise AI practitioners
@@ -15,6 +15,9 @@ He holds degrees from the University of Oxford and Cardiff University. He is a F
 
 ## Areas of Expertise
 
+- Sensing and reasoning for embodied AI, particularly in robotic surgery and other high-stakes domains
+- Machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action
+- Robotics simulation and reinforcement learning environments
 - Post-training for language models: supervised fine-tuning (SFT), reinforcement learning from verifiable rewards (RLVR), GRPO, DPO, KTO, preference optimisation
 - Agentic AI systems: multi-agent frameworks, verifiable agentic architectures, agent interaction protocols, agentic safety
 - Large language models: evaluation, LLMOps, model routing, efficiency (LoRA, QLoRA, quantisation, distillation)

@@ -1,10 +1,10 @@
 # Chris von Csefalvay — full profile
 
-> AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards. Principal at HCLTech's AI Practice. Author of The Craft of Post-Training (No Starch Press), Differentiable Photon Transport, Volume I: Foundations and Computational Modeling of Infectious Disease (Elsevier). Based in Denver, Colorado.
+> Chris von Csefalvay is a Distinguished Engineer in HCLTech’s Robotics Intelligence CoE, specialising in sensing and reasoning for embodied AI. His work brings together machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action, particularly in robotic surgery and other high-stakes domains.
 
 ## Biography
 
-Chris von Csefalvay is an AI researcher and computational epidemiologist specialising in post-training for language models, agentic AI systems and reinforcement learning from verifiable rewards (RLVR). He is a Principal at HCLTech's AI Practice, leading post-training research and clinical intelligence. In this role, he advises organisations in life sciences, medical devices and pharmaceuticals on applications of AI.
+Chris von Csefalvay is a Distinguished Engineer in HCLTech’s Robotics Intelligence CoE, specialising in sensing and reasoning for embodied AI. His work brings together machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action, particularly in robotic surgery and other high-stakes domains.
 
 He attended the University of Oxford for his undergraduate and graduate studies. He also holds degrees from Cardiff University and Robert Gordon University Aberdeen, and studied at Leiden University under the Erasmus programme. He is Certified in Public Health (CPH), a Fellow of the Royal Society for Public Health (FRSPH) and an IEEE Senior Member.
 
@@ -17,6 +17,9 @@ VIAF: 7190162669581955500004
 
 ## Research interests
 
+- Sensing and reasoning for embodied AI, particularly in robotic surgery and other high-stakes domains
+- Machine perception and world models, focusing on post-training to develop the reasoning that connects sensing to action
+- Robotics simulation and reinforcement learning environments
 - Post-training for language models, including supervised fine-tuning, RLHF, RLVR, DPO, GRPO, evaluation, quantisation and domain adaptation
 - Verifiable agentic systems, multi-agent frameworks and large agentic networks, orchestration, emergence, small language models and self-healing agentic architectures
 - Computational epidemiology, including agent-based modelling, disease-avoidant behaviour, epidemic dynamics over dynamic networks and geospatial modelling
